@@ -1,0 +1,1 @@
+gnuplot -p -e 'plot "< ./wifi_sim"'

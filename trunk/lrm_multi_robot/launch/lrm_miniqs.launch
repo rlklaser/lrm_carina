@@ -1,0 +1,270 @@
+<launch>
+
+	<!-- Define a list of miniQ ids <rosparam param="list_of_ids">[0, 1, 2, 3, 4]</rosparam> -->
+
+	<param
+		name="/list_of_ids"
+		value="[0, 1, 2, 3, 4]" />
+
+	<param
+		name="/use_sim_time"
+		value="true" />
+
+	<!-- Run the miniQ node
+	<node
+		name="miniq_node"
+		pkg="lse_miniq_driver"
+		type="multi_miniq_node"
+		output="screen"
+	></node>
+	-->
+	<!-- Run the miniQ in stage -->
+	<node
+		name="stageros"
+		pkg="stage"
+		type="stageros"
+		args="$(find lrm_multi_robot)/worlds/multi_miniq.world"
+		output="screen"
+	></node>
+
+	<!-- Map server -->
+	<node
+		name="map_server"
+		pkg="map_server"
+		type="map_server"
+		args="$(find lrm_multi_robot)/maps/lrm_arena.yaml"
+		output="screen"
+	></node>
+
+	<group ns="robot_0">
+		<param
+			name="tf_prefix"
+			value="robot_0" />
+
+		<node
+			pkg="tf"
+			type="static_transform_publisher"
+			name="map_broadcaster"
+			args="2.5 0.3 0 1.57 0 0 /map odom 50" />
+		<node
+			pkg="tf"
+			type="static_transform_publisher"
+			name="footprint_broadcaster"
+			args="0 0 0 0 0 0 base_footprint base_link 50" />
+
+		<param
+			name="robot_description"
+			command="$(find xacro)/xacro.py $(find lrm_multi_robot)/urdf/miniq.urdf" />
+		<node
+			name="joint_state_publisher"
+			pkg="joint_state_publisher"
+			type="joint_state_publisher" />
+		<node
+			name="robot_state_publisher"
+			pkg="robot_state_publisher"
+			type="state_publisher" />
+
+		<node
+			name="move_base_simple"
+			pkg="move_base_simple"
+			type="multi_move_base_simple"
+			output="screen"
+		>
+			<param
+				name="my_id"
+				type="int"
+				value="0" />
+			<rosparam
+				file="$(find lrm_multi_robot)/settings/navigation.yaml"
+				command="load" />
+		</node>
+	</group>
+
+	<group ns="robot_1">
+		<param
+			name="tf_prefix"
+			value="robot_1" />
+
+		<node
+			pkg="tf"
+			type="static_transform_publisher"
+			name="map_broadcaster"
+			args="2.8 0.3 0 1.57 0 0 /map odom 50" />
+		<node
+			pkg="tf"
+			type="static_transform_publisher"
+			name="footprint_broadcaster"
+			args="0 0 0 0 0 0 base_footprint base_link 50" />
+
+		<param
+			name="robot_description"
+			command="$(find xacro)/xacro.py $(find lrm_multi_robot)/urdf/miniq.urdf" />
+		<node
+			name="joint_state_publisher"
+			pkg="joint_state_publisher"
+			type="joint_state_publisher" />
+		<node
+			name="robot_state_publisher"
+			pkg="robot_state_publisher"
+			type="state_publisher" />
+
+		<node
+			name="move_base_simple"
+			pkg="move_base_simple"
+			type="multi_move_base_simple"
+			output="screen"
+		>
+			<param
+				name="my_id"
+				type="int"
+				value="1" />
+			<rosparam
+				file="$(find lrm_multi_robot)/settings/navigation.yaml"
+				command="load" />
+		</node>
+	</group>
+
+	<group ns="robot_2">
+		<param
+			name="tf_prefix"
+			value="robot_2" />
+
+		<node
+			pkg="tf"
+			type="static_transform_publisher"
+			name="map_broadcaster"
+			args="3.1 0.3 0 1.57 0 0 /map odom 50" />
+		<node
+			pkg="tf"
+			type="static_transform_publisher"
+			name="footprint_broadcaster"
+			args="0 0 0 0 0 0 base_footprint base_link 50" />
+
+		<param
+			name="robot_description"
+			command="$(find xacro)/xacro.py $(find lrm_multi_robot)/urdf/miniq.urdf" />
+		<node
+			name="joint_state_publisher"
+			pkg="joint_state_publisher"
+			type="joint_state_publisher" />
+		<node
+			name="robot_state_publisher"
+			pkg="robot_state_publisher"
+			type="state_publisher" />
+
+		<node
+			name="move_base_simple"
+			pkg="move_base_simple"
+			type="multi_move_base_simple"
+			output="screen"
+		>
+			<param
+				name="my_id"
+				type="int"
+				value="2" />
+			<rosparam
+				file="$(find lrm_multi_robot)/settings/navigation.yaml"
+				command="load" />
+		</node>
+	</group>
+
+	<group ns="robot_3">
+		<param
+			name="tf_prefix"
+			value="robot_3" />
+
+		<node
+			pkg="tf"
+			type="static_transform_publisher"
+			name="map_broadcaster"
+			args="3.4 0.3 0 1.57 0 0 /map odom 50" />
+		<node
+			pkg="tf"
+			type="static_transform_publisher"
+			name="footprint_broadcaster"
+			args="0 0 0 0 0 0 base_footprint base_link 50" />
+
+		<param
+			name="robot_description"
+			command="$(find xacro)/xacro.py $(find lrm_multi_robot)/urdf/miniq.urdf" />
+		<node
+			name="joint_state_publisher"
+			pkg="joint_state_publisher"
+			type="joint_state_publisher" />
+		<node
+			name="robot_state_publisher"
+			pkg="robot_state_publisher"
+			type="state_publisher" />
+
+		<node
+			name="move_base_simple"
+			pkg="move_base_simple"
+			type="multi_move_base_simple"
+			output="screen"
+		>
+			<param
+				name="my_id"
+				type="int"
+				value="3" />
+			<rosparam
+				file="$(find lrm_multi_robot)/settings/navigation.yaml"
+				command="load" />
+		</node>
+	</group>
+
+	<group ns="robot_4">
+		<param
+			name="tf_prefix"
+			value="robot_4" />
+
+		<node
+			pkg="tf"
+			type="static_transform_publisher"
+			name="map_broadcaster"
+			args="3.7 0.3 0 1.57 0 0 /map odom 50" />
+		<node
+			pkg="tf"
+			type="static_transform_publisher"
+			name="footprint_broadcaster"
+			args="0 0 0 0 0 0 base_footprint base_link 50" />
+
+		<param
+			name="robot_description"
+			command="$(find xacro)/xacro.py $(find lrm_multi_robot)/urdf/miniq.urdf" />
+		<node
+			name="joint_state_publisher"
+			pkg="joint_state_publisher"
+			type="joint_state_publisher" />
+		<node
+			name="robot_state_publisher"
+			pkg="robot_state_publisher"
+			type="state_publisher" />
+
+		<node
+			name="move_base_simple"
+			pkg="move_base_simple"
+			type="multi_move_base_simple"
+			output="screen"
+		>
+			<param
+				name="my_id"
+				type="int"
+				value="4" />
+			<rosparam
+				file="$(find lrm_multi_robot)/settings/navigation.yaml"
+				command="load" />
+		</node>
+	</group>
+
+	<!-- Run swistrack_tf_broadcaster node <node name="swistrack_tf_broadcaster" pkg="swistrack_broadcaster" type="tf_broadcaster" output="screen"> 
+		<rosparam command="load" file="$(find lse_miniq_bringup)/settings/initial_poses.yaml" /> </node> -->
+	<!-- -->
+	<node
+		name="rviz"
+		pkg="rviz"
+		type="rviz"
+		args="-d $(find lrm_multi_robot)/view.rviz"
+		output="screen" />
+
+
+</launch>

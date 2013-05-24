@@ -1,0 +1,22 @@
+<launch>
+
+	<node 
+		name="rosbag_our" 
+		pkg="rosbag" 
+		type="play" 
+		args="--loop --delay=5 $(env ROS_WORKSPACE)/bags/carina_1.bag"
+	>	
+		<!-- <remap from="/lse_xsens_mti/xsens/pose" to="/pose" /> -->
+	</node>
+
+	<node
+		name="octomap"
+		pkg="octomap_server"
+		type="octomap_server_node">
+		
+		<param name="latched" value="false" />
+		<remap from="cloud_in" to="/cloud_footprint_front" />
+		
+	</node>
+
+</launch>

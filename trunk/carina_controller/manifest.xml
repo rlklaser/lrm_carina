@@ -1,0 +1,28 @@
+<package>
+  <description brief="carina_controller">
+
+     carina_controller
+
+  </description>
+  <author>Rafael Luiz Klaser</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/carina_controller</url>
+
+  <depend package="roscpp"/>
+  <depend package="std_msgs"/>
+  <depend package="nav_msgs"/>
+  <depend package="pr2_controller_interface"/>
+  <depend package="pr2_mechanism_model"/>
+  <!-- 
+  <depend package="pr2_teleop"/>
+   -->
+  <depend package="pluginlib"/>
+
+  <export>
+     <pr2_controller_interface plugin="${prefix}/controller_plugins.xml" />
+  </export>
+  
+</package>
+
+

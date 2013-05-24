@@ -1,0 +1,19 @@
+<package>
+  <description brief="ogreimp">
+
+     ogreimp
+
+  </description>
+  <author>Rafael Luiz Klaser</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/ogreimp</url>
+
+  <depend package="roscpp"/>
+  <depend package="ogre"/>
+
+  <rosdep name="libassimp-dev"/>
+
+</package>
+
+

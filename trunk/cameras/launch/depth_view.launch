@@ -1,0 +1,8 @@
+<!--  -->
+<launch>
+
+	<node name="stereo_proc" pkg="stereo_image_proc" type="stereo_image_proc">
+	    <env name="ROS_NAMESPACE" value="/stereo" />
+	</node>
+
+</launch>

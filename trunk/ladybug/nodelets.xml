@@ -1,0 +1,10 @@
+
+<library path="lib/libLadyBugColorNodelet">
+
+    <class name = "LadyBugColor/MergerNodelet" type ="LadyBugColor::MergerNodelet" base_class_type = "nodelet::Nodelet" >
+        <description>
+                LadyBug Color Image Nodelet
+        </description>
+    </class>
+
+</library>

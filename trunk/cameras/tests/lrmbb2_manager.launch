@@ -1,0 +1,45 @@
+<!-- -*- mode: XML -*- -->
+
+<!-- Start a standalone nodelet driver for a specific IEEE1394 digital camera.
+
+     this is a test script: NOT FOR GENERAL USE
+
+     arg: camera = base file name of camera YAML parameters
+                   (default: unibrain)
+-->
+
+<launch>
+
+  <arg name="camera" default="bb2" />
+
+  <!-- nodelet manager process -->
+  <node pkg="nodelet" type="nodelet" name="camera_nodelet_manager"
+        args="manager" output="screen"/>
+
+  <!-- camera driver nodelet -->
+  <node pkg="nodelet" type="nodelet" name="camera1394_nodelet"
+        args="load camera1394/driver camera_nodelet_manager" >
+    <rosparam
+       file="$(find cameras)/tests/$(arg camera).yaml" /> 
+  </node>
+
+  <node name="stereo" pkg="lrm_bumblebee" type="split_node" output="screen">
+  </node>
+
+	<node name="stereo_proc" pkg="stereo_image_proc" type="stereo_image_proc">
+	    <env name="ROS_NAMESPACE" value="/stereo" />  
+		<param name="approximate_sync" value="true" />
+		
+	</node>
+
+ 
+  <!-- Disparity image -->
+  <node pkg="nodelet" type="nodelet" name="disparity"
+        args="load stereo_image_proc/disparity camera_nodelet_manager" output="screen"/>
+
+  <!-- Point cloud, PCL-friendly -->
+  <node pkg="nodelet" type="nodelet" name="point_cloud2"
+        args="load stereo_image_proc/point_cloud2 camera_nodelet_manager" output="screen"/>
+		
+
+</launch>

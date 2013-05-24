@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<robot name="test_robot">
+  <link name="chassis">
+    <inertial>
+      <mass value="4.0" />
+      <!-- center of mass (com) is defined w.r.t. link local coord system -->
+      <origin xyz="0 0 0" />
+      <inertia  ixx="1.0" ixy="0.0"  ixz="0.0"  iyy="100.0"  iyz="0.0"  izz="1.0" />
+    </inertial>
+    <visual>
+       <!-- visual origin is defined w.r.t. link local coordinate system -->
+       <origin xyz="0 0 0" rpy="0 0 0" />
+       <geometry>
+         <box size="0.5 0.75 0.2" />
+       </geometry>
+    </visual>
+    <collision>
+       <!-- collision origin is defined w.r.t. link local coord. system -->
+       <origin xyz="0 0 0" rpy="0 0 0 " />
+       <geometry>
+         <box size="0.5 0.75 0.2" />
+       </geometry>
+    </collision>     
+  </link>
+  <gazebo reference="chassis">
+    <material>Gazebo/Blue</material>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+
+  <link name="back_left_wheel">
+    <inertial>
+      <mass value="1.0" />
+      <!-- center of mass (com) is defined w.r.t. link local coord system -->
+      <origin xyz="0 0 0" />
+      <inertia  ixx="1.0" ixy="0.0"  ixz="0.0"  iyy="100.0"  iyz="0.0"  izz="1.0" />
+    </inertial>
+    <visual>
+       <!-- visual origin is defined w.r.t. link local coordinate system -->
+       <origin xyz="0 0 0" rpy="0 0 0" />
+       <geometry>
+         <cylinder radius="0.125" length="0.2" />
+       </geometry>
+    </visual>
+    <collision>
+       <!-- collision origin is defined w.r.t. link local coord. system -->
+       <origin xyz="0 0 0" rpy="0 0 0 " />
+       <geometry>
+         <cylinder radius="0.125" length="0.2" />
+       </geometry>
+    </collision>
+  </link>
+  <gazebo reference="back_left_wheel">
+    <material>Gazebo/Green</material>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+
+  <joint name="joint_back_left_wheel" type="continuous">
+    <parent link="chassis"/>
+    <child link="back_left_wheel"/>
+    <origin xyz="-0.35 -0.375 0" rpy="0 -1.5708 0" />
+    <axis xyz="0 0 1" />
+  </joint>
+
+  <link name="back_right_wheel">
+    <inertial>
+      <mass value="1.0" />
+      <!-- center of mass (com) is defined w.r.t. link local coord system -->
+      <origin xyz="0 0 0" />
+      <inertia  ixx="1.0" ixy="0.0"  ixz="0.0"  iyy="100.0"  iyz="0.0"  izz="1.0" />
+    </inertial>
+    <visual>
+       <!-- visual origin is defined w.r.t. link local coordinate system -->
+       <origin xyz="0 0 0" rpy="0 0 0" />
+       <geometry>
+         <cylinder radius="0.125" length="0.2" />
+       </geometry>
+    </visual>
+    <collision>
+       <!-- collision origin is defined w.r.t. link local coord. system -->
+       <origin xyz="0 0 0" rpy="0 0 0 " />
+       <geometry>
+         <cylinder radius="0.125" length="0.2" />
+       </geometry>
+    </collision>
+  </link>
+  <gazebo reference="back_right_wheel">
+    <material>Gazebo/Green</material>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+
+  <joint name="joint_back_right_wheel" type="continuous">
+    <parent link="chassis"/>
+    <child link="back_right_wheel"/>
+    <origin xyz="0.35 -0.375 0" rpy="0 1.5708 0" />
+    <axis xyz="0 0 1" />
+  </joint>
+
+
+
+</robot>
+

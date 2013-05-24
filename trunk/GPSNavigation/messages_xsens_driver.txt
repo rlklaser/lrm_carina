@@ -1,0 +1,267 @@
+==== xsens_driver ======
+
+
+/velocity
+
+---
+header: 
+  seq: 2930
+  stamp: 
+    secs: 1349368376
+    nsecs: 338381052
+  frame_id: /imu
+twist: 
+  linear: 
+    x: -0.177291378379
+    y: 0.392928600311
+    z: -0.0114246653393
+  angular: 
+    x: 0.00616334425285
+    y: 0.0104323066771
+    z: -0.00727018853649
+---
+
+/fix
+
+---
+header: 
+  seq: 93
+  stamp: 
+    secs: 1349368462
+    nsecs: 367306947
+  frame_id: /imu
+status: 
+  status: 0
+  service: 1
+latitude: -22.0072193146
+longitude: -47.8951339722
+altitude: 823.253295898
+position_covariance: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+position_covariance_type: 0
+---
+
+/fix_extended
+
+---
+header: 
+  seq: 217
+  stamp: 
+    secs: 1349368495
+    nsecs: 267066001
+  frame_id: /imu
+status: 
+  header: 
+    seq: 0
+    stamp: 
+      secs: 0
+      nsecs: 0
+    frame_id: ''
+  satellites_used: 0
+  satellite_used_prn: []
+  satellites_visible: 0
+  satellite_visible_prn: []
+  satellite_visible_z: []
+  satellite_visible_azimuth: []
+  satellite_visible_snr: []
+  status: 0
+  motion_source: 106
+  orientation_source: 106
+  position_source: 105
+latitude: -22.0071735382
+longitude: -47.8951683044
+altitude: 826.68927002
+track: 0.0
+speed: 0.0
+climb: 0.0
+pitch: 0.0
+roll: 0.0
+dip: 0.0
+time: 0.0
+gdop: 0.0
+pdop: 0.0
+hdop: 0.0
+vdop: 0.0
+tdop: 0.0
+err: 0.0
+err_horz: 0.0
+err_vert: 0.0
+err_track: 0.0
+err_speed: 0.0
+err_climb: 0.0
+err_time: 0.0
+err_pitch: 0.0
+err_roll: 0.0
+err_dip: 0.0
+position_covariance: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+position_covariance_type: 0
+---
+
+/diagnostics
+
+---
+header: 
+  seq: 1470
+  stamp: 
+    secs: 1349368534
+    nsecs: 476663112
+  frame_id: /imu
+status: 
+  - 
+    level: 0
+    name: mtnode: Self Test
+    message: Ok
+    hardware_id: ''
+    values: []
+  - 
+    level: 0
+    name: mtnode: XKF Valid
+    message: Valid
+    hardware_id: ''
+    values: []
+  - 
+    level: 0
+    name: mtnode: GPS Fix
+    message: Ok
+    hardware_id: ''
+    values: []
+---
+
+/temperature
+
+---
+data: 33.5
+---
+
+/imu/data
+
+---
+header: 
+  seq: 139
+  stamp: 
+    secs: 1349368602
+    nsecs: 34719944
+  frame_id: /imu
+orientation: 
+  x: 0.0476349331439
+  y: -0.0109613984823
+  z: -0.202506735921
+  w: 0.978060185909
+orientation_covariance: [0.017453292519943295, 0.0, 0.0, 0.0, 0.017453292519943295, 0.0, 0.0, 0.0, 0.15707963267948966]
+angular_velocity: 
+  x: -0.00589950662106
+  y: 0.0069192876108
+  z: 0.00489985570312
+angular_velocity_covariance: [0.0004363323129985824, 0.0, 0.0, 0.0, 0.0004363323129985824, 0.0, 0.0, 0.0, 0.0004363323129985824]
+linear_acceleration: 
+  x: 0.020440518856
+  y: 0.939548373222
+  z: 9.73496723175
+linear_acceleration_covariance: [0.0004, 0.0, 0.0, 0.0, 0.0004, 0.0, 0.0, 0.0, 0.0004]
+---
+
+/magnetic
+
+---
+header: 
+  seq: 96
+  stamp: 
+    secs: 1349368643
+    nsecs: 704966068
+  frame_id: /imu
+vector: 
+  x: 0.473250925541
+  y: 0.246751502156
+  z: 0.365053385496
+---
+
+
+======== lse_xsens_mti ==============
+
+/fix
+
+---
+header: 
+  seq: 281
+  stamp: 
+    secs: 1349368775
+    nsecs: 497943866
+  frame_id: /base_imu
+status: 
+  status: 0
+  service: 0
+latitude: -22.0071430206
+longitude: -47.8951339722
+altitude: 846.857727051
+position_covariance: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+position_covariance_type: 0
+---
+
+/imu/data
+
+---
+header: 
+  seq: 821
+  stamp: 
+    secs: 1349368802
+    nsecs: 497925181
+  frame_id: /base_imu
+orientation: 
+  x: 0.043214071542
+  y: -0.0156108429655
+  z: -0.343212783337
+  w: 0.938133180141
+orientation_covariance: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+angular_velocity: 
+  x: 0.00556724658236
+  y: -0.00470589008182
+  z: 0.00639906991273
+angular_velocity_covariance: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+linear_acceleration: 
+  x: 0.0145425051451
+  y: 0.948655366898
+  z: 9.74539661407
+linear_acceleration_covariance: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+---
+
+/odom
+
+---
+header: 
+  seq: 1245
+  stamp: 
+    secs: 1349368823
+    nsecs: 697941211
+  frame_id: /odom
+child_frame_id: /base_link
+pose: 
+  pose: 
+    position: 
+      x: 0.652346648474
+      y: 1.66206312617
+      z: -2.73457471312
+    orientation: 
+      x: 0.0498064568056
+      y: -0.0107335878392
+      z: -0.0984430596776
+      w: 0.993837547567
+  covariance: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+twist: 
+  twist: 
+    linear: 
+      x: 0.0736560887791
+      y: -0.264692082412
+      z: -0.0831193505776
+    angular: 
+      x: -0.00533117027953
+      y: 0.00797168165445
+      z: -0.000529167009518
+  covariance: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+---
+
+
+
+
+
+
+
+

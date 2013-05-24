@@ -1,0 +1,10 @@
+<launch>
+
+	<node
+		name="rviz"
+		pkg="rviz"
+		type="rviz"
+		args="-d $(find lrm_rbb_grupo_c)/rbbsim.rviz"
+		output="screen" />
+
+</launch>

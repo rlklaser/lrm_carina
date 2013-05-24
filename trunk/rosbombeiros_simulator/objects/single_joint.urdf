@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+
+<robot name="single_joint">
+  <gazebo reference="base">
+    <material>Gazebo/GrassFloor</material>
+  </gazebo>
+  <link name="world"/>
+  <joint name="link_joint" type="continuous">
+    <axis xyz="0 0 1"/>
+    <parent link="world"/>
+    <origin rpy="0 0 0" xyz="0 0 1"/>
+    <child link="link"/>
+    <dynamics damping="0.1"/>
+  </joint>
+  <link name="link">
+    <inertial>
+      <mass value="10"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 1" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.2 1.0 0.2"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 1" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.2 1.0 0.2"/>
+      </geometry>
+    </collision>
+  </link>
+  <gazebo reference="link">
+    <material>Gazebo/GrassFloor</material>
+    <turnGravityOff>true</turnGravityOff>
+  </gazebo>
+</robot>

@@ -1,0 +1,28 @@
+<package>
+  <description brief="lrm_rbb_grupo_c">
+
+     lrm_rbb_grupo_c
+
+  </description>
+  <author>Rafael Luiz Klaser</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/lrm_rbb_grupo_c</url>
+
+  <depend package="roscpp"/>
+  <depend package="std_msgs"/>
+  <depend package="geometry_msgs"/>
+  <depend package="nav_msgs"/>
+  <depend package="angles"/>
+  <depend package="tf"/>
+  <depend package="visualization_msgs"/>
+  <depend package="move_base_msgs"/>
+  <depend package="actionlib"/>
+  
+  <depend package="opende"/>
+  <depend package="drawstuff"/>
+  <depend package="ns3_ros"/>
+    
+</package>
+
+

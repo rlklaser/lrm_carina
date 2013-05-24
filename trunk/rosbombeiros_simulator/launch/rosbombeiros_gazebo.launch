@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<launch>
+
+	<arg name="gui" default="true" />
+
+	<!-- start world -->
+	<include file="$(find rosbombeiros_simulator)/launch/world.launch" />
+	<!-- start robot -->
+	<include file="$(find rosbombeiros_simulator)/launch/carina.launch" />
+ 
+	<!-- start gui -->
+	<group if="$(arg gui)">
+		<node name="gazebo_gui" pkg="gazebo" type="gui" 
+			respawn="true" 
+			output="screen" />
+		<!-- 
+		<node name="rviz" pkg="rviz" type="rviz" 
+			respawn="true" 
+			output="screen" />
+		 -->
+ 	</group>
+	 		
+</launch>

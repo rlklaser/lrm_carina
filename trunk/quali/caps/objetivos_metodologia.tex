@@ -1,0 +1,67 @@
+\chapter{Metodologia} 
+\label{cap:metodologia}
+
+%O objetivo deste trabalho é desenvolver um sistema de navegação autônoma baseado em
+%visão computacional a fim de capacitar um veículo terrestre a se locomover em ambientes externos
+%não estruturados, ou seja, um campo com vegetação/plantação e/ou floresta pouco densa. O veículo
+%deverá ser capaz de desviar de obstáculos de forma autônoma, e se dirigir até uma
+%localização determinada escolhendo por meios próprios o caminho a seguir. Deverá ter alguma
+%capacidade de reconhecer o terreno que irá se deslocar a fim de evitar zonas não transponíveis ou
+%muito acidentadas.
+
+No capítulo anterior foram apresentados os principais problemas referentes a
+navegação autônoma do veículo relativos às questões de localização, mapeamento e
+navegação. Em relação a localização, está sendo considerada uma proposta de
+utilização de sensores do tipo GPS e bússola e de uma câmera estéreo para o
+mapeamento e desvio de obstáculos. Baseado nas referências analisadas, os
+métodos VFH e RNAs são soluções adequadas para uma navegação baseada em uma
+orientação de destino, associada ao desvio de obstáculos detectados através de
+uma percepção local. Em \cite{caio} foi utilizado o VFH para desvio de
+obstáculos utilizando como informação sensorial dados de uma câmera estéreo. O
+histograma polar utilizado pelo método VFH foi gerado a partir da informação de
+profundidade obtida pela câmera estéreo. 
+
+
+%Estes elementos constituem-se portando
+%dos módulos e componentes deste projeto, onde as ferramentas usadas e a
+%arquitetura geral do sistema serão detalhadas a seguir.
+
+%de pesquisa de mestrado. No capítulo seguinte será apresentada a metodologia proposta.
+
+
+No sistema RoBombeiros \cite{Pessin2008} foi implementada uma solução baseada em
+coordenadas GPS para localização e uma RNA para o controle e navegação. O
+sistema foi projetado para ambientes externos onde os veículos tinham como meta
+o combate à incêndios florestais. Este sistema foi testado apenas em simulação
+que consistia em ambientes não estruturados onde a vegetação predominante
+era composta por árvores. Os veículos foram capazes de desviar dos obstáculos
+adequadamente e se dirigir ao destino estabelecido (\fig{fig:incendio}). 
+
+
+\begin{figure}[ht]
+	\begin{minipage}[b]{0.95\linewidth}
+	    \centering
+	    \includegraphics[width=12cm]{images/fogo30905osg.jpg}
+	 	\caption{RoBombeiros - Navegação em ambiente não estruturado e estratégia de
+	 	combate a incêndio florestal.}
+	 	\label{fig:incendio}
+	\end{minipage}
+\end{figure}
+
+Apesar do trabalho de \cite{Pessin2008} ter dado grande foco no combate à
+incêndios e nas estratégias de deslocamento e atuação de um grupo de veículos,
+este projeto irá se focar em um único veículo. Para os testes práticos será
+avaliada apenas a capacidade de chegada ao destino com sucesso, dado que para
+os experimentos em ambiente real somente a navegação estará sendo validada.
+
+
+%Estes elementos constituem-se portando dos módulos e componentes deste projeto,
+%onde as ferramentas usadas e a arquitetura geral do sistema serão detalhadas a
+%seguir.
+
+%\input{./secs/objetivos_especificos}
+%\input{./secs/discussao}
+\input{./secs/materiais_metodos}
+
+\input{./secs/analise_resultados}
+\input{./secs/contribuicoes_esperadas}

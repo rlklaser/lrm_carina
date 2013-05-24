@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!--
+ * Copyright (c) 2012, Siddhant Ahuja (Sid)
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ *     * Redistributions of source code must retain the above copyright
+ *       notice, this list of conditions and the following disclaimer.
+ *     * Redistributions in binary form must reproduce the above copyright
+ *       notice, this list of conditions and the following disclaimer in the
+ *       documentation and/or other materials provided with the distribution.
+ *     * Neither the name of Siddhant Ahuja (Sid) nor the names of its
+ *       contributors may be used to endorse or promote products derived from
+ *       this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+-->
+<!--
+ * Desc: This program contains the description for Microstrain 3dmgx3 IMU
+ * Author: Siddhant Ahuja
+-->
+
+<robot
+	xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+	xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+	xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+	xmlns:xacro="http://ros.org/wiki/xacro"
+>
+
+	<include filename="$(find lrm_description)/urdf/sensors/microstrain.3dmgx3.gazebo.xacro" />
+
+	<xacro:macro
+		name="microstrain_imu"
+		params="name parent *origin imu_topic update_rate stdev"
+	>
+		<joint
+			name="${name}_joint"
+			type="fixed"
+		>
+			<axis xyz="0 1 0" />
+			<insert_block name="origin" />
+			<parent link="${parent}_link" />
+			<child link="${name}_link" />
+		</joint>
+
+		<link name="${name}_link">
+			<inertial>
+				<mass value="0.001" />
+				<origin
+					xyz="0 0 0"
+					rpy="0 0 0" />
+				<inertia
+					ixx="0.0001"
+					ixy="0"
+					ixz="0"
+					iyy="0.000001"
+					iyz="0"
+					izz="0.0001" />
+			</inertial>
+		</link>
+		
+		<!-- gazebo extensions -->
+		<xacro:microstrain_imu_gazebo
+			name="${name}"
+			imu_topic="${imu_topic}"
+			update_rate="${update_rate}"
+			stdev="${stdev}" />
+	</xacro:macro>
+</robot>

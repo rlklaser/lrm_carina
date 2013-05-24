@@ -1,0 +1,5 @@
+<launch>
+        <param name="robot_description" command="cat $(find lrm_odometry)/objects/05-visual.urdf" />
+        <node name="robot_state_publisher" pkg="lrm_odometry" type="state_publisher" />
+        <node name="state_publisher" pkg="lrm_odometry" type="state_publisher" />
+</launch>

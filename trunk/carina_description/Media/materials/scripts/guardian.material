@@ -1,0 +1,27 @@
+material Guardian/Logo
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture RobotnikLogo.jpg
+      }
+    }
+  }
+}
+
+material Guardian/Map
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture robotnik.png
+      }
+    }
+  }
+}

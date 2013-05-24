@@ -1,0 +1,10 @@
+<launch>
+
+	<node
+		name="robombeiros"
+		pkg="lrm_rbb_grupo_c"
+		type="robots"
+		args="$(find lrm_rbb_grupo_c)/textures -noshadow -notex"
+		output="screen" />
+
+</launch>

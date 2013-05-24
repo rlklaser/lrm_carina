@@ -1,0 +1,15 @@
+<launch>
+
+	<node
+		name="controle_node"
+		pkg="GPSNavigation"
+		type="controle_node"
+		output="screen"
+		respawn="true"
+	>
+		<remap
+			from="cmd_vel"
+			to="/two/cmd_vel" />
+	</node>
+
+</launch>

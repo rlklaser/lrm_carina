@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:rtt="http://rtt/1.0" xmi:id="_WmzvYBNWEeKj7KjdAG_7YA" type="Rtt" name="default.rtt_diagram" measurementUnit="Pixel">
+  <children xmi:type="notation:Shape" xmi:id="_Z7cv8BNWEeKj7KjdAG_7YA" type="2002" fontName="Ubuntu">
+    <children xmi:type="notation:DecorationNode" xmi:id="_Z7d-EBNWEeKj7KjdAG_7YA" type="5010"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_Z7elIBNWEeKj7KjdAG_7YA" type="5011"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_Z7elIRNWEeKj7KjdAG_7YA" type="5012"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_Z7elIhNWEeKj7KjdAG_7YA" type="5013"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_Z7elIxNWEeKj7KjdAG_7YA" type="5014"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_Z7fzQBNWEeKj7KjdAG_7YA" type="7002">
+      <styles xmi:type="notation:TitleStyle" xmi:id="_Z7fzQRNWEeKj7KjdAG_7YA" showTitle="true"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_Z7fzQhNWEeKj7KjdAG_7YA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_Z7fzQxNWEeKj7KjdAG_7YA"/>
+    </children>
+    <element xmi:type="rtt:Activity" href="default.rtt#//@activity.0"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Z7cv8RNWEeKj7KjdAG_7YA" x="84" y="144" width="217" height="157"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_dzrlwBNWEeKj7KjdAG_7YA" type="2001" fontName="Ubuntu">
+    <children xmi:type="notation:DecorationNode" xmi:id="_dzsM0BNWEeKj7KjdAG_7YA" type="5006"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_dzsM0RNWEeKj7KjdAG_7YA" type="5007"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_dzsM0hNWEeKj7KjdAG_7YA" type="5008"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_dzsM0xNWEeKj7KjdAG_7YA" type="7001">
+      <styles xmi:type="notation:TitleStyle" xmi:id="_dzsM1BNWEeKj7KjdAG_7YA" showTitle="true"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_dzsM1RNWEeKj7KjdAG_7YA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_dzsM1hNWEeKj7KjdAG_7YA"/>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_dzsM1xNWEeKj7KjdAG_7YA" type="7003">
+      <styles xmi:type="notation:TitleStyle" xmi:id="_dzsM2BNWEeKj7KjdAG_7YA" showTitle="true"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_dzsM2RNWEeKj7KjdAG_7YA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_dzsM2hNWEeKj7KjdAG_7YA"/>
+    </children>
+    <element xmi:type="rtt:TaskContext" href="default.rtt#//@taskContext.0"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_dzrlwRNWEeKj7KjdAG_7YA" x="451" y="312"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_WmzvYRNWEeKj7KjdAG_7YA"/>
+  <element xmi:type="rtt:Package" href="default.rtt#/"/>
+  <edges xmi:type="notation:Connector" xmi:id="_d0CyIBNWEeKj7KjdAG_7YA" type="4002" source="_Z7cv8BNWEeKj7KjdAG_7YA" target="_dzrlwBNWEeKj7KjdAG_7YA">
+    <styles xmi:type="notation:FontStyle" xmi:id="_d0CyIRNWEeKj7KjdAG_7YA" fontName="Ubuntu"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_d0CyIhNWEeKj7KjdAG_7YA" points="[-68, -78, 124, 144]$[-192, -222, 0, 0]"/>
+  </edges>
+</notation:Diagram>

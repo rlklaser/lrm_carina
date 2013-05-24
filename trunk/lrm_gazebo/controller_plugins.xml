@@ -1,0 +1,20 @@
+<library path="lib/libcarina_controller">
+	<class
+		name="lrm_gazebo/CarinaControllerPlugin"
+		type="lrm_gazebo::CarinaController"
+		base_class_type="pr2_controller_interface::Controller" />
+</library>
+
+<library path="lib/libsuspension_controller">
+	<class
+		name="lrm_gazebo/SuspensionControllerPlugin"
+		type="lrm_gazebo::SuspensionController"
+		base_class_type="pr2_controller_interface::Controller" />
+</library>
+
+<library path="lib/libencoders_controller">
+	<class
+		name="lrm_gazebo/EncodersControllerPlugin"
+		type="lrm_gazebo::EncodersController"
+		base_class_type="pr2_controller_interface::Controller" />
+</library>

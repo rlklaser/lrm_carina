@@ -1,0 +1,14 @@
+<package>
+  <description brief="cameras">
+
+     cameras
+
+  </description>
+  <author>Rafael Luiz Klaser</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/cameras</url>
+
+</package>
+
+

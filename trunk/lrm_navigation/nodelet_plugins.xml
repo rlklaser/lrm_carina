@@ -1,0 +1,12 @@
+<library path="lib/liblrm_navigation">
+
+	<class
+		name="lrm_navigation/transform_cloud"
+		type="lrm_navigation::TransformCloudNodelet"
+		base_class_type="nodelet::Nodelet"
+	>
+		<description>Tranform point cloud to base_link
+		</description>
+	</class>
+	
+</library>

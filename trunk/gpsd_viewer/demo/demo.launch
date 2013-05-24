@@ -1,0 +1,8 @@
+<launch>
+	<!-- 
+	<node name="gpsd_viewer" pkg="gpsd_viewer" type="gpsd_viewer" respawn="false" output="log"/>
+	 -->
+	
+	<node pkg="rosbag" type="play" name="rosbag" 
+		args="--loop $(find gpsd_viewer)/demo/demo.bag"/>
+</launch>

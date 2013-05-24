@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+
+<launch>
+
+	<node pkg="rosbombeiros_simulator" type="rosbombeiros_controller"
+		name="rosbombeiros_controller" output="screen">
+		<remap from="cmd_vel" to="carina_controller/command" />
+		<remap from="base_scan" to="scan_front" />
+		<remap from="base_imu" to="robot_pose_ekf/odom" />
+
+		<!-- target -->
+		<param name="target_x" value="10.0" />
+		<param name="target_y" value="10.0" />
+		<param name="target_z" value="0.0" />
+	</node>
+
+</launch>
+

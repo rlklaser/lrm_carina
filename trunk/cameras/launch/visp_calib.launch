@@ -1,0 +1,27 @@
+<launch>
+   
+  <node pkg="rxtools" name="rxconsole" type="rxconsole"/>
+ <!--
+  <node pkg="camera1394" type="camera1394_node" name="my_camera1394_node"/>
+  <node pkg="image_view" type="image_view" name="my_image_raw_viewer" args="image:=/camera/image_raw"/> 
+  -->
+	<node name="left" pkg="usb_cam" type="usb_cam_node">
+		<param name="video_device" value="/dev/video1" />
+		<param name="image_width" value="640" />
+	    <param name="image_height" value="480" />
+	    <param name="pixel_format" value="mjpeg" />
+	    <!-- <param name="camera_frame_id" value="usb_cam" /> -->
+	    <param name="io_method" value="mmap"/>
+	</node>
+	
+	<group ns="visp_camera_calibration">
+		<node name="calibrator" pkg="visp_camera_calibration" type="visp_camera_calibration_calibrator"/>
+		<node name="image_processing" pkg="visp_camera_calibration" type="visp_camera_calibration_image_processing" args="camera_prefix:=/left">
+			<param name="gray_level_precision" value="0.7" />
+			<param name="size_precision" value="0.5" />
+			<param name="pause_at_each_frame" value="False" />
+		</node>
+	</group>
+
+  
+</launch>

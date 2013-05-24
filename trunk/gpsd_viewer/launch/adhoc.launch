@@ -1,0 +1,11 @@
+<launch>
+
+	<node name="viewer" pkg="gpsd_viewer" type="gpsd_pose_viewer" output="screen">
+	
+		<!-- <remap from="/followme/our/pose" to="/pose" /> -->
+	
+		<!-- <remap from="/pose" to="/followme/our/pose" /> -->
+	
+	</node>
+
+</launch>

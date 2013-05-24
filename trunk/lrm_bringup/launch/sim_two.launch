@@ -1,0 +1,77 @@
+<launch>
+
+	<include file="$(find gazebo_worlds)/launch/empty_world.launch" />
+
+	<node
+		name="rviz"
+		pkg="rviz"
+		type="rviz"
+		respawn="false"
+		output="screen"
+		args="-d $(find lrm_bringup)/launch/two_models.rviz" />
+
+	<node
+		pkg="tf"
+		type="static_transform_publisher"
+		name="world_broadcaster"
+		args="0.0 0.0 0 0 0 0 /world /map 30"
+		output="screen" />
+
+<!-- 
+	<param
+		name="robot_description"
+		command="$(find xacro)/xacro.py '$(find lrm_description)/urdf/clubcar/robot.xacro'" />
+ -->
+	<param
+		name="one/robot_description"
+		command="$(find xacro)/xacro.py '$(find lrm_description)/urdf/clubcar/robot.xacro'" />
+	<param
+		name="two/robot_description"
+		command="$(find xacro)/xacro.py '$(find lrm_description)/urdf/clubcar/robot.xacro'" />
+
+	<node
+		name="spawn_one_urdf"
+		pkg="gazebo"
+		type="spawn_model"
+		args="-urdf -param robot_description -namespace one -x 0 -y  1 -model one -gazebo_namespace gazeborver"
+		respawn="false"
+		output="screen" />
+	<node
+		name="spawn_two_urdf"
+		pkg="gazebo"
+		type="spawn_model"
+		args="-urdf -param robot_description -namespace two -x 15 -y  0 -model two -gazebo_namespace gazeborver"
+		respawn="false"
+		output="screen" />
+
+	<include
+		file="$(find lrm_bringup)/launch/robot_gazebo_controllers.launch"
+		ns="one" />
+	<include
+		file="$(find lrm_bringup)/launch/robot_gazebo_controllers.launch"
+		ns="two" />
+
+
+	<include
+		file="$(find lrm_bringup)/launch/odometry.launch"
+		ns="one" />
+	<include
+		file="$(find lrm_bringup)/launch/odometry.launch"
+		ns="two" />
+
+	<node
+		ns="one"
+		pkg="tf"
+		type="static_transform_publisher"
+		name="map_broadcaster"
+		args="0.0 0.0 0 0 0 0 /map odom 30"
+		output="screen" />
+
+	<node
+		ns="two"
+		pkg="tf"
+		type="static_transform_publisher"
+		name="map_broadcaster"
+		args="0.0 0.0 0 0 0 0 /map odom 30"
+		output="screen" />
+</launch>

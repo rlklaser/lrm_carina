@@ -1,0 +1,9 @@
+<launch>
+  <param name="/GPSNavigation/ster" value="true" />   <!-- Sterring active? -->
+  <param name="/GPSNavigation/minDist" value="5" />   <!-- Min dist to consider next point vector -->
+  <param name="/GPSNavigation/sterringFactor" value="0.5" />   <!-- Value multiplied by the angle in degrees -->
+  <param name="/GPSNavigation/maxSterring" value="25" />   <!-- Maximum value sent to the sterring module -->
+  <param name="/GPSNavigation/pointsFileName" value="points.txt" />   <!-- Points file name -->
+  <param name="/GPSNavigation/pointsDir" value="$(find GPSNavigation)/bin/" />      <!-- Points.txt directory -->	
+  <node name="GPSNavigation" pkg="GPSNavigation" type="GPSNavigation" output="screen" />
+</launch>

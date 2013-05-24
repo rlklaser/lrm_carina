@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+
+<robot xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+       xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+       xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+       xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:macro name="home_gazebo_v0" params="name ref_frame ros_topic noise update_rate">
+    <gazebo reference="${name}_link">
+      <selfCollide>false</selfCollide>
+      <mu1 value="100.0" />
+      <mu2 value="100.0" />
+      <kp  value="1000000.0" />
+      <kd  value="1.0" />
+	</gazebo>
+    <gazebo>
+      <controller:gazebo_ros_p3d name="p3d_base_controller" plugin="libgazebo_ros_p3d.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>${update_rate}</updateRate>
+        <frameName>${ref_frame}</frameName>
+        <bodyName>${name}_link</bodyName>
+        <topicName>${ros_topic}</topicName>
+        <gaussianNoise>${noise}</gaussianNoise>
+        <rpyOffsets>0 0 0</rpyOffsets>
+        <interface:position name="p3d_${name}_position"/>
+      </controller:gazebo_ros_p3d>
+    </gazebo>
+  </xacro:macro>
+
+</robot>

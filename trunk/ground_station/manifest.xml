@@ -1,0 +1,33 @@
+<package>
+  <description brief="ground_station">
+
+     ground_station is a package for ROS that typicaly subscribe to several topics and update an Gtk+ based GUI.
+     It is made for the CityFlyer research project of the CCNY Robotics lab.
+
+  </description>
+  <author>Gautier Dumonteil</author>
+  <license>GPL</license>
+  <review status="experimental" notes="This is unstable and under active development."/>
+  <url>http://ros.org/wiki/ground_station</url>
+
+  <depend package="roslib"/>	
+  <depend package="roscpp"/>
+  <depend package="geometry_msgs"/>
+  <depend package="sensor_msgs"/>
+  <depend package="asctec_msgs"/>
+  <depend package="mav_msgs"/>
+<!--  
+  <depend package="osmgpsmap"/>
+  <depend package="rosbag"/>
+-->
+  <depend package="std_msgs"/>
+  <depend package="gps_common"/>
+  <depend package="tf"/>
+  <rosdep name="glib"/>
+  <rosdep name="glade2"/>
+  <rosdep name="gtkglext1"/> 
+  <rosdep name="libosmgpsmap-dev"/>
+
+</package>
+
+

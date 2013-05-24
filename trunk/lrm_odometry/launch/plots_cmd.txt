@@ -1,0 +1,4 @@
+rxplot /encoders/absolute[0] /encoders/relative[0]
+
+rxplot /encoders/absolute[0] /lse_xsens_mti/xsens/imu/data/angular_velocity/z
+

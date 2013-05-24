@@ -1,0 +1,34 @@
+<package>
+	<description brief="lrm_sensors">
+
+		lrm_sensors
+
+	</description>
+	<author>Rafael Luiz Klaser</author>
+	<license>BSD</license>
+	<review
+		status="unreviewed"
+		notes="" />
+	<url>http://ros.org/wiki/lrm_sensors</url>
+	<depend package="roscpp" />
+	<depend package="rospy" />
+	<depend package="std_msgs" />
+	<depend package="sensor_msgs" />
+	<depend package="geometry_msgs" />
+	<depend package="tf" />
+	<depend package="nodelet" />
+	<depend package="image_transport" />
+	<depend package="camera_info_manager" />
+	<depend package="dynamic_reconfigure" />
+	<depend package="pcl_ros" />
+
+	<export>
+		<cpp
+			cflags="-I${prefix}/include"
+			lflags="-Wl,-rpath,${prefix}/lib -L${prefix}/lib -lsensors_proc" />
+		<nodelet plugin="${prefix}/nodelet_plugins.xml" />
+	</export>
+
+</package>
+
+

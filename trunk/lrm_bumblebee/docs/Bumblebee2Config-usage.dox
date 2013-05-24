@@ -1,0 +1,12 @@
+\subsubsection usage Usage
+\verbatim
+<node name="lrm_bumblebee" pkg="lrm_bumblebee" type="lrm_bumblebee">
+  <param name="brightness" type="int" value="-1" />
+  <param name="encoding" type="str" value="" />
+  <param name="exposure" type="int" value="-1" />
+  <param name="gain" type="int" value="-1" />
+  <param name="shutter" type="int" value="-1" />
+  <param name="whitebalance" type="str" value="auto" />
+</node>
+\endverbatim
+

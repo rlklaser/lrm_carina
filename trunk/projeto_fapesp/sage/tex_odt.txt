@@ -1,0 +1,264 @@
+
+
+PROJETO DE PESQUISA
+
+
+
+
+Navegação de Veículos Autônomos em Ambientes Externos Não Estruturados Baseada em Visão Computacional
+
+
+
+Projeto de Mestrado
+Rafael Luiz Klaser
+
+
+
+
+
+
+
+Coordenador e Orientador do Projeto:
+Prof. Dr. Fernando Santos Osório – ICMC/USP
+
+
+
+
+
+
+
+
+
+
+
+Março 2012
+
+
+
+
+Identificação do Projeto
+
+
+
+Título:
+“Navegação de Veículos Autônomos em Ambientes Externos Não Estruturados Baseada em Visão Computacional”
+
+Palavras Chave: Robótica Móvel, Visão Computacional, Navegação Autônoma, Mapa Local de Navegabilidade, Percepção 3D, Ambiente Externo
+
+
+
+
+
+
+Dados Gerais do Projeto
+
+Proponente e Coordenador: Prof. Dr. Fernando Santos Osório
+Instituição: USP – ICMC – PPG CCMC (São Carlos, SP)
+Titulação: Doutor em Computação (INPG-IMAG, Grenoble – França, 1998)
+Departamento de Sistemas de Computação – SSC
+Laboratório de Robótica Móvel – LRM - Web: http://www.icmc.usp.br/~lrm  
+Instituto Nacional de Ciência e Tecnologia em Sistemas Embarcados Críticos – INCT-SEC
+Núcleo de Apoio a Pesquisa do Centro de Robótica de São Carlos - NAP CRob/SC-USP 
+
+
+
+Dados do Aluno/Mestrando
+Nome: Rafael Luiz Klaser
+Instituição: Programa de Pós-Graduação em Ciências de Computação e Matemática Computacional 
+                     CCMC - ICMC/USP – Laboratório de Robótica Móvel (LRM)
+	        INCT-SEC – Instituto Nacional de Ciência e Tecnologia em Sistemas Embarcados Críticos
+Titulação: Bacharel em Ciência da Computação pela Universidade do Vale do Rio dos Sinos (2007)
+	      Mestrando em Ciências de Computação pelo ICMC/USP
+     (Matriculado junto ao PG-CCMC do ICMC da USP - Início em Março de 2012)
+
+
+Resumo
+
+
+	O objetivo deste trabalho é capacitar um veículo terrestre a se locomover de modo autônomo em ambientes externos não estruturados ou pouco estruturados, ou seja, em um campo com vegetação/plantação e/ou em uma floresta pouco densa (outdoor e off-road). O veículo deverá ser capaz de se dirigir até uma localização pré-determinada (coordenada GPS) escolhendo por meios próprios o caminho a seguir, ao mesmo tempo em que desvia de obstáculos, percebendo-os de forma autônoma. O sistema de navegação autônoma irá se basear na aquisição e processamento de imagens, obtidas a partir de um par de câmeras (câmera estéreo), constituindo assim um sistema de visão binocular do qual é possível se obter uma percepção tridimensional do ambiente. 
+Portanto, pretende-se extrair parâmetros de navegabilidade do ambiente percebido pela câmera estéreo, como por exemplo, caminhos livres, obstruções e obstáculos, que combinados com as informações de posição e orientação do veículo e do ponto de destino (baseando-se em coordenadas de GPS) serão integrados em um sistema robusto de navegação. Este trabalho irá utilizar a plataforma CaRINA I (Carro Robótico Inteligente para Navegação Autônoma) do LRM/ICMC/USP e INCT-SEC, dotado de uma câmera estéreo, GPS e bússola, assim como de atuadores usados para o controle de tração e direcionamento do veículo. Inicialmente serão estudados e trabalhados algoritmos para a criação do mapa de disparidade a partir do par de imagens obtidas pela câmera estéreo. Para este processo, o algoritmo deverá ter um compromisso de desempenho entre a qualidade do mapa de disparidade/profundidade e a performance em termos de tempo de processamento, uma vez que a aplicação final deverá executar em tempo real (soft real-time). 
+A partir do mapa de disparidade, será elaborado um mapa local de navegabilidade, que irá processar e classificar o espaço tridimensional percebido, separando e representando as regiões navegáveis (seguras) e as regiões não navegáveis (obstáculos e regiões à evitar) do espaço em frente ao veículo. Este mapa local será utilizado em conjunto com as informações de posição atual e de destino (GPS e bússola), a fim de realizar o controle da navegação do veículo. Estão sendo consideradas duas abordagens principais para o controle local da navegação: a primeira baseada no uso de Redes Neurais Artificiais, conforme proposto em trabalhos ante-riores desenvolvidos por membros do grupo do LRM (RoBombeiros, proposto por Pessin e Osório), e a segunda baseada em uma adaptação do algoritmo VFH (Vector Field Histogram). Nestas abordagens serão consideradas como parâmetro de entrada as informações tridimensionais do mapa de navegabilidade. Além disto, também serão necessários estudos que visam identificar, a partir das imagens da câmera estéreo, o plano de referência de base (chão), seus desníveis e obstáculos, classificando-os como elementos transponíveis ou não.
+As principais contribuições esperadas deste trabalho são a adaptação e aperfeiçoamento dos algoritmos para a geração de mapas de disparidade, a proposta e o desenvolvimento de algoritmos para a obtenção de mapas locais de navegabilidade com informações espaciais (3D), e por fim o aperfeiçoamento de técnicas previamente desenvolvidas para detectar e desviar de obstáculos em mapas 2D, a fim de permitir uma navegação baseada no mapa de navegabilidade 3D.  Este trabalho resultará em um sistema com possibilidade de aplicação em importantes tarefas de navegação, como por exemplo, em sistemas voltados para aplicações agrícolas e em sistema de combate a incêndio em florestas, a exemplo do Sistema Robombeiros.
+
+	
+
+	1. Introdução
+
+	A robótica de manipuladores já faz parte do cotidiano em vários processos de produção industrial. Em se tratando de robótica móvel, a sua aplicação prática ainda apresenta muitos desafios. Na robótica móvel, a navegação é a capacidade do veículo de se locomover no ambiente, podendo ser guiada (tele-operada), autônoma ou híbrida (semi-autônoma). A navegação autônoma é totalmente dependente do aparato sensorial, pois a percepção e estímulos do ambiente precisam ser capturados para o robô reagir de acordo. A morfologia do robô vai limitar seu comportamento em relação a sua mobilidade, da mesma forma, vai demandar um aparato sensorial propício para a execução de suas tarefas. A capacidade de se deslocar de forma autônoma depende certamente de algum grau de inteligência. Através da Inteligência Artificial se pretende traduzir em algoritmos estes processos da motricidade, viabilizando aos veículos autônomos uma locomoção robusta  e de modo seguro.
+	A capacidade de locomoção é própria dos animais. Em robôs móveis, para mimetizar essa capacidade, se dotam os mesmos de aparatos sensoriais e motores, podendo estes, ser ou não inspirados na fisiologia dos animais (Webb, 2000). Tais aparatos são fundamentais e definem a capacidade, características e especificidades dos movimentos. A visão é um subsistema biofísico sensorial, que podemos associar intuitivamente com a capacidade e características de locomoção nos animais . Analogamente, atribuir um sistema de visão artificial como capacidade sensorial para um robô móvel significa dotá-lo desta mesma percepção e especificidade. Para Marr (1982), a visão é acima de tudo uma tarefa de processamento de informações, porém, como a informação é representada a partir da imagem é o que precisa ser investigado. Desta forma, constituição de uma visão computacional adequada ainda é uma tarefa desafiadora.
+	Apesar da inspiração biológica no tratamento de problemas computacionais ser mais notória nos dias de hoje como algo recente através da difusão das áreas de estudo disciplinar, como a computação cognitiva, biologia computacional, computação bio inspirada e bioinformática, o processo indutivo de observação da natureza biológica já era notório como motivação para os algoritmos computacionais em décadas passadas (Poggio, 1984). Porém, a pesquisa não se baseia puramente em descobertas, a nossa capacidade de inventar traz diversas tecnologias ao dia a dia. Da mesma maneira, a capacidade técnica de combinar diversas abordagens tecnológicas em aplicações práticas formalizam-nas em ferramentas e utensílios que com o passar do tempo se tornam parte do cotidiano e até indispensáveis. Robôs móveis autônomos ainda dependem de pesquisa tecnológica, mas bastante já se pode tornar realizável combinando abordagens bem sucedidas em diversas áreas.
+
+
+
+
+Fig. XX – Simulador RoBombeiros (direita),  CaRINA  (centro), Jacto JAV (esquerda)
+
+
+	1. 1 Problemática
+
+	Um veículo autônomo tem como problemática básica as questões de mapeamento, localização e  navegação,  as quais são fortemente influenciadas pelas características do ambiente. Quando se trata de navegação em ambiente externo, o desconhecimento do ambiente e a sua dinâmica tornam o mapeamento e localização mais críticos. Em um ambiente semi estruturado podemos considerar a existência de algum referencial e impor alguma restrição, porém devem ser considerados intermitentes, ou seja, o sistema deve ser mais tolerante à perda momentânea de referenciais. Quando o ambiente é não estruturado depara-se com a falta de referenciais elementares (linhas, paredes, trilhas) e com a baixa possibilidade de imposição de restrições. O desenvolvimento de um sistema autônomo para um veículo móvel se caracteriza primariamente pelo tratamento destas questões.  
+	
+
+	1. 1. 1 Mapeamento e Localização
+
+	A questão do mapeamento e localização é considerado o problema mais central na robótica móvel, onde a caracterização do veículo como autônomo de fato pode vir a ser dada essencialmente pela sua capacidade de tratar essa questão. Quando o ambiente e a localização do veículo são desconhecidos a priori essa questão se torna crítica. Esse problema é normalmente conhecido como SLAM (Simultaneous Location and Mapping). Uma solução robusta e eficiente para a questão de localização e mapeamento simultâneos (SLAM) na prática ainda é desafiadora (Dissanayake et al., 2001), uma abordagem recorrente no tratamento da localização e mapeamento é a utilização de visão computacional.
+	Um veículo móvel terrestre se desloca geometricamente no plano, ou seja, seus graus de liberdade são em duas dimensões. O reconhecimento do chão representa um desafio, ao se considerar um ambiente externo e não estruturado composto por um solo com vegetação,  além da detecção do chão é necessária uma certa classificação do solo, como por exemplo, se transitável ou não transitável devido a sua vegetação. Os sensores típicos como sonares e lasers não tem como apresentar dados que viabilizem essa classificação. As câmeras de vídeo são mais próprias para capturar essas informações. A utilização de câmeras de vídeo demandam algumas tarefas elementares, como ajuste de foco, utilização de lentes adequadas ao ângulo de visão necessário e uma devida calibragem.
+	A calibragem das câmeras é um processo fundamental para se obter uma visão computacional tridimensional (binocular) a partir de um par de câmeras independentes. Neste processo são calculados (estimados) os parâmetros internos e externos de cada câmera. Estes parâmetros são essenciais para a reconstrução tridimensional a partir das imagens (Faugeras, 1993). 
+	A estimação dos parâmetros internos (intrínsecos) basicamente consiste em obter a distância focal e o ponto central da imagem, que por questões de alinhamento entre lentes e sensor pode não ser o pixel central da imagem (Wilson; Shafer, 1994). Estes dois parâmetros definem como a imagem é formada por uma câmera estilo estenopeica (pin-hole) e a sua projeção perspectiva (fig. 1). Outros parâmetros também internos, não associados com o modelo de projeção e sim com as características físicas das lentes utilizadas, também são estimados no processo de calibragem. O modelo estenopeico é uma construção matematicamente simples, muito utilizado por pintores renascentistas do séc. XV, como Leonardo da Vinci. No caso das câmeras de vídeo, existe a necessidade de utilização de lentes, tanto para reduzir a imagem a ser projetada no sensor (filme) como para aproximá-las. As lentes comumente são estruturas com curvatura esférica. A característica esférica das lentes provoca distorções óticas na imagem projetada, chamadas de distorções radiais. Este tipo de distorção produz imagens com demonstrado na fig. 2, nos casos pode ser em forma de barril (barrel) ou almofada (pincushion) (Weng, 1992). As distorções óticas influenciam fortemente de forma negativa o processo de correspondência entre as imagens para extrair a informação tridimensional, sendo grande fonte de ruído quando não corrigidas. É interessante notar que, matematicamente, o processo de correção das distorções óticas se baseia na curvatura esférica da lente, porém as lentes são formadas por composição de várias camadas com curvaturas diferentes (fig. 3), que ainda podem apresentar defeitos no processo de fabricação. Portanto, o modelo matemático utilizado na correção é sempre uma aproximação global do aparato ótico, fonte por si só de imprecisão (Wilson; Shafer, 1994). Ainda existem outros parâmetros que podem ser considerados, porém estes estão associados à questões técnicas da forma de aquisição da imagem e não da formação da imagem propriamente dita, portanto são subjetivas ao aparato utilizado sendo necessárias ou não, como por exemplo, problemas de entrelaçamento e varredura. De posse dos parâmetros internos associados às distorções é necessário um preprocessamento para a sua correção, que ao ser aplicado produz uma imagem mais própria para os algoritmos de correspondência que formarão a imagem tridimensional. Os parâmetros internos são também chamados de parâmetros do modelo, isto é, como a imagem é formada. Um outro modelo de câmera geralmente associado à veículos móveis são as câmeras omnidirecionais, capazes de produzir uma imagem em 360 graus, útil para veículos com esse grau de liberdade de movimentos.  A calibragem deste tipo de câmera é ainda mais complexa.
+	O segundo conjunto de parâmetros são os parâmetros externos (extrínsecos), também chamados de parâmetros de pose. Este conjunto diz respeito à posição da câmera em relação ao ambiente, no caso a um sistema de coordenadas referencial. Estes são os principais parâmetros para a reconstrução tridimensional da imagem pois são utilizados para fazer a correspondência entre os pixeis de cada imagem. A correspondência entre os pontos é obtidos pelos princípios da geometria epipolar (fig. 4) (Faugueras, 1993). 
+	Fundamentalmente, são determinados os planos formados pelos pontos em comum em cada imagem (referenciais obtidos pela calibragem) e o ponto central de cada imagem. Esses planos no espaço (ambiente) são coincidentes, ou seja, o mesmo plano. Esta reprojeção do plano em cada imagem definem retas, chamadas retas epipolares. Desta forma é possível fazer a correspondência dos demais pontos (não referenciais). Este alinhamento das imagens é chamado de retificação (Fusiello; Trucco; Verri, 2000), como pode ser visto na fig. 5. Pela geometria epipolar todos os planos formados pelos pontos referenciais serão concorrentes e as suas intersecções se dão em uma reta em comum, chamada linha base. Esta linha base determina o alcance da visão. 
+	Em um estudo anterior (Klaser, 2007) foi aplicada visão tridimensional para monitorar experimentos de laboratório utilizando como processo de calibragem o método de Tsai (1987). Naquele trabalho foi possível observar que um conjunto de referenciais capazes de descrever os três planos ortogonais do espaço tridimensional produziam uma calibragem bastante precisa. Para isso, foi utilizado um molde semelhante ao canto de uma sala contendo pelo menos três pontos referenciais em cada parede e no chão (fig. 6). 
+	Uma vantagem do método de Tsai (1987) é que o referencial para a calibragem é dado informando sua posição na imagem e sua posição real no ambiente, sendo a posição real dada de forma relativa a um sistema de coordenadas referencial no espaço. Com isso, ao extrair a informação tridimensional de um ponto pelo processo de triangulação a partir da calibragem do par estéreo, a informação resultante contém as coordenadas espaciais do ponto na unidade de medida adotada. Com isso, é possível saber a posição real de um determinado ponto.
+	Porém, para se obter as coordenadas tridimensionais de um determinado ponto no espaço é necessário saber onde esse ponto se encontra em cada imagem (Mundy; Zisserman, 1994). Isto não é trivial, mas é possível utilizar métodos de detecção e casamento (matching) de características (features) das imagens para buscar a correspondência, como por exemplo, o método SIFT (Scale-Invariant Feature Transform) (Lowe 1999) e o método SURF (Speeded Up Robust Features) (Bay et al., 2006). 
+	Uma abordagem baseada neste princípio de, a partir de duas poses da mesma cena extrair uma terceira coordenada tendo uma calibragem das câmeras e um processo de correlação global dos pixeis, é chamada de mapa de disparidade. É um processo computacionalmente custoso e exitem diversas técnicas de implementação.
+	
+
+
+
+Fig. 3: Exemplo de composição ótica
+Fig. 1: Ponto central e distância focal 
+Fonte: (Faugeras, 1993)
+Fig. 2: Distorções óticas
+
+
+
+
+Fig. 4: Geometria epipolar
+Fonte: (Faugeras, 1993)
+Fig. 5: Retificação
+Fonte: Andrea Fusiello
+Fig.6: Calibragem com referenciais fixos
+Fonte: (Klaser, 2007)
+
+ 
+	Mapas de disparidade
+
+	Os mapas de disparidade, também chamados de mapas de profundidade, se tornaram uma ferramenta bastante utilizada para a percepção tridimensional. Para robôs móveis autônomos os mapas de disparidade são muito úteis, principalmente na detecção e desvio de obstáculos. O veículo pode extrair da informação de profundidade parâmetros para a navegação, como por exemplo, uma região de maior profundidade pode representar um caminho sem obstáculos. Atualmente, sua implementação direta em hardware permite aplicação em tempo real de forma embarcada (fig. 7) (Khaleghi; Ahuja; Wu, 2008).  A ideia fundamental por trás do mapa de disparidade é fornecer uma informação de profundidade relativa, mapeada diretamente na imagem bidimensional a partir do valor do pixel. Usualmente são utilizadas imagens em tons de cinza (8 bits), fornecendo então até 255 níveis de profundidade (fig. 8). O sensor Kinect da Microsoft1 fornece imagens RGB, com uma precisão de 2047 níveis de profundidade. Uma avaliação da qualidade do mapa de disparidade produzido pelo Kinect (Khoshelham; Elberink, 2012) mostrou que a relação entre o nível de profundidade e distância não é linear, onde a distância real dos objetos é gradualmente maior do que a distância estimada a medida que se afastam da câmera. O Kinect é utilizado atualmente como base de comparação pois é uma aplicação em larga escala comercial desta técnica e produz resultados práticos bastante satisfatórios. Porém, essa não linearidade não é um defeito próprio daquela implementação, ela advém do fato de o mapa ser gerado a partir de imagens que são formadas pela projeção perspectiva. Em sistemas onde as câmeras são estacionárias (fixas em um local), como na aplicação tradicional do Kinect, técnicas de extração e supressão do fundo podem ser utilizadas  para aumentar a robustez do método.  No caso de aplicação em robótica móvel, as câmeras estão em constante movimento potencializando estes efeitos negativos, levando à necessidade de outros métodos para minimizar estes efeitos. 
+
+
+Fig. 7: Sistema de visão tridimensional embarcado baseado em mapa de disparidade
+Fonte: (Khaleghi; Ahuja; Wu, 2008)
+Fig. 8: a) Imagem RGB; b) Mapa de disparidade
+Fonte: University of Tsukuba
+
+
+	1. 1. 2 Navegação: Estratégia, planejamento e controle
+
+	A navegação em campo aberto se torna um problema de tomada de decisões difícil, visto que a falta de referenciais locais e o excesso de ruído dos sensores produzem pouca informação válida para o sistema. Apesar do veículo estar buscando um destino preestabelecido, dirigir-se em linha reta pode não ser a melhor decisão. Mesmo assim, a posição atual não pode ser totalmente confiada, visto que mesmo utilizando GPS, este sistema apresenta erro de localização exata. Já no caso dos dispositivos como odômetro, a confiabilidade é ainda menor, visto que existe grande tendência de discrepância. Para melhoria do GPS existe a abordagem do DGPS (GPS diferencial), onde antenas em solo são utilizadas para aumentar a precisão do sinal de satélite.  No Brasil, o IBGE disponibiliza serviços de posicionamento de precisão através da RBMC2 (Rede Brasileira de Monitoramento Contínuo).
+	O algoritmo básico de navegação de um veículo autônomo certamente se baseia no princípio estratégico utilizado por uma pessoa portadora de deficiência visual, ou seja, passos controlados e o constante tateamento do ambiente ao seu redor. Uma pessoa intuitiva e/ou racionalmente consegue achar o caminho e evitar colisões. O veículo não tem essa capacidade intrínseca, devendo ser dotado de algum recurso computacional e/ou físico para tal. Existem algoritmos clássicos de estratégia de navegação, como o algoritmo do bug (Choset et al., 2005) e suas variantes (Taylor; Lavalle, 2009), que se baseiam na detecção de bordas e executam a locomoção fazendo o seu contorno.
+	A operação de navegação requer um planejamento, este planejamento pode ser categorizado como local ou global. No planejamento global há a necessidade de que o ambiente seja previamente conhecido, enquanto que o planejamento local se baseia apenas na posição onde o robô se encontra e o alcance dos seus sensores. As metodologias de planejamento podem ser agrupadas em quatro categorias principais: gráficas, clássicas, heurísticas e de campo potencial. As metodologias baseadas em campo potencial são soluções elegantes e simples, porém, apresentam problemas significativos relacionados a mínimos locais. Uma técnica em destaque na abordagem de campo potencial que soluciona diversos problemas associados a esse método é o VFH (Vector Field Histogram) (Borenstein; Koren, 1991). O VFH foi projetado para ser utilizado em tempo real a partir dos dados dos sensores gerando um histograma (fig. 9) que representa a proximidade dos objetos em relação ao veículo. Idealizado para se utilizar com sonares, leva em conta as questões inerentes a ruídos próprios desta classe de sensor, sendo base para outros métodos que utilizam esta abordagem de campo potencial/campo de força.
+	O controle de navegação pode ser classificado basicamente como reativo, deliberativo ou híbrido, podendo ser estruturado de forma hierárquica.  No projeto COHBRA (Heinen, 2002), foi utilizada a abordagem híbrida em camadas (hierárquica) para a criação de um sistema de controle para robôs móveis. Os sistemas de controle também podem vir a ser construídos a partir de Máquinas de Estados Finitos (FSM), Sistemas Especialistas, Redes Neurais Artificiais (RNA) ou a combinação destes. As RNAs são consideradas sistemas "caixa-preta": após o treinamento da RNA os pesos sinápticos associados a cada neurônio (perceptron) não têm um significado numérico que possa representar o conhecimento adquirido. A sua capacidade de generalização torna-a tolerante a ruídos e permite a aplicação principalmente quando não se consegue estruturar totalmente o problema a partir de regras bem definidas.  É uma técnica extremamente plástica, podendo ser aplicada a diversas classes de problemas. O sistema SEVA3D (Heinen et al., 2006) se baseou em uma FSM para fazer o controle de navegação do veículo, já no simulador RoBombeiros (Pessin, 2008) foi treinada uma RNA para este fim (fig. 10).
+
+
+
+Fig. 9: VFH - a) gráfico do histograma; b) representação em relação aos obstáculos
+Fonte: (Borenstein; Koren, 1991)
+Fig. 10: Esquema da RNA no simulador RoBombeiros
+
+
+	1. 2 Justificativa [e contextualização]
+
+	A aplicação de um sistema de visão computacional requer uma boa interpretação da imagem, a informação contida nela é bastante abrangente porém de difícil acesso. Processos mais simples como segmentação, detecção de bordas e extração de características locais já são amplamente utilizados em aplicações baseadas em imagem. Com a capacidade de processamento dos computadores atuais, algoritmos mais complexos e custosos se tornam viáveis e permitem a concepção de uma visão computacional mais eficaz. Com técnicas como os mapas de disparidade é possível obter, a partir de câmeras, dados semelhantes aos sensores tipo rangefinder, baseados em sonar, lazer ou infravermelho, porém na ordem de megapixels.
+	Uma das motivações principais da aplicação deste trabalho advém de um estudo anterior (Pessin, 2008), onde foi apresentado um sistema multiagente de robôs móveis com a finalidade de combate a incêndios florestais em um ambiente simulado. Os veículos foram equipados com sonares, bússola e GPS para a navegação autônoma em ambientes externos não estruturados (outdoor e off-road), onde foi demonstrado com sucesso o uso de uma RNA treinada para controlar o veículo, integrando os dados sensoriais e a geração de comandos para os atuadores do veículo. Esta abordagem servirá de base e inspiração para o projeto e aplicação do sistema de controle de navegação que será desenvolvido, porém será adotado um sistema de visão computacional como principal informação sensorial e a utilização de um veículo terrestre real.
+
+	[contextualização...]
+
+
+	2. Objetivos
+
+	O objetivo deste trabalho é desenvolver um sistema de navegação autônoma baseado em visão computacional afim de capacitar um veículo terrestre a se locomover em ambientes externos não estruturados, ou seja, um campo com vegetação/plantação e/ou floresta pouco densa. O veículo deverá ser capaz de desviar de obstáculos, percebendo-os de forma autônoma, e se dirigir até uma localização determinada escolhendo por meios próprios o caminho a seguir. Deverá ter alguma capacidade de reconhecer o terreno que irá se deslocar afim de evitar zonas não transponíveis ou muito acidentadas.
+
+	2. 1 Objetivos Específicos
+Extração de referenciais a partir de um par de câmeras, constituindo uma visão binocular;
+Gerar um mapa de navegabilidade visual que possa ser adaptado a algoritmos de planejamento e controle de navegação autônoma.
+Criar um mecanismo de navegação autônoma, capaz de desviar de obstáculos e dirigir o veículo até um destino determinado de forma robusta e eficiente;
+Fazer uso do conhecimento prévio de trabalhos desenvolvidos no laboratório e contribuir para a consolidação de tecnologias capazes de atribuir navegabilidade autônoma a veículos de diversas naturezas para fins práticos;
+Aplicação em um veículo real em ambiente externo não estruturado.
+
+
+	3. Materiais e Métodos
+
+	 Este trabalho será desenvolvido junto ao LRM3 – Laboratório de Robótica Móvel do ICMC/USP. Diversos trabalhos relacionados ao desenvolvimento de veículos autônomos e robôs móveis inteligentes vêm sendo pesquisados e desenvolvidos junto a este laboratório, destacando-se, a pesquisa e uso de sistemas de navegação baseados em visão computacional. Atualmente, o Laboratório conta com uma parceria estabelecida com a empresa Jacto4 (equipamentos agrícolas) para o desenvolvimento de um sistema autônomo de navegação de veículos em ambientes agrícolas. O LRM possui atualmente duas plataformas de teste para aplicações de veículos móveis autônomos: os veículos CaRINA I e CaRINA II5 (fig. 11), além de robôs e plataformas móveis de pequeno porte. Para realizar os testes e avaliar o desempenho do sistema teremos à disposição o veículo CaRINA I do LRM, que já possui integrada uma câmera de vídeo estéreo e um dispositivo de localização GPS, bem como outros dispositivos sensores e atuadores de controle do veículo. O veículo CaRINA I (fig. 11) é o mais adaptado para ambientes externos.
+	A primeira etapa consiste no levantamento de todos os pontos críticos do sistema proposto, após esta etapa, serão avaliadas as técnicas mais acessíveis que são adequadas para o tratamento de cada ponto crítico. Será levado em conta prioritariamente o que já vem sendo trabalhado no laboratório, afim de promover a integração das tecnologias já dominadas pelo grupo. Para a programação serão utilizadas as bibliotecas OpenCV6 e PCL7 como ferramentas centrais, podendo vir a ser utilizado o framework ROS8 para a integração. 
+	Para a localização, será aplicado basicamente a utilização de GPS e bússola. Como o destino também será dado em forma de informação de posição de GPS esta questão não é tão crítica para esse projeto. A localização é bastante afetada por ruídos dos sensores, principalmente aqueles que proveem informações de odometria. Dependendo da aplicação pode não ser considerado necessário uma localização espacial precisa do veículo, apenas que o mesmo seja capaz de chegar no seu destino eficazmente. Por se tratar de um ambiente externo e não estruturado, sua navegação permite uma certa liberdade de movimentos dentro de um perímetro onde haja um caminho factível, preferencialmente buscando um caminho ótimo.
+	Inicialmente serão estudados e trabalhados algoritmos para a criação do mapa de disparidade a partir do par de imagens obtidas da câmera estéreo. Para este processo, o algoritmo deverá ter um compromisso de desempenho entre a qualidade do mapa de disparidade/profundidade e performance em termos de tempo de processamento. A partir do mapa de disparidade será elaborado um mapa de navegabilidade, que representa as regiões navegáveis (seguras) e regiões não navegáveis (obstáculos e regiões a evitar) em frente ao veículo.
+	O mapa final gerado será utilizado em conjunto com as informações de posição atual e de destino (GPS e bússola), a fim de realizar o controle da navegação do veículo. Estão sendo consideradas duas abordagens principais para o controle e planejamento local da navegação: a primeira baseada no uso de Redes Neurais Artificiais, conforme proposto no trabalho dos RoBombeiros (Pessin, 2008), e a segunda baseada em uma adaptação do algoritmo VFH. Nestas abordagens serão consideradas como parâmetro de entrada as informações tridimensionais do mapa de navegabilidade. Além disto, também serão necessários estudos que visam identificar, a partir das imagens da câmera estéreo, o plano de referência de base (chão), seus desníveis e obstáculos, classificando-os como elementos transponíveis ou não.
+
+
+Fig. 11: Veículo CaRINA I (esquerda), CaRINA II (direita)
+Fonte: LRM ICMC/USP
+
+
+	4. Plano de Trabalho e Cronograma
+
+	O quadro (1) abaixo apresenta um cronograma das macro atividades. A execução das mesmas se dará respeitando os devidos prazos que não estão aqui explicitados. A colocação temporal das macro atividades estão dispostas nos períodos da sua maior concentração principal, porém a execução das atividades se darão de forma integrada.
+
+
+Quadro 1: Cronograma sintético
+
+
+	5. Resultados Esperados
+
+	Este tipo de tecnologia promove o interesse e possíveis aplicações junto à sociedade, sendo de grande relevância à pesquisa e ao desenvolvimento de novas tecnologias nas áreas afins, a exemplo de iniciativas como as que vêm sendo desenvolvidas em outros países (por exemplo, DARPA Grand/Urban Challenge9,  ELROB10, AUVSI/IGVC11).
+	Este trabalho espera contribuir no desenvolvimento de soluções para a arquitetura de um veículo móvel autônomo robusto e seguro. Mas especificamente, este estudo estará focado na implementação de uma visão computacional para a navegação autônoma aplicável a veículos terrestres em geral, permitindo aplicações diversas.
+	As principais aplicações deste sistema robótico de navegação autônoma são: 
+o combate à incêndios, conforme proposto no trabalho desenvolvido por Pessin (2008);
+o uso em aplicações agrícolas visando criar veículos autônomos usados para arar a terra, semear, pulverizar e realizar a colheita em plantações;
+o uso em aplicações militares e/ou civis para o auxílio no transporte de carga e suprimentos em ambientes não estruturados;
+o transporte de cargas em locais perigosos onde a presença de um motorista possa ser dispensada de modo a proteger sua segurança. 
+
+	[5. 1 Forma de Análise dos Resultados
+
+	Os resultados serão analisados comparativamente com as soluções já desenvolvidas no LRM e projetos relacionados e entre as abordagens adotadas neste estudo. A adaptabilidade do resultado final para as áreas de interesse citadas nesta proposta pode indicar o grau de aplicação atingido. As necessidades de melhorias e a delineação de avanços que devem ser alcançados poderão servir de base para novos projetos, constituindo um resultado na prospecção tecnológica para o desenvolvimento de um sistema eficiente e robusto de navegação autônoma.]
+
+
+	
+
+
+	Referências
+
+
+BAY, H. et al. Speeded-up robust features (SURF). Computer Vision and Image Understanding, v. 110, n. 3, p. 346–359, 2008. 
+
+BORENSTEIN, J.; KOREN, Y. The vector field histogram-fast obstacle avoidance for mobile robots. IEEE Journal of Robotics and Automation, v. 7, n. 3, p. 278-288, 1991. 
+
+CHOSET, H. et al. Principles of robot motion: theory, algorithms, and implementation., The MIT Press, 2005.
+
+DISSANAYAKE, M. W. M. G. et al. A solution to the simultaneous localization and map building (slam) problem. IEEE Transactions on Robotics and Automation, v. 17, p. 229–241,
+2001.
+
+FAUGERAS, O. Three-dimensional computer vision: a geometric viewpoint., The MIT Press, 1993. 
+
+FUSIELLO, A.; TRUCCO, E.; VERRI, A. A compact algorithm for rectification of stereo pairs. Machine Vision and Applications, v. 12, n. 1, p. 16-22, 2000. 
+
+HEINEN, F. Sistema de Controle Híbrido para Robôs Móveis Autônomos., Dissertação (Mestrado) - Mestrado em Computação Aplicada / Unisinos, 2002. 
+
+HEINEN, M. et al. SEVA3D: Autonomous Vehicles Parking Simulator in a three-dimensional environment. Journal of INFOCOMP, 2007. 
+
+KHALEGHI, B.; AHUJA, S.; WU, Q. M. J. A new miniaturized embedded stereo-vision system (MESVS-I). In:  Proceedings of the 2008 Canadian Conference on Computer and Robot Vision., p. 26–33, 2008
+
+KHOSHELHAM, K.; ELBERINK, S. O. Accuracy and resolution of kinect depth data for indoor mapping applications. Sensors, v. 12, n. 2, p. 1437–1454, 2012. ISSN 1424-8220.
+
+KLASER, R. L.,  Aplicação de Técnicas de Visão Computacional para Monitorar Experimentos de Comportamento de Invertebrados, Monogra?a (Bacharel em Informática), Unisinos (Universidade do Vale do Rio dos Sinos), 2007.
+
+LOWE, D. G. Object recognition from local scale-invariant features. In: Proceeding of the International Conference on Computer Vision, v. 2, p. 1150–1157, 1999. 
+
+MARR, D. Vision: A Computational Investigation into the Human Representation and Processing of Visual Information. New York, NY, USA: Henry Holt and Co., Inc., 1982. ISBN
+0716715678.
+
+MUNDY, J. L.; ZISSERMAN, A. Repeated structures: Image correspondence constraints and 3D structure recovery., In: Proceedings of the Second Joint European - US Workshop on Applications of Invariance in Computer Vision, p. 89–106, 1994. 
+
+PESSIN, G. Evolução de estratégias e controle inteligente em sistemas multi-robóticos robustos. Dissertação (Mestrado) -  Mestrado em Computação Aplicada / Unisinos, 2008. 
+
+POGGIO, T. Vision by man and machine. Scienti?c American, v. 250, n. 4, p. 106–122, Abril
+1984.
+
+TAYLOR, K.; LAVALLE, S. M. I-bug: An intensity-based bug algorithm. In: IEEE International Conference on Robotics and Automation, p. 3981–3986, 2009
+
+TSAI, R. Y. A versatile camera calibration technique for high-accuracy 3D machine vision metrology using off-the-shelf TV cameras and lenses. IEEE Journal of Robotics and Automation, v. 3, n. 4, p. 323–344, 1987. 
+
+WEBB, B. What does robotics offer animal behaviour? Animal Behaviour, v. 60, n. 5, p. 545-558, 2000. 
+
+WENG, J.; COHEN, P.; HERNIOU, M. Camera calibration with distortion models and accuracy evaluation. In: IEEE Transactions on pattern analysis and machine intelligence, v. 14, n. 10, p. 965–980, 1992. 
+
+WILLSON, R. G.; SHAFER, S. A. What is the center of the image? Journal of the Optical Society of America A  v. 11, n. 11, p. 2946-2955, 1994. 

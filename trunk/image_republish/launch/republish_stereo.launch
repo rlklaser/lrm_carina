@@ -1,0 +1,8 @@
+<launch>
+
+	<node name="repub" pkg="image_republish" type="stereo_republish_node">
+	
+	
+	</node>
+
+</launch>

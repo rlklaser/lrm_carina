@@ -1,0 +1,10 @@
+<launch>
+
+	<node pkg="camera1394" type="camera1394_node" name="camera1394_node" >
+	</node>
+	
+	<node pkg="image_view" type="image_view" name="image_view" >
+	</node>
+
+
+</launch>

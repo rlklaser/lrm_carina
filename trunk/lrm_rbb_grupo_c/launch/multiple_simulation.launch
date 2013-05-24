@@ -1,0 +1,304 @@
+<launch>
+
+	<rosparam param="/list_of_ids">[1 2 3 4 5 6 7 8]</rosparam>
+
+	<node
+		name="rviz"
+		pkg="rviz"
+		type="rviz"
+		args="-d $(find lrm_rbb_grupo_c)/rbbsim_multi.rviz"
+		output="screen" />
+
+	<node
+		name="robombeiros"
+		pkg="lrm_rbb_grupo_c"
+		type="robots"
+		args="$(find lrm_rbb_grupo_c)/textures -noshadow -notex"
+		output="screen" />
+
+	<param
+		name="antenna_description"
+		command="cat $(find lrm_rbb_grupo_c)/urdf/antenna.urdf" />
+
+	<node
+		name="antenna_tf"
+		pkg="tf"
+		type="static_transform_publisher"
+		args="-5 5 0 0 0 0 /world antenna_link 30" />
+
+	<group ns="vehicle/1">
+		<param
+			name="tf_prefix"
+			value="vehicle/1" />
+		<param
+			name="robot_description"
+			command="cat $(find lrm_rbb_grupo_c)/urdf/simple.urdf" />
+		<node
+			name="robot_state_publisher"
+			pkg="robot_state_publisher"
+			type="state_publisher" />
+		<node
+			name="antenna_node"
+			pkg="lrm_rbb_grupo_c"
+			type="antenna_node"
+		>
+			<rosparam
+				file="$(find lrm_rbb_grupo_c)/settings/antenna.yaml"
+				command="load" />
+		</node>
+		<node
+			name="move_base_simple"
+			pkg="lrm_rbb_grupo_c"
+			type="move_base_simple"
+			output="screen"
+		>
+			<rosparam
+				file="$(find lrm_rbb_grupo_c)/settings/navigation.yaml"
+				command="load" />
+			<param
+				name="my_id"
+				value="1" />
+			<param
+				name="global_frame_id"
+				value="/vehicle/1/base_link" />
+			<param
+				name="odom_frame_id"
+				value="/vehicle/1/odom" />
+		</node>
+		<node
+			name="beacon_navigation"
+			pkg="lrm_rbb_grupo_c"
+			type="beacon_nav_node"
+			output="screen"
+			respawn="false"
+		>
+			<rosparam
+				file="$(find lrm_rbb_grupo_c)/settings/beacon_nav.yaml"
+				command="load" />
+			<param
+				name="frame_id"
+				value="/vehicle/1/base_link" />
+		</node>
+	</group>
+
+
+	<group ns="vehicle/2">
+		<param
+			name="tf_prefix"
+			value="vehicle/2" />
+		<param
+			name="robot_description"
+			command="cat $(find lrm_rbb_grupo_c)/urdf/simple.urdf" />
+		<node
+			name="robot_state_publisher"
+			pkg="robot_state_publisher"
+			type="state_publisher" />
+		<node
+			name="antenna_node"
+			pkg="lrm_rbb_grupo_c"
+			type="antenna_node"
+		>
+			<rosparam
+				file="$(find lrm_rbb_grupo_c)/settings/antenna.yaml"
+				command="load" />
+		</node>
+		<node
+			name="move_base_simple"
+			pkg="lrm_rbb_grupo_c"
+			type="move_base_simple"
+			output="screen"
+		>
+			<rosparam
+				file="$(find lrm_rbb_grupo_c)/settings/navigation.yaml"
+				command="load" />
+			<param
+				name="my_id"
+				value="2" />
+			<param
+				name="global_frame_id"
+				value="/vehicle/2/base_link" />
+			<param
+				name="odom_frame_id"
+				value="/vehicle/2/odom" />
+		</node>
+		<node
+			name="beacon_navigation"
+			pkg="lrm_rbb_grupo_c"
+			type="beacon_nav_node"
+			output="screen"
+			respawn="false"
+		>
+			<rosparam
+				file="$(find lrm_rbb_grupo_c)/settings/beacon_nav.yaml"
+				command="load" />
+			<param
+				name="frame_id"
+				value="/vehicle/2/base_link" />
+		</node>
+	</group>
+
+	<group ns="vehicle/3">
+		<param
+			name="tf_prefix"
+			value="vehicle/3" />
+		<param
+			name="robot_description"
+			command="cat $(find lrm_rbb_grupo_c)/urdf/simple.urdf" />
+		<node
+			name="robot_state_publisher"
+			pkg="robot_state_publisher"
+			type="state_publisher" />
+		<node
+			name="antenna_node"
+			pkg="lrm_rbb_grupo_c"
+			type="antenna_node"
+		>
+			<rosparam
+				file="$(find lrm_rbb_grupo_c)/settings/antenna.yaml"
+				command="load" />
+		</node>
+		<node
+			name="move_base_simple"
+			pkg="lrm_rbb_grupo_c"
+			type="move_base_simple"
+			output="screen"
+		>
+			<rosparam
+				file="$(find lrm_rbb_grupo_c)/settings/navigation.yaml"
+				command="load" />
+			<param
+				name="my_id"
+				value="3" />
+			<param
+				name="global_frame_id"
+				value="/vehicle/3/base_link" />
+			<param
+				name="odom_frame_id"
+				value="/vehicle/3/odom" />
+		</node>
+		<node
+			name="beacon_navigation"
+			pkg="lrm_rbb_grupo_c"
+			type="beacon_nav_node"
+			output="screen"
+			respawn="false"
+		>
+			<rosparam
+				file="$(find lrm_rbb_grupo_c)/settings/beacon_nav.yaml"
+				command="load" />
+			<param
+				name="frame_id"
+				value="/vehicle/3/base_link" />
+		</node>
+	</group>
+
+	<group ns="vehicle/4">
+		<param
+			name="tf_prefix"
+			value="vehicle/4" />
+		<param
+			name="robot_description"
+			command="cat $(find lrm_rbb_grupo_c)/urdf/simple.urdf" />
+		<node
+			name="robot_state_publisher"
+			pkg="robot_state_publisher"
+			type="state_publisher" />
+		<node
+			name="antenna_node"
+			pkg="lrm_rbb_grupo_c"
+			type="antenna_node"
+		>
+			<rosparam
+				file="$(find lrm_rbb_grupo_c)/settings/antenna.yaml"
+				command="load" />
+		</node>
+		<node
+			name="move_base_simple"
+			pkg="lrm_rbb_grupo_c"
+			type="move_base_simple"
+			output="screen"
+		>
+			<rosparam
+				file="$(find lrm_rbb_grupo_c)/settings/navigation.yaml"
+				command="load" />
+			<param
+				name="my_id"
+				value="4" />
+			<param
+				name="global_frame_id"
+				value="/vehicle/4/base_link" />
+			<param
+				name="odom_frame_id"
+				value="/vehicle/4/odom" />
+		</node>
+		<node
+			name="beacon_navigation"
+			pkg="lrm_rbb_grupo_c"
+			type="beacon_nav_node"
+			output="screen"
+			respawn="false"
+		>
+			<rosparam
+				file="$(find lrm_rbb_grupo_c)/settings/beacon_nav.yaml"
+				command="load" />
+			<param
+				name="frame_id"
+				value="/vehicle/4/base_link" />
+		</node>
+	</group>
+
+	<group ns="vehicle/5">
+		<param
+			name="tf_prefix"
+			value="vehicle/5" />
+		<param
+			name="robot_description"
+			command="cat $(find lrm_rbb_grupo_c)/urdf/simple.urdf" />
+		<node
+			name="robot_state_publisher"
+			pkg="robot_state_publisher"
+			type="state_publisher" />
+		<node
+			name="antenna_node"
+			pkg="lrm_rbb_grupo_c"
+			type="antenna_node"
+		>
+			<rosparam
+				file="$(find lrm_rbb_grupo_c)/settings/antenna.yaml"
+				command="load" />
+		</node>
+		<node
+			name="move_base_simple"
+			pkg="lrm_rbb_grupo_c"
+			type="move_base_simple"
+			output="screen"
+		>
+			<rosparam
+				file="$(find lrm_rbb_grupo_c)/settings/navigation.yaml"
+				command="load" />
+			<param
+				name="my_id"
+				value="5" />
+			<param
+				name="global_frame_id"
+				value="/vehicle/5/base_link" />
+			<param
+				name="odom_frame_id"
+				value="/vehicle/5/odom" />
+		</node>
+		<node
+			name="beacon_navigation"
+			pkg="lrm_rbb_grupo_c"
+			type="beacon_nav_node"
+			output="screen"
+			respawn="false"
+		>
+			<rosparam
+				file="$(find lrm_rbb_grupo_c)/settings/beacon_nav.yaml"
+				command="load" />
+			<param
+				name="frame_id"
+				value="/vehicle/5/base_link" />
+		</node>
+	</group>
+</launch>

@@ -1,0 +1,27 @@
+<launch>
+
+	<node
+		pkg="tf"
+		type="static_transform_publisher"
+		name="marker_broadcaster"
+		args="0 0 0 0 0 0 odom odometry_marker 30"
+		output="screen" />
+		
+	<node name="markers" type="pose_markers" pkg="lrm_odometry" output="screen" />
+	<!-- 
+	<node
+		pkg="lrm_odometry"
+		type="extended_odometry"
+		name="imu_odometry"
+		output="screen"
+	>
+		<param
+			name="rate"
+			value="30" />
+
+		<param
+			name="use_imu"
+			value="false" />
+	</node>
+ 	-->
+</launch>

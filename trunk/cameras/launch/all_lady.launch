@@ -1,0 +1,7 @@
+<launch>
+
+	<include file="$(find cameras)/launch/lady.launch" />
+	<include file="$(find cameras)/launch/multiview.launch" />
+	<include file="$(find cameras)/launch/multi_image_view.launch" />
+
+</launch>

@@ -1,0 +1,9 @@
+carina_controller:
+     type: carina_controller/CarinaControllerPlugin
+     joint_flw_dir: joint_front_left_wheel_dir
+     joint_frw_dir: joint_front_right_wheel_dir
+     joint_blw: joint_back_left_wheel
+     joint_brw: joint_back_right_wheel
+     joint_flw: joint_front_left_wheel
+     joint_frw: joint_front_right_wheel
+     joint_drw: joint_base_link_wd

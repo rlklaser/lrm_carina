@@ -1,0 +1,36 @@
+<launch>
+
+	<node
+		name="retina_left"
+		pkg="lrm_wrappers"
+		type="retinal_node"
+		output="screen"
+		respawn="true"
+	>
+
+		<remap
+			from="image_raw"
+			to="/stereo/left/image_raw" />
+		<remap
+			from="retina_left/magno/image_raw"
+			to="/stereo/retina/left/image_raw" />
+
+	</node>
+
+	<node
+		name="retina_right"
+		pkg="lrm_wrappers"
+		type="retinal_node"
+		output="screen"
+		respawn="true"
+	>
+
+		<remap
+			from="image_raw"
+			to="/stereo/right/image_raw" />
+		<remap
+			from="retina_right/magno/image_raw"
+			to="/stereo/retina/right/image_raw" />
+
+	</node>
+</launch>

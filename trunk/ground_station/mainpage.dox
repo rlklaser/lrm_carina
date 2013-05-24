@@ -1,0 +1,10 @@
+/**
+\mainpage
+\htmlinclude manifest.html
+
+\b ground_station is a package for ROS that typicaly subscribe to several topics and update an Gtk+ based GUI. <br>
+The GUI contains several widgets made to look like to real flight instruments in order to allow easy feedbacks for the user/pilot.
+
+For more informations on this package, take a look at the wiki page : http://www.ros.org/wiki/ground_station<br>
+For more informations on the Gtk widgets, take a look at the API code.
+*/

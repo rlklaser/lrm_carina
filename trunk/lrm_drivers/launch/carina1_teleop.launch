@@ -1,0 +1,38 @@
+<launch>
+
+	<!-- Low level system nodes (running at embedded host) -->
+	<node
+		pkg="lrm_drivers"
+		name="roboteq"
+		type="roboteq_node"
+	>
+		<param
+			name="port"
+			value="/dev/ttyUSB1" />
+		<param
+			name="model"
+			value="AX2550" />
+	</node>
+	
+	<node
+		pkg="lrm_drivers"
+		name="arduino"
+		type="throttle_CaRINA1_node"
+	>
+		<param
+			name="port"
+			value="/dev/ttyUSB0" />
+		<param
+			name="max_value"
+			value="100" />
+
+		<remap
+			from="throttle_commands"
+			to="velocity_commands" />
+
+	</node>
+	
+	<include file="$(find lrm_drivers)/launch/joy_teleop.launch" />
+	
+
+</launch>

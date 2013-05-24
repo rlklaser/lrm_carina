@@ -1,0 +1,43 @@
+<!-- -*- xml -*-
+
+     This tutorial relies on a camera calibration.
+
+     See http://www.ros.org/wiki/visp_camera_calibration/Tutorials/CalibrationExternalCamera for more
+     information.
+
+  -->
+<launch>
+
+  <node pkg="rxtools" name="rxconsole" type="rxconsole"/>
+<!--
+  <node pkg="camera1394" type="camera1394_node" name="my_camera1394_node"/>
+  <node pkg="image_view" type="image_view" name="my_image_raw_viewer" args="image:=/camera/image_raw"/> 
+-->
+  <group ns="visp_camera_calibration">
+    <node 
+    	name="visp_camera_calibration_calibrator" 
+    	pkg="visp_camera_calibration" 
+    	type="visp_camera_calibration_calibrator"/>
+                
+    <node 
+    	name="visp_camera_calibration_image_processing"
+    	pkg="visp_camera_calibration"  
+    	type="visp_camera_calibration_image_processing" 
+    	args="camera_prefix:=/camera">
+      
+      <param name="gray_level_precision" value="0.7" />
+      <param name="size_precision" value="0.5" />
+      <param name="pause_at_each_frame" value="false" />
+
+      <!-- 3D coordinates of all points on the calibration pattern. In this example, points are planar -->
+      <rosparam param="model_points_x">[0.0, 0.03, 0.06, 0.09, 0.12, 0.15, 0.0, 0.03, 0.06, 0.09, 0.12, 0.15, 0.0, 0.03, 0.06, 0.09, 0.12, 0.15, 0.0, 0.03, 0.06, 0.09, 0.12, 0.15, 0.0, 0.03, 0.06, 0.09, 0.12, 0.15, 0.0, 0.03, 0.06, 0.09, 0.12, 0.15]</rosparam>
+      <rosparam param="model_points_y">[0.0, 0.00, 0.00, 0.00, 0.00, 0.00, .03, 0.03, 0.03, 0.03, 0.03, 0.03, .06, 0.06, 0.06, 0.06, 0.06, 0.06, .09, 0.09, 0.09, 0.09, 0.09, 0.09, 0.12,0.12, 0.12, 0.12, 0.12, 0.12, 0.15,0.15, 0.15, 0.15, 0.15, 0.15]</rosparam>
+      <rosparam param="model_points_z">[0.0, 0.00, 0.00, 0.00, 0.00, 0.00, 0.0, 0.00, 0.00, 0.00, 0.00, 0.00, 0.0, 0.00, 0.00, 0.00, 0.00, 0.00, 0.0, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.0, 0.00, 0.00, 0.00, 0.00,0.00]</rosparam>
+
+      <!-- 3D coordinates of 4 points the user has to select to initialise the calibration process -->
+      <rosparam param="selected_points_x">[0.03, 0.03, 0.09, 0.12]</rosparam>
+      <rosparam param="selected_points_y">[0.03, 0.12, 0.12, 0.03]</rosparam>
+      <rosparam param="selected_points_z">[0.00, 0.00, 0.00, 0.00]</rosparam>     
+    </node>
+  </group>
+</launch>

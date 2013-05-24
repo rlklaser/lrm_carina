@@ -1,0 +1,14 @@
+<package>
+  <description brief="lrm_multi_robot">
+
+     lrm_multi_robot
+
+  </description>
+  <author>Rafael Luiz Klaser</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/lrm_multi_robot</url>
+
+</package>
+
+

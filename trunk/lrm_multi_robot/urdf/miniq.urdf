@@ -1,0 +1,343 @@
+<?xml version="1.0"?>
+
+<robot
+	name="miniq"
+	xmlns:xi="http://www.w3.org/2001/XInclude"
+	xmlns:gazebo="http://playerstage.sourceforge.net/gazebo/xmlschema/#gz"
+	xmlns:model="http://playerstage.sourceforge.net/gazebo/xmlschema/#model"
+	xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+	xmlns:body="http://playerstage.sourceforge.net/gazebo/xmlschema/#body"
+	xmlns:geom="http://playerstage.sourceforge.net/gazebo/xmlschema/#geom"
+	xmlns:joint="http://playerstage.sourceforge.net/gazebo/xmlschema/#joint"
+	xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+	xmlns:rendering="http://playerstage.sourceforge.net/gazebo/xmlschema/#rendering"
+	xmlns:renderable="http://playerstage.sourceforge.net/gazebo/xmlschema/#renderable"
+	xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+	xmlns:physics="http://playerstage.sourceforge.net/gazebo/xmlschema/#physics"
+>
+
+	<link name="base_link">
+		<inertial>
+			<mass value="0.0001" />
+			<origin xyz="0 0 0" />
+			<inertia
+				ixx="0.0001"
+				ixy="0.0"
+				ixz="0.0"
+				iyy="0.0001"
+				iyz="0.0"
+				izz="0.0001" />
+		</inertial>
+		<visual>
+			<origin
+				rpy="0 0 0"
+				xyz="0 0 0" />
+			<geometry>
+				<cylinder
+					length="0.02"
+					radius="0.061" />
+			</geometry>
+			<material name="body">
+				<color rgba="1 1 0 1" />
+			</material>
+		</visual>
+		<collision>
+			<geometry>
+				<cylinder
+					length="0.02"
+					radius="0.061" />
+			</geometry>
+		</collision>
+	</link>
+
+	<link name="imu_link">
+		<inertial>
+			<mass value="0.0001" />
+			<origin xyz="0 0 0" />
+			<inertia
+				ixx="0.0001"
+				ixy="0.0"
+				ixz="0.0"
+				iyy="0.0001"
+				iyz="0.0"
+				izz="0.0001" />
+		</inertial>
+		<visual>
+			<origin
+				rpy="0 0 0"
+				xyz="0 0 0" />
+			<geometry>
+				<cylinder
+					length="0.01"
+					radius="0.01" />
+			</geometry>
+			<material name="imu">
+				<color rgba="0.5 1 0 1" />
+			</material>
+		</visual>
+		<collision>
+			<geometry>
+				<cylinder
+					length="0.01"
+					radius="0.01" />
+			</geometry>
+		</collision>
+	</link>
+
+	<joint
+		name="joint_imu"
+		type="fixed"
+	>
+		<parent link="base_link" />
+		<child link="imu_link" />
+		<origin
+			xyz="0 0 0.01"
+			rpy="0 0 0" />
+	</joint>
+
+	<link name="hokuyo_link">
+		<inertial>
+			<mass value="0.0001" />
+			<origin xyz="0 0 0" />
+			<inertia
+				ixx="0.0001"
+				ixy="0.0"
+				ixz="0.0"
+				iyy="0.0001"
+				iyz="0.0"
+				izz="0.0001" />
+		</inertial>
+		<visual>
+			<origin
+				rpy="0 0 0"
+				xyz="0 0 0" />
+			<geometry>
+				<cylinder
+					length="0.03"
+					radius="0.02" />
+			</geometry>
+			<material name="hokuyo">
+				<color rgba="0 0 1 1" />
+			</material>
+		</visual>
+		<collision>
+			<geometry>
+				<cylinder
+					length="0.03"
+					radius="0.02" />
+			</geometry>
+		</collision>
+	</link>
+
+	<joint
+		name="joint_hokuyo"
+		type="fixed"
+	>
+		<parent link="base_link" />
+		<child link="hokuyo_link" />
+		<origin
+			xyz="0 0 0.05"
+			rpy="0 0 0" />
+	</joint>
+
+	<link name="left_wheel">
+		<inertial>
+			<mass value="0.0001" />
+			<origin xyz="0 0 0" />
+			<inertia
+				ixx="0.0001"
+				ixy="0.0"
+				ixz="0.0"
+				iyy="0.0001"
+				iyz="0.0"
+				izz="0.0001" />
+		</inertial>
+		<visual>
+			<origin
+				rpy="0 0 0"
+				xyz="0 0 0" />
+			<geometry>
+				<cylinder
+					length="0.02"
+					radius="0.021" />
+			</geometry>
+			<material name="black">
+				<color rgba="0 0 0 1" />
+			</material>
+		</visual>
+		<collision>
+			<geometry>
+				<cylinder
+					length="0.02"
+					radius="0.021" />
+			</geometry>
+		</collision>
+	</link>
+
+	<joint
+		name="joint_left_wheel"
+		type="continuous"
+	>
+		<parent link="base_link" />
+		<child link="left_wheel" />
+		<origin
+			xyz="0 0.042 0"
+			rpy="1.57079633 0 0" />
+		<axis xyz="0 1 0" />
+		<limit
+			effort="100"
+			velocity="100" />
+		<joint_properties
+			damping="0.0"
+			friction="0.0" />
+	</joint>
+
+	<link name="right_wheel">
+		<inertial>
+			<mass value="0.0001" />
+			<origin xyz="0 0 0" />
+			<inertia
+				ixx="0.0001"
+				ixy="0.0"
+				ixz="0.0"
+				iyy="0.0001"
+				iyz="0.0"
+				izz="0.0001" />
+		</inertial>
+		<visual>
+			<origin
+				rpy="0 0 0"
+				xyz="0 0 0" />
+			<geometry>
+				<cylinder
+					length="0.02"
+					radius="0.021" />
+			</geometry>
+			<material name="black">
+				<color rgba="0 0 0 1" />
+			</material>
+		</visual>
+		<collision>
+			<geometry>
+				<cylinder
+					length="0.02"
+					radius="0.021" />
+			</geometry>
+		</collision>
+	</link>
+
+	<joint
+		name="joint_right_wheel"
+		type="continuous"
+	>
+		<parent link="base_link" />
+		<child link="right_wheel" />
+		<origin
+			xyz="0 -0.042 0"
+			rpy="-1.57079633 0 0" />
+		<axis xyz="0 1 0" />
+		<limit
+			effort="100"
+			velocity="100" />
+		<joint_properties
+			damping="0.0"
+			friction="0.0" />
+	</joint>
+
+    <!--    
+    <include filename="$(find lrm_multi_robot)/urdf/robot-gazebo.urdf" />
+    -->
+
+	<transmission
+		name="joint_lw_trans"
+		type="pr2_mechanism_model/SimpleTransmission"
+	>
+		<actuator name="joint_lw_motor" />
+		<joint name="joint_left_wheel" />
+		<mechanicalReduction>1</mechanicalReduction>
+		<motorTorqueConstant>1</motorTorqueConstant>
+	</transmission>
+
+	<transmission
+		name="joint_rw_trans"
+		type="pr2_mechanism_model/SimpleTransmission"
+	>
+		<actuator name="joint_rw_motor" />
+		<joint name="joint_right_wheel" />
+		<mechanicalReduction>1</mechanicalReduction>
+		<motorTorqueConstant>1</motorTorqueConstant>
+	</transmission>
+
+	<gazebo>
+
+		<controller:gazebo_ros_controller_manager
+			name="gazebo_ros_controller_manager"
+			plugin="libgazebo_ros_controller_manager.so"
+		>
+			<alwaysOn>true</alwaysOn>
+			<updateRate>1000.0</updateRate>
+			<interface:audio name="gazebo_ros_controller_manager_dummy_iface" />
+		</controller:gazebo_ros_controller_manager>
+
+
+		<controller:gazebo_ros_imu
+			name="imu_controller"
+			plugin="libgazebo_ros_imu.so"
+		>
+			<alwaysOn>true</alwaysOn>
+			<updateRate>30.0</updateRate>
+			<bodyName>imu_link</bodyName>
+			<topicName>imu_data</topicName>
+			<serviceName>imu_service</serviceName>
+			<gaussianNoise>2.89e-08</gaussianNoise>
+			<interface:position name="imu_link_position" />
+		</controller:gazebo_ros_imu>
+
+		<controller:gazebo_ros_p3d
+			name="p3d_base_controller"
+			plugin="libgazebo_ros_p3d.so"
+		>
+			<alwaysOn>true</alwaysOn>
+			<updateRate>10.0</updateRate>
+			<bodyName>base_link</bodyName>
+			<topicName>odom_gazebo</topicName>
+			<gaussianNoise>0.01</gaussianNoise>
+			<frameName>base_link</frameName>
+			<xyzOffset>0 0 0</xyzOffset>
+			<rpyOffset>0 0 0</rpyOffset>
+			<interface:position name="base_footprint_position" />
+		</controller:gazebo_ros_p3d>
+
+	</gazebo>
+
+	<gazebo reference="hokuyo_link">
+		<material>Gazebo/Blue</material>
+		<turnGravityOff>false</turnGravityOff>
+		<sensor:ray name="hokuyo_laser">
+			<rayCount>640</rayCount>
+			<rangeCount>640</rangeCount>
+			<laserCount>1</laserCount>
+			<origin>0.0 0.0 0.0</origin>
+			<displayRays>fan</displayRays>
+			<minAngle>-180.0</minAngle>
+			<maxAngle>180.0</maxAngle>
+			<minRange>0.05</minRange>
+			<maxRange>30.1</maxRange>
+			<resRange>0.001</resRange>
+			<updateRate>10.0</updateRate>
+			<controller:gazebo_ros_laser
+				name="gazebo_ros_hokuyo_laser_controller02"
+				plugin="libgazebo_ros_laser.so"
+			>
+				<hokuyoMinIntensity>101</hokuyoMinIntensity>
+				<gaussianNoise>0.005</gaussianNoise>
+				<alwaysOn>true</alwaysOn>
+				<updateRate>10.0</updateRate>
+				<topicName>scan</topicName>
+				<frameName>hokuyo_link</frameName>
+				<interface:laser name="gazebo_ros_hokuyo_laser_iface" />
+			</controller:gazebo_ros_laser>
+		</sensor:ray>
+	</gazebo>
+
+</robot>

@@ -1,0 +1,127 @@
+<launch>
+
+	<group ns="/stereo">
+
+		<group ns="left">
+		    <!-- Debayered images -->
+			<node
+				pkg="nodelet"
+				type="nodelet"
+				name="debayer"
+				args="load image_proc/debayer /camera_nodelet_manager --no-bond"
+				respawn="true" />
+			<node
+				pkg="nodelet"
+				type="nodelet"
+				name="rectify_mono"
+				args="load image_proc/rectify /camera_nodelet_manager --no-bond"
+				respawn="true"
+				output="screen" />
+  			<!-- Color rectified image -->
+			<node
+				pkg="nodelet"
+				type="nodelet"
+				name="rectify_color"
+				args="load image_proc/rectify /camera_nodelet_manager --no-bond"
+				respawn="true"
+				output="screen"
+			>
+				<remap
+					from="image_mono"
+					to="image_color" />
+				<remap
+					from="image_rect"
+					to="image_rect_color" />
+			</node>
+		</group>
+
+		<group ns="right">
+		    <!-- Debayered images -->
+			<node
+				pkg="nodelet"
+				type="nodelet"
+				name="debayer"
+				args="load image_proc/debayer /camera_nodelet_manager --no-bond"
+				respawn="true" />
+			<node
+				pkg="nodelet"
+				type="nodelet"
+				name="rectify_mono"
+				args="load image_proc/rectify /camera_nodelet_manager --no-bond"
+				respawn="true"
+				output="screen" />
+  			<!-- Color rectified image -->
+			<node
+				pkg="nodelet"
+				type="nodelet"
+				name="rectify_color"
+				args="load image_proc/rectify /camera_nodelet_manager --no-bond"
+				respawn="true"
+				output="screen"
+			>
+				<remap
+					from="image_mono"
+					to="image_color" />
+				<remap
+					from="image_rect"
+					to="image_rect_color" />
+			</node>
+		</group>
+  
+  		<!-- Disparity image -->
+		<node
+			pkg="nodelet"
+			type="nodelet"
+			name="disparity_bm"
+			args="load stereo_image_proc/disparity /camera_nodelet_manager --no-bond"
+			respawn="true"
+			output="screen"
+		>
+			<param
+				name="approximate_sync"
+				value="true" />
+
+			<remap
+				from="disparity"
+				to="disparity_bm" />
+
+		</node>
+
+		<node
+			pkg="nodelet"
+			type="nodelet"
+			name="disparity_sgbm"
+			args="load lrm_stereo/disparity_sgbm /camera_nodelet_manager --no-bond"
+			respawn="true"
+			output="screen"
+		>
+			<param
+				name="approximate_sync"
+				value="true" />
+
+			<remap
+				from="disparity"
+				to="disparity_sgbm" />
+		</node>
+				
+  		<!-- Point cloud, PCL-friendly -->
+		<node
+			pkg="nodelet"
+			type="nodelet"
+			name="point_cloud2"
+			args="load stereo_image_proc/point_cloud2 /camera_nodelet_manager --no-bond"
+			respawn="true"
+			output="screen"
+		>
+			<param
+				name="approximate_sync"
+				value="true" />
+
+			<remap
+				from="disparity"
+				to="disparity_bm" />
+		</node>
+
+	</group>
+
+</launch>

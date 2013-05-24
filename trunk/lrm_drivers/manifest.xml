@@ -1,0 +1,17 @@
+<package>
+  <description brief="lrm_drivers">
+
+     lrm_drivers
+
+  </description>
+  <author>Rafael Luiz Klaser</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/lrm_drivers</url>
+  <depend package="roscpp"/>
+  <depend package="lrm_msgs"/>
+  <depend package="std_msgs"/>
+  
+</package>
+
+

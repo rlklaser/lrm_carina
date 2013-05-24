@@ -1,0 +1,14 @@
+#TeXlipse project settings
+#Wed May 08 21:07:56 BRT 2013
+markTmpDer=true
+builderNum=2
+outputDir=out/
+makeIndSty=
+bibrefDir=
+outputFormat=pdf
+tempDir=tmp
+mainTexFile=relatorio.tex
+outputFile=document.pdf
+langSpell=pt
+markDer=true
+srcDir=src/

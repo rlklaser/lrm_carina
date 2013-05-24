@@ -1,0 +1,33 @@
+<launch>
+
+ 	<node name="followme" pkg="GPSNavigation" type="GPSFollowMe" output="screen" respawn="true">
+ 	
+		<param name="steer" 			type="bool"		value="true" />   	<!-- Sterring active? -->
+		<param name="velocity" 			type="bool"		value="true" />   	<!-- Velocity active? -->
+		<param name="startDelay" 		type="int" 		value="6" />	   	<!-- Delay of steering prior to synchronize -->
+		<param name="steeringFactor" 	type="double" 	value="0.5" />   	<!-- Value multiplied by the angle in degrees -->
+		<param name="maxSteering" 		type="double" 	value="25.0" />   	<!-- Maximum value sent to the sterring module -->
+		<param name="minDist" 			type="double"	value="5.0" />   	<!-- Min dist to consider next point vector -->
+		<param name="waypointHZ" 		type="double"	value="2" />		<!-- Waypoint generation frequency -->
+		<param name="waypointTTL" 		type="double"	value="5" />  		<!-- Life-Time of a waypoint, a new waypoint is picked if the follower can't reach it at this time -->
+		<param name="startX" 			type="double" 	value="19730.0" />	<!-- Starting position -->
+		<param name="startY" 			type="double" 	value="756370.0" />	<!-- Starting position -->
+		<param name="initialVelocity"	type="double" 	value="1.0" />		<!-- Initial velocity, 0 will wait for a remote command -->
+		
+		<!-- 
+			Params:
+			
+				startDelay : preferencialmente maior que o waypointTTL.
+				waypointTTL : ajustar de acordo com a velociade -> alta, TTL baixo e vice-versa.
+		-->
+		
+		<!-- 
+		<remap from="/lse_xsens_mti/xsens_1/pose" to="/followme/our/pose"/>	
+		<remap from="/lse_xsens_mti/xsens_2/pose" to="/followme/their/pose"/>
+		-->
+		
+		<remap from="followme/velocity" to="/show_velocity/current_velocity" />
+		
+	</node>
+
+</launch>

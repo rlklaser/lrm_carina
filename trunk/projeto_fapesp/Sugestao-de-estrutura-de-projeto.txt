@@ -1,0 +1,25 @@
+1. Introdução
+  - COntextualização
+  - Motivação
+  - Objetivos
+    > Objetivo Geral 
+    > Objetivos Específicos
+
+2. Conceitos Básicos / Fundamentos
+   - Imagem Colorida, Textura
+   - Segmentação de Imagens
+   - Imagem Estereo
+   - Mapa de profundidade / Mapa de disparidade
+   - Imagem Térmica
+
+3. Trabalhos Relacionados / Metodologia / Materiais e Métodos
+   - Patrick Shinzato (segmentação de imagens com rede neural)
+   - Caio Mendes (extração de elementos/obstáculos em imagens estéreo) 
+   Outros autores, referencias bibliográficas (atuais)
+
+4. Plano de Trabalho e Cronograma
+
+>> 5. Conclusão
+
+
+

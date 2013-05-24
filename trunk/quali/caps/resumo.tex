@@ -1,0 +1,57 @@
+\begin{resumo}
+
+O objetivo deste trabalho é pesquisar, propor e desenvolver um sistema que
+capacite um veículo terrestre a se locomover de modo autônomo em ambientes
+externos não estruturados ou pouco estruturados, ou seja, em um campo com
+vegetação/plantação e/ou em uma floresta pouco densa (\textit{outdoor} e
+\textit{off-road}). O veículo deverá ser capaz de se dirigir até uma localização
+pré-determinada (coordenada GPS) escolhendo por meios próprios o caminho a
+seguir, ao mesmo tempo em que desvia de obstáculos, percebendo-os de forma
+autônoma. O sistema de navegação autônoma irá se basear na aquisição e
+processamento de imagens, obtidas a partir de um par de câmeras (câmera
+estéreo), constituindo assim um sistema de visão binocular do qual é possível se
+obter uma percepção tridimensional do ambiente. Portanto, pretende-se extrair
+parâmetros de navegabilidade do ambiente percebido pela câmera estéreo, como
+caminhos livres, obstruções e obstáculos, que combinados com as informações de
+posição e orientação do veículo e do ponto de destino (baseando-se em
+coordenadas de GPS) serão integrados em um sistema robusto de navegação.
+
+% Este trabalho irá utilizar a plataforma CaRINA I do LRM-ICMC/USP e INCT-SEC
+% dotado de uma câmera estéreo, GPS e bússola, e atuadores usados para o
+% controle de tração e direcionamento do veículo.
+Inicialmente serão estudados e trabalhados algoritmos para a criação do mapa de
+disparidade a partir do par de imagens obtidas pela câmera estéreo.
+% Para a criação deste mapa o algoritmo deverá ter um compromisso de desempenho
+% entre a qualidade (disparidade/profundidade) e a performance em termos de
+% tempo de processamento, uma vez que a aplicação final deverá executar em tempo
+% real (\textit{soft real-time}).
+A partir do mapa de disparidade, será elaborado um mapa local de navegabilidade
+que irá processar e classificar o espaço tridimensional percebido, separando e
+representando as regiões navegáveis (seguras) e as regiões não navegáveis
+(obstáculos e regiões à evitar) do espaço em frente ao veículo. Este mapa local
+será utilizado em conjunto com as informações de posição atual e de destino (GPS
+e bússola) a fim de realizar o controle da navegação do veículo. Estão sendo
+consideradas duas abordagens principais para o controle local da navegação: a
+primeira baseada no uso de Redes Neurais Artificiais, conforme proposto em
+trabalhos anteriores desenvolvidos por membros do grupo do LRM e a segunda
+baseada em uma adaptação do algoritmo VFH. Nestas abordagens serão consideradas
+como parâmetro de entrada as informações tridimensionais do mapa de
+navegabilidade.
+% Além disto, também serão necessários estudos que visam identificar, a partir
+% das imagens da câmera estéreo, o plano de referência de base (chão), seus
+% desníveis e obstáculos, classificando-os como elementos transponíveis ou não.
+As principais contribuições esperadas deste trabalho são a adaptação e
+aperfeiçoamento dos algoritmos para a geração de mapas de disparidade, a
+proposta e o desenvolvimento de algoritmos para a obtenção de mapas locais de
+navegabilidade com informações espaciais (3D), e por fim o aperfeiçoamento de
+técnicas previamente desenvolvidas para detectar e desviar de obstáculos em
+mapas 2D, a fim de permitir uma navegação baseada no mapa de navegabilidade 3D.
+
+%Este trabalho resultará em um sistema com
+%possibilidade de aplicação em importantes tarefas de navegação, como por
+%exemplo, em sistemas voltados para aplicações agrícolas e em sistema de combate
+%a incêndio em florestas.
+
+\end{resumo}
+
+% 2012-10-10 lido ok

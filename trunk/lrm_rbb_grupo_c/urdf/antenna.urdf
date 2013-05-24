@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+
+<robot name="antenna">
+
+	<link name="antenna_link">
+		<inertial>
+			<mass value="10" />
+			<origin xyz="0 0 0" />
+			<inertia
+				ixx="0.005"
+				ixy="0.0"
+				ixz="0.0"
+				iyy="0.005"
+				iyz="0.0"
+				izz="0.005" />
+		</inertial>
+		<visual>
+			<origin
+				rpy="0 0 0"
+				xyz="0 0 1.0" />
+			<geometry>
+				<cylinder
+					radius="0.05"
+					length="2.0" />
+			</geometry>
+			<material name="Orange">
+				<color rgba="0.7 1.0 0.0 0.9" />
+			</material>
+		</visual>
+		<collision>
+			<origin
+				rpy="0 0 0"
+				xyz="0 0 1.0" />
+			<geometry>
+				<cylinder
+					radius="0.05"
+					length="2.0" />
+			</geometry>
+		</collision>
+	</link>
+
+</robot>

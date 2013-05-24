@@ -1,0 +1,20 @@
+<launch>
+
+	<node name="camera" pkg="camera1394" type="camera1394_node">
+		<param name="guid" value="00b09d0100ac7cc8" />
+		<!--<param name="video_mode" value="1024x768_mono8" />-->
+		<param name="video_mode" value="1280x480_yuv411" />
+		
+		<!-- <param name="video_mode" value="format0_mode2" /> -->
+		<param name="frame_rate" value="60" /> 
+				
+		<!-- $(env ROS_NAMESPACE) -->
+		<!--
+		<remap from="camera/image_raw" to="/stereo/left/image_raw" />
+		<remap from="camera/camera_info" to="/stereo/left/camera_info" />
+		<remap from="camera/set_camera_info" to="/stereo/left/set_camera_info" />
+		-->
+	</node>
+
+
+</launch>

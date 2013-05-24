@@ -1,0 +1,38 @@
+amcl:
+  #Overall filter parameters
+  min_particles: 500
+  max_particles: 5000
+  kld_err: 0.05
+  kld_z: 0.99
+  update_min_d: 0.1
+  update_min_a: 0.25
+  resample_interval: 1
+  transform_tolerance: 0.2
+  recovery_alpha_slow: 0.001
+  recovery_alpha_fast: 0.1
+  
+  use_map_topic: true
+  first_map_only: false
+  save_pose_rate: 1
+  gui_publish_rate: 10.0
+  
+  #Laser model parameters
+  laser_max_beams: 30
+  laser_z_hit: 0.5
+  laser_z_short: 0.05
+  laser_z_max: 0.05
+  laser_z_rand: 0.5
+  laser_sigma_hit: 0.2
+  laser_lambda_short: 0.1
+  laser_model_type: likelihood_field
+  laser_likelihood_max_dist: 2.0
+        
+  #Odometery model parameters
+  odom_model_type: diff
+  odom_alpha1: 0.8
+  odom_alpha2: 0.4
+  odom_alpha3: 0.8
+  odom_alpha4: 0.4
+  odom_frame_id: odom
+  base_frame_id: base_footprint
+  global_frame_id: map

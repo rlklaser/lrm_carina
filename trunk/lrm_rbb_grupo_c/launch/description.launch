@@ -1,0 +1,12 @@
+<launch>
+
+	<param
+		name="robot_description"
+		command="cat $(find lrm_rbb_grupo_c)/urdf/simple.urdf" />
+		
+	<node
+		name="robot_state_publisher"
+		pkg="robot_state_publisher"
+		type="state_publisher" />
+
+</launch>

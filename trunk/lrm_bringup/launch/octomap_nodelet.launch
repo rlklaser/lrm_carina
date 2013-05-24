@@ -1,0 +1,41 @@
+<launch>
+
+	<rosparam
+		command="load"
+		file="$(find lrm_simulation)/params/octomap_parameters.yaml" />
+
+	<node
+		pkg="nodelet"
+		type="nodelet"
+		name="octomap_server_nodelet"
+		args="load octomap_server/OctomapServerNodelet standalone_nodelet"
+	>
+		<param
+			name="resolution"
+			value="0.05" />
+		
+		<!-- fixed map frame (set to 'map' if SLAM or localization running!) -->
+		<param
+			name="frame_id"
+			type="string"
+			value="odom_combined" />
+		
+		<!-- maximum range to integrate (speedup!) -->
+		<param
+			name="sensor_model/max_range"
+			value="5.0" />
+		
+		<!-- data source to integrate (PointCloud2) -->
+		<remap
+			from="octomap_server_nodelet/cloud_in"
+			to="cloud_in" />
+	 
+	  <!-- output collision map -->
+		<remap
+			from="octomap_server_nodelet/collision_map_out"
+			to="collision_map_out" />
+
+	</node>
+
+
+</launch>

@@ -1,0 +1,15 @@
+<launch>
+
+	<node
+		name="viewer"
+		pkg="gpsd_viewer"
+		type="gpsd_viewer"
+		output="screen"
+	>
+		<remap
+			from="fix"
+			to="/lse_xsens_mti/xsens/fix" />
+
+	</node>
+
+</launch>

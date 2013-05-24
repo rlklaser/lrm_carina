@@ -1,0 +1,22 @@
+<package>
+  <description brief="image_republish">
+
+     image_republish
+
+  </description>
+  <author>Rafael Luiz Klaser</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/image_republish</url>
+
+  <depend package="roscpp"/>
+  <depend package="geometry_msgs"/>
+  <depend package="sensor_msgs"/>
+  <depend package="image_transport"/>
+  <depend package="image_geometry"/>
+  <depend package="camera_info_manager"/>
+  <depend package="tf"/>
+
+</package>
+
+

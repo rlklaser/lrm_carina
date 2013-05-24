@@ -1,0 +1,36 @@
+1) Resumo da Introdução
+
+- objetivos, lacuna, hipotese
+- conceitos básicos
+- projetos relacionados
+
+
+2) Proposta de Pesquisa
+
+- contexto em que se insere
+- background
+- foco: visao computacional
+
+- mapas de disparidade vs mapas de profundidade
+- mapas de navegabilidade planar vs espacial
+- navegação por GPS planar vs espacial: analisar uso da elevação na odometria por GPS (>correção) 
+
+- relacao da visao computacional com estes tópicos
+
+
+
+3) Metodologia
+
+- materiais: CaRINA I, câmeras de vídeo (estéreo), GPS/IMU (Unidade Inercial)
+- contexto: Ambientes não estruturados (vegetação)
+- ferramentas: ROS + Gazebo
+
+- experimentos baseados em simulação
+- validação em ambiente real
+
+- ciclo: coleta de dados > simulação > validação
+
+
+
+4) Cronograma
+ 

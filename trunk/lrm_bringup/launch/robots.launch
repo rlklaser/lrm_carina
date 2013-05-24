@@ -1,0 +1,48 @@
+<launch>
+  <!-- No namespace here as we will share this description. 
+       Access with slash at the beginning -->
+	<param
+		name="robot_description"
+		command="$(find xacro)/xacro.py '$(find lrm_description)/urdf/clubcar/robot_no_camera.xacro'" />
+
+    <!-- BEGIN ROBOT 1-->
+	<group ns="one">
+		<param
+			name="tf_prefix"
+			value="/one" />
+
+	<param
+		name="robot_description"
+		command="$(find xacro)/xacro.py '$(find lrm_description)/urdf/clubcar/robot_one.xacro'" />
+		
+		<include file="$(find lrm_bringup)/launch/one_robot.launch">
+			<arg
+				name="init_pose"
+				value="5" />
+			<arg
+				name="robot_name"
+				value="one" />
+		</include>
+	</group>
+
+    <!-- BEGIN ROBOT 2 -->
+	<group ns="two">
+		<param
+			name="tf_prefix"
+			value="/two" />
+
+	<param
+		name="robot_description"
+		command="$(find xacro)/xacro.py '$(find lrm_description)/urdf/clubcar/robot_two.xacro'" />
+		
+		<include file="$(find lrm_bringup)/launch/one_robot.launch">
+			<arg
+				name="init_pose"
+				value="0" />
+			<arg
+				name="robot_name"
+				value="two" />
+		</include>
+	</group>
+
+</launch>

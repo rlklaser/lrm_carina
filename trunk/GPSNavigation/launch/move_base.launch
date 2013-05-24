@@ -1,0 +1,42 @@
+<launch>
+
+	<node
+		name="move_base_simple"
+		pkg="GPSNavigation"
+		type="move_base_simple"
+		output="screen"
+	>
+
+		<rosparam
+			file="$(find GPSNavigation)/params/navigation.yaml"
+			command="load" />
+
+		<param
+			name="global_frame_id"
+			value="/two/base_link" />
+			
+		<param
+			name="odom_frame_id"
+			value="/two/odom" />
+
+		<remap
+			from="cmd_vel"
+			to="/two/carina_controller/cmd_vel" />
+		<remap
+			from="odom"
+			to="/two/wheel_odometry/odom" />
+			
+		<!-- 
+		<remap
+			from="/move_base_simple/goal"
+			to="move_base_simple/goal" />
+		<remap
+			from="/simple_navigation_markers"
+			to="/vehicle/1/simple_navigation_markers" />
+		<remap
+			from="/move_base_simple/reached"
+			to="/vehicle/1/move_base_simple/reached" />
+		 -->
+	</node>
+
+</launch>

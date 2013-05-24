@@ -1,0 +1,28 @@
+<launch>
+
+	<param
+		name="antenna_description"
+		command="cat $(find lrm_rbb_grupo_c)/urdf/antenna.urdf" />
+
+	<node
+		name="antenna_tf"
+		pkg="tf"
+		type="static_transform_publisher"
+		args="-5 5 0 0 0 0 /world antenna_link 30" />
+
+	<node
+		name="antenna_node"
+		pkg="lrm_rbb_grupo_c"
+		type="antenna_node"
+	>
+		<param name="pos_x" value="-5"/>
+		<param name="pos_y" value="5"/>
+		<param name="dBm" value="17.5"/>
+		<param name="dBi" value="0.0"/>
+		<param name="ssid" value="net0"/>
+	
+		<remap from="signal" to="/vehicle/1/signal" />
+		<remap from="pose2d" to="/vehicle/1/ground_truth" />
+	</node>
+	
+</launch>

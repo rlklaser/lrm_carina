@@ -1,0 +1,7 @@
+#footprint_padding: 0.05
+controller_frequency: 5
+#controller_patience: 100
+
+base_global_planner: SBPLLatticePlanner
+#primitive file on launch
+

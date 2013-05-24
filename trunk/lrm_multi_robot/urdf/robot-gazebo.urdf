@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+
+<robot xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+       xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+       xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+       xmlns:xacro="http://ros.org/wiki/xacro">
+
+<gazebo>
+
+		<controller:gazebo_ros_controller_manager
+			name="gazebo_ros_controller_manager"
+			plugin="libgazebo_ros_controller_manager.so"
+		>
+			<alwaysOn>true</alwaysOn>
+			<updateRate>1000.0</updateRate>
+			<interface:audio name="gazebo_ros_controller_manager_dummy_iface" />
+		</controller:gazebo_ros_controller_manager>	
+		
+		
+		<controller:gazebo_ros_imu
+			name="imu_controller"
+			plugin="libgazebo_ros_imu.so"
+		>
+			<alwaysOn>true</alwaysOn>
+			<updateRate>50.0</updateRate>
+			<bodyName>base_link</bodyName>
+			<topicName>imu_data</topicName>
+			<serviceName>imu_service</serviceName>
+			<gaussianNoise>2.89e-08</gaussianNoise>
+			<interface:position name="imu_link_position" />
+		</controller:gazebo_ros_imu>
+	
+		<controller:gazebo_ros_p3d
+			name="p3d_base_controller"
+			plugin="libgazebo_ros_p3d.so"
+		>
+			<alwaysOn>true</alwaysOn>
+			<updateRate>10.0</updateRate>
+			<bodyName>base_footprint</bodyName>
+			<topicName>odom_gazebo</topicName>
+			<gaussianNoise>0.01</gaussianNoise>
+			<frameName>odom_gazebo</frameName>
+			<xyzOffset>0 0 0</xyzOffset>
+			<rpyOffset>0 0 0</rpyOffset>
+			<interface:position name="base_footprint_position" />
+		</controller:gazebo_ros_p3d>
+
+	</gazebo>
+ 
+    <gazebo reference="hokuyo_link">
+		<material>Gazebo/Blue</material>
+		<turnGravityOff>false</turnGravityOff>
+		<sensor:ray name="hokuyo_laser">
+			<rayCount>640</rayCount>
+			<rangeCount>640</rangeCount>
+			<laserCount>1</laserCount>
+			<origin>0.0 0.0 0.0</origin>
+			<displayRays>fan</displayRays>
+			<minAngle>-180.0</minAngle>
+			<maxAngle>180.0</maxAngle>
+			<minRange>0.05</minRange>
+			<maxRange>30.1</maxRange>
+			<resRange>0.001</resRange>
+			<updateRate>10.0</updateRate>
+			<controller:gazebo_ros_laser
+				name="gazebo_ros_hokuyo_laser_controller02"
+				plugin="libgazebo_ros_laser.so"
+			>
+				<hokuyoMinIntensity>101</hokuyoMinIntensity>
+				<gaussianNoise>0.005</gaussianNoise>
+				<alwaysOn>true</alwaysOn>
+				<updateRate>10.0</updateRate>
+				<topicName>scan</topicName>
+				<frameName>hokuyo_link</frameName>
+				<interface:laser name="gazebo_ros_hokuyo_laser_iface" />
+			</controller:gazebo_ros_laser>
+		</sensor:ray>
+	</gazebo>
+	
+</robot>

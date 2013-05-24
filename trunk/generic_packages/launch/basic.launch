@@ -1,0 +1,8 @@
+<launch>
+
+	<node name="basic" pkg="generic_packages" type="viz_image_node" output="screen">
+		<remap from="image_raw" to="/stereo/left/image_color" />
+	</node>
+	
+
+</launch>

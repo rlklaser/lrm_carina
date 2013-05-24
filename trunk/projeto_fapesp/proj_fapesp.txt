@@ -1,0 +1,228 @@
+Diversas técincas de processamento de imagens tiveram no seu desenvolvimento {especulações sobre} os processos da visão animal (humana) [REF].
+
+Apesar da inspiração biológica no tratamento de problemas computacionais estar mais associada à pesquisas recentes [REF], a motivação algorítmica {desde sempre} se baseia {/baseou} no processo indutivo de observação da natureza biológica.
+
+A robótica, no seu surgimento, partiu dos termos relacionados ao trabalho humano, que por sua vez são processos biológicos.
+
+Porém, a pesquisa não se baseia puramente em descobertas, a nossa capacidade de inventar traz diversas tecnologias ao dia-a-dia. Da mesma maneira, a capacidade técnica de combinar diversas abordagens tecnológicas em aplicações práticas, formalizam em ferramentas e utencílios que ao passar do tempo se tornam do cotidiano e até indispensáveis.
+
+Robôs móveis autônomos ainda dependem de pesquisa tecnológica, mas bastante já se pode tornar realizável, combinando abordagens bem sucedidas em outras áreas com a concretização técnica.
+
+----
+
+para a contrução de um robô móvel autônomo, por se tratar de um objeto físico, devem ser tratados os aspectos mecânicos e elétricos; por se tratar de uma entidade autônoma, devem ser tratados os aspectos sistêmicos; por vir a estar inserido no contexto da sociedade, poderiamos ainda elencar os aspectos éticos e legais. Porém, este trabalho não tem por objetivo tratar diretamente estes aspectos, apenas ser ciente {do contexto que se insere} de que há questões não técnicas.
+
+
+No que diz respeito aos aspectos físicos:
+
+o projeto irá fazer uso de um veículo existente, tais aspectos não estão no escopo deste projeto e já estão concretizados.
+
+
+No que diz respeito aos aspectos sistemicos, podemos categorizar:
+
+
+o)de baixo nível:
+
+  interação com os atuadores do veículo, coleta de dados dos sensores;
+
+  Serão utilizados os tratamentos de baixo nível já existentes para o veículo foco do projeto. 
+
+o)de alto nível:
+
+  sistema autônomo
+
+
+  O desenvolvimento de um sistema autônomo é o foco deste projeto, para tanto, serão considerados aspectos básicos:
+
+
+o veículo autônomo tem como problemática básica:
+
+- Mapeamento e Localização
+- Navegação (desvio de obstáculos)
+
+a navegação externa tem como problemática básica:
+
+- desconhecimento do ambiente
+- ambiente altamente dinâmico
+- 
+
+a navegação em ambiente não estruturado tem como problemática básica:
+
+- falta de referenciais elementares (linhas, paredes, trilhas)
+- pouca possibilidade de imposição de restrições (por não ser estruturado)
+
+em um ambiente semiestruturado podemos considerar a existência de algum referencial e impor alguma restrição, porém devem ser considerados intermitentes, ou seja, o sistema deve ser mais tolerante à perda momentânea de referenciais.
+
+
+
+----
+
+SLAM (Simultaneous Location and Mapping)
+
+Um projeto de robótica móvel autônoma, por se tratar de um veículo autônomo, deve se focar na sua problemática básica, como foi caracterizado anteriormente.
+As questões de mapeamento e localização {, conhecida como SLAM (Simultaneous Location and Mapping),} assim como a navegação, são fortemente influenciadas pelas questões do ambiente, portanto, o trabalho aqui proposto engloba aspectos que tornam o tratamento das questões fundamentais mais árduo.
+
+A questão do mapeamento e localização é considerado o problema mais central na robótica móvel, sendo a característica autônoma do veículo dada essencialmente pela sua capacidade de tratar essa questão. Quando o ambiente e a localização do veículo é desconhecida essa questão se torna crítica, esse problema é normalmente conhecido {na área da robótica} como SLAM (Simultaneous Location and Mapping) 
+
+e uma solução robusta e eficiente na prática ainda é desafiadora. [cite: A solution to the simultaneous localization and map building (SLAM) problem] 
+ou
+Uma solução robusta e eficiente para a questão de localização e mapeamento simultâneos (SLAM) na prática ainda é desafiadora.
+
+
+Neste projeto, para a localização basicamente será utilizado dados de GPS e de bússola, como o destino também será dado em forma de informação de posição de GPS esta questão não é tão crítica para esse projeto. A localização é bastante afetada por ruídos dos sensores, principalmente aqueles que proveem informações de odometria. Neste trabalho não é considerado necessário uma localização espacial precisa do veículo, apenas que o mesmo seja capaz de chegar no seu destino eficazmente. Por se tratar de um ambiente externo e não estruturado, sua navegação permite uma certa liberdade de movimentos dentro de um perímetro onde haja um caminho factível, preferencialmente buscando um caminho ótimo.
+
+A aplicação de visão computacional é onde se concentra a tarefa de mapeamento. Uma visão binocular permite a percepção tridimensional do ambiente, é a partir desta informação espacial que será focado o trabalho. .... (desenvolver)
+
+
+---
+Planejamento e Controle de Navegação
+
+
+
+A operação de navegação requer um planejamento, este planejamento pode ser categorizado como local ou global. No planejamento global há a necessidade de que o ambiente seja previamente conhecido, enquanto que o planejamento local se baseia apenas no local onde o robô se encontra e o alcance dos seus sensores.
+
+Este trabalho irá utilizar a abordagem local de planejamento de navegação como meta central. Porém, as aplicações que este trabalho irá se focar mais prioritariamente permitem algum tipo de planejamento global ou semiglobal, o que poderia vir a contribuir com uma maior eficácia em uma determinada aplição. 
+
+As abordagens para o controle de navegação que serão primariamente utilizadas é o uso de RNA, baseado no trabalho de Pessin e a utilização de técnicas como o VFH. (desenvolver...)
+
+
+----
+
+
+Planejamento Local:
+
+Metodologias:
+	- Gráficas
+	- Clássicas
+	- Heurísticas
+	- De Campo Potencial
+
+Gráficas
+	Fortemente limitadas a ambientes estáticos;
+	Algoritmos desenvolvidos não baseados em princípios geométricos
+  
+Classicas
+	Métodos de otimização
+	Programação dinâmica
+	Descida do Gradiente
+	Menor caminho (Dijkstra)
+Heurísticos
+	A*
+	Algorítmos Genéticos
+	Recozimento Simulado (Simulated Annealing)
+De Campo Potencial
+	Soluções elegantes e simples, porém apresentam problemas significativos, como por exemplo, sujeitos a ficarem presos em obstáculos com formas convexas (mínimos locais)
+
+
+Para a aplicação em um ambiente semiestruturado como uma plantação ou uma área de reflorestamento para extração(1) pode ser pensada uma abordagem probabilística, pois tais áreas na maioria dos casos respeitam uma certa distribuição estatística.
+
+
+(1) uma área de reflorestamento para consevação deve preservar a biodiversidade local e a sua distribuição característica
+
+
+err --A navegação visual pode ser vista como uma metodologia gráfica, em se tratando de visão tridimensional se pretende principalmente 
+err --A navegação visual pode ser vista como uma abordagem utilizando alguma metodologia clássica
+
+
+--- 
+Conclusão:
+
+Nesta etapa do projeto já se pode visualizar questões que podem ser levadas em conta no desenvolvimento de uma aplicação final, por exemplo, a capacidade de se basear em um caminho já realizado para aumentar a velocidade do deslocamento. Em um ambiente parcialmente conhecido o veículo pode obter informações topográficas, evitando zonas intransponíveis ou com maior dificuldade de definir uma trajetória e também pontos críticos, como cercas, zonas rochosas ou inundadas e declives/aclives muito acentuados.
+
+---
+
+Um veículo móvel terrestre se desloca geométricamente no plano, ou seja, seus graus de liberdade são em duas dimensões. O sistema de visão tridimensional terá a tarefa de detecção do plano do chão, sendo este, base para a detecção de obstáculos e obstruções do caminho. O reconhecimento do chão representa um desafio, visto que se está considerando ambiente externo e não estruturado, no caso, o ambiente externo considerado será onde há vegetação, portanto, além da detecção do chão é necessária uma certa classificação, como por exemplo, transitável ou não transitável.
+
+
+A calibragem das câmeras é um processo importante para se obter uma visão tridimensional, neste processo são calculados (estimados) os parâmetros internos e externos de cada câmera. Estes parâmetros são essenciais para a reconstrução tridimensional a partir das imagens. 
+
+A estimação dos parametros internos (intrínsecos) basicamente consiste em obter o ponto central da imagem (que por questões de alinhamento entre lentes e sensor pode não ser o pixel central da imagem) e a distância focal. Estes dois parâmetros definem como a imagem é formada por uma câmera estilo estenopeica ("pin-hole") e a sua projeção perspectiva. As câmeras que iremos trabalhar são desta categoria, que por sua vez é o tipo mais comum de câmera. 
+
+Outros parâmetros também internos, não associados com o modelo de projeção e sim com as características físicas das lentes utilizadas, também são estimados no processo de calibragem. O modelo estenopeico é uma construção matematicamente simples, muito utlizado por pintores renacentistas do sec. XV, como Leonardo da Vinci. No caso das câmeras de vídeo, existe a necessidade de utilização de lentes, tanto para reduzir a imagem a ser projetada no sensor (filme) como para aproximá-las. As lentes comumente são estruturas com curvatura esférica. A característica esférica das lentes provoca distorções óticas na imagem projetada, chamadas de distorção radial. Este tipo de distorção produz imagens com demonstrado na fig X, nos casos pode ser em forma de barril (barrel) ou almofada (pincushion). Outra distorção que ocorre geralmente é a distorção tangencial, esta por sua vez advém de imprecisão de montagem do sensor em relação à lente, conforme fig. X. 
+
+As distorções óticas influenciam fortemente (negativamente) o processo de correspondência entre as imagens para extrair a informação tridimensional, sendo grande fonte de ruído. É interessante notar que, matematicamente, o processo de correção das distorções óticas se baseia na curvatura esférica da lente conforme fig X, porém as lentes são formadas por composição de várias camadas com curvaturas diferentes, que ainda podem apresentar defeitos no processo de fabricação. Portanto, o modelo matemático utilizado na correção é sempre uma aproximação global do aparato ótico, fonte por si só de imprecisão.
+
+
+err-- Outro parametro associado à distorção é o coeficiente de desvio (skew), que boa parte das vezes é ignorado, visto que a tecnologia de construção de lentes atualmente é bastante precisa. O coeficiente de desvio está relacionado à imperfeição esférica. 
+
+Ainda existem outros parâmetros que podem ser considerados, porém estes estão associados à questões técnicas da forma de aquisição da imagem, não da formação delas e portanto são subjetivas ao aparato utilizado.
+
+De posse dos parâmetros internos associados à distorções, um preprocessamento necessário é a correção das distorções, que aplicadas produzem uma imagem mais própria para os algorítmos de correspondência que formarão a imagem tridimensional.
+
+Os parâmetros internos são também chamados de parâmetros do modelo, isto é, como a imagem é formada. Um modelo de câmera geralmente associado à veículos móveis são as câmeras omidirecionais, capazes de produzir uma imagem em 360 graus, util para veículos com esse grau de liberdade de movimentos. {, propícias para veículos holônicos.} Neste trabalho serão utilizadas as câmeras convencionais. 
+
+
+O segundo conjunto de parâmetros são os parâmetros externos (extrínsecos), também chamados de parâmetros de pose. Este conjunto diz respeito à posição da câmera em relação ao ambiente, no caso a um sistema de coordenadas referencial. Estes são os principais parâmetros para a reconstrução tridimensional da imagem pois são utilizados para fazer a correspondência entre os pixeis de cada imagem. De posse dos pixeis que correspondem ao mesmo ponto no ambiente é possível calcular a terceira coordenada pelo processo de triangulação.
+
+A correspondência entre os pontos são obtidos pelos princípios da geometria epipolar (fig X). O processo se baseia em ajustar cada imagem tal que formem uma correspondência pixel a pixel. Fundamentalmente, são determinados os planos formados pelos pontos em comum em cada imagem (referenciais obtidos pela calibragem) e o ponto central de cada imagem. Esses planos no espaco (ambiente) são coincidentes, ou seja, o mesmo plano. Esta reprojeção do plano em cada imagem definem restas, chamadas retas epipolares. Desta forma é possível fazer a correspondência dos demais pontos (não referenciais). Pela geometria epipolar todos os planos formados pelos pontos referenciais serão concorrentes e as suas intersecções se dão em uma reta em comum.  
+
+
+@Book{Hartley2004, 
+    author = "Hartley, R.~I. and Zisserman, A.",
+    title = "Multiple View Geometry in Computer Vision",
+    edition = "Second",
+    year = "2004",
+    publisher = "Cambridge University Press, ISBN: 0521540518"
+}
+
+ que tem entre si uma reta em comum (baseline) e 
+
+--Todo um segmento de reta em uma imagem pode concidir com apenas um ponto na outra (fig x), visto que 
+ Esta correspondência é descrita por uma matriz, chamada de matriz fundamental, obtida a partir das matrizes dos parâmetros de cada câmera.
+
+ 
+err-- Este processo é chamado de projeção inversa, ou mais precisamente no caso das imagens formadas pelo modelo de projeção perspectiva, é o processo de projeção perspectiva inversa. 
+ 
+
+----
+
+
+
+Mapas de disparidade
+
+Os mapas de disparidade se tornaram uma ferramenta bastante utilisada para a percepção tridimensional, sua implementação direta em hardware permite aplicação em tempo real. Isto pode ser visto hoje em dia no videogame xbox utilizando o sensor Kinect. [cite]. Porém, a ideia fundamental por trás do mapa de disparidade é fornecer uma informação de profundidade relativa, mapeada diretamente na imagem bidimensional a parir do valor do pixel. Usualmente é utilizado imagem em tons de cinza, fornecendo então até 255 níveis de profundidade. O Kinect fornece imagens RGB, com uma precisão de 2047 níveis de profundidade. Um experimento bem simples [http://mathnathan.com/2011/02/03/depthvsdistance/] mostrou que a relação entre nível de profundidade e distância não é linear no Kinect, onde objetos mais distantes da camera apresentam níveis de profundidade mais próximos a medida que se afastam. Isto até pode se considerar esperado por este processo, visto que a imagem final ainda apresenta a projeção perspectiva.
+
+Para robôs móveis autônomos, os mapas de disparidade são muito úteis, principalmente na detecção e desvio de obstáculos. O veículo pode extrair da informação de profundidade parâmetros para a navegação, como por exemplo, uma região de maior profundidade pode representar um caminho sem obstáculos. Porém, a aplicação de mapas de disparidade como informação visual para navegação não é um processo direto, diversos aspectos precisam ser tratados, como por exemplo, o mapeamento do chão, que vai depender de como as câmeras estão posicionadas no veículo.
+
+---
+
+No meu trabalho de graduação, onde foi aplicada visão tridimensional para monitorar experimentos de laboratório, foi utilizado um processo de calibragem utilizando o método de Tsai. {Para este método são fornecidos referenciais não colineares.} Naquele trabalho foi possível observar que um conjunto de referenciais capazes de descrever os três planos ortogonais do espaço tridimensional produziam uma calibragem bastante precisa. Para isso, foi utilizado um molde semelhante a um canto de uma sala, contendo pelo menos três pontos referenciais em cada parede e no chão. Uma vantagem deste método, porém trabalhoso, é que o referencial é dado informando sua posição na imagem e sua posição real no ambiente. Esta posição real é dada de forma relativa a um sistema de coordenadas referencial no espaço. Com isso, ao extrair a informação tridimensional de um ponto através da triangulação a partir da calibragem do par estéreo, a informação resultante contém as coordenadas espaciais do ponto na unidade de media real adotada. Com isso, é possivel saber a posição real de um dererminado ponto.
+
+off-- Este método é mais robusto em relação à sincronização das câmeras, no caso dos mapas de disparidade o cálculo é feito a partir das informações dos pixeis da imagem, que se capturadas em instantes diferentes compromete a qualidade do mapa.7
+
+Este método aliado aos mapas de disparidade pode produzir uma informação visual bastante acurada para o processo de navegaçao autônoma do robo móvel.
+
+---
+
+
+
+
+
+
+---
+PS. Não sei se eu escrevi utilizando demasiadamente a opinião pessoal, mas se é para vender o peixe, que mostre onde foi pescado :)
+---
+
+
+Materiais e Métodos
+
+A primeira etapa consiste no levantamento de todos os pontos críticos do sistema proposto, após esta etapa, serão avaliadas as técnicas mais acessíves que são adequadas para o tratamento de cada ponto crítico. Será levado em conta prioritariamente o que já vem sendo trabalhado no laboratório, afim de promover a integração das tecnologias já dominadas pelo grupo.  
+
+Este projeto será desenvolvido fazendo uso da OpenCV e PCL como ferramentas centrais, podendo vir a ser utilizado o framework ROS para integrar as bibliotecas. Primeiramente os testes serão efetuados em laboratório, em ambiente simulado ou sem o veículo apenas lidando com as informações sensoriais. Para teste em campo teremos a disposição o veículo CaRINA I do LMR. {juntar com o resumo, parte: Este trabalho será ... junto ao LMR...}
+
+---
+
+Conclusão
+
+Este projeto é uma aplicação prática de desenvolvimento tecnológio, com a finalidade de agregar valor ao grupo de pesquisa SEER (Sistemas Embarcados, Evolutivos e Robóticos) e a constituição de aparatos técnicos para a construção de robôs móveis autônomos capazes de serem direcionados a diversas áreas de interesse e {, afim de |, de modo a} produzirem resultados coerentes com as suas finalidades de forma robusta e segura.
+
+As principais aplicacoes.....{do resumo}....
+---
+
+
+
+
+
+
+
+

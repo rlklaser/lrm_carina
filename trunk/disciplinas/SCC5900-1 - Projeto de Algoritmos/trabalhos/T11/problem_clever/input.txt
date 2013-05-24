@@ -1,0 +1,63 @@
+11
+
+6
+4 A B C F
+1 A
+4 A B C D
+1 B
+4 A B C E
+1 C
+
+7
+2 Apples Bananas
+2 Bananas Cenouras
+2 Cenouras Damascos
+2 Damascos Espigas
+2 Espigas Feijao
+2 Feijao Goiabas
+2 Goiabas Hortalicas
+
+3
+3 Xu Yu Zu
+1 Yu
+3 Zu Yu Xu
+
+3
+5 Apricot1 Blueberrie1 Cranberrie1 Zuccini1 Yams1
+5 Apricot2 Blueberrie2 Cranberrie2 Zuccini2 Yams2
+5 Apricot3 Blueberrie3 Cranberrie3 Zuccini3 Yams3
+
+3
+2 Apples Oranges
+1 Bananas
+4 Zuccini OYams Apricots Blueberries
+
+3
+2 Apples Oranges
+1 Bananas
+4 Zuccini Yams Apricots Blueberries
+
+3
+2 Apples Oranges
+1 Bananas
+5 Apricots Blueberries Cranberries Zuccini Yams
+
+1
+1 ApPlEs
+
+2
+2 a b
+1 axe
+
+4
+4 Aa Ba Ca Da
+3 Ab Bb Cb
+2 Ac Bc
+1 Ad
+
+3
+2 Apples Oranges
+1 Bananas
+5 Cranberries Zuccini Yams Apricots Blueberries 
+
+ 

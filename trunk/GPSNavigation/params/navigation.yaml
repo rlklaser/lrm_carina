@@ -1,0 +1,25 @@
+rate: 3
+
+max_angular_velocity: 0.8
+min_angular_velocity: 0.05
+in_place_angular_velocity: 0.3
+angular_threshold: 0.0
+
+alpha: 0.5
+
+attraction_coefficient: 1.2
+repulsion_coefficient_robots: 0.2
+repulsion_coefficient_obstacles: 0.01
+repulsion_threshold_robots: 1.0
+repulsion_threshold_obstacles: 0.5
+
+delay: 2.0
+max_distance: 0.5
+
+timeout: 45.0
+goal_tolerance: 0.55
+
+max_linear_velocity: 3.0
+min_linear_velocity: 0.5
+
+visualization: true

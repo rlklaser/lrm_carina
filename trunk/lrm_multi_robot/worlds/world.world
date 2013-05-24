@@ -1,0 +1,507 @@
+<?xml version ='1.0'?>
+<gazebo version='1.2'>
+<world name='default'>
+  <physics type='ode'>
+    <gravity>0.000000 0.000000 -9.800000</gravity>
+    <ode>
+      <solver>
+        <type>quick</type>
+        <dt>0.003000</dt>
+        <iters>30</iters>
+        <sor>1.300000</sor>
+      </solver>
+      <constraints>
+        <cfm>0.000010</cfm>
+        <erp>0.800000</erp>
+        <contact_max_correcting_vel>100.000000</contact_max_correcting_vel>
+        <contact_surface_layer>0.001000</contact_surface_layer>
+      </constraints>
+    </ode>
+    <update_rate>1000.000000</update_rate>
+  </physics>
+  <model name='ground_plane'>
+    <static>1</static>
+    <link name='link'>
+      <collision name='collision'>
+        <geometry>
+          <plane>
+            <normal>0.000000 0.000000 1.000000</normal>
+            <size>100.000000 100.000000</size>
+          </plane>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>100.000000</mu>
+              <mu2>50.000000</mu2>
+            </ode>
+          </friction>
+          <bounce/>
+          <contact>
+            <ode/>
+          </contact>
+        </surface>
+      </collision>
+      <visual name='visual'>
+        <cast_shadows>0</cast_shadows>
+        <geometry>
+          <plane>
+            <normal>0.000000 0.000000 1.000000</normal>
+            <size>100.000000 100.000000</size>
+          </plane>
+        </geometry>
+        <material>
+          <script>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+            <name>Gazebo/Grey</name>
+          </script>
+        </material>
+      </visual>
+      <velocity_decay>
+        <linear>0.000000</linear>
+        <angular>0.000000</angular>
+      </velocity_decay>
+      <self_collide>0</self_collide>
+      <kinematic>0</kinematic>
+    </link>
+  </model>
+  <light name='sun' type='directional'>
+    <cast_shadows>1</cast_shadows>
+    <pose>0.000000 0.000000 10.000000 0.000000 -0.000000 0.000000</pose>
+    <diffuse>0.800000 0.800000 0.800000 1.000000</diffuse>
+    <specular>0.100000 0.100000 0.100000 1.000000</specular>
+    <attenuation>
+      <range>1000.000000</range>
+      <constant>0.900000</constant>
+      <linear>0.100000</linear>
+      <quadratic>0.010000</quadratic>
+    </attenuation>
+    <direction>0.500000 0.000000 -1.000000</direction>
+  </light>
+  <scene>
+    <ambient>0.000000 0.000000 0.000000 1.000000</ambient>
+    <background>0.700000 0.700000 0.700000 1.000000</background>
+    <shadows>1</shadows>
+  </scene>
+  <model name='robot_0'>
+    <link name='base_link'>
+      <pose>0.000000 0.000000 0.000000 0.000000 -0.000000 0.000000</pose>
+      <inertial>
+        <pose>0.000000 0.000000 0.020000 0.000000 -0.000000 0.000000</pose>
+        <mass>0.000300</mass>
+        <inertia>
+          <ixx>0.000300</ixx>
+          <ixy>0.000000</ixy>
+          <ixz>0.000000</ixz>
+          <iyy>0.000300</iyy>
+          <iyz>0.000000</iyz>
+          <izz>0.000300</izz>
+        </inertia>
+      </inertial>
+      <collision name='base_link_geom'>
+        <pose>0.000000 0.000000 0.000000 0.000000 -0.000000 0.000000</pose>
+        <geometry>
+          <cylinder>
+            <length>0.020000</length>
+            <radius>0.061000</radius>
+          </cylinder>
+        </geometry>
+        <surface>
+          <bounce/>
+          <friction>
+            <ode/>
+          </friction>
+          <contact>
+            <ode/>
+          </contact>
+        </surface>
+      </collision>
+      <collision name='base_link_geom_hokuyo_link'>
+        <pose>0.000000 0.000000 0.050000 0.000000 -0.000000 0.000000</pose>
+        <geometry>
+          <cylinder>
+            <length>0.030000</length>
+            <radius>0.020000</radius>
+          </cylinder>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+          <bounce/>
+        </surface>
+      </collision>
+      <collision name='base_link_geom_imu_link'>
+        <pose>0.000000 0.000000 0.010000 0.000000 -0.000000 0.000000</pose>
+        <geometry>
+          <cylinder>
+            <length>0.010000</length>
+            <radius>0.010000</radius>
+          </cylinder>
+        </geometry>
+        <surface>
+          <bounce/>
+          <friction>
+            <ode/>
+          </friction>
+          <contact>
+            <ode/>
+          </contact>
+        </surface>
+      </collision>
+      <visual name='base_link_visual'>
+        <pose>0.000000 0.000000 0.000000 0.000000 -0.000000 0.000000</pose>
+        <geometry>
+          <cylinder>
+            <length>0.020000</length>
+            <radius>0.061000</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+      <visual name='base_link_visual_hokuyo_link'>
+        <pose>0.000000 0.000000 0.050000 0.000000 -0.000000 0.000000</pose>
+        <geometry>
+          <cylinder>
+            <length>0.030000</length>
+            <radius>0.020000</radius>
+          </cylinder>
+        </geometry>
+        <material/>
+      </visual>
+      <visual name='base_link_visual_imu_link'>
+        <pose>0.000000 0.000000 0.010000 0.000000 -0.000000 0.000000</pose>
+        <geometry>
+          <cylinder>
+            <length>0.010000</length>
+            <radius>0.010000</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+      <gravity>1</gravity>
+      <velocity_decay>
+        <linear>0.000000</linear>
+        <angular>0.000000</angular>
+      </velocity_decay>
+      <self_collide>0</self_collide>
+      <sensor name='hokuyo_laser' type='ray'>
+        <update_rate>10.000000</update_rate>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>640</samples>
+              <resolution>1.000000</resolution>
+              <min_angle>-3.141593</min_angle>
+              <max_angle>3.141593</max_angle>
+            </horizontal>
+            <vertical>
+              <samples>1</samples>
+              <min_angle>0.000000</min_angle>
+              <max_angle>0.000000</max_angle>
+            </vertical>
+          </scan>
+          <range>
+            <min>0.050000</min>
+            <max>30.100000</max>
+            <resolution>0.001000</resolution>
+          </range>
+        </ray>
+        <plugin name='gazebo_ros_hokuyo_laser_controller02' filename='libgazebo_ros_laser.so'>
+          <hokuyoMinIntensity>101</hokuyoMinIntensity>
+          <gaussianNoise>0.005</gaussianNoise>
+          <alwaysOn>1</alwaysOn>
+          <updateRate>10.0</updateRate>
+          <topicName>scan</topicName>
+          <frameName>hokuyo_link</frameName>
+        </plugin>
+        <pose>0.000000 0.000000 0.050000 0.000000 -0.000000 0.000000</pose>
+      </sensor>
+      <kinematic>0</kinematic>
+    </link>
+    <link name='left_wheel'>
+      <pose>0.000000 0.042000 0.000000 1.570800 -0.000000 0.000000</pose>
+      <inertial>
+        <pose>0.000000 0.000000 0.000000 0.000000 -0.000000 0.000000</pose>
+        <mass>0.000100</mass>
+        <inertia>
+          <ixx>0.000100</ixx>
+          <ixy>0.000000</ixy>
+          <ixz>0.000000</ixz>
+          <iyy>0.000100</iyy>
+          <iyz>0.000000</iyz>
+          <izz>0.000100</izz>
+        </inertia>
+      </inertial>
+      <collision name='left_wheel_geom'>
+        <pose>0.000000 0.000000 0.000000 0.000000 -0.000000 0.000000</pose>
+        <geometry>
+          <cylinder>
+            <length>0.020000</length>
+            <radius>0.021000</radius>
+          </cylinder>
+        </geometry>
+        <surface>
+          <bounce/>
+          <friction>
+            <ode/>
+          </friction>
+          <contact>
+            <ode/>
+          </contact>
+        </surface>
+      </collision>
+      <visual name='left_wheel_visual'>
+        <pose>0.000000 0.000000 0.000000 0.000000 -0.000000 0.000000</pose>
+        <geometry>
+          <cylinder>
+            <length>0.020000</length>
+            <radius>0.021000</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+      <velocity_decay>
+        <linear>0.000000</linear>
+        <angular>0.000000</angular>
+      </velocity_decay>
+      <self_collide>0</self_collide>
+      <kinematic>0</kinematic>
+    </link>
+    <joint name='left_wheel_joint' type='revolute'>
+      <child>left_wheel</child>
+      <parent>base_link</parent>
+      <axis>
+        <xyz>0.000000 -0.000000 1.000000</xyz>
+        <limit>
+          <lower>-10000000000000000.000000</lower>
+          <upper>10000000000000000.000000</upper>
+        </limit>
+        <dynamics/>
+      </axis>
+    </joint>
+    <link name='right_wheel'>
+      <pose>0.000000 -0.042000 0.000000 -1.570800 0.000000 0.000000</pose>
+      <inertial>
+        <pose>0.000000 0.000000 0.000000 0.000000 -0.000000 0.000000</pose>
+        <mass>0.000100</mass>
+        <inertia>
+          <ixx>0.000100</ixx>
+          <ixy>0.000000</ixy>
+          <ixz>0.000000</ixz>
+          <iyy>0.000100</iyy>
+          <iyz>0.000000</iyz>
+          <izz>0.000100</izz>
+        </inertia>
+      </inertial>
+      <collision name='right_wheel_geom'>
+        <pose>0.000000 0.000000 0.000000 0.000000 -0.000000 0.000000</pose>
+        <geometry>
+          <cylinder>
+            <length>0.020000</length>
+            <radius>0.021000</radius>
+          </cylinder>
+        </geometry>
+        <surface>
+          <bounce/>
+          <friction>
+            <ode/>
+          </friction>
+          <contact>
+            <ode/>
+          </contact>
+        </surface>
+      </collision>
+      <visual name='right_wheel_visual'>
+        <pose>0.000000 0.000000 0.000000 0.000000 -0.000000 0.000000</pose>
+        <geometry>
+          <cylinder>
+            <length>0.020000</length>
+            <radius>0.021000</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+      <velocity_decay>
+        <linear>0.000000</linear>
+        <angular>0.000000</angular>
+      </velocity_decay>
+      <self_collide>0</self_collide>
+      <kinematic>0</kinematic>
+    </link>
+    <joint name='right_wheel_joint' type='revolute'>
+      <child>right_wheel</child>
+      <parent>base_link</parent>
+      <axis>
+        <xyz>0.000000 -0.000000 -1.000000</xyz>
+        <limit>
+          <lower>-10000000000000000.000000</lower>
+          <upper>10000000000000000.000000</upper>
+        </limit>
+        <dynamics/>
+      </axis>
+    </joint>
+    <static>0</static>
+    <plugin name='gazebo_ros_controller_manager' filename='libgazebo_ros_controller_manager.so'>
+      <alwaysOn>1</alwaysOn>
+      <updateRate>1000.0</updateRate>
+    </plugin>
+    <plugin name='imu_controller' filename='libgazebo_ros_imu.so'>
+      <alwaysOn>1</alwaysOn>
+      <updateRate>50.0</updateRate>
+      <topicName>imu_data</topicName>
+      <serviceName>imu_service</serviceName>
+      <gaussianNoise>2.89e-08</gaussianNoise>
+      <bodyName>base_link</bodyName>
+      <xyzOffset>0 0 -0.01</xyzOffset>
+      <rpyOffset>0 -0 0</rpyOffset>
+    </plugin>
+    <plugin name='p3d_base_controller' filename='libgazebo_ros_p3d.so'>
+      <alwaysOn>1</alwaysOn>
+      <updateRate>10.0</updateRate>
+      <bodyName>base_link</bodyName>
+      <topicName>odom_gazebo</topicName>
+      <gaussianNoise>0.01</gaussianNoise>
+      <frameName>base_link</frameName>
+      <xyzOffset>0 0 0</xyzOffset>
+      <rpyOffset>0 0 0</rpyOffset>
+    </plugin>
+  </model>
+  <model name='unit_cylinder_1'>
+    <pose>2.488070 0.000000 0.500000 0.000000 -0.000000 0.000000</pose>
+    <link name='link'>
+      <inertial>
+        <mass>1.000000</mass>
+      </inertial>
+      <collision name='collision'>
+        <geometry>
+          <cylinder>
+            <radius>0.500000</radius>
+            <length>1.000000</length>
+          </cylinder>
+        </geometry>
+        <surface>
+          <bounce/>
+          <friction>
+            <ode/>
+          </friction>
+          <contact>
+            <ode/>
+          </contact>
+        </surface>
+      </collision>
+      <visual name='visual'>
+        <geometry>
+          <cylinder>
+            <radius>0.500000</radius>
+            <length>1.000000</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+            <name>Gazebo/Grey</name>
+          </script>
+        </material>
+      </visual>
+      <velocity_decay>
+        <linear>0.000000</linear>
+        <angular>0.000000</angular>
+      </velocity_decay>
+      <self_collide>0</self_collide>
+      <kinematic>0</kinematic>
+    </link>
+    <static>0</static>
+  </model>
+  <model name='unit_box_1'>
+    <pose>0.000000 2.000000 0.500000 0.000000 -0.000000 0.000000</pose>
+    <link name='link'>
+      <inertial>
+        <mass>1.000000</mass>
+      </inertial>
+      <collision name='collision'>
+        <geometry>
+          <box>
+            <size>1.000000 1.000000 1.000000</size>
+          </box>
+        </geometry>
+        <surface>
+          <bounce/>
+          <friction>
+            <ode/>
+          </friction>
+          <contact>
+            <ode/>
+          </contact>
+        </surface>
+      </collision>
+      <visual name='visual'>
+        <geometry>
+          <box>
+            <size>1.000000 1.000000 1.000000</size>
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+            <name>Gazebo/Grey</name>
+          </script>
+        </material>
+      </visual>
+      <velocity_decay>
+        <linear>0.000000</linear>
+        <angular>0.000000</angular>
+      </velocity_decay>
+      <self_collide>0</self_collide>
+      <kinematic>0</kinematic>
+    </link>
+    <static>0</static>
+  </model>
+  <state world_name='default'>
+    <time>237 375000000</time>
+    <model name='ground_plane'>
+      <pose>0.000000 0.000000 0.000000 0.000000 -0.000000 0.000000</pose>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 -0.000000 0.000000</pose>
+        <velocity>0.000000 0.000000 0.000000 0.000000 -0.000000 0.000000</velocity>
+      </link>
+    </model>
+    <model name='robot_0'>
+      <pose>0.000000 -0.002347 0.021013 0.000237 -0.000000 0.000000</pose>
+      <link name='base_link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 -0.000000 0.000000</pose>
+        <velocity>0.000000 0.000000 0.000000 0.000000 -0.000000 0.000000</velocity>
+      </link>
+      <link name='left_wheel'>
+        <pose>0.000000 0.042000 -0.000004 1.570800 -0.000000 0.000000</pose>
+        <velocity>0.000000 0.000000 0.000000 0.000000 -0.000000 0.000000</velocity>
+      </link>
+      <link name='right_wheel'>
+        <pose>0.000000 -0.042000 -0.000000 -1.570800 0.000000 0.000000</pose>
+        <velocity>0.000000 0.000000 0.000000 0.000000 -0.000000 0.000000</velocity>
+      </link>
+      <link name='left_wheel_joint'>
+        <pose>-0.000000 0.000000 0.042000 0.000000 -0.000000 0.000000</pose>
+        <velocity>0.000000 0.000000 0.000000 0.000000 -0.000000 0.000000</velocity>
+      </link>
+      <link name='right_wheel_joint'>
+        <pose>-0.000000 0.000000 -0.042000 0.000000 -0.000000 0.000000</pose>
+        <velocity>0.000000 0.000000 0.000000 0.000000 -0.000000 0.000000</velocity>
+      </link>
+    </model>
+    <model name='unit_cylinder_1'>
+      <pose>2.488070 0.000000 0.500000 -0.000000 0.000000 0.000001</pose>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 -0.000000 0.000000</pose>
+        <velocity>0.000000 0.000000 0.000000 0.000000 -0.000000 0.000000</velocity>
+      </link>
+    </model>
+    <model name='unit_box_1'>
+      <pose>-0.000008 2.000000 0.499992 -0.000000 -0.000016 -0.000000</pose>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 -0.000000 0.000000</pose>
+        <velocity>0.000000 0.000000 0.000000 0.000000 -0.000000 0.000000</velocity>
+      </link>
+    </model>
+  </state>
+</world>
+</gazebo>

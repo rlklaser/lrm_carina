@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1331993307 source:c:\_mestrado\disciplinas\ssc5858-1 - introducao aos sistemas evolutivos\trabalhos\t1\ssc5858_t1\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+
+1331996440 source:c:\_mestrado\svn\trunk\disciplinas\ssc5858-1 - introducao aos sistemas evolutivos\trabalhos\t1\ssc5858_t1\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	<math.h>
+

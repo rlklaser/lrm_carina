@@ -1,0 +1,83 @@
+4
+VM
+MN
+MP
+IM
+0.8 0.5 0.9
+0.3 0
+0
+
+5
+Mancha-Negra
+Bafo-de-Onca
+Vovo-Metralha
+Irmaos-Metralha
+Maga-Patalojika
+1 0 0 0
+1 0 0
+1 0
+1
+
+5
+Mancha-Negra
+Bafo-de-Onca
+Vovo-Metralha
+Irmaos-Metralha
+Maga-Patalojika
+0.9999 0 0 0
+0.9999 0 0
+0.9999 0
+0.9999
+
+5
+Mancha-Negra
+Bafo-de-Onca
+Vovo-Metralha
+Irmaos-Metralha
+Maga-Patalojika
+0.0001 0 0 0
+0.0001 0 0
+0.0001 0
+0.0001
+
+5
+Mancha-Negra
+Bafo-de-Onca
+Vovo-Metralha
+Irmaos-Metralha
+Maga-Patalojika
+0.5 0 0 0
+0.5 0 0
+0.5 0
+0.5
+
+4
+Mancha-Negra
+Maga-Patalojika
+Vovo-Metralha
+Irmaos-Metralha
+0.3 0.8 0
+0.5 0
+0.9
+
+4
+Bafo-de-Onca
+Escovinha
+Irmaos-Metralha
+Vovo-Metralha
+1.0 0.9 0.1
+0.1 0.1
+0.9
+
+5
+Mancha-Negra
+Bafo-de-Onca
+Vovo-Metralha
+Irmaos-Metralha
+Maga-Patalojika
+0.5 0 0 0
+0.5 0 0
+0.5 0
+0.5
+
+0

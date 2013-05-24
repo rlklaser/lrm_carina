@@ -1,0 +1,42 @@
+<launch>
+
+	<node name="stereo" pkg="video_proc" type="stereo_play_node" output="screen">
+		<param name="video_right" value="bumblebee2_right_calib.avi" />
+		<param name="video_left" value="bumblebee2_left_calib.avi" />
+		
+		<param name="camera_right_prefix" value="bumblebee2_right" />
+		<param name="camera_left_prefix" value="bumblebee2_left" />
+		
+		<param name="loop" value="true" />
+		<param name="fps" value="10" />
+		<param name="encoding" value="bgr8" />
+		<param name="frame_id" value="" />
+		
+	</node>
+
+	<node name="view_right" pkg="image_view" type="image_view" output="screen">
+		<remap from="image" to="/stereo/right/image_raw" />
+	</node>
+	
+	<node name="view_left" pkg="image_view" type="image_view" output="screen">
+		<remap from="image" to="/stereo/left/image_raw" />
+	</node>
+	
+	<node name="stereo_proc" pkg="stereo_image_proc" type="stereo_image_proc" output="screen">
+		<env name="ROS_NAMESPACE" value="/stereo" />
+	</node>
+	
+	<!-- 
+	<node name="image_proc" pkg="image_proc" type="image_proc" output="screen">
+		<env name="ROS_NAMESPACE" value="/stereo/left" />
+	</node>
+	-->
+	<node name="view_rect_right" pkg="image_view" type="image_view" output="screen">
+		<remap from="image" to="/stereo/right/image_rect_color" />
+	</node>
+	
+	<node name="view_rect_left" pkg="image_view" type="image_view" output="screen">
+		<remap from="image" to="/stereo/left/image_rect_color" />
+	</node>
+	
+</launch>

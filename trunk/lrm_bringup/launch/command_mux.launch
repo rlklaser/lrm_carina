@@ -1,0 +1,26 @@
+<launch>
+
+
+	<include file="$(find carina_controller)/teleop_keyboard.launch" />
+
+
+	<node
+		name="velocity_mux"
+		pkg="topic_tools"
+		type="mux"
+		args="controller/cmd_vel carina_controller/cmd_vel joystick/cmd_vel"
+		output="screen"
+	>
+	
+		<param name="lazy" value="true"/>
+		
+		<!-- 
+		<param name="intopic1" value="carina_controller/cmd_vel"/>
+		<param name="intopic2" value="joystick/cmd_vel"/>
+		<param name="outtopic" value="controller/cmd_vel"/>
+	 	-->
+	 
+	</node>
+
+
+</launch>

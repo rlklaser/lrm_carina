@@ -1,0 +1,7 @@
+\subsubsection usage Usage
+\verbatim
+<node name="octomap_server_node" pkg="lrm_octomap_server" type="octomap_server_node">
+  <param name="max_depth" type="int" value="16" />
+</node>
+\endverbatim
+

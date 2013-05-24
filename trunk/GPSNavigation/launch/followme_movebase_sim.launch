@@ -1,0 +1,6 @@
+<launch>
+
+	<include file="$(find GPSNavigation)/launch/move_base.launch" />
+	
+
+</launch>

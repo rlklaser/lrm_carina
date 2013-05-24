@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+<!--
+*  Copyright (C) 2012, Laboratorio de Robotica Movel - ICMC/USP
+ *  Rafael Luiz Klaser <rlklaser@gmail.com>
+ *  http://lrm.icmc.usp.br
+ *
+ *  Apoio FAPESP: 2012/04555-4
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * @file wheel.urdf.xacro
+ * @brief 
+ * @author Rafael Luiz Klaser <rlklaser@gmail.com>
+ * @date Dez 12, 2012
+ *
+ */
+-->
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+	<xacro:macro
+		name="carina_wheel"
+		params="prefix rotation axis_dist"
+	>
+		<xacro:wheel_gazebo prefix="${prefix}" />
+	
+		<link name="${prefix}_wheel">
+			<inertial>
+				<mass value="5.0" />
+				<origin xyz="0 0 0" />
+				<inertia
+					ixx="0.0027"
+					ixy="0.0"
+					ixz="0.0"
+					iyy="0.0039"
+					iyz="0.0"
+					izz="0.0027" />
+			</inertial>
+			<visual>
+				<origin
+					xyz="0 0 0"
+					rpy="0 0 ${rotation}" />
+				<geometry>
+					<mesh
+						filename="package://lrm_description/meshes/wheel.dae"
+						scale="0.63 0.88 0.63" />
+				</geometry>
+				<material name="Roda">
+					<color rgba="1.0 1.0 0.0 1.0" />
+				</material>
+			</visual>
+			<collision>
+				<origin
+					xyz="0 0 0"
+					rpy="${M_PI/2} 0 0 " />
+				<geometry>
+					<cylinder
+						radius="${wheel_diameter/2}"
+						length="${wheel_width}" />
+				</geometry>
+			</collision>
+		</link>
+
+		<link name="${prefix}_bar_link">
+			<inertial>
+				<mass value="${inertia_null_mass}" />
+				<origin xyz="${inertia_null_x} ${inertia_null_y} ${inertia_null_z}" />
+				<inertia
+					ixx="${inertia_null_ixx}"
+					ixy="${inertia_null_ixy}"
+					ixz="${inertia_null_ixz}"
+					iyy="${inertia_null_iyy}"
+					iyz="${inertia_null_iyz}"
+					izz="${inertia_null_izz}" />
+			</inertial>
+			<visual>
+				<origin
+					xyz="0 0 0"
+					rpy="0 0 0" />
+				<geometry>
+					<cylinder
+						radius="0.03"
+						length="0.045" />
+				</geometry>
+				<material name="Red">
+					<color rgba="0.8 0.0 0.0 1.0" />
+				</material>
+			</visual>
+			<collision>
+				<origin
+					xyz="0 0 0"
+					rpy="0 0 0 " />
+				<geometry>
+					<cylinder
+						radius="0.03"
+						length="0.045" />
+				</geometry>
+			</collision>
+		</link>
+
+		<joint
+			name="joint_${prefix}_wheel"
+			type="continuous"
+		>
+			<parent link="${prefix}_bar_link" />
+			<child link="${prefix}_wheel" />
+			<origin
+				xyz="0.0 ${axis_dist} 0"
+				rpy="0 0 0" />
+			<axis
+				xyz="0 1 0"
+				rpy="0 0 0" />
+		</joint>
+
+	</xacro:macro>
+</robot>

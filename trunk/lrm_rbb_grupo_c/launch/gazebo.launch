@@ -1,0 +1,42 @@
+<launch>
+
+	<arg name="use_sim_time" default="true" />
+
+	<!-- start robot -->
+	<include file="$(find lrm_rbb_grupo_c)/launch/robot_model.launch" />
+
+	<node name="gazebo" pkg="gazebo" type="gazebo"
+		args="$(find lrm_rbb_grupo_c)/worlds/empty.world"
+		respawn="false" 
+		output="screen" 
+	/>
+	
+	<node
+		name="carina_object"
+		pkg="gazebo"
+		type="spawn_model"
+		args="-urdf -param robot_description -x 0.0 -y 0.0 -z 0.01 -model carina"
+		respawn="false"
+		output="screen" />
+ 
+ 	<rosparam
+		command="load"
+		file="$(find carina_controller)/carina_controller.yaml" />
+		
+	<node
+		name="carina_controller"
+		pkg="pr2_controller_manager"
+		type="spawner"
+		args="carina_controller"
+		respawn="false"
+		output="screen" />
+ 		
+	<node name="gazebo_gui" pkg="gazebo" type="gui" 
+		respawn="true" 
+		output="screen" />
+
+	<node name="rviz" pkg="rviz" type="rviz" 
+		respawn="true" 
+		output="screen" />
+
+</launch>

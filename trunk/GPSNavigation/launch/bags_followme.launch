@@ -1,0 +1,30 @@
+<launch>
+
+	<node
+		name="rosbag_their"
+		pkg="rosbag"
+		type="play"
+		args="--loop $(find GPSNavigation)/bags/gps_data.bag"
+	>	
+		 <!-- Their -->
+		<!-- <remap from="/lse_xsens_mti/xsens/pose" to="/lse_xsens_mti/xsens_2/pose" /> -->
+		<remap
+			from="/lse_xsens_mti/xsens/pose"
+			to="/followme/their/pose" />
+	</node> 
+
+	<!-- delay: tempo de diferenca entre cada veiculo -->
+	<node
+		name="rosbag_our"
+		pkg="rosbag"
+		type="play"
+		args="--loop --delay=5 $(find GPSNavigation)/bags/gps_data.bag"
+	>	
+		<!-- Our -->
+		<!-- <remap from="/lse_xsens_mti/xsens/pose" to="/lse_xsens_mti/xsens_1/pose" /> -->
+		<remap
+			from="/lse_xsens_mti/xsens/pose"
+			to="/followme/our/pose" />
+	</node>
+
+</launch>

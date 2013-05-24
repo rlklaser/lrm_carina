@@ -1,0 +1,574 @@
+Flat profile:
+
+Each sample counts as 0.001 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls   s/call   s/call  name    
+ 19.07      0.87     0.87   846000     0.00     0.00  __unpack_d
+ 16.77      1.63     0.76   201400     0.00     0.00  _fpadd_parts
+ 14.95      2.31     0.68   201400     0.00     0.00  __muldf3
+ 13.73      2.93     0.62   608400     0.00     0.00  __muldi3
+ 11.69      3.46     0.53   415000     0.00     0.00  __pack_d
+  6.14      3.74     0.28    11800     0.00     0.00  __divdf3
+  3.92      3.92     0.18        1     0.18     0.18  altera_avalon_jtag_uart_close
+  3.80      4.09     0.17                             sbrk
+  3.33      4.24     0.15   201400     0.00     0.00  __subdf3
+  3.11      4.38     0.14       20     0.01     0.20  Solve_Inverse
+  0.66      4.41     0.03        1     0.03     0.03  exit
+  0.63      4.44     0.03     8400     0.00     0.00  __eqdf2
+  0.61      4.47     0.03      400     0.00     0.00  __floatsidf
+  0.51      4.49     0.02      398     0.00     0.00  __clzsi2
+  0.32      4.50     0.01      290     0.00     0.00  memcpy
+  0.20      4.51     0.01     8400     0.00     0.00  __fpcmp_parts_d
+  0.14      4.52     0.01                             __adddf3
+  0.13      4.52     0.01      270     0.00     0.00  altera_avalon_jtag_uart_write
+  0.10      4.53     0.00       41     0.00     0.00  memset
+  0.09      4.53     0.00        1     0.00     4.15  main
+  0.02      4.53     0.00      400     0.00     0.00  rand
+  0.02      4.54     0.00      270     0.00     0.00  __sfvwrite_small_dev
+  0.02      4.54     0.00      270     0.00     0.00  _write_r
+  0.02      4.54     0.00       21     0.00     0.00  ___vfprintf_internal_r
+  0.02      4.54     0.00       21     0.00     0.00  printf
+  0.02      4.54     0.00       11     0.00     0.00  alt_log_private_printf
+  0.00      4.54     0.00     6790     0.00     0.00  alt_irq_handler
+  0.00      4.54     0.00     6536     0.00     0.00  alt_avalon_timer_sc_irq
+  0.00      4.54     0.00     6536     0.00     0.00  alt_log_system_clock
+  0.00      4.54     0.00     6536     0.00     0.00  alt_tick
+  0.00      4.54     0.00      270     0.00     0.00  alt_log_write
+  0.00      4.54     0.00      270     0.00     0.00  altera_avalon_jtag_uart_write_fd
+  0.00      4.54     0.00      270     0.00     0.00  write
+  0.00      4.54     0.00      260     0.00     0.00  alt_log_jtag_uart_isr_proc
+  0.00      4.54     0.00      260     0.00     0.00  altera_avalon_jtag_uart_irq
+  0.00      4.54     0.00      121     0.00     0.00  udivmodsi4
+  0.00      4.54     0.00      108     0.00     0.00  __udivsi3
+  0.00      4.54     0.00       42     0.00     0.00  update_ledg
+  0.00      4.54     0.00       23     0.00     0.00  print_repeat
+  0.00      4.54     0.00       21     0.00     0.00  __vfprintf_internal
+  0.00      4.54     0.00       13     0.00     0.00  __umodsi3
+  0.00      4.54     0.00       11     0.00     0.00  alt_log_printf_proc
+  0.00      4.54     0.00        6     0.00     0.00  altera_avalon_jtag_uart_timeout
+  0.00      4.54     0.00        6     0.00     0.00  memcmp
+  0.00      4.54     0.00        5     0.00     0.00  strlen
+  0.00      4.54     0.00        4     0.00     0.00  alt_release_fd
+  0.00      4.54     0.00        3     0.00     0.00  alt_find_dev
+  0.00      4.54     0.00        3     0.00     0.00  alt_get_fd
+  0.00      4.54     0.00        3     0.00     0.00  alt_ic_irq_enable
+  0.00      4.54     0.00        3     0.00     0.00  alt_ic_isr_register
+  0.00      4.54     0.00        3     0.00     0.00  alt_iic_isr_register
+  0.00      4.54     0.00        3     0.00     0.00  open
+  0.00      4.54     0.00        2     0.00     0.00  _puts_r
+  0.00      4.54     0.00        2     0.00     0.00  _sbrk_r
+  0.00      4.54     0.00        2     0.00     0.00  alt_alarm_start
+  0.00      4.54     0.00        2     0.00     0.00  alt_dev_llist_insert
+  0.00      4.54     0.00        2     0.00     0.00  puts
+  0.00      4.54     0.00        1     0.00     0.00  __malloc_lock
+  0.00      4.54     0.00        1     0.00     0.00  __malloc_unlock
+  0.00      4.54     0.00        1     0.00     0.00  _malloc_r
+  0.00      4.54     0.00        1     0.00     0.00  alt_avalon_timer_sc_init
+  0.00      4.54     0.00        1     0.00     0.00  alt_dcache_flush_all
+  0.00      4.54     0.00        1     0.00     0.00  alt_icache_flush
+  0.00      4.54     0.00        1     0.00     0.00  alt_icache_flush_all
+  0.00      4.54     0.00        1     0.00     0.00  alt_io_redirect
+  0.00      4.54     0.00        1     0.00     0.00  alt_irq_init
+  0.00      4.54     0.00        1     0.00     0.00  alt_load
+  0.00      4.54     0.00        1     0.00     4.36  alt_main
+  0.00      4.54     0.00        1     0.00     0.00  alt_sys_init
+  0.00      4.54     0.00        1     0.00     0.00  altera_avalon_jtag_uart_close_fd
+  0.00      4.54     0.00        1     0.00     0.00  altera_avalon_jtag_uart_init
+  0.00      4.54     0.00        1     0.00     0.00  altera_avalon_uart_init
+  0.00      4.54     0.00        1     0.00     0.00  altera_nios2_irq_init
+  0.00      4.54     0.00        1     0.00     0.18  close
+  0.00      4.54     0.00        1     0.00     0.00  malloc
+  0.00      4.54     0.00        1     0.00     0.00  srand
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+ 
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this 
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
+
+		     Call graph (explanation follows)
+
+
+granularity: each sample hit covers 32 byte(s) for 0.02% of 4.54 seconds
+
+index % time    self  children    called     name
+                0.00    4.36       1/1           _start [2]
+[1]     96.1    0.00    4.36       1         alt_main [1]
+                0.00    4.15       1/1           main [3]
+                0.00    0.18       1/1           close [13]
+                0.03    0.00       1/1           exit [17]
+                0.00    0.00       7/11          alt_log_printf_proc [30]
+                0.00    0.00       1/1           alt_io_redirect [62]
+                0.00    0.00       1/4           alt_release_fd [48]
+                0.00    0.00       1/2           alt_dev_llist_insert [56]
+                0.00    0.00       1/1           alt_irq_init [63]
+                0.00    0.00       1/1           alt_sys_init [65]
+-----------------------------------------------
+                                                 <spontaneous>
+[2]     96.1    0.00    4.36                 _start [2]
+                0.00    4.36       1/1           alt_main [1]
+                0.00    0.00       1/1           alt_icache_flush_all [61]
+                0.00    0.00       1/1           alt_icache_flush [60]
+                0.00    0.00       1/1           alt_load [64]
+-----------------------------------------------
+                0.00    4.15       1/1           alt_main [1]
+[3]     91.5    0.00    4.15       1         main [3]
+                0.14    3.93      20/20          Solve_Inverse [4]
+                0.03    0.02     400/400         __floatsidf [16]
+                0.00    0.02      21/21          printf [19]
+                0.00    0.00     400/400         rand [29]
+                0.00    0.00       2/2           _puts_r [32]
+                0.00    0.00      42/42          update_ledg [43]
+                0.00    0.00       2/2           puts [57]
+                0.00    0.00       1/1           srand [71]
+-----------------------------------------------
+                0.14    3.93      20/20          main [3]
+[4]     89.7    0.14    3.93      20         Solve_Inverse [4]
+                0.68    1.29  201400/201400      __muldf3 [5]
+                0.15    1.43  201400/201400      __subdf3 [6]
+                0.28    0.04   11800/11800       __divdf3 [11]
+                0.03    0.03    8400/8400        __eqdf2 [15]
+                0.00    0.00      40/41          memset [28]
+                0.00    0.00      20/290         memcpy [25]
+-----------------------------------------------
+                0.68    1.29  201400/201400      Solve_Inverse [4]
+[5]     43.4    0.68    1.29  201400         __muldf3 [5]
+                0.62    0.00  608000/608400      __muldi3 [9]
+                0.41    0.00  402800/846000      __unpack_d [7]
+                0.26    0.00  201400/415000      __pack_d [10]
+-----------------------------------------------
+                0.15    1.43  201400/201400      Solve_Inverse [4]
+[6]     34.8    0.15    1.43  201400         __subdf3 [6]
+                0.76    0.00  201400/201400      _fpadd_parts [8]
+                0.41    0.00  402800/846000      __unpack_d [7]
+                0.26    0.00  201400/415000      __pack_d [10]
+-----------------------------------------------
+                0.02    0.00   16800/846000      __eqdf2 [15]
+                0.02    0.00   23600/846000      __divdf3 [11]
+                0.41    0.00  402800/846000      __subdf3 [6]
+                0.41    0.00  402800/846000      __muldf3 [5]
+[7]     19.1    0.87    0.00  846000         __unpack_d [7]
+-----------------------------------------------
+                0.76    0.00  201400/201400      __subdf3 [6]
+[8]     16.8    0.76    0.00  201400         _fpadd_parts [8]
+-----------------------------------------------
+                0.00    0.00     400/608400      rand [29]
+                0.62    0.00  608000/608400      __muldf3 [5]
+[9]     13.7    0.62    0.00  608400         __muldi3 [9]
+-----------------------------------------------
+                0.00    0.00     400/415000      __floatsidf [16]
+                0.02    0.00   11800/415000      __divdf3 [11]
+                0.26    0.00  201400/415000      __subdf3 [6]
+                0.26    0.00  201400/415000      __muldf3 [5]
+[10]    11.7    0.53    0.00  415000         __pack_d [10]
+-----------------------------------------------
+                0.28    0.04   11800/11800       Solve_Inverse [4]
+[11]     7.0    0.28    0.04   11800         __divdf3 [11]
+                0.02    0.00   23600/846000      __unpack_d [7]
+                0.02    0.00   11800/415000      __pack_d [10]
+-----------------------------------------------
+                0.18    0.00       1/1           close [13]
+[12]     3.9    0.18    0.00       1         altera_avalon_jtag_uart_close [12]
+-----------------------------------------------
+                0.00    0.18       1/1           alt_main [1]
+[13]     3.9    0.00    0.18       1         close [13]
+                0.18    0.00       1/1           altera_avalon_jtag_uart_close [12]
+                0.00    0.00       1/4           alt_release_fd [48]
+                0.00    0.00       1/1           altera_avalon_jtag_uart_close_fd [66]
+-----------------------------------------------
+                                                 <spontaneous>
+[14]     3.8    0.17    0.00                 sbrk [14]
+-----------------------------------------------
+                0.03    0.03    8400/8400        Solve_Inverse [4]
+[15]     1.2    0.03    0.03    8400         __eqdf2 [15]
+                0.02    0.00   16800/846000      __unpack_d [7]
+                0.01    0.00    8400/8400        __fpcmp_parts_d [26]
+-----------------------------------------------
+                0.03    0.02     400/400         main [3]
+[16]     1.1    0.03    0.02     400         __floatsidf [16]
+                0.02    0.00     398/398         __clzsi2 [18]
+                0.00    0.00     400/415000      __pack_d [10]
+-----------------------------------------------
+                0.03    0.00       1/1           alt_main [1]
+[17]     0.7    0.03    0.00       1         exit [17]
+                0.00    0.00       4/11          alt_log_printf_proc [30]
+-----------------------------------------------
+                0.02    0.00     398/398         __floatsidf [16]
+[18]     0.5    0.02    0.00     398         __clzsi2 [18]
+-----------------------------------------------
+                0.00    0.02      21/21          main [3]
+[19]     0.5    0.00    0.02      21         printf [19]
+                0.00    0.02      21/21          ___vfprintf_internal_r [20]
+                0.00    0.00      21/21          __vfprintf_internal [107]
+-----------------------------------------------
+                0.00    0.02      21/21          printf [19]
+[20]     0.5    0.00    0.02      21         ___vfprintf_internal_r [20]
+                0.00    0.02     266/270         __sfvwrite_small_dev [21]
+                0.00    0.00     121/121         udivmodsi4 [42]
+                0.00    0.00     108/108         __udivsi3 [106]
+                0.00    0.00      23/23          print_repeat [44]
+                0.00    0.00      13/13          __umodsi3 [108]
+-----------------------------------------------
+                0.00    0.00       4/270         _puts_r [32]
+                0.00    0.02     266/270         ___vfprintf_internal_r [20]
+[21]     0.5    0.00    0.02     270         __sfvwrite_small_dev [21]
+                0.00    0.02     270/270         _write_r [22]
+-----------------------------------------------
+                0.00    0.02     270/270         __sfvwrite_small_dev [21]
+[22]     0.4    0.00    0.02     270         _write_r [22]
+                0.00    0.02     270/270         write [24]
+-----------------------------------------------
+                0.01    0.01     270/270         write [24]
+[23]     0.4    0.01    0.01     270         altera_avalon_jtag_uart_write [23]
+                0.01    0.00     270/290         memcpy [25]
+-----------------------------------------------
+                0.00    0.02     270/270         _write_r [22]
+[24]     0.4    0.00    0.02     270         write [24]
+                0.01    0.01     270/270         altera_avalon_jtag_uart_write [23]
+                0.00    0.00     270/270         alt_log_write [38]
+                0.00    0.00     270/270         altera_avalon_jtag_uart_write_fd [39]
+-----------------------------------------------
+                0.00    0.00      20/290         Solve_Inverse [4]
+                0.01    0.00     270/290         altera_avalon_jtag_uart_write [23]
+[25]     0.3    0.01    0.00     290         memcpy [25]
+-----------------------------------------------
+                0.01    0.00    8400/8400        __eqdf2 [15]
+[26]     0.2    0.01    0.00    8400         __fpcmp_parts_d [26]
+-----------------------------------------------
+                                                 <spontaneous>
+[27]     0.1    0.01    0.00                 __adddf3 [27]
+-----------------------------------------------
+                0.00    0.00       1/41          __mcount_record [33]
+                0.00    0.00      40/41          Solve_Inverse [4]
+[28]     0.1    0.00    0.00      41         memset [28]
+-----------------------------------------------
+                0.00    0.00     400/400         main [3]
+[29]     0.0    0.00    0.00     400         rand [29]
+                0.00    0.00     400/608400      __muldi3 [9]
+-----------------------------------------------
+                0.00    0.00       4/11          exit [17]
+                0.00    0.00       7/11          alt_main [1]
+[30]     0.0    0.00    0.00      11         alt_log_printf_proc [30]
+                0.00    0.00      11/11          alt_log_private_printf [31]
+-----------------------------------------------
+                0.00    0.00      11/11          alt_log_printf_proc [30]
+[31]     0.0    0.00    0.00      11         alt_log_private_printf [31]
+-----------------------------------------------
+                0.00    0.00       2/2           main [3]
+[32]     0.0    0.00    0.00       2         _puts_r [32]
+                0.00    0.00       4/270         __sfvwrite_small_dev [21]
+                0.00    0.00       2/5           strlen [47]
+-----------------------------------------------
+                                                 <spontaneous>
+[33]     0.0    0.00    0.00                 __mcount_record [33]
+                0.00    0.00       1/41          memset [28]
+                0.00    0.00       1/2           alt_alarm_start [55]
+-----------------------------------------------
+                0.00    0.00    6790/6790        alt_exception [75]
+[34]     0.0    0.00    0.00    6790         alt_irq_handler [34]
+                0.00    0.00    6536/6536        alt_avalon_timer_sc_irq [35]
+                0.00    0.00     260/260         altera_avalon_jtag_uart_irq [41]
+-----------------------------------------------
+                0.00    0.00    6536/6536        alt_irq_handler [34]
+[35]     0.0    0.00    0.00    6536         alt_avalon_timer_sc_irq [35]
+                0.00    0.00    6536/6536        alt_tick [37]
+                0.00    0.00    6536/6536        alt_log_system_clock [36]
+-----------------------------------------------
+                0.00    0.00    6536/6536        alt_avalon_timer_sc_irq [35]
+[36]     0.0    0.00    0.00    6536         alt_log_system_clock [36]
+-----------------------------------------------
+                0.00    0.00    6536/6536        alt_avalon_timer_sc_irq [35]
+[37]     0.0    0.00    0.00    6536         alt_tick [37]
+                0.00    0.00       6/6           altera_avalon_jtag_uart_timeout [45]
+-----------------------------------------------
+                0.00    0.00     270/270         write [24]
+[38]     0.0    0.00    0.00     270         alt_log_write [38]
+-----------------------------------------------
+                0.00    0.00     270/270         write [24]
+[39]     0.0    0.00    0.00     270         altera_avalon_jtag_uart_write_fd [39]
+-----------------------------------------------
+                0.00    0.00     260/260         altera_avalon_jtag_uart_irq [41]
+[40]     0.0    0.00    0.00     260         alt_log_jtag_uart_isr_proc [40]
+-----------------------------------------------
+                0.00    0.00     260/260         alt_irq_handler [34]
+[41]     0.0    0.00    0.00     260         altera_avalon_jtag_uart_irq [41]
+                0.00    0.00     260/260         alt_log_jtag_uart_isr_proc [40]
+-----------------------------------------------
+                0.00    0.00     121/121         ___vfprintf_internal_r [20]
+[42]     0.0    0.00    0.00     121         udivmodsi4 [42]
+-----------------------------------------------
+                0.00    0.00      42/42          main [3]
+[43]     0.0    0.00    0.00      42         update_ledg [43]
+-----------------------------------------------
+                0.00    0.00      23/23          ___vfprintf_internal_r [20]
+[44]     0.0    0.00    0.00      23         print_repeat [44]
+-----------------------------------------------
+                0.00    0.00       6/6           alt_tick [37]
+[45]     0.0    0.00    0.00       6         altera_avalon_jtag_uart_timeout [45]
+-----------------------------------------------
+                0.00    0.00       6/6           alt_find_dev [49]
+[46]     0.0    0.00    0.00       6         memcmp [46]
+-----------------------------------------------
+                0.00    0.00       2/5           _puts_r [32]
+                0.00    0.00       3/5           alt_find_dev [49]
+[47]     0.0    0.00    0.00       5         strlen [47]
+-----------------------------------------------
+                0.00    0.00       1/4           close [13]
+                0.00    0.00       1/4           alt_main [1]
+                0.00    0.00       2/4           alt_io_redirect [62]
+[48]     0.0    0.00    0.00       4         alt_release_fd [48]
+-----------------------------------------------
+                0.00    0.00       3/3           open [54]
+[49]     0.0    0.00    0.00       3         alt_find_dev [49]
+                0.00    0.00       6/6           memcmp [46]
+                0.00    0.00       3/5           strlen [47]
+-----------------------------------------------
+                0.00    0.00       3/3           open [54]
+[50]     0.0    0.00    0.00       3         alt_get_fd [50]
+-----------------------------------------------
+                0.00    0.00       3/3           alt_iic_isr_register [53]
+[51]     0.0    0.00    0.00       3         alt_ic_irq_enable [51]
+-----------------------------------------------
+                0.00    0.00       1/3           altera_avalon_uart_init [68]
+                0.00    0.00       1/3           altera_avalon_jtag_uart_init [67]
+                0.00    0.00       1/3           alt_avalon_timer_sc_init [58]
+[52]     0.0    0.00    0.00       3         alt_ic_isr_register [52]
+-----------------------------------------------
+                0.00    0.00       1/3           altera_avalon_uart_init [68]
+                0.00    0.00       1/3           altera_avalon_jtag_uart_init [67]
+                0.00    0.00       1/3           alt_avalon_timer_sc_init [58]
+[53]     0.0    0.00    0.00       3         alt_iic_isr_register [53]
+                0.00    0.00       3/3           alt_ic_irq_enable [51]
+-----------------------------------------------
+                0.00    0.00       3/3           alt_io_redirect [62]
+[54]     0.0    0.00    0.00       3         open [54]
+                0.00    0.00       3/3           alt_find_dev [49]
+                0.00    0.00       3/3           alt_get_fd [50]
+-----------------------------------------------
+                0.00    0.00       1/2           altera_avalon_jtag_uart_init [67]
+                0.00    0.00       1/2           __mcount_record [33]
+[55]     0.0    0.00    0.00       2         alt_alarm_start [55]
+-----------------------------------------------
+                0.00    0.00       1/2           alt_main [1]
+                0.00    0.00       1/2           alt_sys_init [65]
+[56]     0.0    0.00    0.00       2         alt_dev_llist_insert [56]
+-----------------------------------------------
+                0.00    0.00       2/2           main [3]
+[57]     0.0    0.00    0.00       2         puts [57]
+-----------------------------------------------
+                0.00    0.00       1/1           alt_sys_init [65]
+[58]     0.0    0.00    0.00       1         alt_avalon_timer_sc_init [58]
+                0.00    0.00       1/3           alt_ic_isr_register [52]
+                0.00    0.00       1/3           alt_iic_isr_register [53]
+-----------------------------------------------
+                0.00    0.00       1/1           alt_load [64]
+[59]     0.0    0.00    0.00       1         alt_dcache_flush_all [59]
+-----------------------------------------------
+                0.00    0.00       1/1           _start [2]
+[60]     0.0    0.00    0.00       1         alt_icache_flush [60]
+-----------------------------------------------
+                0.00    0.00       1/1           _start [2]
+[61]     0.0    0.00    0.00       1         alt_icache_flush_all [61]
+-----------------------------------------------
+                0.00    0.00       1/1           alt_main [1]
+[62]     0.0    0.00    0.00       1         alt_io_redirect [62]
+                0.00    0.00       3/3           open [54]
+                0.00    0.00       2/4           alt_release_fd [48]
+-----------------------------------------------
+                0.00    0.00       1/1           alt_main [1]
+[63]     0.0    0.00    0.00       1         alt_irq_init [63]
+                0.00    0.00       1/1           altera_nios2_irq_init [69]
+-----------------------------------------------
+                0.00    0.00       1/1           _start [2]
+[64]     0.0    0.00    0.00       1         alt_load [64]
+                0.00    0.00       1/1           alt_dcache_flush_all [59]
+-----------------------------------------------
+                0.00    0.00       1/1           alt_main [1]
+[65]     0.0    0.00    0.00       1         alt_sys_init [65]
+                0.00    0.00       1/1           altera_avalon_jtag_uart_init [67]
+                0.00    0.00       1/1           altera_avalon_uart_init [68]
+                0.00    0.00       1/2           alt_dev_llist_insert [56]
+                0.00    0.00       1/1           alt_avalon_timer_sc_init [58]
+-----------------------------------------------
+                0.00    0.00       1/1           close [13]
+[66]     0.0    0.00    0.00       1         altera_avalon_jtag_uart_close_fd [66]
+-----------------------------------------------
+                0.00    0.00       1/1           alt_sys_init [65]
+[67]     0.0    0.00    0.00       1         altera_avalon_jtag_uart_init [67]
+                0.00    0.00       1/3           alt_ic_isr_register [52]
+                0.00    0.00       1/3           alt_iic_isr_register [53]
+                0.00    0.00       1/2           alt_alarm_start [55]
+-----------------------------------------------
+                0.00    0.00       1/1           alt_sys_init [65]
+[68]     0.0    0.00    0.00       1         altera_avalon_uart_init [68]
+                0.00    0.00       1/3           alt_ic_isr_register [52]
+                0.00    0.00       1/3           alt_iic_isr_register [53]
+-----------------------------------------------
+                0.00    0.00       1/1           alt_irq_init [63]
+[69]     0.0    0.00    0.00       1         altera_nios2_irq_init [69]
+-----------------------------------------------
+                0.00    0.00       1/1           srand [71]
+[70]     0.0    0.00    0.00       1         malloc [70]
+-----------------------------------------------
+                0.00    0.00       1/1           main [3]
+[71]     0.0    0.00    0.00       1         srand [71]
+                0.00    0.00       1/1           malloc [70]
+                0.00    0.00       1/1           _malloc_r [112]
+-----------------------------------------------
+                0.00    0.00     108/108         ___vfprintf_internal_r [20]
+[106]    0.0    0.00    0.00     108         __udivsi3 [106]
+-----------------------------------------------
+                0.00    0.00      21/21          printf [19]
+[107]    0.0    0.00    0.00      21         __vfprintf_internal [107]
+-----------------------------------------------
+                0.00    0.00      13/13          ___vfprintf_internal_r [20]
+[108]    0.0    0.00    0.00      13         __umodsi3 [108]
+-----------------------------------------------
+                0.00    0.00       2/2           _malloc_r [112]
+[109]    0.0    0.00    0.00       2         _sbrk_r [109]
+-----------------------------------------------
+                0.00    0.00       1/1           _malloc_r [112]
+[110]    0.0    0.00    0.00       1         __malloc_lock [110]
+-----------------------------------------------
+                0.00    0.00       1/1           _malloc_r [112]
+[111]    0.0    0.00    0.00       1         __malloc_unlock [111]
+-----------------------------------------------
+                0.00    0.00       1/1           srand [71]
+[112]    0.0    0.00    0.00       1         _malloc_r [112]
+                0.00    0.00       2/2           _sbrk_r [109]
+                0.00    0.00       1/1           __malloc_unlock [111]
+                0.00    0.00       1/1           __malloc_lock [110]
+-----------------------------------------------
+
+ This table describes the call tree of the program, and was sorted by
+ the total amount of time spent in each function and its children.
+
+ Each entry in this table consists of several lines.  The line with the
+ index number at the left hand margin lists the current function.
+ The lines above it list the functions that called this function,
+ and the lines below it list the functions this one called.
+ This line lists:
+     index	A unique number given to each element of the table.
+		Index numbers are sorted numerically.
+		The index number is printed next to every function name so
+		it is easier to look up where the function in the table.
+
+     % time	This is the percentage of the `total' time that was spent
+		in this function and its children.  Note that due to
+		different viewpoints, functions excluded by options, etc,
+		these numbers will NOT add up to 100%.
+
+     self	This is the total amount of time spent in this function.
+
+     children	This is the total amount of time propagated into this
+		function by its children.
+
+     called	This is the number of times the function was called.
+		If the function called itself recursively, the number
+		only includes non-recursive calls, and is followed by
+		a `+' and the number of recursive calls.
+
+     name	The name of the current function.  The index number is
+		printed after it.  If the function is a member of a
+		cycle, the cycle number is printed between the
+		function's name and the index number.
+
+
+ For the function's parents, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the function into this parent.
+
+     children	This is the amount of time that was propagated from
+		the function's children into this parent.
+
+     called	This is the number of times this parent called the
+		function `/' the total number of times the function
+		was called.  Recursive calls to the function are not
+		included in the number after the `/'.
+
+     name	This is the name of the parent.  The parent's index
+		number is printed after it.  If the parent is a
+		member of a cycle, the cycle number is printed between
+		the name and the index number.
+
+ If the parents of the function cannot be determined, the word
+ `<spontaneous>' is printed in the `name' field, and all the other
+ fields are blank.
+
+ For the function's children, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the child into the function.
+
+     children	This is the amount of time that was propagated from the
+		child's children to the function.
+
+     called	This is the number of times the function called
+		this child `/' the total number of times the child
+		was called.  Recursive calls by the child are not
+		listed in the number after the `/'.
+
+     name	This is the name of the child.  The child's index
+		number is printed after it.  If the child is a
+		member of a cycle, the cycle number is printed
+		between the name and the index number.
+
+ If there are any cycles (circles) in the call graph, there is an
+ entry for the cycle-as-a-whole.  This entry shows who called the
+ cycle (as parents) and the members of the cycle (as children.)
+ The `+' recursive calls entry shows the number of function calls that
+ were internal to the cycle, and the calls entry for each member shows,
+ for that member, how many times it was called from other members of
+ the cycle.
+
+
+Index by function name
+
+   [4] Solve_Inverse          [35] alt_avalon_timer_sc_irq [41] altera_avalon_jtag_uart_irq
+  [20] ___vfprintf_internal_r [59] alt_dcache_flush_all   [45] altera_avalon_jtag_uart_timeout
+  [27] __adddf3               [56] alt_dev_llist_insert   [23] altera_avalon_jtag_uart_write
+  [18] __clzsi2               [49] alt_find_dev           [39] altera_avalon_jtag_uart_write_fd
+  [11] __divdf3               [50] alt_get_fd             [68] altera_avalon_uart_init
+  [15] __eqdf2                [51] alt_ic_irq_enable      [69] altera_nios2_irq_init
+  [16] __floatsidf            [52] alt_ic_isr_register    [13] close
+  [26] __fpcmp_parts_d        [60] alt_icache_flush       [17] exit
+ [110] __malloc_lock          [61] alt_icache_flush_all    [3] main
+ [111] __malloc_unlock        [53] alt_iic_isr_register   [70] malloc
+   [5] __muldf3               [62] alt_io_redirect        [46] memcmp
+   [9] __muldi3               [34] alt_irq_handler        [25] memcpy
+  [10] __pack_d               [63] alt_irq_init           [28] memset
+  [21] __sfvwrite_small_dev   [64] alt_load               [54] open
+   [6] __subdf3               [40] alt_log_jtag_uart_isr_proc [44] print_repeat (vfprintf.c)
+ [106] __udivsi3              [30] alt_log_printf_proc    [19] printf
+ [108] __umodsi3              [31] alt_log_private_printf [57] puts
+   [7] __unpack_d             [36] alt_log_system_clock   [29] rand
+ [107] __vfprintf_internal    [38] alt_log_write          [14] sbrk
+   [8] _fpadd_parts (dp-bit.c) [1] alt_main               [71] srand
+ [112] _malloc_r              [48] alt_release_fd         [47] strlen
+  [32] _puts_r                [65] alt_sys_init           [42] udivmodsi4 (lib2-divmod.c)
+ [109] _sbrk_r                [37] alt_tick               [43] update_ledg
+  [22] _write_r               [12] altera_avalon_jtag_uart_close [24] write
+  [55] alt_alarm_start        [66] altera_avalon_jtag_uart_close_fd
+  [58] alt_avalon_timer_sc_init [67] altera_avalon_jtag_uart_init

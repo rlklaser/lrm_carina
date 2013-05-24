@@ -1,0 +1,175 @@
+%\documentclass[openright]{unisinos}
+%\documentclass[twoside]{unisinos}
+%\documentclass{abnt}
+\documentclass[a4paper,12pt,twoside,brazil]{icmc}
+
+% a opção `openright' pode ser usada para forçar inícios de capítulos
+% em páginas ímpares
+% \documentclass[openright]{unisinos}
+% para gerar uma versão somente-frente, basta utilizar a opção `oneside':
+% \documentclass[oneside]{unisinos}
+
+\usepackage[top=25mm,bottom=20mm,left=20mm,right=15mm]{geometry} %coloca o tamanho das margens
+\usepackage[T1]{fontenc}        % pacote para conj. de caracteres correto
+\usepackage[utf8]{inputenc}     % pacote para acentuação
+\usepackage[brazil]{babel}
+\usepackage{graphicx}           % pacote para importar figuras
+\usepackage{times}              % pacote para usar fonte Adobe Times
+\usepackage{mathptmx}           % p/ usar fonte Adobe Times nas fórmulas
+\usepackage{enumerate}
+\usepackage{verbatim}
+\usepackage{moreverb}
+\usepackage{ulem}
+\usepackage{textcomp}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{fancybox}
+\usepackage{indentfirst} %indenta a primeira linha
+\usepackage{titlesec} %para os gr\'{a}ficos dos cap\'{\i}tulos
+\usepackage{textfit}
+\usepackage{fancyhdr} % Para colocar cabe\c{c}alho nas p\'{a}ginas
+\usepackage{subfigure}
+\usepackage{lettrine} % Para fazer letras capitulares
+\usepackage{lscape}
+\usepackage{lmodern} % fonte CMR que funciona
+\usepackage{setspace}
+\usepackage{caption}
+\usepackage{subcaption}
+
+
+\newcommand{\fonte}[1]{
+	\centering
+	\fontfamily{cmss}\selectfont
+	\footnotesize{
+			\textbf{Fonte: \textnormal{
+				\fontfamily{cmss}\selectfont
+				\footnotesize{#1 \\}
+			}
+		}
+	}
+}
+ 
+%\newcommand{\figcap}[1]{
+%	\centering
+%	\fontfamily{cmss}\selectfont
+%	\footnotesize{
+%			\textbf{Fig.:~\label{#1}\textnormal{
+%				\fontfamily{cmss}\selectfont
+%				\footnotesize{#1 \\}
+%			}
+%		}
+%	}
+%}
+
+%\setlength{\footnotesep}{0.5cm}
+%\setlength{\skip\footins}{2cm}
+
+\newcommand{\foot}[1]{\footnote{	\fontfamily{cmss}\selectfont\footnotesize{#1}}}
+
+\newcommand{\fig}[1]{\textit{Figura~\ref{#1}}}
+
+\newcommand{\blankpage}{\newpage\thispagestyle{empty}	\mbox{}
+	%\mbox{Esta página foi intencionalmente deixada em branco.}
+	\newpage}
+
+%>>>>\include{info}
+%%\title{Navegação de Veículos Autônomos em Ambientes Externos Não Estruturados
+% baseada em Visão Computacional.}
+%%\author{Rafael Luiz Klaser}
+%%\advisor{Prof. Dr. Fernando Santos Osório}
+%%\date{Dezembro - 2012}
+%%\address{
+%%ICMC - Instituto de Ciências Matemáticas e de Computação\\
+%%Universidade de São Paulo\\
+%%}
+%%\thanks{Apoio financeiro FAPESP \#2012/04555-4}
+
+% - inicio do documento
+\begin{document}
+
+\singlespacing
+%\fontfamily{cmss}\selectfont
+%\fontfamily{ppl}\selectfont
+%\fontfamily{cmfib}\selectfont
+%\fontfamily{cmdh}\selectfont
+%\fontfamily{cmr}\selectfont
+%\fontfamily{phv}\selectfont
+%\fontfamily{pbk}\selectfont
+%\fontfamily{ppl}\selectfont
+%\fontfamily{pnc}\selectfont
+%\fontfamily{pag}\selectfont
+
+
+%\include{frontpage}
+
+% - folha de rosto
+%%%\fontfamily{pag}\selectfont
+%%%\maketitle
+
+% - dedicatoria
+%%%\clearpage
+%\input{cite/bob.tex}
+%\include{capa}
+
+% - numeracao romana
+\frontmatter 
+
+\fontfamily{cmr}\selectfont
+\include{caps/resumo}
+
+% agradecimentos
+%\input{ack/ack.tex}
+
+\fontfamily{pag}\selectfont
+% - sumario
+\tableofcontents
+% - lista de figuras
+%\listoffigures
+% - lista de tabelas
+%\listoftables
+%\listofsymbols
+\blankpage
+
+
+% - abreviaturas
+%\input{abrev/abrev.tex}
+
+% - abstract
+%\input{abstract/abstract.tex}
+%\input{abstract/abstract-en.tex}
+
+% - comeca numeracao decimal
+\mainmatter 
+
+% - CHAPTERS
+%\onehalfspacing
+\doublespacing
+
+\fontfamily{cmr}\selectfont
+
+%1a parte
+\include{caps/introducao}
+\include{caps/referencial_teorico}
+
+%2a parte
+%\include{caps/proposta_pesquisa}
+\include{caps/objetivos_metodologia}
+\include{caps/plano_trabalho}
+%\include{caps/resultados_esperados}
+
+
+% - REFERENCES
+\singlespacing
+%\fontfamily{cmss}\selectfont
+%\fontfamily{courrier}\selectfont
+%\fontfamily{palatino-ttf}\selectfont
+%\fontsize{10px}
+
+%\bibliographystyle{abnt-num}
+\bibliographystyle{abnt-alf}
+\bibliography{quali}
+
+
+\end{document}

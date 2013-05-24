@@ -1,0 +1,19 @@
+<launch>
+
+	<node
+		name="pose_from_fix"
+		pkg="GPSNavigation"
+		type="pose_from_fix_node"
+		output="screen"
+	>
+
+		<remap
+			from="fix"
+			to="/followme/our/fix" />
+		<remap
+			from="pose"
+			to="pose_converted" />
+
+	</node>
+
+</launch>

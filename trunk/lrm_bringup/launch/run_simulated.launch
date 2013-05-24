@@ -1,0 +1,33 @@
+<launch>
+
+<!-- 
+	<param
+		name="/simulated"
+		value="true" />
+	<env name="RUN_SIMULATED" value="true" />
+-->
+	<param
+		name="/use_sim_time"
+		value="true" />
+	
+	<include file="$(find lrm_bringup)/launch/simulator_terrain.launch" />
+	
+	<include file="$(find lrm_bringup)/launch/robot_model.launch" />
+	<include file="$(find lrm_bringup)/launch/simulation.launch" />
+	
+	<include file="$(find lrm_bringup)/launch/odometry_wheel_sim.launch" />
+	<!-- 
+	<include file="$(find lrm_bringup)/launch/odometry.launch" />
+	<include file="$(find lrm_bringup)/launch/odometry_wheel.launch" />
+	 -->
+	
+	<!-- 
+    <include file="$(find lrm_bringup)/launch/stereo_vision.launch" />
+	
+	
+	
+    <include file="$(find lrm_bringup)/launch/nodelet_manager.launch" />
+	<include file="$(find lrm_bringup)/launch/stereo_vision_nodelet.launch" />
+ 	-->
+ 	
+</launch>

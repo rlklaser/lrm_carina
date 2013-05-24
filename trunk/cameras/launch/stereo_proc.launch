@@ -1,0 +1,12 @@
+<launch>
+
+	<node name="stereo_proc" pkg="stereo_image_proc" type="stereo_image_proc">
+		<!-- 
+	    <env name="ROS_NAMESPACE" value="/stereo" />
+		 -->	
+	    <remap from="left/image_raw" to="left/image" />
+	    <remap from="right/image_raw" to="right/image" />
+    
+	</node>
+
+</launch>

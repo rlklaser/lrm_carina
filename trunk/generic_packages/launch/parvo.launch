@@ -1,0 +1,12 @@
+<launch>
+
+
+	<node name="retinal" pkg="stitch_pkg" type="retinal_node" output="screen">
+		<remap from="image_raw" to="/stereo/left/image_color" />
+	</node>
+	
+	<node name="basic" pkg="generic_packages" type="viz_image_node" output="screen">
+		<remap from="image_raw" to="/retinal/parvo/image_raw" />
+	</node>
+
+</launch>

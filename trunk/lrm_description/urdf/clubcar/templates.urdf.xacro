@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<!--
+*  Copyright (C) 2012, Laboratorio de Robotica Movel - ICMC/USP
+ *  Rafael Luiz Klaser <rlklaser@gmail.com>
+ *  http://lrm.icmc.usp.br
+ *
+ *  Apoio FAPESP: 2012/04555-4
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * @file templates.urdf.xacro
+ * @brief 
+ * @author Rafael Luiz Klaser <rlklaser@gmail.com>
+ * @date Dez 12, 2012
+ *
+ */
+-->
+<robot
+	xmlns:xi="http://www.w3.org/2001/XInclude"
+	xmlns:xacro="http://ros.org/wiki/xacro"
+>
+	<xacro:macro name="visual_minimal">
+		<origin
+			xyz="0 0 0"
+			rpy="0 0 0" />
+		<geometry>
+			<box size="0.01 0.01 0.01" />
+		</geometry>
+		<material name="Red">
+			<color rgba="1.0 0.0 0.0 1.0" />
+		</material>
+	</xacro:macro>
+
+	<xacro:macro name="collision_minimal">
+		<collision>
+			<origin
+				xyz="0 0 0"
+				rpy="0 0 0" />
+			<geometry>
+				<box size="0.01 0.01 0.01" />
+			</geometry>
+		</collision>
+	</xacro:macro>
+
+	<xacro:macro name="inertial_minimal">
+		<inertial>
+			<mass value="${min_mass}" />
+			<origin
+				xyz="0 0 0"
+				rpy="0 0 0" />
+			<inertia
+				ixx="0.1"
+				iyy="0.1"
+				izz="0.1"
+				ixy="0.0"
+				ixz="0.0"
+				iyz="0.0" />
+		</inertial>
+	</xacro:macro>
+
+	<xacro:macro
+		name="suspension_joint"
+		params="name parent child"
+	>
+		<joint
+			name="joint_${name}_susp"
+			type="revolute"
+		>
+			<parent link="${parent}" />
+			<child link="${child}" />
+			<origin
+				xyz="0 0 0"
+				rpy="0 0 0" />
+			<axis
+				xyz="1 0 0"
+				rpy="0 0 0" />
+			<limit
+				effort="100000"
+				velocity="0.05"
+				lower="-0.025"
+				upper="0.025" />
+			<joint_properties
+				damping="0.2"
+				friction="0.0" />
+		</joint>
+		<transmission
+			type="pr2_mechanism_model/SimpleTransmission"
+			name="${name}_trans"
+		>
+			<actuator name="${child}" />
+			<joint name="joint_${name}_susp" />
+			<mechanicalReduction>1.0</mechanicalReduction>
+			<motorTorqueConstant>1</motorTorqueConstant>
+		</transmission>
+	</xacro:macro>
+</robot>

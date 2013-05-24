@@ -1,0 +1,17 @@
+<launch>
+
+
+
+	<node
+		name="markers"
+		type="pose_markers"
+		pkg="lrm_odometry"
+		output="screen"
+	>
+	
+		<remap from="pose2d" to="xxxx"/>
+		<remap from="odom" to="/gpsodom"/>
+	
+	</node>
+
+</launch>

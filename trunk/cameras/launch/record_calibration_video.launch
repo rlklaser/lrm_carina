@@ -1,0 +1,21 @@
+<launch>
+
+	<node name="play" pkg="rosbag" type="play" args="/mnt/Win7/Linux/ros/bags/bumblebee2_calib.bag">
+		<remap to="/camera/image_raw" from="/StereoCam/imageRight"/>
+	</node>
+	
+	<node name="record" pkg="video_proc" type="record_node" output="screen">
+		<param name="video" value="bumblebee2_right_calib.avi" />
+		<param name="encoding" value="bgr8" />
+		<param name="fps" value="10" />
+		<param name="fourcc" value="HFYU" />
+		
+		<remap to="/camera/image_raw" from="/record/video/image"/>
+		
+	</node>
+
+	<node name="view" pkg="image_view" type="image_view">
+		<remap from="image" to="/camera/image_raw" />
+	</node>
+	
+</launch>

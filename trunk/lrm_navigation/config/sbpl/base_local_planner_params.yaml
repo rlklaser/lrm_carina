@@ -1,0 +1,53 @@
+TrajectoryPlannerROS:
+  #Independent settings for the local costmap
+ 
+ # transform_tolerance: 0.3
+ # sim_time: 1.7
+ # sim_granularity: 0.025
+ # dwa: true
+  max_vel_x: 5.0
+  min_vel_x: 0.1
+  max_rotational_vel: 1.0
+  min_in_place_rotational_vel: 1.0
+  xy_goal_tolerance: 0.5
+  yaw_goal_tolerance: 0.57
+  goal_distance_bias: 0.2
+  path_distance_bias: 0.9
+  occdist_scale: 0.05
+  heading_lookahead: 0.5
+  oscillation_reset_dist: 0.05
+
+  acc_lim_th: 3.2
+  acc_lim_x: 2.5
+  acc_lim_y: 2.5
+
+#  heading_scoring: true
+#  heading_scoring_timestep: 0.8
+#  holonomic_robot: false
+#  simple_attractor: false
+#  meter_scoring: true
+  
+ # /move_base/TrajectoryPlannerROS/acc_lim_th
+ # /move_base/TrajectoryPlannerROS/acc_lim_x
+ # /move_base/TrajectoryPlannerROS/acc_lim_y
+ # /move_base/TrajectoryPlannerROS/dwa
+ # /move_base/TrajectoryPlannerROS/goal_distance_bias
+ # /move_base/TrajectoryPlannerROS/heading_lookahead
+ # /move_base/TrajectoryPlannerROS/heading_scoring
+ # /move_base/TrajectoryPlannerROS/heading_scoring_timestep
+ # /move_base/TrajectoryPlannerROS/holonomic_robot
+ # /move_base/TrajectoryPlannerROS/max_rotational_vel
+ # /move_base/TrajectoryPlannerROS/max_vel_x
+ # /move_base/TrajectoryPlannerROS/meter_scoring
+ # /move_base/TrajectoryPlannerROS/min_in_place_rotational_vel
+ # /move_base/TrajectoryPlannerROS/min_vel_x
+ # /move_base/TrajectoryPlannerROS/occdist_scale
+ # /move_base/TrajectoryPlannerROS/oscillation_reset_dist
+ # /move_base/TrajectoryPlannerROS/path_distance_bias
+ # /move_base/TrajectoryPlannerROS/sim_granularity
+ # /move_base/TrajectoryPlannerROS/sim_time
+ # /move_base/TrajectoryPlannerROS/simple_attractor
+ # /move_base/TrajectoryPlannerROS/transform_tolerance
+ # /move_base/TrajectoryPlannerROS/xy_goal_tolerance
+ # /move_base/TrajectoryPlannerROS/yaw_goal_tolerance
+ 

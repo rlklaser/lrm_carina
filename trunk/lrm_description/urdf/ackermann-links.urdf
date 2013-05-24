@@ -1,0 +1,402 @@
+<robot
+	xmlns:gazebo="http://playerstage.sourceforge.net/gazebo/xmlschema/#gz"
+	xmlns:model="http://playerstage.sourceforge.net/gazebo/xmlschema/#model"
+	xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+	xmlns:body="http://playerstage.sourceforge.net/gazebo/xmlschema/#body"
+	xmlns:geom="http://playerstage.sourceforge.net/gazebo/xmlschema/#geom"
+	xmlns:joint="http://playerstage.sourceforge.net/gazebo/xmlschema/#joint"
+	xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+	xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+	xmlns:rendering="http://playerstage.sourceforge.net/gazebo/xmlschema/#rendering"
+	xmlns:physics="http://playerstage.sourceforge.net/gazebo/xmlschema/#physics"
+	name="ackermann"
+>
+	<property
+		name="M_PI"
+		value="3.1415926535897931" />
+
+	<link name="base">
+		<inertial>
+			<mass value="1.0" />
+			<origin xyz="0 0 0" />
+			<inertia
+				ixx="1.0"
+				ixy="0.0"
+				ixz="0.0"
+				iyy="1.0"
+				iyz="0.0"
+				izz="1.0" />
+		</inertial>
+		<visual>
+			<origin
+				xyz="0 0 0"
+				rpy="0 0 0" />
+			<geometry>
+				<box size="2.0 1.0 0.1" />
+			</geometry>
+		</visual>
+		<collision>
+			<origin
+				xyz="0 0 0"
+				rpy="0 0 0" />
+			<geometry>
+				<box size="2.0 1.0 0.1" />
+			</geometry>
+		</collision>
+	</link>
+	<gazebo reference="base">
+		<material>Gazebo/Blue</material>
+		<turnGravityOff>false</turnGravityOff>
+	</gazebo>
+
+	<link name="front_left_bar">
+		<inertial>
+			<mass value="1.0" />
+			<origin xyz="0 0 0" />
+			<inertia
+				ixx="1.0"
+				ixy="0.0"
+				ixz="0.0"
+				iyy="1.0"
+				iyz="0.0"
+				izz="1.0" />
+		</inertial>
+		<visual>
+			<origin
+				xyz="-0.2 -0.2 0"
+				rpy="0 0 0" />
+			<geometry>
+				<box size="0.4 0.5 0.01" />
+			</geometry>
+		</visual>
+		<collision>
+			<origin
+				xyz="-0.2 -0.2 0"
+				rpy="0 0 0" />
+			<geometry>
+				<box size="0.4 0.5 0.01" />
+			</geometry>
+		</collision>
+	</link>
+	<gazebo reference="front_left_bar">
+		<material>Gazebo/Green</material>
+		<turnGravityOff>false</turnGravityOff>
+	</gazebo>
+	<joint
+		name="front_left_bar_joint"
+		type="revolute"
+	>
+		<limit
+			lower="-0.2"
+			upper="0.2"
+			effort="100"
+			velocity="10" />
+		<axis xyz="0 0 1" />
+		<parent link="base" />
+		<child link="front_left_bar" />
+		<origin
+			xyz="1.0 0.5 0.055"
+			rpy="0 0 0" />
+	</joint>
+
+	<link name="front_right_bar">
+		<inertial>
+			<mass value="1.0" />
+			<origin xyz="0 0 0" />
+			<inertia
+				ixx="1.0"
+				ixy="0.0"
+				ixz="0.0"
+				iyy="1.0"
+				iyz="0.0"
+				izz="1.0" />
+		</inertial>
+		<visual>
+			<origin
+				xyz="-0.2 0.2 0"
+				rpy="0 0 0" />
+			<geometry>
+				<box size="0.4 0.5 0.01" />
+			</geometry>
+		</visual>
+		<collision>
+			<origin
+				xyz="-0.2 0.2 0"
+				rpy="0 0 0" />
+			<geometry>
+				<box size="0.4 0.5 0.01" />
+			</geometry>
+		</collision>
+	</link>
+	<gazebo reference="front_right_bar">
+		<material>Gazebo/Green</material>
+		<turnGravityOff>false</turnGravityOff>
+	</gazebo>
+	<joint
+		name="front_right_bar_joint"
+		type="revolute"
+	>
+		<limit
+			lower="-0.2"
+			upper="0.2"
+			effort="100"
+			velocity="10" />
+		<axis xyz="0 0 1" />
+		<parent link="base" />
+		<child link="front_right_bar" />
+		<origin
+			xyz="1.0 -0.5 0.055"
+			rpy="0 0 0" />
+	</joint>
+
+	<link name="front_left_wheel">
+		<inertial>
+			<mass value="1.0" />
+			<origin xyz="0 0 0" />
+			<inertia
+				ixx="1.0"
+				ixy="0.0"
+				ixz="0.0"
+				iyy="1.0"
+				iyz="0.0"
+				izz="1.0" />
+		</inertial>
+		<visual>
+			<origin
+				xyz="0 0 0"
+				rpy="${M_PI/2} 0 0" />
+			<geometry>
+				<cylinder
+					radius="0.2"
+					length="0.01" />
+			</geometry>
+		</visual>
+		<collision>
+			<origin
+				xyz="0 0 0"
+				rpy="${M_PI/2} 0 0" />
+			<geometry>
+				<cylinder
+					radius="0.2"
+					length="0.01" />
+			</geometry>
+		</collision>
+	</link>
+	<gazebo reference="front_left_wheel">
+		<material>Gazebo/Red</material>
+		<turnGravityOff>false</turnGravityOff>
+	</gazebo>
+	<joint
+		name="front_left_wheel_joint"
+		type="continuous"
+	>
+		<axis xyz="0 1 0" />
+		<parent link="front_left_bar" />
+		<child link="front_left_wheel" />
+		<origin
+			xyz="0 0.1 0"
+			rpy="0 0 0" />
+	</joint>
+
+	<link name="front_right_wheel">
+		<inertial>
+			<mass value="1.0" />
+			<origin xyz="0 0 0" />
+			<inertia
+				ixx="1.0"
+				ixy="0.0"
+				ixz="0.0"
+				iyy="1.0"
+				iyz="0.0"
+				izz="1.0" />
+		</inertial>
+		<visual>
+			<origin
+				xyz="0 0 0"
+				rpy="${M_PI/2} 0 0" />
+			<geometry>
+				<cylinder
+					radius="0.2"
+					length="0.01" />
+			</geometry>
+		</visual>
+		<collision>
+			<origin
+				xyz="0 0 0"
+				rpy="${M_PI/2} 0 0" />
+			<geometry>
+				<cylinder
+					radius="0.2"
+					length="0.01" />
+			</geometry>
+		</collision>
+	</link>
+	<gazebo reference="front_right_wheel">
+		<material>Gazebo/Red</material>
+		<turnGravityOff>false</turnGravityOff>
+	</gazebo>
+	<joint
+		name="front_right_wheel_joint"
+		type="continuous"
+	>
+		<axis xyz="0 1 0" />
+		<parent link="front_right_bar" />
+		<child link="front_right_wheel" />
+		<origin
+			xyz="0 -0.1 0"
+			rpy="0 0 0" />
+	</joint>
+
+	<link name="ackermann_bar">
+		<inertial>
+			<mass value="1.0" />
+			<origin xyz="0 0 0" />
+			<inertia
+				ixx="1.0"
+				ixy="0.0"
+				ixz="0.0"
+				iyy="1.0"
+				iyz="0.0"
+				izz="1.0" />
+		</inertial>
+		<visual>
+			<origin
+				xyz="-0.05 -0.3 0"
+				rpy="0 0 0" />
+			<geometry>
+				<box size="0.1 0.6 0.01" />
+			</geometry>
+		</visual>
+		<collision>
+			<origin
+				xyz="-0.05 -0.3 0"
+				rpy="0 0 0" />
+			<geometry>
+				<box size="0.1 0.6 0.01" />
+			</geometry>
+		</collision>
+	</link>
+	<gazebo reference="ackermann_bar">
+		<material>Gazebo/Green</material>
+		<turnGravityOff>false</turnGravityOff>
+	</gazebo>
+	<joint
+		name="ackermann_bar_joint"
+		type="continuous"
+	>
+		<axis xyz="0 0 1" />
+		<parent link="front_left_bar" />
+		<child link="ackermann_bar" />
+		<origin
+			xyz="-0.4 -0.2 0.05"
+			rpy="0 0 0" />
+	</joint>
+
+	<gazebo>
+		<joint:hinge name="ackermann_bar_loop_joint">
+			<body1>front_right_bar</body1>
+			<body2>ackermann_bar</body2>
+			<anchor>front_right_bar</anchor>
+			<axis>0 0 1</axis>
+			<anchorOffset>-0.4 0.2 0</anchorOffset>
+		</joint:hinge>
+	</gazebo>
+
+	<link name="rear_left_wheel">
+		<inertial>
+			<mass value="1.0" />
+			<origin xyz="0 0 0" />
+			<inertia
+				ixx="1.0"
+				ixy="0.0"
+				ixz="0.0"
+				iyy="1.0"
+				iyz="0.0"
+				izz="1.0" />
+		</inertial>
+		<visual>
+			<origin
+				xyz="0 0 0"
+				rpy="${M_PI/2} 0 0" />
+			<geometry>
+				<cylinder
+					radius="0.2"
+					length="0.01" />
+			</geometry>
+		</visual>
+		<collision>
+			<origin
+				xyz="0 0 0"
+				rpy="${M_PI/2} 0 0" />
+			<geometry>
+				<cylinder
+					radius="0.2"
+					length="0.01" />
+			</geometry>
+		</collision>
+	</link>
+	<gazebo reference="rear_left_wheel">
+		<material>Gazebo/Red</material>
+		<turnGravityOff>false</turnGravityOff>
+	</gazebo>
+	<joint
+		name="rear_left_wheel_joint"
+		type="continuous"
+	>
+		<axis xyz="0 1 0" />
+		<parent link="base" />
+		<child link="rear_left_wheel" />
+		<origin
+			xyz="-1.0 0.6 0"
+			rpy="0 0 0" />
+	</joint>
+
+	<link name="rear_right_wheel">
+		<inertial>
+			<mass value="1.0" />
+			<origin xyz="0 0 0" />
+			<inertia
+				ixx="1.0"
+				ixy="0.0"
+				ixz="0.0"
+				iyy="1.0"
+				iyz="0.0"
+				izz="1.0" />
+		</inertial>
+		<visual>
+			<origin
+				xyz="0 0 0"
+				rpy="${M_PI/2} 0 0" />
+			<geometry>
+				<cylinder
+					radius="0.2"
+					length="0.01" />
+			</geometry>
+		</visual>
+		<collision>
+			<origin
+				xyz="0 0 0"
+				rpy="${M_PI/2} 0 0" />
+			<geometry>
+				<cylinder
+					radius="0.2"
+					length="0.01" />
+			</geometry>
+		</collision>
+	</link>
+	<gazebo reference="rear_right_wheel">
+		<material>Gazebo/Red</material>
+		<turnGravityOff>false</turnGravityOff>
+	</gazebo>
+	<joint
+		name="rear_right_wheel_joint"
+		type="continuous"
+	>
+		<axis xyz="0 1 0" />
+		<parent link="base" />
+		<child link="rear_right_wheel" />
+		<origin
+			xyz="-1.0 -0.6 0"
+			rpy="0 0 0" />
+	</joint>
+</robot>

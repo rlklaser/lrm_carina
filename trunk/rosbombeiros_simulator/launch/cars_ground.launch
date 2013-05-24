@@ -1,0 +1,11 @@
+<launch>
+
+	<param name="robot_description" textfile="$(find rosbombeiros_simulator)/objects/cars_ground.urdf" />
+	<!-- push robot_description to factory and spawn robot in gazebo -->
+	<node name="cars_ground" pkg="gazebo" type="spawn_model"
+		args="-urdf -param robot_description -x 0.0 -y 0.0 -z 0.0 -model cars_ground"
+		respawn="false" 
+		output="screen" />
+		
+
+</launch>

@@ -1,0 +1,16 @@
+#define troca(A, B) { int t = A; A = B; B = t; }
+void quicksort (int v[], int p, int r) {
+    if (p < r) {
+       int i = p-1, j = r, c = v[r];
+       while (1) {
+           while (v[++i] < c) ;
+           while (c < v[--j]) if (j == p) break;
+           if (i > j) break;
+           troca (v[i], v[j]);
+       }
+       troca (v[i], v[r]);
+       quicksort (v, p, j);
+       quicksort (v, i+1, r);
+    }
+}
+

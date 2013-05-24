@@ -1,0 +1,30 @@
+<library path="lib/liblrm_stereo">
+
+	<class
+		name="lrm_stereo/disparity_sgbm"
+		type="lrm_stereo::DisparitySGBMNodelet"
+		base_class_type="nodelet::Nodelet"
+	>
+		<description>Stereo Semi-Global Block Matching
+		</description>
+	</class>
+
+	<class
+		name="lrm_stereo/disparity_bm_cuda"
+		type="lrm_stereo::DisparityBMCUDANodelet"
+		base_class_type="nodelet::Nodelet"
+	>
+		<description>CUDA Block Matching
+		</description>
+	</class>
+
+	<class
+		name="lrm_stereo/feature_matcher"
+		type="lrm_stereo::FeatureMatcherNodelet"
+		base_class_type="nodelet::Nodelet"
+	>
+		<description>Feature Matcher
+		</description>
+	</class>
+	
+</library>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<launch>
+ 
+  <!-- start controller manager -->
+  <include file="$(find pr2_controller_manager)/controller_manager.launch"/>
+
+
+  <!--controller yaml-->
+  <rosparam file="$(find carina_controller)/carina_controller.yaml" command="load"/>
+
+  <param name="pr2_controller_manager/joint_state_publish_rate" value="100.0" />
+  <node name="carina_controller" pkg="pr2_controller_manager" type="spawner" args="carina_controller" respawn="false" output="screen"/>
+  
+ 
+</launch>

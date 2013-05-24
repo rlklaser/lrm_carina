@@ -1,0 +1,93 @@
+<launch>
+
+	<node
+		pkg="nodelet"
+		type="nodelet"
+		name="camera_nodelet_manager"
+		args="manager"
+		output="screen" />
+
+	<node
+		pkg="nodelet"
+		type="nodelet"
+		name="camera1394_nodelet"
+		args="load camera1394/driver camera_nodelet_manager"
+	>
+		<rosparam file="$(find lrm_bumblebee)/params/bumblebee.yaml" />
+	</node>
+
+	<!-- or 
+	<node
+		pkg="camera1394"
+		type="camera1394_node"
+		name="bumblebee"
+	>
+		<rosparam file="$(find lrm_bumblebee)/params/bumblebee.yaml" />
+	</node>
+ 	-->
+
+    <!-- TODO: use nodelet 
+	<node
+		name="split_node"
+		pkg="lrm_bumblebee"
+		type="split_node"
+		output="screen"
+	>
+		<remap
+			from="split_node/left/camera_info"
+			to="/stereo/left/camera_info" />
+		<remap
+			from="split_node/right/camera_info"
+			to="/stereo/right/camera_info" />
+	</node>
+	-->
+	
+	<node
+		pkg="nodelet"
+		type="nodelet"
+		name="split_node"
+		args="load lrm_bumblebee/split_nodelet /camera_nodelet_manager"
+		ns="stereo"
+	>
+		<remap
+			from="image_raw"
+			to="/camera/image_raw" />
+	</node>
+	
+    <!-- 
+ 	<node
+		pkg="nodelet"
+		type="nodelet"
+		name="image_proc_debayer_left"
+		args="load image_proc/debayer camera_nodelet_manager"
+	>
+		<remap
+			from="image_raw"
+			to="/left/image_raw" />
+		<remap
+			from="image_color"
+			to="/left/image_raw" />
+		<remap
+			from="image_mono"
+			to="/left/image_mono" />
+	</node>
+	
+	<node
+		pkg="nodelet"
+		type="nodelet"
+		name="image_proc_debayer_right"
+		args="load image_proc/debayer camera_nodelet_manager"
+	>
+		<remap
+			from="image_raw"
+			to="/right/image_raw" />
+		<remap
+			from="image_color"
+			to="/right/image_raw" />
+		<remap
+			from="image_mono"
+			to="/right/image_mono" />
+	</node>
+    -->
+ 	
+</launch>

@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+ <head>
+  <title>lesson11/crypt.cpp</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1" />
+  <meta name="author" content="Alexandre Martins" />
+  <link type="text/css" rel="stylesheet" href="alg/SyntaxHighlighter.css"></link>
+  <style type="text/css">
+  <!--
+  body { margin: 0; padding: 0; border: 0; background-color: #e7e5dc; color: #000; }
+  -->
+  </style>
+  <script type="text/javascript" src="alg/shCore.js"></script>
+  <script type="text/javascript" src="alg/shBrushCpp.js"></script>
+ </head>
+ <body>
+
+ <!--
+  This website was made by Alexandre Martins,
+  alemartf [.a.t.] gmail [.d.o.t.] com
+
+  (c) 2009 Alexandre Martins
+ -->
+
+  <pre id="code" class="cpp">
+// Alexandre Martins
+// UVa 843 - Crypt Kicker
+#include &lt;cstdio&gt;
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;string&gt;
+#include &lt;stack&gt;
+using namespace std;
+
+// dicionario
+vector&lt;string&gt; dicio[20][20]; // numero de letras, letras repetidas
+vector&lt;string&gt; answer;
+
+// tabela de traducao
+char trans[30];
+inline void set_translation(char src, char dest) { trans[src-'a']=dest; }
+inline char get_translation(char src) { return trans[src-'a']; }
+inline bool nothing_translates_to(char c) {
+    int i;
+    for(i=0; i&lt;30; i++) {
+        if(trans[i] == c)
+            return false;
+    }
+    return true;
+}
+
+// repeated_letters()
+// devolve o numero de letras repetidas
+inline int repeated_letters(string str)
+{
+    int i, cnt[30], sum = 0;
+
+    for(i=0; i&lt;30; i++)
+        cnt[i] = 0;
+
+    for(i=0; i&lt;(int)str.length(); i++)
+        cnt[ int(str[i]-'a') ]++;
+
+    for(i=0; i&lt;30; i++)
+        sum += cnt[i];
+
+    return sum;
+}
+
+
+// backtrack()
+// Backtracking - retorna true se achou solucao
+bool backtrack(char *line, int deep)
+{
+    int i, j, n, rep;
+    char cword[20];
+    string word;
+
+    // volta
+    if(*line == '\0')
+        return true;
+
+    sscanf(line, &quot;%s%n&quot;, cword, &amp;n);
+    word = cword;
+    rep = repeated_letters(word);
+
+    // enumerando candidatos
+    for(i=0; i&lt;(int)dicio[ word.length() ][rep].size(); i++) {
+        stack&lt;char&gt; st;
+        string decoded;
+        string candidate = dicio[word.length()][rep][i]; // candidato a ser traducao de word
+
+        for(j=0; j&lt;(int)word.length(); j++) {
+            if(get_translation(word[j]) == 0) {
+                if(nothing_translates_to(candidate[j])) {
+                    set_translation(word[j], candidate[j]);
+                    st.push(word[j]);
+                }
+                else
+                    break;
+            }
+            decoded += get_translation(word[j]);
+        }
+
+        // candidato valido. prossiga!
+        if(decoded.length() == candidate.length() &amp;&amp; decoded == candidate) {
+            answer.push_back(decoded);
+            if(backtrack(line+n, deep+1))
+                return true;
+            answer.pop_back();
+        }
+
+        while(!st.empty()) {
+            set_translation(st.top(), 0);
+            st.pop();
+        }
+    }
+
+    return false;
+}
+
+// impossible()
+// retorna true se estiver na cara que nao tem resposta
+bool impossible(char *str)
+{
+    char *p;
+    int n, i;
+    char word[100];
+    bool imp = true;
+
+    for(p=str; sscanf(p, &quot;%s%n&quot;, word, &amp;n)&gt;0 &amp;&amp; imp; p+=n) {
+        for(i=0; i&lt;20 &amp;&amp; imp; i++)
+            imp = dicio[string(word).length()][i].empty();
+    }
+
+    return imp;
+}
+
+// main()
+// funcao principal
+int main()
+{
+    int i, n;
+    char c;
+    string line;
+
+    // preenche dicionario
+    getline(cin, line);
+    sscanf(line.c_str(), &quot;%d&quot;, &amp;n);
+    while(n--) {
+        getline(cin, line);
+        dicio[line.length()][repeated_letters(line)].push_back(line);
+    }
+
+    // frases
+    while(getline(cin, line)) {
+
+        // inicio
+        answer.clear();
+        for(c='a'; c&lt;='z'; c++)
+            set_translation(c, 0);
+
+        // backtracking
+        if(impossible((char*)line.c_str()) || !backtrack((char*)line.c_str(), 0)) {
+            for(i=0; i&lt;(int)line.length(); i++)
+                putchar((line[i]&gt;='a'&amp;&amp;line[i]&lt;='z') ? '*' : ' ');
+        }
+        else if(answer.size() &gt; 0){
+            printf(&quot;%s&quot;, answer[0].c_str());
+            for(i=1; i&lt;(int)answer.size(); i++)
+                printf(&quot; %s&quot;, answer[i].c_str());
+        }
+        putchar('\n');
+    }
+
+    return 0;
+}
+
+  </pre>
+
+  <script type="text/javascript">
+  dp.SyntaxHighlighter.HighlightAll('code');
+  </script>
+
+ </body>
+</html>

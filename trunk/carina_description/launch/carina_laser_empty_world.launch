@@ -1,0 +1,20 @@
+<!-- -->
+
+<launch>
+        <arg name="$(find carina_description)/urdf/CarinaTriLaser.urdf"/>
+	<arg name="gui" default="False" />
+	<param name="use_gui" value="$(arg gui)"/>
+	        
+        <include file="$(find carina_description)/launch/carina_laser_mobile_base.launch" />
+
+        <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node>     
+
+	<!--node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" /-->
+	<node name="rviz" pkg="rviz" type="rviz"  />
+        <!--args="-d $(find urdf_tutorial)/urdf.vcg"-->
+
+        <node name="gazebo" pkg="gazebo" type="gazebo" 
+          args="$(find gazebo_worlds)/worlds/empty.world" output="screen" respawn="false"/>
+    
+
+</launch>

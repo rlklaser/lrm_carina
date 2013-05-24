@@ -1,0 +1,325 @@
+<?xml version="1.0" ?>
+
+<robot name="CarinaTriLaser" 
+
+       xmlns:xi="http://www.w3.org/2001/XInclude"
+       xmlns:gazebo="http://playerstage.sourceforge.net/gazebo/xmlschema/#gz"
+       xmlns:model="http://playerstage.sourceforge.net/gazebo/xmlschema/#model"
+       xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+       xmlns:body="http://playerstage.sourceforge.net/gazebo/xmlschema/#body"
+       xmlns:geom="http://playerstage.sourceforge.net/gazebo/xmlschema/#geom"
+       xmlns:joint="http://playerstage.sourceforge.net/gazebo/xmlschema/#joint"
+       xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+       xmlns:rendering="http://playerstage.sourceforge.net/gazebo/xmlschema/#rendering"
+       xmlns:renderable="http://playerstage.sourceforge.net/gazebo/xmlschema/#renderable"
+       xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+       xmlns:physics="http://playerstage.sourceforge.net/gazebo/xmlschema/#physics">
+
+
+  <!-- Included URDF Files -->
+  <material name="Black">
+    <color rgba="0.0 0.0 0.0 1.0"/>
+  </material>
+  <material name="Blue">
+    <color rgba="0.0 0.0 0.8 1.0"/>
+  </material>
+  <material name="Green">
+    <color rgba="0.0 0.3 0.02 1.0"/>
+  </material>
+  <material name="Grey">
+    <color rgba="0.7 0.7 0.7 1.0"/>
+  </material>
+  <material name="Grey2">
+    <color rgba="0.2 0.2 0.2 1.0"/>
+  </material>
+  <material name="Red">
+    <color rgba="0.8 0.0 0.0 1.0"/>
+  </material>
+  <material name="White">
+    <color rgba="1.0 1.0 1.0 1.0"/>
+  </material>
+  <material name="Yellow">
+    <color rgba="0.299999 0.2777 0 1.0"/>
+  </material>
+
+
+  <link name="base_footprint">
+    <inertial>
+      <mass value="0.0001"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="Green"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0.0"/>
+      <geometry>
+        <box size="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+
+
+  <joint name="base_footprint_joint" type="fixed">
+    <!--origin rpy="0 0 0" xyz="0 0 0.74"/-->
+    <origin rpy="0 0 0" xyz="0 0 0.35"/>	
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
+  </joint>
+
+  <!--CarinaBase /-->
+  <link name="base_link" >
+    <inertial>
+      <mass value="0.001"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
+   </inertial>
+
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="Green"/>
+    </visual>
+
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+
+
+ 
+    <joint name="chassis_13_joint" type="fixed">
+            <origin xyz="0.0 0 0.3" rpy="0 0 0" />
+            <parent link="base_link"/>
+            <child link="chassis_13"/>  
+        </joint>
+
+        
+        <link name="chassis_13">
+            <inertial>
+                <mass value="20" />
+                <origin xyz="0 0 0" />
+                <inertia ixx="1.0" ixy="0.0" ixz="0.0"
+                         iyy="1.0" iyz="0.0" 
+                         izz="1.0" />
+            </inertial>
+            
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="package://carina_description/meshes/collada/palio/palio.dae" scale="0.8 0.8 0.8"/>
+                </geometry>
+                <material name="Blue" />
+            </visual>
+            
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="package://carina_description/meshes/collada/palio/palio.dae" scale="0.8 0.8 0.8"/>
+                </geometry>
+            </collision>
+        </link>
+
+
+
+  <joint name="chassis_velodyne_joint" type="fixed">
+            <origin xyz="-0.30 0  1.35" rpy="0 0 0" />
+            <parent link="chassis_13"/>
+            <child link="velodyne"/>  
+  </joint>
+
+        
+        <link name="velodyne">
+            <inertial>
+                <mass value="2" />
+                <origin xyz="0 0 0" />
+                <inertia ixx="1.0" ixy="0.0" ixz="0.0"
+                         iyy="1.0" iyz="0.0" 
+                         izz="1.0" />
+            </inertial>
+            
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <cylinder radius="0.05" length="0.14"/>
+                </geometry>
+                <material name="Blue" />
+            </visual>
+            
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <cylinder radius="0.05" length="0.14"/>
+                </geometry>
+            </collision>
+        </link>
+
+
+
+
+
+
+
+  <joint name="chassis_roda01_joint" type="continuous">
+            <origin xyz="1.35 -0.74 -0.37" rpy="0 0 0" />
+            <axis xyz="0 1 0" rpy="0 0 0" />
+            <limit effort="100" velocity="100"/>
+            <joint_properties damping="0.0" friction="0.0"/>
+            <parent link="chassis_13"/>
+            <child link="roda01"/>  
+        </joint>
+
+        
+        <link name="roda01">
+            <inertial>
+                <mass value="20" />
+                <origin xyz="0 0 0" />
+                <inertia ixx="1.0" ixy="0.0" ixz="0.0"
+                         iyy="1.0" iyz="0.0" 
+                         izz="1.0" />
+            </inertial>
+            
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="package://carina_description/meshes/collada/palio/roda.dae" scale="0.8 0.8 0.8"/>
+                </geometry>
+                <material name="Blue" />
+            </visual>
+            
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="package://carina_description/meshes/collada/palio/roda.dae" scale="0.8 0.8 0.8"/>
+                </geometry>
+            </collision>
+        </link>
+
+
+
+ <joint name="chassis_roda02_joint" type="continuous">
+            <origin xyz="1.35 0.74 -0.37" rpy="0 0 3.14" />
+            <axis xyz="0 1 0" rpy="0 0 0" />
+            <limit effort="100" velocity="100"/>
+            <joint_properties damping="0.0" friction="0.0"/>
+
+            <parent link="chassis_13"/>
+            <child link="roda02"/>  
+        </joint>
+
+        
+        <link name="roda02">
+            <inertial>
+                <mass value="20" />
+                <origin xyz="0 0 0" />
+                <inertia ixx="1.0" ixy="0.0" ixz="0.0"
+                         iyy="1.0" iyz="0.0" 
+                         izz="1.0" />
+            </inertial>
+            
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="package://carina_description/meshes/collada/palio/roda.dae" scale="0.8 0.8 0.8"/>
+                </geometry>
+                <material name="Blue" />
+            </visual>
+            
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="package://carina_description/meshes/collada/palio/roda.dae" scale="0.8 0.8 0.8"/>
+                </geometry>
+            </collision>
+        </link>
+
+
+
+<joint name="chassis_roda03_joint" type="continuous">
+            <origin xyz="-1.17 -0.74 -0.4" rpy="0 0 0" />
+            <axis xyz="0 1 0" rpy="0 0 0" />
+            <limit effort="100" velocity="100"/>
+            <joint_properties damping="0.0" friction="0.0"/>
+
+            <parent link="chassis_13"/>
+            <child link="roda03"/>  
+        </joint>
+
+        
+        <link name="roda03">
+            <inertial>
+                <mass value="20" />
+                <origin xyz="0 0 0" />
+                <inertia ixx="1.0" ixy="0.0" ixz="0.0"
+                         iyy="1.0" iyz="0.0" 
+                         izz="1.0" />
+            </inertial>
+            
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="package://carina_description/meshes/collada/palio/roda.dae" scale="0.8 0.8 0.8"/>
+                </geometry>
+                <material name="Blue" />
+            </visual>
+            
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="package://carina_description/meshes/collada/palio/roda.dae" scale="0.8 0.8 0.8"/>
+                </geometry>
+            </collision>
+        </link>
+
+
+
+ <joint name="chassis_roda04_joint" type="continuous">
+            <origin xyz="-1.17 0.74 -0.4" rpy="0 0 3.14" />
+            <axis xyz="0 1 0" rpy="0 0 0" />
+            <limit effort="100" velocity="100"/>
+            <joint_properties damping="0.0" friction="0.0"/>
+
+            <parent link="chassis_13"/>
+            <child link="roda04"/>  
+        </joint>
+
+        
+        <link name="roda04">
+            <inertial>
+                <mass value="20" />
+                <origin xyz="0 0 0" />
+                <inertia ixx="1.0" ixy="0.0" ixz="0.0"
+                         iyy="1.0" iyz="0.0" 
+                         izz="1.0" />
+            </inertial>
+            
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="package://carina_description/meshes/collada/palio/roda.dae" scale="0.8 0.8 0.8"/>
+                </geometry>
+                <material name="Blue" />
+            </visual>
+            
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="package://carina_description/meshes/collada/palio/roda.dae" scale="0.8 0.8 0.8"/>
+                </geometry>
+            </collision>
+        </link>
+
+
+
+</robot>
+

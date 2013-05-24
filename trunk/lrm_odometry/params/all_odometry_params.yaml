@@ -1,0 +1,32 @@
+odometry_1:
+  robot_lenght: 1.7
+  robot_width: 0.98
+  wheel_diameter: 0.478
+  max_angle_left: 35
+  max_angle_right: 30
+  steer_bar_zero: 0
+ 
+ odometry_2:
+  robot_lenght: 1.7
+  robot_width: 0.98
+  wheel_diameter: 0.478
+  max_angle_left: 35
+  max_angle_right: 30
+  steer_bar_zero: 0
+  
+odometry_3:
+  robot_lenght: 1.7
+  robot_width: 0.98
+  wheel_diameter: 0.478
+  max_angle_left: 35
+  max_angle_right: 30
+  steer_bar_zero: 0
+
+odometry_4:
+  robot_lenght: 1.7
+  robot_width: 0.98
+  wheel_diameter: 0.478
+  max_angle_left: 35
+  max_angle_right: 30
+  steer_bar_zero: 0
+  

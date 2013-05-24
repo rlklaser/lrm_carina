@@ -1,0 +1,34 @@
+<launch>
+
+	<node
+		name="beacon_navigation"
+		pkg="lrm_rbb_grupo_c"
+		type="beacon_nav_node"
+		output="screen"
+		respawn="false"
+	>
+
+		<param
+			name="dist_factor"
+			value="2.0" />
+
+		<param
+			name="timeout"
+			value="60" />
+			
+		<remap
+			from="odom"
+			to="/vehicle/1/odom" />
+		<remap
+			from="signal"
+			to="/vehicle/1/signal" />
+		<remap
+			from="move_base_simple/goal"
+			to="/vehicle/1/move_base_simple/goal" />
+		<remap
+			from="move_base_simple/reached"
+			to="/vehicle/1/move_base_simple/reached" />
+
+	</node>
+
+</launch>

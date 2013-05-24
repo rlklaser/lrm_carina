@@ -1,0 +1,50 @@
+<launch>
+
+	<rosparam param="/list_of_ids">[1]</rosparam>
+
+	<node
+		name="move_base_simple"
+		pkg="lrm_rbb_grupo_c"
+		type="move_base_simple"
+		output="screen"
+	>
+		<param
+			name="my_id"
+			type="int"
+			value="1" />
+		<rosparam
+			file="$(find lrm_rbb_grupo_c)/settings/navigation.yaml"
+			command="load" />
+
+		<param
+			name="global_frame_id"
+			value="/vehicle/1/base_link" />
+			
+		<param
+			name="odom_frame_id"
+			value="/vehicle/1/odom" />
+			
+		<param
+			name="my_id"
+			type="int"
+			value="1" />
+
+		<remap
+			from="cmd_vel"
+			to="/vehicle/1/cmd_vel" />
+		<remap
+			from="odom"
+			to="/vehicle/1/odom" />
+		<remap
+			from="/move_base_simple/goal"
+			to="/vehicle/1/move_base_simple/goal" />
+		<remap
+			from="/simple_navigation_markers"
+			to="/vehicle/1/simple_navigation_markers" />
+		<remap
+			from="/move_base_simple/reached"
+			to="/vehicle/1/move_base_simple/reached" />
+
+	</node>
+
+</launch>

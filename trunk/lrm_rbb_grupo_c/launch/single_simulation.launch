@@ -1,0 +1,18 @@
+<launch>
+
+	<include file="$(find lrm_rbb_grupo_c)/launch/robombeiros.launch" />
+	<include file="$(find lrm_rbb_grupo_c)/launch/rviz.launch" />
+	<include file="$(find lrm_rbb_grupo_c)/launch/antenna.launch" />
+	<include file="$(find lrm_rbb_grupo_c)/launch/beacon_nav.launch" />
+
+	<!-- <group ns="/vehicle/1"> -->
+		<param
+			name="tf_prefix"
+			value="/vehicle/1" />
+			
+		<include file="$(find lrm_rbb_grupo_c)/launch/description.launch" />
+	<!-- </group> -->
+
+	<include file="$(find lrm_rbb_grupo_c)/launch/move_base.launch" />
+
+</launch>

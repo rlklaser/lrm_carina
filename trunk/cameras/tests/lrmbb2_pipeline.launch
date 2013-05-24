@@ -1,0 +1,71 @@
+<!-- -*- mode: XML -*- -->
+
+<!-- Load Bayer color correction and recification into camera nodelet
+        manager process.
+-->
+
+<launch>
+
+  <!-- start the driver in a camera_nodelet_manager process -->
+  <arg name="camera" default="bb2" />
+  <include file="$(find cameras)/tests/lrmbb2_manager.launch" >
+    <arg name="camera" value="$(arg camera)" />
+  </include>
+  
+ 
+ <!-- left -->
+
+	  <!-- Bayer color decoding -->
+	  <node pkg="nodelet" type="nodelet" name="image_proc_debayer_left"
+		args="load image_proc/debayer camera_nodelet_manager">
+	    <remap from="camera_info" to="/stereo/left/camera_info" />
+	    <remap from="image_color" to="/stereo/left/image_color" />
+	    <remap from="image_mono" to="/stereo/left/image_mono" />
+	    <remap from="image_raw" to="/stereo/left/image_raw" />
+	  </node>
+	
+	  <!-- mono rectification -->
+	  <node pkg="nodelet" type="nodelet" name="image_proc_rect_left"
+		args="load image_proc/rectify camera_nodelet_manager">
+	    <remap from="camera_info" to="/stereo/left/camera_info" />
+	    <remap from="image_mono" to="/stereo/left/image_mono" />
+	    <remap from="image_rect" to="/stereo/left/image_rect" />
+	  </node>
+	
+	  <!-- color rectification -->
+	  <node pkg="nodelet" type="nodelet" name="image_proc_rect_color_left"
+		args="load image_proc/rectify camera_nodelet_manager">
+	    <remap from="camera_info" to="/stereo/left/camera_info" />
+	    <remap from="image_mono" to="/stereo/left/image_color" />
+	    <remap from="image_rect" to="/stereo/left/image_rect_color" />
+	  </node>
+
+
+<!-- right -->
+
+	  <!-- Bayer color decoding -->
+	  <node pkg="nodelet" type="nodelet" name="image_proc_debayer_right"
+		args="load image_proc/debayer camera_nodelet_manager">
+	    <remap from="camera_info" to="/stereo/right/camera_info" />
+	    <remap from="image_color" to="/stereo/right/image_color" />
+	    <remap from="image_mono" to="/stereo/right/image_mono" />
+	    <remap from="image_raw" to="/stereo/right/image_raw" />
+	  </node>
+	
+	  <!-- mono rectification -->
+	  <node pkg="nodelet" type="nodelet" name="image_proc_rect_right"
+		args="load image_proc/rectify camera_nodelet_manager">
+	    <remap from="camera_info" to="/stereo/right/camera_info" />
+	    <remap from="image_mono" to="/stereo/right/image_mono" />
+	    <remap from="image_rect" to="/stereo/right/image_rect" />
+	  </node>
+	
+	  <!-- color rectification -->
+	  <node pkg="nodelet" type="nodelet" name="image_proc_rect_color_right"
+		args="load image_proc/rectify camera_nodelet_manager">
+	    <remap from="camera_info" to="/stereo/right/camera_info" />
+	    <remap from="image_mono" to="/stereo/right/image_color" />
+	    <remap from="image_rect" to="/stereo/right/image_rect_color" />
+	  </node>
+  
+</launch>

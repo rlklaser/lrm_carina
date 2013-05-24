@@ -1,0 +1,18 @@
+<launch>
+
+	<node 
+		name="rosbag_our" 
+		pkg="rosbag" 
+		type="play" 
+		args="--loop --delay=5 $(env ROS_WORKSPACE)/bags/ros_auto_cam.bag"
+	>	
+		<!-- <remap from="/lse_xsens_mti/xsens/pose" to="/pose" /> -->
+	</node>
+
+<!-- http://localhost:8080/stream?topic=/remote_lab_cam1/image_raw?invert=1 -->
+	<node pkg="mjpeg_server" type="mjpeg_server"  name="mjpeg_server" output="screen">
+		<param name="port" type="int" value="8080" />
+		
+	</node>
+
+</launch>

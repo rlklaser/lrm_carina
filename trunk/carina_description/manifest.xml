@@ -1,0 +1,25 @@
+<package>
+  <description brief="carina_description">
+
+     carina_description
+
+  </description>
+  <author>Marcos Prado</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <!--url>http://ros.org/wiki/summit_description</url-->
+  <url>http://www.robotnik.eu</url>
+  <depend package="roscpp"/>
+  <depend package="std_srvs"/>
+  <depend package="std_msgs"/>
+  <depend package="tf"/>
+  <export>
+    <cpp cflags="-I${prefix}/srv/cpp"/>
+  </export>
+  <platform os="ubuntu" version="9.04"/>
+  <platform os="ubuntu" version="9.10"/>
+  <platform os="ubuntu" version="10.04"/>
+
+</package>
+
+

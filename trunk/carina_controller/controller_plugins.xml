@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<library path="lib/libcarina_controller_lib">
+  <class name="carina_controller/CarinaControllerPlugin" 
+         type="carina_controller_ns::CarinaControllerClass"           
+         base_class_type="pr2_controller_interface::Controller" />
+</library>

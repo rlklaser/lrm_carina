@@ -1,0 +1,26 @@
+<package>
+  <description brief="lrm_controller">
+
+     lrm_controller
+
+  </description>
+  <author>Rafael Luiz Klaser</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/lrm_controller</url>
+  <depend package="roscpp"/>
+  <depend package="geometry_msgs"/>
+  <depend package="std_msgs"/>
+  <depend package="pr2_controller_interface"/>
+  <depend package="pr2_mechanism_model"/>
+  <depend package="pluginlib"/>
+  <depend package="lrm_description"/>
+  <depend package="lrm_msgs"/>
+
+  <export>
+     <pr2_controller_interface plugin="${prefix}/plugins.xml" />
+  </export>
+
+</package>
+
+

@@ -1,0 +1,23 @@
+
+<package>
+  <description brief="rosbombeiros_simulator">
+
+     rosbombeiros_simulator
+
+  </description>
+  <author>Rafael Luiz Klaser</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/rosbombeiros_simulator</url>
+
+  <depend package="roscpp"/>
+  <depend package="std_msgs"/>
+  <depend package="sensor_msgs"/>
+  <depend package="gazebo"/>
+  <depend package="carina_controller"/>
+  
+  <export>
+    <gazebo gazebo_media_path="${prefix}" />
+  </export>
+
+</package>

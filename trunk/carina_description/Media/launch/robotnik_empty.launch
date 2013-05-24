@@ -1,0 +1,11 @@
+<!-- -->
+<launch>
+ 
+  <!-- start empty gazebo world -->
+  <include file="$(find gazebo_worlds)/launch/empty_world.launch" />
+
+  <!-- add png world -x -28.75 -y -22.75 -->
+   <param name="png_world" textfile="$(find summit_description)/Media/models/robotnik.model" />
+   <node name="spawn_png_world" pkg="gazebo" type="spawn_model" args="-gazebo -param png_world -x 0 -y 0 -model walls" respawn="false" output="screen" />
+
+</launch>

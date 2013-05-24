@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<gazebo version='1.2'>
+	<model name="blackTupelo">
+		<pose>0 0 0 0 1.57 0</pose>
+		<static>true</static>
+		<allow_auto_disable>true</allow_auto_disable>
+		<link name="link">
+			<pose>0 0 0 0 0 1.57</pose>
+			<inertial>
+				<mass>10</mass>
+				<pose>0 0 0 0 0 0</pose>
+				<inertia>
+					<ixx>10</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>10</iyy>
+					<iyz>0</iyz>
+					<izz>10</izz>
+				</inertia>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<!-- 
+					<mesh>
+						<uri>model://trees/blackTupelo/meshes/blackTupelo.dae</uri>
+					</mesh>
+					-->
+					<cylinder>
+						<radius>0.07</radius>
+						<length>5.0</length>
+					</cylinder>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<mesh>
+						<uri>model://trees/blackTupelo/meshes/blackTupelo.dae</uri>
+						<scale>0.5 0.5 0.5</scale>
+					</mesh>
+				</geometry>
+			</visual>
+		</link>
+
+	</model>
+</gazebo>

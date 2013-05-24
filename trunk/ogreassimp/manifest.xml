@@ -1,0 +1,16 @@
+<package>
+  <description brief="ogreassimp">
+
+     ogreassimp
+
+  </description>
+  <author>Rafael Luiz Klaser</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/ogreassimp</url>
+  <depend package="roscpp"/>
+  <depend package="ogre"/>
+
+</package>
+
+

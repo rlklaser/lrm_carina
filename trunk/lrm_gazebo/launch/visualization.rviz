@@ -1,0 +1,561 @@
+Panels:
+  - Class: rviz/Displays
+    Help Height: 114
+    Name: Displays
+    Property Tree Widget:
+      Expanded:
+        - /Global Options1
+        - /TF1/Tree1
+        - /Camera2/Visibility1
+      Splitter Ratio: 0.847909
+    Tree Height: 377
+  - Class: rviz/Tool Properties
+    Expanded:
+      - /2D Nav Goal1
+      - /2D Pose Estimate1
+    Name: Tool Properties
+    Splitter Ratio: 0.5
+  - Class: rviz/Selection
+    Name: Selection
+  - Class: rviz/Time
+    Experimental: false
+    Name: Time
+    SyncMode: 0
+    SyncSource: Camera
+  - Class: rviz/Views
+    Expanded:
+      - /Current View1
+    Name: Views
+    Splitter Ratio: 0.5
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Class: rviz/TF
+      Enabled: true
+      Frame Timeout: 15
+      Frames:
+        /ackermann_bar_link:
+          Value: true
+        /ackermann_left_susp_link:
+          Value: true
+        /ackermann_right_susp_link:
+          Value: true
+        /base_footprint:
+          Value: true
+        /base_front_sensors:
+          Value: true
+        /base_link:
+          Value: true
+        /base_odometry:
+          Value: true
+        /base_steering_wheel:
+          Value: true
+        /camera_center_link:
+          Value: true
+        /center_mass_link:
+          Value: true
+        /chassis_link:
+          Value: true
+        /front_axle_link:
+          Value: true
+        /front_left_bar_link:
+          Value: true
+        /front_left_susp_link:
+          Value: true
+        /front_left_wheel:
+          Value: true
+        /front_right_bar_link:
+          Value: true
+        /front_right_susp_link:
+          Value: true
+        /front_right_wheel:
+          Value: true
+        /imu_link:
+          Value: true
+        /map:
+          Value: true
+        /odom_gazebo:
+          Value: true
+        /rear_axle_link:
+          Value: true
+        /rear_left_bar_link:
+          Value: true
+        /rear_left_susp_link:
+          Value: true
+        /rear_left_wheel:
+          Value: true
+        /rear_right_bar_link:
+          Value: true
+        /rear_right_susp_link:
+          Value: true
+        /rear_right_wheel:
+          Value: true
+        /steer_link:
+          Value: true
+        /steering_wheel_link:
+          Value: true
+        /stereo/left_frame:
+          Value: true
+        /stereo/left_optical_frame:
+          Value: true
+        /stereo/right_frame:
+          Value: true
+        /stereo/right_optical_frame:
+          Value: true
+        /stereo_camera:
+          Value: true
+        /wheelodom:
+          Value: true
+        All Enabled: true
+      Marker Scale: 0.7
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: false
+      Tree:
+        /map:
+          /odom_gazebo:
+            {}
+          /wheelodom:
+            /base_footprint:
+              /base_link:
+                /base_front_sensors:
+                  /camera_center_link:
+                    /stereo_camera:
+                      {}
+                  /stereo/left_frame:
+                    /stereo/left_optical_frame:
+                      {}
+                  /stereo/right_frame:
+                    /stereo/right_optical_frame:
+                      {}
+                /base_steering_wheel:
+                  /steering_wheel_link:
+                    {}
+                /center_mass_link:
+                  {}
+                /chassis_link:
+                  {}
+                /front_axle_link:
+                  /front_left_susp_link:
+                    /front_left_bar_link:
+                      /front_left_wheel:
+                        {}
+                  /front_right_susp_link:
+                    /front_right_bar_link:
+                      /front_right_wheel:
+                        {}
+                  /steer_link:
+                    /ackermann_bar_link:
+                      /ackermann_left_susp_link:
+                        {}
+                      /ackermann_right_susp_link:
+                        {}
+                /imu_link:
+                  {}
+                /rear_axle_link:
+                  /base_odometry:
+                    {}
+                  /rear_left_susp_link:
+                    /rear_left_bar_link:
+                      /rear_left_wheel:
+                        {}
+                  /rear_right_susp_link:
+                    /rear_right_bar_link:
+                      /rear_right_wheel:
+                        {}
+      Update Interval: 0
+      Value: true
+    - Alpha: 0.5
+      Cell Size: 1
+      Class: rviz/Grid
+      Color: 140; 140; 140
+      Enabled: true
+      Line Style:
+        Line Width: 0.03
+        Value: Lines
+      Name: Grid
+      Normal Cell Count: 0
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Plane: XY
+      Plane Cell Count: 1000
+      Reference Frame: <Fixed Frame>
+      Value: true
+    - Alpha: 1
+      Class: rviz/RobotModel
+      Collision Enabled: false
+      Enabled: true
+      Links:
+        ackermann_bar_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        camera_center_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        chassis_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        front_left_bar_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        front_left_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        front_right_bar_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        front_right_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        imu_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rear_left_bar_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rear_left_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rear_right_bar_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rear_right_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        steer_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        steering_wheel_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        stereo/left_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        stereo/right_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+      Name: RobotModel
+      Robot Description: robot_description
+      TF Prefix: ""
+      Update Interval: 0
+      Value: true
+      Visual Enabled: true
+    - Class: rviz/Camera
+      Enabled: true
+      Image Rendering: background and overlay
+      Image Topic: /stereo/left/image_raw
+      Name: Camera
+      Overlay Alpha: 0.5
+      Queue Size: 2
+      Transport Hint: raw
+      Value: true
+      Visibility:
+        Camera: false
+        Grid: false
+        GridCells: true
+        Imu: true
+        Map: true
+        MarkerArray: true
+        Odometry: true
+        Path: true
+        PointCloud2: true
+        Polygon: true
+        RobotModel: false
+        TF: false
+        Value: true
+      Zoom Factor: 1
+    - Class: rviz/Camera
+      Enabled: true
+      Image Rendering: background and overlay
+      Image Topic: /stereo/right/image_raw
+      Name: Camera
+      Overlay Alpha: 0.2
+      Queue Size: 2
+      Transport Hint: raw
+      Value: true
+      Visibility:
+        Camera: true
+        Grid: false
+        GridCells: true
+        Imu: true
+        Map: true
+        MarkerArray: true
+        Odometry: true
+        Path: true
+        PointCloud2: true
+        Polygon: true
+        RobotModel: true
+        TF: true
+        Value: true
+      Zoom Factor: 1
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 10
+        Min Value: -10
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz/PointCloud2
+      Color: 255; 255; 255
+      Color Transformer: RGB8
+      Decay Time: 0
+      Enabled: true
+      Max Color: 255; 255; 255
+      Max Intensity: 4096
+      Min Color: 0; 0; 0
+      Min Intensity: 0
+      Name: PointCloud2
+      Position Transformer: XYZ
+      Queue Size: 10
+      Selectable: false
+      Size (Pixels): 3
+      Size (m): 0.01
+      Style: Points
+      Topic: /stereo/points2
+      Use Fixed Frame: true
+      Use rainbow: true
+      Value: true
+    - Angle Tolerance: 0.1
+      Class: rviz/Odometry
+      Color: 0; 0; 255
+      Enabled: true
+      Keep: 10000
+      Length: 1
+      Name: Odometry
+      Position Tolerance: 0.1
+      Topic: /wheel_odometry/odom
+      Value: true
+    - Alpha: 0.7
+      Class: rviz/Map
+      Draw Behind: false
+      Enabled: false
+      Name: Map
+      Topic: /map
+      Value: false
+    - Class: rviz/MarkerArray
+      Enabled: false
+      Marker Topic: /occupied_cells_vis_array
+      Name: MarkerArray
+      Namespaces:
+        {}
+      Queue Size: 100
+      Value: false
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 1.9875
+        Min Value: 0.1875
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz/PointCloud2
+      Color: 255; 255; 255
+      Color Transformer: AxisColor
+      Decay Time: 0
+      Enabled: false
+      Max Color: 255; 255; 255
+      Max Intensity: 4096
+      Min Color: 0; 0; 0
+      Min Intensity: 0
+      Name: PointCloud2
+      Position Transformer: XYZ
+      Queue Size: 10
+      Selectable: true
+      Size (Pixels): 2
+      Size (m): 0.01
+      Style: Points
+      Topic: /octomap_point_cloud_centers
+      Use Fixed Frame: true
+      Use rainbow: true
+      Value: false
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 5.2034
+        Min Value: -0.373463
+        Value: true
+      Axis: Z
+      Channel Name: x
+      Class: rviz/PointCloud2
+      Color: 255; 255; 255
+      Color Transformer: AxisColor
+      Decay Time: 0
+      Enabled: false
+      Max Color: 255; 255; 255
+      Max Intensity: 4096
+      Min Color: 0; 0; 0
+      Min Intensity: 0
+      Name: PointCloud2
+      Position Transformer: XYZ
+      Queue Size: 10
+      Selectable: true
+      Size (Pixels): 3
+      Size (m): 0.01
+      Style: Points
+      Topic: /cloud_filtered
+      Use Fixed Frame: true
+      Use rainbow: true
+      Value: false
+    - Alpha: 1
+      Class: rviz/GridCells
+      Color: 25; 255; 0
+      Enabled: false
+      Name: GridCells
+      Topic: /move_base/local_costmap/inflated_obstacles
+      Value: false
+    - Alpha: 1
+      Class: rviz/Polygon
+      Color: 25; 255; 0
+      Enabled: true
+      Name: Polygon
+      Topic: /move_base/local_costmap/robot_footprint
+      Value: true
+    - Alpha: 1
+      Buffer Length: 1
+      Class: rviz/Path
+      Color: 25; 255; 0
+      Enabled: true
+      Name: Path
+      Topic: /move_base/TrajectoryPlannerROS/global_plan
+      Value: true
+    - Alpha: 1
+      Buffer Length: 1
+      Class: rviz/Path
+      Color: 85; 85; 255
+      Enabled: true
+      Name: Path
+      Topic: /move_base/SBPLLatticePlanner/plan
+      Value: true
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 10
+        Min Value: -10
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz/PointCloud2
+      Color: 255; 255; 255
+      Color Transformer: RGB8
+      Decay Time: 0
+      Enabled: true
+      Max Color: 255; 255; 255
+      Max Intensity: 4096
+      Min Color: 0; 0; 0
+      Min Intensity: 0
+      Name: PointCloud2
+      Position Transformer: XYZ
+      Queue Size: 10
+      Selectable: true
+      Size (Pixels): 3
+      Size (m): 0.01
+      Style: Squares
+      Topic: /vo/point_cloud
+      Use Fixed Frame: true
+      Use rainbow: true
+      Value: true
+    - Angle Tolerance: 0.1
+      Class: rviz/Odometry
+      Color: 255; 255; 0
+      Enabled: false
+      Keep: 1000
+      Length: 1
+      Name: Odometry
+      Position Tolerance: 0.1
+      Topic: /gpsodom
+      Value: false
+    - Alpha: 0.5
+      Class: rviz_plugin_tutorials/Imu
+      Color: 204; 51; 204
+      Enabled: false
+      History Length: 1
+      Name: Imu
+      Topic: /lse_xsens_mti/xsens/imu/data
+      Value: false
+  Enabled: true
+  Global Options:
+    Background Color: 255; 255; 255
+    Fixed Frame: /map
+  Name: root
+  Tools:
+    - Class: rviz/Interact
+      Hide Inactive Objects: true
+    - Class: rviz/Measure
+    - Class: rviz/MoveCamera
+    - Class: rviz/Select
+    - Class: rviz/SetGoal
+      Topic: /move_base_simple/goal
+    - Class: rviz/SetInitialPose
+      Topic: initialpose
+  Value: true
+  Views:
+    Current:
+      Class: rviz/XYOrbit
+      Distance: 10.5152
+      Focal Point:
+        X: 0.822893
+        Y: -0.164536
+        Z: 1.21679e-06
+      Name: Current View
+      Near Clip Distance: 0.01
+      Pitch: 0.0797995
+      Target Frame: /base_footprint
+      Value: XYOrbit (rviz)
+      Yaw: 2.35456
+    Saved: ~
+Window Geometry:
+  Camera:
+    collapsed: false
+  Displays:
+    collapsed: false
+  Height: 1002
+  Hide Left Dock: false
+  Hide Right Dock: true
+  QMainWindow State: 000000ff00000000fd00000002000000000000016500000393fc020000000afc0000003d000002460000010301000019fa000000010100000002fb0000000a005600690065007700730100000000ffffffff0000010f00fffffffb000000100044006900730070006c0061007900730100000000000001a70000010f00fffffffb0000000c00430061006d0065007200610100000289000001470000001600fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007300000001b90000006d0000006a00fffffffb0000001200530065006c0065006300740069006f006e00000001f5000000820000006a00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007300000002a70000009f0000000000000000fc00000135000000af0000000000fffffffa000000000100000001fb0000000a0049006d0061006700650000000000ffffffff0000000000000000fb0000000c00430061006d00650072006100000003140000009e0000001600fffffffb0000000c00540065006c0065006f0070000000030a0000007f0000000000000000fb0000000a0049006d00610067006500000002e0000000c70000000000000000fb0000000a0049006d006100670065000000031c000000b4000000000000000000000003000003ad0000003efc0100000001fb0000000800540069006d0065010000016b000003ad0000024e00ffffff000003ad0000034f00000001000000020000000100000002fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  Selection:
+    collapsed: false
+  Time:
+    collapsed: false
+  Tool Properties:
+    collapsed: false
+  Views:
+    collapsed: false
+  Width: 1304
+  X: 1318
+  Y: 24

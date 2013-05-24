@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rtt:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rtt="http://rtt/1.0">
+  <taskContext/>
+  <activity xsi:type="rtt:Activity" taskContext="//@taskContext.0"/>
+</rtt:Package>

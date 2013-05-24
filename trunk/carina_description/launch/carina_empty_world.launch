@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<launch>
+
+  <master auto="start"/>
+  <param name="/use_sim_time" value="true"/>
+  <!-- start world -->
+  <include file="$(find carina_description)/Media/launch/carina.launch"/>
+
+
+        <arg name="gui" default="False" />
+	
+	
+
+  <!-- start controller manager -->
+  <!--include file="$(find pr2_controller_manager)/controller_manager.launch"/-->
+
+  <!-- send carina.urdf to param server -->
+  <param name="robot_description" textfile="$(find carina_description)/urdf/carina.urdf" />
+
+
+
+   <node pkg="robot_state_publisher" type="state_publisher" name="robot_state_publisher"/>
+
+
+
+
+ <param name="use_gui" value="$(arg gui)"/>
+
+  <!-- push robot_description to factory and spawn robot in gazebo -->
+  <!--node name="spawn_single_link" pkg="gazebo_tools" type="gazebo_model" args="-p robot_description spawn -z 2" respawn="false" output="screen" /-->
+  <node name="spawn_object" pkg="gazebo" type="spawn_model" args="-urdf -param robot_description -x 0.0 -y 0.0 -z 0.5 -model carina" respawn="false" output="screen" />
+
+  <!--summit_controller.yaml-->
+  <rosparam file="$(find carina_controller)/carina_controller.yaml" command="load"/>
+
+  
+  <!-- spawn_summit_controller/    <param name="pr2_controller_manager/joint_state_publish_rate" value="100.0" />-->
+  <node name="carina_controller" pkg="pr2_controller_manager" type="spawner" args="carina_controller" respawn="false" output="screen"/>
+  	
+
+  <node name="rviz" pkg="rviz" type="rviz"  />
+        <!--args="-d $(find urdf_tutorial)/urdf.vcg"-->
+
+</launch>

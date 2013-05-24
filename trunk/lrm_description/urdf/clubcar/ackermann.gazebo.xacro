@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<!--
+*  Copyright (C) 2012, Laboratorio de Robotica Movel - ICMC/USP
+ *  Rafael Luiz Klaser <rlklaser@gmail.com>
+ *  http://lrm.icmc.usp.br
+ *
+ *  Apoio FAPESP: 2012/04555-4
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * @file ackermann.gazebo.xacro
+ * @brief 
+ * @author Rafael Luiz Klaser <rlklaser@gmail.com>
+ * @date Dez 12, 2012
+ *
+ */
+-->
+<robot
+	xmlns:gazebo="http://playerstage.sourceforge.net/gazebo/xmlschema/#gz"
+	xmlns:model="http://playerstage.sourceforge.net/gazebo/xmlschema/#model"
+	xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+	xmlns:body="http://playerstage.sourceforge.net/gazebo/xmlschema/#body"
+	xmlns:geom="http://playerstage.sourceforge.net/gazebo/xmlschema/#geom"
+	xmlns:joint="http://playerstage.sourceforge.net/gazebo/xmlschema/#joint"
+	xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+	xmlns:rendering="http://playerstage.sourceforge.net/gazebo/xmlschema/#rendering"
+	xmlns:renderable="http://playerstage.sourceforge.net/gazebo/xmlschema/#renderable"
+	xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+	xmlns:physics="http://playerstage.sourceforge.net/gazebo/xmlschema/#physics"
+>
+	<gazebo>
+		<joint:hinge name="joint_ackermann_left_bar">
+			<body1>ackermann_bar_link</body1>
+			<body2>front_left_bar_link</body2>
+			<anchor>ackermann_bar_link</anchor>
+			<axis>0 0 1</axis>
+			<anchorOffset>0 ${ackermann_bar/2} 0</anchorOffset>
+		</joint:hinge>
+		<joint:hinge name="joint_ackermann_right_bar">
+			<body1>ackermann_bar_link</body1>
+			<body2>front_right_bar_link</body2>
+			<anchor>ackermann_bar_link</anchor>
+			<axis>0 0 1</axis>
+			<anchorOffset>0 ${-ackermann_bar/2} 0</anchorOffset>
+		</joint:hinge>
+		<!-- 
+		<controller:AckermannControllerPlugin
+			name="AckermannControllerPlugin"
+			plugin="libAckermannControllerPlugin.so"
+		>
+			<alwaysOn>true</alwaysOn>
+			<update>100</update>
+			<updateRate>100.0</updateRate>
+			<backLeftJoint>joint_rear_left_wheel</backLeftJoint>
+			<backRightJoint>joint_rear_right_wheel</backRightJoint>
+			<frontSteerJoint>joint_steer</frontSteerJoint>
+			<steeringWheelJoint>joint_steering_wheel</steeringWheelJoint>
+			<wheelEncoderJoint>joint_front_right_wheel</wheelEncoderJoint>
+			<wheelDiameter>${wheel_diameter}</wheelDiameter>
+			<maxSteerAngle>${max_steer}</maxSteerAngle>
+			<driveTorque>${drive_torque}</driveTorque>
+			<steerTorque>${steer_torque}</steerTorque>
+			<interface:position name="position_iface_0" />
+			<topicName>cmd_vel</topicName>
+			<robotNamespace>${namespace}</robotNamespace>
+		</controller:AckermannControllerPlugin>
+		 -->
+	</gazebo>
+
+	<transmission
+		type="pr2_mechanism_model/SimpleTransmission"
+		name="ackermann_bar_trans"
+	>
+		<actuator name="ackermann_bar_link" />
+		<joint name="joint_ackermann_bar" />
+		<mechanicalReduction>1.0</mechanicalReduction>
+		<motorTorqueConstant>1</motorTorqueConstant>
+	</transmission>
+
+</robot>

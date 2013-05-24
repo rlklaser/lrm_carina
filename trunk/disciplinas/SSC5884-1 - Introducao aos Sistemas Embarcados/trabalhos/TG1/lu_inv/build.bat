@@ -1,0 +1,1 @@
+gcc -pg lu_inv.c -o lu_inv.exe

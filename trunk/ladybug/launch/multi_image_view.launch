@@ -1,0 +1,25 @@
+<launch>
+
+	<node name="view_0" pkg="image_view" type="image_view">
+		<remap from="image" to="/camera/image_color/0" />
+	</node>
+	<node name="view_1" pkg="image_view" type="image_view">
+		<remap from="image" to="/camera/image_color/1" />
+	</node>
+	<node name="view_2" pkg="image_view" type="image_view">
+		<remap from="image" to="/camera/image_color/2" />
+	</node>
+	<node name="view_3" pkg="image_view" type="image_view">
+		<remap from="image" to="/camera/image_color/3" />
+	</node>
+	<node name="view_4" pkg="image_view" type="image_view">
+		<remap from="image" to="/camera/image_color/4" />
+	</node>
+	<node name="view_5" pkg="image_view" type="image_view">
+		<remap from="image" to="/camera/image_color/5" />
+		<param name="window_name" value="top" />
+		<param name="image_transport" value="theora" />
+		<param name="autosize" value="false" />
+	</node>
+		
+</launch>

@@ -1,0 +1,39 @@
+<launch>
+
+	<node
+		pkg="tf"
+		type="static_transform_publisher"
+		name="gps_odom_broadcaster"
+		args="0 0 0 0 0 0 map vo 30"
+		output="screen" />
+
+	<node
+		name="gps_conv"
+		pkg="lrm_odometry"
+		type="utm_odometry_node"
+		output="screen"
+		respawn="true"
+	>
+		<remap
+			from="odom"
+			to="/gpsodom" />
+		<remap
+			from="fix"
+			to="/lse_xsens_mti/xsens/fix" />
+
+		<param
+			name="pos_cov"
+			value="25" />
+		<param
+			name="rot_cov"
+			value="99999" />
+
+		<param
+			name="frame_id"
+			value="/vo" />
+		<param
+			name="child_frame_id"
+			value="base_footprint" />
+	</node>
+	
+</launch>

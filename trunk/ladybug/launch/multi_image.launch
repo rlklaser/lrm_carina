@@ -1,0 +1,7 @@
+<launch>
+
+	<node name="multi_view" pkg="ladybug" type="multi_image">
+		<remap from="camera/image_raw" to="camera/image_raw" />
+	</node>
+
+</launch>

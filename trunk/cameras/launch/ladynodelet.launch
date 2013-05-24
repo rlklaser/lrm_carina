@@ -1,0 +1,32 @@
+<launch> 
+   <!-- nodelet manager process --> 
+   <node pkg="nodelet" type="nodelet" name="camera_nodelet_manager" 
+         args="manager" /> 
+
+   <!-- camera driver nodelet --> 
+<!-- 
+   <node pkg="nodelet" type="nodelet" name="camera1394_nodelet" 
+         args="load camera1394/driver camera_nodelet_manager"> 
+        <param name="guid" value="00b09d0100ac4597" />
+        <param name="video_mode" value="format7_mode1"/> 
+        <param name="format7_color_coding" value="raw8"/> 
+        <param name="bayer_pattern" value="rggb"/> 
+        <param name="bayer_method" value="" /> 
+        <param name="frame_rate" value="30" /> 
+   </node> 
+-->
+
+   <!-- Bayer color decoding --> 
+   <node pkg="nodelet" type="nodelet" name="image_proc_debayer" 
+         args="load image_proc/debayer camera_nodelet_manager"> 
+     <remap from="image_color" to="camera/image_color" /> 
+     <remap from="image_mono" to="camera/image_mono" /> 
+     <remap from="image_raw" to="camera/image_raw" /> 
+   </node> 
+
+   <!-- Image View Node --> 
+   <node pkg="image_view" type="image_view" name="image_view" > 
+     <remap from="image" to="camera/image_color"/> 
+   </node>
+    
+</launch> 

@@ -1,0 +1,28 @@
+<launch>
+
+	<include file="$(find GPSNavigation)/launch/show_velocity.launch"/>
+
+	<node name="ground_station" pkg="ground_station" type="groundstation" respawn="false" output="screen">
+	
+		<!-- General window parameters ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+		<param name="window_grayscale_color" value="false"/>
+		<param name="window_radial_color" value="true"/>
+		<param name="telemetry_refresh_rate" value="100"/>
+	
+		<param name="gauge1_name" value="Velocity"/>	
+		<param name="gauge1_unit" value="Km/h"/>	
+		<param name="gauge1_start_value" value="0"/>
+		<param name="gauge1_end_value" value="180"/>
+		<param name="gauge1_initial_step" value="2"/>
+		<param name="gauge1_sub_step" value="0_5"/>
+		<param name="gauge1_drawing_step" value="2"/>
+		<param name="gauge1_color_strip_order" value="GYR"/>	
+		<param name="gauge1_green_strip_start" value="0"/>
+		<param name="gauge1_yellow_strip_start" value="40"/>
+		<param name="gauge1_red_strip_start" value="60"/>
+		
+		<remap from="/mav/imu" to="/lse_xsens_mti/xsens/imu/data" />
+		<remap from="/fix" to="/lse_xsens_mti/xsens/fix" />
+	
+	</node>
+</launch>

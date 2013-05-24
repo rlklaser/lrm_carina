@@ -1,0 +1,19 @@
+<launch>
+
+	<include file="$(find lrm_drivers)/launch/joy_teleop.launch" />
+
+	<node
+		name="car_message_node"
+		pkg="lrm_drivers"
+		type="car_message_node"
+		output="screen"
+		respawn="true"
+	>
+
+		<remap
+			from="~cmd_vel"
+			to="/carina_controller/cmd_vel" />
+			
+	</node>
+
+</launch>

@@ -1,0 +1,43 @@
+1)
+
+Objetivo é uma meta pontual, ou seja, algo a ser atingido de forma concreta. Os objetivos devem ser bem delineados pois devem ser alcançáveis e/ou atingíveis. No contexto da educação, a necessidade de objetivos é deixar claro a forma que se vai elaborar e selecionar os conteúdos e os métodos de ensino, isto é, se são suficientes para alcançar o fim desejado.
+
+2)
+Os objetivos gerais se caracterizam pelos paradigmas e filosofias que os guiam, definem premissas básicas, valores e ideais. Os objetivos gerais tem o papel de expressar os desejos maiores, no contexto da educação, aquilo que se espera de uma formação tanto no âmbito pessoal como no social. Geralmente os objetivos gerais não são limitantes e sim abrem caminho ao debate das ideias que os caracterizam. Já os objetivos específicos se caracterizam pelo aspecto da ação, dos caminhos, de passos a serem dados numa determinada direção. No contexto da educação, os objetivos específicos podem até por vezes virem a ser antagônicos, com o propósito de estimular um objetivo mais geral. 
+
+3) 
+Disciplina: Sistemas Imunológicos Artificiais
+3.1) Objetivos Gerais
+	- Conhecer os conceitos básicos de imunologia e inteligência artificial
+	- Estudar os modelos e algorítmos bioinspirados aplicados à computação imunológica
+	- Descrever as características dos algorítmos, as técnicas e as dificuldades no tratamento dos problemas que se inspiram na abordagem biológica 
+	- Analizar as causas que levam à necessidade da abordagem imunológica em sistemas computacionais
+	- Capacitar o aluno a caracterizar problemas passíveis de serem tratados com as técnicas abordadas
+3.2) Objetivos Específicos
+	- Caracterização de ataques e invasões em sistemas computacionais
+	- Aprendizado de técnicas de reconhecimento de padrões
+	- Avaliação e trabalho prático
+
+4) 
+Um conteúdo de ensino é de forma geral qualquer coisa que desencadeie um pensamento ou uma ação, pode ser uma mera palavra ou um tema complexo. No meu ver eu agregaria como conteúdo de ensino também uma atividade física além da prática instrumental, visto que o conteúdo de ensino visa a assimilação e prática no dia a dia de algum saber e conhecimento. Desta forma, conteúdos de ensino se caracterizam por todo conhecimento, habilidades, técnicas e ideias que possam ser assimilados.
+
+5) 
+Os conteúdos de ensino numa abordagem inicial devem ser escolhidos de acordo com um certo consenso da sociedade no que deve ser ensinado em cada etapa do processo de educação, ou seja, o que se espera de conhecimento básico, elementar. Por exemplo, é certo que se deve ensinar a ler e escrever assim como alguma matemática básica e isto é definido pela sociedade como um todo do que se espera de conhecimento fundamental de cada indivíduo. O segundo aspecto dos conteúdos devem dizer respeito à formação relacionada a área de conhecimento que o aluno se vê mais apto, ou pelo menos, à que se espera alguma aptidão. Por exemplo, a um aluno que cursa áreas relacionadas à música se espera conhecimentos distintos a aqueles que estudam medicina. Desta forma, os conteúdos devem ser escolhidos de acordo com a área de interesse e são necessários para a formação. O outro critério de escolha de conteúdos se baseia na noção da realidade do aluno, devendo levar em conta os aspectos culturais e pessoais do indivíduo.
+...
+
+
+6)
+As técnicas de ensino podem ser as mais diversas, podendo vir a ser em casos mais extremos serem até mesmo opressoras. Não defendo nenhuma técnica propriamente dita como ideal ou nociva, os contextos em que é aplicada uma determinada técnica pode ter justificativas sensatas e coerentes, porém, podem da mesma forma sererm criticadas pelas mesmas razões de insensatez e incoerência.
+As técnicas de ensino em geral, segundo a compilação feita no texto de Garita, podem ser classificadas como, centradas no professor, centradas no aluno e socializantes. Como definição geral, as técnicas de ensino podem ser vistas como o meio pelo qual o conhecimento será exposto para ser assimilado e a própria forma de assimilação. A técnica irá determinar como o aluno terá contato com o conteúdo e como o conteúdo irá transformar-se em conhecimento. Desta forma, algumas técnicas certamente tem maior poder de sucesso de ação sobre determinados conteúdos e classes de alunos dependendo destes conjuntos.
+
+7)
+
+8)
+Multimeios são recursos de veiculação de informação que estão associados aos sentidos, como audição a visão. Estes recursos estão associados à nossa capacidade de assimilação da informação de acordo com a característica da informação, que combinadas por exemplo de forma gráfica e sonora permitem uma melhor memorização e melhor entendimento.
+
+9)
+
+10)
+
+
+ 

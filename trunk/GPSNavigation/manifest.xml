@@ -1,0 +1,23 @@
+<package>
+  <description brief="GPSNavigation">
+
+     GPSNavigation
+
+  </description>
+  <author>caiom</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/GPSNavigation</url>
+  <depend package="roscpp"/>
+  <depend package="rospy"/>
+  <depend package="geometry_msgs"/>
+  <depend package="sensor_msgs"/>
+  <depend package="std_msgs"/>
+  <depend package="atuacao"/>
+  <depend package="controle"/>
+  <depend package="gps_common"/>
+  <depend package="visualization_msgs"/>
+  
+</package>
+
+

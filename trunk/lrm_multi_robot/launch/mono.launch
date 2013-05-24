@@ -1,0 +1,99 @@
+<launch>
+
+    <!-- Define a list of miniQ ids -->
+	<rosparam param="list_of_ids">[0]</rosparam>
+
+	<rosparam param="use_sim_time">true</rosparam>
+
+	<node
+		name="gazebo"
+		pkg="gazebo"
+		type="gazebo"
+		args="$(find lrm_multi_robot)/worlds/empty.world"
+		respawn="false"
+		output="screen" />
+					
+    <!-- Map server -->
+	<node
+		name="map_server"
+		pkg="map_server"
+		type="map_server"
+		args="$(find lrm_multi_robot)/maps/lrm_arena.yaml"
+		output="screen"
+	></node>
+
+	<node
+		pkg="tf"
+		type="static_transform_publisher"
+		name="map_broadcaster"
+		args="2.5 0.3 0 1.57 0 0 /map odom 50" />
+
+	<node
+		pkg="tf"
+		type="static_transform_publisher"
+		name="tmp_odom"
+		args="0 0.0 0 0 0 0 odom base_footprint 50" />
+
+	<node
+		pkg="tf"
+		type="static_transform_publisher"
+		name="footprint_broadcaster"
+		args="0 0 0 0 0 0 base_footprint base_link 50" />
+
+	<param
+		name="robot_description"
+		command="$(find xacro)/xacro.py $(find lrm_multi_robot)/urdf/miniq.urdf" />
+
+<!--
+	<param name="robot_description" textfile="$(find lrm_multi_robot)/urdf/miniq.urdf" />
+-->
+
+	<node
+		name="joint_state_publisher"
+		pkg="joint_state_publisher"
+		type="joint_state_publisher" />
+
+	<node
+		name="robot_state_publisher"
+		pkg="robot_state_publisher"
+		type="state_publisher" />
+
+	<node
+		name="move_base_simple"
+		pkg="move_base_simple"
+		type="multi_move_base_simple"
+		output="screen"
+	>
+		<param
+			name="my_id"
+			type="int"
+			value="0" />
+		<rosparam
+			file="$(find lrm_multi_robot)/settings/navigation.yaml"
+			command="load" />
+	</node>
+
+	<node
+		name="robot_object"
+		pkg="gazebo"
+		type="spawn_model"
+		args="-urdf -param robot_description -x 2.5 -y 0.3 - z 0.0 - Y 1.57 -model robot_0"
+		respawn="false"
+		output="screen" />
+
+	<node
+		name="rviz"
+		pkg="rviz"
+		type="rviz"
+		args="-d $(find lrm_multi_robot)/view_mono.rviz"
+		output="screen" />
+		
+	<node 
+		name="gazebo_gui" 
+		pkg="gazebo" 
+		type="gui" 
+		respawn="true" 
+		output="screen" 
+	/>
+
+</launch>

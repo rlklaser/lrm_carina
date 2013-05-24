@@ -1,0 +1,543 @@
+Panels:
+  - Class: rviz/Displays
+    Help Height: 84
+    Name: Displays
+    Property Tree Widget:
+      Expanded:
+        - /Global Options1
+        - /Grid1
+        - /TF1/Tree1
+        - /LaserScan5/Autocompute Value Bounds1
+      Splitter Ratio: 0.578212
+    Tree Height: 456
+  - Class: rviz/Time
+    Name: Time
+  - Class: rviz/Tool Properties
+    Expanded:
+      - /2D Nav Goal1
+      - /2D Pose Estimate1
+    Name: Tool Properties
+    Splitter Ratio: 0.5
+  - Class: rviz/Views
+    Expanded:
+      - /Current View1
+      - /Current View1/Focal Point1
+    Name: Views
+    Splitter Ratio: 0.5
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Alpha: 0.5
+      Cell Size: 0.05
+      Class: rviz/Grid
+      Color: 0; 85; 127
+      Enabled: true
+      Line Style:
+        Line Width: 0.03
+        Value: Lines
+      Name: Grid
+      Normal Cell Count: 0
+      Offset:
+        Value: 0; 0; 0
+        X: 0
+        Y: 0
+        Z: 0
+      Plane: XY
+      Plane Cell Count: 1000
+      Reference Frame: <Fixed Frame>
+      Value: true
+    - Class: rviz/TF
+      Enabled: true
+      Frame Timeout: 15
+      Frames:
+        /map:
+          Value: true
+        /robot_0/base_footprint:
+          Value: true
+        /robot_0/base_laser_link:
+          Value: true
+        /robot_0/base_link:
+          Value: true
+        /robot_0/left_wheel:
+          Value: true
+        /robot_0/odom:
+          Value: true
+        /robot_0/right_wheel:
+          Value: true
+        /robot_1/base_footprint:
+          Value: true
+        /robot_1/base_laser_link:
+          Value: true
+        /robot_1/base_link:
+          Value: true
+        /robot_1/left_wheel:
+          Value: true
+        /robot_1/odom:
+          Value: true
+        /robot_1/right_wheel:
+          Value: true
+        /robot_2/base_footprint:
+          Value: true
+        /robot_2/base_laser_link:
+          Value: true
+        /robot_2/base_link:
+          Value: true
+        /robot_2/left_wheel:
+          Value: true
+        /robot_2/odom:
+          Value: true
+        /robot_2/right_wheel:
+          Value: true
+        /robot_3/base_footprint:
+          Value: true
+        /robot_3/base_laser_link:
+          Value: true
+        /robot_3/base_link:
+          Value: true
+        /robot_3/left_wheel:
+          Value: true
+        /robot_3/odom:
+          Value: true
+        /robot_3/right_wheel:
+          Value: true
+        /robot_4/base_footprint:
+          Value: true
+        /robot_4/base_laser_link:
+          Value: true
+        /robot_4/base_link:
+          Value: true
+        /robot_4/left_wheel:
+          Value: true
+        /robot_4/odom:
+          Value: true
+        /robot_4/right_wheel:
+          Value: true
+        All Enabled: true
+      Marker Scale: 0.5
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: false
+      Tree:
+        /map:
+          /robot_0/odom:
+            /robot_0/base_footprint:
+              /robot_0/base_link:
+                /robot_0/base_laser_link:
+                  {}
+                /robot_0/left_wheel:
+                  {}
+                /robot_0/right_wheel:
+                  {}
+          /robot_1/odom:
+            /robot_1/base_footprint:
+              /robot_1/base_link:
+                /robot_1/base_laser_link:
+                  {}
+                /robot_1/left_wheel:
+                  {}
+                /robot_1/right_wheel:
+                  {}
+          /robot_2/odom:
+            /robot_2/base_footprint:
+              /robot_2/base_link:
+                /robot_2/base_laser_link:
+                  {}
+                /robot_2/left_wheel:
+                  {}
+                /robot_2/right_wheel:
+                  {}
+          /robot_3/odom:
+            /robot_3/base_footprint:
+              /robot_3/base_link:
+                /robot_3/base_laser_link:
+                  {}
+                /robot_3/left_wheel:
+                  {}
+                /robot_3/right_wheel:
+                  {}
+          /robot_4/odom:
+            /robot_4/base_footprint:
+              /robot_4/base_link:
+                /robot_4/base_laser_link:
+                  {}
+                /robot_4/left_wheel:
+                  {}
+                /robot_4/right_wheel:
+                  {}
+      Update Interval: 0
+      Value: true
+    - Alpha: 0.6
+      Class: rviz/Map
+      Draw Behind: true
+      Enabled: true
+      Name: Map
+      Topic: /map
+      Value: true
+    - Alpha: 1
+      Autocompute Intensity Bounds:
+        Max Intensity: 1
+        Min Intensity: 1
+        Value: true
+      Autocompute Value Bounds:
+        Max Value: 10
+        Min Value: -10
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz/LaserScan
+      Color: 148; 255; 164
+      Color Transformer: FlatColor
+      Decay Time: 0
+      Enabled: true
+      Name: LaserScan
+      Position Transformer: XYZ
+      Queue Size: 10
+      Selectable: false
+      Size (Pixels): 3
+      Size (m): 0.01
+      Style: Points
+      Topic: /robot_0/base_scan
+      Use Fixed Frame: true
+      Use rainbow:
+        Max Color: 255; 255; 255
+        Min Color: 0; 0; 0
+        Value: true
+      Value: true
+    - Alpha: 1
+      Autocompute Intensity Bounds:
+        Max Intensity: 101
+        Min Intensity: 101
+        Value: true
+      Autocompute Value Bounds:
+        Max Value: 10
+        Min Value: -10
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz/LaserScan
+      Color: 166; 88; 255
+      Color Transformer: FlatColor
+      Decay Time: 0
+      Enabled: true
+      Name: LaserScan
+      Position Transformer: XYZ
+      Queue Size: 10
+      Selectable: false
+      Size (Pixels): 3
+      Size (m): 0.01
+      Style: Points
+      Topic: /robot_1/base_scan
+      Use Fixed Frame: true
+      Use rainbow:
+        Max Color: 255; 255; 255
+        Min Color: 0; 0; 0
+        Value: true
+      Value: true
+    - Alpha: 1
+      Autocompute Intensity Bounds:
+        Max Intensity: 1
+        Min Intensity: 1
+        Value: true
+      Autocompute Value Bounds:
+        Max Value: 0.15
+        Min Value: 0.15
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz/LaserScan
+      Color: 85; 0; 255
+      Color Transformer: FlatColor
+      Decay Time: 0
+      Enabled: true
+      Name: LaserScan
+      Position Transformer: XYZ
+      Queue Size: 10
+      Selectable: false
+      Size (Pixels): 3
+      Size (m): 0.01
+      Style: Points
+      Topic: /robot_2/base_scan
+      Use Fixed Frame: true
+      Use rainbow:
+        Max Color: 255; 255; 255
+        Min Color: 0; 0; 0
+        Value: true
+      Value: true
+    - Alpha: 1
+      Autocompute Intensity Bounds:
+        Max Intensity: 1
+        Min Intensity: 1
+        Value: true
+      Autocompute Value Bounds:
+        Max Value: 0.15
+        Min Value: 0.15
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz/LaserScan
+      Color: 255; 206; 120
+      Color Transformer: FlatColor
+      Decay Time: 0
+      Enabled: true
+      Name: LaserScan
+      Position Transformer: XYZ
+      Queue Size: 10
+      Selectable: false
+      Size (Pixels): 3
+      Size (m): 0.01
+      Style: Points
+      Topic: /robot_3/base_scan
+      Use Fixed Frame: true
+      Use rainbow:
+        Max Color: 255; 255; 255
+        Min Color: 0; 0; 0
+        Value: true
+      Value: true
+    - Alpha: 1
+      Autocompute Intensity Bounds:
+        Max Intensity: 1
+        Min Intensity: 1
+        Value: true
+      Autocompute Value Bounds:
+        Max Value: 0.15
+        Min Value: 0.15
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz/LaserScan
+      Color: 255; 30; 203
+      Color Transformer: FlatColor
+      Decay Time: 0
+      Enabled: true
+      Name: LaserScan
+      Position Transformer: XYZ
+      Queue Size: 10
+      Selectable: false
+      Size (Pixels): 3
+      Size (m): 0.01
+      Style: Points
+      Topic: /robot_4/base_scan
+      Use Fixed Frame: true
+      Use rainbow:
+        Max Color: 255; 255; 255
+        Min Color: 0; 0; 0
+        Value: true
+      Value: true
+    - Alpha: 1
+      Class: rviz/RobotModel
+      Collision Enabled: false
+      Enabled: true
+      Links:
+        base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        left_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+      Name: RobotModel
+      Robot Description: /robot_0/robot_description
+      TF Prefix: /robot_0
+      Update Interval: 0
+      Value: true
+      Visual Enabled: true
+    - Alpha: 1
+      Class: rviz/RobotModel
+      Collision Enabled: false
+      Enabled: true
+      Links:
+        base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        left_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+      Name: RobotModel
+      Robot Description: /robot_1/robot_description
+      TF Prefix: /robot_1
+      Update Interval: 0
+      Value: true
+      Visual Enabled: true
+    - Alpha: 1
+      Class: rviz/RobotModel
+      Collision Enabled: false
+      Enabled: true
+      Links:
+        base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        left_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+      Name: RobotModel
+      Robot Description: /robot_2/robot_description
+      TF Prefix: /robot_2
+      Update Interval: 0
+      Value: true
+      Visual Enabled: true
+    - Alpha: 1
+      Class: rviz/RobotModel
+      Collision Enabled: false
+      Enabled: true
+      Links:
+        base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        left_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+      Name: RobotModel
+      Robot Description: /robot_3/robot_description
+      TF Prefix: /robot_3
+      Update Interval: 0
+      Value: true
+      Visual Enabled: true
+    - Alpha: 1
+      Class: rviz/RobotModel
+      Collision Enabled: false
+      Enabled: true
+      Links:
+        base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        left_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+      Name: RobotModel
+      Robot Description: /robot_4/robot_description
+      TF Prefix: /robot_4
+      Update Interval: 0
+      Value: true
+      Visual Enabled: true
+    - Angle Tolerance: 0.1
+      Class: rviz/Odometry
+      Color: 255; 25; 0
+      Enabled: true
+      Keep: 100
+      Length: 0.2
+      Name: Odometry
+      Position Tolerance: 0.1
+      Topic: /robot_0/odom
+      Value: true
+    - Angle Tolerance: 0.1
+      Class: rviz/Odometry
+      Color: 255; 25; 0
+      Enabled: true
+      Keep: 100
+      Length: 0.2
+      Name: Odometry
+      Position Tolerance: 0.1
+      Topic: /robot_1/odom
+      Value: true
+    - Angle Tolerance: 0.1
+      Class: rviz/Odometry
+      Color: 255; 25; 0
+      Enabled: true
+      Keep: 100
+      Length: 0.2
+      Name: Odometry
+      Position Tolerance: 0.1
+      Topic: /robot_2/odom
+      Value: true
+    - Angle Tolerance: 0.1
+      Class: rviz/Odometry
+      Color: 255; 25; 0
+      Enabled: true
+      Keep: 100
+      Length: 0.2
+      Name: Odometry
+      Position Tolerance: 0.1
+      Topic: /robot_3/odom
+      Value: true
+    - Angle Tolerance: 0.1
+      Class: rviz/Odometry
+      Color: 255; 25; 0
+      Enabled: true
+      Keep: 100
+      Length: 0.2
+      Name: Odometry
+      Position Tolerance: 0.1
+      Topic: /robot_4/odom
+      Value: true
+  Enabled: true
+  Global Options:
+    Background Color: 31; 31; 31
+    Fixed Frame: /map
+  Name: root
+  Tools:
+    - Class: rviz/Interact
+    - Class: rviz/Measure
+    - Class: rviz/MoveCamera
+    - Class: rviz/Select
+    - Class: rviz/SetGoal
+      Topic: /robot_0/move_base_simple/goal
+    - Class: rviz/SetInitialPose
+      Topic: initialpose
+  Value: true
+  Views:
+    Current:
+      Class: rviz/Orbit
+      Distance: 3.9175
+      Focal Point:
+        Value: 1.8331; 0.53171; -1.6608
+        X: 1.8331
+        Y: 0.53171
+        Z: -1.6608
+      Name: Current View
+      Near Clip Distance: 0.01
+      Pitch: 0.864797
+      Target Frame: /map
+      Value: Orbit (rviz)
+      Yaw: 0.0887109
+    Saved: ~
+Window Geometry:
+  Height: 1024
+  QMainWindow State: 000000ff00000000fd00000003000000000000010b0000038bfc0200000005fb000000100044006900730070006c006100790073010000003d0000025c000000e800fffffffb0000000c00430061006d0065007200610000000278000000d00000000000000000fb0000000c00430061006d00650072006101000002d4000000ce0000000000000000fb0000001e0054006f006f006c002000500072006f0070006500720074006900650073010000029f000000700000006d00fffffffb0000000a005600690065007700730100000315000000b3000000af00ffffff000000010000011d0000031afc0200000001fb0000001200530065006c0065006300740069006f006e0100000273000000cf000000000000000000000003000003e30000003efc0100000001fb0000000800540069006d00650100000111000003e30000023100ffffff000003e30000034700000001000000020000000100000002fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  Width: 1280
+  X: -191
+  Y: -358

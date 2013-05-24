@@ -1,0 +1,16 @@
+<launch>
+
+	<param
+		name="/use_sim_time"
+		value="true" />
+
+	<include file="$(find lrm_bringup)/launch/simulator_empty.launch" />
+
+	<include file="$(find lrm_bringup)/launch/robot_model.launch" />
+	<include file="$(find lrm_bringup)/launch/simulation.launch" />
+<!-- 
+	<include file="$(find lrm_bringup)/launch/odometry.launch" />
+ -->
+	<include file="$(find lrm_bringup)/launch/stereo_vision.launch" />
+
+</launch>

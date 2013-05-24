@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- start world -->
+  <!-- include file="$(find summit_description)/Media/launch/robotnik.launch"/ -->
+
+  <!-- start controller manager -->
+  <include file="$(find pr2_controller_manager)/controller_manager.launch"/>
+
+  <!-- send guardian.urdf to param server -->
+  <param name="robot_description" textfile="$(find summit_description)/urdf/summit.urdf" />
+
+  <!-- push robot_description to factory and spawn robot in gazebo -->
+  <!--node name="spawn_single_link" pkg="gazebo_tools" type="gazebo_model" args="-p robot_description spawn -z 2" respawn="false" output="screen" /-->
+  <node name="spawn_object" pkg="gazebo" type="spawn_model" args="-urdf -param robot_description -x 0.0 -y 0.0 -z 0.5 -model summit" respawn="false" output="screen" />
+
+  <!--summit_controller.yaml-->
+  <rosparam file="$(find summit_controller)/summit_controller.yaml" command="load"/>
+
+  <param name="pr2_controller_manager/joint_state_publish_rate" value="100.0" />
+  <!-- spawn_summit_controller/ -->
+  <node name="summit_controller" pkg="pr2_controller_manager" type="spawner" args="summit_controller" respawn="false" output="screen"/>
+  	
+</launch>

@@ -1,0 +1,57 @@
+<launch>
+
+	<node
+		pkg="tf"
+		type="static_transform_publisher"
+		name="wheel_odom_broadcaster"
+		args="0 0 0 0 0 0 map wheelodom 30"
+		output="screen" />
+
+	<rosparam
+		command="load"
+		file="$(find lrm_odometry)/params/odometry_params.yaml" />
+
+	<node
+		pkg="lrm_odometry"
+		type="extended_odometry"
+		name="wheel_odometry"
+		output="screen"
+		respawn="true"
+	>
+		<param
+			name="use_imu"
+			value="true" />
+		<param
+			name="publish_tf"
+			value="true" />
+		<param
+			name="publish_js"
+			value="true" />
+		<param
+			name="animation_only"
+			value="true" />
+
+		<param
+			name="pos_cov"
+			value="0.001" />
+		<param
+			name="rot_cov"
+			value="0.001" />
+
+		<param
+			name="fixed_odometry"
+			value="wheelodom" />
+		<remap
+			from="encoders"
+			to="encoders_controller/encoders" />
+		<remap
+			from="imu_data"
+			to="lse_xsens_mti/xsens/imu/data" />
+		<!-- 
+		<remap
+			from="odom"
+			to="/wheelodom" />
+		 -->
+	</node>
+
+</launch>

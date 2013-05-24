@@ -1,0 +1,106 @@
+<?xml version="1.0"?> 
+
+<launch>
+
+	<arg name="use_sim_time" default="true" />
+
+	<!-- set use_sim_time flag -->
+	<group if="$(arg use_sim_time)">
+		<param name="/use_sim_time" value="true" />
+	</group>
+
+	<!-- the -r option for gazebo disables ogre, therefore, no graphics card 
+		is needed. However, no image generation is possible. -->
+	<!-- the -u (pause) option for start paused -->
+	<!-- NAO TROCAR O NOME DO NODE... precisar ser sempre "gazebo" - bug do ros -->
+	<node name="gazebo" pkg="gazebo" type="gazebo"
+		args="$(find rosbombeiros_simulator)/worlds/empty_new.world"
+		respawn="false" 
+		output="screen" 
+	/>
+
+ 	<group ns="spawn_objects">
+	
+	    <!-- <node name="spawn_box" pkg="gazebo" type="spawn_model" args="-file 
+			$(find rosbombeiros_simulator)/objects/box.urdf -urdf -z 1 -model minha_caixa" 
+			respawn="false" output="screen" /> -->
+			
+		<!-- <node name="spawn_tree_a" pkg="gazebo" type="spawn_model" args="-file 
+			$(find rosbombeiros_simulator)/objects/tree_a.urdf -urdf -x 1 -y 0.5 -z 0 
+			-model tree_a_1" respawn="false" output="screen" /> -->
+
+		<!-- <node name="spawn_tree_1" pkg="gazebo" type="spawn_model" args="-file 
+			$(find rosbombeiros_simulator)/objects/tree_k.urdf -urdf -x 2 -y 2 -z 0 -model 
+			tree_k_1" respawn="false" output="screen" /> -->
+
+<!-- 
+		<node name="spawn_box_1" pkg="gazebo" type="spawn_model"
+			args="-file $(find rosbombeiros_simulator)/objects/box.urdf -urdf -z 1 -x 9 -y 9 -model box_1"/>
+
+		<node name="spawn_box_2" pkg="gazebo" type="spawn_model"
+			args="-file $(find rosbombeiros_simulator)/objects/box.urdf -urdf -z 1 -x -9 -y 9 -model box_2"/>
+
+		<node name="spawn_box_3" pkg="gazebo" type="spawn_model"
+			args="-file $(find rosbombeiros_simulator)/objects/box.urdf -urdf -z 1 -x 9 -y -9 -model box_3"
+			respawn="false" output="log" />
+
+		<node name="spawn_box_4" pkg="gazebo" type="spawn_model"
+			args="-file $(find rosbombeiros_simulator)/objects/box.urdf -urdf -z 1 -x -9 -y -9 -model box_4"
+			respawn="false" output="log" />
+
+
+		<node name="spawn_box_11" pkg="gazebo" type="spawn_model"
+			args="-file $(find rosbombeiros_simulator)/objects/box.urdf -urdf -z 1 -x 6 -y 0 -model box_11"
+			respawn="false" output="log" />
+
+		<node name="spawn_box_21" pkg="gazebo" type="spawn_model"
+			args="-file $(find rosbombeiros_simulator)/objects/box.urdf -urdf -z 1 -x 0 -y 6 -model box_21"
+			respawn="false" output="log" />
+
+		<node name="spawn_box_31" pkg="gazebo" type="spawn_model"
+			args="-file $(find rosbombeiros_simulator)/objects/box.urdf -urdf -z 1 -x -6 -y 0 -model box_31"
+			respawn="false" output="log" />
+
+		<node name="spawn_box_41" pkg="gazebo" type="spawn_model"
+			args="-file $(find rosbombeiros_simulator)/objects/box.urdf -urdf -z 1 -x 0 -y -6 -model box_41"
+			respawn="false" output="log" />
+
+
+		<node name="spawn_box_12" pkg="gazebo" type="spawn_model"
+			args="-file $(find rosbombeiros_simulator)/objects/box.urdf -urdf -z 1 -x 12 -y 0 -model box_12"
+			respawn="false" output="log" />
+
+		<node name="spawn_box_22" pkg="gazebo" type="spawn_model"
+			args="-file $(find rosbombeiros_simulator)/objects/box.urdf -urdf -z 1 -x 0 -y 12 -model box_22"
+			respawn="false" output="log" />
+
+		<node name="spawn_box_32" pkg="gazebo" type="spawn_model"
+			args="-file $(find rosbombeiros_simulator)/objects/box.urdf -urdf -z 1 -x -12 -y 0 -model box_32"
+			respawn="false" output="log" />
+
+		<node name="spawn_box_42" pkg="gazebo" type="spawn_model"
+			args="-file $(find rosbombeiros_simulator)/objects/box.urdf -urdf -z 1 -x 0 -y -12 -model box_42"
+			respawn="false" output="log" />
+
+
+		<node name="spawn_box_13" pkg="gazebo" type="spawn_model"
+			args="-file $(find rosbombeiros_simulator)/objects/box.urdf -urdf -z 1 -x 18 -y 18 -model box_13"
+			respawn="false" output="log" />
+
+		<node name="spawn_box_23" pkg="gazebo" type="spawn_model"
+			args="-file $(find rosbombeiros_simulator)/objects/box.urdf -urdf -z 1 -x -18 -y 18 -model box_23"
+			respawn="false" output="log" />
+
+		<node name="spawn_box_33" pkg="gazebo" type="spawn_model"
+			args="-file $(find rosbombeiros_simulator)/objects/box.urdf -urdf -z 1 -x 18 -y -18 -model box_33"
+			respawn="false" output="log" />
+
+		<node name="spawn_box_43" pkg="gazebo" type="spawn_model"
+			args="-file $(find rosbombeiros_simulator)/objects/box.urdf -urdf -z 1 -x -18 -y -18 -model box_43"
+			respawn="false" output="log" />
+
+ -->
+
+	</group>
+
+</launch>

@@ -1,0 +1,31 @@
+Proposição: A proposição é uma declaração sobre conceitos que podem ser julgados
+como verdadeiros ou falsos, caso se refiram a fenômenos observáveis. Hipótese: A
+hipótese ocorre quando uma proposição é formulada para testes empíricos. É de
+natureza tentativa e conjectural. A hipótese baseada em mais de um caso
+(entidade ou coisa sobre a qual a hipótese discorre), é uma generalização.
+Hipótese descritiva: As hipóteses descritivas são proposições que normalmente
+declaram existência, tamanho, forma ou distribuição de alguma variável. São
+importantes para reforçar as relações a serem encontradas na pesquisa, estimulam
+o pensamento sobre as implicações de uma descoberta apoiada ou rejeitada e são
+úteis para testar a significância estatística. Hipótese relacional: Hipóteses
+relacionais são declarações que descrevem uma relação entre duas variáveis que
+dizem respeito a algum caso. a) As hipóteses correlacionais declaram que as
+variáveis ocorrem juntas, sem implicar que uma causa a outra (relações fracas ou
+faltam provas suficientes). Exemplo: As pessoas do Nordeste avaliam o presidente
+de forma mais favorável do que os do Sudeste. b) A hipótese explanatória
+(causal), também chamada de variável independente (VI) implica que a existência
+de uma variável ou a mudança nessa variável causa ou gera mudança em outra
+variável, “ajudando a fazer acontecer”. Exemplo: um aumento na renda familiar
+(VI) leva a um aumento na aquisição de supérfluos (VD). O papel das hipóteses: A
+virtude da hipótese é que, se levada a sério, separa o que deve ser estudado
+daquilo que não deve ser estudado, pois um problema freqüente na pesquisa é a
+proliferação de informações que dificulta o trabalho de análise. Uma boa
+hipótese deve atender a três requisitos: 1) Ser adequada a seu propósito: a
+hipótese deve informar claramente condição, tamanho ou distribuição de alguma
+variável em termos de valores importantes para a pesquisa. 2) Possibilidade de
+ser testada: A hipótese não deve exigir técnicas indisponíveis, ou explicação
+que desafie leis físicas ou psicológicas conhecidas, e deve ter conseqüências
+que possam ser deduzidos para fins de teste. 3) Ser melhor do que as
+concorrentes: Uma boa hipótese deve ter maior variedade, explicar mais e maior
+variedade de fatos, e que seja simples, exigindo poucas condições ou suposições.
+

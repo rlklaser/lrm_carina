@@ -1,0 +1,24 @@
+<launch>
+
+	<node
+		name="show_velocity"
+		pkg="GPSNavigation"
+		type="GPSShowVelocity"
+		output="screen"
+		respawn="true"
+	>
+
+		<param
+			name="rate"
+			type="double"
+			value="1.0" />
+	
+		<!-- 
+		<remap from="/pose" to="/lse_xsens_mti/xsens/pose" />
+	 	-->
+		<remap
+			from="pose"
+			to="/followme/our/pose" />
+	</node>
+
+</launch>

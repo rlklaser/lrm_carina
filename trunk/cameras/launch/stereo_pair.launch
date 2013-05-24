@@ -1,0 +1,32 @@
+<!-- -->
+<launch>
+
+<group ns="disp">
+	<node name="camera_1" pkg="camera1394" type="camera1394_node">
+		<param name="guid" value="00b09d0100ab8dfc" />
+		<param name="video_mode" value="640x480_yuv422" />
+		<!-- <param name="frame_rate" value="30" /> -->
+				
+		<!-- $(env ROS_NAMESPACE) -->
+		<remap from="camera/image_raw" to="/stereo/left/image_raw" />
+		<remap from="camera/camera_info" to="/stereo/left/camera_info" />
+		<remap from="camera/set_camera_info" to="/stereo/left/set_camera_info" />
+	</node>
+	
+	<node name="camera_2" pkg="camera1394" type="camera1394_node">
+		<param name="guid" value="00b09d0100ab8dfe" />
+		<param name="video_mode" value="640x480_yuv422" />
+		<!-- <param name="frame_rate" value="30" /> -->
+		
+		<remap from="camera/image_raw" to="/stereo/right/image_raw"/>
+		<remap from="camera/camera_info" to="/stereo/right/camera_info" />
+		<remap from="camera/set_camera_info" to="/stereo/right/set_camera_info" />
+	</node>
+
+	<node name="stereo_proc" pkg="stereo_image_proc" type="stereo_image_proc">
+	    <env name="ROS_NAMESPACE" value="/stereo" />
+	</node>
+	
+</group>
+
+</launch>

@@ -1,0 +1,38 @@
+%
+% definições para textos em português
+%
+\@namedef{captionsbrazil}{%
+	\def\bibname{Refer{\^e}ncias}%
+	\def\abstractname{Resumo}%
+	\def\appendixname{Ap{\^e}ndice}%
+	\def\contentsname{Sum{\'a}rio}%
+	\def\listfigurename{Lista de Figuras}%
+	\def\listtablename{Lista de Tabelas}%
+	\def\figurename{Figura}%
+	\def\tablename{Tabela}%
+	\def\advisorname{Orientador}%
+	\def\coadvisorname{Co-orientador}%
+	\def\listabbrvname{Lista de Abreviaturas e Siglas}%
+	\def\listsymbolname{Lista de S{\'\i}mbolos}%
+	\def\annexname{Anexo}%
+	\def\keywordsname{Palavras-chave}%
+	\def\byname{por}%
+	%\def\dissname{Disserta{\c{c}}{\~a}o (mestrado)}%
+	\def\dissname{Monografia (gradua{\c{c}}{\~a}o)}%
+	\def\dissspecificinfo{%
+		Monografia apresentada à Universidade do Vale do Rio dos Sinos como requisito parcial\\
+		para a obten{\c{c}}{\~a}o do título de\\
+		Bacharel em \@course%Ci{\^e}ncia da Computa{\c{c}}{\~a}o
+	}%
+	\def\coordname{Coordenador do Curso}%
+}
+\@namedef{datebrazil}{%
+	\def\monthname{%
+		\ifcase\month\or%
+			janeiro\or fevereiro\or mar{\c{c}}o\or abril\or%
+			maio\or junho\or julho\or agosto\or setembro\or%
+			outubro\or novembro\or dezembro%
+		\fi%
+	}%
+	\def\ii@date{\@publmonth\ de~\@publyear}%
+}

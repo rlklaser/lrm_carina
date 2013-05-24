@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<launch>
+ 
+  <!-- start empty gazebo world -->
+  <include file="$(find gazebo_worlds)/launch/empty_world.launch" />
+
+ 
+  <param name="png_world" textfile="$(find carina_description)/Media/models/parkMap.model" />
+  <node name="spawn_png_world" pkg="gazebo" type="spawn_model" args="-gazebo -param png_world -x -4 -y -4 -model walls" respawn="false" output="screen" />
+
+
+
+</launch>  

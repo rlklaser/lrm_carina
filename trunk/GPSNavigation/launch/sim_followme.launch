@@ -1,0 +1,163 @@
+<launch>
+
+	<node
+		name="show_velocity"
+		pkg="GPSNavigation"
+		type="GPSShowVelocity"
+		output="screen"
+		respawn="true"
+	>
+		<param
+			name="rate"
+			type="double"
+			value="1.0" />
+		 
+		<remap
+			from="pose"
+			to="/one/wheel_odometry/pose" />
+		<!--
+		<remap
+			from="pose"
+			to="/followme/their/pose" />
+		-->
+	</node>
+
+	<node
+		name="pose_ff_one"
+		pkg="GPSNavigation"
+		type="pose_from_fix_node"
+		output="screen"
+		respawn="true"
+	>
+		<remap
+			from="fix"
+			to="/one/lse_xsens_mti/xsens/fix" />
+		<remap
+			from="pose"
+			to="/followme/their/pose" />
+	</node>
+
+	<node
+		name="pose_ff_two"
+		pkg="GPSNavigation"
+		type="pose_from_fix_node"
+		output="screen"
+		respawn="true"
+	>
+		<remap
+			from="fix"
+			to="/two/lse_xsens_mti/xsens/fix" />
+		<remap
+			from="pose"
+			to="/followme/our/pose" />
+	</node>
+
+  
+ 	<node
+		name="relative_pose"
+		pkg="GPSNavigation"
+		type="relative_pose_node"
+		output="screen"
+		respawn="true"
+	>
+	 
+		<remap from="our/pose" to="/two/wheel_odometry/pose" />
+		<remap from="their/pose" to="/one/wheel_odometry/pose" />
+	<!-- 
+	 	<remap from="our/pose" to="/followme/our/pose" />
+		<remap from="their/pose" to="/followme/their/pose" />
+	 -->
+	</node>
+
+	<node
+		name="followme"
+		pkg="GPSNavigation"
+		type="GPSFollowMe"
+		output="screen"
+		respawn="true"
+	>
+
+		<param
+			name="steer"
+			type="bool"
+			value="true" />   	<!-- Sterring active? -->
+		<param
+			name="velocity"
+			type="bool"
+			value="true" />   	<!-- Velocity active? -->
+		<param
+			name="startDelay"
+			type="int"
+			value="6" />	   	<!-- Delay of steering prior to synchronize -->
+		<param
+			name="steeringFactor"
+			type="double"
+			value="1" />   	<!-- Value multiplied by the angle in degrees -->
+		<param
+			name="maxSteering"
+			type="double"
+			value="35.0" />   	<!-- Maximum value sent to the sterring module -->
+		<param
+			name="minDist"
+			type="double"
+			value="1" />   	<!-- Min dist to consider next point vector -->
+		<param
+			name="waypointHZ"
+			type="double"
+			value="1" />		<!-- Waypoint generation frequency -->
+		<param
+			name="waypointTTL"
+			type="double"
+			value="30" /> 		<!-- Life-Time of a waypoint, a new waypoint is picked if the follower can't reach it at this time -->
+		<!-- 
+		<param
+			name="startX"
+			type="double"
+			value="19730.0" />
+		<param
+			name="startY"
+			type="double"
+			value="756370.0" />
+		 -->
+		<param
+			name="initialVelocity"
+			type="double"
+			value="1.0" />		<!-- Initial velocity, 0 will wait for a remote command -->
+			<!-- 
+		<remap to="/two/pose" from="followme/our/pose"/>	
+		<remap to="/one/pose" from="followme/their/pose"/>
+		
+	
+		<remap to="/two/lse_xsens_mti/xsens/pose" from="followme/our/pose"/>	
+		<remap to="/one/lse_xsens_mti/xsens/pose" from="followme/their/pose"/>
+		
+		<remap
+			from="followme/velocity"
+			to="/show_velocity/current_velocity" />
+		-->
+
+		<remap
+			from="followme/our/pose"
+			to="/two/wheel_odometry/pose" />
+		<remap
+			from="followme/their/pose"
+			to="/relative_pose/pose" />
+		<remap
+			from="followme/velocity"
+			to="/show_velocity/velocity" />
+
+	</node>
+
+	<node
+		name="controle_node"
+		pkg="GPSNavigation"
+		type="controle_node"
+		output="screen"
+		respawn="true"
+	>
+		<remap
+			from="cmd_vel"
+			to="/two/carina_controller/cmd_vel" />
+	</node>
+
+</launch>

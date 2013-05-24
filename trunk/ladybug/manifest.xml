@@ -1,0 +1,26 @@
+<package>
+  <description brief="ladybug">
+
+  LadyBug Camera Image
+
+  </description>
+  <author>Rafael Luiz Klaser</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/ladybug</url>
+
+  <depend package="roscpp"/>
+  <depend package="std_msgs"/>
+  <depend package="sensor_msgs"/>
+  <depend package="image_transport"/>
+  <depend package="opencv2"/>
+  <depend package="cv_bridge"/>
+
+</package>
+
+<!-- 
+<export>
+   <ladybug plugin=”${prefix}/nodelets.xml” />
+</export>
+ -->
+ 

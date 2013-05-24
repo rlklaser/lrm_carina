@@ -1,0 +1,64 @@
+<launch>
+
+<!-- 
+	<node pkg="rxtools" name="rxconsole" type="rxconsole"/>
+-->
+ 	
+	<node 
+		name="rosbag_our" 
+		pkg="rosbag" 
+		type="play" 
+		args="--loop --delay=5 /mnt/Win7/Linux/ros/bags/stereo640_xsens_rua.bag" />
+		
+	<node name="left" pkg="image_republish" type="camera_republish_node" output="screen">	
+		<param name="camera_prefix" value="bumblebee2_left" />
+		<param name="restamp" value="true" />
+		<param name="namespace" value="stereo/left" />
+		
+		<remap from="image_old" to="StereoCam/imageLeft" />
+	</node>
+
+	<node name="right" pkg="image_republish" type="camera_republish_node" output="screen">	
+		<param name="camera_prefix" value="bumblebee2_right" />
+		<param name="restamp" value="true" />
+		<param name="namespace" value="stereo/right" />
+		
+		<remap from="image_old" to="StereoCam/imageRight" />
+	</node>
+
+	<node name="view_right" pkg="image_view" type="image_view" output="screen">
+		<remap from="image" to="/stereo/right/image_raw" />
+	</node>
+	
+	<node name="view_left" pkg="image_view" type="image_view" output="screen">
+		<remap from="image" to="/stereo/left/image_raw" />
+	</node>
+
+	<node name="stereo_proc" pkg="stereo_image_proc" type="stereo_image_proc" output="screen">
+		<env name="ROS_NAMESPACE" value="/stereo" />
+		<param name="queue_size" value="100" />
+		<param name="approximate_sync" value="true" />
+	</node>
+	
+	<!-- 
+	<node name="image_proc" pkg="image_proc" type="image_proc" output="screen">
+		<env name="ROS_NAMESPACE" value="/stereo/left" />
+	</node>
+	-->
+
+<!-- 	
+	<node name="view_rect_right" pkg="image_view" type="image_view" output="screen">
+		<remap from="image" to="/stereo/right/image_rect_color" />
+	</node>
+	
+	<node name="view_rect_left" pkg="image_view" type="image_view" output="screen">
+		<remap from="image" to="/stereo/left/image_rect_color" />
+	</node>
+ -->	
+		
+	<node name="stereo_view" pkg="image_view" type="stereo_view" output="screen">
+		<param name="queue_size" value="100" />
+		<param name="approximate_sync" value="true" />
+	</node>
+	
+</launch>

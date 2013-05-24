@@ -1,0 +1,17 @@
+2012-07-05
+
+requer o pacote carina_controller (plugin)
+
+
+existem 2 launchs principais:
+
+1) roslaunch rosbombeiros_simulator rosbombeiros_gazebo
+
+colocar no ar o ambiente de simulacao e abre o rviz e gui do gazebo
+
+2) roslaunch rosbombeiros_simulator rosbombeiros_controller
+
+inicia o controlador neural do carro (a posicao destino eh parametro dentro do launch)
+
+---
+

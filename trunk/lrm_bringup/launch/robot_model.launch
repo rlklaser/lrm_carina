@@ -1,0 +1,44 @@
+<launch>
+
+	<param
+		name="/use_sim_time"
+		value="true" />
+ 
+	<param
+		name="robot_description"
+		command="$(find xacro)/xacro.py '$(find lrm_description)/urdf/clubcar/robot.xacro'" />
+
+	<node
+		name="robot_state_publisher"
+		pkg="robot_state_publisher"
+		type="robot_state_publisher"
+		output="screen"
+		respawn="true"
+	>
+		<param
+			name="publish_frequency"
+			value="30" />
+	</node>
+
+	<node
+		pkg="tf"
+		type="static_transform_publisher"
+		name="world_map_broadcaster"
+		args="0 0 0 0 0 0 world map 30"
+		output="screen" />
+
+<!-- 
+	<node
+		name="joint_state_publisher"
+		pkg="joint_state_publisher"
+		type="joint_state_publisher"
+		output="screen"
+		respawn="true"
+	>
+		<param
+			name="use_gui"
+			value="true" />
+	</node>
+ -->
+  
+</launch>

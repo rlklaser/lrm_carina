@@ -1,0 +1,195 @@
+<launch>
+	<arg name="robot_name" />
+	<arg name="init_pose" />
+
+	<node
+		name="spawn_model"
+		pkg="gazebo"
+		type="spawn_model"
+		args="-x $(arg init_pose) -urdf -param robot_description -model $(arg robot_name) -gazebo_namespace /gazebo -robot_namespace $(arg robot_name)"
+		respawn="false"
+		output="screen" />
+
+	<node
+		pkg="robot_state_publisher"
+		type="robot_state_publisher"
+		name="robot_state_publisher"
+		output="screen" />
+
+	<node
+		pkg="tf"
+		type="static_transform_publisher"
+		name="map_broadcaster"
+		args="$(arg init_pose) 0.0 0.0 0 0 0 /map odom 30"
+		output="screen" />
+
+	<rosparam
+		command="load"
+		file="$(find lrm_odometry)/params/odometry_params.yaml" />
+
+	<node
+		pkg="lrm_odometry"
+		type="simple_odometry"
+		name="wheel_odometry"
+		output="screen"
+		respawn="true"
+	>
+		<param
+			name="use_imu"
+			value="false" />
+		<param
+			name="publish_tf"
+			value="true" />
+		<param
+			name="publish_js"
+			value="true" />
+		<param
+			name="animation_only"
+			value="true" />
+		<param
+			name="pos_cov"
+			value="0.25" />
+		<param
+			name="rot_cov"
+			value="0.0001" />
+		<remap
+			from="encoders"
+			to="encoders_controller/encoders" />
+		<remap
+			from="imu_data"
+			to="lse_xsens_mti/xsens/imu/data" />
+	</node>
+
+	<node
+		name="front_left_susp_controller"
+		pkg="pr2_controller_manager"
+		type="spawner"
+		args="front_left_susp_controller"
+		respawn="false"
+		output="screen"
+	>
+		<param
+			name="type"
+			value="lrm_gazebo/SuspensionControllerPlugin" />
+		<param
+			name="effort"
+			value="-700" />
+		<param
+			name="joint"
+			value="joint_front_left_susp" />
+	</node>
+
+	<node
+		name="front_right_susp_controller"
+		pkg="pr2_controller_manager"
+		type="spawner"
+		args="front_right_susp_controller"
+		respawn="false"
+		output="screen"
+	>
+		<param
+			name="type"
+			value="lrm_gazebo/SuspensionControllerPlugin" />
+		<param
+			name="effort"
+			value="700" />
+		<param
+			name="joint"
+			value="joint_front_right_susp" />
+	</node>
+
+	<node
+		name="rear_left_susp_controller"
+		pkg="pr2_controller_manager"
+		type="spawner"
+		args="rear_left_susp_controller"
+		respawn="false"
+		output="screen"
+	>
+		<param
+			name="type"
+			value="lrm_gazebo/SuspensionControllerPlugin" />
+		<param
+			name="effort"
+			value="-700" />
+		<param
+			name="joint"
+			value="joint_rear_left_susp" />
+	</node>
+
+	<node
+		name="rear_right_susp_controller"
+		pkg="pr2_controller_manager"
+		type="spawner"
+		args="rear_right_susp_controller"
+		respawn="false"
+		output="screen"
+	>
+		<param
+			name="type"
+			value="lrm_gazebo/SuspensionControllerPlugin" />
+		<param
+			name="effort"
+			value="700" />
+		<param
+			name="joint"
+			value="joint_rear_right_susp" />
+	</node>
+
+	<node
+		name="encoders_controller"
+		pkg="pr2_controller_manager"
+		type="spawner"
+		args="encoders_controller"
+		respawn="false"
+		output="screen"
+	>
+		<param
+			name="type"
+			value="lrm_gazebo/EncodersControllerPlugin" />
+		<param
+			name="steering_wheel"
+			value="true" />
+		<param
+			name="update_rate"
+			value="30" />
+		<param
+			name="wheel_encoder_joint"
+			value="joint_front_right_wheel" />
+		<param
+			name="steering_encoder_joint"
+			value="joint_steer" />
+		<param
+			name="steering_wheel_joint"
+			value="joint_steering_wheel" />
+	</node>
+<!-- 
+	<node
+		name="carina_controller"
+		pkg="pr2_controller_manager"
+		type="spawner"
+		args="carina_controller"
+		respawn="false"
+		output="screen"
+	>
+		<param
+			name="type"
+			value="lrm_controller/CarinaControllerPlugin" />
+		<param
+			name="timeout"
+			value="5" />
+		<param
+			name="wheel_diameter"
+			value="0.48" />
+		<param
+			name="joint_blw"
+			value="joint_rear_left_wheel" />
+		<param
+			name="joint_brw"
+			value="joint_rear_right_wheel" />
+		<param
+			name="joint_stw"
+			value="joint_steer" />
+	</node>
+ -->
+</launch>

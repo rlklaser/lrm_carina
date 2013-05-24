@@ -1,0 +1,217 @@
+#VIKING GPS Data file http://viking.sf.net/
+
+xmpp=2.000000
+ympp=2.000000
+lat=-22.005428
+lon=-47.928493
+mode=mercator
+color=#cccccc
+highlightcolor=#eea500
+drawscale=t
+drawcentermark=t
+drawhighlight=t
+
+~Layer TrackWaypoint
+name=TrackWaypoint
+tracks_visible=t
+waypoints_visible=t
+drawmode=0
+drawlines=t
+drawpoints=t
+drawelevation=f
+elevation_factor=30
+drawstops=f
+stop_length=60
+line_thickness=1
+bg_line_thickness=0
+trackbgcolor=#ffffff
+velocity_min=0.000000
+velocity_max=5.000000
+drawlabels=t
+wpcolor=#000000
+wptextcolor=#ffffff
+wpbgcolor=#8383c4
+wpbgand=t
+wpsymbol=0
+wpsize=4
+wpsyms=t
+drawimages=t
+image_size=64
+image_alpha=255
+image_cache_size=300
+
+
+~LayerData
+type="waypointlist"
+type="waypoint" latitude="-22.004822471243763" longitude="-47.93088560029512" name="107"
+type="waypoint" latitude="-22.004849317750178" longitude="-47.930898541843113" name="108"
+type="waypoint" latitude="-22.00486718484127" longitude="-47.930908878893682" name="109"
+type="waypoint" latitude="-22.004759923431475" longitude="-47.930850146320147" name="105"
+type="waypoint" latitude="-22.004474541704589" longitude="-47.930152607463107" name="80"
+type="waypoint" latitude="-22.004469313966279" longitude="-47.930192571416598" name="81"
+type="waypoint" latitude="-22.004459541994272" longitude="-47.930234280935181" name="82"
+type="waypoint" latitude="-22.005179354764987" longitude="-47.9293516346305" name="40"
+type="waypoint" latitude="-22.005152648236191" longitude="-47.92933085609053" name="41"
+type="waypoint" latitude="-22.005134933262898" longitude="-47.929312004679097" name="42"
+type="waypoint" latitude="-22.005112713857493" longitude="-47.929292673492462" name="43"
+type="waypoint" latitude="-22.005085962340495" longitude="-47.92927441062713" name="44"
+type="waypoint" latitude="-22.00506813837379" longitude="-47.929261654852333" name="45"
+type="waypoint" latitude="-22.005032365882993" longitude="-47.929243109734593" name="46"
+type="waypoint" latitude="-22.005005479425989" longitude="-47.929232393845815" name="47"
+type="waypoint" latitude="-22.004969565078881" longitude="-47.929221782722337" name="48"
+type="waypoint" latitude="-22.004938058286974" longitude="-47.929217069705892" name="49"
+type="waypoint" latitude="-22.004449834039658" longitude="-47.930272410498041" name="83"
+type="waypoint" latitude="-22.004444637422242" longitude="-47.930310632840005" name="84"
+type="waypoint" latitude="-22.004435002132631" longitude="-47.930344698666545" name="85"
+type="waypoint" latitude="-22.00442988337312" longitude="-47.930378567008979" name="86"
+type="waypoint" latitude="-22.004420235956307" longitude="-47.930413310113117" name="87"
+type="waypoint" latitude="-22.004415176022796" longitude="-47.930443888766526" name="88"
+type="waypoint" latitude="-22.00441002609309" longitude="-47.930479498694069" name="89"
+type="waypoint" latitude="-22.004912106140885" longitude="-47.930920546832581" name="111"
+type="waypoint" latitude="-22.004934700934186" longitude="-47.930918882242878" name="112"
+type="waypoint" latitude="-22.004952971320701" longitude="-47.930906675234894" name="113"
+type="waypoint" latitude="-22.0049669994307" longitude="-47.930889001449785" name="114" symbol="civil"
+type="waypoint" latitude="-22.00489408846407" longitude="-47.93091862751556" name="110"
+type="waypoint" latitude="-22.004409525949473" longitude="-47.930507460983769" name="90"
+type="waypoint" latitude="-22.004408939269673" longitude="-47.9305402610388" name="91"
+type="waypoint" latitude="-22.004412853543954" longitude="-47.93057373441814" name="92"
+type="waypoint" latitude="-22.004906489218762" longitude="-47.929215839900372" name="50"
+type="waypoint" latitude="-22.004874857874665" longitude="-47.92921809330349" name="51"
+type="waypoint" latitude="-22.004838651175152" longitude="-47.929223833915714" name="52"
+type="waypoint" latitude="-22.00481143430714" longitude="-47.929231598390267" name="53"
+type="waypoint" latitude="-22.004784172461829" longitude="-47.929241878510531" name="54"
+type="waypoint" latitude="-22.004756865639017" longitude="-47.929254674274809" name="55"
+type="waypoint" latitude="-22.004734077084802" longitude="-47.929267175765801" name="56"
+type="waypoint" latitude="-22.004706657816794" longitude="-47.92928626063793" name="57"
+type="waypoint" latitude="-22.00468368415968" longitude="-47.929309114971176" name="58"
+type="waypoint" latitude="-22.004660705310378" longitude="-47.929332259563829" name="59"
+type="waypoint" latitude="-22.00525410814496" longitude="-47.930218778418464" name="11"
+type="waypoint" latitude="-22.00527300838819" longitude="-47.93017135212974" name="12"
+type="waypoint" latitude="-22.005291735573891" longitude="-47.930133601422767" name="13"
+type="waypoint" latitude="-22.005235393055546" longitude="-47.930255851811012" name="10"
+type="waypoint" latitude="-22.005320054753426" longitude="-47.930064203552583" name="15"
+type="waypoint" latitude="-22.005338828637843" longitude="-47.930023840404715" name="16"
+type="waypoint" latitude="-22.005352992535951" longitude="-47.929988899558673" name="17"
+type="waypoint" latitude="-22.00537174044867" longitude="-47.929949987730204" name="18"
+type="waypoint" latitude="-22.005385963163885" longitude="-47.929911757161747" name="19"
+type="waypoint" latitude="-22.005042150234967" longitude="-47.930714830352976" name="1"
+type="waypoint" latitude="-22.005070471366498" longitude="-47.930645335989389" name="2"
+type="waypoint" latitude="-22.005093976523124" longitude="-47.930592777816237" name="3"
+type="waypoint" latitude="-22.005117512817044" longitude="-47.930538478019656" name="4"
+type="waypoint" latitude="-22.005008999430725" longitude="-47.93078900144944" name="0" symbol="flag, blue"
+type="waypoint" latitude="-22.005159914794778" longitude="-47.930438687112172" name="6"
+type="waypoint" latitude="-22.0051787147206" longitude="-47.930396872730277" name="7"
+type="waypoint" latitude="-22.00519758732101" longitude="-47.930350994589659" name="8"
+type="waypoint" latitude="-22.005216529131829" longitude="-47.930301246199818" name="9"
+type="waypoint" latitude="-22.005136510060165" longitude="-47.9304856335024" name="5"
+type="waypoint" latitude="-22.004434300907448" longitude="-47.930636218555776" name="94"
+type="waypoint" latitude="-22.004456338419036" longitude="-47.930665709137891" name="95"
+type="waypoint" latitude="-22.004642287976264" longitude="-47.929352690993269" name="60"
+type="waypoint" latitude="-22.004623761652748" longitude="-47.929379218018255" name="61"
+type="waypoint" latitude="-22.004609739754844" longitude="-47.929406224815729" name="62"
+type="waypoint" latitude="-22.005404631465993" longitude="-47.929877296090908" name="20"
+type="waypoint" latitude="-22.005423457218122" longitude="-47.929834030207708" name="21"
+type="waypoint" latitude="-22.005432921133423" longitude="-47.929809542957038" name="22"
+type="waypoint" latitude="-22.005442473288632" longitude="-47.929780121142237" name="23"
+type="waypoint" latitude="-22.005456654442352" longitude="-47.929744212680099" name="24"
+type="waypoint" latitude="-22.005457308467761" longitude="-47.929707638872536" name="25"
+type="waypoint" latitude="-22.005457986707775" longitude="-47.929669710477967" name="26"
+type="waypoint" latitude="-22.00544950729018" longitude="-47.929639143521158" name="27"
+type="waypoint" latitude="-22.005436582264689" longitude="-47.929604807067818" name="28"
+type="waypoint" latitude="-22.005414565329986" longitude="-47.929574155330485" name="29"
+type="waypoint" latitude="-22.004595551773829" longitude="-47.929442520139993" name="63"
+type="waypoint" latitude="-22.004581446826109" longitude="-47.929474171190606" name="64"
+type="waypoint" latitude="-22.004576343810005" longitude="-47.929507168821537" name="65"
+type="waypoint" latitude="-22.004566566813896" longitude="-47.929549168706416" name="66"
+type="waypoint" latitude="-22.00456126136417" longitude="-47.929593486724031" name="67"
+type="waypoint" latitude="-22.004555980124358" longitude="-47.92963645015972" name="68"
+type="waypoint" latitude="-22.004546166764047" longitude="-47.929680481890927" name="69"
+type="waypoint" latitude="-22.004558624741236" longitude="-47.930750279076818" name="99"
+type="waypoint" latitude="-22.005305851040919" longitude="-47.930101369768757" name="14"
+type="waypoint" latitude="-22.004421310307446" longitude="-47.930605558997264" name="93"
+type="waypoint" latitude="-22.004478429576633" longitude="-47.930692200312784" name="96"
+type="waypoint" latitude="-22.004500643611443" longitude="-47.93071182186452" name="97"
+type="waypoint" latitude="-22.004527389755943" longitude="-47.930730375156962" name="98"
+type="waypoint" latitude="-22.004545415881633" longitude="-47.929722473773026" name="70"
+type="waypoint" latitude="-22.00454013979952" longitude="-47.929765146928624" name="71"
+type="waypoint" latitude="-22.004534801419108" longitude="-47.929811303276644" name="72"
+type="waypoint" latitude="-22.005392454962287" longitude="-47.929548728430511" name="30"
+type="waypoint" latitude="-22.005365805559993" longitude="-47.929524756870535" name="31"
+type="waypoint" latitude="-22.005348130407288" longitude="-47.929503680016992" name="32"
+type="waypoint" latitude="-22.005325930062195" longitude="-47.929483284453738" name="33"
+type="waypoint" latitude="-22.005303712413301" longitude="-47.929463856457097" name="34"
+type="waypoint" latitude="-22.005290494967792" longitude="-47.929445871818665" name="35"
+type="waypoint" latitude="-22.005268232332195" longitude="-47.929428959488945" name="36"
+type="waypoint" latitude="-22.005246059655491" longitude="-47.929407015853386" name="37"
+type="waypoint" latitude="-22.005219308156001" longitude="-47.929388752947851" name="38"
+type="waypoint" latitude="-22.005197142392195" longitude="-47.929366422302486" name="39"
+type="waypoint" latitude="-22.004529473407484" longitude="-47.929856879086756" name="73"
+type="waypoint" latitude="-22.004524160955981" longitude="-47.929901584092761" name="74"
+type="waypoint" latitude="-22.00451445134426" longitude="-47.92993981046034" name="75"
+type="waypoint" latitude="-22.00450921673465" longitude="-47.92998016146101" name="76"
+type="waypoint" latitude="-22.004499358297338" longitude="-47.930026708783927" name="77"
+type="waypoint" latitude="-22.004494130588526" longitude="-47.930066672752822" name="78"
+type="waypoint" latitude="-22.004484369029115" longitude="-47.930107801758695" name="79"
+type="waypoint" latitude="-22.004621191625453" longitude="-47.930784668639362" name="101"
+type="waypoint" latitude="-22.004656963906452" longitude="-47.930803214055899" name="102"
+type="waypoint" latitude="-22.004683793115063" longitude="-47.93081712312501" name="103"
+type="waypoint" latitude="-22.004719613853457" longitude="-47.930832959405215" name="104"
+type="waypoint" latitude="-22.004589909915449" longitude="-47.93076737709854" name="100"
+type="waypoint" latitude="-22.004791149740672" longitude="-47.930870534081095" name="106"
+type="waypointlistend"
+~EndLayerData
+~EndLayer
+
+
+~Layer Map
+name=OpenMap
+mode=13
+directory=/home/rlklaser/.viking-maps/
+alpha=126
+autodownload=t
+mapzoom=0
+~EndLayer
+
+
+~Layer Map
+name=BlueMarble
+visible=f
+mode=15
+directory=/home/rlklaser/.viking-maps/
+alpha=150
+autodownload=t
+mapzoom=0
+~EndLayer
+
+
+~Layer Map
+name=Map
+visible=f
+mode=4
+directory=/home/rlklaser/.viking-maps/
+alpha=225
+autodownload=t
+mapzoom=0
+~EndLayer
+
+
+~Layer Map
+name=Bing
+mode=212
+directory=/home/rlklaser/.viking-maps/
+alpha=122
+autodownload=t
+mapzoom=0
+~EndLayer
+
+
+~Layer Map
+name=Map
+visible=f
+mode=12
+directory=/home/rlklaser/.viking-maps/
+alpha=117
+autodownload=t
+mapzoom=0
+~EndLayer
+

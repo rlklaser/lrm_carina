@@ -1,0 +1,34 @@
+<launch>
+	<param
+		name="/use_sim_time"
+		value="true" />
+
+    <!-- start world -->
+	<node
+		name="gazebo"
+		pkg="gazebo"
+		type="gazebo"
+		args="$(find gazebo_worlds)/worlds/empty.world"
+		respawn="false"
+		output="screen" />
+
+    <!-- start gui -->
+	<node
+		name="gazebo_gui"
+		pkg="gazebo"
+		type="gui"
+		respawn="false"
+		output="screen" />
+
+    <!-- include our robots -->
+	<include file="$(find lrm_bringup)/launch/robots.launch" />
+
+	<node
+		name="rviz"
+		pkg="rviz"
+		type="rviz"
+		respawn="false"
+		output="screen"
+		args="-d $(find lrm_bringup)/launch/two_models.rviz" />
+
+</launch>

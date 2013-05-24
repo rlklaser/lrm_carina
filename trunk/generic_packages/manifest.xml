@@ -1,0 +1,26 @@
+<package>
+	<description brief="generic_packages">
+
+		generic_packages
+
+	</description>
+	<author>Rafael Luiz Klaser</author>
+	<license>BSD</license>
+	<review
+		status="unreviewed"
+		notes="" />
+	<url>http://ros.org/wiki/generic_packages</url>
+	<depend package="roscpp" />
+	<depend package="rospy" />
+	<depend package="cv_bridge" />
+	<depend package="opencv2" />
+	<depend package="sensor_msgs" />
+	<depend package="pcl_ros" />
+	<depend package="pcl" />
+
+	<depend package="sba" />
+	<depend package="ns3_ros" />
+
+</package>
+
+

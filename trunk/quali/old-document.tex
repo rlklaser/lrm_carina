@@ -1,0 +1,149 @@
+\documentclass[a4paper,12pt,twoside,brazil]{icmc}
+%{icmc}
+
+\usepackage{amsmath}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage[top=20mm,bottom=20mm,left=20mm,right=15mm]{geometry} %coloca o tamanho das margens
+\usepackage{setspace} %espacamento entre linhas
+\usepackage{natbib} %referencias com numera\c{c}\~{a}o
+ 
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+%\let\cite=\citep
+\usepackage{url}
+\usepackage{listings}
+% \lstset{language=[AspectJ]Java, stringstyle=\ttfamily,basicstyle=\ttfamily, showstringspaces=false}
+\usepackage{fancybox}
+\usepackage{indentfirst} %indenta a primeira linha
+\usepackage{times}       %utiliza a fonte Times New Roman
+\usepackage{titlesec} %para os gr\'{a}ficos dos cap\'{\i}tulos
+\usepackage{textfit}
+\usepackage{fancyhdr} % Para colocar cabe\c{c}alho nas p\'{a}ginas
+\usepackage{subfigure}
+\usepackage{lettrine} % Para fazer letras capitulares
+\usepackage{lscape}
+
+\usepackage{lmodern} % fonte CMR que funciona
+
+ \usepackage {pdfsync} 
+ 
+%\usepackage[default]{droidserif}
+\usepackage[T1]{fontenc}
+
+\usepackage[pdftex]{hyperref}
+\usepackage[pdftex]{graphicx} %pacote para incluir imagens
+
+%\hypersetup{colorlinks=true,debug=false,
+%             linkcolor=black,%%%cor do tableofcontents,\ref,\footnote,etc
+%             citecolor=black, %%% cor do \cite
+%             urlcolor=black, %%% cor do \url e \href
+%             pdftitle={Geração de aplicações para linhas de produtos orientadas a aspectos com apoio da ferramenta Captor-AO},
+%             pdfauthor={Carlos Alberto de Freitas Pereira Júnior},
+%             pdfsubject={Programação Orientada a Aspectos e Geradores de Aplicações}}
+
+\newcommand{\fig}[1]{\textit{fig.~\ref{#1}}}
+
+%% Uso do comando: Na \fig{fig:xxxx} é apresentada...
+%\newcommand{\aspas}[1]{``#1''} %% Uso do comando: O termo \aspas{feature} é utilizado...
+
+\newcommand{\fonte}[1]{
+	\centering
+	\fontfamily{cmss}\selectfont
+	\footnotesize{
+			\textbf{Fonte: \textnormal{
+				\fontfamily{cmss}\selectfont
+				\footnotesize{#1}
+			}
+		}
+	}
+}
+
+\newcommand{\foot}[1]
+{
+	\footnote{
+		\fontfamily{cmss}\selectfont
+		\footnotesize{#1}
+	}
+}
+
+\fontfamily{cmss}\selectfont
+
+\begin{document}
+
+%\hyphenation{res-pei-to abs-tra-\c{c}\~{a}o su-ges-t\~{o}es
+%cons-tru-\'{i}-do En-ge-nha-ri-a ca-mi-nhos pre-o-cu-pa-ram}
+
+%\begingroup
+
+\pagestyle{empty}
+
+\include{capa}
+%\include{rosto}
+
+%\include{agradecimentos}
+%\newpage\ \thispagestyle{empty}
+
+\frontmatter
+
+
+\include{caps/resumo}
+%\newpage\ \thispagestyle{empty}
+%\include{abstract}
+%\newpage\ \thispagestyle{empty}
+
+
+%\tableofcontents 
+%\newpage\ \thispagestyle{empty}
+%\listoffigures 
+%\newpage\ \thispagestyle{empty}
+%\listoftables
+%\newpage\ \thispagestyle{empty}
+
+%\endgroup
+
+
+\mainmatter
+
+% capítulos
+%\include{caps/resumo}
+
+%\singlespacing
+%\onehalfspacing
+\doublespacing
+
+\include{caps/introducao}
+\include{secs/objetivos_gerais}
+\include{secs/justificativas_aplicacoes}
+\include{secs/contribuicoes_esperadas}
+
+\include{caps/referencial_teorico}
+\include{secs/mapeamento_localizacao}
+\include{secs/sensores}
+\include{secs/mapas_disparidade}
+\include{secs/navegacao}
+\include{secs/consideracoes_referencial}
+
+\include{caps/objetivos_metodologia}
+\include{secs/objetivos_especificos}
+\include{secs/materiais_metodos}
+
+\include{caps/plano_trabalho}
+
+\include{caps/resultados_esperados}
+\include{secs/analise_resultados}
+
+
+% REFERENCES
+\singlespacing
+
+%\bibliographystyle{abnt-num}
+%\bibliographystyle{abnt-alf}
+
+\bibliography{library}
+
+% bibliografia básica
+%\include{library.bib}
+
+
+\end{document}

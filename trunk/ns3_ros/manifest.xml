@@ -1,0 +1,63 @@
+<package>
+	<description brief="ns3_ros">
+
+		ns3_ros
+
+	</description>
+	<author>Rafael Luiz Klaser</author>
+	<license>BSD</license>
+	<review
+		status="unreviewed"
+		notes="" />
+	<url>http://ros.org/wiki/ns3_ros</url>
+
+<!--  
+<rosdep name="libns3-dev" />
+lflags="-L${prefix}/ns3/lib -Wl,-rpath,$/usr/lib -lns3-dev-core-debug -lns3-dev-mobility-debug -lns3-dev-network-debug -lns3-dev-spectrum-debug -lns3-dev-propagation-debug -lns3-dev-wifi-debug -lns3-dev-aodv-debug -lns3-dev-applications-debug -lns3-dev-bridge-debug -lns3-dev-config-store-debug -lns3-dev-csma-debug -lns3-dev-csma-layout-debug -lns3-dev-dsdv-debug -lns3-dev-emu-debug -lns3-dev-energy-debug -lns3-dev-flow-monitor-debug -lns3-dev-internet-debug -lns3-dev-lte-debug -lns3-dev-mesh-debug -lns3-dev-mpi-debug -lns3-dev-netanim-debug -lns3-dev-nix-vector-routing-debug -lns3-dev-olsr-debug -lns3-dev-point-to-point-debug -lns3-dev-stats-debug -lns3-dev-tap-bridge-debug -lns3-dev-test-debug -lns3-dev-tools-debug -lns3-dev-topology-read-debug -lns3-dev-uan-debug -lns3-dev-virtual-net-device-debug -lns3-dev-visualizer-debug -lns3-dev-wimax-debug" />
+lflags="-L${prefix}/ns3/lib -Wl,-rpath,$/usr/lib -lns3-core -lns3-mobility -lns3-network -lns3-spectrum -lns3-propagation -lns3-wifi -lns3-aodv -lns3-applications -lns3-bridge -lns3-config-store -lns3-csma -lns3-csma-layout -lns3-dsdv -lns3-emu -lns3-energy -lns3-flow-monitor -lns3-internet -lns3-lte -lns3-mesh -lns3-mpi -lns3-netanim -lns3-nix-vector-routing -lns3-olsr -lns3-point-to-point -lns3-stats -lns3-tap-bridge -lns3-test -lns3-tools -lns3-topology-read -lns3-uan -lns3-virtual-net-device -lns3-visualizer -lns3-wimax" />
+-->
+ 
+	<export>
+		<cpp
+			cflags="-I${prefix}/ns3/include/ns3-dev"
+			lflags="-L${prefix}/ns3/lib -Wl,-rpath,$/usr/lib:${prefix}/ns3/lib
+			-lns3-dev-antenna-debug 
+			-lns3-dev-aodv-debug 
+			-lns3-dev-applications-debug 
+			-lns3-dev-bridge-debug 
+			-lns3-dev-buildings-debug
+			-lns3-dev-config-store-debug 
+			-lns3-dev-core-debug
+			-lns3-dev-csma-debug 
+			-lns3-dev-csma-layout-debug 
+			-lns3-dev-dsdv-debug
+			-lns3-dev-dsr-debug 
+			-lns3-dev-emu-debug 
+			-lns3-dev-energy-debug 
+			-lns3-dev-flow-monitor-debug 
+			-lns3-dev-internet-debug 
+			-lns3-dev-lte-debug 
+			-lns3-dev-mesh-debug
+			-lns3-dev-mobility-debug 
+			-lns3-dev-mpi-debug 
+			-lns3-dev-netanim-debug
+			-lns3-dev-network-debug 
+			-lns3-dev-nix-vector-routing-debug 
+			-lns3-dev-olsr-debug 
+			-lns3-dev-point-to-point-debug 
+			-lns3-dev-point-to-point-layout-debug
+			-lns3-dev-propagation-debug
+			-lns3-dev-spectrum-debug
+			-lns3-dev-stats-debug 
+			-lns3-dev-tap-bridge-debug 
+			-lns3-dev-test-debug 
+			-lns3-dev-tools-debug 
+			-lns3-dev-topology-read-debug 
+			-lns3-dev-uan-debug 
+			-lns3-dev-virtual-net-device-debug 
+			-lns3-dev-wifi-debug
+			-lns3-dev-wimax-debug" 
+			/>
+	</export>
+
+</package>

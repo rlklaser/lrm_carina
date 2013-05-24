@@ -1,0 +1,195 @@
+Panels:
+  - Class: rviz/Displays
+    Help Height: 84
+    Name: Displays
+    Property Tree Widget:
+      Expanded:
+        - /Global Options1
+        - /TF1/Tree1
+        - /Marker1
+      Splitter Ratio: 0.578212
+    Tree Height: 450
+  - Class: rviz/Time
+    Name: Time
+  - Class: rviz/Views
+    Expanded:
+      - /Current View1
+    Name: Views
+    Splitter Ratio: 0.5
+  - Class: rviz/Tool Properties
+    Expanded:
+      - /2D Nav Goal1
+      - /2D Pose Estimate1
+    Name: Tool Properties
+    Splitter Ratio: 0.5
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Alpha: 0.5
+      Cell Size: 1
+      Class: rviz/Grid
+      Color: 0; 85; 127
+      Enabled: true
+      Line Style:
+        Line Width: 0.03
+        Value: Lines
+      Name: Grid
+      Normal Cell Count: 0
+      Offset:
+        Value: 0; 0; 0
+        X: 0
+        Y: 0
+        Z: 0
+      Plane: XY
+      Plane Cell Count: 1000
+      Reference Frame: <Fixed Frame>
+      Value: true
+    - Class: rviz/TF
+      Enabled: true
+      Frame Timeout: 15
+      Frames:
+        /antenna_link:
+          Value: true
+        /vehicle/1/base_link:
+          Value: true
+        /vehicle/1/odom:
+          Value: true
+        /vehicle/2/base_link:
+          Value: true
+        /vehicle/2/odom:
+          Value: true
+        /vehicle/3/base_link:
+          Value: true
+        /vehicle/3/odom:
+          Value: true
+        /vehicle/4/base_link:
+          Value: true
+        /vehicle/4/odom:
+          Value: true
+        /vehicle/5/base_link:
+          Value: true
+        /vehicle/5/odom:
+          Value: true
+        /world:
+          Value: true
+        All Enabled: true
+      Marker Scale: 1
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: true
+      Tree:
+        /world:
+          /antenna_link:
+            {}
+          /vehicle/1/odom:
+            /vehicle/1/base_link:
+              {}
+          /vehicle/2/odom:
+            /vehicle/2/base_link:
+              {}
+          /vehicle/3/odom:
+            /vehicle/3/base_link:
+              {}
+          /vehicle/4/odom:
+            /vehicle/4/base_link:
+              {}
+          /vehicle/5/odom:
+            /vehicle/5/base_link:
+              {}
+      Update Interval: 0
+      Value: true
+    - Angle Tolerance: 0.1
+      Class: rviz/Odometry
+      Color: 255; 25; 0
+      Enabled: true
+      Keep: 10000
+      Length: 0.5
+      Name: Odometry
+      Position Tolerance: 0.1
+      Topic: /vehicle/1/odom
+      Value: true
+    - Class: rviz/Axes
+      Enabled: true
+      Length: 2
+      Name: Axes
+      Radius: 0.05
+      Reference Frame: <Fixed Frame>
+      Value: true
+    - Class: rviz/Marker
+      Enabled: true
+      Marker Topic: /vehicle/1/simple_navigation_markers
+      Name: Marker
+      Namespaces:
+        {}
+      Queue Size: 100
+      Value: true
+    - Alpha: 1
+      Class: rviz/RobotModel
+      Collision Enabled: false
+      Enabled: true
+      Links:
+        base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+      Name: RobotModel
+      Robot Description: /vehicle/1/robot_description
+      TF Prefix: ""
+      Update Interval: 0
+      Value: true
+      Visual Enabled: true
+    - Alpha: 1
+      Class: rviz/RobotModel
+      Collision Enabled: false
+      Enabled: true
+      Links:
+        antenna_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+      Name: RobotModel
+      Robot Description: antenna_description
+      TF Prefix: ""
+      Update Interval: 0
+      Value: true
+      Visual Enabled: true
+  Enabled: true
+  Global Options:
+    Background Color: 31; 31; 31
+    Fixed Frame: /vehicle/1/odom
+  Name: root
+  Tools:
+    - Class: rviz/Interact
+    - Class: rviz/Measure
+    - Class: rviz/MoveCamera
+    - Class: rviz/Select
+    - Class: rviz/SetGoal
+      Topic: /vehicle/1/move_base_simple/goal
+    - Class: rviz/SetInitialPose
+      Topic: initialpose
+  Value: true
+  Views:
+    Current:
+      Class: rviz/Orbit
+      Distance: 11.3746
+      Focal Point:
+        Value: 0; 0; 0
+        X: 0
+        Y: 0
+        Z: 0
+      Name: Current View
+      Near Clip Distance: 0.01
+      Pitch: 0.660399
+      Target Frame: <Fixed Frame>
+      Value: Orbit (rviz)
+      Yaw: 4.87359
+    Saved: ~
+Window Geometry:
+  Height: 1024
+  QMainWindow State: 000000ff00000000fd0000000300000000000001210000038bfc0200000003fb000000100044006900730070006c006100790073010000003d00000256000000e800fffffffb0000000c00430061006d006500720061000000027b000001370000000000000000fc000002990000012f000000c901000019fa000000010100000002fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000000ffffffff0000005400fffffffb0000000a0056006900650077007301000000000000015d0000010b00ffffff000000010000011d0000031afc0200000001fb0000001200530065006c0065006300740069006f006e0100000273000000cf000000000000000000000003000003cd0000003efc0100000001fb0000000800540069006d00650100000127000003cd0000023100ffffff000003cd0000034700000001000000020000000100000002fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  Width: 1280
+  X: -42
+  Y: -622

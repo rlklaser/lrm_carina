@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<launch>
+<!-- 
+	<env name="OGRE_MEDIA_PATH" value="/home/rlklaser/Work/ros/others/meshes/Penguinville_1" />
+ -->
+  <!-- param name="robot_description" command="$(find xacro)/xacro.py '$(find karlik)/urdf/karlik.xacro' " /-->
+  <param name="robot_description" textfile="$(find carina_description)/urdf/carina_gazebo.urdf" />
+  <param name="use_gui" type="bool" value="true" />
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node>
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+  <!-- node name="rviz" pkg="rviz" type="rviz" args="-d $(find summit_description)/urdf/urdf.vcg" /-->
+  <node name="rviz" pkg="rviz" type="rviz" />
+</launch>

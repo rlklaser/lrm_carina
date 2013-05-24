@@ -1,0 +1,27 @@
+<launch>
+
+	<node
+		name="viewer_a"
+		pkg="gpsd_viewer"
+		type="gpsd_viewer"
+		output="screen"
+	>
+		<remap
+			from="fix"
+			to="/gps_a/xsens_a/fix" />
+
+	</node>
+
+	<node
+		name="viewer_b"
+		pkg="gpsd_viewer"
+		type="gpsd_viewer"
+		output="screen"
+	>
+		<remap
+			from="fix"
+			to="/gps_b/xsens_b/fix" />
+
+	</node>
+
+</launch>
