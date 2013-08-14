@@ -1,0 +1,18 @@
+<launch>
+
+	<node
+		name="obstacle_avoidance"
+		pkg="lrm_navigation"
+		type="obstacle_avoidance"
+		respawn="true"
+		output="screen"
+	>
+		<remap from="StereoMatcher/pointCloud" to="/stereo/points2"/>
+		<!-- <remap from="IMU/relativePose" to="/lse_xsens_mti/xsens/imu/data"/> -->
+		<remap from="IMU/relativePose" to="/pose2d"/>
+		<remap from="stereoCam/imageLeft" to="/stereo/left/image_raw"/>
+		<remap from="cmd_vel" to="/carina_controller/cmd_vel"/>
+		
+	</node>
+	
+</launch>

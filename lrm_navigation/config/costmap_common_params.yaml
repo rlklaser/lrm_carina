@@ -1,0 +1,25 @@
+obstacle_range: 2.5
+raytrace_range: 3.5
+
+footprint: [[1.2, -0.75], [1.2, 0.75], [-1.2, 0.75], [-1.2, -0.75]]
+
+#robot_radius: 1.0
+#inscribed_radius: 1.0
+
+inflation_radius: 1.0
+
+#transform_tolerance: 0.8
+#max_obstacle_height: 2.0
+#meter_scoring: true
+#publish_voxel_map: true
+
+
+observation_sources: cloud 
+cloud: 
+  {
+    sensor_frame: stereo_camera, 
+    data_type: PointCloud2, 
+    topic: /stereo/points2, 
+    marking: true, 
+    clearing: true
+  }

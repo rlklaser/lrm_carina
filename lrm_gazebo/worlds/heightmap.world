@@ -1,0 +1,82 @@
+<?xml version="1.0" ?>
+<gazebo version="1.2">
+	<world name="default">
+
+		<scene>
+			<grid>false</grid>
+			<shadows>true</shadows>
+		</scene>
+		
+ <!--  
+    <scene>
+      <ambient>.1 .1 .1 1</ambient>
+      <shadows>false</shadows>
+    </scene>
+    <physics type="bullet">
+      <gravity>0 0 -9.8</gravity>
+      <bullet>
+        <dt>0.001</dt>
+      </bullet>
+    </physics>
+ -->
+ 
+ <!-- 
+ 	<include><uri>model://golf_cart</uri></include>
+  -->
+      
+    <!-- A global light source -->
+		<include>
+			<uri>model://sun</uri>
+		</include>
+
+		<model name="heightmap">
+			<static>true</static>
+			<link name="link">
+				<collision name="collision">
+					<geometry>
+						<heightmap>
+							<uri>file://media/materials/textures/heightmap_bowl.png</uri>
+							<size>129 129 10</size>
+							<pos>0 0 -5.2</pos>
+						</heightmap>
+					</geometry>
+				</collision>
+
+				<visual name="visual">
+					<geometry>
+						<heightmap>
+							<texture>
+								<diffuse>file://media/materials/textures/dirt_diffusespecular.png</diffuse>
+								<normal>file://media/materials/textures/dirt_normal.png</normal>
+								<size>50</size>
+							</texture>
+							<texture>
+								<diffuse>file://media/materials/textures/grass_diffusespecular.png</diffuse>
+								<normal>file://media/materials/textures/grass_normal.png</normal>
+								<size>20</size>
+							</texture>
+							<texture>
+								<diffuse>file://media/materials/textures/fungus_diffusespecular.png</diffuse>
+								<normal>file://media/materials/textures/fungus_normal.png</normal>
+								<size>80</size>
+							</texture>
+							<blend>
+								<min_height>2</min_height>
+								<fade_dist>5</fade_dist>
+							</blend>
+							<blend>
+								<min_height>4</min_height>
+								<fade_dist>5</fade_dist>
+							</blend>
+							<uri>file://media/materials/textures/heightmap_bowl.png</uri>
+							<size>129 129 10</size>
+							<pos>0 0 -5.2</pos>
+						</heightmap>
+					</geometry>
+				</visual>
+
+			</link>
+		</model>
+
+	</world>
+</gazebo>

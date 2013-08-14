@@ -1,0 +1,280 @@
+<launch>
+
+	<env
+		name="GAZEBO_MODEL_PATH"
+		value="$GAZEBO_MODEL_PATH:$(find lrm_description)/models:$(find lrm_description)/models/trees" />
+	<env
+		name="GAZEBO_PLUGIN_PATH"
+		value="$GAZEBO_PLUGIN_PATH:$(find lrm_gazebo)/lib" />
+
+	<param
+		name="/use_sim_time"
+		value="true" />
+
+	<param
+		name="robot_description"
+		command="$(find xacro)/xacro.py '$(find lrm_description)/urdf/clubcar/robot.xacro'" />
+
+	<node
+		name="robot_state_publisher"
+		pkg="robot_state_publisher"
+		type="robot_state_publisher"
+		output="screen"
+	>
+		<param
+			name="publish_frequency"
+			value="30" />
+	</node>
+
+	<node
+		pkg="tf"
+		type="static_transform_publisher"
+		name="ground_truth_odom_broadcaster"
+		args="0 0 0 0 0 0 map odom_gazebo 30"
+		output="screen" />
+
+	<node
+		pkg="tf"
+		type="static_transform_publisher"
+		name="wheel_odom_broadcaster"
+		args="0 0 0 0 0 0 map odom 30"
+		output="screen" />
+
+	<node
+		pkg="tf"
+		type="static_transform_publisher"
+		name="world_map_broadcaster"
+		args="10 10 0 0 0 0 world map 30"
+		output="screen" />
+
+	
+
+<!-- 
+	<param
+		name="robot_description"
+		command="cat $(find lrm_description)/urdf/carina_cam.urdf" />
+
+	<param
+		name="golf_description"
+		command="cat $(find lrm_description)/models/golf_cart/model.sdf" />
+		
+		
+		args="-u $(find hector_gazebo_worlds)/worlds/rolling_landscape_120m.world"
+		
+		terrain-trees
+		old_empty
+		campus_ii_rua
+		terrain-trees-sparse
+-->
+	<node
+		name="gazebo"
+		pkg="gazebo"
+		type="gazebo"
+		args="$(find lrm_gazebo)/worlds/terrain-trees-sparse.world"
+		respawn="true"
+		output="screen" />
+
+	<node
+		name="carina_object"
+		pkg="gazebo"
+		type="spawn_model"
+		args="-urdf -param robot_description -x 0.0 -y 0.0 -z 0.05 -R 0 -P 0 -Y 0 -model carina -gazebo_namespace gazebo"
+		respawn="false"
+		output="screen" />
+		
+<!-- 
+	<node
+		name="carina_object_2"
+		pkg="gazebo"
+		type="spawn_model"
+		args="-urdf -param robot_description -x 0.0 -y 0.0 -z 0.05 -R 0 -P 0 -Y 1.57 -model carina -gazebo_namespace gazeborver"
+		respawn="false"
+		output="screen" />
+ 		
+or 
+	<node
+		name="joint_state_publisher"
+		pkg="joint_state_publisher"
+		type="joint_state_publisher"
+		output="screen"
+	>
+		<param
+			name="use_gui"
+			value="false" />
+	</node>
+
+
+	<rosparam
+		command="load"
+		file="$(find carina_controller)/carina_controller.yaml" />
+	<node
+		name="carina_controller"
+		pkg="pr2_controller_manager"
+		type="spawner"
+		args="carina_controller"
+		respawn="false"
+		output="screen" />
+-->
+
+<!-- 
+	<node
+		name="disparity_proc"
+		pkg="depth_image_proc"
+		type="depth_image_proc"
+		output="screen"
+		respawn="true"
+	>
+		<env
+			name="ROS_NAMESPACE"
+			value="/stereo" />
+		<param
+			name="approximate_sync"
+			value="true" />
+	</node>
+ -->
+	<rosparam
+		command="load"
+		file="$(find lrm_gazebo)/params/carina_4w_suspension.yaml" />
+
+	<rosparam
+		command="load"
+		file="$(find lrm_odometry)/params/odometry_params.yaml" />
+
+	<node
+		name="front_left_susp_controller"
+		pkg="pr2_controller_manager"
+		type="spawner"
+		args="front_left_susp_controller"
+		respawn="false"
+		output="screen" />
+
+	<node
+		name="front_right_susp_controller"
+		pkg="pr2_controller_manager"
+		type="spawner"
+		args="front_right_susp_controller"
+		respawn="false"
+		output="screen" />
+
+	<node
+		name="rear_left_susp_controller"
+		pkg="pr2_controller_manager"
+		type="spawner"
+		args="rear_left_susp_controller"
+		respawn="false"
+		output="screen" />
+
+	<node
+		name="rear_right_susp_controller"
+		pkg="pr2_controller_manager"
+		type="spawner"
+		args="rear_right_susp_controller"
+		respawn="false"
+		output="screen" />
+
+	<node
+		name="encoders_controller"
+		pkg="pr2_controller_manager"
+		type="spawner"
+		args="encoders_controller"
+		respawn="false"
+		output="screen"
+	>
+		<param
+			name="type"
+			value="lrm_gazebo/EncodersControllerPlugin" />
+		<param
+			name="steering_wheel"
+			value="true" />
+		<param
+			name="update_rate"
+			value="30" />
+		<param
+			name="wheel_encoder_joint"
+			value="joint_front_right_wheel" />
+		<param
+			name="steering_encoder_joint"
+			value="joint_steer" />
+		<param
+			name="steering_wheel_joint"
+			value="joint_steering_wheel" />
+	</node>
+
+	<node
+		pkg="lrm_odometry"
+		type="simple_odometry"
+		name="wheel_odometry"
+		output="screen"
+		respawn="true"
+	>
+		<param
+			name="use_imu"
+			value="false" />
+		<param
+			name="publish_tf"
+			value="true" />
+		<param
+			name="publish_js"
+			value="true" />
+		<param
+			name="animation_only"
+			value="true" />
+		<param
+			name="pos_cov"
+			value="0.25" />
+		<param
+			name="rot_cov"
+			value="0.0001" />
+		<param
+			name="print_info"
+			value="false" />
+		<remap
+			from="encoders"
+			to="encoders_controller/encoders" />
+		<!-- 
+		<remap
+			from="odom"
+			to="wheel_odom" />
+		-->
+	</node>
+
+	<group ns="/stereo">
+		<rosparam
+			command="load"
+			file="$(find lrm_description)/params/sensors_parameters.yaml" />
+
+		<node
+			name="stereo_proc"
+			pkg="stereo_image_proc"
+			type="stereo_image_proc"
+			output="screen"
+			respawn="true"
+		>
+		<!-- 
+		<env
+			name="ROS_NAMESPACE"
+			value="/stereo" />
+		 -->
+			<param
+				name="approximate_sync"
+				value="true" />
+		</node>
+	</group>
+
+	<node
+		name="gazebo_gui"
+		pkg="gazebo"
+		type="gui"
+		respawn="false"
+		output="screen" />
+
+	<node
+		name="rviz"
+		pkg="rviz"
+		type="rviz"
+		respawn="true"
+		output="screen"
+		args="-d $(find lrm_gazebo)/launch/visualization.rviz" />
+
+
+</launch>

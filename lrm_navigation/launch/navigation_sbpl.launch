@@ -1,0 +1,109 @@
+<launch>
+
+	<param
+		name="/use_sim_time"
+		value="true" />
+
+<!-- 
+	<node
+		ns="local_costmap"
+		name="voxel_grid_throttle"
+		pkg="topic_tools"
+		type="throttle"
+		args="messages voxel_grid 3.0 voxel_grid_throttled" />
+ -->
+
+	<node
+		name="move_base"
+		pkg="move_base"
+		type="move_base"
+		respawn="true"
+		output="screen"
+	>
+
+		<rosparam
+			file="$(find lrm_navigation)/config/sbpl/costmap_common_params.yaml"
+			command="load"
+			ns="global_costmap" />
+		<rosparam
+			file="$(find lrm_navigation)/config/sbpl/costmap_common_params.yaml"
+			command="load"
+			ns="local_costmap" />
+		<rosparam
+			file="$(find lrm_navigation)/config/sbpl/local_costmap_params.yaml"
+			command="load" />
+		<rosparam
+			file="$(find lrm_navigation)/config/sbpl/global_costmap_params.yaml"
+			command="load" />
+		<rosparam
+			file="$(find lrm_navigation)/config/sbpl/base_local_planner_params.yaml"
+			command="load" />
+		<rosparam
+			file="$(find lrm_navigation)/config/sbpl/sbpl_global_params.yaml"
+			command="load" />
+		<rosparam
+			file="$(find lrm_navigation)/config/sbpl/move_base_params.yaml"
+			command="load" />
+<!-- 
+		<param
+			name="footprint_padding"
+			value="0.05" />
+		<param
+			name="controller_frequency"
+			value="10.0" />
+		<param
+			name="controller_patience"
+			value="100.0" />				
+		<param
+			name="base_global_planner"
+			value="SBPLLatticePlanner" />
+ -->
+		<param
+			name="SBPLLatticePlanner/primitive_filename"
+			value="$(find lrm_navigation)/config/mprim/out/carina10cmFrenteRe16.mprim" />
+
+		<remap
+			from="cmd_vel"
+			to="/carina_controller/cmd_vel" />
+
+	</node>
+
+<!-- 
+	<node
+		name="global_map_server"
+		pkg="map_server"
+		type="map_server"
+		respawn="true"
+		output="screen"
+		args="$(find lrm_navigation)/worlds/blank_map.yaml"
+	>
+		<remap
+			from="map"
+			to="/global_map" />
+	</node>
+
+
+	<node
+		name="local_map_server"
+		pkg="map_server"
+		type="map_server"
+		respawn="true"
+		output="screen"
+		args="$(find lrm_navigation)/worlds/blank_1k_map.yaml"
+	>
+		<remap
+			from="map"
+			to="/map" />
+	</node>
+ -->
+ 
+<!-- 
+	<node
+		ns="local_costmap"
+		name="voxel_grid_throttle"
+		pkg="topic_tools"
+		type="throttle"
+		args="messages voxel_grid 3.0 voxel_grid_throttled" />
+ -->
+
+</launch>

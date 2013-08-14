@@ -1,0 +1,7 @@
+SBPLLatticePlanner:
+  environment_type: XYThetaLattice
+  planner_type: ADPlanner
+  allocated_time: 20.0
+  initial_epsilon: 5.0
+  forward_search: false
+  #primitive_filename -> on launch

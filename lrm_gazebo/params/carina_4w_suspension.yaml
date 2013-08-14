@@ -1,0 +1,20 @@
+front_left_susp_controller:
+     type: lrm_gazebo/SuspensionControllerPlugin
+     joint: joint_front_left_susp
+     effort: -700.0
+
+front_right_susp_controller:
+     type: lrm_gazebo/SuspensionControllerPlugin
+     joint: joint_front_right_susp
+     effort: 700.0
+
+rear_left_susp_controller:
+     type: lrm_gazebo/SuspensionControllerPlugin
+     joint: joint_rear_left_susp
+     effort: -700.0
+
+rear_right_susp_controller:
+     type: lrm_gazebo/SuspensionControllerPlugin
+     joint: joint_rear_right_susp
+     effort: 700.0
+    
