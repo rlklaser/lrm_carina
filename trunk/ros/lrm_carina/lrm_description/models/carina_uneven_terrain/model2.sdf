@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<sdf version="1.3">
+<gazebo version="1.2">
 	<model name="carina_terrain">
 		<static>true</static>
 		<link name='link'>
@@ -7,8 +7,8 @@
 				<geometry>
 					<heightmap>
 						<uri>file://media/materials/textures/heightmap_bowl.png</uri>
-						<size>1025.0 1025.0 10.0</size>
-						<pos>0.0 0.0 -5.2</pos>
+						<size>257.000000 257.000000 10.000000</size>
+						<pos>0.000000 0.000000 -5.200000</pos>
 					</heightmap>
 				</geometry>
 				<surface>
@@ -24,32 +24,32 @@
 			<visual name='visual'>
 				<geometry>
 					<heightmap>
-						<uri>file://media/materials/textures/heightmap_bowl.png</uri>
-						<size>1025.0 1025.0 10.0</size>
-						<pos>0.0 0.0 -5.2</pos>
 						<texture>
 							<diffuse>file://media/materials/textures/dirt_diffusespecular.png</diffuse>
 							<normal>file://media/materials/textures/dirt_normal.png</normal>
-							<size>48.0</size>
+							<size>50.000000</size>
 						</texture>
-						<blend>
-							<min_height>2.0</min_height>
-							<fade_dist>5.0</fade_dist>
-						</blend>
 						<texture>
 							<diffuse>file://media/materials/textures/grass_diffusespecular.png</diffuse>
 							<normal>file://media/materials/textures/grass_normal.png</normal>
-							<size>24.0</size>
+							<size>20.000000</size>
 						</texture>
-						<blend>
-							<min_height>4.0</min_height>
-							<fade_dist>5.0</fade_dist>
-						</blend>
 						<texture>
 							<diffuse>file://media/materials/textures/fungus_diffusespecular.png</diffuse>
 							<normal>file://media/materials/textures/fungus_normal.png</normal>
-							<size>96.0</size>
+							<size>80.000000</size>
 						</texture>
+						<blend>
+							<min_height>2.000000</min_height>
+							<fade_dist>5.000000</fade_dist>
+						</blend>
+						<blend>
+							<min_height>4.000000</min_height>
+							<fade_dist>5.000000</fade_dist>
+						</blend>
+						<uri>file://media/materials/textures/heightmap_bowl.png</uri>
+						<size>129.000000 129.000000 10.000000</size>
+						<pos>0.000000 0.000000 -5.200000</pos>
 					</heightmap>
 				</geometry>
 			</visual>
@@ -57,9 +57,8 @@
 				<linear>0.000000</linear>
 				<angular>0.000000</angular>
 			</velocity_decay>
-			<self_collide>false</self_collide>
-			<kinematic>false</kinematic>
-			<gravity>true</gravity>
+			<self_collide>0</self_collide>
+			<kinematic>0</kinematic>
 		</link>
 	</model>
-</sdf>
+</gazebo>
