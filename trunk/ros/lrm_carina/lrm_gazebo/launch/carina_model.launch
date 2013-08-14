@@ -1,0 +1,14 @@
+<launch>
+	<param
+		name="robot_description"
+		command="$(find xacro)/xacro.py '$(find lrm_description)/urdf/clubcar/robot.xacro'" />
+		
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" >
+	<param name="use_gui" value="true" />
+	</node> 
+	<!-- 
+	<node pkg="tf" type="static_transform_publisher" name="odom_to_map" args="0 0 0 0 0 0 world odom 100" />
+ 	-->
+ 
+</launch>

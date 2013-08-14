@@ -1,0 +1,12 @@
+<launch>
+
+	<node pkg="lrm_odometry" type="extended_odometry" name="odometry" output="screen">
+		<!-- 
+		<remap from="imu_data" to="/lse_xsens_mti/xsens/imu/data" />
+		<remap from="odom" to="odom_sim_enc" />
+		 -->
+		<param name="use_imu" value="false" />
+		<param name="publish_tf" value="false" />
+	</node>
+
+</launch>

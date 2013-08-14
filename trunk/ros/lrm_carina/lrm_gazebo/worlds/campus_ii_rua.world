@@ -1,0 +1,211 @@
+<?xml version ='1.0'?>
+<gazebo version='1.2'>
+	<world name='default'>
+
+		<physics type='ode'>
+			<update_rate>1000</update_rate>
+			<gravity>0.0 0.0 -9.8</gravity>
+			<ode>
+				<constraints>
+					<cfm>0.00001</cfm>
+					<erp>0.2</erp>
+					<contact_max_correcting_vel>100.0</contact_max_correcting_vel>
+					<contact_surface_layer>0.001</contact_surface_layer>
+				</constraints>
+				<solver>
+					<type>quick</type>
+					<dt>0.001</dt>
+					<iters>50</iters>
+					<sor>1.3</sor>
+				</solver>
+			</ode>
+		</physics>
+
+		<scene>
+			<ambient>0.0 0.0 0.0 1.0</ambient>
+			<background>0.7 0.7 0.7 1.0</background>
+			<sky>
+				<time>12</time>
+				<sunrise>5</sunrise>
+				<sunset>19</sunset>
+				<clouds>
+					<speed>0.02</speed>
+					<direction>0</direction>
+					<humidity>0.8</humidity>
+					<mean_size>1</mean_size>
+					<ambient>0.5 0.5 0.5 1.0</ambient>
+				</clouds>
+			</sky>
+			<shadows>true</shadows>
+			<!-- 
+			<fog>
+				<color>0.5 0.5 0.5 0.5</color>
+				<type>linear</type>
+				<start>2.0</start>
+				<end>10.0</end>
+				<density>0.5</density>
+			</fog>
+			 -->
+			<grid>false</grid>
+		</scene>
+
+
+		<light
+			name='sun'
+			type='directional'
+		>
+			<cast_shadows>true</cast_shadows>
+			<pose>0.0 0.0 20.0 0.0 0.0 0.0</pose>
+			<diffuse>0.85 0.85 0.85 1.0</diffuse>
+			<specular>0.15 0.15 0.15 1.0</specular>
+			<attenuation>
+				<range>1000.0</range>
+				<constant>0.9</constant>
+				<linear>0.01</linear>
+				<quadratic>0.001</quadratic>
+			</attenuation>
+			<direction>-0.5 0.5 -1.0</direction>
+		</light>
+
+		<model name="ground">
+			<link name="body">
+				<collision name="geom">
+					<geometry>
+						<plane>
+							<normal>0 0 1</normal>
+						</plane>
+					</geometry>
+					<surface>
+						<friction>
+							<ode>
+								<mu>100</mu>
+								<mu2>50</mu2>
+							</ode>
+						</friction>
+					</surface>
+				</collision>
+			</link>
+			<static>true</static>
+		</model>
+		
+		<road name="aroad">
+			<width>5</width>
+			<point>0.000000 0.000000 0</point>
+			<point>7.730000 -3.500000 0</point>
+			<point>14.970000 -6.500000 0</point>
+			<point>20.450000 -9.000000 0</point>
+			<point>26.110000 -11.500000 0</point>
+			<point>31.610000 -13.500000 0</point>
+			<point>36.510000 -16.000000 0</point>
+			<point>40.870000 -18.000000 0</point>
+			<point>45.650000 -20.000000 0</point>
+			<point>50.830000 -22.000000 0</point>
+			<point>55.560000 -24.000000 0</point>
+			<point>59.430000 -26.000000 0</point>
+			<point>64.370000 -28.000000 0</point>
+			<point>68.310000 -30.000000 0</point>
+			<point>71.670000 -31.500000 0</point>
+			<point>75.540000 -33.000000 0</point>
+			<point>79.750000 -35.000000 0</point>
+			<point>83.390000 -36.500000 0</point>
+			<point>87.450000 -38.500000 0</point>
+			<point>91.430000 -40.000000 0</point>
+			<point>95.030000 -42.000000 0</point>
+			<point>99.540000 -44.000000 0</point>
+			<point>102.090000 -45.000000 0</point>
+			<point>105.150000 -46.000000 0</point>
+			<point>108.890000 -47.500000 0</point>
+			<point>112.670000 -47.500000 0</point>
+			<point>116.590000 -47.500000 0</point>
+			<point>119.730000 -46.500000 0</point>
+			<point>123.250000 -45.000000 0</point>
+			<point>126.370000 -42.500000 0</point>
+			<point>128.950000 -40.000000 0</point>
+			<point>131.370000 -37.000000 0</point>
+			<point>133.510000 -35.000000 0</point>
+			<point>135.570000 -32.500000 0</point>
+			<point>137.530000 -30.000000 0</point>
+			<point>139.360000 -28.500000 0</point>
+			<point>141.060000 -26.000000 0</point>
+			<point>143.280000 -23.500000 0</point>
+			<point>145.110000 -20.500000 0</point>
+			<point>147.370000 -18.000000 0</point>
+			<point>148.860000 -16.000000 0</point>
+			<point>150.950000 -13.000000 0</point>
+			<point>152.860000 -11.000000 0</point>
+			<point>154.810000 -8.500000 0</point>
+			<point>156.640000 -5.500000 0</point>
+			<point>157.920000 -3.500000 0</point>
+			<point>159.760000 0.500000 0</point>
+			<point>160.810000 3.500000 0</point>
+			<point>161.830000 7.500000 0</point>
+			<point>162.250000 11.000000 0</point>
+			<point>162.310000 14.500000 0</point>
+			<point>162.010000 18.000000 0</point>
+			<point>161.340000 22.000000 0</point>
+			<point>160.480000 25.000000 0</point>
+			<point>159.360000 28.000000 0</point>
+			<point>157.980000 31.000000 0</point>
+			<point>156.640000 33.500000 0</point>
+			<point>154.610000 36.500000 0</point>
+			<point>152.200000 39.000000 0</point>
+			<point>149.760000 41.500000 0</point>
+			<point>147.610000 43.500000 0</point>
+			<point>144.830000 45.500000 0</point>
+			<point>142.010000 47.000000 0</point>
+			<point>138.230000 48.500000 0</point>
+			<point>134.930000 50.000000 0</point>
+			<point>131.510000 50.500000 0</point>
+			<point>127.150000 51.500000 0</point>
+			<point>122.560000 52.000000 0</point>
+			<point>118.110000 52.500000 0</point>
+			<point>113.540000 53.500000 0</point>
+			<point>109.200000 53.500000 0</point>
+			<point>104.780000 54.000000 0</point>
+			<point>100.000000 54.500000 0</point>
+			<point>95.280000 55.000000 0</point>
+			<point>90.650000 55.500000 0</point>
+			<point>86.680000 56.500000 0</point>
+			<point>82.500000 57.000000 0</point>
+			<point>77.670000 58.000000 0</point>
+			<point>73.530000 58.500000 0</point>
+			<point>69.260000 59.500000 0</point>
+			<point>64.610000 60.500000 0</point>
+			<point>60.470000 61.000000 0</point>
+			<point>56.140000 62.000000 0</point>
+			<point>52.180000 63.000000 0</point>
+			<point>48.220000 63.500000 0</point>
+			<point>44.680000 64.500000 0</point>
+			<point>41.170000 65.000000 0</point>
+			<point>37.560000 66.000000 0</point>
+			<point>34.390000 66.500000 0</point>
+			<point>30.700000 67.000000 0</point>
+			<point>27.810000 67.000000 0</point>
+			<point>24.420000 67.000000 0</point>
+			<point>20.970000 66.500000 0</point>
+			<point>17.700000 65.500000 0</point>
+			<point>14.560000 64.000000 0</point>
+			<point>11.560000 61.500000 0</point>
+			<point>8.870000 59.000000 0</point>
+			<point>6.890000 56.500000 0</point>
+			<point>5.030000 53.500000 0</point>
+			<point>3.040000 50.000000 0</point>
+			<point>1.340000 46.500000 0</point>
+			<point>-0.380000 43.000000 0</point>
+			<point>-2.220000 39.000000 0</point>
+			<point>-3.600000 36.000000 0</point>
+			<point>-5.160000 32.000000 0</point>
+			<point>-6.850000 27.500000 0</point>
+			<point>-8.890000 24.000000 0</point>
+			<point>-10.380000 20.500000 0</point>
+			<point>-11.660000 17.500000 0</point>
+			<point>-12.690000 15.500000 0</point>
+			<point>-13.640000 12.500000 0</point>
+			<point>-13.800000 10.500000 0</point>
+			<point>-13.580000 8.000000 0</point>
+			<point>-12.280000 6.000000 0</point>
+			<point>-10.430000 4.500000 0</point>
+		</road>
+
+	</world>
+</gazebo>

@@ -1,0 +1,16 @@
+<package>
+  <description brief="lrm_msgs">
+
+     lrm_msgs
+
+  </description>
+  <author>Rafael Luiz Klaser</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/lrm_msgs</url>
+  <depend package="std_msgs"/>
+  <depend package="geometry_msgs"/>
+
+</package>
+
+

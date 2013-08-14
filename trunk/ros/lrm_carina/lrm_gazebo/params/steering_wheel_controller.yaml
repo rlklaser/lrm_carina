@@ -1,0 +1,2 @@
+carina_controller:
+     type: lrm_gazebo/CarinaControllerPlugin

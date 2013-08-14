@@ -1,0 +1,26 @@
+<launch>
+
+	<env
+		name="GAZEBO_MODEL_PATH"
+		value="$GAZEBO_MODEL_PATH:/home/rlklaser/Work/ros/others/ContentPack037::/home/rlklaser/Work/ros/others/meshes" />
+	<env
+		name="GAZEBO_PLUGIN_PATH"
+		value="$GAZEBO_PLUGIN_PATH:$(find lrm_gazebo)/lib" />
+		
+	<node
+		name="gazebo"
+		pkg="gazebo"
+		type="gazebo"
+		args="$(find lrm_gazebo)/worlds/empty_world_plugin.world"
+		respawn="true"
+		output="screen" />
+
+	<node
+		name="gazebo_gui"
+		pkg="gazebo"
+		type="gui"
+		respawn="false"
+		output="screen" />
+
+
+</launch>
