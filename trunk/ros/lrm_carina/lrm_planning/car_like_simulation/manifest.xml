@@ -1,0 +1,14 @@
+<package>
+  <description brief="car_like_simulation">
+
+     car_like_simulation
+
+  </description>
+  <author>alex</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/car_like_simulation</url>
+
+</package>
+
+
