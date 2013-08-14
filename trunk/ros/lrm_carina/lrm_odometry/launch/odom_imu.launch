@@ -1,0 +1,7 @@
+<launch>
+ 
+	<node pkg="lrm_odometry" type="est_odometry" name="odometry" output="screen">
+		<remap from="imu_data" to="/lse_xsens_mti/xsens/imu/data" />
+	</node>
+
+</launch>

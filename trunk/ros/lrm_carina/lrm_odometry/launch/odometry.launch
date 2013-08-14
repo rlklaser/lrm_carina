@@ -1,0 +1,44 @@
+<launch>
+
+<!-- 
+	<node name="mti" pkg="xsens_driver" type="mtnode.py">
+	</node>
+ -->
+ 
+ 	<!-- 
+	<node name="gps_conv" pkg="gps_common" type="utm_odometry_node">
+	 -->
+	<node
+		name="gps_odom"
+		pkg="lrm_odometry"
+		type="utm_odometry_node"
+	>
+		<remap
+			from="odom"
+			to="odom_gps" />
+		<remap
+			from="fix"
+			to="/lse_xsens_mti/xsens/fix" />
+		<param
+			name="rot_cov"
+			value="99999" /> <!-- uncertain -->
+		<param
+			name="pos_cov"
+			value="25" /> <!-- err 5m -->
+		<param
+			name="frame_id"
+			value="/odom" />
+		<param
+			name="child_frame_id"
+			value="base_odometry" />
+		<param
+			name="latitude"
+			value="-22.006286" />
+		<param
+			name="longitude"
+			value="-47.898417" />
+	</node>
+
+
+
+</launch>

@@ -1,0 +1,37 @@
+<package>
+  <description brief="lrm_opencv">
+
+     lrm_opencv
+
+  </description>
+  <author>Rafael Luiz Klaser</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/lrm_opencv</url>
+  <depend package="roscpp"/>
+  <depend package="std_msgs"/>
+
+	<export>
+		<cpp
+			cflags="-I${prefix}/opencv/include"
+			lflags="-L${prefix}/opencv/lib -Wl,-rpath,$/usr/lib:${prefix}/opencv/lib
+				-lopencv_calib3d
+				-lopencv_contrib
+				-lopencv_core
+				-lopencv_features2d
+				-lopencv_flann
+				-lopencv_gpu
+				-lopencv_highgui
+				-lopencv_imgproc
+				-lopencv_legacy
+				-lopencv_ml
+				-lopencv_nonfree
+				-lopencv_objdetect
+				-lopencv_ocl
+				-lopencv_photo
+				-lopencv_softcascade
+				-lopencv_video"/>
+	</export>
+</package>
+
+

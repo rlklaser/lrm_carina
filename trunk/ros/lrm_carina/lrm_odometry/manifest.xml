@@ -1,0 +1,31 @@
+<package>
+	<description brief="lrm_odometry">
+
+		lrm_odometry
+
+	</description>
+	<author>Rafael Luiz Klaser</author>
+	<license>BSD</license>
+	<review
+		status="unreviewed"
+		notes="" />
+	<url>http://ros.org/wiki/lrm_odometry</url>
+
+	<depend package="roscpp" />
+	<depend package="rospy" />
+	<depend package="std_msgs" />
+	<depend package="nav_msgs" />
+	<depend package="tf" />
+	<depend package="dynamic_reconfigure" />
+	<depend package="visualization_msgs" />
+	<depend package="opencv2" />
+	<depend package="gps_common" />
+	<depend package="bfl" />
+	<depend package="robot_pose_ekf" />
+
+	<depend package="lrm_msgs" />
+	<depend package="lrm_description" />
+
+</package>
+
+

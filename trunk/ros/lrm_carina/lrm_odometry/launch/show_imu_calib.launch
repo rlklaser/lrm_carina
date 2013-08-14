@@ -1,0 +1,14 @@
+<launch>
+
+	<node
+		name="imu_yaw_node"
+		pkg="lrm_odometry"
+		type="imu_yaw_node"
+		output="screen"
+	>
+		<remap
+			from="imu_data"
+			to="/calibrated/imu/data" />
+	</node>
+
+</launch>

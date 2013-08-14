@@ -1,0 +1,11 @@
+<launch>
+
+	<node
+		name="enc_kalman"
+		pkg="lrm_odometry"
+		type="encoders_kalman"
+		output="screen"
+	>
+	</node>
+
+</launch>

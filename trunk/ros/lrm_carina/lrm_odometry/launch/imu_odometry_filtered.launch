@@ -1,0 +1,72 @@
+<launch>
+
+	<param
+		name="robot_description"
+		command="cat $(find carina_description)/urdf/carina_gazebo.urdf" />
+
+	<node
+		name="robot_state_publisher"
+		pkg="robot_state_publisher"
+		type="state_publisher"
+		output="screen"
+	>
+		<param
+			name="publish_frequency"
+			value="25" />
+	</node>
+
+	<node
+		pkg="tf"
+		type="static_transform_publisher"
+		name="map_broadcaster"
+		args="10 10 0 0 0 0 /map odom 30"
+		output="screen" />
+
+	<node
+		name="enc_kalman"
+		pkg="lrm_odometry"
+		type="encoders_kalman"
+		output="screen"
+	>
+	</node>
+
+	<rosparam
+		command="load"
+		file="$(find lrm_odometry)/params/odometry_params.yaml" />
+
+	<node
+		pkg="lrm_odometry"
+		type="extended_odometry"
+		name="imu_odometry"
+		output="screen"
+	>
+		<param
+			name="rate"
+			value="30" />
+		<param
+			name="print_info"
+			value="true" />
+
+		<remap
+			from="imu_data"
+			to="/lse_xsens_mti/xsens/imu/data" />
+
+		<remap
+			from="encoders"
+			to="encoders_filtered" />
+	</node>
+
+	<node
+		name="markers"
+		type="pose_markers"
+		pkg="lrm_odometry"
+		output="screen" />
+
+	<node
+		pkg="tf"
+		type="static_transform_publisher"
+		name="marker_broadcaster"
+		args="0 0 0 0 0 0 odom odometry_marker 30"
+		output="screen" />
+		
+</launch>
