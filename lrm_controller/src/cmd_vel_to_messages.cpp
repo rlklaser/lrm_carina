@@ -34,6 +34,7 @@
 #include <tf/transform_broadcaster.h>
 #include <lrm_msgs/Throttle.h>
 #include <lrm_msgs/Steering.h>
+#include <angles/angles.h>
 
 geometry_msgs::Twist base_vel_msg_;
 double previous_linear_vel = 0.0;
@@ -68,8 +69,9 @@ int main(int argc, char** argv) {
 
 	while (nh.ok()) {
 
-		throttle.value = (int) (base_vel_msg_.linear.x * 100);
-		steer.angle = 57.3 * base_vel_msg_.angular.z; // radianos p/ graus
+		throttle.value = std::max(std::min((int)(base_vel_msg_.linear.x * 100), 100), -100);
+		//steer.angle = 57.3 * base_vel_msg_.angular.z; // radianos p/ graus
+		steer.angle = angles::to_degrees(base_vel_msg_.angular.z); // radianos p/ graus
 
 		throttle_pub.publish(throttle);
 		steering_pub.publish(steer);

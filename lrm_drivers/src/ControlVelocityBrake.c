@@ -8,7 +8,7 @@
 
 #include <stdio.h>
 #include <math.h>
-#include <controle/ControlVelocityBrake.h>
+#include <lrm_drivers/ControlVelocityBrake.h>
 
 /*======================================================*/
 /*  Common function to compute a fuzzy number           */

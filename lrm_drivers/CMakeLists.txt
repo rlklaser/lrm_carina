@@ -58,7 +58,10 @@ rosbuild_add_executable(nav_message_node
 rosbuild_add_executable(car_message_node 
 	src/car_message_node.cpp)
 	
-#rosbuild_add_executable(cruise_control 
-#	src/ControlVelocityBrake.c 
-#	src/cruise_control.cpp)
-		
+rosbuild_add_executable(cruise_control 
+	src/ControlVelocityBrake.c 
+	src/cruise_control.cpp)
+	
+rosbuild_add_executable(vehicle_state_node 
+	src/vehicle_state_node.cpp)
+			

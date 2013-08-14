@@ -1,0 +1,56 @@
+<launch>
+
+	<rosparam
+		command="load"
+		file="$(find lrm_bringup)/params/carina_drivers_params.yaml" />
+		
+	<!-- Low level system nodes (running at embedded host) -->
+	<node
+		pkg="lrm_drivers"
+		name="roboteq_driver"
+		type="roboteq_node"
+		respawn="true"
+		output="screen"
+	>
+	</node>
+
+	<node
+		pkg="lrm_drivers"
+		name="arduino_driver"
+		type="throttle_CaRINA1_node"
+		respawn="true"
+		output="screen"
+	>
+		<remap
+			from="throttle_commands"
+			to="velocity_commands" />
+	</node>
+
+	<node
+		pkg="lrm_drivers"
+		name="cruise_control"
+		type="cruise_control"
+		respawn="true"
+		output="screen"
+	>
+	</node>
+
+	<node
+		name="nav_message_node"
+		pkg="lrm_drivers"
+		type="nav_message_node"
+		output="screen"
+		respawn="true"
+	>
+		<remap
+			from="cmd_vel"
+			to="/carina_controller/cmd_vel" />
+		<remap
+			from="~steering_commands"
+			to="steering_commands" />
+		<remap
+			from="~velocity_commands"
+			to="velocity_commands" />
+	</node>
+
+</launch>

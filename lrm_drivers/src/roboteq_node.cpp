@@ -38,6 +38,8 @@ private:
 	double steering_angle; /**< Represents the value of current steering angle. */
 	double brake_intensity; /**< Represents the value of current brake intensity. */
 
+	double steering_angle_ratio;
+
 	long int msg_counter;
 
 public:
@@ -47,7 +49,8 @@ public:
 		nh_priv.param("port", roboteqPath, std::string("/dev/ttyUSB0"));
 		nh_priv.param("model", roboteqModel, std::string(ROBOTEQ_MODEL_AX2550));
 		nh_priv.param("publish_encoder", publish_encoder, false);
-		nh_priv.param("which_frequency", encoder_freq, 0.05);
+		nh_priv.param("which_frequency", encoder_freq, 20.0);
+		nh_priv.param("steering_angle_ratio", steering_angle_ratio, 1.0);
 
 		angle_subscriber = nh.subscribe<lrm_msgs::Steering>("steering_commands", 10, &RoboteqNode::steeringCallback, this);
 		brake_subscriber = nh.subscribe<lrm_msgs::Brake>("brake_commands", 10, &RoboteqNode::brakeCallback, this);
@@ -56,16 +59,19 @@ public:
 			roboteq = new AX2550();
 		else if (roboteqModel.compare(ROBOTEQ_MODEL_HDC2450) == 0)
 			roboteq = new HDC2450();
-		else
+		else {
 			ROS_ERROR("RoboteQ model invalid or no defined, impossible to create a new instance of RoboteQ.");
+			exit(-1);
+		}
 
+		roboteq->setSteeringEncoderRatio(steering_angle_ratio);
 		roboteq->connect(this->roboteqPath.c_str());
 
 		ROS_INFO("RoboteQ model %s was configured at serial port %s", this->roboteqModel.c_str(), this->roboteqPath.c_str());
 
 		if (publish_encoder) {
 			encoder_publisher = nh.advertise<lrm_msgs::Encoders>("encoders", 10, 0);
-			encoderTimer = n.createTimer(ros::Duration(encoder_freq), &RoboteqNode::statePublisherCallback, this);
+			encoderTimer = n.createTimer(ros::Duration(1.0/encoder_freq), &RoboteqNode::statePublisherCallback, this);
 		}
 
 		this->steering_angle = 0;

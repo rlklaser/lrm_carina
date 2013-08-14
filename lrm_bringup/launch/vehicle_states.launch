@@ -1,0 +1,12 @@
+<launch>
+
+	<node
+		pkg="lrm_drivers"
+		name="vehicle_state_node"
+		type="vehicle_state_node"
+		respawn="true"
+		output="screen"
+	>
+	</node>
+
+</launch>

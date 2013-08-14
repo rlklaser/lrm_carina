@@ -1,0 +1,13 @@
+<launch>
+
+	<rosparam
+		command="load"
+		file="$(find lrm_bringup)/params/gps_imu_params.yaml" />
+
+	<node
+		ns="lse_xsens_mti"
+		pkg="lse_xsens_mti"
+		type="mti_node"
+		name="xsens_driver" />
+
+</launch>
