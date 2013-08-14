@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<!--
+*  Copyright (C) 2012, Laboratorio de Robotica Movel - ICMC/USP
+ *  Rafael Luiz Klaser <rlklaser@gmail.com>
+ *  http://lrm.icmc.usp.br
+ *
+ *  Apoio FAPESP: 2012/04555-4
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * @file front.suspension.urdf.xacro
+ * @brief 
+ * @author Rafael Luiz Klaser <rlklaser@gmail.com>
+ * @date Dez 12, 2012
+ *
+ */
+-->
+<robot
+	xmlns:xi="http://www.w3.org/2001/XInclude"
+	xmlns:xacro="http://ros.org/wiki/xacro"
+>
+	<xacro:macro
+		name="front_suspension"
+		params="side size"
+	>
+
+		<xacro:wheel_gazebo prefix="${side}" />
+
+		<link name="front_${side}_hinge_link">
+			<inertial>
+				<mass value="${inertia_null_mass}" />
+				<origin xyz="${inertia_null_x} ${inertia_null_y} ${inertia_null_z}" />
+				<inertia
+					ixx="${inertia_null_ixx}"
+					ixy="${inertia_null_ixy}"
+					ixz="${inertia_null_ixz}"
+					iyy="${inertia_null_iyy}"
+					iyz="${inertia_null_iyz}"
+					izz="${inertia_null_izz}" />
+			</inertial>
+		</link>
+		<link name="front_${side}_bar_link">
+			<inertial>
+				<mass value="${inertia_null_mass}" />
+				<origin xyz="${inertia_null_x} ${inertia_null_y} ${inertia_null_z}" />
+				<inertia
+					ixx="${inertia_null_ixx}"
+					ixy="${inertia_null_ixy}"
+					ixz="${inertia_null_ixz}"
+					iyy="${inertia_null_iyy}"
+					iyz="${inertia_null_iyz}"
+					izz="${inertia_null_izz}" />
+			</inertial>
+		</link>
+		<joint
+			name="joint_front_${side}_hinge"
+			type="revolute"
+		>
+			<origin
+				rpy="0 0 0"
+				xyz="0 0 0" />
+			<parent link="front_axle_link" />
+			<child link="front_${side}_hinge_link" />
+			<axis
+				xyz="1 0 0"
+				rpy="0 0 0" />
+			<limit
+				effort="0.1"
+				velocity="0.1"
+				upper="0.025"
+				lower="-0.025" />
+		</joint>
+		<joint
+			name="joint_front_${side}_suspension"
+			type="fixed"
+		>
+			<origin
+				rpy="0 0 0"
+				xyz="0 ${size} 0" />
+			<parent link="front_${side}_hinge_link" />
+			<child link="front_${side}_suspension_link" />
+		</joint>
+	</xacro:macro>
+</robot>

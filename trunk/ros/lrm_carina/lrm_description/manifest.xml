@@ -1,0 +1,19 @@
+<package>
+  <description brief="lrm_description">
+
+     lrm_description
+
+  </description>
+  <author>Rafael Luiz Klaser</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/lrm_description</url>
+
+  <export>
+    <cpp cflags="-I${prefix}/include"/>
+    <gazebo gazebo_media_path="${prefix}" />
+  </export>
+ 
+</package>
+
+

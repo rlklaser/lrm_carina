@@ -1,0 +1,96 @@
+type erroV [-30.0,30.0;10000] {
+  fam[] xfl.triangular(-15.0,0.0,15.0);
+  muitoDevagar fam[0];
+  devagar fam[1];
+  velocidadeCruzeiro fam[2];
+  rapido fam[3];
+  muitoRapido fam[4];
+}
+
+type accelAjust [-5.0,5.0;10000] {
+  fam[] xfl.triangular(-3.75,0.0,3.75);
+  desacelerarMuito fam[0];
+  desacelerar fam[1];
+  manterAceleracao fam[2];
+  acelerar fam[3];
+  acelerarMuito fam[4];
+}
+
+type dV [-5.0,5.0;10000] {
+  fam[] xfl.triangular(-1.25,0.0,1.25);
+  desacelerandoMuito fam[0];
+  desacelerando fam[1];
+  velocidadeConstante fam[2];
+  acelerando fam[3];
+  acelerandoMuito fam[4];
+}
+
+type brakeAjust [-10.0,10.0;10000] {
+  fam[] xfl.triangular(-5.0,0.0,5.0);
+  frearMuito fam[4];
+  aumentarFrenagem fam[3];
+  manterFrenagem fam[2];
+  liberarBastante fam[0];
+  liberar fam[1];
+}
+
+rulebase AccelRules (erroV erroV, dV dV : accelAjust accelAjust) {
+  if(erroV == muitoDevagar & dV == desacelerandoMuito) -> accelAjust = acelerarMuito;
+  if(erroV == muitoDevagar & dV == desacelerando) -> accelAjust = acelerarMuito;
+  if(erroV == muitoDevagar & dV == velocidadeConstante) -> accelAjust = acelerar;
+  if(erroV == muitoDevagar & dV == acelerando) -> accelAjust = manterAceleracao;
+  if(erroV == muitoDevagar & dV == acelerandoMuito) -> accelAjust = desacelerar;
+  if(erroV == devagar & dV == desacelerandoMuito) -> accelAjust = acelerarMuito;
+  if(erroV == devagar & dV == desacelerando) -> accelAjust = acelerar;
+  if(erroV == devagar & dV == velocidadeConstante) -> accelAjust = acelerar;
+  if(erroV == devagar & dV == acelerando) -> accelAjust = manterAceleracao;
+  if(erroV == devagar & dV == acelerandoMuito) -> accelAjust = desacelerar;
+  if(erroV == velocidadeCruzeiro & dV == desacelerandoMuito) -> accelAjust = acelerar;
+  if(erroV == velocidadeCruzeiro & dV == desacelerando) -> accelAjust = acelerar;
+  if(erroV == velocidadeCruzeiro & dV == velocidadeConstante) -> accelAjust = manterAceleracao;
+  if(erroV == velocidadeCruzeiro & dV == acelerando) -> accelAjust = desacelerar;
+  if(erroV == velocidadeCruzeiro & dV == acelerandoMuito) -> accelAjust = desacelerar;
+  if(erroV == rapido & dV == desacelerandoMuito) -> accelAjust = acelerar;
+  if(erroV == rapido & dV == desacelerando) -> accelAjust = manterAceleracao;
+  if(erroV == rapido & dV == velocidadeConstante) -> accelAjust = desacelerar;
+  if(erroV == rapido & dV == acelerando) -> accelAjust = desacelerar;
+  if(erroV == rapido & dV == acelerandoMuito) -> accelAjust = desacelerarMuito;
+  if(erroV == muitoRapido & dV == desacelerandoMuito) -> accelAjust = manterAceleracao;
+  if(erroV == muitoRapido & dV == desacelerando) -> accelAjust = desacelerar;
+  if(erroV == muitoRapido & dV == velocidadeConstante) -> accelAjust = desacelerarMuito;
+  if(erroV == muitoRapido & dV == acelerando) -> accelAjust = desacelerarMuito;
+  if(erroV == muitoRapido & dV == acelerandoMuito) -> accelAjust = desacelerarMuito;
+}
+
+rulebase BrakeRules (erroV erroV, dV dV : brakeAjust brakeAjust) {
+  if(erroV == muitoDevagar & dV == desacelerandoMuito) -> brakeAjust = liberarBastante;
+  if(erroV == muitoDevagar & dV == desacelerando) -> brakeAjust = liberarBastante;
+  if(erroV == muitoDevagar & dV == velocidadeConstante) -> brakeAjust = liberarBastante;
+  if(erroV == muitoDevagar & dV == acelerando) -> brakeAjust = manterFrenagem;
+  if(erroV == muitoDevagar & dV == acelerandoMuito) -> brakeAjust = manterFrenagem;
+  if(erroV == devagar & dV == desacelerandoMuito) -> brakeAjust = liberar;
+  if(erroV == devagar & dV == desacelerando) -> brakeAjust = liberar;
+  if(erroV == devagar & dV == velocidadeConstante) -> brakeAjust = liberar;
+  if(erroV == devagar & dV == acelerando) -> brakeAjust = manterFrenagem;
+  if(erroV == devagar & dV == acelerandoMuito) -> brakeAjust = aumentarFrenagem;
+  if(erroV == velocidadeCruzeiro & dV == desacelerandoMuito) -> brakeAjust = liberar;
+  if(erroV == velocidadeCruzeiro & dV == desacelerando) -> brakeAjust = liberar;
+  if(erroV == velocidadeCruzeiro & dV == velocidadeConstante) -> brakeAjust = manterFrenagem;
+  if(erroV == velocidadeCruzeiro & dV == acelerando) -> brakeAjust = aumentarFrenagem;
+  if(erroV == velocidadeCruzeiro & dV == acelerandoMuito) -> brakeAjust = aumentarFrenagem;
+  if(erroV == rapido & dV == desacelerandoMuito) -> brakeAjust = manterFrenagem;
+  if(erroV == rapido & dV == desacelerando) -> brakeAjust = manterFrenagem;
+  if(erroV == rapido & dV == velocidadeConstante) -> brakeAjust = aumentarFrenagem;
+  if(erroV == rapido & dV == acelerando) -> brakeAjust = aumentarFrenagem;
+  if(erroV == rapido & dV == acelerandoMuito) -> brakeAjust = aumentarFrenagem;
+  if(erroV == muitoRapido & dV == desacelerandoMuito) -> brakeAjust = manterFrenagem;
+  if(erroV == muitoRapido & dV == desacelerando) -> brakeAjust = manterFrenagem;
+  if(erroV == muitoRapido & dV == velocidadeConstante) -> brakeAjust = aumentarFrenagem;
+  if(erroV == muitoRapido & dV == acelerando) -> brakeAjust = aumentarFrenagem;
+  if(erroV == muitoRapido & dV == acelerandoMuito) -> brakeAjust = aumentarFrenagem;
+}
+
+system (erroV erroV, dV dV : accelAjust accelAjust, brakeAjust brakeAjust) {
+  AccelRules(erroV, dV : accelAjust);
+  BrakeRules(erroV, dV : brakeAjust);
+ }

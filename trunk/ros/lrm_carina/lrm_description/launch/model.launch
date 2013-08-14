@@ -1,0 +1,51 @@
+<launch>
+
+<!-- 
+	<param
+		name="robot_description"
+		command="cat $(find carina_description)/urdf/carina_gazebo.urdf" />
+ 
+	<param
+		name="robot_description"
+		command="$(find xacro)/xacro.py '$(find lrm_description)/urdf/ackermann.urdf.xacro'" />
+
+
+	<param
+		name="robot_description"
+		command="cat $(find lrm_description)/urdf/carina_cam.urdf" />
+
+	<param
+		name="robot_description"
+		command="cat $(find lrm_description)/urdf/ackermann-link.urdf" />
+ -->
+
+	<param
+		name="robot_description"
+		command="$(find xacro)/xacro.py '$(find lrm_description)/urdf/clubcar/robot.xacro'" />
+
+
+	<node
+		name="joint_state_publisher"
+		pkg="joint_state_publisher"
+		type="joint_state_publisher"
+	>
+		<param
+			name="rate"
+			value="30" />
+		<param
+			name="use_gui"
+			value="true" />
+	</node>
+
+	<node
+		name="robot_state_publisher"
+		pkg="robot_state_publisher"
+		type="state_publisher"
+	>
+		<param
+			name="publish_frequency"
+			value="30" />
+	</node>
+
+
+</launch>

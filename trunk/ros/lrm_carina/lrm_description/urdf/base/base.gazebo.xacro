@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<!--
+ * Copyright (c) 2012, Siddhant Ahuja (Sid)
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ *     * Redistributions of source code must retain the above copyright
+ *       notice, this list of conditions and the following disclaimer.
+ *     * Redistributions in binary form must reproduce the above copyright
+ *       notice, this list of conditions and the following disclaimer in the
+ *       documentation and/or other materials provided with the distribution.
+ *     * Neither the name of Siddhant Ahuja (Sid) nor the names of its
+ *       contributors may be used to endorse or promote products derived from
+ *       this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+-->
+<!--
+ * Desc: This program contains the gazebo elements of the simulation robot's base.
+ * Author: Siddhant Ahuja
+-->
+
+<robot
+	xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+	xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+	xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+	xmlns:xacro="http://ros.org/wiki/xacro"
+>
+
+	<xacro:macro
+		name="simBot_base_gazebo"
+		params="name"
+	>
+
+		<gazebo reference="${name}_link">
+			<selfCollide>false</selfCollide>
+			<sensor:contact name="${name}_contact_sensor">
+				<geom>${name}_link_geom</geom>
+				<updateRate>100.0</updateRate>
+				<controller:gazebo_ros_bumper
+					name="${name}_gazebo_ros_bumper_controller"
+					plugin="libgazebo_ros_bumper.so"
+				>
+					<alwaysOn>true</alwaysOn>
+					<updateRate>100.0</updateRate>
+					<bumperTopicName>${name}_bumper</bumperTopicName>
+					<interface:bumper name="${name}_bumper_iface" />
+				</controller:gazebo_ros_bumper>
+			</sensor:contact>
+		</gazebo>
+
+
+		<gazebo reference="${name}_link">
+			<material>simBot/Yellow</material>
+		</gazebo>
+
+		<gazebo reference="steer_link">
+			<material>Gazebo/Blue</material>
+		</gazebo>
+
+		<gazebo reference="ackermann_bar_link">
+			<material>Gazebo/Red</material>
+		</gazebo>
+
+		<gazebo reference="front_right_bar_link">
+			<material>Gazebo/Yellow</material>
+		</gazebo>
+
+		<gazebo reference="front_left_bar_link">
+			<material>Gazebo/White</material>
+		</gazebo>
+    
+		<!-- CONTROLLERS -->
+
+		<gazebo>
+			<controller:simBotBaseAckermannController
+				name="simBotBaseAckermannController"
+				plugin="libsimBotBaseAckermannController.so"
+			>
+				<alwaysOn>true</alwaysOn>
+				<update>100</update>
+				<updateRate>100.0</updateRate>
+				<backLeftJoint>back_left_wheel_joint</backLeftJoint>
+				<backRightJoint>back_right_wheel_joint</backRightJoint>
+				<frontSteerJoint>steer_joint</frontSteerJoint>
+				<wheelDiameter>0.4</wheelDiameter>
+				<wheelBase>2.33918</wheelBase>
+				<wheelTrack>2.12</wheelTrack>
+				<maxSteerAngle>20.0</maxSteerAngle>
+				<driveTorque>5</driveTorque>
+				<steerTorque>5</steerTorque>
+				<velControl>false</velControl>
+				<interface:position name="position_iface_0" />
+				<topicName>cmd_vel</topicName>
+			</controller:simBotBaseAckermannController>
+
+			<controller:gazebo_ros_p3d
+				name="p3d_base_controller"
+				plugin="libgazebo_ros_p3d.so"
+			>
+				<alwaysOn>true</alwaysOn>
+				<updateRate>100.0</updateRate>
+				<bodyName>${name}_footprint</bodyName>
+				<topicName>${name}_pose_ground_truth</topicName>
+				<gaussianNoise>0</gaussianNoise>
+				<frameName>map</frameName>
+				<xyzOffsets>0 0 0</xyzOffsets>
+				<rpyOffsets>0 0 0</rpyOffsets>
+				<interface:position name="p3d_base_position" />
+			</controller:gazebo_ros_p3d>
+
+			<canonicalBody>${name}_footprint</canonicalBody>
+
+			<!-- this publishes empty joint_states due to no transmission, but
+			triggering robot_state_publisher to publish tf between fixed joints in erratic,
+			(e.g. base_laser_link for the base_scan frame) -->
+			<controller:gazebo_ros_controller_manager
+				name="gazebo_ros_controller_manager"
+				plugin="libgazebo_ros_controller_manager.so"
+			>
+				<alwaysOn>true</alwaysOn>
+				<updateRate>100.0</updateRate>
+				<interface:audio name="gazebo_ros_controller_manager_dummy_iface" />
+			</controller:gazebo_ros_controller_manager>
+		</gazebo>
+	</xacro:macro>
+</robot>

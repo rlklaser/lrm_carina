@@ -1,0 +1,145 @@
+<?xml version="1.0" ?>
+<!--
+*  Copyright (C) 2012, Laboratorio de Robotica Movel - ICMC/USP
+ *  Rafael Luiz Klaser <rlklaser@gmail.com>
+ *  http://lrm.icmc.usp.br
+ *
+ *  Apoio FAPESP: 2012/04555-4
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * @file stereo.camera.xacro
+ * @brief 
+ * @author Rafael Luiz Klaser <rlklaser@gmail.com>
+ * @date Dez 12, 2012
+ *
+ */
+-->
+
+<!-- 
+ focal_length = width_ / (2.0 * tan( HFOV/2.0 )),
+ -->
+
+<robot
+	xmlns:xi="http://www.w3.org/2001/XInclude"
+	xmlns:xacro="http://ros.org/wiki/xacro"
+>
+	<include filename="$(find lrm_description)/urdf/sensors/camera.urdf.xacro" />
+	<include filename="$(find lrm_description)/urdf/clubcar/templates.urdf.xacro" />
+
+<!-- 
+left_optical_frame
+right_optical_frame
+
+simulating a Bumblebee2 BB2-03S2C 25 (2.5mm 97dg HFOV)
+
+FL 50:  343.120940
+FL 100: 134.255975
+
+simulating a Bumblebee2 BB2-03S2C 66 (3.8mm 66dg HFOV)
+
+
+simulating a Bumblebee2 BB2-03S2C 43 (6.0mm 43dg HFOV)
+
+FL 43: 
+	320x240: 406.183412
+	640x480: 812.366824
+ -->
+ 
+	<xacro:camera_v0
+		name="stereo_camera/left"
+		image_format="R8G8B8"
+		image_topic_name="image_raw"
+		camera_info_topic_name="camera_info"
+		parent="base_front_sensors"
+		hfov="43"
+		focal_length="812.366824"
+		frame_id="stereo_camera"
+		image_width="640"
+		image_height="480"
+		updateRate="48"
+		nearClip="0.1"
+		farClip="100"
+		baseline="0"
+	>
+		<origin xyz="-0.1 0.06 0.1" />
+	</xacro:camera_v0>
+
+	<xacro:camera_v0
+		name="stereo_camera/right"
+		image_format="R8G8B8"
+		image_topic_name="image_raw"
+		camera_info_topic_name="camera_info"
+		parent="base_front_sensors"
+		hfov="43"
+		focal_length="812.366824"
+		frame_id="stereo_camera"
+		image_width="640"
+		image_height="480"
+		updateRate="48"
+		nearClip="0.1"
+		farClip="100"
+		baseline="0.12"
+	>
+		<origin xyz="-0.1 -0.06 0.1" />
+	</xacro:camera_v0>
+
+	<link name="camera_center_link">
+		<xacro:inertial_minimal />
+		<collision>
+			<geometry>
+				<box size="0.073 0.276 0.072" />
+			</geometry>
+		</collision>
+		<visual>
+			<origin
+				xyz="0 0 0"
+				rpy="0 0 0" />
+			<geometry>
+				<mesh
+					filename="package://lrm_description/meshes/kinect.dae"
+					scale="1 1 1" />
+			</geometry>
+		</visual>
+	</link>
+
+	<joint
+		name="camera_center_joint"
+		type="fixed"
+	>
+		<origin
+			xyz="-0.1 0 0.1"
+			rpy="0 0 0 " />
+		<parent link="base_front_sensors" />
+		<child link="camera_center_link" />
+	</joint>
+
+	<link name="stereo_camera">
+		<xacro:inertial_minimal />
+	</link>
+
+	<joint
+		name="stereo_camera_joint"
+		type="fixed"
+	>
+		<origin
+			xyz="0 0 0"
+			rpy="${M_PI/2} ${M_PI} ${M_PI/2}" />
+		<parent link="camera_center_link" />
+		<child link="stereo_camera" />
+	</joint>
+
+</robot>

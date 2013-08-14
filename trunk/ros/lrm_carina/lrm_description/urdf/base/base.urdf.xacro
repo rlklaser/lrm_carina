@@ -1,0 +1,421 @@
+<?xml version="1.0"?>
+<!--
+ * Copyright (c) 2012, Siddhant Ahuja (Sid)
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ *     * Redistributions of source code must retain the above copyright
+ *       notice, this list of conditions and the following disclaimer.
+ *     * Redistributions in binary form must reproduce the above copyright
+ *       notice, this list of conditions and the following disclaimer in the
+ *       documentation and/or other materials provided with the distribution.
+ *     * Neither the name of Siddhant Ahuja (Sid) nor the names of its
+ *       contributors may be used to endorse or promote products derived from
+ *       this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+-->
+<!--
+ * Desc: This program contains the description of the simulation robot's base.
+ * Author: Siddhant Ahuja
+-->
+<robot
+	xmlns:gazebo="http://playerstage.sourceforge.net/gazebo/xmlschema/#gz"
+	xmlns:model="http://playerstage.sourceforge.net/gazebo/xmlschema/#model"
+	xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+	xmlns:body="http://playerstage.sourceforge.net/gazebo/xmlschema/#body"
+	xmlns:geom="http://playerstage.sourceforge.net/gazebo/xmlschema/#geom"
+	xmlns:joint="http://playerstage.sourceforge.net/gazebo/xmlschema/#joint"
+	xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+	xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+	xmlns:rendering="http://playerstage.sourceforge.net/gazebo/xmlschema/#rendering"
+	xmlns:physics="http://playerstage.sourceforge.net/gazebo/xmlschema/#physics"
+	xmlns:xacro="http://ros.org/wiki/xacro"
+>
+	
+
+	<!-- Included URDF/XACRO Files -->
+
+	<include filename="$(find lrm_description)/urdf/base/wheel.urdf.xacro" />
+	<include filename="$(find lrm_description)/urdf/box_fixed.urdf.xacro" />
+	<include filename="$(find lrm_description)/urdf/base/base.gazebo.xacro" />
+	<include filename="$(find lrm_description)/urdf/sensors/hokuyo.UTM30LX.urdf.xacro" />
+	<include filename="$(find lrm_description)/urdf/sensors/microstrain.3dmgx3.urdf.xacro" />
+
+	<xacro:macro
+		name="simBot_base"
+		params="name"
+	>
+		<!-- Links and Joints (i.e., the robot) -->
+		<link name="${name}_link">
+			<inertial>
+				<mass value="${base_mass}" />
+				<origin xyz="${base_cg_x} ${base_cg_y} ${base_cg_z}" />
+				<inertia
+					ixx="${base_ixx_cg_cs}"
+					ixy="${base_ixy_cg_cs}"
+					ixz="${base_ixz_cg_cs}"
+					iyy="${base_iyy_cg_cs}"
+					iyz="${base_iyz_cg_cs}"
+					izz="${base_izz_cg_cs}" />
+			</inertial>
+
+			<visual>
+				<origin
+					xyz="0 0 0"
+					rpy="0 0 0" />
+				<geometry>
+					<mesh filename="package://lrm_description/meshes/base_link.stl" />
+				</geometry>
+				<material name="Yellow" />
+			</visual>
+
+			<collision>
+				<origin
+					xyz="0 0 0"
+					rpy="0 0 0" />
+				<geometry>
+					<mesh filename="package://lrm_description/meshes/base_link.stl" />
+				</geometry>
+			</collision>
+		</link>
+		
+		<!-- base_footprint is a fictitious link(frame) that is on the ground right below base_link origin,
+		navigation stack depends on this frame -->
+
+		<link name="${name}_footprint">
+			<inertial>
+				<mass value="1.0" />
+				<origin xyz="0 0 0" />
+				<inertia
+					ixx="0.0001"
+					ixy="0.0"
+					ixz="0.0"
+					iyy="0.0001"
+					iyz="0.0"
+					izz="0.0001" />
+			</inertial>
+
+			<visual>
+				<origin
+					xyz="0 0 0"
+					rpy="0 0 0" />
+				<geometry>
+					<box size="0.001 0.001 0.001" />
+				</geometry>
+				<material name="Green" />
+			</visual>
+
+			<collision>
+				<origin
+					xyz="0 0 0.4826"
+					rpy="0 0 0" />
+				<geometry>
+					<box size="0.001 0.001 0.001" />
+				</geometry>
+			</collision>
+		</link>
+
+		<joint
+			name="${name}_footprint_joint"
+			type="fixed"
+		>
+			<origin
+				xyz="0 0 0.4826"
+				rpy="0 0 0" />
+			<parent link="${name}_footprint" />
+			<child link="${name}_link" />
+		</joint>
+   
+    <!-- the left Ackermann bar -->
+		<joint
+			name="front_left_bar_joint"
+			type="revolute"
+		>
+			<limit
+				lower="-0.5"
+				upper="0.5"
+				effort="100"
+				velocity="10" />
+			<axis xyz="0 0 1" />
+			<parent link="front_link" />
+			<child link="front_left_bar_link" />
+			<origin
+				xyz="0.0 ${(base_y_size - base_ack_width - base_ack_wheel_offset)/2} 0.0"
+				rpy="0 0 0" />
+		</joint>
+		<link name="front_left_bar_link">
+			<inertial>
+				<mass value="1.0" />
+				<origin xyz="0 0 0" />
+				<inertia
+					ixx="1.0"
+					ixy="0.0"
+					ixz="0.0"
+					iyy="1.0"
+					iyz="0.0"
+					izz="1.0" />
+			</inertial>
+			<visual>
+				<origin xyz="${-(base_ack_x_size-base_ack_width)/2} 0 0" />
+				<geometry>
+					<box size="${base_ack_x_size} ${base_ack_width} 0.01" />
+				</geometry>
+				<material name="Red" />
+			</visual>
+			<collision>
+				<origin xyz="${-(base_ack_x_size-base_ack_width)/2} 0 0" />
+				<geometry>
+					<box size="${base_ack_x_size} ${base_ack_width} 0.01" />
+				</geometry>
+			</collision>
+		</link>
+
+    <!-- the right Ackermann bar -->
+		<joint
+			name="front_right_bar_joint"
+			type="revolute"
+		>
+			<limit
+				lower="-0.5"
+				upper="0.5"
+				effort="100"
+				velocity="10" />
+			<axis xyz="0 0 1" />
+			<parent link="front_link" />
+			<child link="front_right_bar_link" />
+			<origin
+				xyz="0.0 ${-(base_y_size - base_ack_width - base_ack_wheel_offset)/2} 0.0"
+				rpy="0 0 0" />
+		</joint>
+		<link name="front_right_bar_link">
+			<inertial>
+				<mass value="1.0" />
+				<origin xyz="0 0 0" />
+				<inertia
+					ixx="1.0"
+					ixy="0.0"
+					ixz="0.0"
+					iyy="1.0"
+					iyz="0.0"
+					izz="1.0" />
+			</inertial>
+			<visual>
+				<origin xyz="${-(base_ack_x_size-base_ack_width)/2} 0 0" />
+				<geometry>
+					<box size="${base_ack_x_size} ${base_ack_width} 0.01" />
+				</geometry>
+				<material name="Red" />
+			</visual>
+			<collision>
+				<origin xyz="${-(base_ack_x_size-base_ack_width)/2} 0 0" />
+				<geometry>
+					<box size="${base_ack_x_size} ${base_ack_width} 0.01" />
+				</geometry>
+			</collision>
+		</link>
+
+	<!-- the Ackerman bar -->
+		<joint
+			name="ackermann_joint"
+			type="revolute"
+		>
+			<limit
+				lower="-0.5"
+				upper="0.5"
+				effort="100"
+				velocity="10" />
+			<axis xyz="0 0 1" />
+			<parent link="steer_link" />
+			<child link="ackermann_bar_link" />
+			<origin
+				xyz="${-(base_ack_x_size-base_ack_width)} 0 0"
+				rpy="0 0 0" />
+		</joint>
+		<link name="ackermann_bar_link">
+			<inertial>
+				<mass value="1.0" />
+				<origin xyz="0 0 0" />
+				<inertia
+					ixx="1.0"
+					ixy="0.0"
+					ixz="0.0"
+					iyy="1.0"
+					iyz="0.0"
+					izz="1.0" />
+			</inertial>
+			<visual>
+				<geometry>
+					<box size="${base_ack_width} ${base_y_size - base_ack_wheel_offset} 0.01" />
+				</geometry>
+				<material name="Red" />
+			</visual>
+			<collision>
+				<geometry>
+					<box size="${base_ack_width} ${base_y_size - base_ack_wheel_offset} 0.01" />
+				</geometry>
+			</collision>
+		</link>
+   
+<!-- Gazebo Ackermann loop joints -->
+		<gazebo>
+			<joint:hinge name="ackermann_left_bar_joint">
+				<body1>ackermann_bar_link</body1>
+				<body2>front_left_bar_link</body2>
+				<anchor>ackermann_bar_link</anchor>
+				<axis>0 0 1</axis>
+				<anchorOffset>0 ${(base_y_size - base_ack_width - base_ack_wheel_offset)/2} 0</anchorOffset>
+			</joint:hinge>
+		</gazebo>
+		<gazebo>
+			<joint:hinge name="ackermann_right_bar_joint">
+				<body1>ackermann_bar_link</body1>
+				<body2>front_right_bar_link</body2>
+				<anchor>ackermann_bar_link</anchor>
+				<axis>0 0 1</axis>
+				<anchorOffset>0 ${-(base_y_size - base_ack_width - base_ack_wheel_offset)/2} 0</anchorOffset>
+			</joint:hinge>
+		</gazebo>
+
+ <!-- a link aligned with the steer direction -->
+		<joint
+			name="steer_joint"
+			type="revolute"
+		>
+			<limit
+				lower="-0.5"
+				upper="0.5"
+				effort="100"
+				velocity="10" />
+			<axis xyz="0 0 1" />
+			<parent link="front_link" />
+			<child link="steer_link" />
+			<origin
+				xyz="0.0 0.0 0.0"
+				rpy="0 0 0" />
+		</joint>
+		<link name="steer_link">
+			<inertial>
+				<mass value="1.0" />
+				<origin xyz="0 0 0" />
+				<inertia
+					ixx="1.0"
+					ixy="0.0"
+					ixz="0.0"
+					iyy="1.0"
+					iyz="0.0"
+					izz="1.0" />
+			</inertial>
+			<visual>
+				<origin xyz="${-(base_ack_x_size-base_ack_width)/2} 0 0" />
+				<geometry>
+					<box size="${base_ack_x_size} ${base_ack_width} 0.01" />
+				</geometry>
+				<material name="Red" />
+			</visual>
+			<collision>
+				<origin xyz="${-(base_ack_x_size-base_ack_width)/2} 0 0" />
+				<geometry>
+					<box size="${base_ack_x_size} ${base_ack_width} 0.01" />
+				</geometry>
+			</collision>
+		</link>
+    
+		<!-- MACRO INSTANTIATION -->
+		
+		<!--Front Ackermann Bar-->
+		<xacro:simBot_box_fixed
+			name="front"
+			parent="${name}"
+			color="Gazebo/Green"
+			xSize="${base_ack_width}"
+			ySize="${base_y_size - base_ack_wheel_offset}"
+			zSize="0.01"
+		>
+			<origin
+				xyz="${(base_x_size - base_ack_width - 0.025)/2} 0.0 0.0"
+				rpy="0 0 0" />
+		</xacro:simBot_box_fixed>
+		
+		<!--WHEELS-->
+
+		<xacro:simBot_wheel
+			suffix="front_right"
+			parent="front_right_bar_link"
+		>
+			<origin
+				xyz="0 ${-base_ack_wheel_offset/2} 0"
+				rpy="0 0 0" />
+		</xacro:simBot_wheel>
+
+		<xacro:simBot_wheel
+			suffix="front_left"
+			parent="front_left_bar_link"
+		>
+			<origin
+				xyz="0 ${base_ack_wheel_offset/2} 0"
+				rpy="0 0 0" />
+		</xacro:simBot_wheel>
+
+		<xacro:simBot_wheel
+			suffix="back_right"
+			parent="${name}_link"
+		>
+			<origin
+				xyz="-${base_x_origin_to_wheel_origin} -${base_y_origin_to_wheel_origin} 0"
+				rpy="0 0 0" />
+		</xacro:simBot_wheel>
+
+		<xacro:simBot_wheel
+			suffix="back_left"
+			parent="${name}_link"
+		>
+			<origin
+				xyz="-${base_x_origin_to_wheel_origin} ${base_y_origin_to_wheel_origin} 0"
+				rpy="0 0 0" />
+		</xacro:simBot_wheel>
+		
+	<!--gazebo extensions-->
+		<xacro:simBot_base_gazebo name="${name}" />
+		
+		<!--Hokuyo 2d laser-->
+		<xacro:simBot_hokuyo_laser
+			parent="${name}"
+			name="${name}_laser"
+			laser_topic="base_scan/scan"
+			update_rate="20"
+			min_angle="-1.57079633"
+			max_angle="1.57079633"
+		>
+			<origin
+				xyz="${base_laser_x} ${base_laser_y} ${base_laser_z}"
+				rpy="0 0 0" />
+		</xacro:simBot_hokuyo_laser>
+		
+		<!--Microstrain 3DMGX3 IMU-->
+		<xacro:simBot_microstrain_imu
+			name="imu"
+			parent="${name}"
+			imu_topic="imu/data"
+			update_rate="100.0"
+			stdev="0.00017"
+		>
+			<origin
+				xyz="0.0 0.0 0.01"
+				rpy="0 0 0" />
+		</xacro:simBot_microstrain_imu>
+
+	</xacro:macro>
+</robot>

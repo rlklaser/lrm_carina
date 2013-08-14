@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<!--
+*  Copyright (C) 2012, Laboratorio de Robotica Movel - ICMC/USP
+ *  Rafael Luiz Klaser <rlklaser@gmail.com>
+ *  http://lrm.icmc.usp.br
+ *
+ *  Apoio FAPESP: 2012/04555-4
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * @file ackermann.gazebo.xacro
+ * @brief 
+ * @author Rafael Luiz Klaser <rlklaser@gmail.com>
+ * @date Dez 12, 2012
+ *
+ */
+-->
+<robot
+	xmlns:gazebo="http://playerstage.sourceforge.net/gazebo/xmlschema/#gz"
+	xmlns:model="http://playerstage.sourceforge.net/gazebo/xmlschema/#model"
+	xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+	xmlns:body="http://playerstage.sourceforge.net/gazebo/xmlschema/#body"
+	xmlns:geom="http://playerstage.sourceforge.net/gazebo/xmlschema/#geom"
+	xmlns:joint="http://playerstage.sourceforge.net/gazebo/xmlschema/#joint"
+	xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+	xmlns:rendering="http://playerstage.sourceforge.net/gazebo/xmlschema/#rendering"
+	xmlns:renderable="http://playerstage.sourceforge.net/gazebo/xmlschema/#renderable"
+	xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+	xmlns:physics="http://playerstage.sourceforge.net/gazebo/xmlschema/#physics"
+> 
+	<gazebo>
+		<joint:hinge name="ackermann_left_bar_joint">
+			<body1>ackermann_bar_link</body1>
+			<body2>front_left_bar_link</body2>
+			<anchor>ackermann_bar_link</anchor>
+			<axis>0 0 1</axis>
+			<anchorOffset>0 0.0875 0</anchorOffset>
+		</joint:hinge>
+
+		<joint:hinge name="ackermann_right_bar_joint">
+			<body1>ackermann_bar_link</body1>
+			<body2>front_right_bar_link</body2>
+			<anchor>ackermann_bar_link</anchor>
+			<axis>0 0 1</axis>
+			<anchorOffset>0 -0.0875 0</anchorOffset>
+		</joint:hinge>
+<!--
+		<controller:simBotBaseAckermannController
+			name="simBotBaseAckermannController"
+			plugin="libsimBotBaseAckermannController.so"
+		>
+			<alwaysOn>true</alwaysOn>
+			<update>100</update>
+			<updateRate>100.0</updateRate>
+			<backLeftJoint>back_left_wheel_joint</backLeftJoint>
+			<backRightJoint>back_right_wheel_joint</backRightJoint>
+			<frontSteerJoint>steer_joint</frontSteerJoint>
+			<wheelDiameter>0.4</wheelDiameter>
+			<wheelBase>2.33918</wheelBase>
+			<wheelTrack>2.12</wheelTrack>
+			<maxSteerAngle>20.0</maxSteerAngle>
+			<driveTorque>5</driveTorque>
+			<steerTorque>5</steerTorque>
+			<velControl>false</velControl>
+			<interface:position name="position_iface_0" />
+			<topicName>cmd_vel</topicName>
+		</controller:simBotBaseAckermannController>
+ -->
+	</gazebo>
+</robot>

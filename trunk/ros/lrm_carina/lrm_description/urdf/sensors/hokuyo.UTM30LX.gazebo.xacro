@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<!--
+ * Copyright (c) 2012, Siddhant Ahuja (Sid)
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ *     * Redistributions of source code must retain the above copyright
+ *       notice, this list of conditions and the following disclaimer.
+ *     * Redistributions in binary form must reproduce the above copyright
+ *       notice, this list of conditions and the following disclaimer in the
+ *       documentation and/or other materials provided with the distribution.
+ *     * Neither the name of Siddhant Ahuja (Sid) nor the names of its
+ *       contributors may be used to endorse or promote products derived from
+ *       this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+-->
+<!--
+ * Desc: This program contains the Gazebo elements for Hokuyo Laser
+ * Author: Siddhant Ahuja
+-->
+
+<robot
+	xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+	xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+	xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+	xmlns:xacro="http://ros.org/wiki/xacro"
+>
+
+	<xacro:macro
+		name="simBot_hokuyo_laser_gazebo"
+		params="parent name laser_topic update_rate min_angle max_angle"
+	>
+		<gazebo reference="${name}_link">
+			<sensor:ray name="laser">
+				<rayCount>640</rayCount>
+				<rangeCount>640</rangeCount>
+				<laserCount>1</laserCount>
+
+				<origin>0.0 0.0 0.0</origin>
+				<displayRays>false</displayRays>
+
+				<minAngle>${min_angle*180.0/M_PI}</minAngle>
+				<maxAngle>${max_angle*180.0/M_PI}</maxAngle>
+
+				<minRange>0.08</minRange>
+				<maxRange>10.0</maxRange>
+				<resRange>0.01</resRange>
+				<updateRate>${update_rate}</updateRate>
+				<controller:gazebo_ros_laser
+					name="gazebo_ros_${name}_controller"
+					plugin="libgazebo_ros_laser.so"
+				>
+					<gaussianNoise>0.005</gaussianNoise>
+					<alwaysOn>true</alwaysOn>
+					<updateRate>${update_rate}</updateRate>
+					<topicName>${laser_topic}</topicName>
+					<frameName>${name}_link</frameName>
+					<interface:laser name="gazebo_ros_${name}_iface" />
+				</controller:gazebo_ros_laser>
+			</sensor:ray>
+		</gazebo>
+
+		<gazebo reference="${parent}_link">
+			<material>simBot/Grey</material>
+		</gazebo>
+
+		<gazebo reference="${name}_link">
+			<material>simBot/Black</material>
+		</gazebo>
+	</xacro:macro>
+</robot>
+
+

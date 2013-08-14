@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<model>
+  <name>Finihed tree</name>
+  <version>1.0</version>
+  <license></license>
+  <sdf>model-1_3.sdf</sdf>
+
+  <author>
+    <name></name>
+    <email></email>
+  </author>
+
+  <description>
+    A tree.
+  </description>
+</model>
