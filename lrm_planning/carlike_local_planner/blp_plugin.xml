@@ -1,0 +1,7 @@
+<library path="lib/libbase_local_planner">
+  <class name="carlike_local_planner/CarLikeTrajectoryPlannerROS" type="carlike_local_planner::CarLikeTrajectoryPlannerROS" base_class_type="nav_core::BaseLocalPlanner">
+    <description>
+      A implementation of a local planner for car-like robots using either a DWA or Trajectory Rollout approach based on configuration parameters.
+    </description>
+  </class>
+</library>

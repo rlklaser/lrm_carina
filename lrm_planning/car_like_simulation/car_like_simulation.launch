@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- this launch file corresponds to robot model in ros-pkg/robot_descriptions/pr2/erratic_defs/robots for full erratic -->
+  <!-- start up wg world -->
+  <include file="$(find gazebo_worlds)/launch/wg_world.launch"/>
+
+  <!-- Create a transform sender for linking these frames. -->
+  <node name="tf_footprint_base" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 base_footprint base_link 40" />	
+
+  <arg name="model" />
+  <param name="robot_description" command="$(find xacro)/xacro.py '$(find car_like_simulation)/car_like.urdf.xacro'" />
+  
+  <!-- push robot_description to factory and spawn robot in gazebo -->
+  <node name="spawn_robot" pkg="gazebo" type="spawn_model"
+          args="-param robot_description
+                -urdf
+                -z 0.25
+                -model robot_description"
+          respawn="false" output="screen" />
+	  
+  <param name="box_description" textfile="$(find car_like_simulation)/media/box.urdf" />
+
+  <!-- push box_description to factory and spawn robot in gazebo -->
+  <node name="spawn_box1" pkg="gazebo" type="spawn_model" args="-urdf -param box_description -z 0.3 -model box_model1" respawn="false" output="screen" />	  
+
+  <!-- push box_description to factory and spawn robot in gazebo -->
+  <node name="spawn_box2" pkg="gazebo" type="spawn_model" args="-urdf -param box_description -x 1.5 -z 0.3 -model box_model2" respawn="false" output="screen" />  
+  
+  <node pkg="robot_state_publisher" type="state_publisher" name="robot_state_publisher" output="screen" >
+        <param name="publish_frequency" type="double" value="50.0" />
+       <param name="tf_prefix" type="string" value="" />
+  </node>
+  
+      <!-- Filter for base laser shadowing/veiling -->
+<!--
+    <node pkg="laser_filters" type="scan_to_cloud_filter_chain" respawn="true" name="base_shadow_filter" >
+        <remap from="scan" to="base_scan/scan" />
+        <remap from="cloud_filtered" to="base_scan/shadow_filtered_old" />
+        <param name="target_frame" value="base_footprint" />
+        <param name="high_fidelity" value="false" />
+        <rosparam command="load" file="$(find erratic_description)/params/shadow_filter.yaml" />
+    </node>
+-->
+
+    <node pkg="point_cloud_converter" type="point_cloud_converter" name="laser_scan_cloud_to_cloud2" >
+        <remap from="points_in" to="base_scan/shadow_filtered_old" />
+        <remap from="points2_out" to="base_scan/shadow_filtered" />
+    </node>
+
+    <!-- Filter for base laser scans that hit the body of the robot -->
+<!-- 
+   <node pkg="robot_self_filter" type="self_filter" name="base_laser_self_filter" respawn="true" output="screen" >
+        <remap from="cloud_in" to="base_scan/shadow_filtered" />
+        <remap from="cloud_out" to="base_scan/marking" />
+        <param name="sensor_frame" type="string" value="base_scan_link" />
+        <rosparam file="$(find erratic_description)/params/self_filter.yaml" command="load" />
+    </node>
+  -->
+  <node pkg="nxt_steering_control" type="cmdvel_to_cardrive.py" name="cmdvel_to_cardrive" output="screen" respawn="true">
+  </node>
+  
+  <!--
+  <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
+        <remap from="scan" to="base_scan/scan" />
+        <param name="base_frame" value="base_footprint" />
+        <param name="odom_frame" value="odom"/>
+        <param name="map_update_interval" value="30.0"/>
+        <param name="maxUrange" value="4.0"/>
+        <param name="sigma" value="0.05"/>
+        <param name="kernelSize" value="1"/>
+        <param name="lstep" value="0.05"/>
+        <param name="astep" value="0.05"/>
+        <param name="iterations" value="5"/>
+        <param name="lsigma" value="0.075"/>
+        <param name="ogain" value="3.0"/>
+        <param name="lskip" value="0"/>
+        <param name="srr" value="0.01"/>
+        <param name="srt" value="0.02"/>
+        <param name="str" value="0.01"/>
+        <param name="stt" value="0.02"/>
+        <param name="linearUpdate" value="0.5"/>
+        <param name="angularUpdate" value="0.436"/>
+        <param name="temporalUpdate" value="-1.0"/>
+        <param name="resampleThreshold" value="0.5"/>
+        <param name="particles" value="80"/>
+        <param name="xmin" value="-10.0" />
+        <param name="ymin" value="-10.0" />
+        <param name="xmax" value="10.0" />
+        <param name="ymax" value="10.0" />
+        <param name="delta" value="0.01"/>
+        <param name="llsamplerange" value="0.01"/>
+        <param name="llsamplestep" value="0.01"/>
+        <param name="lasamplerange" value="0.005"/>
+        <param name="lasamplestep" value="0.005"/>
+    </node>
+   -->
+   <node name="map_node" pkg="map_server" type="map_server" 
+          args="$(find car_like_simulation)/media/empty_map.yaml" respawn="true" output="screen" />
+	  
+<!--
+   <include file="$(find erratic_navigation)/navigation_global/amcl_node.launch" />
+-->
+  <!-- for moving --> 
+    <node pkg="move_base" type="move_base" respawn="false" name="move_base_node" output="screen">
+        <remap from="odom" to="odom" />
+        <remap from="cmd_vel" to="cmd_vel" />
+        
+        <!-- Load common configuration files -->
+        <rosparam file="$(find car_like_simulation)/navigation_config/move_base_params.yaml" command="load" />
+        <rosparam file="$(find car_like_simulation)/navigation_config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+        <rosparam file="$(find car_like_simulation)/navigation_config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+        <rosparam file="$(find car_like_simulation)/navigation_config/base_local_planner_params.yaml" command="load" ns="TrajectoryPlannerROS" />
+
+        <!-- Load global navigation specific parameters -->
+        <rosparam file="$(find car_like_simulation)/slam_config/move_base_params.yaml" command="load" />
+        <rosparam file="$(find car_like_simulation)/slam_config/local_costmap_params.yaml" command="load" />
+        <rosparam file="$(find car_like_simulation)/slam_config/global_costmap_params.yaml" command="load" />
+        <rosparam file="$(find car_like_simulation)/slam_config/base_local_planner_params.yaml" command="load" />
+    </node>
+   
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find car_like_simulation)/rviz_config.vcg">
+    </node>
+  
+</launch>
