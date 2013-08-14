@@ -213,18 +213,19 @@ void PointCloud2Nodelet::imageCb(const ImageConstPtr& l_image_msg,
       }
       else
       {
-        /*
+
         memcpy (&points_msg->data[offset + 0], &bad_point, sizeof (float));
         memcpy (&points_msg->data[offset + 4], &bad_point, sizeof (float));
         memcpy (&points_msg->data[offset + 8], &bad_point, sizeof (float));
-        */
+
+        /*
     	mat(v,u)[2] = 100.0;
     	mat(v,u)[0] *= -1;
     	mat(v,u)[1] *= -1;
-
     	memcpy (&points_msg->data[offset + 0], &mat(v,u)[0], sizeof (float));
     	memcpy (&points_msg->data[offset + 4], &mat(v,u)[1], sizeof (float));
     	memcpy (&points_msg->data[offset + 8], &mat(v,u)[2], sizeof (float));
+    	*/
       }
     }
   }
