@@ -1,0 +1,19 @@
+<package>
+  <description brief="lrm_sbpl">
+
+     lrm_sbpl
+
+  </description>
+  <author>Rafael Luiz Klaser</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/lrm_sbpl</url>
+  <depend package="roscpp"/>
+
+ <export>
+    <cpp cflags="-I${prefix}/include" lflags="-Wl,-rpath,${prefix}/lib -L${prefix}/lib -lsbpl"/>
+  </export>
+  
+</package>
+
+

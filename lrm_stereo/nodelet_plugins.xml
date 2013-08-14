@@ -1,0 +1,56 @@
+<library path="lib/liblrm_stereo">
+
+	<class
+		name="lrm_stereo/disparity_sgbm"
+		type="lrm_stereo::DisparitySGBMNodelet"
+		base_class_type="nodelet::Nodelet"
+	>
+		<description>Stereo Semi-Global Block Matching
+		</description>
+	</class>
+
+	<class
+		name="lrm_stereo/disparity_bm_cuda"
+		type="lrm_stereo::DisparityBMCUDANodelet"
+		base_class_type="nodelet::Nodelet"
+	>
+		<description>CUDA Block Matching
+		</description>
+	</class>
+
+	<class
+		name="lrm_stereo/feature_matcher"
+		type="lrm_stereo::FeatureMatcherNodelet"
+		base_class_type="nodelet::Nodelet"
+	>
+		<description>Feature Matcher
+		</description>
+	</class>
+
+	<class
+		name="lrm_stereo/pcl_stereo"
+		type="lrm_stereo::RosPclStereoNodelet"
+		base_class_type="nodelet::Nodelet"
+	>
+		<description>PCL Stereo
+		</description>
+	</class>
+
+	<class
+		name="lrm_stereo/colorless_stereo"
+		type="lrm_stereo::PointCloudColorlessNodelet"
+		base_class_type="nodelet::Nodelet"
+	>
+		<description>PointCloud without color
+		</description>
+	</class>
+
+	<class
+		name="lrm_stereo/point_cloud2"
+		type="lrm_stereo::PointCloud2Nodelet"
+		base_class_type="nodelet::Nodelet"
+	>
+		<description>Nodelet to produce XYZRGB PointCloud2 messages</description>
+	</class>
+	
+</library>

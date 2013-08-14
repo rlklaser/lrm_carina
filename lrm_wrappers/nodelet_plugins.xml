@@ -1,0 +1,12 @@
+<library path="lib/liblrm_wrappers">
+
+	<class
+		name="lrm_wrappers/disparity"
+		type="lrm_wrappers::DisparityNodelet"
+		base_class_type="nodelet::Nodelet"
+	>
+		<description>Nodelet to perform stereo processing on a pair of rectified image streams, producing disparity images
+		</description>
+	</class>
+
+</library>

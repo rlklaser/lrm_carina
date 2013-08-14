@@ -1,0 +1,18 @@
+<launch>
+
+	<group ns="/stereo">
+		<node
+			pkg="nodelet"
+			type="nodelet"
+			name="pcl_point_cloud"
+			args="load lrm_stereo/pcl_stereo /camera_nodelet_manager --no-bond"
+			respawn="true"
+			output="screen"
+		>
+			<param
+				name="approximate_sync"
+				value="true" />
+		</node>
+	</group>
+
+</launch>

@@ -1,0 +1,49 @@
+<launch>
+
+	<node
+		pkg="nodelet"
+		type="nodelet"
+		name="pass_throught_nodelet"
+		args="load pcl/PassThrough /camera_nodelet_manager --no-bond"
+		output="screen"
+		respawn="true"
+	>
+		<remap
+			from="~input"
+			to="/stereo/points2" />
+<!-- 
+		<remap
+			from="~output"
+			to="points_through_ground" />
+ -->
+ 		<remap
+			from="~output"
+			to="/ground_cloud_in" />
+<rosparam>
+filter_field_name: z
+filter_limit_min: -1.0
+filter_limit_max: 0.1
+filter_limit_negative: False
+input_frame: /base_footprint
+output_frame: base_footprint
+</rosparam>
+	</node>
+<!-- 
+	<node
+		name="ground_seg_node"
+		pkg="lrm_wrappers"
+		type="plane_segment"
+		respawn="true"
+		output="screen"
+	>
+		<remap
+			from="points"
+			to="points_through_ground" />
+		<remap
+			from="~ground_points"
+			to="/ground_cloud_in" />
+
+	</node>
+ -->
+ 
+</launch>

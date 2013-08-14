@@ -1,0 +1,47 @@
+<launch>
+
+	<node
+		name="cloud_sum"
+		pkg="lrm_wrappers"
+		type="cloud_sum_node"
+		respawn="true"
+		output="screen"
+	>
+	<!-- 
+		<remap
+			from="points"
+			to="/stereo/points_voxel" />
+ 	-->
+		<remap
+			from="points"
+			to="/stereo/points2" />
+
+		<param
+			name="frame_count"
+			value="6" />
+	</node>
+
+
+	<node
+		name="cloud_sum_filtered"
+		pkg="lrm_wrappers"
+		type="cloud_sum_node"
+		respawn="true"
+		output="screen"
+	>
+	<!-- 
+		<remap
+			from="points"
+			to="/stereo/points_voxel" />
+ 	-->
+		<remap
+			from="points"
+			to="/stereo/stat_removal_nodelet/output" />
+
+		<param
+			name="frame_count"
+			value="50" />
+	</node>
+	
+
+</launch>
