@@ -34,6 +34,8 @@ protected:
 	int steeringMotorIndex;			/**< Index of steering motor (where it is connected to roboteq device). */
 	int brakeMotorIndex;			/**< Index of brake motor (where it is connected to roboteq device). */
 
+	double steeringAngleRatio;     /**< motor angle/force ratio */
+
 	pthread_t queue_thread;
 	static pthread_mutex_t mutexQueueMsg;
 	static std::queue<std::string> queue_messages;
@@ -51,6 +53,8 @@ public:
 	std::string getModel();
 	std::string getErrorMsg();
 	std::string getLastResponse();
+
+	inline void setSteeringEncoderRatio(double value) {steeringAngleRatio = value;};
 
 	void changeChannels();
 	void changeSteeringDirection();

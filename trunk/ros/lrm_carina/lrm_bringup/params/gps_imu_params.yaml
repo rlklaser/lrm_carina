@@ -1,0 +1,25 @@
+xsens_driver:
+
+  port: /dev/ttyUSB0
+ 
+  temperature: true
+  calibrated: true
+  orientation: true
+  auxiliary: false
+  position: true
+  velocity: true
+  status: true
+  rawGPS: false
+  rawInertial: false
+  timeStamp: true
+  orientationMode: 0
+  enableAcceleration: true
+  enableRateOfTurn: true
+  enableMagnetometer: true
+  velocityModeNED: false
+  heading: 0.0
+  scenario: 2
+
+  GPSLeverArm_X: 0.0
+  GPSLeverArm_Y: 0.0
+  GPSLeverArm_Z: 1.0

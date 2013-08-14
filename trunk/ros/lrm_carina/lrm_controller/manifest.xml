@@ -18,6 +18,7 @@
   <depend package="kdl_parser" />
   <depend package="sensor_msgs" />
   <depend package="tf" />
+  <depend package="angles" />
   <depend package="tf_conversions" />
   
   <export>
