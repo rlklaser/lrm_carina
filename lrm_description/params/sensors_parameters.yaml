@@ -1,0 +1,11 @@
+#gazebo:
+#  cfm: 0.00002
+#  erp: 0.2
+#  max_contacts: 100000
+
+left:
+  imager_rate: 15
+
+right:
+  imager_rate: 15
+  

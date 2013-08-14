@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<!--
+*  Copyright (C) 2012, Laboratorio de Robotica Movel - ICMC/USP
+ *  Rafael Luiz Klaser <rlklaser@gmail.com>
+ *  http://lrm.icmc.usp.br
+ *
+ *  Apoio FAPESP: 2012/04555-4
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * @file rear.suspension.urdf.xacro
+ * @brief 
+ * @author Rafael Luiz Klaser <rlklaser@gmail.com>
+ * @date Dez 12, 2012
+ *
+ */
+-->
+<robot>
+	<link name="rear_suspension_rot_link">
+		<inertial>
+			<mass value="${inertia_null_mass}" />
+			<origin xyz="${inertia_null_x} ${inertia_null_y} ${inertia_null_z}" />
+			<inertia
+				ixx="${inertia_null_ixx}"
+				ixy="${inertia_null_ixy}"
+				ixz="${inertia_null_ixz}"
+				iyy="${inertia_null_iyy}"
+				iyz="${inertia_null_iyz}"
+				izz="${inertia_null_izz}" />
+		</inertial>
+	</link>
+	<link name="rear_suspension_trans_link">
+		<inertial>
+			<mass value="${inertia_null_mass}" />
+			<origin xyz="${inertia_null_x} ${inertia_null_y} ${inertia_null_z}" />
+			<inertia
+				ixx="${inertia_null_ixx}"
+				ixy="${inertia_null_ixy}"
+				ixz="${inertia_null_ixz}"
+				iyy="${inertia_null_iyy}"
+				iyz="${inertia_null_iyz}"
+				izz="${inertia_null_izz}" />
+		</inertial>
+	</link>
+	<joint
+		name="joint_rear_suspension_trans"
+		type="prismatic"
+	>
+		<parent link="rear_axle_link" />
+		<child link="rear_suspension_trans_link" />
+		<origin
+			xyz="0 0 0"
+			rpy="0 0 0" />
+		<axis xyz="0 0 1" />
+		<limit
+			effort="0.1"
+			velocity="0.1"
+			lower="-0.01"
+			upper="0.01" />
+	</joint>
+	<joint
+		name="joint_rear_suspension_rot"
+		type="revolute"
+	>
+		<parent link="rear_suspension_trans_link" />
+		<child link="rear_suspension_rot_link" />
+		<origin
+			xyz="0 0 0"
+			rpy="0 0 0" />
+		<axis xyz="1 0 0" />
+		<limit
+			effort="0.1"
+			velocity="0.1"
+			lower="-0.015"
+			upper="0.015" />
+	</joint>
+</robot>

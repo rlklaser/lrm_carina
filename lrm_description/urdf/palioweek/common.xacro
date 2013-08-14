@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<!--
+*  Copyright (C) 2012, Laboratorio de Robotica Movel - ICMC/USP
+ *  Rafael Luiz Klaser <rlklaser@gmail.com>
+ *  http://lrm.icmc.usp.br
+ *
+ *  Apoio FAPESP: 2012/04555-4
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * @file common.xacro
+ * @brief 
+ * @author Rafael Luiz Klaser <rlklaser@gmail.com>
+ * @date Dez 12, 2012
+ *
+ */
+-->
+<robot>
+	<property
+		name="M_PI"
+		value="3.1415926535897931" />
+	<property
+		name="min_mass"
+		value="0.1" />
+	<property
+		name="base_mass"
+		value="1000" />
+	<property
+		name="wheel_mass"
+		value="10" />
+	<property
+		name="axle_mass"
+		value="25" />
+	<property
+		name="base_height"
+		value="0.75" />
+	<property
+		name="wheel_diameter"
+		value="0.65" />
+	<property
+		name="wheel_width"
+		value="0.35" />
+	<property
+		name="wheel_axis"
+		value="0.12" />
+	<property
+		name="front_to_base"
+		value="1.35" />
+	<property
+		name="rear_to_base"
+		value="1.17" />
+	<property
+		name="rear_axle"
+		value="1.10" />
+	<property
+		name="front_axle"
+		value="1.10" />
+	<property
+		name="ackermann_bar"
+		value="0.86" />
+	<property
+		name="max_steer"
+		value="40" />
+	<property
+		name="drive_torque"
+		value="120" />
+	<property
+		name="steer_torque"
+		value="600" />
+	<property
+		name="bounding_box_x"
+		value="2.8" />
+	<property
+		name="bounding_box_y"
+		value="1.2" />
+	<property
+		name="bounding_box_z"
+		value="1.5" />
+</robot>

@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!--
+ * Copyright (c) 2012, Siddhant Ahuja (Sid)
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ *     * Redistributions of source code must retain the above copyright
+ *       notice, this list of conditions and the following disclaimer.
+ *     * Redistributions in binary form must reproduce the above copyright
+ *       notice, this list of conditions and the following disclaimer in the
+ *       documentation and/or other materials provided with the distribution.
+ *     * Neither the name of Siddhant Ahuja (Sid) nor the names of its
+ *       contributors may be used to endorse or promote products derived from
+ *       this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+-->
+<!--
+ * Desc: This program contains common properties for the simulation robot
+ * Author: Siddhant Ahuja
+-->
+<robot>
+	<property name="M_PI" value="3.1415926535897931" />
+
+	<!-- Size of the base-->
+	<property name="base_mass" value="10.0" />
+	<property name="base_cg_x" value="0.0" /> 
+	<property name="base_cg_y" value="0.0" /> 
+	<property name="base_cg_z" value="0.0" /> 
+	<property name="base_x_size" value="0.28298000" /> 
+	<property name="base_y_size" value="0.20500000" /> 
+	<property name="base_z_size" value="0.04250000" />
+	<property name="base_ack_x_size" value="0.05" /> 
+	<property name="base_ack_z_size" value="0.01" />
+	<property name="base_ack_width" value="0.010" />
+	<property name="base_ack_wheel_offset" value="0.02" />
+	<property name="base_x_origin_to_wheel_origin" value="0.12024000" />
+	<property name="base_y_origin_to_wheel_origin" value="0.08750000" />
+	<property name="base_z_origin_to_wheel_origin" value="0.00000000" />
+	<property name="base_ixx_cg_cs" value="0.0" />
+	<property name="base_ixy_cg_cs" value="0.0" />
+	<property name="base_ixz_cg_cs" value="0.0" />
+	<property name="base_iyy_cg_cs" value="0.0" />
+	<property name="base_iyz_cg_cs" value="0.0" />
+	<property name="base_izz_cg_cs" value="0.0" />
+	<property name="wheel_mass" value="1.0" />
+	<property name="wheel_x_size" value="0.09652" /> 
+	<property name="wheel_y_size" value="0.09652" /> 
+	<property name="wheel_z_size" value="0.03000" />
+	<property name="wheel_ixx_cg_cs" value="0.012411765597" />
+	<property name="wheel_ixy_cg_cs" value="0.00000000" />
+	<property name="wheel_ixz_cg_cs" value="0.00000000" />
+	<property name="wheel_iyy_cg_cs" value="0.015218160428" />
+	<property name="wheel_iyz_cg_cs" value="0.00000000" />
+	<property name="wheel_izz_cg_cs" value="0.011763977943" />
+	<property name="base_laser_x" value="${base_x_size/2 - 0.01 - 0.04}" /> 
+	<property name="base_laser_y" value="0.0" /> 
+	<property name="base_laser_z" value="${base_z_size}" /> 
+</robot>

@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!--
+*  Copyright (C) 2012, Laboratorio de Robotica Movel - ICMC/USP
+ *  Rafael Luiz Klaser <rlklaser@gmail.com>
+ *  http://lrm.icmc.usp.br
+ *
+ *  Apoio FAPESP: 2012/04555-4
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * @file suspension.urdf.xacro
+ * @brief 
+ * @author Rafael Luiz Klaser <rlklaser@gmail.com>
+ * @date Dez 12, 2012
+ *
+ */
+-->
+<robot
+	xmlns:xi="http://www.w3.org/2001/XInclude"
+	xmlns:xacro="http://ros.org/wiki/xacro"
+>
+	<include filename="$(find lrm_description)/urdf/carina/front.suspension.urdf.xacro" />
+	<include filename="$(find lrm_description)/urdf/carina/front.suspension.gazebo.xacro" />
+	<include filename="$(find lrm_description)/urdf/carina/rear.suspension.urdf.xacro" />
+	<include filename="$(find lrm_description)/urdf/carina/rear.suspension.gazebo.xacro" />
+
+	<xacro:front_suspension
+		side="left"
+		size="${front_axle/2}" />
+	<xacro:front_suspension
+		side="right"
+		size="${-front_axle/2}" />
+
+</robot>

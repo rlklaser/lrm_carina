@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<library path="lib/libcarina_controller">
+  <class name="lrm_controller/CarinaControllerPlugin" 
+         type="lrm_controller::CarinaController"           
+         base_class_type="pr2_controller_interface::Controller" />
+</library>
+
+<library path="lib/libsteering_controller">
+  <class name="lrm_controller/SteeringControllerPlugin" 
+         type="lrm_controller::SteeringController"           
+         base_class_type="pr2_controller_interface::Controller" />
+</library>

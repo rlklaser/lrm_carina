@@ -1,0 +1,74 @@
+<?xml version="1.0" ?>
+<!--
+*  Copyright (C) 2012, Laboratorio de Robotica Movel - ICMC/USP
+ *  Rafael Luiz Klaser <rlklaser@gmail.com>
+ *  http://lrm.icmc.usp.br
+ *
+ *  Apoio FAPESP: 2012/04555-4
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * @file robot.xacro
+ * @brief 
+ * @author Rafael Luiz Klaser <rlklaser@gmail.com>
+ * @date Dez 12, 2012
+ *
+ */
+-->
+
+<robot
+	xmlns:xi="http://www.w3.org/2001/XInclude"
+	xmlns:xacro="http://ros.org/wiki/xacro"
+	xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+	xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+	xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+>
+	<xacro:macro
+		name="imu_gazebo"
+		params="name topic"
+	>
+		<gazebo>
+			<plugin
+				name="${name}_controller"
+				filename="liblrm_gazebo_ros_imu.so"
+			>
+				<alwaysOn>true</alwaysOn>
+				<updateRate>30.0</updateRate>
+				<bodyName>${name}_link</bodyName>
+				<topicName>${topic}</topicName>
+				
+				<accelDrift>0.0 0.0 0.0</accelDrift>
+				<accelGaussianNoise>0.001 0.001 0.001</accelGaussianNoise>
+				<accelOffset>0.0 0.0 0.0</accelOffset>
+				<accelDriftFrequency>0.0 0.0 0.0</accelDriftFrequency>
+				
+				<rateDrift>0.0 0.0 0.0</rateDrift>
+				<rateGaussianNoise>0.001 0.001 0.001</rateGaussianNoise>
+				<rateOffset>0.0 0.0 0.0</rateOffset>
+				<rateDriftFrequency>0.0 0.0 0.0</rateDriftFrequency>
+				
+				<headingDrift>0.00000001</headingDrift>
+				<headingGaussianNoise>0.0001</headingGaussianNoise>
+				<headingOffset>0.0</headingOffset>
+				<headingDriftFrequency>0.0</headingDriftFrequency>
+				
+				<referenceHeading>${heading}</referenceHeading>
+				
+				<robotNamespace>${namespace}</robotNamespace>
+			</plugin>
+		</gazebo>
+	</xacro:macro>
+</robot>
