@@ -6,10 +6,6 @@ Panels:
       Expanded:
         - /TF1
         - /TF1/Tree1
-        - /TF1/Tree1//world1
-        - /TF1/Tree1//world1//map1
-        - /TF1/Tree1//world1//map1//wheel_odom1
-        - /TF1/Tree1//world1//map1//wheel_odom1//base_footprint1
         - /Camera2/Visibility1
       Splitter Ratio: 0.847826
     Tree Height: 255
@@ -28,7 +24,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: ""
+    SyncSource: Image
   - Class: rviz/Views
     Expanded:
       - /Current View1
@@ -73,13 +69,11 @@ Visualization Manager:
           Value: true
         /bbx_top_rear_right_link:
           Value: true
+        /body_link:
+          Value: true
         /camera_center_link:
           Value: true
         /center_mass_link:
-          Value: true
-        /chassis_link:
-          Value: true
-        /compass_link:
           Value: true
         /ekf_odom:
           Value: true
@@ -184,9 +178,9 @@ Visualization Manager:
                     {}
                   /bbx_top_rear_right_link:
                     {}
-                  /center_mass_link:
+                  /body_link:
                     {}
-                  /chassis_link:
+                  /center_mass_link:
                     {}
                   /front_axle_link:
                     /front_left_susp_link:
@@ -216,8 +210,6 @@ Visualization Manager:
                       /rear_right_bar_link:
                         /rear_right_wheel:
                           {}
-                /compass_link:
-                  {}
       Update Interval: 0
       Value: true
     - Alpha: 0.5
@@ -313,6 +305,11 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
+        body_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         camera_center_link:
           Alpha: 1
           Show Axes: false
@@ -322,11 +319,6 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        chassis_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         front_axle_link:
           Alpha: 1
           Show Axes: false
@@ -802,29 +794,18 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Class: rviz_animated_view_controller/Animated
-      Control Mode: Orbit
-      Distance: 39.0016
-      Eye:
-        X: -6.73836
-        Y: 0.213907
-        Z: 21.9281
-      Focus:
-        X: 3.66253
-        Y: -0.107497
-        Z: -15.6597
-      Maintain Vertical Axis: true
-      Mouse Enabled: true
+      Class: rviz/Orbit
+      Distance: 15.6582
+      Focal Point:
+        X: 2.17933
+        Y: 0.552914
+        Z: 1.04619
       Name: Current View
       Near Clip Distance: 0.01
-      Placement Topic: /rviz/camera_placement
+      Pitch: 0.385161
       Target Frame: /base_footprint
-      Transition Time: 0.5
-      Up:
-        X: 0
-        Y: 0
-        Z: 1
-      Value: Animated (rviz_animated_view_controller)
+      Value: Orbit (rviz)
+      Yaw: 5.02955
     Saved: ~
 Window Geometry:
   Camera:

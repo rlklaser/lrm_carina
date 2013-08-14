@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<model>
+  <name>CaRINA Terrain</name>
+  <version>1.0</version>
+  <sdf>model-1_3.sdf</sdf>
+
+  <author>
+    <name>Rafael Luiz Klaser</name>
+    <email></email>
+  </author>
+
+  <description>
+    A simple terrain.
+  </description>
+</model>

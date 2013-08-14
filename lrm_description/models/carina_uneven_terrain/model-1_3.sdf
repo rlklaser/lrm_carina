@@ -6,7 +6,7 @@
 			<collision name='collision'>
 				<geometry>
 					<heightmap>
-						<uri>file://media/materials/textures/heightmap_bowl.png</uri>
+						<uri>file://media/materials/textures/terrain.png</uri>
 						<size>1025.0 1025.0 10.0</size>
 						<pos>0.0 0.0 -5.2</pos>
 					</heightmap>
@@ -24,7 +24,7 @@
 			<visual name='visual'>
 				<geometry>
 					<heightmap>
-						<uri>file://media/materials/textures/heightmap_bowl.png</uri>
+						<uri>file://media/materials/textures/terrain.png</uri>
 						<size>1025.0 1025.0 10.0</size>
 						<pos>0.0 0.0 -5.2</pos>
 						<texture>
