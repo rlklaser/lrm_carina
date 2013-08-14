@@ -1,0 +1,25 @@
+<launch>
+	<node
+		pkg="lrm_stereo"
+		name="fake_cloud"
+		type="fake_cloud"
+	>
+
+		<param
+			name="density"
+			value="2000" />
+		<param
+			name="ray"
+			value="15.0" />
+		<param
+			name="isRandon"
+			value="false" />
+		<param
+			name="rate"
+			value="10" />
+		<param
+			name="frame_id"
+			value="/stereo_camera" />
+
+	</node>
+</launch>

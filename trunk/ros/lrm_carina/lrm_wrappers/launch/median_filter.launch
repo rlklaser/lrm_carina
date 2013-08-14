@@ -1,0 +1,21 @@
+<launch>
+
+	<node
+		name="median_filter_node"
+		pkg="lrm_wrappers"
+		type="median_filter_node"
+		respawn="true"
+		output="screen"
+	>
+<!-- 
+		<remap
+			from="points_in"
+			to="/region_growing_seg/points_out" />
+ -->
+		<remap
+			from="points_in"
+			to="/stereo/points2" />
+
+	</node>
+
+</launch>

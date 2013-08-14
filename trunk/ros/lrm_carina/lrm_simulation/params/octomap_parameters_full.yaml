@@ -1,0 +1,26 @@
+octomap_server:
+    latch: false
+    frame_id: /map
+    base_frame_id: base_footprint
+    height_map: true
+    resolution: 0.1
+    
+    filter_speckles: true
+    
+    pointcloud_min_z: 0.15
+    pointcloud_max_z: 2.5
+    
+    filter_ground: false
+    #ground_filter/distance: 0.05
+    ground_filter/angle: 0.5
+    #ground_filter/plane_distance: 0.05
+    
+    #compress_map: true
+    
+    sensor_model/max_range: 15
+    
+    #sensor_model/hit: 0.6
+    #sensor_model/miss: 0.4
+    #sensor_model/max: 0.75
+    #sensor_model/min: 0.35
+    

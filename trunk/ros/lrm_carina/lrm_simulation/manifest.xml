@@ -1,0 +1,14 @@
+<package>
+  <description brief="lrm_simulation">
+
+     lrm_simulation
+
+  </description>
+  <author>Rafael Luiz Klaser</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/lrm_simulation</url>
+
+</package>
+
+

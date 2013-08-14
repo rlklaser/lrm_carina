@@ -1,0 +1,27 @@
+<library path="lib/libsensors_proc">
+
+	<class
+		name="lrm_sensors_proc/split"
+		type="lrm_sensors::SplitNodelet"
+		base_class_type="nodelet::Nodelet"
+	>
+		<description>Nodelet to split left/right images from Format7 bumblebee stereo image</description>
+	</class>
+
+	<class
+		name="lrm_sensors/split_bb2"
+		type="lrm_sensors::SplitBB2Nodelet"
+		base_class_type="nodelet::Nodelet"
+	>
+		<description>Nodelet to split left/right images from Format7 bumblebee stereo image</description>
+	</class>
+
+	<class
+		name="lrm_sensors/split_xb3"
+		type="lrm_sensors::SplitXB3Nodelet"
+		base_class_type="nodelet::Nodelet"
+	>
+		<description>Nodelet to split left/right narrow/wide images from Format7 bumblebee xb3 stereo image</description>
+	</class>
+		
+</library>

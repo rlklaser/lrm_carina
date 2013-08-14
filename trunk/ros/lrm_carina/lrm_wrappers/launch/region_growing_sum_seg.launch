@@ -1,0 +1,55 @@
+<launch>
+
+	<node
+		name="region_growing_seg"
+		pkg="lrm_wrappers"
+		type="region_growing"
+		respawn="true"
+		output="screen"
+	>
+		<remap
+			from="points_in"
+			to="/cloud_sum_filtered/points_sum" />
+
+		<param
+			name="k_search"
+			value="30" />
+		<param
+			name="min_size"
+			value="100" />
+		<param
+			name="max_size"
+			value="5000" />
+		<param
+			name="neighbours"
+			value="30" />
+		<param
+			name="curvature"
+			value="5.0" />
+		<param
+			name="smoothness"
+			value="45.0" />
+	</node>
+
+	<node
+		name="cloud_sum_filtered"
+		pkg="lrm_wrappers"
+		type="cloud_sum_node"
+		respawn="true"
+		output="screen"
+	>
+		<remap
+			from="points"
+			to="/stereo/points_stat" />
+
+		<param
+			name="frame_count"
+			value="100" />
+		
+		<param
+			name="incremental"
+			value="true" />
+			
+	</node>
+
+</launch>

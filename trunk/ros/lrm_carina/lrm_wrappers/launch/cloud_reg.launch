@@ -1,0 +1,22 @@
+<launch>
+
+	<node
+		name="cloud_reg"
+		pkg="lrm_wrappers"
+		type="cloud_register_node"
+		respawn="true"
+		output="screen"
+	>
+	<!-- 
+		<remap
+			from="points"
+			to="/stereo/points_voxel" />
+ 	-->
+		<remap
+			from="points_in"
+			to="/stereo/points2" />
+
+	</node>
+
+
+</launch>

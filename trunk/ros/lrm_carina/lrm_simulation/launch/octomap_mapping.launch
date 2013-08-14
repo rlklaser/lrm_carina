@@ -1,0 +1,152 @@
+<!-- 
+  Example launch file for octomap_server mapping: 
+  Listens to incoming PointCloud2 data and incrementally builds an octomap. 
+  The data is sent out in different representations. 
+
+  Copy this file into your workspace and adjust as needed, see
+  www.ros.org/wiki/octomap_server for details  
+-->
+<launch>
+
+	<param
+		name="/use_sim_time"
+		value="true" />
+
+	<rosparam
+		command="load"
+		file="$(find lrm_simulation)/params/octomap_parameters.yaml" />
+
+	<node
+		name="filter_cloud"
+		pkg="lrm_wrappers"
+		type="cloud_cut"
+		output="screen"
+		respawn="true"
+	>
+		<remap
+			from="points"
+			to="/stereo/points2" />
+		<remap
+			from="points_cut"
+			to="/cloud_filtered" />
+	</node>
+
+<!-- 
+	<node
+		pkg="lrm_stereo"
+		name="fake_cloud"
+		type="fake_cloud"
+	>
+
+		<param
+			name="density"
+			value="35000" />
+		<param
+			name="ray"
+			value="20.0" />
+		<param
+			name="isRandon"
+			value="true" />
+		<param
+			name="rate"
+			value="5" />
+		<param
+			name="frame_id"
+			value="/base_link" />
+
+		<remap
+			from="cloud"
+			to="cloud_filtered" />
+
+	</node>
+
+	<node
+		name="cloud_mux"
+		pkg="topic_tools"
+		type="mux"
+		args="/cloud_filtered_mux /cloud_filtered /cloud"
+		output="screen"
+	>
+		<param
+			name="lazy"
+			value="true" />
+	</node>
+ -->
+	<node
+		pkg="lrm_octomap_server"
+		type="octomap_server_node"
+		name="octomap_server"
+		output="screen"
+		respawn="true"
+	>
+		<!-- 
+		<param
+			name="resolution"
+			value="0.05" />
+		
+		<param
+			name="frame_id"
+			value="map" />
+		
+		<param
+			name="base_frame_id"
+			value="base_footprint" />
+		<param
+			name="sensor_model/max_range"
+			value="50.0" />
+		<param
+			name="latch"
+			value="fasle" />
+		<param
+			name="height_map"
+			value="true" />
+		<param
+			name="sensor_model/max_range"
+			value="30.0" />
+		<param
+			name="filter_ground"
+			value="false" />
+		<param
+			name="ground_filter/distance"
+			value="0.05" />
+		
+		<param
+			name="pointcloud_min"
+			value="0.01" />
+		<param
+			name="pointcloud_max"
+			value="5.0" />
+		
+		<param
+			name="occupancy_min"
+			value="0.01" />
+		<param
+			name="occupancy_max"
+			value="5.0" />
+		-->
+
+		<param
+			name="publish_free_space"
+			value="true" />
+
+		<remap
+			from="cloud_in"
+			to="/cloud_filtered" />
+
+		<remap
+			from="projected_map"
+			to="map" />
+
+<!-- 
+octomap_saver
+
+A small command line tool to request octomap files from 
+an octomap_server, similar to map_server#map_saver. 
+Just run "octomap_saver mapfile.bt" to request a 
+compressed binary octomap via service call and save it 
+to mapfile.bt. Run "octomap_saver -f mapfile.ot" 
+to request a full probability octomap instead;
+ -->
+
+	</node>
+</launch>

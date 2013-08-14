@@ -1,0 +1,34 @@
+<package>
+	<description brief="lrm_stereo">
+
+		lrm_stereo
+
+	</description>
+	<author>Rafael Luiz Klaser</author>
+	<license>BSD</license>
+	<review
+		status="unreviewed"
+		notes="" />
+	<url>http://ros.org/wiki/lrm_stereo</url>
+	<depend package="roscpp" />
+	<depend package="rospy" />
+	<depend package="std_msgs" />
+<!-- 
+	<depend package="lrm_opencv" />
+ -->
+	<depend package="opencv2" />
+
+	<depend package="nodelet" />
+	<depend package="dynamic_reconfigure" />
+
+	<depend package="pcl" />
+	<depend package="pcl_ros" />
+	<depend package="image_geometry" />
+
+	<export>
+		<nodelet plugin="${prefix}/nodelet_plugins.xml" />
+	</export>
+
+</package>
+
+

@@ -1,0 +1,90 @@
+<launch>
+
+	<node
+		name="cloud_sum_filtered"
+		pkg="lrm_wrappers"
+		type="cloud_sum_node"
+		respawn="true"
+		output="screen"
+	>
+		<remap
+			from="points"
+			to="/stereo/points_stat" />
+		<param
+			name="frame_count"
+			value="3" />
+	</node>
+
+	<node
+		name="region_growing_seg"
+		pkg="lrm_wrappers"
+		type="region_growing"
+		respawn="true"
+		output="screen"
+	>
+<!-- 
+		<remap
+			from="points_in"
+			to="/cloud_sum_filtered/points_sum" />
+-->
+		<remap
+			from="points_in"
+			to="/stereo/points_stat" />
+
+		<param
+			name="k_search"
+			value="30" />
+		<param
+			name="min_size"
+			value="100" />
+		<param
+			name="max_size"
+			value="5000" />
+		<param
+			name="neighbours"
+			value="30" />
+		<param
+			name="curvature"
+			value="2.0" />
+		<param
+			name="smoothness"
+			value="35.0" />
+	</node>
+
+	<node
+		name="cloud_sum_grown"
+		pkg="lrm_wrappers"
+		type="cloud_sum_node"
+		respawn="true"
+		output="screen"
+	>
+		<remap
+			from="points"
+			to="/region_growing_seg/points_out" />
+
+		<param
+			name="frame_count"
+			value="200" />
+		<param
+			name="incremental"
+			value="true" />
+	</node>
+
+<!-- 
+	<node
+		pkg="nodelet"
+		type="nodelet"
+		name="rad_removal_nodelet"
+		args="load pcl/RadiusOutlierRemoval /camera_nodelet_manager - -no-bond"
+		output="screen"
+		respawn="true"
+	>
+		<remap
+			from="~input"
+			to="/region_growing_seg/points_out" />
+		<remap
+			from="~output"
+			to="points_radius" />
+	</node>
+-->
+</launch>

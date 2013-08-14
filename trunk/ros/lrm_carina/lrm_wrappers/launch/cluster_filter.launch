@@ -1,0 +1,44 @@
+<launch>
+
+	<node
+		name="cluster_filter_node"
+		pkg="lrm_wrappers"
+		type="cluster_filter_node"
+		respawn="true"
+		output="screen"
+	>
+		<remap
+			from="points_in"
+			to="/region_growing_seg/points_out" />
+	</node>
+
+	<node
+		name="cluster_sum_filtered"
+		pkg="lrm_wrappers"
+		type="cloud_sum_node"
+		respawn="true"
+		output="screen"
+	>
+		<remap
+			from="points"
+			to="/cluster_filter_node/points_out" />
+
+		<param
+			name="frame_count"
+			value="10000" />
+
+		<param
+			name="incremental"
+			value="true" />
+
+	</node>
+
+	<node
+		name="cluster_filter_relay"
+		pkg="topic_tools"
+		type="relay"
+		args="/cluster_filter_node/points_out /cloud_in"
+		respawn="true"
+		output="screen" />
+
+</launch>

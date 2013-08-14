@@ -1,0 +1,39 @@
+<package>
+	<description brief="lrm_wrappers">
+
+		lrm_wrappers
+
+	</description>
+	<author>Rafael Luiz Klaser</author>
+	<license>BSD</license>
+	<review
+		status="unreviewed"
+		notes="" />
+	<url>http://ros.org/wiki/lrm_wrappers</url>
+	<depend package="roscpp" />
+	<depend package="std_msgs" />
+	<depend package="lrm_msgs" />
+	
+	<depend package="opencv2" />
+	<!-- 
+	<depend package="lrm_opencv" />
+	 -->
+	
+	<depend package="cv_bridge" />
+	<depend package="gps_common" />
+	<depend package="image_transport" />
+	<depend package="sensor_msgs" />
+	<depend package="pcl_ros" />
+	<depend package="pcl" />
+	<depend package="nodelet" />
+
+	<export>
+		<cpp
+			cflags="-I${prefix}/include -I${prefix}/cfg/cpp"
+			lflags="-Wl,-rpath,${prefix}/lib -L${prefix}/lib -llrm_wrappers" />
+		<nodelet plugin="${prefix}/nodelet_plugins.xml" />
+	</export>
+
+</package>
+
+

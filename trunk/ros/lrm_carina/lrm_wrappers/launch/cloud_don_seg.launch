@@ -1,0 +1,26 @@
+<launch>
+
+	<node
+		name="cloud_don_seg"
+		pkg="lrm_wrappers"
+		type="cloud_don_segmentation"
+		respawn="true"
+		output="screen"
+	>
+	<!-- 
+		<remap
+			from="points"
+			to="/stereo/points_voxel" />
+
+		<remap
+			from="points_in"
+			to="/stereo/points2" />
+ 	-->
+ 		<remap
+			from="points_in"
+			to="/stereo/points_stat" />
+ 	
+	</node>
+
+
+</launch>
