@@ -1,0 +1,17 @@
+<launch>
+
+	<node
+		name="reset_pose"
+		pkg="lrm_odometry"
+		type="pose_reset_node"
+		output="screen"
+		respawn="true"
+	>
+
+		<remap
+			from="set_pose"
+			to="/simple_odometry/set_pose" />
+
+	</node>
+
+</launch>

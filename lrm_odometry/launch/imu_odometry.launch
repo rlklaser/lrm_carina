@@ -1,0 +1,71 @@
+<launch>
+
+	<param
+		name="robot_description"
+		command="cat $(find carina_description)/urdf/carina_gazebo.urdf" />
+
+	<node
+		name="robot_state_publisher"
+		pkg="robot_state_publisher"
+		type="robot_state_publisher"
+		output="screen"
+	>
+		<param
+			name="publish_frequency"
+			value="30" />
+	</node>
+
+	<node
+		pkg="tf"
+		type="static_transform_publisher"
+		name="map_broadcaster"
+		args="10 10 0 0 0 0 /map odom 30"
+		output="screen" />
+
+	<rosparam
+		command="load"
+		file="$(find lrm_odometry)/params/odometry_params.yaml" />
+
+	<node
+		pkg="lrm_odometry"
+		type="extended_odometry"
+		name="imu_odometry"
+		output="screen"
+	>
+		<param
+			name="rate"
+			value="15" />
+		<param
+			name="print_info"
+			value="true" />
+		<param
+			name="publish_tf"
+			value="true" />
+		<param
+			name="publish_js"
+			value="true" />	
+		<remap
+			from="imu_data"
+			to="/lse_xsens_mti/xsens/imu/data" />
+	</node>
+	
+
+	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" /> 
+	
+<!-- 
+	<node pkg="robot_pose_ekf" type="robot_pose_ekf" name="robot_pose_ekf">
+		<remap from="imu" to="imu_gazebo" />
+		<remap from="odom" to="odom" />
+		<remap from="vo" to="odom_scan" />
+
+		<param name="output_frame" value="odom" />
+		<param name="freq" value="10.0" />
+		<param name="sensor_timeout" value="1.0" />
+		<param name="publish_tf" value="true" />
+		<param name="odom_used" value="true" />
+		<param name="imu_used" value="false" />
+		<param name="vo_used" value="false" />
+	</node>
+ -->
+ 	
+</launch>

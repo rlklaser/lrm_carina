@@ -1,0 +1,125 @@
+<launch>
+
+	<!--
+	<env name="CHECK_SPEEDUP" value="ON" />
+	-->
+	
+	<!-- 
+	<include file="$(find lrm_odometry)/launch/imu_odometry.launch" />
+	-->
+	<param
+		name="/use_sim_time"
+		value="true" />
+
+	<param
+		name="robot_description"
+		command="cat $(find carina_description)/urdf/carina_gazebo.urdf" />
+
+	<node
+		name="robot_state_publisher"
+		pkg="robot_state_publisher"
+		type="state_publisher"
+		respawn="true"
+		output="screen"
+	>
+		<param
+			name="publish_frequency"
+			value="25" />
+	</node>
+
+	<node
+		pkg="tf"
+		type="static_transform_publisher"
+		name="map_broadcaster"
+		args="10 10 0 0 0 0 /map odom 30"
+		respawn="true"
+		output="screen" />
+
+	<rosparam
+		command="load"
+		file="$(find lrm_odometry)/params/odometry_params.yaml" />
+
+	<node
+		name="carina_object"
+		pkg="gazebo"
+		type="spawn_model"
+		args="-urdf -param robot_description -x 0.0 -y 0.0 -z 0.05 -model carina"
+		respawn="false"
+		output="screen" />
+
+	<rosparam
+		command="load"
+		file="$(find lrm_gazebo)/params/carina_controller.yaml" />
+
+	<node
+		name="carina_controller"
+		pkg="pr2_controller_manager"
+		type="spawner"
+		args="carina_controller"
+		respawn="false"
+		output="screen" />
+
+	<node
+		name="gazebo"
+		pkg="gazebo"
+		type="gazebo"
+		args="$(find lrm_gazebo)/worlds/empty.world"
+		respawn="true"
+		output="screen" />
+	<!-- 	 
+	<node name="gazebo" pkg="gazebo" type="gazebo"
+		args="$(find lrm_gazebo)/worlds/heightmap.world"
+		respawn="false" 
+		output="screen" 
+	/>
+	-->
+
+	<node
+		pkg="tf"
+		type="static_transform_publisher"
+		name="marker_broadcaster"
+		args="0 0 0 0 0 0 odom odometry_marker 30"
+		output="screen" />
+
+<!-- 
+	<node
+		name="markers"
+		type="pose_markers"
+		pkg="lrm_odometry"
+		output="screen" />
+ -->
+
+	<node
+		pkg="lrm_odometry"
+		type="extended_odometry"
+		name="odometry"
+		respawn="true"
+		output="screen"
+	>
+		<param
+			name="rate"
+			value="15" />
+		<param
+			name="print_info"
+			value="true" />
+		<remap
+			from="encoders"
+			to="carina_controller/encoders_gazebo" />
+	</node>
+
+	<node
+		name="gazebo_gui"
+		pkg="gazebo"
+		type="gui"
+		respawn="true"
+		output="screen" />
+
+	<node
+		name="rviz_gui"
+		pkg="rviz"
+		type="rviz"
+		args="-d $(find lrm_odometry)/launch/gazebo.rviz"
+		respawn="true"
+		output="screen" />
+
+</launch>

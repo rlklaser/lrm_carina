@@ -1,0 +1,39 @@
+<launch>
+
+	<node
+		name="vo"
+		pkg="viso2_ros"
+		type="stereo_odometer"
+		args="stereo:=stereo image:=image_rect"
+		output="screen"
+		respawn="true"
+	>
+		<param
+			name="base_link_frame_id"
+			value="base_footprint" />
+		<!-- 
+		from camera_info
+		<param
+			name="sensor_frame_id"
+			value="camera_center_link" />
+		 -->
+		<param
+			name="publish_tf"
+			value="false" />
+		<param
+			name="approximate_sync"
+			value="true" />
+		<!-- 
+		<param name="image" value="image_rect"/>
+		<param name="stereo" value="stereo"/>
+		 -->
+		<remap
+			from="point_cloud"
+			to="vo_cloud" />
+		<remap
+			from="odom"
+			to="vo_odom" />
+
+	</node>
+
+</launch>
