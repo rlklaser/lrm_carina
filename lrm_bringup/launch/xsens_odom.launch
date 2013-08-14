@@ -1,0 +1,38 @@
+<launch>
+
+<!-- 
+
+rosrun xsens_driver mtdevice.py -i
+rosrun xsens_driver mtdevice.py --configure --xkf-scenario=2 --output-mode=copvs --output-settings=tqAGM --period=3456
+
+ -->
+
+	<node
+		pkg="xsens_driver"
+		type="mtnode.py"
+		name="xsens_driver"
+		output="screen"
+	>
+		<param
+			name="frame_id"
+			value="/imu_link" />
+		<param
+			name="device"
+			value="/dev/ttyUSB0" />
+	</node>
+<!-- 
+	<node
+		name="gps_conv"
+		pkg="gps_common"
+		type="utm_odometry_node"
+	>
+		<param
+			name="rot_covariance"
+			value="99999" />
+		<param
+			name="frame_id"
+			value="base_footprint" />
+	</node>
+ -->
+ 
+</launch>

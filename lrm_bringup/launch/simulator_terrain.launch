@@ -1,0 +1,39 @@
+<launch>
+
+	<param
+		name="/use_sim_time"
+		value="true" />
+
+	<env
+		name="GAZEBO_MODEL_PATH"
+		value="$GAZEBO_MODEL_PATH:$(find lrm_description)/models:$(find lrm_description)/models/trees:/home/rlklaser/Work/ros/libraries/drcsim/gazebo_models/environments" />
+	<env
+		name="GAZEBO_PLUGIN_PATH"
+		value="$GAZEBO_PLUGIN_PATH:$(find lrm_gazebo)/lib" />
+		
+<!-- 
+	<node
+		name="gazebo"
+		pkg="gazebo"
+		type="gazebo"
+		args="$(find lrm_gazebo)/worlds/terrain-trees.world"
+		respawn="true"
+		output="screen" />
+
+	<node
+		name="gazebo"
+		pkg="gazebo"
+		type="gazebo"
+		args="$(find lrm_gazebo)/worlds/empty_terrain.world"
+		respawn="true"
+		output="screen" />
+-->
+
+	<node
+		name="gazebo"
+		pkg="gazebo"
+		type="gazebo"
+		args="$(find lrm_gazebo)/worlds/terrain-trees-sparse.world"
+		respawn="true"
+		output="screen" />
+</launch>

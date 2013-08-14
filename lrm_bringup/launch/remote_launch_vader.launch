@@ -1,0 +1,18 @@
+<launch>
+
+	<machine
+		name="vader"
+		address="vader"
+		env-loader="/home/lrm/ros_workspace/env.sh"
+		user="lrm"
+		password="lrm"
+		default="true"
+	>
+	</machine>
+
+	<include file="$(find lrm_bringup)/launch/planning_navigation.launch" />
+<!-- 
+ 	<include file="$(find lrm_navigation)/launch/navigation_sbpl.launch" />
+-->
+ 	
+</launch>

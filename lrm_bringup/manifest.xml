@@ -1,0 +1,17 @@
+<package>
+  <description brief="lrm_bringup">
+
+     lrm_bringup
+
+  </description>
+  <author>Rafael Luiz Klaser</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/lrm_bringup</url>
+  <depend package="roscpp"/>
+  <depend package="rospy"/>
+  <depend package="std_msgs"/>
+
+</package>
+
+

@@ -1,0 +1,33 @@
+<launch>
+	
+	<!-- 
+	rosrun lrm_bringup setup_xsens_driver.sh
+	 -->
+	
+	<node
+		pkg="xsens_driver"
+		type="mtnode.py"
+		name="xsens_driver"
+		output="screen"
+		respawn="true"
+	>
+		<param
+			name="frame_id"
+			value="/imu_link" />
+			
+		<param
+			name="device"
+			value="auto" />
+	</node>
+	
+	
+	<node
+		pkg="enu"
+		type="from_fix"
+		name="odom_xsens_driver"
+		output="screen"
+		respawn="true"
+	>
+	</node>
+	
+</launch>

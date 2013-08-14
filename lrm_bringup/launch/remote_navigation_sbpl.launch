@@ -1,0 +1,9 @@
+<launch>
+
+	<env
+		name="ROS_MASTER_URI"
+		value="http://master:11311" />
+
+	<include file="$(find lrm_navigation)/launch/navigation_sbpl.launch" />
+
+</launch>

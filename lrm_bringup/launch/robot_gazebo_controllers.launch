@@ -1,0 +1,113 @@
+<launch>
+
+	<group ns="/stereo">
+		<rosparam
+			command="load"
+			file="$(find lrm_description)/params/sensors_parameters.yaml" />
+	</group>
+
+	<node
+		name="front_left_susp_controller"
+		pkg="pr2_controller_manager"
+		type="spawner"
+		args="front_left_susp_controller"
+		respawn="false"
+		output="screen"
+	>
+		<param
+			name="type"
+			value="lrm_gazebo/SuspensionControllerPlugin" />
+		<param
+			name="effort"
+			value="-700" />
+		<param
+			name="joint"
+			value="joint_front_left_susp" />
+	</node>
+
+	<node
+		name="front_right_susp_controller"
+		pkg="pr2_controller_manager"
+		type="spawner"
+		args="front_right_susp_controller"
+		respawn="false"
+		output="screen"
+	>
+		<param
+			name="type"
+			value="lrm_gazebo/SuspensionControllerPlugin" />
+		<param
+			name="effort"
+			value="700" />
+		<param
+			name="joint"
+			value="joint_front_right_susp" />
+	</node>
+
+	<node
+		name="rear_left_susp_controller"
+		pkg="pr2_controller_manager"
+		type="spawner"
+		args="rear_left_susp_controller"
+		respawn="false"
+		output="screen"
+	>
+		<param
+			name="type"
+			value="lrm_gazebo/SuspensionControllerPlugin" />
+		<param
+			name="effort"
+			value="-700" />
+		<param
+			name="joint"
+			value="joint_rear_left_susp" />
+	</node>
+
+	<node
+		name="rear_right_susp_controller"
+		pkg="pr2_controller_manager"
+		type="spawner"
+		args="rear_right_susp_controller"
+		respawn="false"
+		output="screen"
+	>
+		<param
+			name="type"
+			value="lrm_gazebo/SuspensionControllerPlugin" />
+		<param
+			name="effort"
+			value="700" />
+		<param
+			name="joint"
+			value="joint_rear_right_susp" />
+	</node>
+<!-- 
+	<node
+		name="encoders_controller"
+		pkg="pr2_controller_manager"
+		type="spawner"
+		args="encoders_controller"
+		respawn="false"
+		output="screen"
+	>
+		<param
+			name="type"
+			value="lrm_gazebo/EncodersControllerPlugin" />
+		<param
+			name="steering_wheel"
+			value="true" />
+		<param
+			name="update_rate"
+			value="30" />
+		<param
+			name="wheel_encoder_joint"
+			value="joint_front_right_wheel" />
+		<param
+			name="steering_encoder_joint"
+			value="joint_steer" />
+		<param
+			name="steering_wheel_joint"
+			value="joint_steering_wheel" />
+	</node>
+ -->
+</launch>

@@ -1,0 +1,204 @@
+<launch>
+
+	<param
+		name="/use_sim_time"
+		value="true" />
+
+	<include file="$(find lrm_bringup)/launch/simulator_terrain.launch" />
+
+	<group ns="/stereo_camera">
+		<rosparam
+			command="load"
+			file="$(find lrm_bringup)/params/camera_parameters.yaml" />
+	</group>
+
+	<rosparam
+		command="load"
+		file="$(find lrm_bringup)/params/carina_4w_suspension.yaml" />
+
+	<node
+		name="carina_object"
+		pkg="gazebo"
+		type="spawn_model"
+		args="-urdf -param robot_description -x 0.0 -y 0.0 -z 0.05 -R 0 -P 0 -Y 0 -model carina -gazebo_namespace /gazebo -unpause"
+		respawn="false"
+		output="screen" />
+
+<!--
+	<node
+		name="controller_spawner"
+		pkg="controller_manager"
+		type="spawner"
+		respawn="false"
+		output="screen"
+		args="
+            joint_front_left_wheel_position_controller
+            joint_front_right_wheel_position_controller
+            joint_rear_left_wheel_position_controller
+            joint_rear_right_wheel_position_controller
+            " />
+-->
+
+	<node
+		pkg="tf"
+		type="static_transform_publisher"
+		name="world_map_broadcaster"
+		args="0 0 0 0 0 0 world map 50"
+		output="screen" />
+
+	<node
+		pkg="tf"
+		type="static_transform_publisher"
+		name="ground_truth_odom_broadcaster"
+		args="0 0 0 0 0 0 map gazebo_odom 50"
+		output="screen"
+		respawn="true" />
+
+	<node
+		name="front_left_susp_controller"
+		pkg="pr2_controller_manager"
+		type="spawner"
+		args="front_left_susp_controller"
+		respawn="true"
+		output="screen" />
+
+	<node
+		name="front_right_susp_controller"
+		pkg="pr2_controller_manager"
+		type="spawner"
+		args="front_right_susp_controller"
+		respawn="true"
+		output="screen" />
+
+	<node
+		name="rear_left_susp_controller"
+		pkg="pr2_controller_manager"
+		type="spawner"
+		args="rear_left_susp_controller"
+		respawn="true"
+		output="screen" />
+
+	<node
+		name="rear_right_susp_controller"
+		pkg="pr2_controller_manager"
+		type="spawner"
+		args="rear_right_susp_controller"
+		respawn="true"
+		output="screen" />
+
+	<node
+		name="encoders_controller"
+		pkg="pr2_controller_manager"
+		type="spawner"
+		args="encoders_controller"
+		respawn="true"
+		output="screen"
+	>
+		<param
+			name="type"
+			value="lrm_gazebo/EncodersControllerPlugin" />
+		<param
+			name="steering_wheel"
+			value="true" />
+		<param
+			name="update_rate"
+			value="30" />
+		<param
+			name="wheel_encoder_joint"
+			value="joint_front_right_wheel" />
+		<param
+			name="steering_encoder_joint"
+			value="joint_steer" />
+		<param
+			name="steering_wheel_joint"
+			value="joint_steering_wheel" />
+	</node>
+
+</launch>
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+	<node
+		name="carina_controller"
+		pkg="pr2_controller_manager"
+		type="spawner"
+		args="carina_controller"
+		respawn="false"
+		output="screen"
+	>
+		<param
+			name="type"
+			value="lrm_controller/CarinaControllerPlugin" />
+		<param
+			name="timeout"
+			value="5" />
+		<param
+			name="wheel_diameter"
+			value="0.48" />
+		<param
+			name="joint_blw"
+			value="joint_rear_left_wheel" />
+		<param
+			name="joint_brw"
+			value="joint_rear_right_wheel" />
+		<param
+			name="joint_stw"
+			value="joint_steer" />
+
+		<remap
+			from="cmd_vel"
+			to="/carina_controller/cmd_vel" />
+	</node>
+-->
+
+<!-- 
+	<node
+		name="carina_controller"
+		pkg="pr2_controller_manager"
+		type="spawner"
+		args="carina_controller"
+		respawn="false"
+		output="screen"
+	>
+		<param
+			name="type"
+			value="lrm_controller/SteeringControllerPlugin" />
+		<param
+			name="timeout"
+			value="5" />
+		<param
+			name="wheel_diameter"
+			value="0.48" />
+		<param
+			name="joint_blw"
+			value="joint_rear_left_wheel" />
+		<param
+			name="joint_brw"
+			value="joint_rear_right_wheel" />
+		<param
+			name="joint_flw"
+			value="joint_front_left_wheel" />
+		<param
+			name="joint_frw"
+			value="joint_front_right_wheel" />
+		<param
+			name="joint_drw"
+			value="joint_steer" />
+		<param
+			name="joint_flw_dir"
+			value="joint_front_left_bar" />
+		<param
+			name="joint_frw_dir"
+			value="joint_front_right_bar" />
+		
+	</node>
+-->

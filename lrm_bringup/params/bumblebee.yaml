@@ -1,0 +1,11 @@
+#Point Grey Research Bumblebee2 BB2-03S2C
+
+guid: 00b09d0100ac7cc8
+video_mode: format7_mode3
+frame_id: camera
+iso_speed: 400
+frame_rate: 48
+format7_color_coding: raw16
+bayer_pattern: bggr 
+
+camera_info_url: package://lrm_bringup/params/00b09d0100ac7cc8.yaml

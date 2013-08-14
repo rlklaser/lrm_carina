@@ -1,0 +1,98 @@
+<launch>
+
+	<param
+		name="/use_sim_time"
+		value="true" />
+
+	<group ns="/cloud">
+
+		<node
+			name="region_growing_seg"
+			pkg="lrm_wrappers"
+			type="region_growing"
+			respawn="true"
+			output="screen"
+		>
+			<remap
+				from="points_in"
+				to="points_stat" />
+			<remap
+				from="~points_out"
+				to="points_cluster" />
+
+			<param
+				name="k_search"
+				value="30" />
+			<param
+				name="min_size"
+				value="100" />
+			<param
+				name="max_size"
+				value="5000" />
+			<param
+				name="neighbours"
+				value="30" />
+			<param
+				name="curvature"
+				value="2.0" />
+			<param
+				name="smoothness"
+				value="35.0" />
+		</node>
+
+		<node
+			name="cluster_filter_node"
+			pkg="lrm_wrappers"
+			type="cluster_filter_node"
+			respawn="true"
+			output="screen"
+		>
+			<remap
+				from="points_in"
+				to="points_cluster" />
+			<remap
+				from="~points_out"
+				to="points_cluster_filter" />
+		</node>
+
+		<node
+			name="cluster_sum_filtered"
+			pkg="lrm_wrappers"
+			type="cloud_sum_node"
+			respawn="true"
+			output="screen"
+		>
+			<remap
+				from="points_in"
+				to="points_cluster_filter" />
+			<remap
+				from="~points_out"
+				to="points_cluster_sum" />
+
+			<param
+				name="frame_count"
+				value="5" />
+			<param
+				name="incremental"
+				value="false" />
+		</node>
+
+		<node
+			name="cluster_filter_relay"
+			pkg="topic_tools"
+			type="relay"
+			args="points_cluster_sum /cloud_in"
+			respawn="true"
+			output="screen" />
+
+		<node
+			name="cluster_ground_filter_relay"
+			pkg="topic_tools"
+			type="relay"
+			args="ground_points_through /ground_cloud_in"
+			respawn="true"
+			output="screen" />
+
+	</group>
+
+</launch>

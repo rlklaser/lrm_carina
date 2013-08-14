@@ -1,0 +1,16 @@
+<launch>
+
+	<machine
+		name="jarjar"
+		address="jarjar"
+		env-loader="/home/lrm/ros_workspace/env.sh"
+		user="lrm"
+		password="lrm"
+		default="true"
+	>
+	</machine>
+
+	<include file="$(find lrm_bringup)/launch/octomap_mapping.launch" />
+
+
+</launch>

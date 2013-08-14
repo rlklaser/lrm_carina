@@ -1,0 +1,53 @@
+<launch>
+
+	<param
+		name="/use_sim_time"
+		value="true" />
+
+	<node
+		pkg="tf"
+		type="static_transform_publisher"
+		name="gps_odom_broadcaster"
+		args="0 0 0 0 0 0 map gsp_odom 50"
+		output="screen" />
+
+	<node
+		name="gps_odometry"
+		pkg="lrm_odometry"
+		type="utm_odometry_node"
+		output="screen"
+		respawn="true"
+	>
+
+		<remap
+			from="fix"
+			to="/lse_xsens_mti/xsens/fix" />
+		<remap
+			from="imu_x"
+			to="/lse_xsens_mti/xsens/imu/data" />
+		<remap
+			from="imu"
+			to="/calibrated/imu/data" />
+<!--  
+		<param
+			name="pos_cov"
+			value="25" />
+		<param
+			name="rot_cov"
+			value="99999" />
+-->
+		<param
+			name="pos_cov"
+			value="0.00002" />
+		<param
+			name="rot_cov"
+			value="99999" />
+		<param
+			name="frame_id"
+			value="gps_odom" />
+		<param
+			name="child_frame_id"
+			value="base_footprint" />
+	</node>
+
+</launch>

@@ -1,0 +1,55 @@
+<launch>
+
+	<node
+		name="imu_calibrate_node"
+		pkg="lrm_odometry"
+		type="imu_calibrate_node"
+		output="screen"
+		respawn="true"
+	>
+	<!-- ajuste entre o norte geografico (gps) e o norte magnetico (bussola/imu)
+	http://revistapesquisa.fapesp.br/2012/07/16/o-que-e-o-que-e-8/
+	 -->
+		<param
+			name="offset"
+			value="23.0" />
+
+		<remap
+			from="imu_data"
+			to="lse_xsens_mti/xsens/imu/data" />
+		<remap
+			from="~imu/data"
+			to="calibrated/imu/data" />
+	</node>
+
+<!--
+	<node
+		name="reset_pose"
+		pkg="lrm_odometry"
+		type="pose_reset_node"
+		output="screen"
+		respawn="true"
+	>
+		<param
+			name="timeout"
+			value="5.0" />
+
+		<remap
+			from="set_pose"
+			to="/wheel_odometry/set_pose_xxx" />
+<!- -
+reset on kalman 
+		<remap
+			from="odom"
+			to="/ekf_odometry/odom" />
+- ->
+ <!- - 
+ reset on gps
+- ->
+		<remap
+			from="odom"
+			to="/gps_odometry/odom" />
+	</node>
+-->
+
+</launch>

@@ -1,0 +1,11 @@
+<launch>
+
+	<node
+		name="carina_object"
+		pkg="gazebo"
+		type="spawn_model"
+		args="-urdf -param robot_description -x 0.0 -y 0.0 -z 0.05 -R 0 -P 0 -Y 1.57 -model carina -gazebo_namespace gazebo"
+		respawn="false"
+	output="screen" />
+
+<launch>

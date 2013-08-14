@@ -1,0 +1,95 @@
+<launch>
+
+	<param
+		name="/use_sim_time"
+		value="true" />
+
+	<node
+		name="move_base"
+		pkg="move_base"
+		type="move_base"
+		respawn="true"
+		output="screen"
+	>
+
+		<rosparam
+			file="$(find lrm_bringup)/params/planning/move_base_params.yaml"
+			command="load" />
+
+		<rosparam
+			file="$(find lrm_bringup)/params/planning/costmap_common_params.yaml"
+			command="load"
+			ns="global_costmap" />
+		<rosparam
+			file="$(find lrm_bringup)/params/planning/global_costmap_params.yaml"
+			command="load" />
+
+		<rosparam
+			file="$(find lrm_bringup)/params/planning/costmap_common_params.yaml"
+			command="load"
+			ns="local_costmap" />
+		<rosparam
+			file="$(find lrm_bringup)/params/planning/local_costmap_params.yaml"
+			command="load" />
+
+		<param
+			name="base_global_planner"
+			value="SBPLLatticePlanner" />
+		<param
+			name="SBPLLatticePlanner/primitive_filename"
+			value="$(find lrm_bringup)/params/planning/prim/carina.mprim" />
+		<rosparam
+			file="$(find lrm_bringup)/params/planning/sbpl_global_params.yaml"
+			command="load" />
+
+ 
+		<param
+			name="base_local_planner"
+			value="base_local_planner/TrajectoryPlannerROS" />
+		<rosparam
+			file="$(find lrm_bringup)/params/planning/base_local_planner_params.yaml"
+			command="load"
+			ns="TrajectoryPlannerROS" />
+<!--
+		<param
+			name="base_local_planner"
+			value="carlike_local_planner/CarLikeTrajectoryPlannerROS" />
+		<rosparam
+			file="$(find lrm_bringup)/params/planning/base_local_planner_params.yaml"
+			command="load"
+			ns="CarLikeTrajectoryPlannerROS" />	
+		<param
+			name="base_local_planner"
+			value="dwa_local_planner/DWAPlannerROS" />
+		<rosparam
+			file="$(find lrm_bringup)/params/planning/base_local_planner_params.yaml"
+			command="load"
+			ns="DWAPlannerROS" />
+-->			
+		<rosparam
+			file="$(find lrm_bringup)/params/planning/sbpl_global_params.yaml"
+			command="load"
+			ns="sbpl_recovery" />
+		<param
+			name="sbpl_recovery/SBPLLatticePlanner/primitive_filename"
+			value="$(find lrm_bringup)/params/planning/prim/carina.mprim" />
+
+		<rosparam
+			file="$(find lrm_bringup)/params/planning/base_local_planner_params.yaml"
+			command="load"
+			ns="pose_follower" />
+
+		<remap
+			from="cmd_vel"
+			to="/navigation/cmd_vel" />
+
+	</node>
+
+	<node
+		pkg="lrm_outdoor"
+		type="compass_tf_node"
+		name="compass_tf_node"
+		respawn="true"
+		output="screen" />
+
+</launch>

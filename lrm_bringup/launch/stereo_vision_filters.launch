@@ -1,0 +1,143 @@
+<launch>
+
+	<param
+		name="/use_sim_time"
+		value="true" />
+
+	<group ns="/cloud">
+
+		<rosparam
+			command="load"
+			file="$(find lrm_bringup)/params/cloud_filters.yaml" />
+
+		<node
+			pkg="nodelet"
+			type="nodelet"
+			name="voxel_grid_nodelet"
+			args="load pcl/VoxelGrid /camera_nodelet_manager --no-bond"
+			output="screen"
+			respawn="true"
+		>
+			<remap
+				from="~input"
+				to="/stereo/points2" />
+			<remap
+				from="~output"
+				to="points_voxel" />
+		</node>
+
+		<node
+			pkg="nodelet"
+			type="nodelet"
+			name="pass_throught_range_nodelet"
+			args="load pcl/PassThrough /camera_nodelet_manager --no-bond"
+			output="screen"
+			respawn="true"
+		>
+			<remap
+				from="~input"
+				to="points_voxel" />
+			<remap
+				from="~output"
+				to="points_through_range" />
+		</node>
+
+		<node
+			pkg="nodelet"
+			type="nodelet"
+			name="pass_throught_nodelet"
+			args="load pcl/PassThrough /camera_nodelet_manager --no-bond"
+			output="screen"
+			respawn="true"
+		>
+			<remap
+				from="~input"
+				to="points_through_range" />
+			<remap
+				from="~output"
+				to="points_through" />
+		</node>
+
+		<node
+			pkg="nodelet"
+			type="nodelet"
+			name="ground_pass_throught_nodelet"
+			args="load pcl/PassThrough /camera_nodelet_manager --no-bond"
+			output="screen"
+			respawn="true"
+		>
+			<remap
+				from="~input"
+				to="points_voxel" />
+			<remap
+				from="~output"
+				to="ground_points_through" />
+		</node>
+
+		<node
+			pkg="nodelet"
+			type="nodelet"
+			name="stat_removal_nodelet"
+			args="load pcl/StatisticalOutlierRemoval /camera_nodelet_manager --no-bond"
+			output="screen"
+			respawn="true"
+		>
+			<remap
+				from="~input"
+				to="points_through" />
+			<remap
+				from="~output"
+				to="points_stat" />
+		</node>
+
+		<node
+			pkg="nodelet"
+			type="nodelet"
+			name="local_scan_cutahead_points_nodelet"
+			args="load pcl/PassThrough /camera_nodelet_manager"
+			output="screen"
+			respawn="true"
+		>
+			<remap
+				from="~input"
+				to="points_voxel" />
+			<remap
+				from="~output"
+				to="points_local_scan_cutahead" />
+		</node>
+
+		<node
+			pkg="nodelet"
+			type="nodelet"
+			name="local_scan_points_nodelet"
+			args="load pcl/PassThrough /camera_nodelet_manager"
+			output="screen"
+			respawn="true"
+		>
+			<remap
+				from="~input"
+				to="points_local_scan_cutahead" />
+			<remap
+				from="~output"
+				to="points_local_scan" />
+		</node>
+
+		<node
+			pkg="nodelet"
+			type="nodelet"
+			name="local_ground_scan_points_nodelet"
+			args="load pcl/PassThrough /camera_nodelet_manager"
+			output="screen"
+			respawn="true"
+		>
+			<remap
+				from="~input"
+				to="points_local_scan_cutahead" />
+			<remap
+				from="~output"
+				to="points_local_ground_scan" />
+		</node>
+
+	</group>
+
+</launch>

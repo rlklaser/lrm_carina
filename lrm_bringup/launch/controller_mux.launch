@@ -1,0 +1,16 @@
+<launch>
+
+	<node
+		pkg="nodelet"
+		type="nodelet"
+		name="cmd_vel_mux"
+		args="load cmd_vel_mux/CmdVelMuxNodelet /main_nodelet_manager --no-bond"
+		output="screen"
+		respawn="true"
+	>
+		<param
+			name="yaml_cfg_file"
+			value="$(find lrm_bringup)/params/cmd_vel_mux.yaml" />
+	</node>
+
+</launch>

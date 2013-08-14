@@ -1,0 +1,7 @@
+video_mode: 640x480_yuv411
+frame_rate: 30
+frame_id: stereo_camera
+
+#video_mode: 640x480_yuv411
+#frame_rate: 60
+#iso_speed: 400

@@ -1,0 +1,37 @@
+<launch>
+
+	<include file="$(find lrm_bringup)/launch/nodelet_manager.launch" />
+
+	<node
+		name="cam_right_img_relay"
+		pkg="topic_tools"
+		type="relay"
+		args="/stereo_camera/right/image_raw /stereo/right/image_raw"
+		respawn="true"
+		output="screen" />
+
+	<node
+		name="cam_left_img_relay"
+		pkg="topic_tools"
+		type="relay"
+		args="/stereo_camera/left/image_raw /stereo/left/image_raw"
+		respawn="true"
+		output="screen" />
+
+	<node
+		name="cam_right_info_relay"
+		pkg="topic_tools"
+		type="relay"
+		args="/stereo_camera/right/camera_info /stereo/right/camera_info"
+		respawn="true"
+		output="screen" />
+
+	<node
+		name="cam_left_info_relay"
+		pkg="topic_tools"
+		type="relay"
+		args="/stereo_camera/left/camera_info /stereo/left/camera_info"
+		respawn="true"
+		output="screen" />
+		
+</launch>

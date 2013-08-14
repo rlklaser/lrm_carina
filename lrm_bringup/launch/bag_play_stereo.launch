@@ -1,0 +1,70 @@
+<launch>
+
+	<param
+		name="/use_sim_time"
+		value="true" />
+
+	<group ns="/stereo_camera">
+		<node
+			name="stereo_proc"
+			pkg="stereo_image_proc"
+			type="stereo_image_proc"
+			output="screen"
+			respawn="true"
+		>
+			<param
+				name="approximate_sync"
+				value="true" />
+		</node>
+	</group>
+
+<!-- 
+	<include file="$(find lrm_bringup)/launch/extended_wheel_odometry.launch" />
+ -->
+
+	<node
+		pkg="tf"
+		type="static_transform_publisher"
+		name="wheel_odom_broadcaster_a"
+		args="0.0 0.0 0.0  1.57 3.14 1.57 base_sensors stereo_camera 30"
+		output="screen" />
+
+	<include file="$(find lrm_bringup)/launch/base_car_tf.launch" />
+
+	<node
+		name="rviz"
+		pkg="rviz"
+		type="rviz"
+		output="screen"
+		args="-d $(find carina_odometry)/config/bags_play.rviz" />
+
+	<node
+		pkg="nodelet"
+		type="nodelet"
+		name="camera_nodelet_manager"
+		args="manager"
+		respawn="true"
+		output="screen" />
+		
+	<node
+		pkg="nodelet"
+		type="nodelet"
+		name="voxel_grid"
+		args="load pcl/VoxelGrid /camera_nodelet_manager --no-bond"
+		output="screen"
+	>
+		<remap
+			from="~input"
+			to="/stereo_camera/points2" />
+<rosparam>
+filter_field_name: z
+filter_limit_min: 4.0
+filter_limit_max: 7.0
+filter_limit_negative: False
+leaf_size: 0.1
+</rosparam>
+	</node>
+
+	
+	
+</launch>

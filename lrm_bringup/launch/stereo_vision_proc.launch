@@ -1,0 +1,36 @@
+<launch>
+
+<!-- 
+	<param
+		name="/use_sim_time"
+		value="true" />
+ -->
+ 
+	<group ns="/stereo">
+
+<!-- 
+		<rosparam
+			command="load"
+			file="$(find lrm_bringup)/params/stereo_proc_params.yaml" />
+ -->
+ 			
+		<node
+			name="stereo_proc"
+			pkg="stereo_image_proc"
+			type="stereo_image_proc"
+			output="screen"
+			respawn="true"
+		>
+			<param
+				name="approximate_sync"
+				value="true" />
+							
+			<!-- 
+			<remap from="left/image_raw" to="retina/left/image_raw"/>
+			<remap from="right/image_raw" to="retina/right/image_raw"/>
+			 -->
+
+		</node>
+	</group>
+
+</launch>

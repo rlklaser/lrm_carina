@@ -1,0 +1,36 @@
+octomap_server:
+    latch: true
+    frame_id: /map
+    base_frame_id: /base_footprint
+    source_frame_id: /stereo_camera
+    height_map: true
+    resolution: 0.1
+    
+    filter_speckles: false #true
+    
+    #if max==min==0, no filter
+    pointcloud_min_z: 0.0
+    pointcloud_max_z: 0.0
+    
+    occupancy_min_z: 0.0
+    occupancy_max_z: 1.9
+    
+    filter_ground: false
+    #ground_filter/distance: 0.1
+    #ground_filter/angle: 0.4
+    #ground_filter/plane_distance: 0.15
+    
+    compress_map: false
+    
+    #sensor_model/max_range: 15
+    sensor_model/max_range: 80
+    
+    #sensor_model/hit: 0.51
+    #sensor_model/miss: 0.05
+    #sensor_model/max: 0.75
+    #sensor_model/min: 0.25
+    
+    #incremental_2D_projection: true
+    
+    unknown_cost: -1
+    

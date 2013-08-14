@@ -1,0 +1,91 @@
+<launch>
+
+	<group ns="/stereo">
+
+		<group ns="left">
+			<node
+				name="retina"
+				pkg="lrm_wrappers"
+				type="retinal_node"
+				output="screen"
+				respawn="true"
+			>
+				<remap
+					from="image"
+					to="image_raw" />
+			</node>
+		</group>
+
+		<group ns="right">
+			<node
+				name="retina"
+				pkg="lrm_wrappers"
+				type="retinal_node"
+				output="screen"
+				respawn="true"
+			>
+				<remap
+					from="image"
+					to="image_raw" />
+			</node>
+
+		</group>
+
+
+		<node
+			pkg="nodelet"
+			type="nodelet"
+			name="disparity_bm_retina"
+			args="load stereo_image_proc/disparity /camera_nodelet_manager --no-bond"
+			respawn="true"
+			output="screen"
+		>
+			<param
+				name="approximate_sync"
+				value="true" />
+
+			<remap
+				from="disparity"
+				to="disparity_bm_retina" />
+<!-- 
+			<remap
+				from="left/image_raw"
+				to="left/retina/parvo/image_raw" />
+			<remap
+				from="right/image_raw"
+				to="right/retina/parvo/image_raw" />
+ -->
+			<remap
+				from="left/image_rect"
+				to="/stereo/left/retina/parvo/image_mono" />
+			<remap
+				from="right/image_rect"
+				to="/stereo/right/retina/parvo/image_mono" />
+
+		</node>
+
+		<node
+			pkg="nodelet"
+			type="nodelet"
+			name="point_cloud2_retina"
+			args="load stereo_image_proc/point_cloud2 /camera_nodelet_manager --no-bond"
+			respawn="true"
+			output="screen"
+		>
+			<param
+				name="approximate_sync"
+				value="true" />
+
+			<remap
+				from="disparity"
+				to="disparity_bm_retina" />
+			<remap
+				from="points2"
+				to="points_retina" />
+			<remap
+				from="left/image_rect_color"
+				to="/stereo/left/retina/parvo/image" />
+		</node>
+
+	</group>
+</launch>

@@ -1,0 +1,26 @@
+<launch>
+
+	<rosparam
+		command="load"
+		file="$(find lrm_bringup)/params/octomap_parameters.yaml" />
+
+	<node
+		pkg="nodelet"
+		type="nodelet"
+		name="octomap_server_nodelet"
+		args="load lrm_octomap_server/OctomapServerNodelet /camera_nodelet_manager"
+	>
+		<param
+			name="publish_free_space"
+			value="true" />
+
+		<remap
+			from="cloud_in"
+			to="/cluster_filter_node/points_out" />
+
+		<remap
+			from="projected_map"
+			to="map" />
+	</node>
+
+</launch>
