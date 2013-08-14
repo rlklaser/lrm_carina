@@ -1,0 +1,36 @@
+<launch>
+
+	<param
+		name="/use_sim_time"
+		value="true" />
+
+	<include file="$(find lrm_bringup)/launch/extended_wheel_odometry.launch" />
+	<include file="$(find lrm_bringup)/launch/odometry_gps.launch" />
+	<include file="$(find lrm_bringup)/launch/odometry_ekf.launch" />
+	<include file="$(find lrm_bringup)/launch/base_car_tf.launch" />
+	<include file="$(find lrm_bringup)/launch/odometry_refine.launch" />
+
+<!-- 
+	<node
+		pkg="tf"
+		type="static_transform_publisher"
+		name="tf_imu_broadcaster"
+		args="-1.0 0.0 0.0 0.0 0.0 0.0 base_sensors base_imu 30"
+		output="screen" />
+ 
+	<node
+		pkg="tf"
+		type="static_transform_publisher"
+		name="tf_camera_broadcaster"
+		args="1.0 0.0 0.0 1.57 3.14 1.57 base_sensors stereo_camera 30"
+		output="screen" />
+
+	<node
+		pkg="tf"
+		type="static_transform_publisher"
+		name="tf_camera_broadcaster"
+		args="0.0 0.0 0.0 0.0 0.0 0.0 stereo stereo_camera 30"
+		output="screen" />
+ -->
+ 
+</launch>

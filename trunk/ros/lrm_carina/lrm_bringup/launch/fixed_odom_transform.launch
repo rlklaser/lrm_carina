@@ -1,0 +1,10 @@
+<launch>
+
+	<node
+		pkg="tf"
+		type="static_transform_publisher"
+		name="fixed_odom_broadcaster"
+		args="0 0 0 0 0 0 wheel_odom base_footprint 50"
+		output="screen" />
+
+</launch>

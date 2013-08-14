@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<launch>
+
+	<node
+		pkg="lrm_controller"
+		type="teleop_keyboard"
+		name="teleop_keyboard"
+		output="screen"
+		respawn="true"
+	>
+
+		<remap
+			from="cmd_vel"
+			to="/keyboard/cmd_vel" />
+<!-- 
+		<param
+			name="walk_vel"
+			value="0.5" />
+		<param
+			name="run_vel"
+			value="4.0" />
+		<param
+			name="yaw_rate"
+			value="0.05" />
+		<param
+			name="yaw_run_rate"
+			value="0.5" />
+ -->
+ 
+	</node>
+
+</launch>

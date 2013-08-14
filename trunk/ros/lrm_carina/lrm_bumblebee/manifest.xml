@@ -1,0 +1,31 @@
+<package>
+	<description brief="lrm_bumblebee">
+
+		lrm_bumblebee
+
+	</description>
+	<author>Rafael Luiz Klaser</author>
+	<license>BSD</license>
+	<review
+		status="unreviewed"
+		notes="" />
+	<url>http://ros.org/wiki/lrm_bumblebee</url>
+
+	<depend package="rospy" />
+	<depend package="roscpp" />
+	<depend package="std_msgs" />
+	<depend package="sensor_msgs" />
+	<depend package="image_transport" />
+	<depend package="tf" />
+	<depend package="camera_info_manager" />
+	<depend package="dynamic_reconfigure" />
+	<depend package="nodelet" />
+	<depend package="lrm_msgs" />
+
+	<rosdep name="libdc1394-dev" />
+
+	<export>
+		<nodelet plugin="${prefix}/camera1394stereo_nodelet.xml" />
+	</export>
+
+</package>

@@ -1,0 +1,61 @@
+<launch>
+
+	<param
+		name="/use_sim_time"
+		value="true" />
+		
+<!-- 
+	<include file="$(find lrm_bringup)/launch/camera_nodelet_manager.launch" />
+ -->
+ 
+	<node
+		pkg="nodelet"
+		type="nodelet"
+		name="camera1394_nodelet"
+		args="load camera1394/driver camera_nodelet_manager"
+	>
+		<rosparam file="$(find lrm_bringup)/params/bumblebee_xb3.yaml" />
+	</node>
+
+	<!-- or 
+	00b09d0100be241e - bb2-38
+	00b09d0100ac7cc8 - bb2-60
+	00b09d0100bec852 - xb3
+	-->
+
+	<group ns="/stereo">
+		<node
+			pkg="nodelet"
+			type="nodelet"
+			name="xb3_split_nodelet"
+			args="load lrm_sensors/split_xb3 /camera_nodelet_manager"
+		>
+			<remap
+				from="image_raw"
+				to="/camera/image_raw" />
+
+			<param
+				name="name"
+				value="00b09d0100bec852" />
+			<param
+				name="frame_id"
+				value="/stereo_camera" />
+
+			<param
+				name="narrow/left/camera_info_url"
+				value="package://lrm_bringup/params/00b09d0100ac7cc8_narrow_left.yaml" />
+			<param
+				name="narrow/right/camera_info_url"
+				value="package://lrm_bringup/params/00b09d0100ac7cc8_narrow_right.yaml" />
+			<param
+				name="wide/left/camera_info_url"
+				value="package://lrm_bringup/params/00b09d0100ac7cc8_wide_left.yaml" />
+			<param
+				name="wide/right/camera_info_url"
+				value="package://lrm_bringup/params/00b09d0100ac7cc8_wide_right.yaml" />
+							 	
+		</node>
+	</group>
+		
+
+</launch>

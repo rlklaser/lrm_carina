@@ -1,0 +1,18 @@
+<launch>
+
+	<node
+		name="filter_cloud"
+		pkg="lrm_wrappers"
+		type="cloud_cut"
+		output="screen"
+		respawn="true"
+	>
+		<remap
+			from="points"
+			to="/stereo/points2" />
+		<remap
+			from="points_cut"
+			to="/cloud_filtered" />
+	</node>
+
+</launch>

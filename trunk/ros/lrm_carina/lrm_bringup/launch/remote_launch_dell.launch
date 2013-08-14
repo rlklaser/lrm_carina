@@ -1,0 +1,16 @@
+<launch>
+
+	<machine
+		name="lrm-dell-02"
+		address="lrm-dell-02"
+		env-loader="/home/lrm/ros/env.sh"
+		user="lrm"
+		password="lrm"
+		default="true"
+	>
+	</machine>
+
+	<include file="$(find lrm_bringup)/launch/stereo_vision.launch" />
+
+
+</launch>

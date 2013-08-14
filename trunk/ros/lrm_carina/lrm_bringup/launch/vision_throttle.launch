@@ -1,0 +1,70 @@
+<launch>
+
+	<node
+		name="throttle_stereo"
+		pkg="lrm_stereo"
+		type="throttle_stereo"
+		output="screen"
+		respawn="true"
+	>
+		<param
+			name="input_namespace"
+			value="stereo_camera" />
+		<param
+			name="output_namespace"
+			value="stereo" />
+		<param
+			name="rate"
+			value="2" />
+	</node>
+
+<!-- 
+	<group ns="/stereo">
+		<group ns="left">
+			<node
+				name="image_raw_throttle"
+				pkg="topic_tools"
+				type="throttle"
+				args="messages /stereo_camera/left/image_raw 5.0 image_raw"
+			>
+				<param
+					name="lazy"
+					value="true" />
+			</node>
+			<node
+				name="camera_info_throttle"
+				pkg="topic_tools"
+				type="throttle"
+				args="messages /stereo_camera/left/camera_info 5.0 camera_info"
+			>
+				<param
+					name="lazy"
+					value="true" />
+			</node>
+		</group>
+		<group ns="right">
+			<node
+				name="image_raw_throttle"
+				pkg="topic_tools"
+				type="throttle"
+				args="messages /stereo_camera/right/image_raw 5.0 image_raw"
+			>
+				<param
+					name="lazy"
+					value="true" />
+			</node>
+			<node
+				name="camera_info_throttle"
+				pkg="topic_tools"
+				type="throttle"
+				args="messages /stereo_camera/right/camera_info 5.0 camera_info"
+			>
+				<param
+					name="lazy"
+					value="true" />
+			</node>
+		</group>
+	</group>
+ -->
+
+</launch>

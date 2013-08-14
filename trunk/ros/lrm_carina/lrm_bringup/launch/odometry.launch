@@ -1,0 +1,34 @@
+<launch>
+
+	<param
+		name="/use_sim_time"
+		value="true" />
+
+	<include file="$(find lrm_bringup)/launch/odometry_wheel_sim.launch" />
+	<include file="$(find lrm_bringup)/launch/odometry_gps.launch" />
+	<include file="$(find lrm_bringup)/launch/odometry_ekf.launch" />
+	<include file="$(find lrm_bringup)/launch/odometry_refine.launch" />
+
+	<node
+		name="odom_relay"
+		pkg="topic_tools"
+		type="relay"
+		args="/wheel_odometry/odom /odom"
+		respawn="true"
+		output="screen" />
+
+<!-- 
+	<node
+		name="markers"
+		type="pose_markers"
+		pkg="lrm_odometry"
+		output="screen"
+	>
+		<remap
+			from="odom"
+			to="/gps_odometry/odom" />
+
+	</node>
+-->
+
+</launch>

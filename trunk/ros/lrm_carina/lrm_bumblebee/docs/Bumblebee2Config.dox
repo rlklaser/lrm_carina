@@ -1,0 +1,11 @@
+\subsubsection parameters ROS parameters
+
+Reads and maintains the following parameters on the ROS server
+
+- \b "~brightness" : \b [int] The camera brightness for automatic gain/exposure. min: -1, default: -1, max: 9999
+- \b "~encoding" : \b [str] Image encoding. min: , default: , max: 
+- \b "~exposure" : \b [int] Exposure setting. min: -1, default: -1, max: 9999
+- \b "~gain" : \b [int] Gain setting. min: -1, default: -1, max: 9999
+- \b "~shutter" : \b [int] Shutter setting. min: -1, default: -1, max: 9999
+- \b "~whitebalance" : \b [str] Sets the Blue/U and Red/V components of white balance. min: , default: auto, max: 
+

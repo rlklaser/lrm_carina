@@ -1,0 +1,71 @@
+<launch>
+
+	<group ns="/stereo">
+	
+<!-- 
+		<node
+			pkg="nodelet"
+			type="nodelet"
+			name="feature_matcher_surf"
+			args="load lrm_stereo/feature_matcher /camera_nodelet_manager --no-bond"
+			respawn="true"
+			output="screen"
+		>
+			<param
+				name="approximate_sync"
+				value="true" />
+		</node>
+ -->
+<!-- 
+
+		<node
+			pkg="nodelet"
+			type="nodelet"
+			name="voxel_grid"
+			args="load pcl/VoxelGrid /camera_nodelet_manager --no-bond"
+			output="screen"
+		>
+			<remap
+				from="~input"
+				to="/stereo/points2" />
+<rosparam>
+filter_field_name: y
+filter_limit_min: -1.1
+filter_limit_max: 4.1
+filter_limit_negative: False
+leaf_size: 0.05
+</rosparam>
+		</node>
+
+<!-- 
+		<node
+			pkg="nodelet"
+			type="nodelet"
+			name="transform_cloud"
+			args="load lrm_navigation/transform_cloud /camera_nodelet_manager --no-bond"
+			respawn="true"
+			output="screen"
+		>
+		</node>
+ -->
+
+<node
+			pkg="nodelet"
+			type="nodelet"
+			name="voxel_grid"
+			args="load pcl/StatisticalOutlierRemoval /camera_nodelet_manager --no-bond"
+			output="screen"
+		>
+			<remap
+				from="~input"
+				to="/stereo/points_voxel" />
+<rosparam>
+mean_k: 2
+stddev: 0.0
+negative: False
+</rosparam>
+		</node>
+		
+	</group>
+
+</launch>

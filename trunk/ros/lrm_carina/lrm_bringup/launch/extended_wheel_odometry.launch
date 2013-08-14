@@ -1,0 +1,65 @@
+<launch>
+
+	<param
+		name="/use_sim_time"
+		value="true" />
+
+	<node
+		pkg="generic_packages"
+		type="encoder_translate"
+		name="encoder_translate"
+		output="screen"
+		respawn="true" />
+
+	<node
+		pkg="tf"
+		type="static_transform_publisher"
+		name="wheel_odom_broadcaster"
+		args="0 0 0 0 0 0 map wheelodom 30"
+		output="screen" />
+	
+	<rosparam
+		command="load"
+		file="$(find carina_odometry)/params/odometry_params.yaml" />
+
+	<node
+		pkg="lrm_odometry"
+		type="extended_odometry"
+		name="wheel_odometry"
+		output="screen"
+		respawn="true"
+	>
+		<param
+			name="absolute"
+			value="true" />
+		<param
+			name="use_imu"
+			value="true" />
+		<param
+			name="publish_tf"
+			value="true" />
+		<param
+			name="publish_js"
+			value="true" />
+		<param
+			name="animation_only"
+			value="false" />
+		<param
+			name="pos_cov"
+			value="0.00001" />
+		<param
+			name="rot_cov"
+			value="0.00001" />
+
+		<param
+			name="frame_id"
+			value="wheelodom" />
+		<remap
+			from="encoders"
+			to="/encoders_translated" />
+		<remap
+			from="imu_data"
+			to="/lse_xsens_mti/xsens/imu/data" />
+	</node>
+
+</launch>

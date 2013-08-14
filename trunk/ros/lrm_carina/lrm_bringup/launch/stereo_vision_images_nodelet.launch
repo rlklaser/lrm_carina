@@ -1,0 +1,77 @@
+<launch>
+
+	<param
+		name="/use_sim_time"
+		value="true" />
+
+	<group ns="/stereo">
+
+		<group ns="left">
+		    <!-- Debayered images -->
+			<node
+				pkg="nodelet"
+				type="nodelet"
+				name="debayer"
+				args="load image_proc/debayer /camera_nodelet_manager --no-bond"
+				respawn="true" />
+			<node
+				pkg="nodelet"
+				type="nodelet"
+				name="rectify_mono"
+				args="load image_proc/rectify /camera_nodelet_manager --no-bond"
+				respawn="true"
+				output="screen" />
+  			<!-- Color rectified image -->
+			<node
+				pkg="nodelet"
+				type="nodelet"
+				name="rectify_color"
+				args="load image_proc/rectify /camera_nodelet_manager --no-bond"
+				respawn="true"
+				output="screen"
+			>
+				<remap
+					from="image_mono"
+					to="image_color" />
+				<remap
+					from="image_rect"
+					to="image_rect_color" />
+			</node>
+		</group>
+
+		<group ns="right">
+		    <!-- Debayered images -->
+			<node
+				pkg="nodelet"
+				type="nodelet"
+				name="debayer"
+				args="load image_proc/debayer /camera_nodelet_manager --no-bond"
+				respawn="true" />
+			<node
+				pkg="nodelet"
+				type="nodelet"
+				name="rectify_mono"
+				args="load image_proc/rectify /camera_nodelet_manager --no-bond"
+				respawn="true"
+				output="screen" />
+  			<!-- Color rectified image -->
+			<node
+				pkg="nodelet"
+				type="nodelet"
+				name="rectify_color"
+				args="load image_proc/rectify /camera_nodelet_manager --no-bond"
+				respawn="true"
+				output="screen"
+			>
+				<remap
+					from="image_mono"
+					to="image_color" />
+				<remap
+					from="image_rect"
+					to="image_rect_color" />
+			</node>
+		</group>
+		
+	</group>
+
+</launch>

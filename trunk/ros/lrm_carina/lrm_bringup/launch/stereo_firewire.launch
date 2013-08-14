@@ -1,0 +1,76 @@
+<launch>
+
+<!--  
+	<node
+		pkg="lrm_bumblebee"
+		type="camera1394stereo_node"
+		name="camera1394stereo_node"
+		output="screen"
+		respawn="true"
+	>
+		<param
+			name="video_mode"
+			value="format7_mode3" />
+		<param
+			name="format7_color_coding"
+			value="raw16" />
+		<param
+			name="bayer_pattern"
+			value="bggr" />
+		<param
+			name="bayer_method"
+			value="" />
+		<param
+			name="stereo_method"
+			value="Interlaced" />
+		<param
+			name="camera_info_url_left"
+			value="" />
+		<param
+			name="camera_info_url_right"
+			value="" />
+	</node>
+-->
+
+	<node
+		pkg="nodelet"
+		type="nodelet"
+		name="camera_nodelet"
+		args="load camera1394stereo/driver /camera_nodelet_manager"
+		output="screen"
+		respawn="true"
+	>
+		<param
+			name="guid"
+			value="b09d0100ac7cc8" />
+		<param
+			name="video_mode"
+			value="format7_mode3" />
+		<param
+			name="format7_color_coding"
+			value="raw16" />
+		<!--
+		<param
+			name="frame_rate"
+			value="48" />
+		<param
+			name="iso_speed"
+			value="400" />
+		<param
+			name="bayer_pattern"
+			value="bggr" />
+		<param
+			name="bayer_method"
+			value="" />
+		 -->
+		<param
+			name="stereo_method"
+			value="Interlaced" />
+		<param
+			name="camera_info_url_left"
+			value="package://lrm_bumblebee/params/camera_left.yaml" />
+		<param
+			name="camera_info_url_right"
+			value="package://lrm_bumblebee/params/camera_right.yaml" />
+	</node>
+</launch>

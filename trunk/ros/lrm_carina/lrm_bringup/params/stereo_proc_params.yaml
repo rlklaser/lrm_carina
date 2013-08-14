@@ -1,0 +1,12 @@
+stereo_proc:
+  queue_size: 10
+  #prefilter_size: 31
+  texture_threshold: 512
+  speckle_size: 100
+  speckle_range: 4
+  disparity_range: 32
+  min_disparity: 8
+  #uniqueness_ratio: 
+  #correlation_window_size: 
+  
+  

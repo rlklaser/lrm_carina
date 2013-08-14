@@ -1,0 +1,15 @@
+<!-- -*- mode: XML -*- -->
+
+<launch>
+  <node pkg="lrm_bumblebee" type="lrm_bumblebee" name="bumblebee2"
+	output="screen" respawn="false">
+    <param name="video_mode" value="320x240_yuv422" />
+    <param name="fps" value="15" />
+    <param name="gain" value="auto" />   
+    <param name="brightness" value="auto" /> 
+    <param name="whitebalance" value="auto" />  
+    <param name="shutter" value="auto" />    
+    <param name="bayer_pattern" value="NONE" />  
+    <param name="bayer_method" value="NONE" />  
+  </node>
+</launch>

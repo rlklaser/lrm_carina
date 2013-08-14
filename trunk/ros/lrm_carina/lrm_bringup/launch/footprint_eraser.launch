@@ -1,0 +1,24 @@
+<launch>
+
+	<node
+		name="footprint_eraser"
+		type="footprint_eraser"
+		pkg="lrm_navigation"
+		output="screen"
+		respawn="true"
+	>
+
+		<remap
+			from="clear_bbx"
+			to="/octomap_server/clear_bbx" />
+
+<!-- 
+		<remap
+			from="odom"
+			to="/wheel_odometry/odom" />
+ -->
+ 			
+	</node>
+
+
+</launch>

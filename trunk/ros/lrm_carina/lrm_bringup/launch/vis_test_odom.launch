@@ -1,0 +1,19 @@
+<launch>
+
+	<param
+		name="/use_sim_time"
+		value="true" />
+
+	<node
+		name="rviz"
+		pkg="rviz"
+		type="rviz"
+		respawn="true"
+		output="screen"
+		args="-d $(find lrm_bringup)/config/bags_play_odom.rviz" />
+
+<!-- 
+	<include file="$(find lrm_bringup)/launch/robot_model.launch" />
+ -->
+ 
+</launch>

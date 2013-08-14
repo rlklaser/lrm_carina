@@ -1,0 +1,10 @@
+<launch>
+
+	<node
+		name="wall_clock"
+		pkg="lrm_sensors"
+		type="fake_clock_node"
+		output="screen"
+		respawn="false" />
+
+</launch>

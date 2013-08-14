@@ -1,0 +1,29 @@
+<launch>
+
+	<param
+		name="/use_sim_time"
+		value="true" />
+
+	<env
+		name="GAZEBO_MODEL_PATH"
+		value="$GAZEBO_MODEL_PATH:$(find lrm_description)/models:$(find lrm_description)/models/trees:/home/rlklaser/Work/ros/libraries/drcsim/gazebo_models/environments" />
+	<env
+		name="GAZEBO_PLUGIN_PATH"
+		value="$GAZEBO_PLUGIN_PATH:$(find lrm_gazebo)/lib" />
+
+	<node
+		name="gazebo_gui"
+		pkg="gazebo"
+		type="gui"
+		respawn="false"
+		output="screen" />
+
+	<node
+		name="rviz"
+		pkg="rviz"
+		type="rviz"
+		respawn="true"
+		output="screen"
+		args="-d $(find lrm_bringup)/config/visualization.rviz" />
+
+</launch>

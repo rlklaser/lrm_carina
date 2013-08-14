@@ -1,0 +1,16 @@
+<launch>
+
+	<machine
+		name="c3po"
+		address="c3po"
+		env-loader="/home/lrm/ros_workspace/env.sh"
+		user="lrm"
+		password="lrm"
+		default="true"
+	>
+	</machine>
+
+	<include file="$(find lrm_bringup)/launch/stereo_vision.launch" />
+
+
+</launch>

@@ -1,0 +1,6 @@
+<launch>
+
+	<include file="$(find lrm_bringup)/launch/stereo_vision_nodelet.launch" />
+	<include file="$(find lrm_bringup)/launch/stereo_vision_filters.launch" />
+
+</launch>

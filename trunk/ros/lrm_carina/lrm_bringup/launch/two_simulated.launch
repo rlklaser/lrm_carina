@@ -1,0 +1,24 @@
+<launch>
+
+	<param
+		name="/use_sim_time"
+		value="true" />
+		
+	<node
+		name="gazebo"
+		pkg="gazebo"
+		type="gazebo"
+		args="$(find gazebo_worlds)/worlds/empty.world"
+		respawn="true"
+		output="screen" />
+
+	<group ns="one">
+		<param
+			name="tf_prefix"
+			value="one" />
+
+		<include file="$(find lrm_bringup)/launch/simulation.launch" />
+
+	</group>
+
+</launch>
