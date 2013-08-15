@@ -86,42 +86,19 @@
 		respawn="true"
 		output="screen" />
 
+	<rosparam
+		command="load"
+		file="$(find lrm_bringup)/params/controllers_params.yaml" />
+
 	<node
 		name="encoders_controller"
 		pkg="pr2_controller_manager"
 		type="spawner"
 		args="encoders_controller"
 		respawn="true"
-		output="screen"
-	>
-		<param
-			name="type"
-			value="lrm_gazebo/EncodersControllerPlugin" />
-		<param
-			name="steering_wheel"
-			value="true" />
-		<param
-			name="update_rate"
-			value="30" />
-		<param
-			name="wheel_encoder_joint"
-			value="joint_front_right_wheel" />
-		<param
-			name="steering_encoder_joint"
-			value="joint_steer" />
-		<param
-			name="steering_wheel_joint"
-			value="joint_steering_wheel" />
-	</node>
+		output="screen" />
 
 </launch>
-
-
-
-
-
-
-
 
 
 

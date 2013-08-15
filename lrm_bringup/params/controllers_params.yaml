@@ -1,0 +1,7 @@
+encoders_controller:
+  type: lrm_gazebo/EncodersControllerPlugin
+  steering_wheel: true
+  update_rate: 20
+  wheel_encoder_joint: joint_front_right_wheel
+  steering_encoder_joint: joint_steer
+  steering_wheel_joint: joint_steering_wheel

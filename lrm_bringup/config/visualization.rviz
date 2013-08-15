@@ -4,7 +4,6 @@ Panels:
     Name: Displays
     Property Tree Widget:
       Expanded:
-        - /TF1
         - /TF1/Tree1
         - /Camera2/Visibility1
       Splitter Ratio: 0.847826
@@ -13,8 +12,6 @@ Panels:
     Expanded:
       - /2D Nav Goal1
       - /2D Pose Estimate1
-      - /Plant Flag1
-      - /Navigate To1
       - /Publish Point1
     Name: Tool Properties
     Splitter Ratio: 0.5
@@ -34,103 +31,9 @@ Visualization Manager:
   Class: ""
   Displays:
     - Class: rviz/TF
-      Enabled: true
+      Enabled: false
       Frame Timeout: 15
       Frames:
-        /ackermann_bar_link:
-          Value: true
-        /ackermann_left_susp_link:
-          Value: true
-        /ackermann_right_susp_link:
-          Value: true
-        /base_footprint:
-          Value: true
-        /base_front_sensors:
-          Value: true
-        /base_link:
-          Value: true
-        /base_odometry:
-          Value: true
-        /base_steering_wheel:
-          Value: true
-        /bbx_base_front_left_link:
-          Value: true
-        /bbx_base_front_right_link:
-          Value: true
-        /bbx_base_rear_left_link:
-          Value: true
-        /bbx_base_rear_right_link:
-          Value: true
-        /bbx_top_front_left_link:
-          Value: true
-        /bbx_top_front_right_link:
-          Value: true
-        /bbx_top_rear_left_link:
-          Value: true
-        /bbx_top_rear_right_link:
-          Value: true
-        /body_link:
-          Value: true
-        /camera_center_link:
-          Value: true
-        /center_mass_link:
-          Value: true
-        /ekf_odom:
-          Value: true
-        /front_axle_link:
-          Value: true
-        /front_left_bar_link:
-          Value: true
-        /front_left_susp_link:
-          Value: true
-        /front_left_wheel:
-          Value: true
-        /front_right_bar_link:
-          Value: true
-        /front_right_susp_link:
-          Value: true
-        /front_right_wheel:
-          Value: true
-        /gazebo_odom:
-          Value: true
-        /gsp_odom:
-          Value: true
-        /imu_link:
-          Value: true
-        /map:
-          Value: true
-        /rear_axle_link:
-          Value: true
-        /rear_left_bar_link:
-          Value: true
-        /rear_left_susp_link:
-          Value: true
-        /rear_left_wheel:
-          Value: true
-        /rear_right_bar_link:
-          Value: true
-        /rear_right_susp_link:
-          Value: true
-        /rear_right_wheel:
-          Value: true
-        /steer_link:
-          Value: true
-        /steering_wheel_link:
-          Value: true
-        /stereo_camera:
-          Value: true
-        /stereo_camera/left_frame:
-          Value: true
-        /stereo_camera/left_optical_frame:
-          Value: true
-        /stereo_camera/right_frame:
-          Value: true
-        /stereo_camera/right_optical_frame:
-          Value: true
-        /wheel_odom:
-          Value: true
-        /world:
-          Value: true
         All Enabled: true
       Marker Scale: 0.7
       Name: TF
@@ -138,80 +41,9 @@ Visualization Manager:
       Show Axes: true
       Show Names: false
       Tree:
-        /world:
-          /map:
-            /ekf_odom:
-              {}
-            /gazebo_odom:
-              {}
-            /gsp_odom:
-              {}
-            /wheel_odom:
-              /base_footprint:
-                /base_link:
-                  /base_front_sensors:
-                    /camera_center_link:
-                      /stereo_camera:
-                        {}
-                    /stereo_camera/left_frame:
-                      /stereo_camera/left_optical_frame:
-                        {}
-                    /stereo_camera/right_frame:
-                      /stereo_camera/right_optical_frame:
-                        {}
-                  /base_steering_wheel:
-                    /steering_wheel_link:
-                      {}
-                  /bbx_base_front_left_link:
-                    {}
-                  /bbx_base_front_right_link:
-                    {}
-                  /bbx_base_rear_left_link:
-                    {}
-                  /bbx_base_rear_right_link:
-                    {}
-                  /bbx_top_front_left_link:
-                    {}
-                  /bbx_top_front_right_link:
-                    {}
-                  /bbx_top_rear_left_link:
-                    {}
-                  /bbx_top_rear_right_link:
-                    {}
-                  /body_link:
-                    {}
-                  /center_mass_link:
-                    {}
-                  /front_axle_link:
-                    /front_left_susp_link:
-                      /front_left_bar_link:
-                        /front_left_wheel:
-                          {}
-                    /front_right_susp_link:
-                      /front_right_bar_link:
-                        /front_right_wheel:
-                          {}
-                    /steer_link:
-                      /ackermann_bar_link:
-                        /ackermann_left_susp_link:
-                          {}
-                        /ackermann_right_susp_link:
-                          {}
-                  /imu_link:
-                    {}
-                  /rear_axle_link:
-                    /base_odometry:
-                      {}
-                    /rear_left_susp_link:
-                      /rear_left_bar_link:
-                        /rear_left_wheel:
-                          {}
-                    /rear_right_susp_link:
-                      /rear_right_bar_link:
-                        /rear_right_wheel:
-                          {}
+        {}
       Update Interval: 0
-      Value: true
+      Value: false
     - Alpha: 0.5
       Cell Size: 1
       Class: rviz/Grid
@@ -441,7 +273,6 @@ Visualization Manager:
         Grid: false
         GridCells: true
         Image: true
-        Imu: true
         Local Window: true
         Map: true
         MarkerArray: true
@@ -470,7 +301,6 @@ Visualization Manager:
         Grid: false
         GridCells: true
         Image: true
-        Imu: true
         Local Window: true
         Map: true
         MarkerArray: true
@@ -508,7 +338,7 @@ Visualization Manager:
       Size (Pixels): 3
       Size (m): 0.01
       Style: Points
-      Topic: /ground_cloud_in
+      Topic: /cloud/points_cluster
       Use Fixed Frame: true
       Use rainbow: true
       Value: false
@@ -593,7 +423,7 @@ Visualization Manager:
       Use Fixed Frame: true
       Use rainbow: true
       Value: false
-    - Alpha: 1
+    - Alpha: 0.6
       Class: rviz/GridCells
       Color: 25; 255; 0
       Enabled: true
@@ -661,14 +491,6 @@ Visualization Manager:
       Position Tolerance: 0.1
       Topic: /gps_odometry/odom
       Value: false
-    - Alpha: 0.5
-      Class: rviz_plugin_tutorials/Imu
-      Color: 204; 51; 204
-      Enabled: false
-      History Length: 1
-      Name: Imu
-      Topic: /lse_xsens_mti/xsens/imu/data
-      Value: false
     - Angle Tolerance: 0.1
       Class: rviz/Odometry
       Color: 255; 25; 0
@@ -693,14 +515,14 @@ Visualization Manager:
       Shape: Arrow
       Topic: /move_base/current_goal
       Value: true
-    - Alpha: 1
+    - Alpha: 0.5
       Class: rviz/GridCells
       Color: 255; 0; 0
       Enabled: true
       Name: GridCells
       Topic: /move_base/local_costmap/obstacles
       Value: true
-    - Alpha: 1
+    - Alpha: 0.6
       Class: rviz/GridCells
       Color: 170; 85; 255
       Enabled: true
@@ -775,15 +597,7 @@ Visualization Manager:
     - Class: rviz/SetInitialPose
       Topic: initialpose
     - Class: rviz_plugin_tutorials/PlantFlag
-      Flags:
-        - Name: Flag 0
-          X: -3.20041
-          Y: 10.1888
-          Z: -8.549e-07
-        - Name: Flag 1
-          X: 12.8054
-          Y: -9.09642
-          Z: -3.20808e-07
+      Flags: ""
     - Class: rviz/FocusCamera
     - Class: pr2_interactive_manipulation_frontend/NavigateTo
       Single click: true
@@ -795,17 +609,17 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 15.6582
+      Distance: 11.7119
       Focal Point:
-        X: 2.17933
-        Y: 0.552914
-        Z: 1.04619
+        X: -1.39647
+        Y: 1.66571
+        Z: -1.25889
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 0.385161
+      Pitch: 0.575127
       Target Frame: /base_footprint
       Value: Orbit (rviz)
-      Yaw: 5.02955
+      Yaw: 5.56197
     Saved: ~
 Window Geometry:
   Camera:
@@ -827,5 +641,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1267
-  X: 1574
-  Y: 176
+  X: 160
+  Y: 98
