@@ -37,6 +37,8 @@
 
 #include <octomap_server/OctomapServer.h>
 
+#define MIN_COST 50
+
 using namespace octomap;
 using octomap_msgs::Octomap;
 
@@ -990,7 +992,7 @@ void OctomapServer::handlePreNodeTraversal(const ros::Time& rostime) {
 			// init to unknown:
 			//m_gridmap.data.resize(m_gridmap.info.width * m_gridmap.info.height, -1);
 //rlkaser:init to free
-			m_gridmap.data.resize(m_gridmap.info.width * m_gridmap.info.height, 0);
+			m_gridmap.data.resize(m_gridmap.info.width * m_gridmap.info.height, MIN_COST);
 		} else {
 
 			if (mapChanged(oldMapInfo, m_gridmap.info)) {
@@ -1017,7 +1019,7 @@ void OctomapServer::handlePreNodeTraversal(const ros::Time& rostime) {
 			for (unsigned int j = mapUpdateBBXMinY; j <= mapUpdateBBXMaxY; ++j) {
 				//std::fill_n(m_gridmap.data.begin() + m_gridmap.info.width * j + mapUpdateBBXMinX, numCols, -1);
 //rlkaser:init to free
-				std::fill_n(m_gridmap.data.begin() + m_gridmap.info.width * j + mapUpdateBBXMinX, numCols, 0);
+				std::fill_n(m_gridmap.data.begin() + m_gridmap.info.width * j + mapUpdateBBXMinX, numCols, MIN_COST);
 			}
 
 		}
@@ -1066,11 +1068,12 @@ void OctomapServer::update2DMap(const OcTreeT::iterator& it, bool occupied) {
 
 	if (it.getDepth() == m_maxTreeDepth) {
 		unsigned idx = mapIdx(it.getKey());
-		if (occupied)
+		if (occupied) {
 			m_gridmap.data[mapIdx(it.getKey())] = 100;
-		else if (m_gridmap.data[idx] == -1) {
-			m_gridmap.data[idx] = 0;
 		}
+//		else if (m_gridmap.data[idx] == -1) {
+//			m_gridmap.data[idx] = 0;
+//		}
 //rlklaser:loss of occupancy
 		else {
 			m_gridmap.data[idx] *= 0.8;
@@ -1083,11 +1086,12 @@ void OctomapServer::update2DMap(const OcTreeT::iterator& it, bool occupied) {
 			int i = (minKey[0] + dx - m_paddedMinKey[0]) / m_multires2DScale;
 			for (int dy = 0; dy < intSize; dy++) {
 				unsigned idx = mapIdx(i, (minKey[1] + dy - m_paddedMinKey[1]) / m_multires2DScale);
-				if (occupied)
+				if (occupied) {
 					m_gridmap.data[idx] = 100;
-				else if (m_gridmap.data[idx] == -1) {
-					m_gridmap.data[idx] = 0;
 				}
+//				else if (m_gridmap.data[idx] == -1) {
+//					m_gridmap.data[idx] = 0;
+//				}
 //rlklaser:loss of occupancy
 				else {
 					m_gridmap.data[idx] *= 0.8;
