@@ -1,5 +1,9 @@
 <launch>
 
+	<param
+		name="/use_sim_time"
+		value="true" />
+
 	<node
 		pkg="lrm_drivers"
 		name="vehicle_state_node"
@@ -7,6 +11,18 @@
 		respawn="true"
 		output="screen"
 	>
+		<remap
+			from="encoders"
+			to="/encoders_controller/encoders" />
 	</node>
 
+	<node
+		pkg="lrm_drivers"
+		name="cruise_control"
+		type="cruise_control"
+		respawn="true"
+		output="screen"
+	>
+	</node>
+	
 </launch>

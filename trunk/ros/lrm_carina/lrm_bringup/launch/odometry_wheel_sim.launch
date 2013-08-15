@@ -17,7 +17,7 @@
 
 	<node
 		pkg="lrm_odometry"
-		type="extended_odometry"
+		type="simple_odometry"
 		name="wheel_odometry"
 		output="screen"
 		respawn="true"
