@@ -33,7 +33,7 @@ public:
 		this->nh_priv.param("port", path, std::string("/dev/vcm_das_1")  );
 		this->nh_priv.param("baud",baud , ARDUINO_DEFAULT_BAUD);
 		this->nh_priv.param("min_value", min, 0);
-		this->nh_priv.param("max_value", max, 22);
+		this->nh_priv.param("max_value", max, 40);
 		this->nh_priv.param("base_addr", base_addr, 0x300);
 		this->nh_priv.param("channel", channel, 1);
 		if(path.compare(std::string("/dev/vcmdas1") ) != 0)

@@ -8,16 +8,19 @@
 	>
 		<param
 			name="port"
-			value="/dev/ttyUSB1" />
+			value="/dev/ttyUSB01" />
 		<param
 			name="model"
 			value="AX2550" />
+		<param
+			name="max_value"
+			value="40" />
 	</node>
-	
+
 	<node
 		pkg="lrm_drivers"
 		name="arduino"
-		type="throttle_CaRINA1_node"
+		type="throttle_node"
 	>
 		<param
 			name="port"
@@ -31,8 +34,8 @@
 			to="velocity_commands" />
 
 	</node>
-	
+
 	<include file="$(find lrm_drivers)/launch/joy_teleop.launch" />
-	
+
 
 </launch>
