@@ -29,7 +29,7 @@
 			value="7" />
 		<param
 			name="velocity_scale"
-			value="10" />
+			value="20" />
 	</node>
 
 	<node
