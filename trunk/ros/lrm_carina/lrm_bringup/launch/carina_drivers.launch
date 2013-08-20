@@ -21,7 +21,7 @@
 	<node
 		pkg="lrm_drivers"
 		name="arduino_driver"
-		type="throttle_CaRINA1_node"
+		type="throttle_node"
 		respawn="true"
 		output="screen"
 	>
