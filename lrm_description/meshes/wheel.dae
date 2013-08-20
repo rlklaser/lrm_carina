@@ -11,13 +11,13 @@
     </asset>
     <library_images>
         <image id="texture0" name="texture0">
-            <init_from>wheel_color.bmp</init_from>
+            <init_from>wheel_color.png</init_from>
         </image>
         <image id="texture1" name="texture1">
             <init_from>prata.png</init_from>
         </image>
         <image id="texture2" name="texture2">
-            <init_from>preto.bmp</init_from>
+            <init_from>preto.png</init_from>
         </image>
     </library_images>
     <library_materials>
