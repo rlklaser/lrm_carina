@@ -65,7 +65,7 @@ CruiseControl::CruiseControl(ros::NodeHandle n) :
 	nh_priv.param("top_speed", topSpeed, DEFAULT_MAX_VELOCITY);
 	nh_priv.param("max_accel", this->max_accel, MAX_ACCEL_VALUE);
 	nh_priv.param("max_brake", this->max_brake, MAX_BRAKE_VALUE);
-	nh_priv.param("frequency", this->frequency, FREQUENCY);
+	nh_priv.param("rate", this->frequency, FREQUENCY);
 	nh_priv.param("switch_lag_brake", this->switch_lag_brake, 7.0);
 	nh_priv.param("switch_lag_throttle", this->switch_lag_throttle, 7.0);
 
@@ -75,8 +75,8 @@ CruiseControl::CruiseControl(ros::NodeHandle n) :
 	throttle.value = 0;
 	brake.value = 0;
 
-	cruiseVelocity_sub = nh.subscribe<lrm_msgs::Velocity>("velocity_commands",10, &CruiseControl::cruiseVelocityCallback, this);
-	can_sub = nh.subscribe<lrm_msgs::VehicleState>("vehicle_state", 10,	&CruiseControl::canCallback, this);
+	cruiseVelocity_sub = nh.subscribe<lrm_msgs::Velocity>("velocity_commands",1, &CruiseControl::cruiseVelocityCallback, this);
+	can_sub = nh.subscribe<lrm_msgs::VehicleState>("vehicle_state", 1,	&CruiseControl::canCallback, this);
 
 	brake_pub = nh.advertise<lrm_msgs::Brake>("brake_commands", 1);
 	throttle_pub = nh.advertise<lrm_msgs::Throttle>("throttle_commands", 1);
