@@ -1,18 +1,18 @@
 roboteq_driver:
-  port: /dev/ttyUSB1
+  port: /dev/ttyS0
   model: AX2550
-  publish_encoder: true
-  encoder_freq: 20
+  publish_encoders: true
+  encoders_rate: 20
   steering_angle_ratio: 4.1
   
 arduino_driver:
   port: /dev/ttyUSB0
-  max_value: 100
+  #max_value: 100
   
 cruise_control:
   top_speed: 10
   max_accel: 5
   max_brake: 40
-  frequency: 2.0
+  #rate: 2.0
   switch_lag_brake: 7.0
   switch_lag_throttle: 7.0
