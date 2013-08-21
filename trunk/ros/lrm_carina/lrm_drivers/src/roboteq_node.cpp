@@ -48,12 +48,12 @@ public:
 
 		nh_priv.param("port", roboteqPath, std::string("/dev/ttyUSB0"));
 		nh_priv.param("model", roboteqModel, std::string(ROBOTEQ_MODEL_AX2550));
-		nh_priv.param("publish_encoder", publish_encoder, false);
-		nh_priv.param("which_frequency", encoder_freq, 20.0);
-		nh_priv.param("steering_angle_ratio", steering_angle_ratio, 1.0);
+		nh_priv.param("publish_encoders", publish_encoder, true);
+		nh_priv.param("encoders_rate", encoder_freq, 20.0);
+		nh_priv.param("steering_angle_ratio", steering_angle_ratio, 4.1);
 
-		angle_subscriber = nh.subscribe<lrm_msgs::Steering>("steering_commands", 10, &RoboteqNode::steeringCallback, this);
-		brake_subscriber = nh.subscribe<lrm_msgs::Brake>("brake_commands", 10, &RoboteqNode::brakeCallback, this);
+		angle_subscriber = nh.subscribe<lrm_msgs::Steering>("steering_commands", 1, &RoboteqNode::steeringCallback, this);
+		brake_subscriber = nh.subscribe<lrm_msgs::Brake>("brake_commands", 1, &RoboteqNode::brakeCallback, this);
 
 		if (roboteqModel.compare(ROBOTEQ_MODEL_AX2550) == 0)
 			roboteq = new AX2550();
@@ -70,7 +70,7 @@ public:
 		ROS_INFO("RoboteQ model %s was configured at serial port %s", this->roboteqModel.c_str(), this->roboteqPath.c_str());
 
 		if (publish_encoder) {
-			encoder_publisher = nh.advertise<lrm_msgs::Encoders>("encoders", 10, 0);
+			encoder_publisher = nh.advertise<lrm_msgs::Encoders>("encoders", 2, true); //latched
 			encoderTimer = n.createTimer(ros::Duration(1.0/encoder_freq), &RoboteqNode::statePublisherCallback, this);
 		}
 
@@ -106,7 +106,7 @@ public:
 	void statePublisherCallback(const ros::TimerEvent&) {
 		lrm_msgs::Encoders encoder;
 
-		encoder.header.frame_id = "/wheel_encoder";
+		encoder.header.frame_id = "/encoders";
 		encoder.header.seq = msg_counter++;
 		encoder.header.stamp = ros::Time::now();
 

@@ -20,7 +20,7 @@
 			value="0" />
 		<param
 			name="steering_scale"
-			value="30" /> <!-- max angle in degrees -->
+			value="35" /> <!-- max angle in degrees -->
 		<param
 			name="velocity_increase_button"
 			value="6" />

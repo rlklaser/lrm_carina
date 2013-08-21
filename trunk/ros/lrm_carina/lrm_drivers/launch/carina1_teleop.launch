@@ -8,13 +8,16 @@
 	>
 		<param
 			name="port"
-			value="/dev/ttyUSB01" />
+			value="/dev/ttyS0" />
 		<param
 			name="model"
 			value="AX2550" />
 		<param
-			name="max_value"
-			value="40" />
+			name="steering_angle_ratio"
+			value="4.1" />
+		<param
+			name="publish_encoders"
+			value="true" />
 	</node>
 
 	<node
@@ -27,7 +30,7 @@
 			value="/dev/ttyUSB0" />
 		<param
 			name="max_value"
-			value="100" />
+			value="20" />
 
 		<remap
 			from="throttle_commands"
