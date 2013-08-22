@@ -58,11 +58,11 @@ public:
 	}
 
 	void starting() {
-		ROS_INFO_STREAM("Encoders controller starting...");
+		//ROS_INFO_STREAM("Encoders controller starting...");
 	}
 
 	void stopping() {
-		ROS_INFO_STREAM("Encoders controller stopping...");
+		//ROS_INFO_STREAM("Encoders controller stopping...");
 	}
 
 	void update() {

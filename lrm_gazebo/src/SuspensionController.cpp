@@ -51,11 +51,11 @@ public:
 	}
 
 	void starting() {
-		ROS_INFO_STREAM("Suspension controller starting...");
+		//ROS_INFO_STREAM("Suspension controller starting...");
 	}
 
 	void stopping() {
-		ROS_INFO_STREAM("Suspension controller stopping...");
+		//ROS_INFO_STREAM("Suspension controller stopping...");
 	}
 
 	void update() {
