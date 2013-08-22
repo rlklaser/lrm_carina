@@ -175,7 +175,7 @@ void WheelOdometryExtended::calcOdometry()
 	odo.R = 0;
 	odo.R_f_l = 0;
 	odo.R_f_r = 0;
-	odo.ratio = 0;
+	odo.ratio = 1;
 	odo.phi_l = 0;
 	odo.phi_r = 0;
 	odo.a = 0;
