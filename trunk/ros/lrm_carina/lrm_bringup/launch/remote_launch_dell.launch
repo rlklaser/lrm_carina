@@ -11,6 +11,7 @@
 	</machine>
 
 	<include file="$(find lrm_bringup)/launch/stereo_vision.launch" />
+	<include file="$(find lrm_bringup)/launch/octomap_mapping.launch" />
 
 
 </launch>

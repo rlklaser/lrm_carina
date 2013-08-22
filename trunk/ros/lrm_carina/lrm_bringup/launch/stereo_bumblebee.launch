@@ -7,7 +7,7 @@
 <!-- 
 	<include file="$(find lrm_bringup)/launch/camera_nodelet_manager.launch" />
  -->
- 
+
 	<node
 		pkg="nodelet"
 		type="nodelet"
@@ -120,22 +120,6 @@
 	</node>
     -->
 
-	<node
-		name="throttle_stereo"
-		pkg="lrm_stereo"
-		type="throttle_stereo"
-		output="screen"
-		respawn="true"
-	>
-		<param
-			name="input_namespace"
-			value="stereo_camera" />
-		<param
-			name="output_namespace"
-			value="stereo" />
-		<param
-			name="rate"
-			value="5" />
-	</node>
-	
+	<include file="$(find lrm_bringup)/launch/vision_throttle.launch" />
+
 </launch>
