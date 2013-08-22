@@ -10,19 +10,19 @@
 				<mass>10</mass>
 				<pose>0 0 0 0 0 0</pose>
 				<inertia>
-					<ixx>10</ixx>
+					<ixx>1</ixx>
 					<ixy>0</ixy>
 					<ixz>0</ixz>
-					<iyy>10</iyy>
+					<iyy>1</iyy>
 					<iyz>0</iyz>
-					<izz>10</izz>
+					<izz>1</izz>
 				</inertia>
 			</inertial>
 			<!-- 
 			<collision name="collision">
 				<geometry>
 					<mesh>
-						<uri>model://hydrangea_macrophylla/model/hydrangea_macrophylla.dae</uri>
+						<uri>model://hydrangea_macrophylla/meshes/hydrangea_macrophylla.dae</uri>
 					</mesh>
 				</geometry>
 			</collision>
@@ -30,7 +30,7 @@
 			<visual name="visual">
 				<geometry>
 					<mesh>
-						<uri>model://hydrangea_macrophylla/model/hydrangea_macrophylla.dae</uri>
+						<uri>model://hydrangea_macrophylla/meshes/hydrangea_macrophylla.dae</uri>
 					</mesh>
 				</geometry>
 			</visual>
