@@ -7,3 +7,5 @@ sudo apt-get install ros-groovy-pr2-mechanism
 sudo apt-get install ros-groovy-joy
 
 sudo apt-get install libdc1394-22-dev
+sudo apt-get install libgsl0-dev
+	

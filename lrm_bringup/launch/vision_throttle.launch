@@ -19,9 +19,9 @@
 			value="stereo" />
 		<param
 			name="rate"
-			value="2" />
+			value="5" />
 	</node>
-
+	
 <!-- 
 	<group ns="/stereo">
 		<group ns="left">

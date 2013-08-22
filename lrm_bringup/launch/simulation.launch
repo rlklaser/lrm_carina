@@ -12,6 +12,8 @@
 			file="$(find lrm_bringup)/params/camera_parameters.yaml" />
 	</group>
 
+	<include file="$(find lrm_bringup)/launch/vision_throttle.launch" />
+	
 	<rosparam
 		command="load"
 		file="$(find lrm_bringup)/params/carina_4w_suspension.yaml" />
