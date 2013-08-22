@@ -152,7 +152,8 @@ void WheelOdometry::getParams() {
 
 	nh_priv.param("print_info", odo.p.print_info, false);
 	nh_priv.param("absolute", odo.p.absolute, false);
-	nh_priv.param("use_imu", odo.p.use_imu, true);
+	nh_priv.param("use_imu", odo.p.use_imu, false);
+	nh_priv.param("use_6dof", odo.p.use_6dof, true);
 	nh_priv.param("publish_tf", odo.p.publish_tf, true);
 	nh_priv.param("tf_delay", odo.p.tf_delay, 0.1);
 	nh_priv.param("publish_js", odo.p.publish_js, false);
@@ -223,6 +224,7 @@ void WheelOdometry::reconfigure(lrm_odometry::OdometryConfig &config, uint32_t l
 }
 
 void WheelOdometry::imuCallback(const sensor_msgs::Imu::ConstPtr& msg) {
+
 	if (odo.initial_orientation == INF) {
 		odo.initial_orientation = tf::getYaw(msg->orientation);
 		odo.last_orientation = odo.initial_orientation;
@@ -238,6 +240,43 @@ void WheelOdometry::imuCallback(const sensor_msgs::Imu::ConstPtr& msg) {
 	odo.imu_ang_vel_x = msg->angular_velocity.x;
 	odo.imu_ang_vel_y = msg->angular_velocity.y;
 	odo.imu_ang_vel_z = msg->angular_velocity.z;
+
+	if(odo.p.use_6dof) {
+		if(!odo.cached_transform) {
+			try {
+				listener.waitForTransform(
+					msg->header.frame_id,
+					odo.p.base_odometry,
+					ros::Time(0),
+					ros::Duration(5.0));
+				try {
+					listener.lookupTransform(
+							msg->header.frame_id,
+							odo.p.base_odometry,
+							ros::Time(0),
+							odo.trans_base_imu);
+					odo.cached_transform = true;
+				} catch (tf::TransformException &ex) {
+					ROS_ERROR("lrm_odometry: %s", ex.what());
+				}
+			} catch (tf::TransformException &ex) {
+					ROS_ERROR("lrm_odometry wait: %s", ex.what());
+			}
+		}
+
+		if(odo.cached_transform) {
+			tf::Quaternion orientation;
+			tf::quaternionMsgToTF(msg->orientation, orientation);
+			tf::Transform transf(
+					orientation,
+					tf::Vector3(0, 0, 0)
+			);
+			transf *= odo.trans_base_imu;
+			orientation = transf.getRotation();
+			double yaw;
+			tf::Matrix3x3(orientation).getRPY(odo.roll, odo.pitch, yaw);
+		}
+	}
 }
 
 /**
@@ -503,7 +542,14 @@ bool WheelOdometry::calcTransform() {
 			std::endl;
 	*/
 
-	tf::Quaternion qt = tf::createQuaternionFromYaw(odo.theta);
+	tf::Quaternion qt;
+
+	if(odo.p.use_imu && odo.p.use_6dof) {
+		qt = tf::createQuaternionFromRPY(odo.roll, odo.pitch, odo.theta);
+	}
+	else {
+		qt = tf::createQuaternionFromYaw(odo.theta);
+	}
 
 	tf::Transform trans_odom_encoder(
 			qt,
@@ -515,10 +561,10 @@ bool WheelOdometry::calcTransform() {
 			odo.p.frame_id,
 			odo.p.base_footprint);
 
-	tf::Transform trans_compass(
-			tf::createQuaternionFromYaw(angles::from_degrees(90)/* odo.initial_orientation*/),
-			tf::Vector3(0, 0, 0)
-	);
+	//tf::Transform trans_compass(
+	//		tf::createQuaternionFromYaw(angles::from_degrees(90)/* odo.initial_orientation*/),
+	//		tf::Vector3(0, 0, 0)
+	//);
 	//trans_odom_base_st *= trans_compass;
 
     //trans_odom_base_st *= trans_base_enc.inverse();

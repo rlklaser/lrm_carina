@@ -85,11 +85,4 @@
 
 	</node>
 
-	<node
-		pkg="lrm_outdoor"
-		type="compass_tf_node"
-		name="compass_tf_node"
-		respawn="true"
-		output="screen" />
-
 </launch>

@@ -73,6 +73,7 @@ struct st_param
 
 	bool absolute;		//absolute odometry - use compass orientation
 	bool use_imu;
+	bool use_6dof;		//publish odometry with rpy orientations
 	bool publish_tf;	//publish TF
 	bool publish_js;	//publish Joint States (not simulated)
 	bool print_info;
@@ -160,6 +161,11 @@ struct st_odometry
 	double imu_ang_vel_x;
 	double imu_ang_vel_y;
 	double imu_ang_vel_z;
+
+	double roll;
+	double pitch;
+	bool cached_transform;
+	tf::StampedTransform trans_base_imu;
 
 	struct st_param p;
 
