@@ -6,14 +6,14 @@
       <collision name="collision">
         <geometry>
           <mesh>
-            <uri>model://lamp_post/meshes/lamp_post.dae</uri>
+            <uri>model://TerrainGradient2/meshes/TerrainGradient2.dae</uri>
           </mesh>
         </geometry>
       </collision>
       <visual name="visual">
         <geometry>
           <mesh>
-            <uri>model://lamp_post/meshes/lamp_post.dae</uri>
+            <uri>model://TerrainGradient2/meshes/TerrainGradient2.dae</uri>
           </mesh>
         </geometry>
       </visual>

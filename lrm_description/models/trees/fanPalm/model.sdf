@@ -30,7 +30,6 @@
 						<length>5.0</length>
 					</cylinder>
 				</geometry>
-
 			</collision>
 			<visual name="visual">
 				<geometry>
