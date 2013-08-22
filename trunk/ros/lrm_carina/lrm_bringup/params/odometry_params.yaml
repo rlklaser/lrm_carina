@@ -12,6 +12,7 @@ wheel_odometry:
   #node
   absolute: true
   use_imu: true
+  use_6dof: true
   publish_tf: true
   publish_js: true
   animation_only: true
