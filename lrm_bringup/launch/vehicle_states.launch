@@ -4,6 +4,10 @@
 		name="/use_sim_time"
 		value="true" />
 
+	<rosparam
+		command="load"
+		file="$(find lrm_bringup)/params/vehicle_params.yaml" />
+		
 	<node
 		pkg="lrm_drivers"
 		name="vehicle_state_node"
