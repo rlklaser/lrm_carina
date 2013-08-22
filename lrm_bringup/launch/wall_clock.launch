@@ -5,6 +5,6 @@
 		pkg="lrm_sensors"
 		type="fake_clock_node"
 		output="screen"
-		respawn="false" />
+		respawn="true" />
 
 </launch>
