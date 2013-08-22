@@ -1,0 +1,17 @@
+<package>
+  <description brief="lrm_gazebo_ros">
+
+     lrm_gazebo_ros
+
+  </description>
+  <author>Rafael Luiz Klaser</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/lrm_gazebo_ros</url>
+  <depend package="roscpp"/>
+  <depend package="gazebo_ros"/>
+  <depend package="lrm_msgs"/>
+
+</package>
+
+
