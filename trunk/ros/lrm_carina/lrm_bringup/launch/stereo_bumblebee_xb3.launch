@@ -14,7 +14,7 @@
 		name="camera1394_nodelet"
 		args="load camera1394/driver camera_nodelet_manager"
 	>
-		<rosparam file="$(find lrm_bringup)/params/bumblebee_xb3.yaml" />
+		<rosparam file="$(find lrm_bringup)/params/cameras/bumblebee_xb3.yaml" />
 	</node>
 
 	<!-- or 
@@ -43,16 +43,16 @@
 
 			<param
 				name="narrow/left/camera_info_url"
-				value="package://lrm_bringup/params/00b09d0100ac7cc8_narrow_left.yaml" />
+				value="package://lrm_bringup/params/cameras/00b09d0100ac7cc8_narrow_left.yaml" />
 			<param
 				name="narrow/right/camera_info_url"
-				value="package://lrm_bringup/params/00b09d0100ac7cc8_narrow_right.yaml" />
+				value="package://lrm_bringup/params/cameras/00b09d0100ac7cc8_narrow_right.yaml" />
 			<param
 				name="wide/left/camera_info_url"
-				value="package://lrm_bringup/params/00b09d0100ac7cc8_wide_left.yaml" />
+				value="package://lrm_bringup/params/cameras/00b09d0100ac7cc8_wide_left.yaml" />
 			<param
 				name="wide/right/camera_info_url"
-				value="package://lrm_bringup/params/00b09d0100ac7cc8_wide_right.yaml" />
+				value="package://lrm_bringup/params/cameras/00b09d0100ac7cc8_wide_right.yaml" />
 							 	
 		</node>
 	</group>
