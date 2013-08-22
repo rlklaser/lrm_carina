@@ -113,15 +113,14 @@ WheelOdometry::WheelOdometry(ros::NodeHandle n) :
 	joints.ndx_joint_steering_wheel = position++;
 
 	if (odo.p.use_imu) {
-		imu_sub = nh.subscribe<sensor_msgs::Imu>("imu_data", 2, &WheelOdometry::imuCallback, this);
+		imu_sub = nh.subscribe<sensor_msgs::Imu>("imu_data", 1, &WheelOdometry::imuCallback, this);
 	}
 	//encoders_sub = nh.subscribe<atuacao::Encoders> ("encoders", 2, &WheelOdometry::encodersCallback, this);
-	encoders_sub = nh.subscribe<lrm_msgs::Encoders>("encoders", 2, &WheelOdometry::encodersCallback, this);
+	encoders_sub = nh.subscribe<lrm_msgs::Encoders>("encoders", 1, &WheelOdometry::encodersCallback, this);
 
-	/// publish with 1 sec buffer
-	pose_pub = nh.advertise<geometry_msgs::Pose2D>(nh_priv.getNamespace() + "/pose2d", odo.p.rate);
-	posestamped_pub = nh.advertise<geometry_msgs::PoseStamped>(nh_priv.getNamespace() + "/pose", odo.p.rate);
-	odom_pub = nh.advertise<nav_msgs::Odometry>(nh_priv.getNamespace() + "/odom", odo.p.rate);
+	pose_pub = nh.advertise<geometry_msgs::Pose2D>(nh_priv.getNamespace() + "/pose2d", 1/*odo.p.rate*/);
+	posestamped_pub = nh.advertise<geometry_msgs::PoseStamped>(nh_priv.getNamespace() + "/pose", 1/*odo.p.rate*/);
+	odom_pub = nh.advertise<nav_msgs::Odometry>(nh_priv.getNamespace() + "/odom", 1/*odo.p.rate*/);
 	velocity_pub = nh.advertise<lrm_msgs::Velocity>(nh_priv.getNamespace() + "/velocity", 1);
 
 	joint_pub = nh.advertise<sensor_msgs::JointState>("joint_states", 1);
