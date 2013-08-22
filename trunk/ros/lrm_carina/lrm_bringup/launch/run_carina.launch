@@ -9,7 +9,6 @@
     <include file="$(find lrm_bringup)/launch/controller_mux.launch" />
  	<include file="$(find lrm_bringup)/launch/teleop_joystick.launch" />
  	<include file="$(find lrm_bringup)/launch/teleop_keyboard.launch" />
- 	<include file="$(find lrm_bringup)/launch/vision_throttle.launch" />
  	<include file="$(find lrm_bringup)/launch/vehicle_states.launch" />
 
 </launch>
