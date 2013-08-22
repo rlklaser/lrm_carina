@@ -1,5 +1,9 @@
 <launch>
 
+	<param
+		name="/use_sim_time"
+		value="true" />
+		
 	<node
 		pkg="tf"
 		type="static_transform_publisher"
@@ -18,39 +22,16 @@
 		output="screen"
 		respawn="true"
 	>
-		<param
-			name="use_imu"
-			value="true" />
-		<param
-			name="publish_tf"
-			value="false" />
-		<param
-			name="publish_js"
-			value="true" />
-		<param
-			name="animation_only"
-			value="true" />
-
-		<param
-			name="pos_cov"
-			value="0.0001" />
-		<param
-			name="rot_cov"
-			value="0.0001" />
-
-		<param
-			name="frame_id"
-			value="wheel_odom" />
 		<remap
 			from="encoders"
-			to="encoders_controller/encoders" />
-		<remap
-			from="imu_data_x"
-			to="lse_xsens_mti/xsens/imu/data" />
+			to="/encoders_controller/encoders" />
 		<remap
 			from="imu_data"
 			to="/calibrated/imu/data" />
 		<!-- 
+		<remap
+			from="imu_data_x"
+			to="/lse_xsens_mti/xsens/imu/data" />
 		<remap
 			from="odom"
 			to="/wheelodom" />
