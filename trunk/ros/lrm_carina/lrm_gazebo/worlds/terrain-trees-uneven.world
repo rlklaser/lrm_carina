@@ -70,7 +70,11 @@
 
 		<include>
 			<name>terrain</name>
+
 			<uri>model://carina_uneven_terrain</uri>
+			<!-- 
+			<uri>model://greece_terrain</uri>
+			-->
 		</include>
 
 	</world>
