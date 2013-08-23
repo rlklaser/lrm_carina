@@ -7,5 +7,5 @@ roboteq_driver:
   
 arduino_driver:
   port: /dev/ttyUSB0
-  #max_value: 100
+  max_value: 100
   
