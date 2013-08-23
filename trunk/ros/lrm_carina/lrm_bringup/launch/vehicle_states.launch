@@ -7,7 +7,7 @@
 	<rosparam
 		command="load"
 		file="$(find lrm_bringup)/params/vehicle_params.yaml" />
-		
+
 	<node
 		pkg="lrm_drivers"
 		name="vehicle_state_node"
@@ -27,6 +27,9 @@
 		respawn="true"
 		output="screen"
 	>
+		<remap
+			from="throttle_commands"
+			to="throttle_cruisecontrol" />
 	</node>
-	
+
 </launch>
