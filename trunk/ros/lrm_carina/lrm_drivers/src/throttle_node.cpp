@@ -70,14 +70,18 @@ public:
 
 };
 
-/**
- *
- */
+ThrottleNode* node;
+
+void sigsegv_handler(int sig) {
+	ROS_INFO_STREAM("node kill");
+	delete node;
+}
+
 int main(int argc, char** argv) {
 	ros::init(argc, argv, "throttle");
 	ros::NodeHandle n;
 
-	ThrottleNode throttle(n);
+	node = new ThrottleNode(n);
 
 	ros::spin();
 

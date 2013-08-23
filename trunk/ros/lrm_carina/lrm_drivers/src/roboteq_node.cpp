@@ -14,6 +14,8 @@
 #include <lrm_msgs/Brake.h>
 #include <lrm_msgs/Encoders.h>
 
+#include <signal.h>
+
 #define MAX_STEERING_ANGLE 30			/**< Maximum steering angle. */
 #define ROBOTEQ_MODEL_AX2550 "AX2550"	/**< First supported RoboteQ model (that's the default choice). */
 #define ROBOTEQ_MODEL_HDC2450 "HDC2450"	/**< Second supported RoboteQ model. */
@@ -136,14 +138,20 @@ public:
 
 };
 
-/**
- *
- */
+RoboteqNode* node;
+
+void sigsegv_handler(int sig) {
+	ROS_INFO_STREAM("node kill");
+	delete node;
+}
+
 int main(int argc, char** argv) {
 	ros::init(argc, argv, "roboteq");
 	ros::NodeHandle n;
 
-	RoboteqNode roboteq_node(n);
+	node = new RoboteqNode(n);
+
+	signal(SIGTERM, &sigsegv_handler);
 
 	ros::spin();
 }
