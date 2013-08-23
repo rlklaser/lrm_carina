@@ -1,0 +1,18 @@
+<launch>
+
+	<node
+		name="gazebo"
+		pkg="gazebo"
+		type="gazebo"
+		args="$(find lrm_gazebo)/worlds/terrain-trees-uneven.world"
+		respawn="true"
+		output="screen" />
+
+	<node
+		name="gazebo_gui"
+		pkg="gazebo"
+		type="gui"
+		respawn="true"
+		output="screen" />
+		
+</launch>
