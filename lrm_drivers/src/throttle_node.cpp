@@ -80,4 +80,6 @@ int main(int argc, char** argv) {
 	ThrottleNode throttle(n);
 
 	ros::spin();
+
+	return 0;
 }
