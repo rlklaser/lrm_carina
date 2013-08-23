@@ -22,7 +22,7 @@ ArduinoThrottle::ArduinoThrottle():Throttle(){
 	this->arduino->openPort(this->arduinoPath.c_str());
 	this->arduino->configure(this->arduinoBaud, 8, false, 0, 0, 1, 1, 0);
 	pthread_create(&queue_thread, NULL, &incomingMessagesThread, this);
-
+	setAccel(0);
 }
 
 
@@ -34,10 +34,12 @@ ArduinoThrottle::ArduinoThrottle( const int& min, const int& max, const std::str
 	this->arduino->openPort(this->arduinoPath.c_str());
 	this->arduino->configure(this->arduinoBaud, 8, false, 0, 0, 1, 1, 0);
 	pthread_create(&queue_thread, NULL, &incomingMessagesThread, this);
+	setAccel(0);
 }
 
 
 ArduinoThrottle::~ArduinoThrottle(){
+	setAccel(0);
 	delete this->arduino;
 }
 
