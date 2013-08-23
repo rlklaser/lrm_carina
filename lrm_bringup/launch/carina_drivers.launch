@@ -25,9 +25,11 @@
 		respawn="true"
 		output="screen"
 	>
+	<!-- 
 		<remap
 			from="throttle_commands"
 			to="velocity_commands" />
+	 -->
 	</node>
 
 	<node
