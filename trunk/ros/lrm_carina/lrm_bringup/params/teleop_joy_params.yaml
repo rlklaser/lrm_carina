@@ -6,7 +6,7 @@ joy_teleop:
   steering_scale: 38  #max angle in degrees
   velocity_increase_button: 6
   velocity_decrease_button: 7
-  velocity_scale: 20
+  velocity_scale: 64
 
 joystick:
   dev: /dev/input/js0
