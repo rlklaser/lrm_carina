@@ -154,4 +154,6 @@ int main(int argc, char** argv) {
 	signal(SIGTERM, &sigsegv_handler);
 
 	ros::spin();
+
+	return 0;
 }
