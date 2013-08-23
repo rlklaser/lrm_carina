@@ -1,0 +1,15 @@
+<launch>
+
+	<machine
+		name="carina"
+		address="carina"
+		env-loader="/home/carina/ros/env.sh"
+		user="carina"
+		password="lrm"
+		default="true"
+	>
+	</machine>
+
+    <include file="$(find lrm_bringup)/launch/run_real_painel.launch" />
+ 	
+</launch>

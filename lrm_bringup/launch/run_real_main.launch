@@ -4,6 +4,8 @@
 		name="/use_sim_time"
 		value="true" />
 
+	<include file="$(find lrm_bringup)/launch/robot_model.launch" />
+	
 	<include file="$(find lrm_bringup)/launch/gps_imu_driver.launch" />
 	<include file="$(find lrm_bringup)/launch/stereo_bumblebee.launch" />
 
