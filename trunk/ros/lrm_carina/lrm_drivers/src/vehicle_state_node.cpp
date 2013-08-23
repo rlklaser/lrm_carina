@@ -41,8 +41,7 @@ ros::Publisher states_pub;
 
 //int i;
 
-void encodersCallback(const lrm_msgs::Encoders::ConstPtr& encoder)
-{
+void encodersCallback(const lrm_msgs::Encoders::ConstPtr& encoder) {
 	wheel_encoder += encoder->wheel.relative;
 	now = encoder->header.stamp;
 	//encoder->steering.absolute;
@@ -59,8 +58,7 @@ void encodersCallback(const lrm_msgs::Encoders::ConstPtr& encoder)
 	 */
 }
 
-int main(int argc, char** argv)
-{
+int main(int argc, char** argv) {
 	ros::init(argc, argv, "vehicle_state_node");
 	ros::NodeHandle nh;
 	ros::NodeHandle nh_priv("~");
@@ -80,15 +78,19 @@ int main(int argc, char** argv)
 	ros::Subscriber encoders_sub = nh.subscribe<lrm_msgs::Encoders>("encoders", 50, &encodersCallback);
 	states_pub = nh.advertise<lrm_msgs::VehicleState>("vehicle_state", 1);
 
-	while (ros::ok())
-	{
+	while (ros::ok()) {
 		//ros::Time now = ros::Time::now();
 		ros::Duration dt = now - last_time;
 		last_time = now;
 		dist = (tread_lenght / WHEEL_ENCODER_RESOLUTION) * wheel_encoder;
 		wheel_encoder = 0;
-		vel = dist / dt.toSec();
-		state.header.stamp = ros::Time::now();//now;
+		double delta = dt.toSec();
+		if (delta > 0) {
+			vel = dist / delta;
+		} else {
+			vel = 0;
+		}
+		state.header.stamp = ros::Time::now(); //now;
 		state.velocity = vel * 3.6; //km/h
 		//i=0;
 		states_pub.publish(state);
