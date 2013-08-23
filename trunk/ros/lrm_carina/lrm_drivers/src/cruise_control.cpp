@@ -150,13 +150,15 @@ void CruiseControl::inferenceControl(lrm_msgs::VehicleState state) {
 
 void CruiseControl::canCallback(const lrm_msgs::VehicleState::ConstPtr& state) {
 
+	double vel = state->velocity * 3.6;//inference built in km/h
+
 	lrm_msgs::VehicleState tempState;
 	tempState.header = state->header;
-	tempState.velocity = state->velocity;
+	tempState.velocity = vel;
 
 	this->inferenceControl(tempState);
 
-	this->lastVelocity.value = state->velocity;
+	this->lastVelocity.value = vel;
 	this->lastVelocity.header = state->header;
 }
 

@@ -32,26 +32,35 @@
 
 #include <lrm_msgs/Steering.h>
 #include <lrm_msgs/Velocity.h>
+#include <lrm_msgs/Throttle.h>
 
 #include <math.h>
 
 ros::Publisher steer_pub;
 ros::Publisher vel_pub;
+ros::Publisher acc_pub;
+
+double _max_velocity;
+double _max_throttle;
 
 void callbackTwist(const geometry_msgs::Twist::ConstPtr msg) {
 	lrm_msgs::Steering steer_msg;
 	lrm_msgs::Velocity vel_msg;
+	lrm_msgs::Throttle acc_msg;
 
 	ros::Time current_timestamp = ros::Time::now();
 
 	steer_msg.header.stamp = current_timestamp;
 	vel_msg.header.stamp = current_timestamp;
+	acc_msg.header.stamp = current_timestamp;
 
 	steer_msg.angle = msg->angular.z / M_PI * 180;
 	vel_msg.value = msg->linear.x;
+	acc_msg.value = msg->linear.x * (_max_throttle/_max_velocity);
 
 	steer_pub.publish(steer_msg);
 	vel_pub.publish(vel_msg);
+	acc_pub.publish(acc_msg);
 }
 
 int main(int argc, char** argv) {
@@ -59,9 +68,13 @@ int main(int argc, char** argv) {
 	ros::NodeHandle nh;
 	ros::NodeHandle nh_priv("~");
 
+	nh.param("max_velocity", _max_velocity, 5.0);
+	nh.param("max_throttle", _max_throttle, 100.0);
+
 	ros::Subscriber cmdvel_sub = nh.subscribe<geometry_msgs::Twist>("cmd_vel", 1, callbackTwist);
 	steer_pub = nh.advertise<lrm_msgs::Steering>(nh_priv.getNamespace() + "/steering_commands", 1);
 	vel_pub = nh.advertise<lrm_msgs::Velocity>(nh_priv.getNamespace() + "/velocity_commands", 1);
+	acc_pub = nh.advertise<lrm_msgs::Throttle>(nh_priv.getNamespace() + "/throttle_commands", 1);
 
 	ROS_INFO_STREAM("nav message node start spinning...");
 
