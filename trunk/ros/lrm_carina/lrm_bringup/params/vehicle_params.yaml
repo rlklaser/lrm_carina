@@ -1,6 +1,6 @@
 cruise_control:
   top_speed: 5
-  max_accel: 20
+  max_accel: 100
   max_brake: 40
   #rate: 2.0
   switch_lag_brake: 7.0
