@@ -91,7 +91,7 @@ int main(int argc, char** argv) {
 			vel = 0;
 		}
 		state.header.stamp = ros::Time::now(); //now;
-		state.velocity = vel * 3.6; //km/h
+		state.velocity = vel;// * 3.6; //km/h
 		//i=0;
 		states_pub.publish(state);
 

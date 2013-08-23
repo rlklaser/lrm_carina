@@ -11,6 +11,11 @@
 			output="screen"
 			respawn="true"
 		>
+		    <!-- 
+			<param
+				name="max_velocity"
+				value="100" />
+			-->
 			<remap
 				from="~cmd_vel"
 				to="/joystick/cmd_vel" />

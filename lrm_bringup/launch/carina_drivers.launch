@@ -28,9 +28,11 @@
 		respawn="true"
 		output="screen"
 	>
+		<!-- 
 		<remap
 			from="throttle_commands"
 			to="velocity_commands" />
+		 -->
 	</node>
 
 	<node
@@ -49,6 +51,9 @@
 		<remap
 			from="~velocity_commands"
 			to="velocity_commands" />
+		<remap
+			from="~throttle_commands"
+			to="throttle_commands" />
 	</node>
 
 </launch>
