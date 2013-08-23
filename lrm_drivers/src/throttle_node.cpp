@@ -15,7 +15,7 @@
 #include <exception>
 #include <stdexcept>
 
-
+#include <signal.h>
 
 #define ARDUINO_DEFAULT_BAUD 9600
 
@@ -82,6 +82,8 @@ int main(int argc, char** argv) {
 	ros::NodeHandle n;
 
 	node = new ThrottleNode(n);
+
+	signal(SIGTERM, &sigsegv_handler);
 
 	ros::spin();
 
