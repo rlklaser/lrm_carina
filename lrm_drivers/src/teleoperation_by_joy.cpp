@@ -86,7 +86,7 @@ TeleopByJoy::TeleopByJoy(ros::NodeHandle n) :
 	brake_pub = nh.advertise<lrm_msgs::Brake>("brake_commands", 1);
 	velocity_pub = nh.advertise<lrm_msgs::Velocity>("velocity_commands", 1);
 
-	joy_sub = nh.subscribe<sensor_msgs::Joy>("joy", 10, &TeleopByJoy::joyCallback, this);
+	joy_sub = nh.subscribe<sensor_msgs::Joy>("joy", 1, &TeleopByJoy::joyCallback, this);
 }
 
 TeleopByJoy::~TeleopByJoy() {
