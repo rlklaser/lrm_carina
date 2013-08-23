@@ -1,0 +1,12 @@
+joy_teleop:
+  reset_button: 3
+  brake_axis: 1
+  brake_scale: 100
+  steering_axis: 0
+  steering_scale: 38  #max angle in degrees
+  velocity_increase_button: 6
+  velocity_decrease_button: 7
+  velocity_scale: 10
+		
+joystick:
+  dev: /dev/input/js0

@@ -1,17 +1,21 @@
 <launch>
 
-	<include file="$(find lrm_bringup)/launch/joystick_node.launch" />
+	<group ns="joystick">
 
-	<node
-		name="car_message_node"
-		pkg="lrm_drivers"
-		type="car_message_node"
-		output="screen"
-		respawn="true"
-	>
-		<remap
-			from="~cmd_vel"
-			to="/joystick/cmd_vel" />		
-	</node>
+		<include file="$(find lrm_bringup)/launch/joystick_node.launch" />
+
+		<node
+			name="car_message_node"
+			pkg="lrm_drivers"
+			type="car_message_node"
+			output="screen"
+			respawn="true"
+		>
+			<remap
+				from="~cmd_vel"
+				to="/joystick/cmd_vel" />
+		</node>
+
+	</group>
 
 </launch>
