@@ -136,6 +136,12 @@ void CruiseControl::inferenceControl(lrm_msgs::VehicleState state) {
 		accelFlag = false;
 
 	}
+
+	if(state.velocity==0) {
+		throttle.value = 0;
+		accelFlag = false;
+	}
+
 	throttle.header.seq = throttle_msg_counter++;
 	throttle.header.stamp = ros::Time::now();
 	throttle.header.frame_id = "/throttle";
