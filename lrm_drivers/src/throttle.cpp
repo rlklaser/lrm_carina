@@ -10,14 +10,14 @@
 Throttle::Throttle(const int& min, const int& max ) {
 	this->min_value = min;
 	this->max_value = max;
-	this->currentAccel = 0.0;
+	this->currentAccel = -1.0;
 
 }
 
 Throttle::Throttle() {
 	this->min_value = 0;
 	this->max_value = 40;
-	this->currentAccel = 0.0;
+	this->currentAccel = -1.0;
 }
 
 Throttle::~Throttle() {
