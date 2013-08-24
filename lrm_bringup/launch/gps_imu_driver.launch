@@ -8,7 +8,7 @@
 		ns="lse_xsens_mti"
 		pkg="lse_xsens_mti"
 		type="mti_node"
-		name="xsens_driver"
+		name="xsens"
 		output="screen"
 		respawn="true" />
 
