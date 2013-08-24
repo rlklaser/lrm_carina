@@ -64,4 +64,8 @@ rosbuild_add_executable(cruise_control
 	
 rosbuild_add_executable(vehicle_state_node 
 	src/vehicle_state_node.cpp)
+
+rosbuild_add_executable(vel_booster_node 
+	src/vel_booster_node.cpp)
 			
+						
