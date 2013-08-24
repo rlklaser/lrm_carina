@@ -6,11 +6,11 @@ acc_lim_y: 0
 max_vel_y: 0.0
 min_vel_y: 0.0
 
-max_vel_x: 1.0
-min_vel_x: -1.0
+max_vel_x: 5.0
+min_vel_x: -5.0
 
-max_vel_theta: 0.5 #0.66
-min_vel_theta: -0.5 #0.66
+max_vel_theta: 0.66
+min_vel_theta: -0.66
 
 max_rotational_vel: 0.1
  
