@@ -9,7 +9,9 @@
 		command="load"
 		file="$(find lrm_bringup)/params/global_real_params.yaml" />
 
+    <!-- 
 	<include file="$(find lrm_bringup)/launch/stereo_vision.launch" />
+	-->
 	<include file="$(find lrm_bringup)/launch/octomap_mapping.launch" />
 	<include file="$(find lrm_bringup)/launch/planning_navigation.launch" />
 
