@@ -40,6 +40,7 @@ ArduinoThrottle::ArduinoThrottle( const int& min, const int& max, const std::str
 
 ArduinoThrottle::~ArduinoThrottle(){
 	setAccel(0);
+	ROS_INFO_STREAM("arduino clean exit");
 	delete this->arduino;
 }
 

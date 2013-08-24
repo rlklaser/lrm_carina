@@ -73,7 +73,7 @@ public:
 ThrottleNode* node;
 
 void sigsegv_handler(int sig) {
-	ROS_INFO_STREAM("node kill");
+	ROS_INFO_STREAM("throttle node kill" << sig);
 	delete node;
 }
 
@@ -84,6 +84,9 @@ int main(int argc, char** argv) {
 	node = new ThrottleNode(n);
 
 	signal(SIGTERM, &sigsegv_handler);
+	signal(SIGINT, &sigsegv_handler);
+	signal(SIGHUP, &sigsegv_handler);
+	signal(SIGSEGV, &sigsegv_handler);
 
 	ros::spin();
 
