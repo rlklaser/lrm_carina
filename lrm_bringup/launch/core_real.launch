@@ -5,6 +5,8 @@
 		file="$(find lrm_bringup)/params/global_real_params.yaml" />
 		
 	<include file="$(find lrm_bringup)/launch/robot_model_real.launch" />
+	<!-- 
 	<include file="$(find lrm_bringup)/launch/wall_clock.launch" />
-
+    -->
+ 
 </launch>
