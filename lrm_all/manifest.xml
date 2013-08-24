@@ -1,29 +1,32 @@
 <package>
   <description brief="lrm_all">
-
      lrm_all
-
   </description>
+  
   <author>Rafael Luiz Klaser</author>
+  
   <license>BSD</license>
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/lrm_all</url>
+  
   <depend package="roscpp"/>
   <depend package="lrm_bringup"/>
   <depend package="lrm_bumblebee"/>
   <depend package="lrm_controller"/>
   <depend package="lrm_description"/>
   <depend package="lrm_drivers"/>
+  <!-- 
   <depend package="lrm_gazebo"/>
+  <depend package="lrm_opencv"/>
+  <depend package="lrm_simulation"/>
+  -->
   <depend package="lrm_msgs"/>
   <depend package="lrm_navigation"/>
   <depend package="lrm_octomap_server"/>
   <depend package="lrm_odometry"/>
-  <depend package="lrm_opencv"/>
   <depend package="lrm_outdoor"/>
   <depend package="lrm_sbpl"/>
   <depend package="lrm_sensors"/>
-  <depend package="lrm_simulation"/>
   <depend package="lrm_stereo"/>
   <depend package="lrm_wrappers"/>
 
