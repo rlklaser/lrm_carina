@@ -49,14 +49,14 @@
 #include "lrm_odometry/OdometryConfig.h"
 
 
-#define DEFAULT_RATE 				10
+#define DEFAULT_RATE 				10.0
 #define INF	99999999
 #define DEFAULT_ROT_COV	0.00001
 #define DEFAULT_POS_COV	0.00001
 
 struct st_param
 {
-	int rate;
+	double rate;
 
 	double robot_length;
 	double robot_width;

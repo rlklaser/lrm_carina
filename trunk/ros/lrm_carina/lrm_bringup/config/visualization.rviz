@@ -12,7 +12,6 @@ Panels:
     Expanded:
       - /2D Nav Goal1
       - /2D Pose Estimate1
-      - /Publish Point1
     Name: Tool Properties
     Splitter Ratio: 0.5
   - Class: rviz/Selection
@@ -21,7 +20,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: Image
+    SyncSource: ""
   - Class: rviz/Views
     Expanded:
       - /Current View1
@@ -596,30 +595,22 @@ Visualization Manager:
       Topic: /move_base_simple/goal
     - Class: rviz/SetInitialPose
       Topic: initialpose
-    - Class: rviz_plugin_tutorials/PlantFlag
-      Flags: ""
     - Class: rviz/FocusCamera
-    - Class: pr2_interactive_manipulation_frontend/NavigateTo
-      Single click: true
-      Topic: /rviz/navigate_to
-    - Class: rviz/PublishPoint
-      Single click: true
-      Topic: /clicked_point
   Value: true
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 11.7119
+      Distance: 8.07981
       Focal Point:
-        X: -1.39647
-        Y: 1.66571
-        Z: -1.25889
+        X: 0.461628
+        Y: -0.392806
+        Z: 1.21895
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 0.575127
+      Pitch: 0.502692
       Target Frame: /base_footprint
       Value: Orbit (rviz)
-      Yaw: 5.56197
+      Yaw: 5.60705
     Saved: ~
 Window Geometry:
   Camera:
