@@ -1,0 +1,7 @@
+<launch>
+
+	<rosparam
+		command="load"
+		file="$(find lrm_bringup)/params/global_real_params.yaml" />
+
+</launch>

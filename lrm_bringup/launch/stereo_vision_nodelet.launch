@@ -18,10 +18,12 @@
 		name="manager"
 		default="/$(arg camera)_nodelet_manager" />
 
+	<!--
 	<param
 		name="/use_sim_time"
 		value="true" />
-
+	-->
+	
 	<group ns="/stereo">
 
 		<rosparam
