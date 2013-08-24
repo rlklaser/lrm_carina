@@ -19,4 +19,25 @@
 			value="$(find lrm_bringup)/params/cmd_vel_mux.yaml" />
 	</node>
 
+	<node
+		name="nav_message_node"
+		pkg="lrm_drivers"
+		type="nav_message_node"
+		output="screen"
+		respawn="true"
+	>
+		<remap
+			from="cmd_vel"
+			to="/carina_controller/cmd_vel" />
+		<remap
+			from="~steering_commands"
+			to="steering_commands" />
+		<remap
+			from="~velocity_commands"
+			to="velocity_commands" />
+		<remap
+			from="~throttle_commands"
+			to="throttle_commands" />
+	</node>
+	
 </launch>

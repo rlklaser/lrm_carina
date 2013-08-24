@@ -1,8 +1,12 @@
 cruise_control:
-  top_speed: 5
-  max_accel: 100
+  top_speed: 30
+  max_accel: 110
   max_brake: 40
-  rate: 5.0
-  switch_lag_brake: 2.0
-  switch_lag_throttle: 2.0
+  rate: 10.0
+  switch_lag_brake: 1
+  switch_lag_throttle: 1
+  
+vehicle_state_node:
+  rate: 10.0
+  tread_lenght: 1.508
   

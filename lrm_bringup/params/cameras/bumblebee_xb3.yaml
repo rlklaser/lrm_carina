@@ -29,4 +29,4 @@ auto_white_balance: 3
 white_balance_BU: 810
 white_balance_RV: 550
 
-camera_info_url: package://lrm_bringup/params/00b09d0100bec852.yaml
+camera_info_url: package://lrm_bringup/params/cameras/00b09d0100bec852.yaml

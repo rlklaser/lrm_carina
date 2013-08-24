@@ -37,6 +37,7 @@
 		 -->
 	</node>
 
+	<!-- 
 	<node
 		name="nav_message_node"
 		pkg="lrm_drivers"
@@ -57,5 +58,6 @@
 			from="~throttle_commands"
 			to="throttle_commands" />
 	</node>
-
+    -->
+     
 </launch>
