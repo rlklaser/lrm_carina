@@ -265,8 +265,11 @@ void WheelOdometry::imuCallback(const sensor_msgs::Imu::ConstPtr& msg) {
 		}
 
 		if(odo.cached_transform) {
-			tf::Quaternion orientation;
-			tf::quaternionMsgToTF(msg->orientation, orientation);
+			tf::Quaternion orientation(msg->orientation.x, msg->orientation.y, msg->orientation.z, msg->orientation.w);
+			//geometry_msgs::Quaternion qt;
+			//qt = msg->orientation.normalize();
+			//tf::quaternionMsgToTF(qt, orientation);
+			orientation.normalize();
 			tf::Transform transf(
 					orientation,
 					tf::Vector3(0, 0, 0)
