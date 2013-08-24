@@ -1,8 +1,9 @@
 xsens:
 
-  frame_id: imu_link
   port: /dev/ttyUSB0
- 
+
+  frame_id: imu_link
+   
   temperature: true
   calibrated: true
   orientation: true
