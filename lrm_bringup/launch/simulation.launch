@@ -47,7 +47,7 @@
 		name="world_map_broadcaster"
 		args="0 0 0 0 0 0 world map 50"
 		output="screen" />
-
+    <!--  
 	<node
 		pkg="tf"
 		type="static_transform_publisher"
@@ -55,7 +55,7 @@
 		args="0 0 0 0 0 0 map gazebo_odom 50"
 		output="screen"
 		respawn="true" />
-
+    -->
 	<node
 		name="front_left_susp_controller"
 		pkg="pr2_controller_manager"
