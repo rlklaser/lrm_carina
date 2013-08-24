@@ -8,4 +8,4 @@ frame_rate: 48
 format7_color_coding: raw16
 bayer_pattern: bggr 
 
-camera_info_url: package://lrm_bringup/params/00b09d0100be241e.yaml
+camera_info_url: package://lrm_bringup/params/cameras/00b09d0100be241e.yaml

@@ -108,7 +108,7 @@ void CruiseControl::inferenceControl(lrm_msgs::VehicleState state) {
 
 	ControlVelocityBrakeInferenceEngine(erroV, dV * FREQUENCY, &increaseAccel, &increaseBrake);
 
-	if (((erroV < (-1 * switch_lag_throttle)) && (this->brakeD == 0)) || accelFlag) {
+	if (((erroV < -switch_lag_throttle) && (this->brakeD == 0)) || accelFlag) {
 		//accel
 		if ((this->throttle.value + increaseAccel) <= this->max_accel)
 			this->throttle.value = this->throttle.value + increaseAccel;
