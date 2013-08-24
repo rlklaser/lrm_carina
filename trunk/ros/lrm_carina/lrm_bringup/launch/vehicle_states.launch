@@ -29,9 +29,11 @@
 		respawn="true"
 		output="screen"
 	>
+	<!-- 
 		<remap
 			from="throttle_commands"
 			to="throttle_cruisecontrol" />
+	 -->
 	</node>
 
 </launch>

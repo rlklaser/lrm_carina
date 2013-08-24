@@ -37,7 +37,7 @@
 			to="velocity_commands" />
 		<remap
 			from="~throttle_commands"
-			to="throttle_commands" />
+			to="nav_throttle_commands" />
 	</node>
 	
 </launch>

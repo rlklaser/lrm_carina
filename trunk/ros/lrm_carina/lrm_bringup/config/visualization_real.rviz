@@ -4,9 +4,10 @@ Panels:
     Name: Displays
     Property Tree Widget:
       Expanded:
+        - /Global Options1
         - /TF1/Tree1
         - /Camera2/Visibility1
-        - /Image1/Status1
+        - /PointCloud21
       Splitter Ratio: 0.847826
     Tree Height: 386
   - Class: rviz/Tool Properties
@@ -326,7 +327,7 @@ Visualization Manager:
       Color: 255; 255; 255
       Color Transformer: RGB8
       Decay Time: 0
-      Enabled: false
+      Enabled: true
       Max Color: 255; 255; 255
       Max Intensity: 4096
       Min Color: 0; 0; 0
@@ -338,10 +339,10 @@ Visualization Manager:
       Size (Pixels): 3
       Size (m): 0.01
       Style: Points
-      Topic: /cloud/points_cluster
+      Topic: /ground_cloud_in
       Use Fixed Frame: true
       Use rainbow: true
-      Value: false
+      Value: true
     - Angle Tolerance: 0.1
       Class: rviz/Odometry
       Color: 0; 0; 255
@@ -583,7 +584,7 @@ Visualization Manager:
       Value: true
   Enabled: true
   Global Options:
-    Background Color: 0; 0; 0
+    Background Color: 255; 255; 255
     Fixed Frame: /map
   Name: root
   Tools:
@@ -601,17 +602,17 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 5.12097
+      Distance: 12.9469
       Focal Point:
         X: 0.431828
         Y: -0.509695
         Z: 0.24761
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 0.667691
+      Pitch: 0.152691
       Target Frame: /base_footprint
       Value: Orbit (rviz)
-      Yaw: 5.48707
+      Yaw: 6.18707
     Saved: ~
 Window Geometry:
   Camera:
