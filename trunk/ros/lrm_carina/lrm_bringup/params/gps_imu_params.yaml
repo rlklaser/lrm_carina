@@ -1,4 +1,4 @@
-xsens_driver:
+xsens:
 
   port: /dev/ttyUSB0
  
