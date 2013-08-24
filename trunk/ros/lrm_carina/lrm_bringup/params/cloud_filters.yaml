@@ -10,7 +10,7 @@ voxel_grid_nodelet:
   #keep_organized: true
   input_frame: stereo_camera
   output_frame: /base_footprint
-  
+  approximate_sync: true
   
   
 # in base_footprint frame the coordinates are in the right hand
@@ -21,6 +21,7 @@ pass_throught_range_nodelet:
   filter_limit_max: 20.0
   filter_limit_negative: False
   #keep_organized: true
+  approximate_sync: true
   
 pass_throught_nodelet:
   filter_field_name: z
@@ -28,6 +29,7 @@ pass_throught_nodelet:
   filter_limit_max: 2.0
   filter_limit_negative: False
   #keep_organized: true
+  approximate_sync: true
   
 ground_pass_throught_nodelet:
   filter_field_name: z
@@ -35,24 +37,28 @@ ground_pass_throught_nodelet:
   filter_limit_max: 0.1
   filter_limit_negative: False
   #keep_organized: true
+  approximate_sync: true
 
 local_scan_cutahead_points_nodelet:
   filter_field_name: x
   filter_limit_min: 0.0
   filter_limit_max: 10.0
   #keep_organized: true
+  approximate_sync: true
   
 local_scan_points_nodelet:
   filter_field_name: z
   filter_limit_min: 0.2
   filter_limit_max: 1.8
   #keep_organized: true
- 
+  approximate_sync: true
+  
 local_ground_scan_points_nodelet:
   filter_field_name: z
   filter_limit_min: -0.5
   filter_limit_max:  0.2
   #keep_organized: true
+  approximate_sync: true
    
 stat_removal_nodelet:
   mean_k: 30.0
@@ -60,4 +66,4 @@ stat_removal_nodelet:
   #mean_k: 5.0
   #stddev: 0.1
   negative: False
-    
+  approximate_sync: true  
