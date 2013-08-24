@@ -6,15 +6,13 @@
 		value="true" />
 	-->
 	
-<!-- 
 	<include file="$(find lrm_bringup)/launch/camera_nodelet_manager.launch" />
- -->
 
 	<node
 		pkg="nodelet"
 		type="nodelet"
 		name="camera1394_nodelet"
-		args="load camera1394/driver camera_nodelet_manager"
+		args="load camera1394/driver /camera_nodelet_manager"
 	>
 		<rosparam file="$(find lrm_bringup)/params/cameras/bumblebee.yaml" />
 	</node>
