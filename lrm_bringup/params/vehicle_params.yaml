@@ -3,8 +3,8 @@ cruise_control:
   max_accel: 110
   max_brake: 40
   rate: 10.0
-  switch_lag_brake: 0.1
-  switch_lag_throttle: 0.1
+  switch_lag_brake: 0.01
+  switch_lag_throttle: 0.01
   
 vehicle_state_node:
   rate: 10.0
