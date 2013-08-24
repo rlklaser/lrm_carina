@@ -1,27 +1,25 @@
-xsens:
+lse_xsens_mti:
+  xsens:
+    port: /dev/ttyUSB0
+    frame_id: imu_link
+    temperature: true
+    calibrated: true
+    orientation: true
+    auxiliary: false
+    position: true
+    velocity: true
+    status: true
+    rawGPS: false
+    rawInertial: false
+    timeStamp: true
+    orientationMode: 0
+    enableAcceleration: true
+    enableRateOfTurn: true
+    enableMagnetometer: true
+    velocityModeNED: false
+    heading: 0.0
+    scenario: 2
 
-  port: /dev/ttyUSB0
-
-  frame_id: imu_link
-   
-  temperature: true
-  calibrated: true
-  orientation: true
-  auxiliary: false
-  position: true
-  velocity: true
-  status: true
-  rawGPS: false
-  rawInertial: false
-  timeStamp: true
-  orientationMode: 0
-  enableAcceleration: true
-  enableRateOfTurn: true
-  enableMagnetometer: true
-  velocityModeNED: false
-  heading: 0.0
-  scenario: 2
-
-  GPSLeverArm_X: 0.0
-  GPSLeverArm_Y: 0.0
-  GPSLeverArm_Z: 1.0
+    GPSLeverArm_X: 0.0
+    GPSLeverArm_Y: 0.0
+    GPSLeverArm_Z: 1.0
