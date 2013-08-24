@@ -1,9 +1,11 @@
 <launch>
 
+    <!--
 	<param
 		name="/use_sim_time"
 		value="true" />
-
+	-->
+	
 	<node
 		pkg="generic_packages"
 		type="encoder_translate"

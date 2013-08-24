@@ -1,9 +1,11 @@
 <launch>
 
+	<!--
 	<param
 		name="/use_sim_time"
 		value="true" />
-
+	-->
+	
 <!-- 
 	<include file="$(find lrm_bringup)/launch/camera_nodelet_manager.launch" />
  -->

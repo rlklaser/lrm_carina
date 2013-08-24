@@ -1,9 +1,11 @@
 <launch>
 
+	<!--
 	<param
 		name="/use_sim_time"
 		value="true" />
-
+	-->
+	
 	<env
 		name="GAZEBO_MODEL_PATH"
 		value="$GAZEBO_MODEL_PATH:$(find lrm_description)/models:$(find lrm_description)/models/trees:/home/rlklaser/Work/ros/libraries/drcsim/gazebo_models/environments" />
