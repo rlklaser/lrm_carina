@@ -45,7 +45,7 @@ protected:
 	int max_accel;
 	int max_brake;
 	bool accelFlag;
-	int topSpeed;
+	double topSpeed;
 
 public:
 	CruiseControl(ros::NodeHandle n);
@@ -62,12 +62,16 @@ public:
 CruiseControl::CruiseControl(ros::NodeHandle n) :
 		nh(n), nh_priv("~") {
 
-	nh_priv.param("top_speed", topSpeed, DEFAULT_MAX_VELOCITY);
+	nh_priv.param("top_speed", this->topSpeed, DEFAULT_MAX_VELOCITY/3.6);
 	nh_priv.param("max_accel", this->max_accel, MAX_ACCEL_VALUE);
 	nh_priv.param("max_brake", this->max_brake, MAX_BRAKE_VALUE);
 	nh_priv.param("rate", this->frequency, FREQUENCY);
-	nh_priv.param("switch_lag_brake", this->switch_lag_brake, 7.0);
-	nh_priv.param("switch_lag_throttle", this->switch_lag_throttle, 7.0);
+	nh_priv.param("switch_lag_brake", this->switch_lag_brake, 7.0/3.6);
+	nh_priv.param("switch_lag_throttle", this->switch_lag_throttle, 7.0/3.6);
+
+	topSpeed *= 3.6;
+	switch_lag_brake *= 3.6;
+	switch_lag_throttle *= 3.6;
 
 	//setting initial message values
 	throttle_msg_counter = 0;
