@@ -36,15 +36,4 @@
 	</node>
  -->
 
-	<rosparam
-		command="load"
-		file="$(find lrm_bringup)/params/outdoor_params.yaml" />
-
-	<node
-		pkg="lrm_outdoor"
-		type="compass_tf_node"
-		name="compass_frame"
-		respawn="true"
-		output="screen" />
-
 </launch>
