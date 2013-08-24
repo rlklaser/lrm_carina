@@ -5,7 +5,7 @@
 		name="/use_sim_time"
 		value="true" />
 	-->
-	
+
 	<node
 		name="move_base"
 		pkg="move_base"
@@ -44,7 +44,7 @@
 			file="$(find lrm_bringup)/params/planning/sbpl_global_params.yaml"
 			command="load" />
 
- 
+
 		<param
 			name="base_local_planner"
 			value="base_local_planner/TrajectoryPlannerROS" />
@@ -67,7 +67,7 @@
 			file="$(find lrm_bringup)/params/planning/base_local_planner_params.yaml"
 			command="load"
 			ns="DWAPlannerROS" />
--->			
+-->
 		<rosparam
 			file="$(find lrm_bringup)/params/planning/sbpl_global_params.yaml"
 			command="load"
@@ -81,10 +81,24 @@
 			command="load"
 			ns="pose_follower" />
 
+		<!-- 
 		<remap
 			from="cmd_vel"
 			to="/navigation/cmd_vel" />
+		 -->
 
+	</node>
+
+	<node
+		name="vel_booster_node"
+		pkg="lrm_drivers"
+		type="vel_booster_node"
+		respawn="true"
+		output="screen"
+	>
+		<remap
+			from="~cmd_vel"
+			to="/navigation/cmd_vel" />
 	</node>
 
 </launch>
