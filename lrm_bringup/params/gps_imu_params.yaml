@@ -1,5 +1,6 @@
 xsens:
 
+  frame_id: imu_link
   port: /dev/ttyUSB0
  
   temperature: true
