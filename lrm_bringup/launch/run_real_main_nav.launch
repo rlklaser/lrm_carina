@@ -8,18 +8,9 @@
 	<rosparam
 		command="load"
 		file="$(find lrm_bringup)/params/global_real_params.yaml" />
-		
-	<include file="$(find lrm_bringup)/launch/robot_model.launch" />
-	
-	<include file="$(find lrm_bringup)/launch/gps_imu_driver.launch" />
-	<include file="$(find lrm_bringup)/launch/stereo_bumblebee.launch" />
 
-	<include file="$(find lrm_bringup)/launch/odometry.launch" />
-	
-	<!-- 
 	<include file="$(find lrm_bringup)/launch/stereo_vision.launch" />
 	<include file="$(find lrm_bringup)/launch/octomap_mapping.launch" />
 	<include file="$(find lrm_bringup)/launch/planning_navigation.launch" />
-	-->
-	
+
 </launch>

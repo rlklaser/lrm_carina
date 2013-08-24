@@ -1,4 +1,4 @@
-chmod +x ./lrm_bumblebee/cfg/Bumblebee.cfg
+chmod +x ./lrm_bumblebee/cfg/Bumblebee2.cfg
 chmod +x ./lrm_bumblebee/cfg/Camera1394Stereo.cfg
 chmod +x ./lrm_odometry/cfg/Odometry.cfg
 
