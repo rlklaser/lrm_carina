@@ -63,7 +63,7 @@ void imuCallback(const sensor_msgs::Imu::ConstPtr& msg) {
 
 void fixCallback(const sensor_msgs::NavSatFixConstPtr& fix) {
 	if (fix->status.status == sensor_msgs::NavSatStatus::STATUS_NO_FIX) {
-		ROS_INFO("No fix.");
+		ROS_INFO_THROTTLE(0.2, "No fix.");
 		return;
 	}
 
