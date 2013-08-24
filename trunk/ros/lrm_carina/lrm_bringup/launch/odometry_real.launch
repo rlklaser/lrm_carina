@@ -1,0 +1,6 @@
+<launch>
+
+	<include file="$(find lrm_bringup)/launch/odometry_wheel.launch" />
+	<include file="$(find lrm_bringup)/launch/odometry.launch" />
+
+</launch>

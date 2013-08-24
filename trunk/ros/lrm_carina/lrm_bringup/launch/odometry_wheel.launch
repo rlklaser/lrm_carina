@@ -15,7 +15,7 @@
 
 	<rosparam
 		command="load"
-		file="$(find lrm_bringup)/params/odometry_params.yaml" />
+		file="$(find lrm_bringup)/params/odometry_real_params.yaml" />
 
 	<node
 		pkg="lrm_odometry"
@@ -30,14 +30,6 @@
 		<remap
 			from="imu_data"
 			to="/calibrated/imu/data" />
-		<!-- 
-		<remap
-			from="imu_data_x"
-			to="/lse_xsens_mti/xsens/imu/data" />
-		<remap
-			from="odom"
-			to="/wheelodom" />
-		 -->
 	</node>
 
 </launch>

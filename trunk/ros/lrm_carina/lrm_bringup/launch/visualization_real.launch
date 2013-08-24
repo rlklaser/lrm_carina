@@ -16,6 +16,6 @@
 		type="rviz"
 		respawn="true"
 		output="screen"
-		args="-d $(find lrm_bringup)/config/visualization.rviz" />
+		args="-d $(find lrm_bringup)/config/visualization_real.rviz" />
 
 </launch>

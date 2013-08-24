@@ -6,7 +6,6 @@
 		value="true" />
 	-->
 	
-	<include file="$(find lrm_bringup)/launch/odometry_wheel.launch" />
 	<include file="$(find lrm_bringup)/launch/odometry_gps.launch" />
 	<include file="$(find lrm_bringup)/launch/odometry_ekf.launch" />
 	<include file="$(find lrm_bringup)/launch/odometry_refine.launch" />
