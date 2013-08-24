@@ -141,7 +141,7 @@ void CruiseControl::inferenceControl(lrm_msgs::VehicleState state) {
 
 	}
 
-	if(state.velocity==0) {
+	if(this->cruiseVelocity.value==0) {
 		throttle.value = 0;
 		accelFlag = false;
 	}
