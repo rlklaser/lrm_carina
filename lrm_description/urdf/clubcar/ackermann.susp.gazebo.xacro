@@ -142,9 +142,12 @@
 			<maxSteerAngle>${max_steer}</maxSteerAngle>
 			<driveTorque>${drive_torque}</driveTorque>
 			<steerTorque>${steer_torque}</steerTorque>
-			<interface:position name="position_iface_ackermann" />
+			<!-- 
 			<topicName>carina_controller/cmd_vel</topicName>
+		    -->
 			<robotNamespace>${namespace}</robotNamespace>
+			
+			<interface:position name="position_iface_ackermann" />
 		</plugin>
 	</gazebo>
  

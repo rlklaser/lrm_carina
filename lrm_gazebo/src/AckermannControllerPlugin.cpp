@@ -38,6 +38,7 @@ namespace gazebo {
 AckermannControllerPlugin::AckermannControllerPlugin() {
 	std::string name = "ackermann_controller_plugin_node";
 	int argc = 0;
+	_use_cmd_vel = false;
 	ros::init(argc, NULL, name);
 }
 
@@ -154,6 +155,20 @@ void AckermannControllerPlugin::Load(physics::ModelPtr _parent, sdf::ElementPtr 
 		topicName_ = _sdf->GetElement("topicName")->GetValueString();
 	}
 
+	if (!_sdf->HasElement("maxThrottle")) {
+		maxThrottle_ = 110;
+	} else {
+		maxThrottle_ = _sdf->GetElement("maxThrottle")->GetValueDouble();
+	}
+
+	/*
+	if (!_sdf->HasElement("topicName")) {
+		topicName_ = "cmd_vel";
+	} else {
+		topicName_ = _sdf->GetElement("topicName")->GetValueString();
+	}
+	*/
+
 	wheelSpeed_[BACKRIGHT] = 0;
 	wheelSpeed_[BACKLEFT] = 0;
 
@@ -178,6 +193,8 @@ void AckermannControllerPlugin::Load(physics::ModelPtr _parent, sdf::ElementPtr 
 	//sub_ = rosnode_->subscribe(so);
 
 	sub_ = rosnode_->subscribe<geometry_msgs::Twist>(tf_prefix_ + topicName_, 1, &AckermannControllerPlugin::CmdVelCallback, this);
+	sub_steer_ = rosnode_->subscribe<lrm_msgs::Steering>(tf_prefix_ + "/steering_commands", 1, &AckermannControllerPlugin::SteeringCallback, this);
+	sub_throttle_ = rosnode_->subscribe<lrm_msgs::Throttle>(tf_prefix_ + "/throttle_commands", 1, &AckermannControllerPlugin::ThrottleCallback, this);
 
 	// start custom queue for ackermann drive
 	callback_queue_thread_ = boost::thread(boost::bind(&AckermannControllerPlugin::QueueThread, this));
@@ -204,11 +221,16 @@ void AckermannControllerPlugin::UpdateChild() {
 
 	stAngle = joints_[FRONTSTEER]->GetAngle(0).Radian();
 
-	joints_[BACKLEFT]->SetVelocity(0, wheelSpeed_[BACKLEFT] / (wheelDiameter_ / 2.0));
-	joints_[BACKRIGHT]->SetVelocity(0, wheelSpeed_[BACKRIGHT] / (wheelDiameter_ / 2.0));
-	//joints_[FRONTSTEER]->SetVelocity(0, wheelSpeed_[FRONTSTEER] / 2.0);
-	//joints_[FRONTSTEER]->SetAngle(0, wheelSpeed_[FRONTSTEER]);
-	//joints_[FRONTSTEER]->SetVelocity(0, (wheelSpeed_[FRONTSTEER] - stAngle) / stepTime);
+	if(_use_cmd_vel) {
+		joints_[BACKLEFT]->SetVelocity(0, wheelSpeed_[BACKLEFT] / (wheelDiameter_ / 2.0));
+		joints_[BACKRIGHT]->SetVelocity(0, wheelSpeed_[BACKRIGHT] / (wheelDiameter_ / 2.0));
+		//joints_[FRONTSTEER]->SetVelocity(0, wheelSpeed_[FRONTSTEER] / 2.0);
+		//joints_[FRONTSTEER]->SetAngle(0, wheelSpeed_[FRONTSTEER]);
+		//joints_[FRONTSTEER]->SetVelocity(0, (wheelSpeed_[FRONTSTEER] - stAngle) / stepTime);
+	} else {
+		joints_[BACKLEFT]->SetForce(0, wheelSpeed_[BACKLEFT] * driveTorque_/maxThrottle_);
+		joints_[BACKRIGHT]->SetForce(0, wheelSpeed_[BACKRIGHT] * driveTorque_/maxThrottle_);
+	}
 
 	double diff = (wheelSpeed_[FRONTSTEER] - stAngle);
 
@@ -264,6 +286,24 @@ void AckermannControllerPlugin::CmdVelCallback(const geometry_msgs::Twist::Const
 
 	x_ = cmd_msg->linear.x;
 	rot_ = cmd_msg->angular.z;
+
+	_use_cmd_vel = true;
+
+	lock_.unlock();
+}
+
+void AckermannControllerPlugin::SteeringCallback(const lrm_msgs::Steering::ConstPtr& cmd_msg) {
+	lock_.lock();
+
+	rot_ = cmd_msg->angle;
+
+	lock_.unlock();
+}
+
+void AckermannControllerPlugin::ThrottleCallback(const lrm_msgs::Throttle::ConstPtr& cmd_msg) {
+	lock_.lock();
+
+	x_ = cmd_msg->value;
 
 	lock_.unlock();
 }

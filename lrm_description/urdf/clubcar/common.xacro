@@ -37,7 +37,7 @@
 		value="0.1" />
 	<property
 		name="base_mass"
-		value="300" />
+		value="350" />
 	<property
 		name="wheel_mass"
 		value="5" />
@@ -79,7 +79,7 @@
 		value="38" /> <!-- 0,66 rad -->
 	<property
 		name="drive_torque"
-		value="120" />
+		value="2600" /> <!-- 1 hp = 746 W = 746 N·m/s -> clubcar motor ~ 3.5 Hp -->
 	<property
 		name="steer_torque"
 		value="600" />
