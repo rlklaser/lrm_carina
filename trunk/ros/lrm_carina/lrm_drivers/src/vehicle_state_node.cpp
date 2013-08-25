@@ -67,7 +67,7 @@ int main(int argc, char** argv) {
 	double dist;
 	double vel;
 
-	nh_priv.param("rate", rate, 5.0);
+	nh_priv.param("rate", rate, 10.0);
 	nh_priv.param("tread_lenght", tread_lenght, 1.508);
 
 	wheel_encoder = 0;
