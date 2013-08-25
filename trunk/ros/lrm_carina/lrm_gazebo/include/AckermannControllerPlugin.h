@@ -45,6 +45,9 @@
 #include <lrm_msgs/RobotStates.h>
 #include <lrm_msgs/Encoders.h>
 
+#include <lrm_msgs/Steering.h>
+#include <lrm_msgs/Throttle.h>
+
 // Custom Callback Queue
 #include <ros/callback_queue.h>
 #include <ros/advertise_options.h>
@@ -95,6 +98,7 @@ private:
 	double turnAngle_;
 	double diffAngle_;
 	double wheelSpeed_[3];
+	double maxThrottle_;
 
 	physics::JointPtr joints_[NUM_JOINTS];
 	physics::PhysicsEnginePtr physicsEngine_;
@@ -103,6 +107,8 @@ private:
 	ros::NodeHandle* rosnode_;
 	ros::Publisher pub_;
 	ros::Subscriber sub_;
+	ros::Subscriber sub_steer_;
+	ros::Subscriber sub_throttle_;
 
 	std::string tf_prefix_;
 
@@ -124,10 +130,14 @@ private:
 
 	// AckermannDrive stuff
 	void CmdVelCallback(const geometry_msgs::Twist::ConstPtr& cmd_msg);
+	void SteeringCallback(const lrm_msgs::Steering::ConstPtr& cmd_msg);
+	void ThrottleCallback(const lrm_msgs::Throttle::ConstPtr& cmd_msg);
 
 	double x_;
 	double rot_;
 	bool alive_;
+
+	bool _use_cmd_vel;
 
 };
 
