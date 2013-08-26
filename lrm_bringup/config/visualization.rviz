@@ -4,6 +4,7 @@ Panels:
     Name: Displays
     Property Tree Widget:
       Expanded:
+        - /Global Options1
         - /TF1/Tree1
         - /Camera2/Visibility1
       Splitter Ratio: 0.847826
@@ -582,7 +583,7 @@ Visualization Manager:
       Value: true
   Enabled: true
   Global Options:
-    Background Color: 0; 0; 0
+    Background Color: 255; 255; 255
     Fixed Frame: /map
   Name: root
   Tools:
@@ -607,10 +608,10 @@ Visualization Manager:
         Z: 1.21895
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 0.502692
+      Pitch: 0.392692
       Target Frame: /base_footprint
       Value: Orbit (rviz)
-      Yaw: 5.60705
+      Yaw: 5.32205
     Saved: ~
 Window Geometry:
   Camera:
@@ -632,5 +633,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1267
-  X: 160
+  X: 1
   Y: 98
