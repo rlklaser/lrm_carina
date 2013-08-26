@@ -140,6 +140,7 @@
 			<wheelEncoderJoint>joint_front_right_wheel</wheelEncoderJoint>
 			<wheelDiameter>${wheel_diameter}</wheelDiameter>
 			<maxSteerAngle>${max_steer}</maxSteerAngle>
+			<maxThrottle>${max_throttle}</maxThrottle>
 			<driveTorque>${drive_torque}</driveTorque>
 			<steerTorque>${steer_torque}</steerTorque>
 			<!-- 

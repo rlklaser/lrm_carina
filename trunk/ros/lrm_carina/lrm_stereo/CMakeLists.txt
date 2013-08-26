@@ -46,8 +46,11 @@ rosbuild_add_library(lrm_stereo
 	src/throttle_stereo_nodelet.cpp
 	src/point_cloud_colorless.cpp
 	src/point_cloud2.cpp
+	#src/transform_cloud_nodelet.cpp
+	#src/region_growing.cpp
 	)
 rosbuild_add_boost_directories()
+#target_link_libraries(lrm_stereo pcl_ros_filters)
 
 rosbuild_add_executable(fake_cloud src/fake_cloud.cpp)
 rosbuild_add_openmp_flags(fake_cloud)

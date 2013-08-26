@@ -20,12 +20,15 @@
  */
 
 /**
- * @file transform_cloud_nodelet.cpp
+ * @file region_growing.h
  * @brief 
  * @author Rafael Luiz Klaser <rlklaser@gmail.com>
- * @date May 29, 2013
+ * @date Aug 26, 2013
  *
  */
+
+#ifndef REGION_GROWING_H_
+#define REGION_GROWING_H_
 
 #include <ros/ros.h>
 #include <pcl_ros/transforms.h>
@@ -34,11 +37,16 @@
 
 namespace lrm_stereo {
 
-class TransformCloudNodelet: public pcl_ros::Filter {
-	//virtual void onInit();
-
-	virtual void filter(const PointCloud2::ConstPtr &input, const IndicesPtr &indices, PointCloud2 &output) {
-
-	}
+class RegionGrowingFilter: public pcl_ros::Filter {
+protected:
+	void filter(const PointCloud2::ConstPtr &input, const IndicesPtr &indices, PointCloud2 &output);
+public:
+	EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 };
 }
+
+#include <pluginlib/class_list_macros.h>
+typedef lrm_stereo::RegionGrowingFilter RegionGrowingFilter;
+PLUGINLIB_EXPORT_CLASS(RegionGrowingFilter, nodelet::Nodelet);
+
+#endif /* REGION_GROWING_H_ */

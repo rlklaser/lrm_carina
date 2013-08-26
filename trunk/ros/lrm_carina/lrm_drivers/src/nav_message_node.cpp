@@ -36,12 +36,16 @@
 
 #include <math.h>
 
-ros::Publisher steer_pub;
-ros::Publisher vel_pub;
-ros::Publisher acc_pub;
+ros::Publisher _steer_pub;
+ros::Publisher _vel_pub;
+ros::Publisher _acc_pub;
 
 double _max_velocity;
 double _max_throttle;
+
+double _curr_steer = std::numeric_limits<double>::quiet_NaN();
+double _curr_vel = std::numeric_limits<double>::quiet_NaN();
+double _curr_throttle = std::numeric_limits<double>::quiet_NaN();
 
 void callbackTwist(const geometry_msgs::Twist::ConstPtr msg) {
 	lrm_msgs::Steering steer_msg;
@@ -56,11 +60,21 @@ void callbackTwist(const geometry_msgs::Twist::ConstPtr msg) {
 
 	steer_msg.angle = msg->angular.z / M_PI * 180;
 	vel_msg.value = msg->linear.x;
-	acc_msg.value = msg->linear.x * (_max_throttle/_max_velocity);
+	acc_msg.value = msg->linear.x * (_max_throttle / _max_velocity);
 
-	steer_pub.publish(steer_msg);
-	vel_pub.publish(vel_msg);
-	acc_pub.publish(acc_msg);
+	if (_curr_steer != steer_msg.angle) {
+		_steer_pub.publish(steer_msg);
+	}
+	if (_curr_vel != vel_msg.value) {
+		_vel_pub.publish(vel_msg);
+	}
+	if (_curr_throttle != acc_msg.value) {
+		_acc_pub.publish(acc_msg);
+	}
+
+	_curr_steer = steer_msg.angle;
+	_curr_vel = vel_msg.value;
+	_curr_throttle = acc_msg.value;
 }
 
 int main(int argc, char** argv) {
@@ -72,9 +86,9 @@ int main(int argc, char** argv) {
 	nh.param("max_throttle", _max_throttle, 100.0);
 
 	ros::Subscriber cmdvel_sub = nh.subscribe<geometry_msgs::Twist>("cmd_vel", 1, callbackTwist);
-	steer_pub = nh.advertise<lrm_msgs::Steering>(nh_priv.getNamespace() + "/steering_commands", 1);
-	vel_pub = nh.advertise<lrm_msgs::Velocity>(nh_priv.getNamespace() + "/velocity_commands", 1);
-	acc_pub = nh.advertise<lrm_msgs::Throttle>(nh_priv.getNamespace() + "/throttle_commands", 1);
+	_steer_pub = nh.advertise<lrm_msgs::Steering>(nh_priv.getNamespace() + "/steering_commands", 1);
+	_vel_pub = nh.advertise<lrm_msgs::Velocity>(nh_priv.getNamespace() + "/velocity_commands", 1);
+	_acc_pub = nh.advertise<lrm_msgs::Throttle>(nh_priv.getNamespace() + "/throttle_commands", 1);
 
 	ROS_INFO_STREAM("nav message node start spinning...");
 

@@ -37,7 +37,7 @@
 		value="0.1" />
 	<property
 		name="base_mass"
-		value="350" />
+		value="346" />
 	<property
 		name="wheel_mass"
 		value="5" />
@@ -78,8 +78,11 @@
 		name="max_steer"
 		value="38" /> <!-- 0,66 rad -->
 	<property
+		name="max_throttle"
+		value="110" /> <!-- see arduino controller -->
+	<property
 		name="drive_torque"
-		value="2600" /> <!-- 1 hp = 746 W = 746 N·m/s -> clubcar motor ~ 3.5 Hp -->
+		value="700000" /> <!-- 1 hp = 746 W = 746 N·m/s -> clubcar motor ~ 9.5 Hp -->
 	<property
 		name="steer_torque"
 		value="600" />
