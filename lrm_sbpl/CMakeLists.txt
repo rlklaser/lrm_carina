@@ -8,18 +8,15 @@ include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
 #  RelWithDebInfo : w/ debug symbols, w/ optimization
 #  MinSizeRel     : w/o debug symbols, w/ optimization, stripped binaries
 
-set(ROS_BUILD_TYPE Debug)
-set(DEBUG 1)
-set(TIME_DEBUG 1)
+#set(ROS_BUILD_TYPE Debug)
+#set(DEBUG 1)
+#set(TIME_DEBUG 1)
 
-#set(ROS_BUILD_TYPE Release)
-#set(DEBUG 0)
-#set(TIME_DEBUG 0)
+set(ROS_BUILD_TYPE Release)
+set(DEBUG 0)
+set(TIME_DEBUG 0)
 
 rosbuild_init()
-
-
-
 
 #set the default path for built executables to the "bin" directory
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
