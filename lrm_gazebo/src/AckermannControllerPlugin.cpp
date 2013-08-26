@@ -228,8 +228,16 @@ void AckermannControllerPlugin::UpdateChild() {
 		//joints_[FRONTSTEER]->SetAngle(0, wheelSpeed_[FRONTSTEER]);
 		//joints_[FRONTSTEER]->SetVelocity(0, (wheelSpeed_[FRONTSTEER] - stAngle) / stepTime);
 	} else {
-		joints_[BACKLEFT]->SetForce(0, wheelSpeed_[BACKLEFT] * driveTorque_/maxThrottle_);
-		joints_[BACKRIGHT]->SetForce(0, wheelSpeed_[BACKRIGHT] * driveTorque_/maxThrottle_);
+		double l_force = wheelSpeed_[BACKLEFT] * driveTorque_/maxThrottle_;
+		double r_force = wheelSpeed_[BACKRIGHT] * driveTorque_/maxThrottle_;
+
+		//l_force /= stepTime;
+		//r_force /= stepTime;
+
+		//std::cout << l_force << " ";
+
+		joints_[BACKLEFT]->SetForce(0, l_force);
+		joints_[BACKRIGHT]->SetForce(0, r_force);
 	}
 
 	double diff = (wheelSpeed_[FRONTSTEER] - stAngle);
@@ -295,7 +303,7 @@ void AckermannControllerPlugin::CmdVelCallback(const geometry_msgs::Twist::Const
 void AckermannControllerPlugin::SteeringCallback(const lrm_msgs::Steering::ConstPtr& cmd_msg) {
 	lock_.lock();
 
-	rot_ = cmd_msg->angle;
+	rot_ = angles::from_degrees(cmd_msg->angle);
 
 	lock_.unlock();
 }
@@ -304,6 +312,10 @@ void AckermannControllerPlugin::ThrottleCallback(const lrm_msgs::Throttle::Const
 	lock_.lock();
 
 	x_ = cmd_msg->value;
+
+	if(_use_cmd_vel) {
+		ROS_ERROR_STREAM("Using cmd_vel with cruise_control");
+	}
 
 	lock_.unlock();
 }

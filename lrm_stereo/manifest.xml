@@ -25,6 +25,9 @@
 	<depend package="pcl_ros" />
 	<depend package="image_geometry" />
 
+	<depend package="pluginlib" />
+    <depend package="tf" />
+
 	<export>
 		<nodelet plugin="${prefix}/nodelet_plugins.xml" />
 	</export>

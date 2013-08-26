@@ -95,7 +95,7 @@ CruiseControl::~CruiseControl() {
 }
 
 void CruiseControl::cruiseVelocityCallback(const lrm_msgs::Velocity::ConstPtr& velocity) {
-	this->cruiseVelocity.value = velocity->value;
+	this->cruiseVelocity.value = velocity->value * 3.6;
 	this->cruiseVelocity.header = velocity->header;
 }
 

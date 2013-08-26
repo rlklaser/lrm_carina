@@ -21,6 +21,7 @@
   <depend package="tf"/>
   <depend package="gazebo"/>
   <depend package="cv_bridge" />
+  <depend package="angles" />
   
   <depend package="lrm_description"/>
   <depend package="lrm_msgs"/>
