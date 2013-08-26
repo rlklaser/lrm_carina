@@ -575,12 +575,12 @@ Visualization Manager:
       Topic: /move_base/TrajectoryPlannerROS/global_plan
       Value: true
     - Class: rviz/Axes
-      Enabled: true
+      Enabled: false
       Length: 100
       Name: Axes
       Radius: 0.1
       Reference Frame: <Fixed Frame>
-      Value: true
+      Value: false
   Enabled: true
   Global Options:
     Background Color: 255; 255; 255

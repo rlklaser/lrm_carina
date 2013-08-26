@@ -87,6 +87,10 @@
 			to="/navigation/cmd_vel" />
 		 -->
 
+		<remap
+			from="cmd_vel"
+			to="/planning/cmd_vel" />
+
 	</node>
 
 	<node
@@ -96,6 +100,9 @@
 		respawn="true"
 		output="screen"
 	>
+		<remap
+			from="cmd_vel"
+			to="/planning/cmd_vel" />
 		<remap
 			from="~cmd_vel"
 			to="/navigation/cmd_vel" />
