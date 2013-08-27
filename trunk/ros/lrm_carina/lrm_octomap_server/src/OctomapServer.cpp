@@ -90,6 +90,9 @@ OctomapServer::OctomapServer(ros::NodeHandle nh) :
 
 	private_nh.param("unknown_cost", m_unknownCost, m_unknownCost);
 
+	double rate;
+	private_nh.param("rate", rate, 5.0);
+
 	if (m_filterGroundPlane && (m_pointcloudMinZ > 0.0 || m_pointcloudMaxZ < 0.0)) {
 		ROS_WARN_STREAM("You enabled ground filtering but incoming pointclouds will be pre-filtered in [" <<
 				m_pointcloudMinZ <<", "<< m_pointcloudMaxZ << "], excluding the ground level z=0. " <<
@@ -149,7 +152,17 @@ OctomapServer::OctomapServer(ros::NodeHandle nh) :
 
 	f = boost::bind(&OctomapServer::reconfigureCallback, this, _1, _2);
 	m_reconfigureServer.setCallback(f);
+
+	m_updated = false;
+	m_publisher_timer = nh.createTimer(ros::Duration(1.0 / rate), &OctomapServer::timerCallback, this);
 }
+
+void OctomapServer::timerCallback(const ros::TimerEvent& t) {
+	if(m_updated) {
+		_publishAll(ros::Time::now());
+	}
+}
+
 
 OctomapServer::~OctomapServer() {
 	if (m_tfPointCloudSub) {
@@ -496,7 +509,7 @@ void OctomapServer::insertScan(const tf::Point& sensorOriginTf, const PCLPointCl
 
 void OctomapServer::publishAll(const ros::Time& rostime) {
 	m_updated = true;
-	_publishAll(rostime);
+	//_publishAll(rostime);
 }
 
 void OctomapServer::_publishAll(const ros::Time& rostime) {

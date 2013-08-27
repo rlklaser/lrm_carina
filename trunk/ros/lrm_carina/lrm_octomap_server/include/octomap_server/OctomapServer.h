@@ -96,7 +96,6 @@ public:
 
   virtual void insertCloudCallback(const sensor_msgs::PointCloud2::ConstPtr& cloud);
   virtual void insertCloudGroundCallback(const sensor_msgs::PointCloud2::ConstPtr& cloud);
-
   virtual bool openFile(const std::string& filename);
 
 protected:
@@ -116,7 +115,7 @@ protected:
          && key[0] <= m_updateBBXMax[0] && key[1] <= m_updateBBXMax[1]);
   }
 
-
+  void timerCallback(const ros::TimerEvent& t);
   void reconfigureCallback(lrm_octomap_server::OctomapServerConfig& config, uint32_t level);
   void publishBinaryOctoMap(const ros::Time& rostime = ros::Time::now()) const;
   void publishFullOctoMap(const ros::Time& rostime = ros::Time::now()) const;
@@ -258,6 +257,8 @@ protected:
 
 private:
   boost::mutex m_mutex;
+
+  ros::Timer m_publisher_timer;
 
   void _publishAll(const ros::Time& rostime = ros::Time::now());
 
