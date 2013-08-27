@@ -15,6 +15,7 @@
 		name="joy_teleop"
 		type="teleoperation_by_joy"
 		output="screen"
+		respawn="true"
 	>
 	</node>
 
@@ -23,6 +24,7 @@
 		name="joystick"
 		type="joy_node"
 		output="screen"
+		respawn="true"
 	>
 	</node>
 
