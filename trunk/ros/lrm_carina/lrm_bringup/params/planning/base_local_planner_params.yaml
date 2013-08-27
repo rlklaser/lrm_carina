@@ -1,6 +1,8 @@
 dwa: true
 #trajectory rollout if false
 
+#y_vels: [0]
+
 holonomic_robot: false
 acc_lim_y: 0
 max_vel_y: 0.0
@@ -34,12 +36,11 @@ heading_lookahead: 0.0
   
 escape_reset_dist: 0.5
 escape_reset_theta: 0.0
-escape_vel: -0.2
+escape_vel: -0.5
   
 simple_attractor: false
-  
 meter_scoring: true
- 
+prune_plan: true
 
 #carlike planner
 base_wheels: 1.65
