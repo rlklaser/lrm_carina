@@ -25,6 +25,8 @@ private:
 	int velocity_btn_inc, velocity_btn_dec, velocity_gain, reset_btn;
 	double brake_scale, velocity_scale, steering_scale;
 
+	sensor_msgs::Joy last_joy;
+
 	lrm_msgs::Steering steer;
 	lrm_msgs::Throttle throttle;
 	lrm_msgs::Brake brake;
@@ -110,7 +112,7 @@ void TeleopByJoy::joyCallback(const sensor_msgs::Joy::ConstPtr& joy) {
 	 * Velocity commands
 	 * Default: buttons 6 and 7 (at base)
 	 */
-	if (joy->buttons[velocity_btn_inc]) {
+	if (joy->buttons[velocity_btn_inc] && !last_joy.buttons[velocity_btn_inc]) {
 		//ROS_INFO_STREAM("inc btn");
 		//Release brake pedal before throttle
 		if (brake.value != 0) {
@@ -132,7 +134,7 @@ void TeleopByJoy::joyCallback(const sensor_msgs::Joy::ConstPtr& joy) {
 		velocity_pub.publish(velocity);
 	}
 
-	if (joy->buttons[velocity_btn_dec]) {
+	if (joy->buttons[velocity_btn_dec] && !last_joy.buttons[velocity_btn_dec]) {
 		//ROS_INFO_STREAM("dec btn");
 		//Release brake pedal before throttle
 		if (brake.value != 0) {
@@ -213,6 +215,7 @@ void TeleopByJoy::joyCallback(const sensor_msgs::Joy::ConstPtr& joy) {
 		brake_pub.publish(brake);
 	}
 
+	last_joy = *joy;
 }
 
 int main(int argc, char** argv) {
