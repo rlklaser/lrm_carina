@@ -76,7 +76,12 @@ std::string AX2550::composeCmdWithHex( std::string cmd, int value ) {
 	char valueInHex[3];
 	std::size_t pos;
 
-	ROS_ASSERT( (value >= 0) && (value <= 127) );
+	//ROS_ASSERT( (value >= 0) && (value <= 127) );
+	if(!((value >= 0) && (value <= 127))) {
+		ROS_ERROR_STREAM("roboteq: value out of range " << value);
+		if(value<0) value = 0;
+		if(value>127) value = 127;
+	}
 
 	composedCmd.assign( cmd );
 	pos = composedCmd.find("nn");
