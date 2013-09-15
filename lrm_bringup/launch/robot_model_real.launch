@@ -12,7 +12,7 @@
 
 	<node
 		name="robot_state_publisher"
-		pkg="robot_state_publisher"
+		pkg="lrm_controller"
 		type="robot_state_publisher"
 		output="screen"
 		respawn="true"
