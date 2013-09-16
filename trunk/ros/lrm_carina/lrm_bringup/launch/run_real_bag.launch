@@ -4,7 +4,7 @@
 		name="/use_sim_time"
 		value="true" />
 
-
+<!-- 
 	<node
 		pkg="tf"
 		type="tf_remap"
@@ -12,14 +12,7 @@
 		output="screen"
 	>
 	</node>
-		
-	<!-- 
-	<include file="$(find lrm_bringup)/launch/wall_clock.launch" />
-	 -->
-	<rosparam
-		command="load"
-		file="$(find lrm_bringup)/params/global_real_params.yaml" />
-
+ -->
 	<include file="$(find lrm_bringup)/launch/robot_model_real.launch" />
 	<include file="$(find lrm_bringup)/launch/vehicle_states.launch" />
 	<include file="$(find lrm_bringup)/launch/odometry_real.launch" />
