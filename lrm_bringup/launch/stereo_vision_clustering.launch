@@ -5,8 +5,12 @@
 		name="/use_sim_time"
 		value="true" />
 	-->
-	
+
 	<group ns="/cloud">
+
+		<rosparam
+			command="load"
+			file="$(find lrm_bringup)/params/clustering_filters.yaml" />
 
 		<node
 			name="region_growing_seg"
@@ -21,25 +25,6 @@
 			<remap
 				from="~points_out"
 				to="points_cluster" />
-
-			<param
-				name="k_search"
-				value="30" />
-			<param
-				name="min_size"
-				value="100" />
-			<param
-				name="max_size"
-				value="5000" />
-			<param
-				name="neighbours"
-				value="30" />
-			<param
-				name="curvature"
-				value="2.0" />
-			<param
-				name="smoothness"
-				value="35.0" />
 		</node>
 
 		<node
@@ -64,19 +49,17 @@
 			respawn="true"
 			output="screen"
 		>
+			<!-- 
 			<remap
 				from="points_in"
 				to="points_cluster_filter" />
+			 -->
+			<remap
+				from="points_in"
+				to="points_cluster" />
 			<remap
 				from="~points_out"
 				to="points_cluster_sum" />
-
-			<param
-				name="frame_count"
-				value="5" />
-			<param
-				name="incremental"
-				value="false" />
 		</node>
 
 		<node
