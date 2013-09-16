@@ -22,6 +22,8 @@
 			value="50" />
 	</node>
 
+<!-- 
+	published by odometry node
 	<node
 		name="joint_state_publisher"
 		pkg="joint_state_publisher"
@@ -31,7 +33,8 @@
 	>
 		<param
 			name="use_gui"
-			value="false" />
+			value="true" />
 	</node>
-
+ -->
+ 
 </launch>
