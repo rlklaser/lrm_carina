@@ -66,7 +66,7 @@
 			name="cluster_filter_relay"
 			pkg="topic_tools"
 			type="relay"
-			args="points_cluster_sum /cloud_in"
+			args="points_cluster /cloud_in"
 			respawn="true"
 			output="screen" />
 
@@ -74,7 +74,7 @@
 			name="cluster_ground_filter_relay"
 			pkg="topic_tools"
 			type="relay"
-			args="ground_points_through /ground_cloud_in"
+			args="ground_points_through_voxel /ground_cloud_in"
 			respawn="true"
 			output="screen" />
 
