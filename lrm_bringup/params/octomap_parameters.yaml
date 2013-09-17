@@ -1,6 +1,6 @@
 octomap_server:
     latch: false
-    rate: 5.0
+    rate: 4.0
     frame_id: /map
     base_frame_id: /base_footprint
     source_frame_id: /stereo_camera
@@ -13,8 +13,8 @@ octomap_server:
     pointcloud_min_z: 0.0
     pointcloud_max_z: 0.0
     
-    occupancy_min_z: 0.0
-    occupancy_max_z: 1.9
+    occupancy_min_z: -5.0
+    occupancy_max_z: 5.0
     
     filter_ground: false
     #ground_filter/distance: 0.1
@@ -26,8 +26,8 @@ octomap_server:
     #sensor_model/max_range: 15
     sensor_model/max_range: 80
     
-    #sensor_model/hit: 0.51
-    #sensor_model/miss: 0.05
+    sensor_model/hit: 0.8
+    sensor_model/miss: 0.2
     #sensor_model/max: 0.75
     #sensor_model/min: 0.25
     

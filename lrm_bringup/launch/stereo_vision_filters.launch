@@ -75,6 +75,22 @@
 				from="~output"
 				to="ground_points_through" />
 		</node>
+		
+		<node
+			pkg="nodelet"
+			type="nodelet"
+			name="ground_voxel_grid_nodelet"
+			args="load pcl/VoxelGrid /camera_nodelet_manager --no-bond"
+			output="screen"
+			respawn="true"
+		>
+			<remap
+				from="~input"
+				to="ground_points_through" />
+			<remap
+				from="~output"
+				to="ground_points_through_voxel" />
+		</node>
 
 		<node
 			pkg="nodelet"

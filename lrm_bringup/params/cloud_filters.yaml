@@ -39,6 +39,14 @@ ground_pass_throught_nodelet:
   #keep_organized: true
   approximate_sync: true
 
+ground_voxel_grid_nodelet:
+  filter_field_name: z
+  filter_limit_min: -1.0
+  filter_limit_max: 1.0
+  filter_limit_negative: False
+  leaf_size: 0.25
+  approximate_sync: true
+  
 local_scan_cutahead_points_nodelet:
   filter_field_name: x
   filter_limit_min: 0.0
