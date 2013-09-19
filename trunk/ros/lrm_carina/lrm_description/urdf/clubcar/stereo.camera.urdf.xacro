@@ -58,13 +58,13 @@ FL 43:
 	320x240: 406.183412
 	640x480: 812.366824
  -->
- 
+
 	<xacro:camera_v0
 		name="stereo_camera/left"
 		image_format="R8G8B8"
 		image_topic_name="image_raw"
 		camera_info_topic_name="camera_info"
-		parent="base_front_sensors"
+		parent="base_stereo_camera"
 		hfov="43"
 		focal_length="812.366824"
 		frame_id="stereo_camera"
@@ -83,7 +83,7 @@ FL 43:
 		image_format="R8G8B8"
 		image_topic_name="image_raw"
 		camera_info_topic_name="camera_info"
-		parent="base_front_sensors"
+		parent="base_stereo_camera"
 		hfov="43"
 		focal_length="812.366824"
 		frame_id="stereo_camera"
@@ -121,13 +121,28 @@ FL 43:
 		type="fixed"
 	>
 		<origin
-			xyz="-0.1 0 0.1"
+			xyz="0.0 0.0 0.12"
 			rpy="0 0 0 " />
 		<parent link="base_front_sensors" />
+		<child link="base_stereo_camera" />
+	</joint>
+
+	<joint
+		name="base_camera_center_joint"
+		type="fixed"
+	>
+		<origin
+			xyz="-0.1 0.0 0.1"
+			rpy="0 0 0" />
+		<parent link="base_stereo_camera" />
 		<child link="camera_center_link" />
 	</joint>
 
 	<link name="stereo_camera">
+		<xacro:inertial_minimal />
+	</link>
+
+	<link name="base_stereo_camera">
 		<xacro:inertial_minimal />
 	</link>
 
