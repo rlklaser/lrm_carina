@@ -158,6 +158,9 @@ OctomapServer::OctomapServer(ros::NodeHandle nh) :
 }
 
 void OctomapServer::timerCallback(const ros::TimerEvent& t) {
+
+	boost::lock_guard<boost::mutex> guard(m_mutex);
+
 	if(m_updated) {
 		_publishAll(ros::Time::now());
 	}
@@ -291,6 +294,7 @@ void OctomapServer::insertCloudGroundCallback(const sensor_msgs::PointCloud2::Co
     insertScan(sensorTf.getOrigin(), pc_ground, pc_nonground);
 
     double total_elapsed = (ros::WallTime::now() - startTime).toSec();
+
     ROS_DEBUG("Pointcloud insertion in OctomapServer done (%zu+%zu pts (ground/nonground), %f sec)", pc_ground.size(), pc_nonground.size(), total_elapsed);
 
     //publishAll(cloud->header.stamp);
@@ -466,16 +470,20 @@ void OctomapServer::insertScan(const tf::Point& sensorOriginTf, const PCLPointCl
 		}
 	}
 
+	int in = 0, jn = 0;
+
 	// mark free cells only if not seen occupied in this cloud
 	for (KeySet::iterator it = free_cells.begin(), end = free_cells.end(); it != end; ++it) {
 		if (occupied_cells.find(*it) == occupied_cells.end()) {
 			m_octree->updateNode(*it, false);
+			in++;
 		}
 	}
 
 	// now mark all occupied cells:
-	for (KeySet::iterator it = occupied_cells.begin(), end = free_cells.end(); it != end; it++) {
+	for (KeySet::iterator it = occupied_cells.begin(), end = occupied_cells.end(); it != end; it++) {
 		m_octree->updateNode(*it, true);
+		jn++;
 	}
 
 	// TODO: eval lazy+updateInner vs. proper insertion
@@ -483,6 +491,9 @@ void OctomapServer::insertScan(const tf::Point& sensorOriginTf, const PCLPointCl
 	//m_octree->updateInnerOccupancy();
 	octomap::point3d minPt, maxPt;
 	ROS_DEBUG_STREAM("Bounding box keys (before): " << m_updateBBXMin[0] << " " <<m_updateBBXMin[1] << " " << m_updateBBXMin[2] << " / " <<m_updateBBXMax[0] << " "<<m_updateBBXMax[1] << " "<< m_updateBBXMax[2]);
+
+
+	ROS_INFO_STREAM("occ updt:" << jn << " free uptd:" << in);
 
 	// TODO: snap max / min keys to larger voxels by m_maxTreeDepth
 //   if (m_maxTreeDepth < 16)
@@ -508,13 +519,16 @@ void OctomapServer::insertScan(const tf::Point& sensorOriginTf, const PCLPointCl
 }
 
 void OctomapServer::publishAll(const ros::Time& rostime) {
+
+	boost::lock_guard<boost::mutex> guard(m_mutex);
+
 	m_updated = true;
 	//_publishAll(rostime);
 }
 
 void OctomapServer::_publishAll(const ros::Time& rostime) {
 
-	boost::lock_guard<boost::mutex> guard(m_mutex);
+	//boost::lock_guard<boost::mutex> guard(m_mutex);
 
 	ros::WallTime startTime = ros::WallTime::now();
 	size_t octomapSize = m_octree->size();
