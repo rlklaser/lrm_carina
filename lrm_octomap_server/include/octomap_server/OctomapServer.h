@@ -74,7 +74,7 @@
 #include <octomap_ros/conversions.h>
 #include <octomap/octomap.h>
 #include <octomap/OcTreeKey.h>
-
+#include <octomap/ColorOcTree.h>
 
 namespace octomap_server {
 class OctomapServer{
@@ -84,6 +84,7 @@ public:
   typedef octomap_msgs::GetOctomap OctomapSrv;
   typedef octomap_msgs::BoundingBoxQuery BBXSrv;
 
+  //typedef octomap::ColorOcTree OcTreeT;
   typedef octomap::OcTree OcTreeT;
 
   OctomapServer(ros::NodeHandle nh = ros::NodeHandle("~"));
@@ -204,7 +205,7 @@ protected:
   tf::TransformListener m_tfListener;
   dynamic_reconfigure::Server<lrm_octomap_server::OctomapServerConfig> m_reconfigureServer;
 
-  octomap::OcTree* m_octree;
+  OcTreeT* m_octree;
   octomap::KeyRay m_keyRay;  // temp storage for ray casting
   octomap::OcTreeKey m_updateBBXMin;
   octomap::OcTreeKey m_updateBBXMax;

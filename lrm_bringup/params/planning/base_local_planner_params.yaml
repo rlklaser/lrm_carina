@@ -1,4 +1,5 @@
-dwa: true
+dwa: false
+#dwa: true
 #trajectory rollout if false
 
 #y_vels: [0]
@@ -16,8 +17,8 @@ min_vel_theta: -0.66
 
 max_rotational_vel: 0.1
  
-sim_time: 4.0
-sim_granularity: 0.1
+#>sim_time: 4.0
+#>sim_granularity: 0.1
 path_distance_bias: 0.5
 goal_distance_bias: 0.5
 occdist_scale: 0.0
@@ -34,9 +35,9 @@ heading_scoring: true
 heading_scoring_timestep: 0.02
 heading_lookahead: 0.0
   
-escape_reset_dist: 0.5
-escape_reset_theta: 0.0
-escape_vel: -0.5
+#>escape_reset_dist: 0.5
+#>escape_reset_theta: 0.0
+#>escape_vel: -0.5
   
 simple_attractor: false
 meter_scoring: true

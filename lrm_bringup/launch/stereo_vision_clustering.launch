@@ -66,7 +66,7 @@
 			name="cluster_filter_relay"
 			pkg="topic_tools"
 			type="relay"
-			args="points_cluster /cloud_in"
+			args="points_cluster_filter /cloud_in"
 			respawn="true"
 			output="screen" />
 

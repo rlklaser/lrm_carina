@@ -5,9 +5,31 @@
 		name="/use_sim_time"
 		value="true" />
 	-->
-	
+
 	<include file="$(find lrm_bringup)/launch/stereo_vision_nodelet.launch" />
 	<include file="$(find lrm_bringup)/launch/stereo_vision_filters.launch" />
 	<include file="$(find lrm_bringup)/launch/stereo_vision_clustering.launch" />
+
+	<node
+		pkg="lrm_stereo"
+		type="fake_cloud"
+		name="fake_cloud"
+		output="screen"
+		respawn="true"
+	>
+		<param
+			name="density"
+			value="100" />
+		<param
+			name="ray"
+			value="100" />
+		<param
+			name="isRandom"
+			value="false" />
+
+		<remap
+			from="cloud"
+			to="/local_cloud_in" />
+	</node>
 
 </launch>
