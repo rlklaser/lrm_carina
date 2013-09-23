@@ -497,7 +497,7 @@ void OctomapServer::insertScan(const tf::Point& sensorOriginTf, const PCLPointCl
 	ROS_DEBUG_STREAM("Bounding box keys (before): " << m_updateBBXMin[0] << " " <<m_updateBBXMin[1] << " " << m_updateBBXMin[2] << " / " <<m_updateBBXMax[0] << " "<<m_updateBBXMax[1] << " "<< m_updateBBXMax[2]);
 
 
-	ROS_INFO_STREAM("occ updt:" << jn << " free uptd:" << in);
+//	ROS_INFO_STREAM("occ updt:" << jn << " free uptd:" << in);
 
 	// TODO: snap max / min keys to larger voxels by m_maxTreeDepth
 //   if (m_maxTreeDepth < 16)
