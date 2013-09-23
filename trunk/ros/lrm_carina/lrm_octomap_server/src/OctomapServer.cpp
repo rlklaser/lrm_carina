@@ -100,7 +100,7 @@ OctomapServer::OctomapServer(ros::NodeHandle nh) :
 	}
 
 	// initialize octomap object & params
-	m_octree = new OcTree(m_res);
+	m_octree = new OcTreeT(m_res);
 	m_octree->setProbHit(m_probHit);
 	m_octree->setProbMiss(m_probMiss);
 	m_octree->setClampingThresMin(m_thresMin);
@@ -213,7 +213,7 @@ bool OctomapServer::openFile(const std::string& filename) {
 			delete m_octree;
 			m_octree = NULL;
 		}
-		m_octree = dynamic_cast<OcTree*>(tree);
+		m_octree = dynamic_cast<OcTreeT*>(tree);
 		if (!m_octree) {
 			ROS_ERROR("Could not read OcTree in file, currently there are no other types supported in .ot");
 			return false;
@@ -329,6 +329,7 @@ void OctomapServer::insertCloudCallback(const sensor_msgs::PointCloud2::ConstPtr
 	PCLPointCloud pc_ground; // segmented ground plane
 	PCLPointCloud pc_nonground; // everything else
 
+	/*
 	if (m_filterGroundPlane) {
 		tf::StampedTransform sensorToBaseTf, baseToWorldTf;
 		try {
@@ -354,7 +355,9 @@ void OctomapServer::insertCloudCallback(const sensor_msgs::PointCloud2::ConstPtr
 		pcl::transformPointCloud(pc_ground, pc_ground, baseToWorld);
 		pcl::transformPointCloud(pc_nonground, pc_nonground, baseToWorld);
 	}
-	else {
+	else
+	*/
+	{
 
 		if(m_worldFrameId != cloud->header.frame_id) {
 			tf::StampedTransform sensorToWorldTf;
@@ -448,6 +451,7 @@ void OctomapServer::insertScan(const tf::Point& sensorOriginTf, const PCLPointCl
 			// occupied endpoint
 			OcTreeKey key;
 			if (m_octree->coordToKeyChecked(point, key)) {
+				//m_octree->integrateNodeColor(key, it->r)
 				occupied_cells.insert(key);
 
 				updateMinKey(key, m_updateBBXMin);
@@ -579,7 +583,7 @@ void OctomapServer::_publishAll(const ros::Time& rostime) {
 	handlePreNodeTraversal(rostime);
 
 	// now, traverse all leafs in the tree:
-	for (OcTree::iterator it = m_octree->begin(m_maxTreeDepth), end = m_octree->end(); it != end; ++it) {
+	for (OcTreeT::iterator it = m_octree->begin(m_maxTreeDepth), end = m_octree->end(); it != end; ++it) {
 		bool inUpdateBBX = isInUpdateBBX(it.getKey());
 
 		// call general hook:
@@ -738,7 +742,7 @@ bool OctomapServer::clearBBXSrv(BBXSrv::Request& req, BBXSrv::Response& resp) {
 
 	boost::lock_guard<boost::mutex> guard(m_mutex);
 
-	for (OcTree::leaf_bbx_iterator it = m_octree->begin_leafs_bbx(min, max), end = m_octree->end_leafs_bbx(); it != end; ++it) {
+	for (OcTreeT::leaf_bbx_iterator it = m_octree->begin_leafs_bbx(min, max), end = m_octree->end_leafs_bbx(); it != end; ++it) {
 
 		it->setLogOdds(octomap::logodds(m_thresMin));
 		//			m_octree->updateNode(it.getKey(), -6.0f);

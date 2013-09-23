@@ -9,9 +9,9 @@ include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
 #  RelWithDebInfo : w/ debug symbols, w/ optimization
 #  MinSizeRel     : w/o debug symbols, w/ optimization, stripped binaries
 
-#set(ROS_BUILD_TYPE Debug)
+set(ROS_BUILD_TYPE Debug)
 #set(ROS_BUILD_TYPE RelWithDebInfo)
-set(ROS_BUILD_TYPE Release)
+#set(ROS_BUILD_TYPE Release)
 
 rosbuild_init()
 
@@ -59,7 +59,7 @@ target_link_libraries(
 rosbuild_add_executable(octomap_server_node src/octomap_server_node.cpp)
 target_link_libraries(octomap_server_node ${PROJECT_NAME} ${OCTOMAP_LIBRARIES})
 
-rosbuild_add_compile_flags(octomap_server_node -msse4.2 -mpreferred-stack-boundary=4 -march=native)
+#rosbuild_add_compile_flags(octomap_server_node -msse4.2 -mpreferred-stack-boundary=4 -march=native)
 
 #rosbuild_add_executable(octomap_server_multilayer src/octomap_server_multilayer.cpp)
 #target_link_libraries(octomap_server_multilayer ${PROJECT_NAME} ${OCTOMAP_LIBRARIES})
