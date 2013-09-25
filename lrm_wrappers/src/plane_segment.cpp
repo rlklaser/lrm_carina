@@ -91,7 +91,7 @@ void pointcloudCallback(const sensor_msgs::PointCloud2::ConstPtr& msg)
 	seg.setInputCloud(cloud_filtered);
 	seg.segment(*inliers, *coefficients);
 
-	if(fabs(coefficients->values[2])>0.05) return;
+	//if(fabs(coefficients->values[2])>0.05) return;
 
 	// Publish the model coefficients
 	cf_pub.publish(*coefficients);
@@ -135,11 +135,11 @@ int main(int argc, char **argv)
 	ros::NodeHandle n;
 	ros::NodeHandle nh_priv("~");
 
-	ros::Subscriber pc_sub = n.subscribe("points", 5, pointcloudCallback);
+	ros::Subscriber pc_sub = n.subscribe("points", 1, pointcloudCallback);
 
-	pc_pub_gd = n.advertise<sensor_msgs::PointCloud2>(nh_priv.getNamespace() + "/ground_points", 5);
-	pc_pub_ngd = n.advertise<sensor_msgs::PointCloud2>(nh_priv.getNamespace() + "/no_ground_points", 5);
-	pc_pub_filter = n.advertise<sensor_msgs::PointCloud2>(nh_priv.getNamespace() + "/filtered_points", 5);
+	pc_pub_gd = n.advertise<sensor_msgs::PointCloud2>(nh_priv.getNamespace() + "/ground_points", 1);
+	pc_pub_ngd = n.advertise<sensor_msgs::PointCloud2>(nh_priv.getNamespace() + "/no_ground_points", 1);
+	pc_pub_filter = n.advertise<sensor_msgs::PointCloud2>(nh_priv.getNamespace() + "/filtered_points", 1);
 	cf_pub = n.advertise<pcl::ModelCoefficients>(nh_priv.getNamespace() + "/ground", 1);
 
 	ros::spin();
