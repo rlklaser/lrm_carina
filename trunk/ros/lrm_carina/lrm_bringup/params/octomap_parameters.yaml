@@ -26,10 +26,16 @@ octomap_server:
     #sensor_model/max_range: 15
     sensor_model/max_range: 80
     
-    sensor_model/hit: 0.8
+    sensor_model/hit: 0.7
     sensor_model/miss: 0.2
+    
     #sensor_model/max: 0.75
     #sensor_model/min: 0.25
+    
+    #no clamping
+    sensor_model/max: 1.0
+    sensor_model/min: 0.0
+    
     
     #incremental_2D_projection: true
     

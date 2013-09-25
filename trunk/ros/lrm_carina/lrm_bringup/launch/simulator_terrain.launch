@@ -29,15 +29,7 @@
 		args="$(find lrm_gazebo)/worlds/empty_terrain.world"
 		respawn="true"
 		output="screen" />
-		
-	<node
-		name="gazebo"
-		pkg="gazebo"
-		type="gazebo"
-		args="$(find lrm_gazebo)/worlds/terrain-trees-uneven.world"
-		respawn="true"
-		output="screen" />		
--->
+
 
 	<node
 		name="gazebo"
@@ -45,5 +37,16 @@
 		type="gazebo"
 		args="$(find lrm_gazebo)/worlds/terrain-trees-sparse.world"
 		respawn="true"
+		output="screen" />		
+-->
+
+		
+	<node
+		name="gazebo"
+		pkg="gazebo"
+		type="gazebo"
+		args="$(find lrm_gazebo)/worlds/terrain-trees-uneven.world"
+		respawn="true"
 		output="screen" />
+		
 </launch>
