@@ -1,44 +1,49 @@
-dwa: false
-#dwa: true
+#dwa: false
+dwa: true
 #trajectory rollout if false
 
 #y_vels: [0]
 
 holonomic_robot: false
-acc_lim_y: 0
-max_vel_y: 0.0
-min_vel_y: 0.0
+acc_lim_y: 5
+max_vel_y: 5.0
+min_vel_y: -5.0
 
+acc_lim_x: 5
 max_vel_x: 5.0
 min_vel_x: -5.0
 
 max_vel_theta: 0.66
 min_vel_theta: -0.66
 
-max_rotational_vel: 0.1
- 
-#>sim_time: 4.0
-#>sim_granularity: 0.1
+max_rotational_vel: 2.0
+
+sim_time: 1.0
+sim_granularity: 0.1
+angular_sim_granularity: 0.1
+
 path_distance_bias: 0.5
 goal_distance_bias: 0.5
-occdist_scale: 0.0
-stop_time_buffer: 0.2
-oscillation_reset_dist: 0.4
 
-vx_samples: 10
-vtheta_samples: 18
+stop_time_buffer: 0.2
+occdist_scale: 0.5
+oscillation_reset_dist: 0.1
+oscillation_reset_angle: 0.05
+
+vx_samples: 5 #10
+vtheta_samples: 9 #36
 
 xy_goal_tolerance: 1.0
 yaw_goal_tolerance: 1.57
-  
+
 heading_scoring: true
 heading_scoring_timestep: 0.02
 heading_lookahead: 0.0
-  
-#>escape_reset_dist: 0.5
-#>escape_reset_theta: 0.0
-#>escape_vel: -0.5
-  
+
+escape_reset_dist: 0.5
+escape_reset_theta: 0.0
+escape_vel: -0.5
+
 simple_attractor: false
 meter_scoring: true
 prune_plan: true
@@ -46,4 +51,3 @@ prune_plan: true
 #carlike planner
 base_wheels: 1.65
 steer: 0.66
-  

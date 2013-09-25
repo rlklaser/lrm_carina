@@ -44,7 +44,6 @@
 			file="$(find lrm_bringup)/params/planning/sbpl_global_params.yaml"
 			command="load" />
 
-
 		<param
 			name="base_local_planner"
 			value="base_local_planner/TrajectoryPlannerROS" />
@@ -52,6 +51,7 @@
 			file="$(find lrm_bringup)/params/planning/base_local_planner_params.yaml"
 			command="load"
 			ns="TrajectoryPlannerROS" />
+
 <!--
 		<param
 			name="base_local_planner"
@@ -60,6 +60,7 @@
 			file="$(find lrm_bringup)/params/planning/base_local_planner_params.yaml"
 			command="load"
 			ns="CarLikeTrajectoryPlannerROS" />	
+		
 		<param
 			name="base_local_planner"
 			value="dwa_local_planner/DWAPlannerROS" />
@@ -67,7 +68,8 @@
 			file="$(find lrm_bringup)/params/planning/base_local_planner_params.yaml"
 			command="load"
 			ns="DWAPlannerROS" />
--->
+-->	
+
 		<rosparam
 			file="$(find lrm_bringup)/params/planning/sbpl_global_params.yaml"
 			command="load"
