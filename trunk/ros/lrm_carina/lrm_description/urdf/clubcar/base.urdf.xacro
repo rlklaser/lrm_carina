@@ -43,6 +43,10 @@
 		<xacro:inertial_minimal />
 	</link>
 
+	<link name="heading_link">
+		<xacro:inertial_minimal />
+	</link>
+	
 	<link name="center_mass_link">
 		<xacro:inertial_sphere
 			mass="${base_mass}"
@@ -127,6 +131,17 @@
 		<child link="base_link" />
 	</joint>
 
+	<joint
+		name="joint_base_heading"
+		type="fixed"
+	>
+		<origin
+			rpy="0 0 0"
+			xyz="0 0 ${-wheel_diameter/2}" />
+		<parent link="front_axle_link" />
+		<child link="heading_link" />
+	</joint>
+	
 	<joint
 		name="joint_base_link_to_rear_axle"
 		type="fixed"
