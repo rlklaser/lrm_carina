@@ -60,6 +60,7 @@
 	<include filename="$(find lrm_description)/urdf/sensors/xsens.mti.urdf.xacro" />
 	<include filename="$(find lrm_description)/urdf/clubcar/stereo.camera.urdf.xacro" />
 	<include filename="$(find lrm_description)/urdf/sensors/gps.urdf.xacro" />
+	<include filename="$(find lrm_description)/urdf/sensors/compass.urdf.xacro" />
 
 	<xacro:xsens
 		name="imu"
@@ -70,5 +71,6 @@
 	</xacro:xsens>
 
 	<xacro:gps frame_id="imu_link" />
+	<xacro:compass frame_id="imu_link" />
 
 </robot>

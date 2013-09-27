@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!--
+*  Copyright (C) 2012, Laboratorio de Robotica Movel - ICMC/USP
+ *  Rafael Luiz Klaser <rlklaser@gmail.com>
+ *  http://lrm.icmc.usp.br
+ *
+ *  Apoio FAPESP: 2012/04555-4
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * @file gps.gazebo.xacro
+ * @brief 
+ * @author Rafael Luiz Klaser <rlklaser@gmail.com>
+ * @date Dez 12, 2012
+ *
+ */
+-->
+
+<robot
+	xmlns:xi="http://www.w3.org/2001/XInclude"
+	xmlns:xacro="http://ros.org/wiki/xacro"
+	xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+	xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+	xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+>
+	<xacro:macro
+		name="compass_gazebo"
+		params="frame_id"
+	>
+		<gazebo>
+			<plugin
+				name="carina_compass_sim"
+				filename="liblrm_gazebo_ros_magnetic.so"
+			>
+				<alwaysOn>true</alwaysOn>
+				<updateRate>20</updateRate>
+				<bodyName>${frame_id}</bodyName>
+				<topicName>lse_xsens_mti/xsens/mag</topicName>
+				<robotNamespace>${namespace}</robotNamespace>
+				<declination>-23</declination>
+			</plugin>
+		</gazebo>
+	</xacro:macro>
+
+</robot>
