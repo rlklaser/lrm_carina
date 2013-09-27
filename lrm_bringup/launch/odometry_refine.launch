@@ -22,6 +22,53 @@
 			to="calibrated/imu/data" />
 	</node>
 
+	<node
+		pkg="lrm_outdoor"
+		type="compute.py"
+		name="declination_compute"
+		output="screen"
+		respawn="true"
+		cwd="node"
+	>
+		<remap
+			from="fix"
+			to="lse_xsens_mti/xsens/fix" />
+	</node>
+
+	<node
+		pkg="lrm_outdoor"
+		type="imu_compass"
+		name="imu_compass"
+		output="screen"
+		respawn="true"
+	>
+		<remap
+			from="imu"
+			to="lse_xsens_mti/xsens/imu/data" />
+		<remap
+			from="mag"
+			to="lse_xsens_mti/xsens/mag" />
+	</node>
+
+	<node
+		pkg="enu"
+		type="from_fix"
+		name="odom_from_fix"
+		output="screen"
+		respawn="true"
+	>
+		<remap
+			from="fix"
+			to="lse_xsens_mti/xsens/fix" />
+	</node>
+	
+    <node
+		pkg="tf"
+		type="static_transform_publisher"
+		name="from_fix_odom_broadcaster"
+		args="0 0 0 0 0 0 map odom_from_fix 50"
+		output="screen" />
+		
 <!--
 	<node
 		name="reset_pose"
