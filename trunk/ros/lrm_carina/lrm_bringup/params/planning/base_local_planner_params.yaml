@@ -37,8 +37,8 @@ xy_goal_tolerance: 1.0
 yaw_goal_tolerance: 1.57
 
 heading_scoring: true
-heading_scoring_timestep: 0.01
-heading_lookahead: 0.01
+heading_scoring_timestep: 0.1
+heading_lookahead: 0.1
 
 escape_reset_dist: 0.5
 escape_reset_theta: 0.0
@@ -46,7 +46,7 @@ escape_vel: -0.5
 
 simple_attractor: false
 meter_scoring: true
-prune_plan: false
+prune_plan: true
 
 #carlike planner
 base_wheels: 1.65
