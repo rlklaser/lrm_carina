@@ -139,6 +139,8 @@ void GazeboRosMagnetic::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
   // simulation iteration.
   updateConnection = event::Events::ConnectWorldUpdateStart(
       boost::bind(&GazeboRosMagnetic::Update, this));
+
+  ROS_WARN_STREAM("Compass Plugin loaded");
 }
 
 void GazeboRosMagnetic::Reset()
