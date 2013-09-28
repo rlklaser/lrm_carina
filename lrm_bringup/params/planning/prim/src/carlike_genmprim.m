@@ -11,7 +11,7 @@ custo1 = 2.5;
 custo2 = 4;
 custo3 = 7;
 
-stlim = 0.66;  % estercamento maximo 38 graus
+stlim = 0.559;  % estercamento maximo 32 graus
 vmax = 2;      % velocidade maxima
 L = 1.64;      % distancia entre eixos
 dt = 0.1;

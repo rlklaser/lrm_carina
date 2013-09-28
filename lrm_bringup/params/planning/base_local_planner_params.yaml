@@ -13,8 +13,8 @@ acc_lim_x: 5
 max_vel_x: 5.0
 min_vel_x: 0.2
 
-max_vel_theta: 0.66
-min_vel_theta: -0.66
+max_vel_theta: 0.559
+min_vel_theta: -0.559
 
 max_rotational_vel: 2.0
 
@@ -22,8 +22,8 @@ sim_time: 1.0
 sim_granularity: 0.1
 angular_sim_granularity: 0.1
 
-path_distance_bias: 1.0
-goal_distance_bias: 1.0
+path_distance_bias: 0.5
+goal_distance_bias: 0.9
 
 stop_time_buffer: 0.2
 occdist_scale: 0.5
@@ -31,7 +31,7 @@ oscillation_reset_dist: 0.5
 oscillation_reset_angle: 0.15
 
 vx_samples: 10
-vtheta_samples: 33
+vtheta_samples: 65
 
 xy_goal_tolerance: 1.0
 yaw_goal_tolerance: 1.57
@@ -50,4 +50,4 @@ prune_plan: true
 
 #carlike planner
 base_wheels: 1.65
-steer: 0.66
+steer: 0.559
