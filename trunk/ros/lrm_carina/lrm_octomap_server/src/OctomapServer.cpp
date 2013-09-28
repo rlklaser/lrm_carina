@@ -743,16 +743,17 @@ bool OctomapServer::clearBBXSrv(BBXSrv::Request& req, BBXSrv::Response& resp) {
 	boost::lock_guard<boost::mutex> guard(m_mutex);
 
 	for (OcTreeT::leaf_bbx_iterator it = m_octree->begin_leafs_bbx(min, max), end = m_octree->end_leafs_bbx(); it != end; ++it) {
-
-		it->setLogOdds(octomap::logodds(m_thresMin));
+		//it->setLogOdds(octomap::logodds(m_thresMin));
 		//			m_octree->updateNode(it.getKey(), -6.0f);
 		//ROS_INFO_STREAM("it: " << m_thresMin);
 
+		//free space
 		//it->setLogOdds(octomap::logodds(0));
+		m_octree->updateNode(it.getKey(), octomap::logodds(0));
 	}
 
 	// TODO: eval which is faster (setLogOdds+updateInner or updateNode)
-	m_octree->updateInnerOccupancy();
+	//m_octree->updateInnerOccupancy();
 
 	//rlklaser:: let next read publish all
 	//publishAll(ros::Time::now());
