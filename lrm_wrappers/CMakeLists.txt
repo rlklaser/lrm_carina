@@ -9,8 +9,8 @@ include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
 #  MinSizeRel     : w/o debug symbols, w/ optimization, stripped binaries
 #set(ROS_BUILD_TYPE RelWithDebInfo)
 
-#set(ROS_BUILD_TYPE Debug)
-set(ROS_BUILD_TYPE Release)
+set(ROS_BUILD_TYPE Debug)
+#set(ROS_BUILD_TYPE Release)
 
 rosbuild_init()
 
@@ -82,3 +82,12 @@ rosbuild_add_executable(cluster_filter_node src/cluster_filter_node.cpp)
 
 #rosbuild_add_executable(median_filter_node src/median_filter_node.cpp)
 
+rosbuild_add_executable(principal_curvature_node 
+    src/principal_curvature_node.cpp)
+
+rosbuild_add_executable(zigzag_filter_node 
+    src/zigzag_filter.cpp)
+
+rosbuild_add_executable(moving_leastsquares_node 
+    src/moving_leastsquares_node.cpp)
+        
