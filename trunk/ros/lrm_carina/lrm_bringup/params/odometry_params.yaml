@@ -10,7 +10,7 @@ wheel_odometry:
   print_info: false
   
   #node
-  rate: 10
+  rate: 20
   
   absolute: true
   use_imu: true

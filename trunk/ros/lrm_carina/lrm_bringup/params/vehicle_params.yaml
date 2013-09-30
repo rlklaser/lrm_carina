@@ -7,6 +7,6 @@ cruise_control:
   switch_lag_throttle: 0.01
   
 vehicle_state_node:
-  rate: 20.0
+  rate: 5.0
   tread_lenght: 1.508
   

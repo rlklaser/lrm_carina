@@ -67,7 +67,7 @@ int main(int argc, char** argv) {
 	double dist;
 	double vel;
 
-	nh_priv.param("rate", rate, 10.0);
+	nh_priv.param("rate", rate, 5.0);
 	nh_priv.param("tread_lenght", tread_lenght, 1.508);
 
 	wheel_encoder = 0;
@@ -81,19 +81,19 @@ int main(int argc, char** argv) {
 	while (ros::ok()) {
 		//ros::Time now = ros::Time::now();
 		ros::Duration dt = now - last_time;
-		last_time = now;
 		dist = (tread_lenght / WHEEL_ENCODER_RESOLUTION) * wheel_encoder;
-		wheel_encoder = 0;
+
 		double delta = dt.toSec();
 		if (delta > 0) {
 			vel = dist / delta;
-		} else {
-			vel = 0;
+			wheel_encoder = 0;
+			last_time = now;
+
+			state.header.stamp = ros::Time::now(); //now;
+			state.velocity = vel; // * 3.6; //km/h
+			//i=0;
+			states_pub.publish(state);
 		}
-		state.header.stamp = ros::Time::now(); //now;
-		state.velocity = vel;// * 3.6; //km/h
-		//i=0;
-		states_pub.publish(state);
 
 		ros::spinOnce();
 		r.sleep();

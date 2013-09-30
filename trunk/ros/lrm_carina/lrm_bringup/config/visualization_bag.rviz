@@ -22,7 +22,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: Camera
+    SyncSource: ""
   - Class: rviz/Views
     Expanded:
       - /Current View1
@@ -95,9 +95,13 @@ Visualization Manager:
           Value: true
         /gsp_odom:
           Value: true
+        /heading_link:
+          Value: true
         /imu_link:
           Value: true
         /map:
+          Value: true
+        /odom_from_fix:
           Value: true
         /rear_axle_link:
           Value: true
@@ -143,6 +147,8 @@ Visualization Manager:
             /ekf_odom:
               {}
             /gsp_odom:
+              {}
+            /odom_from_fix:
               {}
             /wheel_odom:
               /base_footprint:
@@ -190,6 +196,8 @@ Visualization Manager:
                       /front_right_bar_link:
                         /front_right_wheel:
                           {}
+                    /heading_link:
+                      {}
                     /steer_link:
                       /ackermann_bar_link:
                         /ackermann_left_susp_link:
@@ -356,6 +364,10 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        heading_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
         imu_link:
           Alpha: 1
           Show Axes: false
@@ -432,14 +444,14 @@ Visualization Manager:
       Value: true
       Visual Enabled: true
     - Class: rviz/Camera
-      Enabled: false
+      Enabled: true
       Image Rendering: background and overlay
       Image Topic: /stereo/left/image_color
       Name: Camera
       Overlay Alpha: 0.5
       Queue Size: 2
       Transport Hint: raw
-      Value: false
+      Value: true
       Visibility:
         Axes: true
         Camera: false
@@ -537,7 +549,7 @@ Visualization Manager:
       Marker Topic: /occupied_cells_vis_array
       Name: MarkerArray
       Namespaces:
-        map: true
+        {}
       Queue Size: 100
       Value: true
     - Alpha: 1
@@ -774,17 +786,17 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 14.5554
+      Distance: 10
       Focal Point:
-        X: -2.13122
-        Y: 5.63028
-        Z: -0.233015
+        X: 0
+        Y: 0
+        Z: 0
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 0.210398
+      Pitch: 0.355399
       Target Frame: /base_footprint
       Value: Orbit (rviz)
-      Yaw: 5.18361
+      Yaw: 2.3704
     Saved: ~
 Window Geometry:
   Camera:
@@ -796,7 +808,7 @@ Window Geometry:
   Hide Right Dock: true
   Image:
     collapsed: false
-  QMainWindow State: 000000ff00000000fd0000000200000000000001fa00000378fc020000000bfc0000003d000001ed0000010301000019fa000000010100000002fb0000000a005600690065007700730100000000ffffffff0000010f00fffffffb000000100044006900730070006c0061007900730100000000000001a70000010f00fffffffb0000000c00430061006d00650072006100000001ce000000af0000001600fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007300000001b90000006d0000006a00fffffffb0000001200530065006c0065006300740069006f006e00000001f5000000820000006a00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007300000002a70000009f0000000000000000fc00000220000001130000000000fffffffaffffffff0100000001fb0000000a0049006d0061006700650000000000ffffffff0000005100fffffffb0000000c00430061006d0065007200610100000230000001850000001600fffffffb0000000c00540065006c0065006f0070000000030a0000007f0000000000000000fb0000000a0049006d00610067006500000002e0000000c70000000000000000fb0000000a0049006d006100670065000000031c000000b40000000000000000fb0000000a0049006d006100670065010000021c00000117000000000000000000000003000003920000003efc0100000001fb0000000800540069006d00650100000200000003920000024e00ffffff000003920000033400000001000000020000000100000002fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd0000000200000000000001fa00000378fc020000000bfc0000003d000001ed0000010301000019fa000000000100000002fb0000000a005600690065007700730100000000ffffffff0000010f00fffffffb000000100044006900730070006c0061007900730100000000000001a70000010f00fffffffb0000000c00430061006d00650072006100000001ce000000af0000001600fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007300000001b90000006d0000006a00fffffffb0000001200530065006c0065006300740069006f006e00000001f5000000820000006a00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007300000002a70000009f0000000000000000fc00000220000001130000000000fffffffaffffffff0100000001fb0000000a0049006d0061006700650000000000ffffffff0000005100fffffffb0000000c00430061006d0065007200610100000230000001850000001600fffffffb0000000c00540065006c0065006f0070000000030a0000007f0000000000000000fb0000000a0049006d00610067006500000002e0000000c70000000000000000fb0000000a0049006d006100670065000000031c000000b40000000000000000fb0000000a0049006d006100670065010000021c00000117000000000000000000000003000003920000003efc0100000001fb0000000800540069006d00650100000200000003920000024e00ffffff000003920000033400000001000000020000000100000002fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:
