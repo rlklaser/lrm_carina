@@ -42,6 +42,19 @@
 			 -->
 		</node>
 
+<!-- 
+		<node
+			name="zigzag_filter_node"
+			pkg="lrm_wrappers"
+			type="zigzag_filter_node"
+			respawn="true"
+			output="screen"
+		>
+			<remap
+				from="points_in"
+				to="points_cluster" />
+		</node>
+-->
 
 	</group>
 

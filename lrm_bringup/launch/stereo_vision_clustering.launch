@@ -13,6 +13,21 @@
 			file="$(find lrm_bringup)/params/clustering_filters.yaml" />
 
 		<node
+			name="region_growing_rgb_seg"
+			pkg="lrm_wrappers"
+			type="region_growing_rgb"
+			respawn="true"
+			output="screen"
+		>
+			<remap
+				from="points_in"
+				to="points_stat" />
+			<remap
+				from="~points_out"
+				to="points_cluster_rgb" />
+		</node>
+		
+		<node
 			name="region_growing_seg"
 			pkg="lrm_wrappers"
 			type="region_growing"
@@ -66,7 +81,7 @@
 			name="cluster_filter_relay"
 			pkg="topic_tools"
 			type="relay"
-			args="points_cluster_filter /cloud_in"
+			args="points_zigzag_filter /cloud_in"
 			respawn="true"
 			output="screen" />
 
@@ -78,6 +93,20 @@
 			respawn="true"
 			output="screen" />
 
+		<node
+			name="zigzag_filter_node"
+			pkg="lrm_wrappers"
+			type="zigzag_filter_node"
+			respawn="true"
+			output="screen"
+		>
+			<remap
+				from="points_in"
+				to="points_cluster_rgb" />
+			<remap
+				from="~points_out"
+				to="points_zigzag_filter" />
+		</node>
 	</group>
 
 </launch>

@@ -55,8 +55,8 @@ ros::Publisher marker_pub;
 
 void pointcloudCallback(const sensor_msgs::PointCloud2::ConstPtr& msg) {
 
-	//if (pc_pub.getNumSubscribers() == 0)
-	//	return;
+	if (pc_pub.getNumSubscribers() == 0)
+		return;
 
 	//pcl::PointCloud<pcl::PointXYZ> cloud;
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZ>);
@@ -92,7 +92,7 @@ void pointcloudCallback(const sensor_msgs::PointCloud2::ConstPtr& msg) {
 	pcl::PointCloud<pcl::PrincipalCurvatures>::Ptr principal_curvatures(new pcl::PointCloud<pcl::PrincipalCurvatures>());
 	principal_curvatures_estimation.compute(*principal_curvatures);
 
-	std::cout << "input points.size (): " << cloud->points.size()  << " output points.size (): " << principal_curvatures->points.size() << std::endl;
+	//std::cout << "input points.size (): " << cloud->points.size()  << " output points.size (): " << principal_curvatures->points.size() << std::endl;
 
 	visualization_msgs::Marker marker;
 
@@ -142,9 +142,8 @@ int main(int argc, char** argv) {
 
 	//tf_listener = new tf::TransformListener(nh, ros::Duration(30), true);
 
-	//ros::Subscriber pc_sub = nh.subscribe("points_in", 1, pointcloudCallback);
-
-	ros::Subscriber pc_sub = nh.subscribe("/cloud/points_cluster", 1, pointcloudCallback);
+	ros::Subscriber pc_sub = nh.subscribe("points_in", 1, pointcloudCallback);
+	//ros::Subscriber pc_sub = nh.subscribe("/cloud/points_cluster", 1, pointcloudCallback);
 
 
 	pc_pub = nh.advertise<sensor_msgs::PointCloud2>(nh_priv.getNamespace() + "/points_out", 1);
