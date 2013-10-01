@@ -47,8 +47,8 @@ tf::TransformListener* tf_listener;
 
 void pointcloudCallback(const sensor_msgs::PointCloud2::ConstPtr& msg) {
 
-	//if (pc_pub.getNumSubscribers() == 0)
-	//	return;
+	if (pc_pub.getNumSubscribers() == 0)
+		return;
 
 	pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZRGB> ());
 	pcl::PointCloud<pcl::PointXYZRGB>::Ptr points (new pcl::PointCloud<pcl::PointXYZRGB> ());

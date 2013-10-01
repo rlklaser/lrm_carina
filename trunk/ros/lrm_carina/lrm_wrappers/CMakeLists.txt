@@ -76,7 +76,11 @@ rosbuild_add_executable(cloud_sum_node src/cloud_sum.cpp)
 
 #rosbuild_add_executable(cloud_don_segmentation src/cloud_don_segmentation.cpp)
 
-rosbuild_add_executable(region_growing src/region_growing.cpp)
+rosbuild_add_executable(region_growing 
+    src/region_growing.cpp)
+
+rosbuild_add_executable(region_growing_rgb 
+    src/region_growing_rgb.cpp)
 
 rosbuild_add_executable(cluster_filter_node src/cluster_filter_node.cpp)
 
