@@ -48,9 +48,13 @@
 #include <boost/lambda/lambda.hpp>
 #include <boost/lambda/bind.hpp>
 
+#include <math.h>
+
 using namespace boost::accumulators;
 
 ros::Publisher pc_pub;
+ros::Publisher pc_rem_pub;
+
 sensor_msgs::PointCloud2 cloud_out;
 
 void pointcloudCallback(const sensor_msgs::PointCloud2::ConstPtr& msg) {
@@ -59,12 +63,78 @@ void pointcloudCallback(const sensor_msgs::PointCloud2::ConstPtr& msg) {
 	//	return;
 
 	pcl::PointCloud<pcl::PointXYZRGB> cloud;
-	//pcl::fromROSMsg(*msg, cloud);
+	pcl::PointCloud<pcl::PointXYZRGB> cloud_out;
+	pcl::PointCloud<pcl::PointXYZRGB> cloud_rem_out;
 
-	//pcl::toROSMsg(cloud_tot, cloud_out);
-	//cloud_out.header.frame_id = "/map";
-	//cloud_out.header.stamp = ros::Time::now();
-	//pc_pub.publish(cloud_out);
+	typedef pcl::PointCloud<pcl::PointXYZRGB>::iterator itrtor;
+	//typedef cloud->data.iterator it;
+
+	sensor_msgs::PointCloud2 msg_out;
+
+	//cloud_out.header = msg->header;
+
+	pcl::fromROSMsg(*msg, cloud);
+
+	double min_x = 99999999;
+	double max_x = 0;
+	long qtd = 0;
+	double x;
+	double tot = 0;
+	double mean = 0;
+	double var = 0;
+	double stdev = 0;
+	double centered_x;
+
+	itrtor end = cloud.points.end();
+	for (itrtor itr = cloud.points.begin(); itr != end; ++itr )
+	{
+		qtd++;
+		x = itr->x;
+		tot += x;
+
+		if(x>max_x) max_x = x;
+		if(x<min_x) min_x = x;
+	}
+
+	tot = tot - (min_x * qtd);
+	mean = tot / qtd;
+
+	tot = 0;
+	for (itrtor itr = cloud.points.begin(); itr != end; ++itr )
+	{
+		x = itr->x;
+		centered_x = x-min_x;
+		tot += (centered_x-mean)*(centered_x-mean);
+	}
+
+	var = tot / qtd;
+
+	stdev = sqrt(var);
+
+	qtd = 0;
+	for (itrtor itr = cloud.points.begin(); itr != end; ++itr )
+	{
+		x = itr->x;
+		centered_x = x-min_x;
+		if( centered_x > (mean-stdev) && centered_x < (mean+stdev)) {
+			cloud_out.points.push_back(*itr);
+		}
+		else {
+			cloud_rem_out.points.push_back(*itr);
+			qtd++;
+		}
+	}
+
+	pcl::toROSMsg(cloud_out, msg_out);
+	msg_out.header = msg->header;
+	pc_pub.publish(msg_out);
+
+	pcl::toROSMsg(cloud_rem_out, msg_out);
+	msg_out.header = msg->header;
+	pc_rem_pub.publish(msg_out);
+
+
+	std::cout << "removed " << qtd << std::endl;
 
 	//double sum;
 
@@ -94,6 +164,12 @@ void pointcloudCallback(const sensor_msgs::PointCloud2::ConstPtr& msg) {
 	cout << mean(acc) << endl;
 	cout << sqrt(variance(acc)) << endl;
 	*/
+
+	//msg->data::iterator end = msg->data.end();
+	//for (msg->data::iterator itr = cloud->data.begin(); itr != end; ++itr )
+	{
+
+	}
 }
 
 int main(int argc, char** argv) {
@@ -103,8 +179,11 @@ int main(int argc, char** argv) {
 
 	//tf_listener = new tf::TransformListener(nh, ros::Duration(30), true);
 
-	ros::Subscriber pc_sub = nh.subscribe("points_in", 5, pointcloudCallback);
+	//ros::Subscriber pc_sub = nh.subscribe("points_in", 1, pointcloudCallback);
+	ros::Subscriber pc_sub = nh.subscribe("/cloud/points_cluster", 1, pointcloudCallback);
+
 	pc_pub = nh.advertise<sensor_msgs::PointCloud2>(nh_priv.getNamespace() + "/points_out", 1);
+	pc_rem_pub = nh.advertise<sensor_msgs::PointCloud2>(nh_priv.getNamespace() + "/points_out_removed", 1);
 
 	//nh_priv.param<int>("frame_count", _nro_of_frames, 5);
 	//nh_priv.param<bool>("incremental", _incremental, false);
