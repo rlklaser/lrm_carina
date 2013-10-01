@@ -52,26 +52,23 @@
 
 using namespace boost::accumulators;
 
+typedef pcl::PointCloud<pcl::PointXYZRGB>::iterator itrtor;
+
 ros::Publisher pc_pub;
 ros::Publisher pc_rem_pub;
-
 sensor_msgs::PointCloud2 cloud_out;
 
 void pointcloudCallback(const sensor_msgs::PointCloud2::ConstPtr& msg) {
 
-	//if (pc_pub.getNumSubscribers() == 0)
-	//	return;
+	if (pc_pub.getNumSubscribers() == 0 && pc_rem_pub.getNumSubscribers())
+		return;
 
 	pcl::PointCloud<pcl::PointXYZRGB> cloud;
 	pcl::PointCloud<pcl::PointXYZRGB> cloud_out;
 	pcl::PointCloud<pcl::PointXYZRGB> cloud_rem_out;
 
-	typedef pcl::PointCloud<pcl::PointXYZRGB>::iterator itrtor;
-	//typedef cloud->data.iterator it;
-
 	sensor_msgs::PointCloud2 msg_out;
 
-	//cloud_out.header = msg->header;
 
 	pcl::fromROSMsg(*msg, cloud);
 
@@ -108,7 +105,6 @@ void pointcloudCallback(const sensor_msgs::PointCloud2::ConstPtr& msg) {
 	}
 
 	var = tot / qtd;
-
 	stdev = sqrt(var);
 
 	qtd = 0;
@@ -133,43 +129,7 @@ void pointcloudCallback(const sensor_msgs::PointCloud2::ConstPtr& msg) {
 	msg_out.header = msg->header;
 	pc_rem_pub.publish(msg_out);
 
-
-	std::cout << "removed " << qtd << std::endl;
-
-	//double sum;
-
-	//BOOST_FOREACH(sensor_msgs::PointCloud2::Type point, msg->data)
-	//{
-    //
-	//}
-
-	/*
-	 double sum = std::accumulate(std::begin(msg->points), std::end(msg->points), 0.0);
-	 double m =  sum / msg->points.size();
-
-	 double accum = 0.0;
-	 std::for_each (std::begin(msg->points), std::end(msg->points), [&](const double d) {
-	 accum += (d - m) * (d - m);
-	 });
-
-	 double stdev = sqrt(accum / (msg->points.size()-1));
-	 */
-
-	/*
-	double v[msg->data.size()];
-	for_each(msg->data.begin(), msg->data.end(), bind<void>(ref(acc), _1));
-
-	accumulator_set<double, stats<tag::variance> > acc;
-	for_each(v.begin(), v.end(), bind<void>(ref(acc), _1));
-	cout << mean(acc) << endl;
-	cout << sqrt(variance(acc)) << endl;
-	*/
-
-	//msg->data::iterator end = msg->data.end();
-	//for (msg->data::iterator itr = cloud->data.begin(); itr != end; ++itr )
-	{
-
-	}
+	//std::cout << "removed " << qtd << std::endl;
 }
 
 int main(int argc, char** argv) {
@@ -177,22 +137,13 @@ int main(int argc, char** argv) {
 	ros::NodeHandle nh;
 	ros::NodeHandle nh_priv("~");
 
-	//tf_listener = new tf::TransformListener(nh, ros::Duration(30), true);
-
-	//ros::Subscriber pc_sub = nh.subscribe("points_in", 1, pointcloudCallback);
-	ros::Subscriber pc_sub = nh.subscribe("/cloud/points_cluster", 1, pointcloudCallback);
+	ros::Subscriber pc_sub = nh.subscribe("points_in", 1, pointcloudCallback);
+	//ros::Subscriber pc_sub = nh.subscribe("/cloud/points_cluster", 1, pointcloudCallback);
 
 	pc_pub = nh.advertise<sensor_msgs::PointCloud2>(nh_priv.getNamespace() + "/points_out", 1);
 	pc_rem_pub = nh.advertise<sensor_msgs::PointCloud2>(nh_priv.getNamespace() + "/points_out_removed", 1);
 
-	//nh_priv.param<int>("frame_count", _nro_of_frames, 5);
-	//nh_priv.param<bool>("incremental", _incremental, false);
-
-	//ROS_INFO_STREAM("cloud sum within " << _nro_of_frames << " frames");
-
 	ros::spin();
-
-	//delete tf_listener;
 
 	return 0;
 }
