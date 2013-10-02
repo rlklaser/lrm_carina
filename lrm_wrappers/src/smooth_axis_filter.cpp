@@ -50,6 +50,8 @@
 
 #include <math.h>
 
+#include <Eigen/Core>
+
 using namespace boost::accumulators;
 
 typedef pcl::PointCloud<pcl::PointXYZRGB>::iterator itrtor;
@@ -74,13 +76,20 @@ void pointcloudCallback(const sensor_msgs::PointCloud2::ConstPtr& msg) {
 
 	double min_x = 99999999;
 	double max_x = 0;
+
+	double min_y = 99999999;
+	double max_y = 0;
+
 	long qtd = 0;
 	double x;
+	double y;
 	double tot = 0;
+	double mean_loc = 0;
 	double mean = 0;
 	double var = 0;
 	double stdev = 0;
 	double centered_x;
+	double centered_y;
 
 	itrtor end = cloud.points.end();
 	for (itrtor itr = cloud.points.begin(); itr != end; ++itr )
@@ -89,10 +98,16 @@ void pointcloudCallback(const sensor_msgs::PointCloud2::ConstPtr& msg) {
 		x = itr->x;
 		tot += x;
 
+		y = itr->y;
+
 		if(x>max_x) max_x = x;
 		if(x<min_x) min_x = x;
+
+		if(y>max_y) max_y = y;
+		if(y<min_y) min_y = y;
 	}
 
+	mean_loc = tot / qtd;
 	tot = tot - (min_x * qtd);
 	mean = tot / qtd;
 
@@ -110,21 +125,65 @@ void pointcloudCallback(const sensor_msgs::PointCloud2::ConstPtr& msg) {
 	//double range = (mean+stdev)(mean-stdev)
 
 	double ratio;
+	double range = (max_x-min_x);
+	double range_std = (2*stdev);
+	double center_x = (max_x+min_x)/2;
+	double center_y = (max_y+min_y)/2;
 
-	ratio = (2*stdev) / (max_x-min_x);
-
-	double center = ((max_x-min_x)/2) + min_x;
+	ratio = range_std / range;
 
 	qtd = 0;
 	for (itrtor itr = cloud.points.begin(); itr != end; ++itr )
 	{
 		x = itr->x;
+		//y = itr->y;
 
-		x *= ratio;
+		double diff_x = x - center_x;
+		//double diff_y = y - center_y;
 
-		itr->x = x + center;
+		diff_x *= ratio;
+		//diff_y *= ratio;
 
+		Eigen::Vector3d vi(x, itr->y, itr->z);
 
+		//Eigen::Matrix3d m(3, 3);
+
+		//m << ratio, 0, 0, 0, 1, 0, 0, 0, 1;
+
+		//Eigen::Vector3d o =  m * v;
+		//x += center;
+		//x *= ratio;
+
+		x = center_x + diff_x;
+		//y = center_y + diff_y;
+
+		Eigen::Vector3d vo(x, itr->y, itr->z);
+
+		Eigen::Matrix3d R;
+		R = Eigen::Quaterniond().setFromTwoVectors(vo, vi);
+
+		Eigen::Vector3d vf = R * vo;
+
+		itr->x = vf[0];
+		itr->y = vf[1];
+		itr->z = vf[2];
+/*
+		itr->x = x ;//+ mean_loc;//+ center;
+*/
+
+		//itr->y = y;
+/*
+		Eigen::Vector3d vv(itr->x, itr->y, itr->z);
+
+		Eigen::Matrix3d R;
+		R = Eigen::Quaterniond().setFromTwoVectors(v, vv);
+
+		Eigen::Vector3d vo = R * v;
+
+		itr->x = vo[0];
+		itr->y = vo[1];
+		itr->z = vo[2];
+*/
 		//centered_x = x-min_x;
 		//if( centered_x > (mean-stdev) && centered_x < (mean+stdev)) {
 		cloud_out.points.push_back(*itr);
@@ -133,9 +192,6 @@ void pointcloudCallback(const sensor_msgs::PointCloud2::ConstPtr& msg) {
 		//	cloud_rem_out.points.push_back(*itr);
 		//	qtd++;
 		//}
-
-
-
 	}
 
 	pcl::toROSMsg(cloud_out, msg_out);
