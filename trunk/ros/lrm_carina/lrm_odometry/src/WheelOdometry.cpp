@@ -154,6 +154,7 @@ void WheelOdometry::getParams() {
 	nh_priv.param("absolute", odo.p.absolute, false);
 	nh_priv.param("use_imu", odo.p.use_imu, false);
 	nh_priv.param("use_6dof", odo.p.use_6dof, true);
+	nh_priv.param("inverse", odo.p.inverse, false);
 	nh_priv.param("publish_tf", odo.p.publish_tf, true);
 	nh_priv.param("tf_delay", odo.p.tf_delay, 0.1);
 	nh_priv.param("publish_js", odo.p.publish_js, false);
@@ -548,7 +549,12 @@ bool WheelOdometry::calcTransform() {
 	tf::Quaternion qt;
 
 	if(odo.p.use_imu && odo.p.use_6dof) {
-		qt = tf::createQuaternionFromRPY(odo.roll, odo.pitch, odo.theta);
+		if(odo.p.inverse) {
+			qt = tf::createQuaternionFromRPY(odo.roll, -odo.pitch, odo.theta);
+		}
+		else {
+			qt = tf::createQuaternionFromRPY(odo.roll, odo.pitch, odo.theta);
+		}
 	}
 	else {
 		qt = tf::createQuaternionFromYaw(odo.theta);
