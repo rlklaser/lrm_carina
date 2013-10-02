@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<robot
+	xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+	xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+	xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+	xmlns:xacro="http://ros.org/wiki/xacro"
+>
+  <!-- For a standard camera, use nearClip="0.1" and farClip="100" -->
+  <!-- image_format : "R8G8B8" (color), "L8" (gray) -->
+	<xacro:macro
+		name="camera_gazebo_v0"
+		params="name image_format image_topic_name camera_info_topic_name hfov focal_length frame_id baseline image_width image_height updateRate nearClip farClip"
+	>
+		<gazebo reference="${name}_frame">
+			<sensor
+				type="depth"
+				name="${name}_sensor"
+			>
+				<update_rate>${updateRate}</update_rate>
+				<always_on>true</always_on>
+				<camera>
+					<horizontal_fov>${hfov}</horizontal_fov>
+					<image>
+						<format>${image_format}</format>
+						<width>${image_width}</width>
+						<height>${image_height}</height>
+					</image>
+					<clip>
+						<near>${nearClip}</near>
+						<far>${farClip}</far>
+					</clip>
+				</camera>
+				<plugin
+					name="${name}_controller"
+					filename="liblrm_gazebo_ros_prosilica.so"
+				>
+					<updateRate>${updateRate}</updateRate>
+					<cameraName>${name}</cameraName>
+					<imageTopicName>${image_topic_name}</imageTopicName>
+					<cameraInfoTopicName>${camera_info_topic_name}</cameraInfoTopicName>
+					<frameName>${frame_id}</frameName>
+					<hackBaseline>${baseline}</hackBaseline>
+					<CxPrime>${(image_width+1)/2}</CxPrime>
+					<Cx>${(image_width+1)/2}</Cx>
+					<Cy>${(image_height+1)/2}</Cy>
+          			<!-- image_width / (2*tan(hfov_radian /2)) -->
+          			<!-- 320 for wide and 772.55 for narrow stereo camera -->
+					<focalLength>${focal_length}</focalLength>
+					<distortionK1>0.00000001</distortionK1>
+					<distortionK2>0.00000001</distortionK2>
+					<distortionK3>0.00000001</distortionK3>
+					<distortionT1>0.00000001</distortionT1>
+					<distortionT2>0.00000001</distortionT2>
+					<interface:camera name="${name}_iface" />
+					<robotNamespace>${namespace}</robotNamespace>
+				</plugin>
+			</sensor>
+			<material value="Gazebo/Black" />
+		</gazebo>
+	</xacro:macro>
+
+</robot>

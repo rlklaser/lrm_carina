@@ -1,0 +1,188 @@
+<?xml version="1.0"?>
+<!--
+*  Copyright (C) 2012, Laboratorio de Robotica Movel - ICMC/USP
+ *  Rafael Luiz Klaser <rlklaser@gmail.com>
+ *  http://lrm.icmc.usp.br
+ *
+ *  Apoio FAPESP: 2012/04555-4
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * @file base.urdf.xacro
+ * @brief 
+ * @author Rafael Luiz Klaser <rlklaser@gmail.com>
+ * @date Dez 12, 2012
+ *
+ */
+-->
+<robot
+	xmlns:xi="http://www.w3.org/2001/XInclude"
+	xmlns:xacro="http://ros.org/wiki/xacro"
+>
+	<include filename="$(find lrm_description)/urdf/inertia_tensors.urdf.xacro" />
+	<include filename="$(find lrm_description)/urdf/clubcar/templates.urdf.xacro" />
+	
+	<include filename="$(find lrm_description)/urdf/clubcar/base.gazebo.xacro" />
+
+	<link name="base_footprint" />
+
+	<link name="base_link">
+		<xacro:inertial_minimal />
+	</link>
+
+	<link name="heading_link">
+		<xacro:inertial_minimal />
+	</link>
+	
+	<link name="center_mass_link">
+		<xacro:inertial_sphere
+			mass="${base_mass}"
+			diameter="0.25" />
+	</link>
+
+	<link name="rear_axle_link">
+		<xacro:inertial_sphere
+			mass="${axle_mass}"
+			diameter="0.05" />
+	</link>
+
+	<link name="front_axle_link">
+		<xacro:inertial_sphere
+			mass="${axle_mass}"
+			diameter="0.05" />
+	</link>
+
+	<link name="base_odometry">
+		<xacro:inertial_minimal />
+	</link>
+
+	<link name="body_link">
+		<xacro:inertial_minimal />
+		<visual>
+			<origin
+				xyz="0 0 0.04"
+				rpy="0 0 0" />
+			<geometry>
+				<mesh
+					filename="package://lrm_description/meshes/carina_texture.dae"
+					scale="0.85 0.9 0.85" />
+			</geometry>
+			<material name="Car">
+				<color rgba="0.0 1.0 0.0 1.0" />
+			</material>
+		</visual>
+		<collision>
+			<origin
+				xyz="-0.12 0.0 0.0"
+				rpy="0 0 0" />
+			<geometry>
+				<box size="${bounding_box_x} ${bounding_box_y} ${bounding_box_z}" />
+			</geometry>
+		</collision>
+	</link>
+
+	<link name="base_front_sensors">
+		<xacro:inertial_minimal />
+	</link>
+
+	<joint
+		name="joint_front_sensors"
+		type="fixed"
+	>
+		<origin
+			xyz="1.25 0 0"
+			rpy="0 0 0" />
+		<parent link="base_link" />
+		<child link="base_front_sensors" />
+	</joint>
+
+	<joint
+		name="joint_base_to_body"
+		type="fixed"
+	>
+		<origin
+			xyz="0.15 0 0.28"
+			rpy="0 0 0" />
+		<parent link="base_link" />
+		<child link="body_link" />
+	</joint>
+
+	<joint
+		name="joint_base_footprint"
+		type="fixed"
+	>
+		<origin
+			rpy="0 0 0"
+			xyz="-0.18 0 ${base_height}" />
+		<parent link="base_footprint" />
+		<child link="base_link" />
+	</joint>
+
+	<joint
+		name="joint_base_heading"
+		type="fixed"
+	>
+		<origin
+			rpy="0 0 0"
+			xyz="0 0 ${-wheel_diameter/2}" />
+		<parent link="front_axle_link" />
+		<child link="heading_link" />
+	</joint>
+	
+	<joint
+		name="joint_base_link_to_rear_axle"
+		type="fixed"
+	>
+		<origin
+			rpy="0 0 0"
+			xyz="${-rear_to_base} 0 ${-base_height + wheel_diameter/2}" />
+		<parent link="base_link" />
+		<child link="rear_axle_link" />
+	</joint>
+
+	<joint
+		name="joint_base_link_to_front_axle"
+		type="fixed"
+	>
+		<origin
+			rpy="0 0 0"
+			xyz="${front_to_base} 0.0 ${-base_height + wheel_diameter/2}" />
+		<parent link="base_link" />
+		<child link="front_axle_link" />
+	</joint>
+
+	<joint
+		name="joint_base_odometry"
+		type="fixed"
+	>
+		<origin
+			rpy="0 0 0"
+			xyz="0.0 0.0 ${-wheel_diameter/2}" />
+		<parent link="rear_axle_link" />
+		<child link="base_odometry" />
+	</joint>
+
+	<joint
+		name="joint_center_mass"
+		type="fixed"
+	>
+		<origin
+			rpy="0 0 0"
+			xyz="0.18 0 -0.3" />
+		<parent link="base_link" />
+		<child link="center_mass_link" />
+	</joint>
+</robot>

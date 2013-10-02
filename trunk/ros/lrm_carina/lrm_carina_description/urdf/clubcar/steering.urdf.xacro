@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<!--
+*  Copyright (C) 2012, Laboratorio de Robotica Movel - ICMC/USP
+ *  Rafael Luiz Klaser <rlklaser@gmail.com>
+ *  http://lrm.icmc.usp.br
+ *
+ *  Apoio FAPESP: 2012/04555-4
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * @file steering.urdf.xacro
+ * @brief 
+ * @author Rafael Luiz Klaser <rlklaser@gmail.com>
+ * @date Dez 12, 2012
+ *
+ */
+-->
+<robot
+	xmlns:xi="http://www.w3.org/2001/XInclude"
+	xmlns:xacro="http://ros.org/wiki/xacro"
+>
+	<include filename="$(find lrm_description)/urdf/inertia_tensors.urdf.xacro" />
+	<include filename="$(find lrm_description)/urdf/clubcar/templates.urdf.xacro" />
+	<include filename="$(find lrm_description)/urdf/clubcar/steeringwheel.urdf.xacro" />
+	
+	<link name="steer_link">
+		<xacro:inertial_minimal />
+		<visual>
+			<origin
+				xyz="${-wheel_diameter/4} 0 0"
+				rpy="0 0 0" />
+			<geometry>
+				<box size="${wheel_diameter/2} 0.02 0.02" />
+			</geometry>
+			<material name="Red">
+				<color rgba="0.8 0.0 0.0 1.0" />
+			</material>
+		</visual>
+	</link>
+
+	<joint
+		name="joint_steer"
+		type="revolute"
+	>
+		<limit
+			effort="1"
+			velocity="1"
+			lower="${-max_steer*M_PI/180}"
+			upper="${max_steer*M_PI/180}" />
+		<axis xyz="0 0 1" />
+		<parent link="front_axle_link" />
+		<child link="steer_link" />
+		<origin
+			rpy="0 0 0"
+			xyz="0.0 0.0 0.0" />
+	</joint>
+
+	<transmission
+		type="pr2_mechanism_model/SimpleTransmission"
+		name="steer_trans"
+	>
+		<actuator name="joint_steer_motor" />
+		<joint name="joint_steer" />
+		<mechanicalReduction>1.0</mechanicalReduction>
+		<motorTorqueConstant>1</motorTorqueConstant>
+	</transmission>
+</robot>
