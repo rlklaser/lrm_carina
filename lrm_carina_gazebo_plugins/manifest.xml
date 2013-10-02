@@ -1,0 +1,27 @@
+<package>
+  <description brief="lrm_carina_gazebo_plugins">
+
+     lrm_carina_gazebo_plugins
+
+  </description>
+  <author>Rafael Luiz Klaser</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/lrm_carina_gazebo_plugins</url>
+  <depend package="roscpp"/>
+  <depend package="rospy"/>
+  <depend package="std_msgs"/>
+  
+  <depend package="gazebo_plugins"/>
+  <depend package="gazebo_msgs"/>
+  <depend package="tf"/>
+  <depend package="angles"/>
+
+  <depend package="lrm_msgs"/>
+  <depend package="lrm_carina_description"/>
+  
+  <depend package="pr2_controller_interface"/>
+
+</package>
+
+
