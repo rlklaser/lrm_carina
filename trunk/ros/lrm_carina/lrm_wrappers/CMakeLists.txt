@@ -95,3 +95,7 @@ rosbuild_add_executable(zigzag_filter_node
 rosbuild_add_executable(moving_leastsquares_node 
     src/moving_leastsquares_node.cpp)
         
+rosbuild_add_executable(smooth_axis_filter_node 
+    src/smooth_axis_filter.cpp)
+    
+        
