@@ -48,6 +48,7 @@ rosbuild_add_library(lrm_stereo
 	src/point_cloud2.cpp
 	#src/transform_cloud_nodelet.cpp
 	#src/region_growing.cpp
+	src/segmentation_nodelet.cpp
 	)
 rosbuild_add_boost_directories()
 #target_link_libraries(lrm_stereo pcl_ros_filters)
