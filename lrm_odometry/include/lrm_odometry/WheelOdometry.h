@@ -74,6 +74,7 @@ struct st_param
 	bool absolute;		//absolute odometry - use compass orientation
 	bool use_imu;
 	bool use_6dof;		//publish odometry with rpy orientations
+	bool inverse;		//inverse rpy orientations (from playing log)
 	bool publish_tf;	//publish TF
 	bool publish_js;	//publish Joint States (not simulated)
 	bool print_info;
