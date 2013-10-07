@@ -149,7 +149,7 @@ int main(int argc, char** argv) {
 
 	tf_listener = new tf::TransformListener(nh, ros::Duration(30), true);
 
-	ros::Subscriber pc_sub = nh.subscribe("points_in", 1, pointcloudCallback);
+	ros::Subscriber pc_sub = nh.subscribe("points_in", 10, pointcloudCallback);
 	pc_pub = nh.advertise<sensor_msgs::PointCloud2>(nh_priv.getNamespace() + "/points_out", 30);
 
 	nh_priv.param<double>("k_search", _k_search, 50.0);
