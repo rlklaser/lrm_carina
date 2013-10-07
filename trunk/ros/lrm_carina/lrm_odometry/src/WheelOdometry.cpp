@@ -219,6 +219,13 @@ void WheelOdometry::reconfigure(lrm_odometry::OdometryConfig &config, uint32_t l
 	odo.p.robot_width = config.robot_width;
 	odo.p.wheel_diameter = config.wheel_diameter;
 
+
+	odo.p.absolute = config.absolute;
+	odo.p.use_imu = config.use_imu;
+	odo.p.use_6dof = config.use_6dof;
+	odo.p.inverse = config.inverse;
+	odo.p.publish_tf = config.publish_tf;
+
 	calcParams();
 
 	ROS_WARN("node reconfigured");
