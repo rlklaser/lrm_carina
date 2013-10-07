@@ -210,11 +210,11 @@ int main(int argc, char** argv) {
 	ros::NodeHandle nh;
 	ros::NodeHandle nh_priv("~");
 
-	//ros::Subscriber pc_sub = nh.subscribe("points_in", 1, pointcloudCallback);
-	ros::Subscriber pc_sub = nh.subscribe("/cloud/points_cluster_rgb", 1, pointcloudCallback);
+	ros::Subscriber pc_sub = nh.subscribe("points_in", 1, pointcloudCallback);
+	//ros::Subscriber pc_sub = nh.subscribe("/cloud/points_cluster_rgb", 10, pointcloudCallback);
 
-	pc_pub = nh.advertise<sensor_msgs::PointCloud2>(nh_priv.getNamespace() + "/points_out", 1);
-	pc_rem_pub = nh.advertise<sensor_msgs::PointCloud2>(nh_priv.getNamespace() + "/points_out_removed", 1);
+	pc_pub = nh.advertise<sensor_msgs::PointCloud2>(nh_priv.getNamespace() + "/points_out", 10);
+	pc_rem_pub = nh.advertise<sensor_msgs::PointCloud2>(nh_priv.getNamespace() + "/points_out_removed", 10);
 
 	ros::spin();
 

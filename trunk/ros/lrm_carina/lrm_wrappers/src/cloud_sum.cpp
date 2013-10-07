@@ -115,7 +115,7 @@ int main(int argc, char** argv) {
 	tf_listener = new tf::TransformListener(nh, ros::Duration(30), true);
 
 	ros::Subscriber pc_sub = nh.subscribe("points_in", 5, pointcloudCallback);
-	pc_pub = nh.advertise<sensor_msgs::PointCloud2>(nh_priv.getNamespace() + "/points_out", 1);
+	pc_pub = nh.advertise<sensor_msgs::PointCloud2>(nh_priv.getNamespace() + "/points_out", 10);
 	nh_priv.param<int>("frame_count", _nro_of_frames, 5);
 	nh_priv.param<bool>("incremental", _incremental, false);
 
