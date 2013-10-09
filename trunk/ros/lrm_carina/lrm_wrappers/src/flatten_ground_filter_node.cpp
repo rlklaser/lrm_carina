@@ -84,6 +84,8 @@ void pointcloudCallback(const sensor_msgs::PointCloud2::ConstPtr& msg) {
 
 }
 
+
+
 int main(int argc, char** argv) {
 	ros::init(argc, argv, "flatten_ground_filter_node");
 	ros::NodeHandle nh;
