@@ -76,7 +76,7 @@
 		value="0.60" />
 	<property
 		name="max_steer"
-		value="38" /> <!-- 0,66 rad -->
+		value="32" /> <!-- 32 = 0.59, 38 = 0,66 rad -->
 	<property
 		name="max_throttle"
 		value="110" /> <!-- see arduino controller -->
