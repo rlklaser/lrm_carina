@@ -66,7 +66,7 @@
 			file="$(find lrm_bringup)/params/planning/base_local_planner_params.yaml"
 			command="load"
 			ns="DWAPlannerROS" />
--->	
+-->
 
 		<rosparam
 			file="$(find lrm_bringup)/params/planning/sbpl_global_params.yaml"
@@ -81,31 +81,15 @@
 			command="load"
 			ns="pose_follower" />
 
-		<!-- 
+<!--  
 		<remap
 			from="cmd_vel"
 			to="/navigation/cmd_vel" />
-		 -->
-
+-->
 		<remap
 			from="cmd_vel"
 			to="/planning/cmd_vel" />
 
-	</node>
-
-	<node
-		name="vel_booster_node"
-		pkg="lrm_drivers"
-		type="vel_booster_node"
-		respawn="true"
-		output="screen"
-	>
-		<remap
-			from="cmd_vel"
-			to="/planning/cmd_vel" />
-		<remap
-			from="~cmd_vel"
-			to="/navigation/cmd_vel" />
 	</node>
 
 </launch>
