@@ -121,35 +121,35 @@ void AckermannControllerPlugin::Load(physics::ModelPtr _parent, sdf::ElementPtr 
 	 */
 
 	if (!_sdf->HasElement("wheelDiameter")) {
-		ROS_WARN("Ackermann Drive plugin missing <wheelDiameter>, defaults to 0.15");
-		wheelDiameter_ = 0.15;
+		ROS_WARN("Ackermann Drive plugin missing <wheelDiameter>");
+		wheelDiameter_ = 0.48;
 	} else {
 		wheelDiameter_ = _sdf->GetElement("wheelDiameter")->GetValueDouble();
 	}
 
 	if (!_sdf->HasElement("driveTorque")) {
-		ROS_WARN("Ackermann Drive plugin missing <driveTorque>, defaults to 5.0");
-		driveTorque_ = 5.0;
+		ROS_WARN("Ackermann Drive plugin missing <driveTorque>");
+		driveTorque_ = 700000.0;
 	} else {
 		driveTorque_ = _sdf->GetElement("driveTorque")->GetValueDouble();
 	}
 
 	if (!_sdf->HasElement("steerTorque")) {
-		ROS_WARN("Ackermann Drive plugin missing <steerTorque>, defaults to 5.0");
-		steerTorque_ = 5.0;
+		ROS_WARN("Ackermann Drive plugin missing <steerTorque>");
+		steerTorque_ = 600.0;
 	} else {
 		steerTorque_ = _sdf->GetElement("steerTorque")->GetValueDouble();
 	}
 
 	if (!_sdf->HasElement("maxSteerAngle")) {
-		ROS_WARN("Ackermann Drive plugin missing <maxSteerAngle>, defaults to 20.0");
-		maxSteerAngle_ = 20.0 * M_PI / 180;
+		ROS_WARN("Ackermann Drive plugin missing <maxSteerAngle>");
+		maxSteerAngle_ = 32.0 * M_PI / 180;
 	} else {
 		maxSteerAngle_ = _sdf->GetElement("maxSteerAngle")->GetValueDouble() * M_PI / 180;
 	}
 
 	if (!_sdf->HasElement("topicName")) {
-		ROS_WARN("Ackermann Drive plugin missing <topicName>, defaults to cmd_vel");
+		ROS_WARN("Ackermann Drive plugin missing <topicName>");
 		topicName_ = "cmd_vel";
 	} else {
 		topicName_ = _sdf->GetElement("topicName")->GetValueString();
