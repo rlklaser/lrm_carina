@@ -20,7 +20,7 @@ cloud:
     #point cloud are transformed
     sensor_frame: /base_footprint, 
     data_type: PointCloud2,  
-    topic: /cloud/points_local_scan, 
+    topic: /fake_cloud_in, 
     marking: true, 
     clearing: false,
     max_obstacle_height: 2.0, 
@@ -40,7 +40,7 @@ ground_cloud:
     #point cloud are transformed
     sensor_frame: /base_footprint,  
     data_type: PointCloud2,  
-    topic: /cloud/points_local_ground_scan, 
+    topic: /ground_cloud_in, 
     marking: false, 
     clearing: true,
     max_obstacle_height: 0.1, 

@@ -14,7 +14,8 @@ wheel_odometry:
   
   absolute: true
   use_imu: true
-  use_6dof: true
+  use_6dof: false
+  inverse: false
   publish_tf: true
   publish_js: true
   animation_only: false
