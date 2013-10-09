@@ -45,8 +45,8 @@ void reconfig(lrm_drivers::VelBoosterConfig &config, uint32_t level)
 	//odometry->reconfigure(config, level);
 	boost::unique_lock<boost::mutex> scoped_lock(_mutex);
 
-	_max_velocity = config.max;
-	_max_velocity_boost = config.boost;
+	_max_velocity = config.max_velocity;
+	_max_velocity_boost = config.max_velocity_boost;
 
 }
 */

@@ -9,8 +9,10 @@
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/lrm_drivers</url>
   <depend package="roscpp"/>
+  <depend package="rospy" />
   <depend package="lrm_msgs"/>
   <depend package="std_msgs"/>
+  <depend package="dynamic_reconfigure"/>
   
 </package>
 
