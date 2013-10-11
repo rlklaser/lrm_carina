@@ -18,7 +18,7 @@ local_costmap:
   #observation_sources: cloud ground_cloud
   #observation_sources: local_cloud global_cloud ground_cloud
   #observation_sources:  local_cloud global_cloud
-  observation_sources: cloud
+  observation_sources: cloud map_cloud
   
   #source
   #obstacle_range: 7.0

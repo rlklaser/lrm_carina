@@ -12,7 +12,7 @@ custo2 = 4;
 custo3 = 7;
 
 stlim = 0.559;  % estercamento maximo 32 graus
-vmax = 2;      % velocidade maxima
+vmax = 5;      % velocidade maxima
 L = 1.64;      % distancia entre eixos
 dt = 0.1;
 
@@ -45,11 +45,11 @@ dt = 0.1;
 %pi/8.2 = 0.3831 = 22 deg
 %pi/12  = 0.2618 = 15 deg
 
-basemprimendpts0_c(1,:) = [ 15  -4  -1  custo1  0.4  -pi/8.2 40];
+basemprimendpts0_c(1,:) = [ 15  -4  -1  custo1  0.3  -pi/8.2 40];
 basemprimendpts0_c(2,:) = [ 16  -2  -1  custo1  0.4  -pi/12  40];
-basemprimendpts0_c(3,:) = [ 10   0   0  custo0  0.4   0      40];
+basemprimendpts0_c(3,:) = [ 10   0   0  custo0  0.5   0      40];
 basemprimendpts0_c(4,:) = [ 16   2   1  custo1  0.4   pi/12  40];
-basemprimendpts0_c(5,:) = [ 15   4   1  custo1  0.4   pi/8.2 40];
+basemprimendpts0_c(5,:) = [ 15   4   1  custo1  0.3   pi/8.2 40];
 
 basemprimendpts0_c(6,:) = [  8  -2  -1  custo2  0.3  -pi/8.2 40];
 basemprimendpts0_c(7,:) = [  8   2   1  custo2  0.3   pi/8.2 40];
