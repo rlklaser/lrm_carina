@@ -26,8 +26,8 @@ octomap_server:
     #sensor_model/max_range: 15
     sensor_model/max_range: 80
     
-    sensor_model/hit: 0.65
-    sensor_model/miss: 0.05
+    sensor_model/hit: 0.55
+    sensor_model/miss: 0.45
     
     #sensor_model/max: 0.75
     #sensor_model/min: 0.25
