@@ -5,7 +5,7 @@
 		name="/use_sim_time"
 		value="true" />
 	-->
-	
+
 	<rosparam
 		command="load"
 		file="$(find lrm_bringup)/params/vehicle_params.yaml" />
@@ -34,6 +34,22 @@
 			from="throttle_commands"
 			to="throttle_cruisecontrol" />
 	 -->
+	</node>
+
+
+	<node
+		name="vel_booster_node"
+		pkg="lrm_drivers"
+		type="vel_booster_node"
+		respawn="true"
+		output="screen"
+	>
+		<remap
+			from="cmd_vel"
+			to="/planning/cmd_vel" />
+		<remap
+			from="~cmd_vel"
+			to="/navigation/cmd_vel" />
 	</node>
 
 </launch>

@@ -2,7 +2,7 @@
 
 resolution = 0.1;          	% resolucao da primitiva
 numberofangles = 16; 		% número de fracoes de angulos para um giro de 360 graus
-numberofprimsperangle = 9; 	% numero de primitivas de movimento
+numberofprimsperangle = 18; 	% numero de primitivas de movimento
 
 %numofsamples = 30;          % numero de passos para cada primitiva (poses calculadas)
 
@@ -10,9 +10,10 @@ custo0 = 1;
 custo1 = 2.5;
 custo2 = 4;
 custo3 = 7;
+custo3 = 11;
 
 stlim = 0.559;  % estercamento maximo 32 graus
-vmax = 5;      % velocidade maxima
+vmax = 3;      % velocidade maxima
 L = 1.64;      % distancia entre eixos
 dt = 0.1;
 
@@ -56,6 +57,17 @@ basemprimendpts0_c(7,:) = [  8   2   1  custo2  0.3   pi/8.2 40];
 
 basemprimendpts0_c(8,:) = [  7  -3  -1  custo3  0.2  -stlim 50];
 basemprimendpts0_c(9,:) = [  7   3   1  custo3  0.2   stlim 50];
+
+
+basemprimendpts0_c(10,:) = [ 15  -4  -1  custo2  -0.3  -pi/8.2 40];
+basemprimendpts0_c(11,:) = [ 16  -2  -1  custo2  -0.4  -pi/12  40];
+basemprimendpts0_c(12,:) = [ 10   0   0  custo1  -0.5   0      40];
+basemprimendpts0_c(13,:) = [ 16   2   1  custo2  -0.4   pi/12  40];
+basemprimendpts0_c(14,:) = [ 15   4   1  custo2  -0.3   pi/8.2 40];
+basemprimendpts0_c(15,:) = [  8  -2  -1  custo3  -0.3  -pi/8.2 40];
+basemprimendpts0_c(16,:) = [  8   2   1  custo3  -0.3   pi/8.2 40];
+basemprimendpts0_c(17,:) = [  7  -3  -1  custo3  -0.2  -stlim 50];
+basemprimendpts0_c(18,:) = [  7   3   1  custo3  -0.2   stlim 50];
 
     
 fout = fopen('../carina.mprim', 'w');

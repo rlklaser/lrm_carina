@@ -16,10 +16,10 @@
 
 		<remap
 			from="imu_data"
-			to="lse_xsens_mti/xsens/imu/data" />
+			to="/lse_xsens_mti/xsens/imu/data" />
 		<remap
 			from="~imu/data"
-			to="calibrated/imu/data" />
+			to="/calibrated/imu/data" />
 	</node>
 
 	<node
@@ -32,7 +32,7 @@
 	>
 		<remap
 			from="fix"
-			to="lse_xsens_mti/xsens/fix" />
+			to="/lse_xsens_mti/xsens/fix" />
 	</node>
 
 	<node
@@ -44,10 +44,10 @@
 	>
 		<remap
 			from="imu"
-			to="lse_xsens_mti/xsens/imu/data" />
+			to="/lse_xsens_mti/xsens/imu/data" />
 		<remap
 			from="mag"
-			to="lse_xsens_mti/xsens/mag" />
+			to="/lse_xsens_mti/xsens/mag" />
 	</node>
 
 	<node
@@ -59,7 +59,7 @@
 	>
 		<remap
 			from="fix"
-			to="lse_xsens_mti/xsens/fix" />
+			to="/lse_xsens_mti/xsens/fix" />
 	</node>
 	
     <node
