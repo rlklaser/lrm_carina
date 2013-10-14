@@ -93,5 +93,10 @@ rosbuild_add_executable(imu_yaw_node
 
 rosbuild_add_executable(imu_calibrate_node 
 	src/imu_calibrate_node.cpp)
+
+
+rosbuild_add_executable(fake_odom_frame 
+	src/fake_odom_frame.cpp)
+	
 	
 	
