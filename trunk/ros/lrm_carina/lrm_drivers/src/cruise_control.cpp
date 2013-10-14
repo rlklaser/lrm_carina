@@ -47,6 +47,8 @@ protected:
 	bool accelFlag;
 	double topSpeed;
 
+	bool reverse;
+
 public:
 	CruiseControl(ros::NodeHandle n);
 	virtual ~CruiseControl();
@@ -86,6 +88,7 @@ CruiseControl::CruiseControl(ros::NodeHandle n) :
 	throttle_pub = nh.advertise<lrm_msgs::Throttle>("throttle_commands", 1);
 
 	accelFlag = false;
+	reverse = false;
 }
 
 /*
@@ -97,6 +100,9 @@ CruiseControl::~CruiseControl() {
 void CruiseControl::cruiseVelocityCallback(const lrm_msgs::Velocity::ConstPtr& velocity) {
 	this->cruiseVelocity.value = velocity->value * 3.6;
 	this->cruiseVelocity.header = velocity->header;
+
+	//if (this->cruiseVelocity.value < 0)
+	//if(reverse) this->cruiseVelocity.value *= -1;
 }
 
 void CruiseControl::inferenceControl(lrm_msgs::VehicleState state) {
@@ -106,6 +112,11 @@ void CruiseControl::inferenceControl(lrm_msgs::VehicleState state) {
 
 	tempVelocity.value = state.velocity;
 	tempVelocity.header = state.header;
+
+	if(this->cruiseVelocity.value<0 && !reverse) {
+
+	}
+
 
 	double erroV = tempVelocity.value - this->cruiseVelocity.value;
 	double dV = tempVelocity.value - this->lastVelocity.value;
@@ -141,6 +152,9 @@ void CruiseControl::inferenceControl(lrm_msgs::VehicleState state) {
 
 	}
 
+
+
+
 	if(this->cruiseVelocity.value==0) {
 		throttle.value = 0;
 		accelFlag = false;
@@ -161,6 +175,8 @@ void CruiseControl::inferenceControl(lrm_msgs::VehicleState state) {
 void CruiseControl::canCallback(const lrm_msgs::VehicleState::ConstPtr& state) {
 
 	double vel = state->velocity * 3.6;//inference built in km/h
+
+	if(reverse) vel *= -1;
 
 	lrm_msgs::VehicleState tempState;
 	tempState.header = state->header;
