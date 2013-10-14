@@ -52,28 +52,6 @@ void imuCallback(const sensor_msgs::Imu::ConstPtr msg) {
 	_yaw = tf::getYaw(msg->orientation);
 }
 
-void publishTF() {
-	tf::TransformBroadcaster odom_broadcaster;
-/*
-	tf::StampedTransform trans_base_enc;
-	try {
-		listener.lookupTransform("base_footprint", "odom", ros::Time(0), trans_base_enc);
-	} catch (tf::TransformException &ex) {
-		ROS_ERROR("position_node: %s", ex.what());
-		return false;
-	}
-*/
-	tf::Quaternion qt = tf::createQuaternionFromYaw(_yaw);
-	tf::Transform trans_odom_encoder(qt, tf::Vector3(0.0, 0.0, 0.0));
-
-	tf::StampedTransform trans_odom_base_st(trans_odom_encoder, ros::Time::now(),
-			"/odom", "/base_footprint");
-
-	odom_broadcaster.sendTransform(trans_odom_base_st);
-
-	//ROS_INFO_STREAM("fake odom publishing...");
-}
-
 int main(int argc, char **argv) {
 	ros::init(argc, argv, "fake_odom_frame");
 	ros::NodeHandle nh;
@@ -84,10 +62,20 @@ int main(int argc, char **argv) {
 	ros::Subscriber imu_sub = nh.subscribe<sensor_msgs::Imu>("imu_data", 1, &imuCallback);
 	ros::Subscriber odom_sub = nh.subscribe<nav_msgs::Odometry>("odom", 1, &odomCallback);
 
+	tf::TransformBroadcaster odom_broadcaster;
+
 	_stop_publish = false;
-	while(!_stop_publish) {
+
+	while (ros::ok()) {
 		ros::spinOnce();
-		publishTF();
+
+		if (!_stop_publish) {
+			tf::Quaternion qt = tf::createQuaternionFromYaw(_yaw);
+			tf::Transform trans_odom_encoder(qt, tf::Vector3(0.0, 0.0, 0.0));
+			tf::StampedTransform trans_odom_base_st(trans_odom_encoder, ros::Time::now(), "/odom", "/base_footprint");
+			odom_broadcaster.sendTransform(trans_odom_base_st);
+		}
+
 		rate.sleep();
 	}
 
