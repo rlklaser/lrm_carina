@@ -41,4 +41,7 @@
 	<property
 		name="heading"
 		value="0.0" />
+	<property
+		name="declination"
+		value="-0.35" />
 </robot>

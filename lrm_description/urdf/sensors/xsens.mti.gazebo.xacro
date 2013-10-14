@@ -66,7 +66,9 @@
 				<headingDriftFrequency>0.0</headingDriftFrequency>
 				
 				<referenceHeading>${heading}</referenceHeading>
-				
+
+				<rpyOffset>0.0 0.0 ${declination}</rpyOffset>
+
 				<robotNamespace>${namespace}</robotNamespace>
 			</plugin>
 		</gazebo>
