@@ -42,7 +42,7 @@ void poseCallback(const geometry_msgs::PoseWithCovarianceStampedPtr msg) {
 	//odom_msgs.header.stamp = msg->header.stamp;
 
 	odom_msgs.header = msg->header;
-	odom_msgs.header.frame_id = "/odom_combined";
+	odom_msgs.header.frame_id = "/odom";
 	odom_msgs.child_frame_id = "/base_footprint";
 	odom_msgs.pose = msg->pose;
 	odom_msgs.pose.pose.position.z = 0;
