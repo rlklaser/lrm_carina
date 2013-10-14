@@ -61,7 +61,7 @@ void imuCallback(sensor_msgs::Imu::ConstPtr msg)
 	_time_drift = _drift * sec;
 
 	sensor_msgs::Imu imu = *msg;
-	yaw = angles::normalize_angle(yaw + _offset + _time_drift);
+	yaw = angles::normalize_angle(yaw + _offset + _time_drift /*+ angles::from_degrees(90)*/);
 	imu.orientation = tf::createQuaternionMsgFromRollPitchYaw(roll, pitch, yaw);
 
 	imu_pub.publish(imu);
