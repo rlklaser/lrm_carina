@@ -583,7 +583,7 @@ bool WheelOdometry::calcTransform() {
 	//);
 	//trans_odom_base_st *= trans_compass;
 
-    //trans_odom_base_st *= trans_base_enc.inverse();
+    trans_odom_base_st *= trans_base_enc.inverse();
 	//tf::transformStampedTFToMsg(trans_odom_base_st, base_to_odom_msg);
 	//base_to_odom_msg.header.stamp = current_time;
 	base_to_odom_msg = trans_odom_base_st;
