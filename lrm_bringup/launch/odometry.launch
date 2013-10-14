@@ -8,8 +8,10 @@
 	
 	<include file="$(find lrm_bringup)/launch/odometry_gps.launch" />
 	<include file="$(find lrm_bringup)/launch/odometry_ekf.launch" />
+	<!-- localization
 	<include file="$(find lrm_bringup)/launch/odometry_refine.launch" />
-
+ 	-->
+ 	
 	<node
 		name="odom_relay"
 		pkg="topic_tools"
@@ -30,8 +32,8 @@
 			to="/gps_odometry/odom" />
 
 	</node>
--->
 
+- on localization.launch
 	<node
 		pkg="tf"
 		type="static_transform_publisher"
@@ -49,5 +51,6 @@
 		name="compass_frame"
 		respawn="true"
 		output="screen" />
+-->
 		
 </launch>
