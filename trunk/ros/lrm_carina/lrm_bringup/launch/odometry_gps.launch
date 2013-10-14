@@ -6,13 +6,19 @@
 		value="true" />
 	-->
 	
+	<!-- 
 	<node
 		pkg="tf"
 		type="static_transform_publisher"
 		name="gps_odom_broadcaster"
-		args="0 0 0 0 0 0 map gsp_odom 50"
+		args="0 0 0 0 0 0 map gps_odom 50"
 		output="screen" />
-
+    -->
+ 
+ 	<rosparam
+		command="load"
+		file="$(find lrm_bringup)/params/odometry_gps_params.yaml" />
+		
 	<node
 		name="gps_odometry"
 		pkg="lrm_odometry"
@@ -37,7 +43,6 @@
 		<param
 			name="rot_cov"
 			value="99999" />
--->
 		<param
 			name="pos_cov"
 			value="0.00002" />
@@ -50,6 +55,7 @@
 		<param
 			name="child_frame_id"
 			value="base_footprint" />
+-->
 	</node>
 
 </launch>

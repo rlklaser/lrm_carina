@@ -1,0 +1,18 @@
+robot_pose_ekf:
+
+  output_frame: odom
+  freq: 50.0
+  sensor_timeout: 1.0
+  odom_used: true
+  imu_used: false
+  vo_used: false
+  gps_used: true
+  debug: false
+  self_diagnose: false
+  publish_tf: false
+
+ekf_odometry:
+  
+  frame_id: odom
+  child_frame_id: base_footprint
+  

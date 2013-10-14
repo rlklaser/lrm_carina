@@ -5,21 +5,29 @@
 		name="/use_sim_time"
 		value="true" />
 	-->
-	
+	<!-- 
 	<node
 		pkg="tf"
 		type="static_transform_publisher"
 		name="ekf_odom_broadcaster"
 		args="0 0 0 0 0 0 map ekf_odom 50"
 		output="screen" />
+    -->
+ 
+<!-- pkg="lrm_odometry" -->
 
+	<rosparam
+		command="load"
+		file="$(find lrm_bringup)/params/odometry_ekf_params.yaml" />
+		
 	<node
-		pkg="lrm_odometry"
+		pkg="robot_pose_ekf"
 		type="robot_pose_ekf"
 		name="robot_pose_ekf"
 		output="screen"
 		respawn="true"
 	>
+<!-- 
 		<param
 			name="output_frame"
 			value="/odom_combined" />
@@ -50,6 +58,7 @@
 		<param
 			name="publish_tf"
 			value="false" />
+-->
 
 		<remap
 			from="imu_data"
@@ -69,13 +78,14 @@
 		output="screen"
 		respawn="true"
 	>
+<!-- 
 		<param
 			name="frame_id"
 			value="ekf_odom" />
 		<param
 			name="child_frame_id"
 			value="base_footprint" />
-
+ -->
 		<remap
 			from="pose"
 			to="/odom_combined" />

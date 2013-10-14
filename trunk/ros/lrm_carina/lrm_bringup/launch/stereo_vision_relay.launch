@@ -1,0 +1,31 @@
+<launch>
+
+	<node
+		name="cluster_filter_relay"
+		pkg="topic_tools"
+		type="relay"
+		args="/cloud/points_zigzag_filter /cloud_in"
+		respawn="true"
+		output="screen" />
+
+	<node
+		name="local_cluster_filter_relay"
+		pkg="topic_tools"
+		type="relay"
+		args="/cloud/points_local_scan /local_cloud_in"
+		respawn="true"
+		output="screen" />
+
+<!-- 
+args="/cloud/ground_points_through_voxel /ground_cloud_in"
+ -->
+ 
+	<node
+		name="cluster_ground_filter_relay"
+		pkg="topic_tools"
+		type="relay"
+		args="/cloud/ground_points_flattened /ground_cloud_in"
+		respawn="true"
+		output="screen" />
+
+</launch>
