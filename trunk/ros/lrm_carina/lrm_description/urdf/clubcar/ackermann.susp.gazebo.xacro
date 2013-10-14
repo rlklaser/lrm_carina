@@ -146,6 +146,7 @@
 			<!-- 
 			<topicName>carina_controller/cmd_vel</topicName>
 		    -->
+		    <topicName>cmd_vel</topicName>
 			<robotNamespace>${namespace}</robotNamespace>
 			
 			<interface:position name="position_iface_ackermann" />
