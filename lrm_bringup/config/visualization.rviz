@@ -4,11 +4,14 @@ Panels:
     Name: Displays
     Property Tree Widget:
       Expanded:
+        - /TF1/Frames1
         - /TF1/Tree1
         - /Camera1/Visibility1
         - /Camera2/Visibility1
-        - /Odometry4
-        - /Odometry4/Status1
+        - /PointCloud23
+        - /Odometry3
+        - /PointCloud26
+        - /PointCloud27
       Splitter Ratio: 0.847826
     Tree Height: 193
   - Class: rviz/Tool Properties
@@ -33,9 +36,101 @@ Visualization Manager:
   Class: ""
   Displays:
     - Class: rviz/TF
-      Enabled: false
+      Enabled: true
       Frame Timeout: 15
       Frames:
+        /ackermann_bar_link:
+          Value: true
+        /ackermann_left_susp_link:
+          Value: true
+        /ackermann_right_susp_link:
+          Value: true
+        /base_footprint:
+          Value: true
+        /base_front_sensors:
+          Value: true
+        /base_link:
+          Value: true
+        /base_odometry:
+          Value: true
+        /base_steering_wheel:
+          Value: true
+        /base_stereo_camera:
+          Value: true
+        /bbx_base_front_left_link:
+          Value: true
+        /bbx_base_front_right_link:
+          Value: true
+        /bbx_base_rear_left_link:
+          Value: true
+        /bbx_base_rear_right_link:
+          Value: true
+        /bbx_top_front_left_link:
+          Value: true
+        /bbx_top_front_right_link:
+          Value: true
+        /bbx_top_rear_left_link:
+          Value: true
+        /bbx_top_rear_right_link:
+          Value: true
+        /body_link:
+          Value: true
+        /camera_center_link:
+          Value: true
+        /center_mass_link:
+          Value: true
+        /compass_link:
+          Value: true
+        /front_axle_link:
+          Value: true
+        /front_left_bar_link:
+          Value: true
+        /front_left_susp_link:
+          Value: true
+        /front_left_wheel:
+          Value: true
+        /front_right_bar_link:
+          Value: true
+        /front_right_susp_link:
+          Value: true
+        /front_right_wheel:
+          Value: true
+        /heading_link:
+          Value: true
+        /imu_link:
+          Value: true
+        /map:
+          Value: true
+        /odom:
+          Value: true
+        /rear_axle_link:
+          Value: true
+        /rear_left_bar_link:
+          Value: true
+        /rear_left_susp_link:
+          Value: true
+        /rear_left_wheel:
+          Value: true
+        /rear_right_bar_link:
+          Value: true
+        /rear_right_susp_link:
+          Value: true
+        /rear_right_wheel:
+          Value: true
+        /steer_link:
+          Value: true
+        /stereo_camera:
+          Value: true
+        /stereo_camera/left_frame:
+          Value: true
+        /stereo_camera/left_optical_frame:
+          Value: true
+        /stereo_camera/right_frame:
+          Value: true
+        /stereo_camera/right_optical_frame:
+          Value: true
+        /world:
+          Value: true
         All Enabled: true
       Marker Scale: 0.7
       Name: TF
@@ -43,9 +138,78 @@ Visualization Manager:
       Show Axes: true
       Show Names: false
       Tree:
-        {}
+        /world:
+          /map:
+            /odom:
+              /base_footprint:
+                /base_link:
+                  /base_front_sensors:
+                    /base_stereo_camera:
+                      /camera_center_link:
+                        /stereo_camera:
+                          {}
+                      /stereo_camera/left_frame:
+                        /stereo_camera/left_optical_frame:
+                          {}
+                      /stereo_camera/right_frame:
+                        /stereo_camera/right_optical_frame:
+                          {}
+                  /base_steering_wheel:
+                    {}
+                  /bbx_base_front_left_link:
+                    {}
+                  /bbx_base_front_right_link:
+                    {}
+                  /bbx_base_rear_left_link:
+                    {}
+                  /bbx_base_rear_right_link:
+                    {}
+                  /bbx_top_front_left_link:
+                    {}
+                  /bbx_top_front_right_link:
+                    {}
+                  /bbx_top_rear_left_link:
+                    {}
+                  /bbx_top_rear_right_link:
+                    {}
+                  /body_link:
+                    {}
+                  /center_mass_link:
+                    {}
+                  /front_axle_link:
+                    /front_left_susp_link:
+                      /front_left_bar_link:
+                        /front_left_wheel:
+                          {}
+                    /front_right_susp_link:
+                      /front_right_bar_link:
+                        /front_right_wheel:
+                          {}
+                    /heading_link:
+                      {}
+                    /steer_link:
+                      /ackermann_bar_link:
+                        /ackermann_left_susp_link:
+                          {}
+                        /ackermann_right_susp_link:
+                          {}
+                  /imu_link:
+                    {}
+                  /rear_axle_link:
+                    /base_odometry:
+                      {}
+                    /rear_left_susp_link:
+                      /rear_left_bar_link:
+                        /rear_left_wheel:
+                          {}
+                    /rear_right_susp_link:
+                      /rear_right_bar_link:
+                        /rear_right_wheel:
+                          {}
+                /compass_link:
+                  {}
       Update Interval: 0
-      Value: false
+      Value: true
     - Alpha: 0.5
       Cell Size: 1
       Class: rviz/Grid
@@ -370,13 +534,13 @@ Visualization Manager:
       Topic: /map
       Value: true
     - Class: rviz/MarkerArray
-      Enabled: false
+      Enabled: true
       Marker Topic: /occupied_cells_vis_array
       Name: MarkerArray
       Namespaces:
         {}
       Queue Size: 100
-      Value: false
+      Value: true
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
@@ -408,16 +572,16 @@ Visualization Manager:
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
-        Max Value: 5.2034
-        Min Value: -0.373463
+        Max Value: 0.527353
+        Min Value: 0.101
         Value: true
       Axis: Z
       Channel Name: x
       Class: rviz/PointCloud2
-      Color: 255; 255; 255
-      Color Transformer: AxisColor
+      Color: 255; 85; 127
+      Color Transformer: FlatColor
       Decay Time: 0
-      Enabled: false
+      Enabled: true
       Max Color: 255; 255; 255
       Max Intensity: 4096
       Min Color: 0; 0; 0
@@ -429,10 +593,10 @@ Visualization Manager:
       Size (Pixels): 3
       Size (m): 0.01
       Style: Points
-      Topic: /cloud_filtered
+      Topic: /cloud/points_zigzag_filter
       Use Fixed Frame: true
       Use rainbow: true
-      Value: false
+      Value: true
     - Alpha: 0.6
       Class: rviz/GridCells
       Color: 25; 255; 0
@@ -494,23 +658,23 @@ Visualization Manager:
     - Angle Tolerance: 0.1
       Class: rviz/Odometry
       Color: 255; 255; 0
-      Enabled: false
+      Enabled: true
       Keep: 1000
       Length: 1
       Name: Odometry
       Position Tolerance: 0.1
       Topic: /gps_odometry/odom
-      Value: false
+      Value: true
     - Angle Tolerance: 0.1
       Class: rviz/Odometry
       Color: 255; 25; 0
-      Enabled: false
+      Enabled: true
       Keep: 1000
       Length: 1
       Name: Odometry
       Position Tolerance: 0.1
       Topic: /ekf_odometry/odom
-      Value: false
+      Value: true
     - Alpha: 1
       Axes Length: 1
       Axes Radius: 0.1
@@ -603,7 +767,7 @@ Visualization Manager:
       Color: 255; 255; 255
       Color Transformer: AxisColor
       Decay Time: 0
-      Enabled: true
+      Enabled: false
       Max Color: 255; 255; 255
       Max Intensity: 4096
       Min Color: 0; 0; 0
@@ -618,16 +782,72 @@ Visualization Manager:
       Topic: /octomap_point_cloud_centers
       Use Fixed Frame: true
       Use rainbow: true
-      Value: true
+      Value: false
     - Angle Tolerance: 0.1
       Class: rviz/Odometry
       Color: 0; 255; 0
-      Enabled: true
+      Enabled: false
       Keep: 100
       Length: 1
       Name: Odometry
       Position Tolerance: 0.1
       Topic: /enu
+      Value: false
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 1.10214
+        Min Value: -0.708143
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz/PointCloud2
+      Color: 255; 255; 255
+      Color Transformer: AxisColor
+      Decay Time: 0
+      Enabled: true
+      Max Color: 255; 255; 255
+      Max Intensity: 4096
+      Min Color: 0; 0; 0
+      Min Intensity: 0
+      Name: PointCloud2
+      Position Transformer: XYZ
+      Queue Size: 10
+      Selectable: true
+      Size (Pixels): 3
+      Size (m): 0.01
+      Style: Points
+      Topic: /cloud/gd_points_voxel
+      Use Fixed Frame: true
+      Use rainbow: true
+      Value: true
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 10
+        Min Value: -10
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz/PointCloud2
+      Color: 255; 255; 255
+      Color Transformer: RGB8
+      Decay Time: 0
+      Enabled: true
+      Max Color: 255; 255; 255
+      Max Intensity: 4096
+      Min Color: 0; 0; 0
+      Min Intensity: 0
+      Name: PointCloud2
+      Position Transformer: XYZ
+      Queue Size: 10
+      Selectable: true
+      Size (Pixels): 3
+      Size (m): 0.01
+      Style: Points
+      Topic: /cloud/ngd_points_voxel
+      Use Fixed Frame: true
+      Use rainbow: true
       Value: true
   Enabled: true
   Global Options:
@@ -649,17 +869,17 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 8.07981
+      Distance: 25.3378
       Focal Point:
-        X: 0.461628
-        Y: -0.392806
-        Z: 1.21895
+        X: 15.6153
+        Y: 9.30849
+        Z: 1.76788
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 0.262692
+      Pitch: 0.012692
       Target Frame: /base_footprint
       Value: Orbit (rviz)
-      Yaw: 5.34705
+      Yaw: 4.21206
     Saved: ~
 Window Geometry:
   Camera:
@@ -681,5 +901,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1267
-  X: 1
-  Y: 98
+  X: 1455
+  Y: 82

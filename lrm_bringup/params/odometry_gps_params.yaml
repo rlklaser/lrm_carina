@@ -3,6 +3,8 @@ gps_odometry:
   pos_cov: 0.00002
   rot_cov: 99999
   
-#  frame_id: odom
-  frame_id: imu_link  
-  child_frame_id: /base_footprint
+  frame_id: odom
+#  frame_id: imu_link  
+#  child_frame_id: /base_footprint
+  child_frame_id: /imu_link
+  

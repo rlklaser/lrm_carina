@@ -14,14 +14,14 @@
 		output="screen" />
     -->
  
-<!-- pkg="lrm_odometry" -->
+<!-- pkg="robot_pose_ekf" -->
 
 	<rosparam
 		command="load"
 		file="$(find lrm_bringup)/params/odometry_ekf_params.yaml" />
 		
 	<node
-		pkg="robot_pose_ekf"
+		pkg="lrm_odometry"
 		type="robot_pose_ekf"
 		name="robot_pose_ekf"
 		output="screen"
@@ -61,14 +61,18 @@
 -->
 
 		<remap
-			from="imu_data"
+			from="imu_data_x"
 			to="/lse_xsens_mti/xsens/imu/data" />
+		<remap
+			from="imu_data"
+			to="/calibrated/imu/data" />
 		<remap
 			from="gps"
 			to="/gps_odometry/odom" />
 		<remap
 			from="odom"
 			to="/wheel_odometry/odom" />
+			
 	</node>
 
 	<node
@@ -88,7 +92,7 @@
  -->
 		<remap
 			from="pose"
-			to="/odom_combined" />
+			to="/robot_pose_ekf/pose" />
 	</node>
 
 </launch>

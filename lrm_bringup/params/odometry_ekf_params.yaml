@@ -1,10 +1,10 @@
 robot_pose_ekf:
 
   output_frame: odom
-  freq: 50.0
+  freq: 20.0
   sensor_timeout: 1.0
   odom_used: true
-  imu_used: false
+  imu_used: true
   vo_used: false
   gps_used: true
   debug: false

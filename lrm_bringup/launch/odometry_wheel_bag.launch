@@ -6,13 +6,15 @@
 		value="true" />
 	-->
 	
+	<!-- 
 	<node
 		pkg="tf"
 		type="static_transform_publisher"
 		name="wheel_odom_broadcaster"
 		args="0 0 0 0 0 0 map wheel_odom 50"
 		output="screen" />
-
+    -->
+ 
 	<rosparam
 		command="load"
 		file="$(find lrm_bringup)/params/odometry_bag_params.yaml" />
