@@ -62,11 +62,12 @@ sensor_msgs::PointCloud2 ground_points;
 sensor_msgs::PointCloud2 no_ground_points;
 sensor_msgs::PointCloud2 filtered_points;
 
-void pointcloudCallback(const sensor_msgs::PointCloud2::ConstPtr& msg)
-{
+typedef pcl::PointXYZRGB PointT;
+
+void pointcloudCallback(const sensor_msgs::PointCloud2::ConstPtr& msg) {
 	//pcl::PointCloud<pcl::PointXYZ> cloud;
 
-	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered(new pcl::PointCloud<pcl::PointXYZ>);
+	pcl::PointCloud<PointT>::Ptr cloud_filtered(new pcl::PointCloud<PointT>);
 	//pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_out(new pcl::PointCloud<pcl::PointXYZ>);
 	pcl::ModelCoefficients::Ptr coefficients(new pcl::ModelCoefficients());
 	pcl::PointIndices::Ptr inliers(new pcl::PointIndices());
@@ -76,7 +77,7 @@ void pointcloudCallback(const sensor_msgs::PointCloud2::ConstPtr& msg)
 	//pcl::ModelCoefficients coefficients;
 	//pcl::PointIndices inliers;
 	// Create the segmentation object
-	pcl::SACSegmentation<pcl::PointXYZ> seg;
+	pcl::SACSegmentation<PointT> seg;
 	// Optional
 	seg.setOptimizeCoefficients(true);
 	// Mandatory
@@ -84,7 +85,8 @@ void pointcloudCallback(const sensor_msgs::PointCloud2::ConstPtr& msg)
 	seg.setMethodType(pcl::SAC_RANSAC);
 	//seg.setMethodType(pcl::SAC_PROSAC);
 	seg.setDistanceThreshold(0.25);
-	Eigen::Vector3f axis(1,1,0);
+	//Eigen::Vector3f axis(1,1,0);
+	Eigen::Vector3f axis(0, 0, 1);
 	seg.setAxis(axis);
 	//seg.setEpsAngle(M_PI/32);
 
@@ -93,20 +95,24 @@ void pointcloudCallback(const sensor_msgs::PointCloud2::ConstPtr& msg)
 
 	//if(fabs(coefficients->values[2])>0.05) return;
 
+	//test Z axis;
+	//if (fabs(coefficients->values[2]) < 0.90)
+	//	return;
+
 	// Publish the model coefficients
 	cf_pub.publish(*coefficients);
 
-	pcl::ExtractIndices<pcl::PointXYZ> extract_gd;
+	pcl::ExtractIndices<PointT> extract_gd;
 	extract_gd.setInputCloud(cloud_filtered);
 	extract_gd.setIndices(inliers);
 	extract_gd.setNegative(false);
 
-	pcl::ExtractIndices<pcl::PointXYZ> extract_ngd;
+	pcl::ExtractIndices<PointT> extract_ngd;
 	extract_ngd.setInputCloud(cloud_filtered);
 	extract_ngd.setIndices(inliers);
 	extract_ngd.setNegative(true);
 
-	pcl::PointCloud<pcl::PointXYZ> cloud_out;
+	pcl::PointCloud<PointT> cloud_out;
 
 	extract_gd.filter(cloud_out);
 	pcl::toROSMsg(cloud_out, ground_points);
@@ -116,21 +122,22 @@ void pointcloudCallback(const sensor_msgs::PointCloud2::ConstPtr& msg)
 	pcl::toROSMsg(cloud_out, no_ground_points);
 	pc_pub_ngd.publish(no_ground_points);
 
-	pcl::RadiusOutlierRemoval<pcl::PointXYZ> rorfilter(true); // Initializing with true will allow us to extract the removed indices
-	rorfilter.setInputCloud(cloud_filtered);
-	rorfilter.setRadiusSearch(0.1);
-	rorfilter.setMinNeighborsInRadius(5);
-	rorfilter.setNegative(false);
-	rorfilter.filter(cloud_out);
-	// The resulting cloud_out contains all points of cloud_in that have 4 or less neighbors within the 0.1 search radius
-	//indices_rem = rorfilter.getRemovedIndices();
-	// The indices_rem array indexes all points of cloud_in that have 5 or more neighbors within the 0.1 search radius
-	pcl::toROSMsg(cloud_out, filtered_points);
-	pc_pub_filter.publish(filtered_points);
+	/*
+	 pcl::RadiusOutlierRemoval<pcl::PointXYZ> rorfilter(true); // Initializing with true will allow us to extract the removed indices
+	 rorfilter.setInputCloud(cloud_filtered);
+	 rorfilter.setRadiusSearch(0.1);
+	 rorfilter.setMinNeighborsInRadius(5);
+	 rorfilter.setNegative(false);
+	 rorfilter.filter(cloud_out);
+	 // The resulting cloud_out contains all points of cloud_in that have 4 or less neighbors within the 0.1 search radius
+	 //indices_rem = rorfilter.getRemovedIndices();
+	 // The indices_rem array indexes all points of cloud_in that have 5 or more neighbors within the 0.1 search radius
+	 pcl::toROSMsg(cloud_out, filtered_points);
+	 pc_pub_filter.publish(filtered_points);
+	 */
 }
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
 	ros::init(argc, argv, "plane_segment_node");
 	ros::NodeHandle n;
 	ros::NodeHandle nh_priv("~");
@@ -139,7 +146,7 @@ int main(int argc, char **argv)
 
 	pc_pub_gd = n.advertise<sensor_msgs::PointCloud2>(nh_priv.getNamespace() + "/ground_points", 1);
 	pc_pub_ngd = n.advertise<sensor_msgs::PointCloud2>(nh_priv.getNamespace() + "/no_ground_points", 1);
-	pc_pub_filter = n.advertise<sensor_msgs::PointCloud2>(nh_priv.getNamespace() + "/filtered_points", 1);
+	//pc_pub_filter = n.advertise<sensor_msgs::PointCloud2>(nh_priv.getNamespace() + "/filtered_points", 1);
 	cf_pub = n.advertise<pcl::ModelCoefficients>(nh_priv.getNamespace() + "/ground", 1);
 
 	ros::spin();
