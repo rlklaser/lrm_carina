@@ -56,6 +56,41 @@
 		</node>
 -->
 
+		<node
+			name="smooth_axis_filter_node"
+			pkg="lrm_wrappers"
+			type="smooth_axis_filter_node"
+			respawn="true"
+			output="screen"
+		>
+			<remap
+				from="points_in"
+				to="points_cluster" />
+		</node>
+
+		<node
+			name="zigzag_sum_filtered"
+			pkg="lrm_wrappers"
+			type="cloud_sum_node"
+			respawn="true"
+			output="screen"
+		>
+			<remap
+				from="points_in"
+				to="points_zigzag_filter" />
+			<remap
+				from="~points_out"
+				to="points_zigzag_filter_sum" />
+
+			<param
+				name="frame_count"
+				value="50000" />
+			<param
+				name="incremental"
+				value="true" />
+
+		</node>
+
 	</group>
 
 </launch>

@@ -4,7 +4,7 @@
 voxel_grid_nodelet:
   filter_field_name: z
   filter_limit_min: 0.0
-  filter_limit_max: 100.0
+  filter_limit_max: 45.0
   filter_limit_negative: False
   leaf_size: 0.05
   #keep_organized: true
@@ -18,7 +18,7 @@ voxel_grid_nodelet:
 pass_throught_range_nodelet:
   filter_field_name: x
   filter_limit_min: 0.0
-  filter_limit_max: 20.0
+  filter_limit_max: 30.0
   filter_limit_negative: False
   #keep_organized: true
   approximate_sync: true
@@ -56,8 +56,8 @@ local_scan_cutahead_points_nodelet:
   
 local_scan_points_nodelet:
   filter_field_name: z
-  filter_limit_min: 0.2
-  filter_limit_max: 1.8
+  filter_limit_min: 0.15
+  filter_limit_max: 1.85
   #keep_organized: true
   approximate_sync: true
   

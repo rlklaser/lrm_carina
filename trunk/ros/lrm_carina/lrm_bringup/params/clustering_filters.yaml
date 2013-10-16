@@ -3,6 +3,12 @@ region_growing_seg:
   min_size: 100
   max_size: 5000
   neighbours: 30
+
+#  k_search: 15
+#  min_size: 50
+#  max_size: 50000
+#  neighbours: 10
+
   curvature: 2.0
   smoothness: 35.0
 

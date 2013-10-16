@@ -28,6 +28,28 @@
 				to="points_voxel" />
 		</node>
 
+
+		<node
+			name="plane_segment"
+			pkg="lrm_wrappers"
+			type="plane_segment"
+			respawn="true"
+			output="screen"
+		>
+			<remap
+				from="points"
+				to="points_voxel" />
+				
+		   <remap
+				from="~ground_points"
+				to="gd_points_voxel" />
+		   <remap
+				from="~no_ground_points"
+				to="ngd_points_voxel" />
+		</node>
+
+
+
 		<node
 			pkg="nodelet"
 			type="nodelet"
@@ -38,7 +60,7 @@
 		>
 			<remap
 				from="~input"
-				to="points_voxel" />
+				to="ngd_points_voxel" />
 			<remap
 				from="~output"
 				to="points_through_range" />
@@ -70,7 +92,7 @@
 		>
 			<remap
 				from="~input"
-				to="points_voxel" />
+				to="gd_points_voxel" />
 			<remap
 				from="~output"
 				to="ground_points_through" />

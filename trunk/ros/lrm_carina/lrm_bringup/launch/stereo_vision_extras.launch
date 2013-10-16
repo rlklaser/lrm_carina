@@ -1,13 +1,13 @@
 <launch>
 
-	<group ns="/stereo">
+	<group ns="/cloud">
 	
 <!-- 
 		<node
 			pkg="nodelet"
 			type="nodelet"
 			name="feature_matcher_surf"
-			args="load lrm_stereo/feature_matcher /camera_nodelet_manager --no-bond"
+			args="load lrm_stereo/feature_matcher /camera_nodelet_manager - -no-bond"
 			respawn="true"
 			output="screen"
 		>
@@ -22,7 +22,7 @@
 			pkg="nodelet"
 			type="nodelet"
 			name="voxel_grid"
-			args="load pcl/VoxelGrid /camera_nodelet_manager --no-bond"
+			args="load pcl/VoxelGrid /camera_nodelet_manager - -no-bond"
 			output="screen"
 		>
 			<remap
@@ -37,23 +37,23 @@ leaf_size: 0.05
 </rosparam>
 		</node>
 
-<!-- 
+
 		<node
 			pkg="nodelet"
 			type="nodelet"
 			name="transform_cloud"
-			args="load lrm_navigation/transform_cloud /camera_nodelet_manager --no-bond"
+			args="load lrm_navigation/transform_cloud /camera_nodelet_manager - -no-bond"
 			respawn="true"
 			output="screen"
 		>
 		</node>
- -->
+
 
 <node
 			pkg="nodelet"
 			type="nodelet"
 			name="voxel_grid"
-			args="load pcl/StatisticalOutlierRemoval /camera_nodelet_manager --no-bond"
+			args="load pcl/StatisticalOutlierRemoval /camera_nodelet_manager - -no-bond"
 			output="screen"
 		>
 			<remap
@@ -65,7 +65,22 @@ stddev: 0.0
 negative: False
 </rosparam>
 		</node>
-		
+ -->
+
+		<node
+			name="plane_segment"
+			pkg="lrm_wrappers"
+			type="plane_segment"
+			respawn="true"
+			output="screen"
+		>
+			<remap
+				from="points"
+				to="points_voxel" />
+		</node>
+
+
+
 	</group>
 
 </launch>

@@ -58,4 +58,24 @@
 -->
 	</node>
 
+	<node
+		pkg="lrm_odometry"
+		type="from_fix"
+		name="odom_from_fix"
+		output="screen"
+		respawn="true"
+	>
+	<param
+			name="frame_id"
+			value="odom" />
+
+	<param
+			name="child_frame_id"
+			value="imu_link" />			
+
+		<remap
+			from="fix"
+			to="/lse_xsens_mti/xsens/fix" />
+	</node>
+	
 </launch>
