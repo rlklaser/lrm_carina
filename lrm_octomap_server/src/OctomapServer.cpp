@@ -759,12 +759,12 @@ bool OctomapServer::clearBBXSrv(BBXSrv::Request& req, BBXSrv::Response& resp) {
 		//ROS_INFO_STREAM("it: " << m_thresMin);
 
 		//free space
-		//it->setLogOdds(octomap::logodds(0));
-		m_octree->updateNode(it.getKey(), octomap::logodds(0));
+		it->setLogOdds(octomap::logodds(0));
+		//m_octree->updateNode(it.getKey(), octomap::logodds(0));
 	}
 
 	// TODO: eval which is faster (setLogOdds+updateInner or updateNode)
-	//m_octree->updateInnerOccupancy();
+	m_octree->updateInnerOccupancy();
 
 	//rlklaser:: let next read publish all
 	//publishAll(ros::Time::now());
