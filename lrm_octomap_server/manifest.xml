@@ -30,6 +30,8 @@
 	<rosdep name="octomap_msgs" />
 	<rosdep name="nodelet" />
 
+	<depend package="angles" />
+
 	<export>
 		<cpp
 			cflags="-I${prefix}/include -I${prefix}/cfg/cpp"

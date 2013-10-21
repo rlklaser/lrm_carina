@@ -61,7 +61,9 @@
 #include <pcl/io/pcd_io.h>
 #include <pcl/filters/extract_indices.h>
 #include <pcl/filters/passthrough.h>
-
+#include <pcl/common/centroid.h>
+#include <pcl/common/common.h>
+#include <pcl/common/distances.h>
 
 #include <tf/transform_listener.h>
 #include <tf/message_filter.h>
@@ -76,16 +78,20 @@
 #include <octomap/OcTreeKey.h>
 #include <octomap/ColorOcTree.h>
 
+#include <angles/angles.h>
+
 namespace octomap_server {
 class OctomapServer{
 
 public:
-  typedef pcl::PointCloud<pcl::PointXYZ> PCLPointCloud;
+  //typedef pcl::PointXYZ PointT;
+  typedef pcl::PointXYZRGB PointT;
+  typedef pcl::PointCloud<PointT> PCLPointCloud;
   typedef octomap_msgs::GetOctomap OctomapSrv;
   typedef octomap_msgs::BoundingBoxQuery BBXSrv;
 
-  //typedef octomap::ColorOcTree OcTreeT;
-  typedef octomap::OcTree OcTreeT;
+  typedef octomap::ColorOcTree OcTreeT;
+  //typedef octomap::OcTree OcTreeT;
 
   OctomapServer(ros::NodeHandle nh = ros::NodeHandle("~"));
   virtual ~OctomapServer();
@@ -130,7 +136,7 @@ protected:
   * @param ground scan endpoints on the ground plane (only clear space)
   * @param nonground all other endpoints (clear up to occupied endpoint)
   */
-  virtual void insertScan(const tf::Point& sensorOrigin, const PCLPointCloud& ground, const PCLPointCloud& nonground);
+  virtual void insertScan(const tf::StampedTransform& sensorOrigin, const PCLPointCloud& ground, const PCLPointCloud& nonground);
 
   /// label the input cloud "pc" into ground and nonground. Should be in the robot's fixed frame (not world!)
   void filterGroundPlane(const PCLPointCloud& pc, PCLPointCloud& ground, PCLPointCloud& nonground) const;
@@ -179,6 +185,8 @@ protected:
 
   }
 
+  void putCenterMarker(tf::Quaternion orientation, Eigen::Vector4f centroid, Eigen::Vector4f max, Eigen::Vector4f min);
+
   /**
    * Adjust data of map due to a change in its info properties (origin or size,
    * resolution needs to stay fixed). map already contains the new map info,
@@ -196,7 +204,7 @@ protected:
 
   static std_msgs::ColorRGBA heightMapColor(double h);
   ros::NodeHandle m_nh;
-  ros::Publisher m_markerPub, m_binaryMapPub, m_fullMapPub, m_pointCloudPub, m_collisionObjectPub, m_mapPub, m_cmapPub;
+  ros::Publisher m_markerPub, m_markerSinglePub, m_binaryMapPub, m_fullMapPub, m_pointCloudPub, m_collisionObjectPub, m_mapPub, m_cmapPub;
   message_filters::Subscriber<sensor_msgs::PointCloud2>* m_pointCloudSub;
   message_filters::Subscriber<sensor_msgs::PointCloud2>* m_pointCloudGroundSub;
   tf::MessageFilter<sensor_msgs::PointCloud2>* m_tfPointCloudSub;
@@ -256,6 +264,7 @@ protected:
 
   int m_unknownCost;
 
+  int _single_marker_id;
 private:
   boost::mutex m_mutex;
 
