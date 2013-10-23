@@ -45,9 +45,23 @@ using octomap_msgs::Octomap;
 namespace octomap_server {
 
 OctomapServer::OctomapServer(ros::NodeHandle nh) :
-		m_nh(), m_pointCloudSub(NULL), m_tfPointCloudSub(NULL), m_octree(NULL), m_maxRange(-1.0), m_worldFrameId("/map"), m_baseFrameId("base_footprint"), m_SourceFrameId("stereo_camera"), m_useHeightMap(true), m_colorFactor(0.8), m_latchedTopics(true), m_res(0.1), m_treeDepth(0), m_maxTreeDepth(0), m_probHit(0.7), m_probMiss(0.4), m_thresMin(0.12), m_thresMax(
-				0.97), m_pointcloudMinZ(-std::numeric_limits<double>::max()), m_pointcloudMaxZ(std::numeric_limits<double>::max()), m_occupancyMinZ(-std::numeric_limits<double>::max()), m_occupancyMaxZ(std::numeric_limits<double>::max()), m_minSizeX(0.0), m_minSizeY(0.0), m_filterSpeckles(false), m_filterGroundPlane(false), m_groundFilterDistance(0.04), m_groundFilterAngle(
-				0.15), m_groundFilterPlaneDistance(0.07), m_compressMap(false), m_incrementalUpdate(false), m_unknownCost(-1) {
+		m_nh(), m_pointCloudSub(NULL), m_tfPointCloudSub(NULL),
+		m_octree(NULL), m_maxRange(-1.0), m_worldFrameId("/map"),
+		m_baseFrameId("base_footprint"), m_SourceFrameId("stereo_camera"),
+		m_useHeightMap(true), m_colorFactor(0.8), m_latchedTopics(true),
+		m_res(0.1), m_treeDepth(0), m_maxTreeDepth(0),
+		m_probHitNear(0.7), m_probHitFar(0.7), m_probFarDist(25.0),
+		m_probMiss(0.4), m_thresMin(0.12), m_thresMax(0.97),
+		m_pointcloudMinZ(-std::numeric_limits<double>::max()),
+		m_pointcloudMaxZ(std::numeric_limits<double>::max()),
+		m_occupancyMinZ(-std::numeric_limits<double>::max()),
+		m_occupancyMaxZ(std::numeric_limits<double>::max()),
+		m_minSizeX(0.0), m_minSizeY(0.0), m_filterSpeckles(false),
+		m_filterGroundPlane(false), m_groundFilterDistance(0.04),
+		m_groundFilterAngle(0.15), m_groundFilterPlaneDistance(0.07),
+		m_compressMap(false), m_incrementalUpdate(false), m_unknownCost(-1),
+		m_occupancyThres(0)
+{
 	ros::NodeHandle private_nh(nh);
 	private_nh.param("frame_id", m_worldFrameId, m_worldFrameId);
 	private_nh.param("source_frame_id", m_SourceFrameId, m_SourceFrameId);
@@ -74,10 +88,13 @@ OctomapServer::OctomapServer(ros::NodeHandle nh) :
 	private_nh.param("sensor_model/max_range", m_maxRange, m_maxRange);
 
 	private_nh.param("resolution", m_res, m_res);
-	private_nh.param("sensor_model/hit", m_probHit, m_probHit);
+	private_nh.param("sensor_model/hit_near", m_probHitNear, m_probHitNear);
+	private_nh.param("sensor_model/hit_far", m_probHitFar, m_probHitFar);
+	private_nh.param("sensor_model/far_dist", m_probFarDist, m_probFarDist);
 	private_nh.param("sensor_model/miss", m_probMiss, m_probMiss);
 	private_nh.param("sensor_model/min", m_thresMin, m_thresMin);
 	private_nh.param("sensor_model/max", m_thresMax, m_thresMax);
+	private_nh.param("sensor_model/occ", m_occupancyThres, m_occupancyThres);
 	private_nh.param("compress_map", m_compressMap, m_compressMap);
 	private_nh.param("incremental_2D_projection", m_incrementalUpdate, m_incrementalUpdate);
 
@@ -92,10 +109,12 @@ OctomapServer::OctomapServer(ros::NodeHandle nh) :
 
 	// initialize octomap object & params
 	m_octree = new OcTreeT(m_res);
-	m_octree->setProbHit(m_probHit);
+	m_octree->setProbHit(m_probHitNear);
 	m_octree->setProbMiss(m_probMiss);
 	m_octree->setClampingThresMin(m_thresMin);
 	m_octree->setClampingThresMax(m_thresMax);
+	m_octree->setOccupancyThres(m_occupancyThres);
+
 	m_treeDepth = m_octree->getTreeDepth();
 	m_maxTreeDepth = m_treeDepth;
 	m_gridmap.info.resolution = m_res;
@@ -408,6 +427,9 @@ void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPo
 		ROS_ERROR_STREAM("Could not generate Key for origin "<<sensorOrigin);
 	}
 
+	
+	double hit_dist = 0;
+	
 	if (!nonground.empty()) {
 		Eigen::Vector4f min_point;
 		Eigen::Vector4f max_point;
@@ -423,9 +445,13 @@ void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPo
 		tf::Quaternion oriA = tf::createQuaternionFromYaw(n);
 		tf::Quaternion oriB = sensorTf.getRotation();
 		tf::Quaternion oriC = oriA * oriB;
-		tf::Quaternion oriD(0,0,0,1);
+		tf::Quaternion oriD(0, 0, 0, 1);
 
-		putCenterMarker(oriD, centroid, max_point, min_point);
+		hit_dist = sensorOrigin.distance(cloudOrigin);
+
+		putCenterMarker(oriD, centroid, max_point, min_point, hit_dist);
+		
+		//pcl::euclideanDistance(cloudOrigin, sensorOrigin);
 	}
 
 	// instead of direct scan insertion, compute update to filter ground:
@@ -469,8 +495,14 @@ void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPo
 				occupied_cells.insert(key);
 
 				//m_octree->integrateNodeColor(key, it->r, it->g, it->b);
-//				m_octree->setNodeColor(key, it->r, it->g, it->b);
-//				m_octree->updateNode(key, true);
+				m_octree->setNodeColor(key, it->r, it->g, it->b);
+
+				if(hit_dist>m_probFarDist) {
+					m_octree->updateNode(key, octomap::logodds(m_probHitFar));
+				}
+				else {
+					m_octree->updateNode(key, true);
+				}
 
 				updateMinKey(key, m_updateBBXMin);
 				updateMaxKey(key, m_updateBBXMax);
@@ -496,7 +528,6 @@ void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPo
 
 	//m_octree->computeUpdate(nonground, sensorOrigin, free_cells, occupied_cells);
 
-
 	// mark free cells only if not seen occupied in this cloud
 	for (KeySet::iterator it = free_cells.begin(), end = free_cells.end(); it != end; ++it) {
 		if (occupied_cells.find(*it) == occupied_cells.end()) {
@@ -506,24 +537,24 @@ void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPo
 	}
 
 	/*
-	// now mark all occupied cells:
-	for (KeySet::iterator it = occupied_cells.begin(), end = occupied_cells.end(); it != end; it++) {
+	 // now mark all occupied cells:
+	 for (KeySet::iterator it = occupied_cells.begin(), end = occupied_cells.end(); it != end; it++) {
 
-		point3d point;
-		const OcTreeKey k = *it;
-		point = m_octree->keyToCoord(k);
-		double dist = point.distance(sensorOrigin);
+	 point3d point;
+	 const OcTreeKey k = *it;
+	 point = m_octree->keyToCoord(k);
+	 double dist = point.distance(sensorOrigin);
 
-		float new_odds = std::max(std::min((m_probHit / 2) + (1.0 / dist), 0.9), 0.51);
+	 float new_odds = std::max(std::min((m_probHit / 2) + (1.0 / dist), 0.9), 0.51);
 
-		ROS_INFO_STREAM("distance: " << dist << " new odds :" << new_odds);
+	 ROS_INFO_STREAM("distance: " << dist << " new odds :" << new_odds);
 
-		//m_octree->updateNode(*it, new_odds, true);
-		m_octree->updateNode(*it, true);
-		jn++;
-	}
+	 //m_octree->updateNode(*it, new_odds, true);
+	 m_octree->updateNode(*it, true);
+	 jn++;
+	 }
 
-	*/
+	 */
 
 	// TODO: eval lazy+updateInner vs. proper insertion
 	// non-lazy by default (updateInnerOccupancy() too slow for large maps)
@@ -633,7 +664,7 @@ void OctomapServer::_publishAll(const ros::Time& rostime) {
 				float x = it.getX();
 				float y = it.getY();
 
-				ColorOcTreeNode* node = (ColorOcTreeNode*)&it;
+				ColorOcTreeNode* node = (ColorOcTreeNode*) &it;
 
 				ColorOcTreeNode::Color node_color = node->getColor();
 				char r = node_color.r;
@@ -688,13 +719,12 @@ void OctomapServer::_publishAll(const ros::Time& rostime) {
 
 						double h = (1.0 - std::min(std::max((cubeCenter.z - minZ) / (maxZ - minZ), 0.0), 1.0)) * m_colorFactor;
 						occupiedNodesVis.markers[idx].colors.push_back(heightMapColor(h));
-					}
-					else {
+					} else {
 						//unsigned idx = it.getDepth();
 						//std_msgs::ColorRGBA color;//(0,0,0);
 						//ColorOcTreeNode::Color c = node->getColor();
 
-						std_msgs::ColorRGBA color;// << c.r << c.g << c.b;
+						std_msgs::ColorRGBA color; // << c.r << c.g << c.b;
 
 						color.r = r;
 						color.g = g;
@@ -715,14 +745,14 @@ void OctomapServer::_publishAll(const ros::Time& rostime) {
 
 					pclCloud.push_back(pt);
 					//pclCloud.push_back(pcl::PointXYZRGB(x, y, z, pcl::RGB(r, g, b)));
-/*
-					int rgb = ((int)r) << 16 | ((int)g) << 8 | ((int)b);
-					float frgb = rgb = *reinterpret_cast<float*>(&rgb);
+					/*
+					 int rgb = ((int)r) << 16 | ((int)g) << 8 | ((int)b);
+					 float frgb = rgb = *reinterpret_cast<float*>(&rgb);
 
-					pcl::PointXYZRGB pt = pcl::PointXYZRGB(x, y, z, frgb);
+					 pcl::PointXYZRGB pt = pcl::PointXYZRGB(x, y, z, frgb);
 
-					pclCloud.push_back(pt);
-*/
+					 pclCloud.push_back(pt);
+					 */
 				}
 			}
 		} else { // node not occupied => mark as free in 2D map if unknown so far
@@ -1024,7 +1054,7 @@ void OctomapServer::filterGroundPlane(const PCLPointCloud& pc, PCLPointCloud& gr
 
 }
 
-void OctomapServer::putCenterMarker(tf::Quaternion orientation, Eigen::Vector4f centroid, Eigen::Vector4f max, Eigen::Vector4f min) {
+void OctomapServer::putCenterMarker(tf::Quaternion orientation, Eigen::Vector4f centroid, Eigen::Vector4f max, Eigen::Vector4f min, double distance) {
 	uint32_t shape = visualization_msgs::Marker::CUBE;
 	visualization_msgs::Marker marker;
 	marker.header.frame_id = m_worldFrameId;
@@ -1044,11 +1074,11 @@ void OctomapServer::putCenterMarker(tf::Quaternion orientation, Eigen::Vector4f 
 	marker.pose.orientation.z = orientation.getZ();
 	marker.pose.orientation.w = orientation.getW();
 	/*
-	marker.pose.orientation.x = 0.0;
-	marker.pose.orientation.y = 0.0;
-	marker.pose.orientation.z = 0.0;
-	marker.pose.orientation.w = 1.0;
-	*/
+	 marker.pose.orientation.x = 0.0;
+	 marker.pose.orientation.y = 0.0;
+	 marker.pose.orientation.z = 0.0;
+	 marker.pose.orientation.w = 1.0;
+	 */
 
 	marker.scale.x = (max[0] - min[0]);
 	marker.scale.y = (max[1] - min[1]);
@@ -1063,7 +1093,7 @@ void OctomapServer::putCenterMarker(tf::Quaternion orientation, Eigen::Vector4f 
 	if (marker.scale.z == 0)
 		marker.scale.z = 0.1;
 
-	marker.color = heightMapColor(1);
+	marker.color = heightMapColor(distance>m_probFarDist ? 1 : 0.25);
 	marker.color.a = 0.5;
 
 	// marker.lifetime = ros::Duration();

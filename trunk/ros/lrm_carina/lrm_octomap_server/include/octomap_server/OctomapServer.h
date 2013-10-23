@@ -185,7 +185,7 @@ protected:
 
   }
 
-  void putCenterMarker(tf::Quaternion orientation, Eigen::Vector4f centroid, Eigen::Vector4f max, Eigen::Vector4f min);
+  void putCenterMarker(tf::Quaternion orientation, Eigen::Vector4f centroid, Eigen::Vector4f max, Eigen::Vector4f min, double distance);
 
   /**
    * Adjust data of map due to a change in its info properties (origin or size,
@@ -233,7 +233,9 @@ protected:
   double m_res;
   unsigned m_treeDepth;
   unsigned m_maxTreeDepth;
-  double m_probHit;
+  double m_probHitNear;
+  double m_probHitFar;
+  double m_probFarDist;
   double m_probMiss;
   double m_thresMin;
   double m_thresMax;
@@ -251,6 +253,8 @@ protected:
   double m_groundFilterAngle;
   double m_groundFilterPlaneDistance;
 
+
+  double m_occupancyThres;
   bool m_compressMap;
 
   // downprojected 2D map:
