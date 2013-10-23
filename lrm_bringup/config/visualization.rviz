@@ -8,12 +8,8 @@ Panels:
         - /TF1/Tree1
         - /Camera1/Visibility1
         - /Camera2/Visibility1
-        - /PointCloud23
-        - /Odometry3
-        - /PointCloud26
-        - /PointCloud27
       Splitter Ratio: 0.847826
-    Tree Height: 193
+    Tree Height: 305
   - Class: rviz/Tool Properties
     Expanded:
       - /2D Nav Goal1
@@ -119,6 +115,8 @@ Visualization Manager:
           Value: true
         /steer_link:
           Value: true
+        /steering_wheel_link:
+          Value: true
         /stereo_camera:
           Value: true
         /stereo_camera/left_frame:
@@ -155,7 +153,8 @@ Visualization Manager:
                         /stereo_camera/right_optical_frame:
                           {}
                   /base_steering_wheel:
-                    {}
+                    /steering_wheel_link:
+                      {}
                   /bbx_base_front_left_link:
                     {}
                   /bbx_base_front_right_link:
@@ -449,6 +448,7 @@ Visualization Manager:
         Image: true
         Local Window: false
         Map: true
+        Marker: true
         MarkerArray: true
         OSM Map: true
         Odometry: true
@@ -477,6 +477,7 @@ Visualization Manager:
         Image: true
         Local Window: true
         Map: true
+        Marker: true
         MarkerArray: true
         OSM Map: true
         Odometry: true
@@ -538,7 +539,7 @@ Visualization Manager:
       Marker Topic: /occupied_cells_vis_array
       Name: MarkerArray
       Namespaces:
-        {}
+        map: true
       Queue Size: 100
       Value: true
     - Alpha: 1
@@ -581,7 +582,7 @@ Visualization Manager:
       Color: 255; 85; 127
       Color Transformer: FlatColor
       Decay Time: 0
-      Enabled: true
+      Enabled: false
       Max Color: 255; 255; 255
       Max Intensity: 4096
       Min Color: 0; 0; 0
@@ -596,7 +597,7 @@ Visualization Manager:
       Topic: /cloud/points_zigzag_filter
       Use Fixed Frame: true
       Use rainbow: true
-      Value: true
+      Value: false
     - Alpha: 0.6
       Class: rviz/GridCells
       Color: 25; 255; 0
@@ -658,23 +659,23 @@ Visualization Manager:
     - Angle Tolerance: 0.1
       Class: rviz/Odometry
       Color: 255; 255; 0
-      Enabled: true
+      Enabled: false
       Keep: 1000
       Length: 1
       Name: Odometry
       Position Tolerance: 0.1
       Topic: /gps_odometry/odom
-      Value: true
+      Value: false
     - Angle Tolerance: 0.1
       Class: rviz/Odometry
       Color: 255; 25; 0
-      Enabled: true
+      Enabled: false
       Keep: 1000
       Length: 1
       Name: Odometry
       Position Tolerance: 0.1
       Topic: /ekf_odometry/odom
-      Value: true
+      Value: false
     - Alpha: 1
       Axes Length: 1
       Axes Radius: 0.1
@@ -796,8 +797,8 @@ Visualization Manager:
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
-        Max Value: 1.10214
-        Min Value: -0.708143
+        Max Value: 0.498714
+        Min Value: -0.408333
         Value: true
       Axis: Z
       Channel Name: intensity
@@ -805,7 +806,7 @@ Visualization Manager:
       Color: 255; 255; 255
       Color Transformer: AxisColor
       Decay Time: 0
-      Enabled: true
+      Enabled: false
       Max Color: 255; 255; 255
       Max Intensity: 4096
       Min Color: 0; 0; 0
@@ -820,7 +821,7 @@ Visualization Manager:
       Topic: /cloud/gd_points_voxel
       Use Fixed Frame: true
       Use rainbow: true
-      Value: true
+      Value: false
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
@@ -833,7 +834,7 @@ Visualization Manager:
       Color: 255; 255; 255
       Color Transformer: RGB8
       Decay Time: 0
-      Enabled: true
+      Enabled: false
       Max Color: 255; 255; 255
       Max Intensity: 4096
       Min Color: 0; 0; 0
@@ -848,6 +849,15 @@ Visualization Manager:
       Topic: /cloud/ngd_points_voxel
       Use Fixed Frame: true
       Use rainbow: true
+      Value: false
+    - Class: rviz/Marker
+      Enabled: true
+      Marker Topic: /occupied_cells_vis
+      Name: Marker
+      Namespaces:
+        cluster_center: true
+        map: true
+      Queue Size: 100
       Value: true
   Enabled: true
   Global Options:
@@ -869,29 +879,29 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 25.3378
+      Distance: 14.0493
       Focal Point:
-        X: 15.6153
-        Y: 9.30849
-        Z: 1.76788
+        X: 0.842101
+        Y: 1.82901
+        Z: 2.5895
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 0.012692
+      Pitch: 0.285398
       Target Frame: /base_footprint
       Value: Orbit (rviz)
-      Yaw: 4.21206
+      Yaw: 4.79858
     Saved: ~
 Window Geometry:
   Camera:
     collapsed: false
   Displays:
     collapsed: false
-  Height: 845
+  Height: 1050
   Hide Left Dock: false
   Hide Right Dock: true
   Image:
     collapsed: false
-  QMainWindow State: 000000ff00000000fd0000000200000000000001a2000002f6fc020000000bfc0000003d0000019a0000010301000019fa000000010100000002fb0000000a005600690065007700730100000000ffffffff0000010f00fffffffb000000100044006900730070006c0061007900730100000000000001a70000010f00fffffffb0000000c00430061006d0065007200610000000223000001100000001600fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007300000001b90000006d0000006a00fffffffb0000001200530065006c0065006300740069006f006e00000001f5000000820000006a00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007300000002a70000009f0000000000000000fc0000021b000001180000000000fffffffaffffffff0100000001fb0000000a0049006d0061006700650000000000ffffffff0000005100fffffffb0000000c00430061006d00650072006101000001dd000001560000001600fffffffb0000000c00540065006c0065006f0070000000030a0000007f0000000000000000fb0000000a0049006d00610067006500000002e0000000c70000000000000000fb0000000a0049006d006100670065000000031c000000b40000000000000000fb0000000a0049006d006100670065010000021c000001170000000000000000000000030000034b0000003efc0100000001fb0000000800540069006d006501000001a80000034b0000024e00ffffff0000034b000002b200000001000000020000000100000002fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd0000000200000000000001a2000003c3fc020000000bfc0000003d0000020a0000010301000019fa000000010100000002fb0000000a005600690065007700730100000000ffffffff0000010f00fffffffb000000100044006900730070006c0061007900730100000000000001a70000010f00fffffffb0000000c00430061006d0065007200610000000223000001100000001600fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007300000001b90000006d0000006a00fffffffb0000001200530065006c0065006300740069006f006e00000001f5000000820000006a00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007300000002a70000009f0000000000000000fc0000021b000001180000000000fffffffaffffffff0100000001fb0000000a0049006d0061006700650000000000ffffffff0000005100fffffffb0000000c00430061006d006500720061010000024d000001b30000001600fffffffb0000000c00540065006c0065006f0070000000030a0000007f0000000000000000fb0000000a0049006d00610067006500000002e0000000c70000000000000000fb0000000a0049006d006100670065000000031c000000b40000000000000000fb0000000a0049006d006100670065010000021c00000117000000000000000000000003000005cc0000003efc0100000001fb0000000800540069006d006501000001a8000005cc0000024e00ffffff000005cc0000037f00000001000000020000000100000002fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:
@@ -900,6 +910,6 @@ Window Geometry:
     collapsed: false
   Views:
     collapsed: false
-  Width: 1267
-  X: 1455
-  Y: 82
+  Width: 1908
+  X: 1280
+  Y: 0
