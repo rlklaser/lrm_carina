@@ -84,9 +84,14 @@
 			respawn="true"
 			output="screen"
 		>
+			<!-- 
 			<remap
 				from="points_in"
 				to="points_cluster_filter" />
+			 -->
+			<remap
+				from="points_in"
+				to="points_cluster_rgb" />
 			<remap
 				from="~points_out"
 				to="points_zigzag_filter" />

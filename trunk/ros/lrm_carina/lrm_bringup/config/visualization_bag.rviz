@@ -8,6 +8,8 @@ Panels:
         - /TF1/Tree1
         - /Camera1/Visibility1
         - /Camera2/Visibility1
+        - /Marker1
+        - /Marker1/Namespaces1
       Splitter Ratio: 0.847826
     Tree Height: 315
   - Class: rviz/Tool Properties
@@ -77,8 +79,6 @@ Visualization Manager:
           Value: true
         /compass_link:
           Value: true
-        /ekf_odom:
-          Value: true
         /front_axle_link:
           Value: true
         /front_left_bar_link:
@@ -93,15 +93,13 @@ Visualization Manager:
           Value: true
         /front_right_wheel:
           Value: true
-        /gsp_odom:
-          Value: true
         /heading_link:
           Value: true
         /imu_link:
           Value: true
         /map:
           Value: true
-        /odom_from_fix:
+        /odom:
           Value: true
         /rear_axle_link:
           Value: true
@@ -131,8 +129,6 @@ Visualization Manager:
           Value: true
         /stereo_camera/right_optical_frame:
           Value: true
-        /wheel_odom:
-          Value: true
         /world:
           Value: true
         All Enabled: true
@@ -144,13 +140,7 @@ Visualization Manager:
       Tree:
         /world:
           /map:
-            /ekf_odom:
-              {}
-            /gsp_odom:
-              {}
-            /odom_from_fix:
-              {}
-            /wheel_odom:
+            /odom:
               /base_footprint:
                 /base_link:
                   /base_front_sensors:
@@ -460,6 +450,7 @@ Visualization Manager:
         Image: true
         Local Window: true
         Map: true
+        Marker: true
         MarkerArray: true
         OSM Map: true
         Odometry: true
@@ -488,6 +479,7 @@ Visualization Manager:
         Image: true
         Local Window: true
         Map: true
+        Marker: true
         MarkerArray: true
         OSM Map: true
         Odometry: true
@@ -511,7 +503,7 @@ Visualization Manager:
       Color: 255; 255; 255
       Color Transformer: RGB8
       Decay Time: 0
-      Enabled: true
+      Enabled: false
       Max Color: 255; 255; 255
       Max Intensity: 4096
       Min Color: 0; 0; 0
@@ -526,7 +518,7 @@ Visualization Manager:
       Topic: /cloud/points_cluster
       Use Fixed Frame: true
       Use rainbow: true
-      Value: true
+      Value: false
     - Angle Tolerance: 0.1
       Class: rviz/Odometry
       Color: 0; 0; 255
@@ -545,13 +537,13 @@ Visualization Manager:
       Topic: /map
       Value: false
     - Class: rviz/MarkerArray
-      Enabled: true
+      Enabled: false
       Marker Topic: /occupied_cells_vis_array
       Name: MarkerArray
       Namespaces:
         {}
       Queue Size: 100
-      Value: true
+      Value: false
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
@@ -564,7 +556,7 @@ Visualization Manager:
       Color: 0; 0; 0
       Color Transformer: FlatColor
       Decay Time: 0
-      Enabled: true
+      Enabled: false
       Max Color: 255; 255; 255
       Max Intensity: 4096
       Min Color: 0; 0; 0
@@ -579,7 +571,7 @@ Visualization Manager:
       Topic: /ground_cloud_in
       Use Fixed Frame: true
       Use rainbow: true
-      Value: true
+      Value: false
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
@@ -626,18 +618,18 @@ Visualization Manager:
       Buffer Length: 1
       Class: rviz/Path
       Color: 25; 255; 0
-      Enabled: true
+      Enabled: false
       Name: Path
       Topic: /move_base/SBPLLatticePlanner/plan
-      Value: true
+      Value: false
     - Alpha: 1
       Buffer Length: 1
       Class: rviz/Path
       Color: 85; 85; 255
-      Enabled: true
+      Enabled: false
       Name: Path
       Topic: /move_base/TrajectoryPlannerROS/local_plan
-      Value: true
+      Value: false
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
@@ -766,6 +758,15 @@ Visualization Manager:
       Radius: 0.1
       Reference Frame: <Fixed Frame>
       Value: false
+    - Class: rviz/Marker
+      Enabled: true
+      Marker Topic: /occupied_cells_vis
+      Name: Marker
+      Namespaces:
+        cluster_center: true
+        map: false
+      Queue Size: 100
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 255; 255; 255
@@ -786,17 +787,17 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 10
+      Distance: 18.6256
       Focal Point:
-        X: 1.60303
-        Y: 0.575378
-        Z: 2.30724
+        X: 3.64905
+        Y: -0.988327
+        Z: 4.84703
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 0.200399
+      Pitch: 0.775399
       Target Frame: /base_footprint
       Value: Orbit (rviz)
-      Yaw: 2.5004
+      Yaw: 2.2304
     Saved: ~
 Window Geometry:
   Camera:
