@@ -1,16 +1,17 @@
 robot_pose_ekf:
 
+  publish_tf: false
+
   output_frame: odom
   freq: 20.0
   sensor_timeout: 1.0
   odom_used: true
   imu_used: true
-  vo_used: false
-  gps_used: true
+  vo_used: true
+  gps_used: false
   debug: false
   self_diagnose: false
-  publish_tf: false
-
+  
 ekf_odometry:
   
   frame_id: odom
