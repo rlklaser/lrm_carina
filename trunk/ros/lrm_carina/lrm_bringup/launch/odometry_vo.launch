@@ -1,0 +1,31 @@
+<launch>
+
+	<rosparam
+		command="load"
+		file="$(find lrm_bringup)/params/odometry_vo_params.yaml" />
+		
+	<!-- Run the viso2_ros package -->
+	<node
+		pkg="viso2_ros"
+		type="stereo_odometer"
+		name="vo_odometry"
+		output="screen"
+		respawn="true"
+	>
+		<remap
+			from="stereo"
+			to="stereo" />
+		<remap
+			from="image"
+			to="image_rect" />
+		<remap
+			from="~odometry"
+			to="/vo_odometry/odom" />
+		<!-- 
+		<remap
+			from="pose"
+			to="/vo_odometry/pose" />
+		-->
+	</node>
+
+</launch>

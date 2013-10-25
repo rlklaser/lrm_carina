@@ -58,6 +58,7 @@
 -->
 	</node>
 
+<!-- 
 	<node
 		pkg="lrm_odometry"
 		type="from_fix"
@@ -77,5 +78,6 @@
 			from="fix"
 			to="/lse_xsens_mti/xsens/fix" />
 	</node>
-	
+ -->
+ 	
 </launch>

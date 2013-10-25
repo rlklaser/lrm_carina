@@ -1,0 +1,29 @@
+vo_odometry:
+
+  publish_tf: false
+
+  nms_n: 3
+  nms_tau: 50
+  match_binsize: 50
+  match_radius: 200
+  match_disp_tolerance: 2
+  outlier_disp_tolerance: 5
+  outlier_flow_tolerance: 5
+  multi_stage: 1
+  half_resolution: 1
+  refinement: 1
+
+#Bucketing params
+  max_features: 2
+  bucket_width: 50
+  bucket_height: 50
+
+#Stereo params
+  ransac_iters: 200
+  inlier_threshold: 1.5
+  reweighting: 1
+
+#Reference frame
+  ref_frame_change_method: 0
+  ref_frame_motion_threshold: 5
+  ref_frame_inlier_threshold: 150

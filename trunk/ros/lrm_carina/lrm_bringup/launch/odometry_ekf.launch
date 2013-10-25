@@ -72,6 +72,9 @@
 		<remap
 			from="odom"
 			to="/wheel_odometry/odom" />
+		<remap
+			from="vo"
+			to="/vo_odometry/odom" />
 			
 	</node>
 
