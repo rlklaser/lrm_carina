@@ -497,6 +497,9 @@ void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPo
 				//m_octree->integrateNodeColor(key, it->r, it->g, it->b);
 				m_octree->setNodeColor(key, it->r, it->g, it->b);
 
+				//std::cout << "pt x:" << it->x << " y:" << it->y << " z:" << it->z << " r:" << (unsigned int)it->r << " g:" << (unsigned int)it->g << " b:" << (unsigned int)it->b << std::endl;
+
+
 				if(hit_dist>m_probFarDist) {
 					m_octree->updateNode(key, octomap::logodds(m_probHitFar));
 				}
@@ -671,6 +674,8 @@ void OctomapServer::_publishAll(const ros::Time& rostime) {
 				char g = node_color.g;
 				char b = node_color.b;
 
+
+				//std::cout << "pt x:" << x << " y:" << y << " z:" << z << " r:" << (int)r << " g:" << (int)g << " b:" << (int)b << std::endl;
 				//node->getColor();
 
 				// Ignore speckles in the map:
