@@ -50,7 +50,8 @@ OctomapServer::OctomapServer(ros::NodeHandle nh) :
 		m_baseFrameId("base_footprint"), m_SourceFrameId("stereo_camera"),
 		m_useHeightMap(true), m_colorFactor(0.8), m_latchedTopics(true),
 		m_res(0.1), m_treeDepth(0), m_maxTreeDepth(0),
-		m_probHitNear(0.7), m_probHitFar(0.7), m_probFarDist(25.0),
+		m_probHit(0.7), m_probHitMid(0.7), m_probHitFar(0.7),
+		m_probMidDist(15.0), m_probFarDist(25.0),
 		m_probMiss(0.4), m_thresMin(0.12), m_thresMax(0.97),
 		m_pointcloudMinZ(-std::numeric_limits<double>::max()),
 		m_pointcloudMaxZ(std::numeric_limits<double>::max()),
@@ -88,8 +89,10 @@ OctomapServer::OctomapServer(ros::NodeHandle nh) :
 	private_nh.param("sensor_model/max_range", m_maxRange, m_maxRange);
 
 	private_nh.param("resolution", m_res, m_res);
-	private_nh.param("sensor_model/hit_near", m_probHitNear, m_probHitNear);
+	private_nh.param("sensor_model/hit", m_probHit, m_probHit);
+	private_nh.param("sensor_model/hit_mid", m_probHitMid, m_probHitMid);
 	private_nh.param("sensor_model/hit_far", m_probHitFar, m_probHitFar);
+	private_nh.param("sensor_model/mid_dist", m_probMidDist, m_probMidDist);
 	private_nh.param("sensor_model/far_dist", m_probFarDist, m_probFarDist);
 	private_nh.param("sensor_model/miss", m_probMiss, m_probMiss);
 	private_nh.param("sensor_model/min", m_thresMin, m_thresMin);
@@ -109,7 +112,7 @@ OctomapServer::OctomapServer(ros::NodeHandle nh) :
 
 	// initialize octomap object & params
 	m_octree = new OcTreeT(m_res);
-	m_octree->setProbHit(m_probHitNear);
+	m_octree->setProbHit(m_probHit);
 	m_octree->setProbMiss(m_probMiss);
 	m_octree->setClampingThresMin(m_thresMin);
 	m_octree->setClampingThresMax(m_thresMax);
@@ -495,17 +498,22 @@ void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPo
 				occupied_cells.insert(key);
 
 				//m_octree->integrateNodeColor(key, it->r, it->g, it->b);
-				m_octree->setNodeColor(key, it->r, it->g, it->b);
+				//m_octree->setNodeColor(key, it->r, it->g, it->b);
+				m_octree->averageNodeColor(key, it->r, it->g, it->b);
 
 				//std::cout << "pt x:" << it->x << " y:" << it->y << " z:" << it->z << " r:" << (unsigned int)it->r << " g:" << (unsigned int)it->g << " b:" << (unsigned int)it->b << std::endl;
 
 
-				if(hit_dist>m_probFarDist) {
-					m_octree->updateNode(key, octomap::logodds(m_probHitFar));
-				}
-				else {
+				if(hit_dist<m_probMidDist) {
 					m_octree->updateNode(key, true);
 				}
+				else
+					if(hit_dist>m_probFarDist) {
+						m_octree->updateNode(key, octomap::logodds(m_probHitFar));
+					}
+					else {
+						m_octree->updateNode(key, octomap::logodds(m_probHitMid));
+					}
 
 				updateMinKey(key, m_updateBBXMin);
 				updateMaxKey(key, m_updateBBXMax);
@@ -1098,7 +1106,7 @@ void OctomapServer::putCenterMarker(tf::Quaternion orientation, Eigen::Vector4f 
 	if (marker.scale.z == 0)
 		marker.scale.z = 0.1;
 
-	marker.color = heightMapColor(distance>m_probFarDist ? 1 : 0.25);
+	marker.color = heightMapColor(distance>m_probFarDist ? 1 :  (distance>m_probMidDist ? 0.3 :  0.1) );
 	marker.color.a = 0.5;
 
 	// marker.lifetime = ros::Duration();

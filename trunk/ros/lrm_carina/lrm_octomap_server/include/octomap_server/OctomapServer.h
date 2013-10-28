@@ -233,9 +233,11 @@ protected:
   double m_res;
   unsigned m_treeDepth;
   unsigned m_maxTreeDepth;
-  double m_probHitNear;
+  double m_probHit;
+  double m_probHitMid;
   double m_probHitFar;
   double m_probFarDist;
+  double m_probMidDist;
   double m_probMiss;
   double m_thresMin;
   double m_thresMax;

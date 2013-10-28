@@ -530,10 +530,10 @@ Visualization Manager:
     - Alpha: 0.9
       Class: rviz/Map
       Draw Behind: false
-      Enabled: false
+      Enabled: true
       Name: Map
       Topic: /map
-      Value: false
+      Value: true
     - Class: rviz/MarkerArray
       Enabled: false
       Marker Topic: /occupied_cells_vis_array
@@ -659,13 +659,13 @@ Visualization Manager:
     - Angle Tolerance: 0.1
       Class: rviz/Odometry
       Color: 255; 255; 0
-      Enabled: true
+      Enabled: false
       Keep: 1000
       Length: 1
       Name: Odometry
       Position Tolerance: 0.1
       Topic: /gps_odometry/odom
-      Value: true
+      Value: false
     - Angle Tolerance: 0.1
       Class: rviz/Odometry
       Color: 255; 25; 0
@@ -761,7 +761,7 @@ Visualization Manager:
       Marker Topic: /occupied_cells_vis
       Name: Marker
       Namespaces:
-        {}
+        cluster_center: true
       Queue Size: 100
       Value: true
     - Alpha: 1
@@ -822,17 +822,17 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 14.216
+      Distance: 14.1978
       Focal Point:
-        X: 2.29515
-        Y: -0.263988
-        Z: 1.63488
+        X: 2.74577
+        Y: 6.65905
+        Z: 8.17068
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 0.380399
+      Pitch: 0.1654
       Target Frame: /base_footprint
       Value: Orbit (rviz)
-      Yaw: 5.19041
+      Yaw: 0.780872
     Saved: ~
 Window Geometry:
   Camera:
