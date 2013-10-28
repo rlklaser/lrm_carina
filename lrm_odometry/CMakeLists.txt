@@ -99,7 +99,7 @@ rosbuild_add_executable(fake_odom_frame
 	src/fake_odom_frame.cpp)
 	
 	
-include_directories(src/libswiftnav/include)
-add_subdirectory(src/libswiftnav)
-rosbuild_add_executable(from_fix src/from_fix.cpp)
-target_link_libraries(from_fix swiftnav)
+#include_directories(src/libswiftnav/include)
+#add_subdirectory(src/libswiftnav)
+#rosbuild_add_executable(from_fix src/from_fix.cpp)
+#target_link_libraries(from_fix swiftnav)

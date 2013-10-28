@@ -1,0 +1,1 @@
+rosbag play --clock --pause map:=old_map  /home/rlklaser/Work/ros/bags/bag-estacionamento/2013-09-28/
