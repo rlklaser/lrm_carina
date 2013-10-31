@@ -12,6 +12,19 @@ include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
 set(ROS_BUILD_TYPE Debug)
 
 
+#include (FindPkgConfig)
+#if (PKG_CONFIG_FOUND)
+#  pkg_check_modules(GAZEBO gazebo)
+#endif()
+
+#find_package(gazebo REQUIRED)
+#include_directories(${GAZEBO_INCLUDE_DIRS})
+#link_directories(${GAZEBO_LIBRARY_DIRS})
+
+##add_library(hello_world SHARED hello_world.cc)
+##target_link_libraries(hello_world ${GAZEBO_libraries})
+
+
 rosbuild_init()
 
 #set the default path for built executables to the "bin" directory

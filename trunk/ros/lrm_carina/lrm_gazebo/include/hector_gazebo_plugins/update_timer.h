@@ -29,7 +29,7 @@
 #ifndef HECTOR_GAZEBO_PLUGINS_UPDATE_TIMER_H
 #define HECTOR_GAZEBO_PLUGINS_UPDATE_TIMER_H
 
-#include <gazebo/sdf/sdf.hh>
+//#include <gazebo/sdf/sdf.hh>
 #include <gazebo/physics/World.hh>
 #include <gazebo/physics/PhysicsEngine.hh>
 
@@ -57,7 +57,7 @@ public:
       double update_rate = _sdf->GetElement(_prefix + "Rate")->GetValueDouble();
       update_period_ = update_rate > 0.0 ? 1.0/update_rate : 0.0;
     }
-
+/*
     if (_sdf->HasElement(_prefix + "Period")) {
       update_period_ = _sdf->GetElement(_prefix + "Period")->GetValueTime();
     }
@@ -65,6 +65,7 @@ public:
     if (_sdf->HasElement(_prefix + "Offset")) {
       update_offset_ = _sdf->GetElement(_prefix + "Offset")->GetValueTime();
     }
+*/
   }
 
   virtual event::ConnectionPtr Connect(const boost::function<void()> &_subscriber, bool connectToWorldUpdateStart = true)
@@ -122,7 +123,7 @@ public:
     if (period == 0) return true;
     double fraction =  fmod((world_->GetSimTime() - update_offset_).Double(), period);
     // gzwarn << "time is " << world_->GetSimTime().Double() << ", period is " << period << ", check if fraction = " << fraction << " < " << world_->GetPhysicsEngine()->GetStepTime() << std::endl;
-    return fraction >= 0.0 && fraction < world_->GetPhysicsEngine()->GetStepTime();
+    return fraction >= 0.0 && fraction <  /*world_->GetPhysicsEngine()->GetMaxStepSize();*/  world_->GetPhysicsEngine()->GetStepTime();
   }
 
   virtual bool update()

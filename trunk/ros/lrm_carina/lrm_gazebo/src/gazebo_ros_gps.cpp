@@ -27,7 +27,7 @@
 //=================================================================================================
 
 #include <hector_gazebo_plugins/gazebo_ros_gps.h>
-#include "physics/physics.hh"
+#include "gazebo/physics/physics.hh"
 
 // WGS84 constants
 static const double equatorial_radius = 6378137.0;

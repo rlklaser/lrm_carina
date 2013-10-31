@@ -31,10 +31,10 @@
 #define ACKERMANNPLUGIN_H_
 
 #include <ros/ros.h>
-#include <gazebo.hh>
-#include <physics/physics.hh>
-#include <physics/World.hh>
-#include <sdf/sdf.hh>
+#include <gazebo/gazebo.hh>
+#include <gazebo/physics/physics.hh>
+#include <gazebo/physics/World.hh>
+//#include <sdf/sdf.hh>
 
 namespace gazebo {
 

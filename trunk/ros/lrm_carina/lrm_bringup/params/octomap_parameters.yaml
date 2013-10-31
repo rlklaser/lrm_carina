@@ -1,6 +1,6 @@
 octomap_server:
     latch: false
-    rate: 2.0
+    rate: 5.0
     frame_id: /map
     base_frame_id: /base_footprint
     source_frame_id: /stereo_camera

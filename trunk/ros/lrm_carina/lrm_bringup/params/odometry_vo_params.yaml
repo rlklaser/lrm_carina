@@ -12,6 +12,7 @@ vo_odometry:
   multi_stage: 1
   half_resolution: 1
   refinement: 1
+  approximate_sync: true
 
 #Bucketing params
   max_features: 2

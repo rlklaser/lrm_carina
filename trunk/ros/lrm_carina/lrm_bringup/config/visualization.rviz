@@ -8,6 +8,7 @@ Panels:
         - /TF1/Tree1
         - /Camera1/Visibility1
         - /Camera2/Visibility1
+        - /Odometry5
       Splitter Ratio: 0.847826
     Tree Height: 305
   - Class: rviz/Tool Properties
@@ -539,7 +540,7 @@ Visualization Manager:
       Marker Topic: /occupied_cells_vis_array
       Name: MarkerArray
       Namespaces:
-        map: true
+        {}
       Queue Size: 100
       Value: true
     - Alpha: 1
@@ -855,9 +856,18 @@ Visualization Manager:
       Marker Topic: /occupied_cells_vis
       Name: Marker
       Namespaces:
-        cluster_center: true
-        map: true
+        {}
       Queue Size: 100
+      Value: true
+    - Angle Tolerance: 0.1
+      Class: rviz/Odometry
+      Color: 0; 85; 0
+      Enabled: true
+      Keep: 100
+      Length: 1
+      Name: Odometry
+      Position Tolerance: 0.1
+      Topic: /vo_odometry/odom
       Value: true
   Enabled: true
   Global Options:

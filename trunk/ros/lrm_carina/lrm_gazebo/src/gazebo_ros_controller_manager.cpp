@@ -36,14 +36,14 @@
 
 //#include <gazebo/XMLConfig.hh>
 //#include "physics/physics.h"
-#include "physics/World.hh"
-#include "physics/HingeJoint.hh"
-#include "sensors/Sensor.hh"
-#include "sdf/interface/SDF.hh"
-#include "sdf/interface/Param.hh"
-#include "common/Exception.hh"
-#include "physics/PhysicsTypes.hh"
-#include "physics/Base.hh"
+#include "gazebo/physics/World.hh"
+#include "gazebo/physics/HingeJoint.hh"
+#include "gazebo/sensors/Sensor.hh"
+//#include "sdf/interface/SDF.hh"
+//#include "sdf/interface/Param.hh"
+#include "gazebo/common/Exception.hh"
+#include "gazebo/physics/PhysicsTypes.hh"
+#include "gazebo/physics/Base.hh"
 
 
 #include <angles/angles.h>

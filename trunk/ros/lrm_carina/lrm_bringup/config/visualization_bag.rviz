@@ -669,13 +669,13 @@ Visualization Manager:
     - Angle Tolerance: 0.1
       Class: rviz/Odometry
       Color: 255; 25; 0
-      Enabled: true
+      Enabled: false
       Keep: 1000
       Length: 1
       Name: Odometry
       Position Tolerance: 0.1
       Topic: /ekf_odometry/odom
-      Value: true
+      Value: false
     - Alpha: 1
       Axes Length: 1
       Axes Radius: 0.1
@@ -762,6 +762,7 @@ Visualization Manager:
       Name: Marker
       Namespaces:
         cluster_center: true
+        map: true
       Queue Size: 100
       Value: true
     - Alpha: 1
@@ -795,13 +796,13 @@ Visualization Manager:
     - Angle Tolerance: 0.1
       Class: rviz/Odometry
       Color: 0; 85; 0
-      Enabled: true
+      Enabled: false
       Keep: 100
       Length: 1
       Name: Odometry
       Position Tolerance: 0.1
       Topic: /vo_odometry/odom
-      Value: true
+      Value: false
   Enabled: true
   Global Options:
     Background Color: 255; 255; 255
@@ -822,17 +823,17 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 14.1978
+      Distance: 10
       Focal Point:
-        X: 2.74577
-        Y: 6.65905
-        Z: 8.17068
+        X: -1.39508
+        Y: 1.18579
+        Z: 3.12023
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 0.1654
+      Pitch: 0.180398
       Target Frame: /base_footprint
       Value: Orbit (rviz)
-      Yaw: 0.780872
+      Yaw: 5.32358
     Saved: ~
 Window Geometry:
   Camera:

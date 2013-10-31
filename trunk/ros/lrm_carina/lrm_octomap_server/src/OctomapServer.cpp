@@ -541,10 +541,10 @@ void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPo
 
 	// mark free cells only if not seen occupied in this cloud
 	for (KeySet::iterator it = free_cells.begin(), end = free_cells.end(); it != end; ++it) {
-		if (occupied_cells.find(*it) == occupied_cells.end()) {
+		//if (occupied_cells.find(*it) == occupied_cells.end()) {
 			m_octree->updateNode(*it, false);
 			in++;
-		}
+		//}
 	}
 
 	/*
