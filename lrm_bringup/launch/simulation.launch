@@ -26,7 +26,7 @@
 		args="-urdf -param robot_description -x 0.0 -y 0.0 -z 0.05 -R 0 -P 0 -Y 0 -model carina -gazebo_namespace /gazebo -unpause"
 		respawn="false"
 		output="screen" />
-
+   
 <!--
 	<node
 		name="controller_spawner"
@@ -51,6 +51,8 @@
 		output="screen"
 		respawn="true" />
     -->
+    
+
 	<node
 		name="front_left_susp_controller"
 		pkg="pr2_controller_manager"
@@ -94,7 +96,7 @@
 		args="encoders_controller"
 		respawn="true"
 		output="screen" />
-
+ 
 </launch>
 
 

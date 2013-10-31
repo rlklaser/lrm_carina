@@ -27,8 +27,8 @@
 //=================================================================================================
 
 #include <hector_gazebo_plugins/gazebo_ros_magnetic.h>
-#include "common/Events.hh"
-#include "physics/physics.hh"
+#include "gazebo/common/Events.hh"
+#include "gazebo/physics/physics.hh"
 
 static const double DEFAULT_MAGNITUDE           = 1.0;
 static const double DEFAULT_REFERENCE_HEADING   = 0.0;
@@ -45,7 +45,8 @@ GazeboRosMagnetic::GazeboRosMagnetic()
 // Destructor
 GazeboRosMagnetic::~GazeboRosMagnetic()
 {
-  event::Events::DisconnectWorldUpdateStart(updateConnection);
+  //event::Events::DisconnectWorldUpdateStart(updateConnection);
+	event::Events::DisconnectWorldUpdateBegin(updateConnection);
 
   node_handle_->shutdown();
   delete node_handle_;
@@ -137,7 +138,8 @@ void GazeboRosMagnetic::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
   // New Mechanism for Updating every World Cycle
   // Listen to the update event. This event is broadcast every
   // simulation iteration.
-  updateConnection = event::Events::ConnectWorldUpdateStart(
+  //updateConnection = event::Events::ConnectWorldUpdateStart(
+  updateConnection = event::Events::ConnectWorldUpdateBegin(
       boost::bind(&GazeboRosMagnetic::Update, this));
 
   ROS_WARN_STREAM("Compass Plugin loaded");

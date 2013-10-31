@@ -16,13 +16,13 @@
 		name="GAZEBO_PLUGIN_PATH"
 		value="$GAZEBO_PLUGIN_PATH:$(find lrm_gazebo)/lib" />
 
-	<node
+ 	<node
 		name="gazebo_gui"
 		pkg="gazebo"
 		type="gui"
 		respawn="false"
 		output="screen" />
-
+		
 	<node
 		name="rviz"
 		pkg="rviz"

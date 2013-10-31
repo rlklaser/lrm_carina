@@ -31,10 +31,12 @@
 #define ACKERMANNCONTROLLER_H_
 
 #include <map>
-#include <common/common.hh>
-#include <physics/physics.hh>
-#include <math/gzmath.hh>
-#include <sdf/sdf.hh>
+
+#include <gazebo/gazebo.hh>
+#include <gazebo/common/common.hh>
+#include <gazebo/physics/physics.hh>
+#include <gazebo/math/gzmath.hh>
+//#include <gazebo/sdf/sdf.hh>
 
 // ROS
 #include <ros/ros.h>

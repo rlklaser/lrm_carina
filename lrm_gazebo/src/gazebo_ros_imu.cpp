@@ -55,8 +55,8 @@
 //=================================================================================================
 
 #include <hector_gazebo_plugins/gazebo_ros_imu.h>
-#include "common/Events.hh"
-#include "physics/physics.hh"
+#include "gazebo/common/Events.hh"
+#include "gazebo/physics/physics.hh"
 
 #include <ros/console.h>
 
@@ -147,7 +147,7 @@ void GazeboRosIMU::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
   }
 
   if (_sdf->HasElement("rpyOffset")) {
-    math::Vector3 rpyOffset = _sdf->GetElement("rpyOffset")->GetValueVector3();
+    math::Vector3 /*sdf::Vector3*/ rpyOffset = _sdf->GetElement("rpyOffset")->GetValueVector3();
     if (accelModel.offset.y == 0.0 && rpyOffset.x != 0.0) accelModel.offset.y = -rpyOffset.x * 9.8065;
     if (accelModel.offset.x == 0.0 && rpyOffset.y != 0.0) accelModel.offset.x =  rpyOffset.y * 9.8065;
     if (headingModel.offset == 0.0 && rpyOffset.z != 0.0) headingModel.offset =  -0.35;//rpyOffset.z;

@@ -29,7 +29,8 @@
 #ifndef HECTOR_GAZEBO_PLUGINS_SENSOR_MODEL_H
 #define HECTOR_GAZEBO_PLUGINS_SENSOR_MODEL_H
 
-#include <gazebo/sdf/sdf.hh>
+//#include <gazebo/sdf/sdf.hh>
+#include <gazebo/gazebo.hh>
 
 namespace gazebo {
 
@@ -108,7 +109,9 @@ void SensorModel_<T>::Load(sdf::ElementPtr _sdf, const std::string& prefix)
 template <typename T>
 bool SensorModel_<T>::LoadImpl(sdf::ElementPtr _element, T& _value) {
   if (!_element->GetValue()) return false;
-  if (_element->GetValue()->IsStr()) {
+
+  if (_element->GetValue()->GetTypeName() == "string") {
+  //if (_element->GetValue()->IsStr()) {
     try {
       _value = boost::lexical_cast<T>(_element->GetValue()->GetAsString());
       return true;
