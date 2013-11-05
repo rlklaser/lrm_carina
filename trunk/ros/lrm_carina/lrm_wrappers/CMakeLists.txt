@@ -40,6 +40,8 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 
 add_definitions(-Wno-deprecated -DEIGEN_DONT_VECTORIZE -DEIGEN_DISABLE_UNALIGNED_ARRAY_ASSERT)
 
+add_definitions(-msse3 -msse4.1 -msse4.2 -mfpmath=sse)
+#add_definitions(-mavx -mfpmath=sse)
 
 #rosbuild_add_executable(optflow src/ic2020_optflow.cpp)
 
