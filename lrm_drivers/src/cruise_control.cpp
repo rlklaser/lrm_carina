@@ -101,8 +101,10 @@ void CruiseControl::cruiseVelocityCallback(const lrm_msgs::Velocity::ConstPtr& v
 	this->cruiseVelocity.value = velocity->value * 3.6;
 	this->cruiseVelocity.header = velocity->header;
 
+	reverse = (this->cruiseVelocity.value < 0);
+
 	//if (this->cruiseVelocity.value < 0)
-	//if(reverse) this->cruiseVelocity.value *= -1;
+	if(reverse) this->cruiseVelocity.value *= -1;
 }
 
 void CruiseControl::inferenceControl(lrm_msgs::VehicleState state) {
@@ -110,13 +112,13 @@ void CruiseControl::inferenceControl(lrm_msgs::VehicleState state) {
 	double increaseBrake = 0;
 	lrm_msgs::Velocity tempVelocity;
 
+	if(reverse) state.velocity *= -1;
+
 	tempVelocity.value = state.velocity;
 	tempVelocity.header = state.header;
 
-	if(this->cruiseVelocity.value<0 && !reverse) {
-
-	}
-
+	//if(this->cruiseVelocity.value<0 && !reverse) {
+	//}
 
 	double erroV = tempVelocity.value - this->cruiseVelocity.value;
 	double dV = tempVelocity.value - this->lastVelocity.value;
@@ -149,21 +151,22 @@ void CruiseControl::inferenceControl(lrm_msgs::VehicleState state) {
 		this->throttle.value = 0.0;
 		this->brake.value = this->brakeD;
 		accelFlag = false;
-
 	}
-
-
-
 
 	if(this->cruiseVelocity.value==0) {
 		throttle.value = 0;
 		accelFlag = false;
 	}
 
+	if(reverse) this->throttle.value *= -1;
+
 	throttle.header.seq = throttle_msg_counter++;
 	throttle.header.stamp = ros::Time::now();
 	throttle.header.frame_id = "/throttle";
 	throttle_pub.publish(throttle);
+
+	//go back after publish
+	if(reverse) this->throttle.value *= -1;
 
 	brake.header.seq = brake_msg_counter++;
 	brake.header.stamp = ros::Time::now();

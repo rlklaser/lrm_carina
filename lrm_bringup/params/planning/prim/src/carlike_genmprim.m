@@ -6,16 +6,26 @@ numberofprimsperangle = 18; 	% numero de primitivas de movimento
 
 %numofsamples = 30;          % numero de passos para cada primitiva (poses calculadas)
 
-custo0 = 1;
-custo1 = 2.5;
-custo2 = 4;
-custo3 = 7;
-custo3 = 11;
+custo0 = 0.1;
+custo1 = 0.25;
+custo2 = 0.4;
+custo3 = 0.7;
+custo4 = 1.1;
+
+cmul = 7;
+
+custo0 *= cmul;
+custo1 *= cmul;
+custo2 *= cmul;
+custo3 *= cmul;
+custo4 *= cmul;
 
 stlim = 0.559;  % estercamento maximo 32 graus
 vmax = 3;      % velocidade maxima
 L = 1.64;      % distancia entre eixos
 dt = 0.1;
+
+to_plot = false;
 
 %maxsteer = stlim;
 
@@ -75,9 +85,13 @@ fprintf(fout, 'totalnumberofprimitives: %d\n', numberofprimsperangle*numberofang
 
 %iterate over angles
 for angleind = 1:numberofangles
-    figure(1);
-    hold off;
-    text(0, 0, int2str(angleind));
+    
+    if to_plot    
+        figure(1);
+        hold off;
+        text(0, 0, int2str(angleind));
+    end;
+        
     for primind = 1:numberofprimsperangle
 
         fprintf(fout, 'primID: %d\n', primind-1);
@@ -134,20 +148,24 @@ for angleind = 1:numberofangles
                     intermcells_m(interind, 2), intermcells_m(interind, 3));
         end;
         
-        hold on;
-        plot(intermcells_m(:,1), intermcells_m(:,2));
-        axis([-2 2 -2 2]);
-        text(intermcells_m(numofsamples, 1), intermcells_m(numofsamples, 2), int2str(endpose_c(3)));
-        hold on;
+        if to_plot        
+            hold on;
+            plot(intermcells_m(:,1), intermcells_m(:,2));
+            axis([-2 2 -2 2]);
+            text(intermcells_m(numofsamples, 1), intermcells_m(numofsamples, 2), int2str(endpose_c(3)));
+            hold on;
+        end;            
         
     end; 
-
-    grid;
-    %if angleind == 1
-    pause;
-    %end;
-    clc;
-
+    
+    if to_plot  
+        grid;
+        %if angleind == 1
+        pause;
+        %end;
+        clc;
+    end;
+        
 end;
 
 fclose(fout);

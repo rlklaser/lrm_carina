@@ -20,6 +20,9 @@ include_directories(${OCTOMAP_INCLUDE_DIRS})
 link_directories(${OCTOMAP_LIBRARY_DIRS})
 add_definitions(-DOCTOMAP_NODEBUGOUT)
 
+add_definitions(-msse3 -msse4.1 -msse4.2 -mfpmath=sse)
+#add_definitions(-mavx -mfpmath=sse)
+
 find_package(PCL REQUIRED)
 include_directories(${PCL_INCLUDE_DIRS})
 
