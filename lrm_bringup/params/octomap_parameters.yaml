@@ -8,8 +8,8 @@ octomap_server:
     height_map: false
     resolution: 0.1
     
-    #filter_speckles: false
-    filter_speckles: true
+    filter_speckles: false
+    #filter_speckles: true
     
     #if max==min==0, no filter
     pointcloud_min_z: 0.0
