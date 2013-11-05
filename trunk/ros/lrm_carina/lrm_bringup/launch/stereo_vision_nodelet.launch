@@ -23,7 +23,7 @@
 		name="/use_sim_time"
 		value="true" />
 	-->
-	
+
 	<group ns="/stereo">
 
 		<rosparam
@@ -42,7 +42,7 @@
 				pkg="nodelet"
 				type="nodelet"
 				name="rectify_mono"
-				args="load image_proc/rectify /camera_nodelet_manager --no-bond"
+				args="load image_proc/rectify $(arg manager) $(arg bond)"
 				respawn="true"
 				output="screen" />
   			<!-- Color rectified image -->
@@ -50,7 +50,7 @@
 				pkg="nodelet"
 				type="nodelet"
 				name="rectify_color"
-				args="load image_proc/rectify /camera_nodelet_manager --no-bond"
+				args="load image_proc/rectify $(arg manager) $(arg bond)"
 				respawn="true"
 				output="screen"
 			>
@@ -69,13 +69,13 @@
 				pkg="nodelet"
 				type="nodelet"
 				name="debayer"
-				args="load image_proc/debayer /camera_nodelet_manager --no-bond"
+				args="load image_proc/debayer $(arg manager) $(arg bond)"
 				respawn="true" />
 			<node
 				pkg="nodelet"
 				type="nodelet"
 				name="rectify_mono"
-				args="load image_proc/rectify /camera_nodelet_manager --no-bond"
+				args="load image_proc/rectify $(arg manager) $(arg bond)"
 				respawn="true"
 				output="screen" />
   			<!-- Color rectified image -->
@@ -83,7 +83,7 @@
 				pkg="nodelet"
 				type="nodelet"
 				name="rectify_color"
-				args="load image_proc/rectify /camera_nodelet_manager --no-bond"
+				args="load image_proc/rectify $(arg manager) $(arg bond)"
 				respawn="true"
 				output="screen"
 			>
@@ -96,12 +96,30 @@
 			</node>
 		</group>
   		
-  		<!-- Disparity image -->
+  		<!-- Disparity image 
 		<node
 			pkg="nodelet"
 			type="nodelet"
 			name="disparity_bm"
-			args="load stereo_image_proc/disparity /camera_nodelet_manager --no-bond"
+			args="load stereo_image_proc/disparity $(arg manager) $(arg bond)"
+			respawn="true"
+			output="screen"
+		>
+			<param
+				name="approximate_sync"
+				value="true" />
+
+			<remap
+				from="disparity"
+				to="disparity_bm" />
+
+		</node>
+		-->
+		<node
+			pkg="nodelet"
+			type="nodelet"
+			name="disparity_bm"
+			args="load lrm_stereo/disparity_bm $(arg manager) $(arg bond)"
 			respawn="true"
 			output="screen"
 		>
@@ -120,7 +138,7 @@
 			pkg="nodelet"
 			type="nodelet"
 			name="disparity_sgbm"
-			args="load lrm_stereo/disparity_sgbm /camera_nodelet_manager - -no-bond"
+			args="load lrm_stereo/disparity_sgbm $(arg manager) $(arg bond)"
 			respawn="true"
 			output="screen"
 		>
@@ -139,7 +157,7 @@
 			pkg="nodelet"
 			type="nodelet"
 			name="point_cloud2"
-			args="load lrm_stereo/point_cloud2 /camera_nodelet_manager --no-bond"
+			args="load lrm_stereo/point_cloud2 $(arg manager) $(arg bond)"
 			respawn="true"
 			output="screen"
 		>
@@ -157,7 +175,7 @@
 			pkg="nodelet"
 			type="nodelet"
 			name="point_cloud_colorless"
-			args="load lrm_stereo/colorless_stereo /camera_nodelet_manager - -no-bond"
+			args="load lrm_stereo/colorless_stereo $(arg manager) $(arg bond)"
 			respawn="true"
 			output="screen"
 		>
