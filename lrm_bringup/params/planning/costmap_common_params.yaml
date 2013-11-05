@@ -1,7 +1,7 @@
 footprint: [[1.45, -0.85], [1.8, 0.0], [1.45, 0.85], [-1.6, 0.85], [-1.6, -0.85]]
 #footprint: [[1.25, -0.8], [1.6, 0.0], [1.25, 0.8], [-1.6, 0.8], [-1.6, -0.8]]
 
-inflation_radius: 2.0
+inflation_radius: 2.5
 
 #marcos
 #transform_tolerance: 0.4
