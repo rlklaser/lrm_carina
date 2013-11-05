@@ -15,8 +15,8 @@ octomap_server:
     pointcloud_min_z: 0.0
     pointcloud_max_z: 0.0
     
-    occupancy_min_z: -5.0
-    occupancy_max_z: 5.0
+    occupancy_min_z: -1.0
+    occupancy_max_z: 3.0
     
     filter_ground: false
     #ground_filter/distance: 0.1

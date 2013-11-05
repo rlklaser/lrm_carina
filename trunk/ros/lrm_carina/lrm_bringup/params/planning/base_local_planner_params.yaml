@@ -5,13 +5,13 @@ dwa: true
 #y_vels: [0]
 
 holonomic_robot: false
-acc_lim_y: 6
-max_vel_y: 6.0
-min_vel_y: -6.0
+acc_lim_y: 3
+max_vel_y: 3.0
+min_vel_y: -3.0
 
-acc_lim_x: 6
-max_vel_x: 6.0
-min_vel_x: -6.0
+acc_lim_x: 3
+max_vel_x: 3.0
+min_vel_x: -3.0
 
 max_vel_theta: 0.559
 min_vel_theta: -0.559
