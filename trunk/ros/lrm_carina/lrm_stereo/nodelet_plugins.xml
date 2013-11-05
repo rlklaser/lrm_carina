@@ -1,6 +1,15 @@
 <library path="lib/liblrm_stereo">
 
 	<class
+		name="lrm_stereo/disparity_bm"
+		type="lrm_stereo::DisparityBMNodelet"
+		base_class_type="nodelet::Nodelet"
+	>
+		<description>Stereo Local Block Matching
+		</description>
+	</class>
+	
+	<class
 		name="lrm_stereo/disparity_sgbm"
 		type="lrm_stereo::DisparitySGBMNodelet"
 		base_class_type="nodelet::Nodelet"
