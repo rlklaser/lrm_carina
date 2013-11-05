@@ -30,6 +30,33 @@
 #ifndef CARINAGAZEBOPLUGIN_H_
 #define CARINAGAZEBOPLUGIN_H_
 
+#include <boost/bind.hpp>
+#include <gazebo/gazebo.hh>
+#include <gazebo/physics/physics.hh>
+#include <gazebo/common/common.hh>
+#include <stdio.h>
+#include <ros/ros.h>
 
+namespace gazebo
+{
+class CaRINAGazeboPlugin: public ModelPlugin
+{
+private:
+
+	physics::ModelPtr _model;
+	ros::NodeHandle* _node;
+	ros::Subscriber _sub;
+
+	void SetupSteeringConstraint();
+
+public:
+
+	CaRINAGazeboPlugin();
+	virtual ~CaRINAGazeboPlugin();
+	void Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf);
+	void OnUpdate();
+};
+
+}
 
 #endif /* CARINAGAZEBOPLUGIN_H_ */
