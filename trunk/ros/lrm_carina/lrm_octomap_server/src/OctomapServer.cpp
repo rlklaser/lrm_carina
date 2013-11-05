@@ -499,7 +499,8 @@ void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPo
 
 				//m_octree->integrateNodeColor(key, it->r, it->g, it->b);
 				//m_octree->setNodeColor(key, it->r, it->g, it->b);
-				m_octree->averageNodeColor(key, it->r, it->g, it->b);
+				//m_octree->averageNodeColor(key, it->r, it->g, it->b);
+				m_octree->averageNodeColor(it->x, it->y, it->z, it->r, it->g, it->b);
 
 				//std::cout << "pt x:" << it->x << " y:" << it->y << " z:" << it->z << " r:" << (unsigned int)it->r << " g:" << (unsigned int)it->g << " b:" << (unsigned int)it->b << std::endl;
 
@@ -569,7 +570,8 @@ void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPo
 
 	// TODO: eval lazy+updateInner vs. proper insertion
 	// non-lazy by default (updateInnerOccupancy() too slow for large maps)
-	//m_octree->updateInnerOccupancy();
+	m_octree->updateInnerOccupancy();
+
 	octomap::point3d minPt, maxPt;
 	ROS_DEBUG_STREAM("Bounding box keys (before): " << m_updateBBXMin[0] << " " <<m_updateBBXMin[1] << " " << m_updateBBXMin[2] << " / " <<m_updateBBXMax[0] << " "<<m_updateBBXMax[1] << " "<< m_updateBBXMax[2]);
 
@@ -671,13 +673,15 @@ void OctomapServer::_publishAll(const ros::Time& rostime) {
 		if (m_octree->isNodeOccupied(*it)) {
 			float z = it.getZ();
 			if (z > m_occupancyMinZ && z < m_occupancyMaxZ) {
-				double size = it.getSize();
+				//double size = it.getSize();
 				float x = it.getX();
 				float y = it.getY();
 
-				ColorOcTreeNode* node = (ColorOcTreeNode*) &it;
+				//ColorOcTreeNode* node = (ColorOcTreeNode*) &it;
+				//it.getKey()
+				//it->getColor();
 
-				ColorOcTreeNode::Color node_color = node->getColor();
+				ColorOcTreeNode::Color node_color = it->getColor();
 				char r = node_color.r;
 				char g = node_color.g;
 				char b = node_color.b;
@@ -725,6 +729,7 @@ void OctomapServer::_publishAll(const ros::Time& rostime) {
 					cubeCenter.z = z;
 
 					occupiedNodesVis.markers[idx].points.push_back(cubeCenter);
+
 					if (m_useHeightMap) {
 						double minX, minY, minZ, maxX, maxY, maxZ;
 						m_octree->getMetricMin(minX, minY, minZ);
@@ -745,18 +750,24 @@ void OctomapServer::_publishAll(const ros::Time& rostime) {
 						color.a = 1;
 
 						occupiedNodesVis.markers[idx].colors.push_back(color);
+						//occupiedNodesVis.markers[idx].color = color;
+
+						//double h = node->getOccupancy();
+						//occupiedNodesVis.markers[idx].colors.push_back(heightMapColor(h));
 					}
 				}
 
 				// insert into pointcloud:
 				if (publishPointCloud) {
+
 					//pclCloud.push_back(pcl::PointXYZ(x, y, z));
+
 					pcl::PointXYZRGB pt(r, g, b);
 					pt.x = x;
 					pt.y = y;
 					pt.z = z;
-
 					pclCloud.push_back(pt);
+
 					//pclCloud.push_back(pcl::PointXYZRGB(x, y, z, pcl::RGB(r, g, b)));
 					/*
 					 int rgb = ((int)r) << 16 | ((int)g) << 8 | ((int)b);
@@ -766,6 +777,16 @@ void OctomapServer::_publishAll(const ros::Time& rostime) {
 
 					 pclCloud.push_back(pt);
 					 */
+
+					/*
+					std_msgs::ColorRGBA color = heightMapColor(it->getOccupancy());
+					pcl::PointXYZRGB pt(color.r, color.g, color.b);
+					pt.x = x;
+					pt.y = y;
+					pt.z = z;
+					pclCloud.push_back(pt);
+					*/
+
 				}
 			}
 		} else { // node not occupied => mark as free in 2D map if unknown so far
@@ -791,8 +812,9 @@ void OctomapServer::_publishAll(const ros::Time& rostime) {
 			occupiedNodesVis.markers[i].scale.x = size;
 			occupiedNodesVis.markers[i].scale.y = size;
 			occupiedNodesVis.markers[i].scale.z = size;
-			occupiedNodesVis.markers[i].color = m_color;
-
+			//if (!m_useHeightMap) {
+				occupiedNodesVis.markers[i].color = m_color;
+			//}
 			if (occupiedNodesVis.markers[i].points.size() > 0)
 				occupiedNodesVis.markers[i].action = visualization_msgs::Marker::ADD;
 			else
