@@ -14,7 +14,7 @@
 #include <stereo_msgs/DisparityImage.h>
 #include <dynamic_reconfigure/server.h>
 
-#include "lrm_stereo/ThrottleStereoConfig.h";
+#include "lrm_stereo/ThrottleStereoConfig.h"
 
 namespace lrm_stereo {
 

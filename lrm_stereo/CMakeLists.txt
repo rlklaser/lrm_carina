@@ -40,6 +40,7 @@ add_definitions(-Wno-deprecated -DEIGEN_DONT_VECTORIZE -DEIGEN_DISABLE_UNALIGNED
 
 rosbuild_add_library(lrm_stereo 
 	src/disparity.cpp 
+	src/disparity_bm.cpp 
 	src/feature_matcher.cpp
 	src/ros_pcl_stereo.cpp
 	#src/disparity_bm_cuda.cpp 
