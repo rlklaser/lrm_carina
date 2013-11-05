@@ -101,3 +101,5 @@ rosbuild_add_executable(smooth_axis_filter_node
 rosbuild_add_executable(flatten_ground_filter_node 
     src/flatten_ground_filter_node.cpp)    
     
+rosbuild_add_executable(interactive_tf 
+    src/interactive_tf.cpp)
