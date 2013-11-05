@@ -51,23 +51,21 @@ basemprimendpts0_c(2,:) = [ 16  -2  -1  custo1  0.4  -pi/12  40];
 basemprimendpts0_c(3,:) = [ 10   0   0  custo0  0.5   0      40];
 basemprimendpts0_c(4,:) = [ 16   2   1  custo1  0.4   pi/12  40];
 basemprimendpts0_c(5,:) = [ 15   4   1  custo1  0.3   pi/8.2 40];
-
 basemprimendpts0_c(6,:) = [  8  -2  -1  custo2  0.3  -pi/8.2 40];
 basemprimendpts0_c(7,:) = [  8   2   1  custo2  0.3   pi/8.2 40];
-
 basemprimendpts0_c(8,:) = [  7  -3  -1  custo3  0.2  -stlim 50];
 basemprimendpts0_c(9,:) = [  7   3   1  custo3  0.2   stlim 50];
 
 
-basemprimendpts0_c(10,:) = [ 15  -4  -1  custo2  -0.3  -pi/8.2 40];
-basemprimendpts0_c(11,:) = [ 16  -2  -1  custo2  -0.4  -pi/12  40];
-basemprimendpts0_c(12,:) = [ 10   0   0  custo1  -0.5   0      40];
-basemprimendpts0_c(13,:) = [ 16   2   1  custo2  -0.4   pi/12  40];
-basemprimendpts0_c(14,:) = [ 15   4   1  custo2  -0.3   pi/8.2 40];
-basemprimendpts0_c(15,:) = [  8  -2  -1  custo3  -0.3  -pi/8.2 40];
-basemprimendpts0_c(16,:) = [  8   2   1  custo3  -0.3   pi/8.2 40];
-basemprimendpts0_c(17,:) = [  7  -3  -1  custo3  -0.2  -stlim 50];
-basemprimendpts0_c(18,:) = [  7   3   1  custo3  -0.2   stlim 50];
+basemprimendpts0_c(10,:) = [ -15 -4   1  custo2  -0.3  -pi/8.2 40];
+basemprimendpts0_c(11,:) = [ -16 -2   1  custo2  -0.4  -pi/12  40];
+basemprimendpts0_c(12,:) = [ -10  0   0  custo1  -0.5   0      40];
+basemprimendpts0_c(13,:) = [ -16  2  -1  custo2  -0.4   pi/12  40];
+basemprimendpts0_c(14,:) = [ -15  4  -1  custo2  -0.3   pi/8.2 40];
+basemprimendpts0_c(15,:) = [ -8  -2   1  custo3  -0.3  -pi/8.2 40];
+basemprimendpts0_c(16,:) = [ -8   2  -1  custo3  -0.3   pi/8.2 40];
+basemprimendpts0_c(17,:) = [ -7  -3   1  custo3  -0.2  -stlim 50];
+basemprimendpts0_c(18,:) = [ -7   3  -1  custo3  -0.2   stlim 50];
 
     
 fout = fopen('../carina.mprim', 'w');
