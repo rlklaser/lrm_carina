@@ -10,26 +10,19 @@ namespace lrm_stereo
 class ThrottleStereoNodelet: public nodelet::Nodelet
 {
 public:
-//	StereoCameraThrottler* throttler_;
 	virtual void onInit();
-//	virtual ~ThrottleStereoNodelet();
 private:
 	boost::shared_ptr<StereoCameraThrottler> server_;
 };
 
 void ThrottleStereoNodelet::onInit()
 {
+	ROS_WARN("throttle nodelet init");
 	ros::NodeHandle& nh = getNodeHandle();
 	ros::NodeHandle& private_nh = getPrivateNodeHandle();
 
-	//throttler_ = new StereoCameraThrottler(nh, private_nh);
 	server_.reset(new StereoCameraThrottler(nh, private_nh));
 }
-
-//ThrottleStereoNodelet::~ThrottleStereoNodelet()
-//{
-//	delete throttler_;
-//}
 
 }
 // Register nodelet

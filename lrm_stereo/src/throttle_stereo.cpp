@@ -32,19 +32,10 @@
 namespace lrm_stereo
 {
 
-StereoCameraThrottler::~StereoCameraThrottler()
-{
-	delete sync_;
-	delete left_sub_;
-	delete right_sub_;
-}
-
 StereoCameraThrottler::StereoCameraThrottler(ros::NodeHandle& nh, ros::NodeHandle& nh_priv)
 	: nh_(nh), nh_priv_(nh_priv)
 {
 	//store the topic and initial rate and initialize the last message time
-	//nh_ = nh;
-	//nh_priv_ = nh_priv;
 	last_msg_time_ = ros::Time(0);
 	received_left_cam_info_ = 0;
 	received_right_cam_info_ = 0;
@@ -59,11 +50,11 @@ StereoCameraThrottler::StereoCameraThrottler(ros::NodeHandle& nh, ros::NodeHandl
 	left_info_sub_ = nh_.subscribe(image_topic_ + std::string("/left/camera_info"), 1, &StereoCameraThrottler::left_info_cb, this);
 	right_info_sub_ = nh_.subscribe(image_topic_ + std::string("/right/camera_info"), 1, &StereoCameraThrottler::right_info_cb, this);
 
-	left_sub_ = new ImageSubscriber(nh_, image_topic_ + std::string("/left/image_raw"), 1);
-	right_sub_ = new ImageSubscriber(nh_, image_topic_ + std::string("/right/image_raw"), 1);
+	left_sub_.reset(new ImageSubscriber(nh_, image_topic_ + std::string("/left/image_raw"), 1));
+	right_sub_.reset(new ImageSubscriber(nh_, image_topic_ + std::string("/right/image_raw"), 1));
 
 	//register the callback for the topic synchronizer
-	sync_ = new ImageSynchronizer(StereoCameraSyncPolicy(50), *left_sub_, *right_sub_);
+	sync_.reset(new ImageSynchronizer(StereoCameraSyncPolicy(50), *left_sub_, *right_sub_));
 	sync_->registerCallback(boost::bind(&StereoCameraThrottler::stereo_cb, this, _1, _2));
 
 	dynamic_reconfigure::Server<lrm_stereo::ThrottleStereoConfig>::CallbackType f = boost::bind(&StereoCameraThrottler::reconfig, this, _1, _2);
