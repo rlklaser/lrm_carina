@@ -15,18 +15,18 @@
 	<depend package="std_msgs" />
 <!--  
 	<depend package="lrm_opencv" />
---> 
+-->
 	<depend package="opencv2" />
 
 	<depend package="nodelet" />
 	<depend package="dynamic_reconfigure" />
-
+	<depend package="image_transport" />
 	<depend package="pcl" />
 	<depend package="pcl_ros" />
 	<depend package="image_geometry" />
 
 	<depend package="pluginlib" />
-    <depend package="tf" />
+	<depend package="tf" />
 
 	<export>
 		<nodelet plugin="${prefix}/nodelet_plugins.xml" />

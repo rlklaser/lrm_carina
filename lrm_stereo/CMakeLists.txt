@@ -9,7 +9,8 @@ include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
 #  MinSizeRel     : w/o debug symbols, w/ optimization, stripped binaries
 #set(ROS_BUILD_TYPE RelWithDebInfo)
 
-set(ROS_BUILD_TYPE Release)
+#set(ROS_BUILD_TYPE Release)
+set(ROS_BUILD_TYPE Debug)
 
 rosbuild_init()
 
@@ -38,7 +39,7 @@ gencfg()
 
 add_definitions(-Wno-deprecated -DEIGEN_DONT_VECTORIZE -DEIGEN_DISABLE_UNALIGNED_ARRAY_ASSERT)
 
-add_definitions(-msse3 -msse4.1 -msse4.2 -mfpmath=sse)
+##add_definitions(-msse3 -msse4.1 -msse4.2 -mfpmath=sse)
 #add_definitions(-mavx -mfpmath=sse)
 
 rosbuild_add_library(lrm_stereo 
@@ -53,6 +54,7 @@ rosbuild_add_library(lrm_stereo
 	#src/transform_cloud_nodelet.cpp
 	#src/region_growing.cpp
 	src/segmentation_nodelet.cpp
+	src/moving_roi_nodelet.cpp
 	)
 rosbuild_add_boost_directories()
 #target_link_libraries(lrm_stereo pcl_ros_filters)
