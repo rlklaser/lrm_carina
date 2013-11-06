@@ -2,7 +2,7 @@
 
 resolution = 0.1;          	% resolucao da primitiva
 numberofangles = 16; 		% número de fracoes de angulos para um giro de 360 graus
-numberofprimsperangle = 18; 	% numero de primitivas de movimento
+numberofprimsperangle = 9; 	% numero de primitivas de movimento
 
 %numofsamples = 30;          % numero de passos para cada primitiva (poses calculadas)
 
