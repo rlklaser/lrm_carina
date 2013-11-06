@@ -43,7 +43,7 @@ latch_xy_goal_tolerance: true
 
 heading_scoring: true
 heading_scoring_timestep: 0.1
-heading_lookahead: 0.1
+heading_lookahead: 1.5
 
 escape_reset_dist: 0.5
 escape_reset_theta: 0.0
