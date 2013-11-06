@@ -12,7 +12,7 @@
 	<include file="$(find lrm_bringup)/launch/octomap_mapping.launch" />
 	<include file="$(find lrm_bringup)/launch/planning_navigation.launch" />
 
-
+<!-- 
 	<node
 		name="ground_seg_node"
 		pkg="lrm_wrappers"
@@ -23,11 +23,7 @@
 		<remap
 			from="points"
 			to="/cloud/points_voxel" />
-    <!-- 
-		<remap
-			from="points"
-			to="/stereo/points" />
-	 -->
 	</node>
-
+ -->
+ 
 </launch>
