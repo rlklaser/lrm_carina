@@ -1,6 +1,15 @@
 <library path="lib/liblrm_stereo">
 
 	<class
+		name="lrm_stereo/moving_roi"
+		type="lrm_stereo::MovingROINodelet"
+		base_class_type="nodelet::Nodelet"
+	>
+		<description>Moving ROI
+		</description>
+	</class>
+
+	<class
 		name="lrm_stereo/throttler"
 		type="lrm_stereo::ThrottleStereoNodelet"
 		base_class_type="nodelet::Nodelet"

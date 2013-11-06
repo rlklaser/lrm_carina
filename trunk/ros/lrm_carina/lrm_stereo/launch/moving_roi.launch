@@ -1,0 +1,63 @@
+<launch>
+
+
+	<node
+		pkg="nodelet"
+		type="nodelet"
+		name="roi_nodelet_manager"
+		args="manager"
+		respawn="true"
+		output="screen"
+	>
+		<param
+			name="num_worker_threads"
+			value="2" />
+	</node>
+
+	<group ns="/stereo">
+		<node
+			name="moving_roi"
+			pkg="nodelet"
+			type="nodelet"
+			args="load lrm_stereo/moving_roi /roi_nodelet_manager"
+			respawn="true"
+			output="screen"
+		>
+			<param
+				name="approximate_sync"
+				value="true" />
+			<param
+				name="output_namespace"
+				value="/stereo_cropped" />
+		</node>
+	</group>
+
+	<group ns="/stereo_cropped">
+		<node
+			pkg="nodelet"
+			type="nodelet"
+			name="disparity_bm"
+			args="load lrm_stereo/disparity_bm /roi_nodelet_manager"
+			respawn="true"
+			output="screen"
+		>
+			<param
+				name="approximate_sync"
+				value="true" />
+		</node>
+		
+		<node
+			pkg="nodelet"
+			type="nodelet"
+			name="point_cloud2"
+			args="load lrm_stereo/colorless_stereo /roi_nodelet_manager"
+			respawn="true"
+			output="screen"
+		>
+			<param
+				name="approximate_sync"
+				value="true" />
+		</node>
+	</group>
+
+</launch>
