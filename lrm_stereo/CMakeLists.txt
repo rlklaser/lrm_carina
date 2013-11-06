@@ -64,7 +64,11 @@ rosbuild_add_openmp_flags(fake_cloud)
 #	src/disparity_bm_cuda.cpp 
 #	)
 
-rosbuild_add_executable(throttle_stereo 
-	src/throttle_stereo.cpp 
-	)
+#rosbuild_add_executable(throttle_stereo 
+#	src/throttle_stereo.cpp 
+#	)
 
+rosbuild_add_executable(throttle_stereo_node 
+    src/throttle_stereo.cpp 
+	src/throttle_stereo_node.cpp 
+	)
