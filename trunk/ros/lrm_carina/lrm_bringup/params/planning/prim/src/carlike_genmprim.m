@@ -12,7 +12,7 @@ custo2 = 0.4;
 custo3 = 0.7;
 custo4 = 1.1;
 
-cmul = 7;
+cmul = 8.5;
 
 custo0 *= cmul;
 custo1 *= cmul;
@@ -74,8 +74,8 @@ basemprimendpts0_c(13,:) = [ -16  2  -1  custo2  -0.4   pi/12  40];
 basemprimendpts0_c(14,:) = [ -15  4  -1  custo2  -0.3   pi/8.2 40];
 basemprimendpts0_c(15,:) = [ -8  -2   1  custo3  -0.3  -pi/8.2 40];
 basemprimendpts0_c(16,:) = [ -8   2  -1  custo3  -0.3   pi/8.2 40];
-basemprimendpts0_c(17,:) = [ -7  -3   1  custo3  -0.2  -stlim 50];
-basemprimendpts0_c(18,:) = [ -7   3  -1  custo3  -0.2   stlim 50];
+basemprimendpts0_c(17,:) = [ -7  -3   1  custo4  -0.2  -stlim 50];
+basemprimendpts0_c(18,:) = [ -7   3  -1  custo4  -0.2   stlim 50];
 
     
 fout = fopen('../carina.mprim', 'w');
