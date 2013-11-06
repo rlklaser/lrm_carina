@@ -1,5 +1,5 @@
-#dwa: false
-dwa: true
+dwa: false
+#dwa: true
 #trajectory rollout if false
 
 #y_vels: [0]
