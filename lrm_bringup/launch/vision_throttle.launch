@@ -21,7 +21,7 @@
 			value="stereo" />
 		<param
 			name="rate"
-			value="5" />
+			value="7" />
 	</node>
 
 <!-- 
@@ -30,7 +30,7 @@
 			name="throttle_stereo"
 			pkg="nodelet"
 			type="nodelet"
-			args="load lrm_stereo/throttler /camera_nodelet_manager - -no-bond"
+			args="load lrm_stereo/throttler /camera_nodelet_manager"
 			respawn="true"
 			output="screen"
 		>
@@ -39,13 +39,14 @@
 				value="/stereo_camera" />
 			<param
 				name="output_namespace"
-				value="/stereo" />
+				value="/stereo_nodelet" />
 			<param
 				name="rate"
 				value="5" />
 		</node>
 	</group>
  -->
+  
 <!-- 
 	<group ns="/stereo">
 		<group ns="left">

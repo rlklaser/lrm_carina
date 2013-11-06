@@ -1,5 +1,5 @@
 cruise_control:
-  top_speed: 5
+  top_speed: 3
   max_accel: 110
   max_brake: 40
   rate: 20.0
