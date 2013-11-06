@@ -70,9 +70,9 @@ private:
 	ros::Publisher right_image_pub_;
 	ros::Publisher left_camera_info_pub_;
 	ros::Publisher right_camera_info_pub_;
-	ImageSubscriber* left_sub_;
-	ImageSubscriber* right_sub_;
-	ImageSynchronizer* sync_;
+	boost::shared_ptr<ImageSubscriber> left_sub_;
+	boost::shared_ptr<ImageSubscriber> right_sub_;
+	boost::shared_ptr<ImageSynchronizer> sync_;
 	ros::Subscriber left_info_sub_;
 	ros::Subscriber right_info_sub_;
 	CameraInfo left_cam_info_;
@@ -86,7 +86,7 @@ private:
 	dynamic_reconfigure::Server<ThrottleStereoConfig> srv_;
 public:
 	StereoCameraThrottler(ros::NodeHandle& nh, ros::NodeHandle& nh_priv);
-	virtual ~StereoCameraThrottler();
+	//virtual ~StereoCameraThrottler();
 	void reconfig(ThrottleStereoConfig &config, uint32_t level);
 	void setRate(double rate);
 protected:
