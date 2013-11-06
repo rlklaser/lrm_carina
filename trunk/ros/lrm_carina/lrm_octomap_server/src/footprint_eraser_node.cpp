@@ -129,7 +129,7 @@ int main(int argc, char **argv) {
 	_client = nh.serviceClient<octomap_msgs::BoundingBoxQuery>("clear_bbx");
 
 	nh_priv.param<double>("min_distance", _min_distance_to_update, 0.5);
-	nh_priv.param<double>("timeout", _timeout, 30);
+	nh_priv.param<double>("timeout", _timeout, 10);
 
 	_last_clear = ros::Time::now();
 
