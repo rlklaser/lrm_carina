@@ -500,7 +500,8 @@ void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPo
 				//m_octree->integrateNodeColor(key, it->r, it->g, it->b);
 				//m_octree->setNodeColor(key, it->r, it->g, it->b);
 				//m_octree->averageNodeColor(key, it->r, it->g, it->b);
-				m_octree->averageNodeColor(it->x, it->y, it->z, it->r, it->g, it->b);
+				//m_octree->averageNodeColor(it->x, it->y, it->z, it->r, it->g, it->b);
+				m_octree->setNodeColor(it->x, it->y, it->z, it->r, it->g, it->b);
 
 				//std::cout << "pt x:" << it->x << " y:" << it->y << " z:" << it->z << " r:" << (unsigned int)it->r << " g:" << (unsigned int)it->g << " b:" << (unsigned int)it->b << std::endl;
 
