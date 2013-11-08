@@ -70,7 +70,7 @@ Hemisfere::Hemisfere(ros::NodeHandle n) :
 	nh_priv.param("isRandon", isRandon, true);
 	nh_priv.param("density", density, DENSITY_DEFAULT);
 	nh_priv.param("ray", rayd, R);
-	nh_priv.param<std::string>("frame_id", frame_id, "base_link");
+	nh_priv.param<std::string>("frame_id", frame_id, "/base_link");
 
 	ray = (float) rayd;
 
