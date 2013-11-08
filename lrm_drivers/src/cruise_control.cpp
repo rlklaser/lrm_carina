@@ -123,7 +123,7 @@ void CruiseControl::inferenceControl(lrm_msgs::VehicleState state) {
 	double erroV = tempVelocity.value - this->cruiseVelocity.value;
 	double dV = tempVelocity.value - this->lastVelocity.value;
 
-	ControlVelocityBrakeInferenceEngine(erroV, dV * FREQUENCY, &increaseAccel, &increaseBrake);
+	ControlVelocityBrakeInferenceEngine(erroV, dV * this->frequency, &increaseAccel, &increaseBrake);
 
 	if (((erroV < -switch_lag_throttle) && (this->brakeD == 0)) || accelFlag) {
 		//accel
