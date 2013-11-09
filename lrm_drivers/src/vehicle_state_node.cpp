@@ -38,12 +38,13 @@ lrm_msgs::VehicleState state;
 ros::Time last_time = ros::Time(0);
 ros::Time now = ros::Time(0);
 ros::Publisher states_pub;
-
+bool started;
 //int i;
 
 void encodersCallback(const lrm_msgs::Encoders::ConstPtr& encoder) {
 	wheel_encoder += encoder->wheel.relative;
 	now = encoder->header.stamp;
+	started = true;
 	//encoder->steering.absolute;
 	//i++;
 	/*
@@ -75,11 +76,17 @@ int main(int argc, char** argv) {
 
 	state.header.frame_id = "base_footprint";
 
+	started = false;
 	ros::Subscriber encoders_sub = nh.subscribe<lrm_msgs::Encoders>("encoders", 50, &encodersCallback);
 	states_pub = nh.advertise<lrm_msgs::VehicleState>("vehicle_state", 1);
 
+	//publisher_timer = n.createTimer(ros::Duration(1.0 / odo.p.rate), &WheelOdometry::odomCallback, this, false, false);
+
 	while (ros::ok()) {
-		//ros::Time now = ros::Time::now();
+		if(!started) {
+			now = ros::Time::now();
+			ROS_WARN_STREAM_THROTTLE(0.1, "wheel encoder no received");
+		}
 		ros::Duration dt = now - last_time;
 		dist = (tread_lenght / WHEEL_ENCODER_RESOLUTION) * wheel_encoder;
 
