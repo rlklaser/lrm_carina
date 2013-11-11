@@ -6,7 +6,7 @@ planner_frequency: 5.0
 
 clearing_rotation_allowed: false
 
-oscillation_timeout: 10.0
+oscillation_timeout: 0.0
 oscillation_distance: 1.0
 
 # Recovery
