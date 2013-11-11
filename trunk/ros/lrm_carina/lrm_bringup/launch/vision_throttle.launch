@@ -21,7 +21,7 @@
 			value="stereo" />
 		<param
 			name="rate"
-			value="7" />
+			value="6" />
 	</node>
 
 <!-- 

@@ -8,6 +8,7 @@
 		respawn="true"
 		output="screen" />
 
+<!-- args="/cloud/points_zigzag_filter /cloud_in" -->
 	<node
 		name="local_cluster_filter_relay"
 		pkg="topic_tools"
