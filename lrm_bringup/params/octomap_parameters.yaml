@@ -49,5 +49,5 @@ octomap_server:
     
     #incremental_2D_projection: true
     
-    unknown_cost: -1
+    unknown_cost: 50
     
