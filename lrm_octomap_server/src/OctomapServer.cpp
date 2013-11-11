@@ -37,7 +37,7 @@
 
 #include <octomap_server/OctomapServer.h>
 
-#define MIN_COST 50
+//#define MIN_COST 50
 
 using namespace octomap;
 using octomap_msgs::Octomap;
@@ -1211,7 +1211,7 @@ void OctomapServer::handlePreNodeTraversal(const ros::Time& rostime) {
 			// init to unknown:
 			//m_gridmap.data.resize(m_gridmap.info.width * m_gridmap.info.height, -1);
 //rlkaser:init to free
-			m_gridmap.data.resize(m_gridmap.info.width * m_gridmap.info.height, MIN_COST);
+			m_gridmap.data.resize(m_gridmap.info.width * m_gridmap.info.height, m_unknownCost);
 		} else {
 
 			if (mapChanged(oldMapInfo, m_gridmap.info)) {
@@ -1238,7 +1238,7 @@ void OctomapServer::handlePreNodeTraversal(const ros::Time& rostime) {
 			for (unsigned int j = mapUpdateBBXMinY; j <= mapUpdateBBXMaxY; ++j) {
 				//std::fill_n(m_gridmap.data.begin() + m_gridmap.info.width * j + mapUpdateBBXMinX, numCols, -1);
 //rlkaser:init to free
-				std::fill_n(m_gridmap.data.begin() + m_gridmap.info.width * j + mapUpdateBBXMinX, numCols, MIN_COST);
+				std::fill_n(m_gridmap.data.begin() + m_gridmap.info.width * j + mapUpdateBBXMinX, numCols, m_unknownCost);
 			}
 
 		}
