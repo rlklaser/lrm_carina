@@ -12,7 +12,7 @@ custo2 = 0.4;
 custo3 = 0.7;
 custo4 = 1.1;
 
-cmul = 20;
+cmul = 10;
 
 custo0 *= cmul;
 custo1 *= cmul;
