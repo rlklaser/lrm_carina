@@ -14,8 +14,8 @@ inflation_radius: 1.85
 #cost_scaling_factor: 10
 #lethal_cost_threshold: 100
 
-unknown_cost_value: 50
-track_unknown_space: true
+#unknown_cost_value: 50
+#track_unknown_space: true
 
 cloud: 
   {

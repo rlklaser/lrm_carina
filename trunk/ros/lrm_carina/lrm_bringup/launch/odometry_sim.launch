@@ -5,6 +5,8 @@
 		value="true" />
 	
 	<include file="$(find lrm_bringup)/launch/odometry_wheel_sim.launch" />
+	<!-- 
 	<include file="$(find lrm_bringup)/launch/odometry.launch" />
-		
+	 -->
+	 	
 </launch>
