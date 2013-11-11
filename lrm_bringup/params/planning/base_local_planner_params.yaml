@@ -52,7 +52,7 @@ escape_vel: -0.5
 simple_attractor: true             # follow strictly the global path
 #simple_attractor: false
 meter_scoring: true                # If true, distances are expressed in meters; otherwise grid cells
-prune_plan: true
+prune_plan: false
 
 #carlike planner
 base_wheels: 1.65
