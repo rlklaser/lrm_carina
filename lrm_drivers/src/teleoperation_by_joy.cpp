@@ -26,6 +26,7 @@ private:
 	double brake_scale, velocity_scale, steering_scale;
 
 	sensor_msgs::Joy last_joy;
+	bool first;
 
 	lrm_msgs::Steering steer;
 	lrm_msgs::Throttle throttle;
@@ -81,6 +82,8 @@ TeleopByJoy::TeleopByJoy(ros::NodeHandle n) :
 	velocity_btn_dec--;
 	reset_btn--;
 
+	first = true;
+
 	velocity_gain = 100 / velocity_scale;
 
 	steering_pub = nh.advertise<lrm_msgs::Steering>("steering_commands", 1);
@@ -96,6 +99,10 @@ TeleopByJoy::~TeleopByJoy() {
 
 void TeleopByJoy::joyCallback(const sensor_msgs::Joy::ConstPtr& joy) {
 
+	if(first) {
+		last_joy = *joy;
+		first = false;
+	}
 	/*
 	 * Steering commands
 	 * Default: horizontal axis (left and right)
