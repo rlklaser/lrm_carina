@@ -14,7 +14,7 @@ inflation_radius: 1.85
 #cost_scaling_factor: 10
 #lethal_cost_threshold: 100
 
-unknown_cost_value: 50
+unknown_cost_value: 20
 track_unknown_space: false
 
 cloud: 
@@ -95,6 +95,22 @@ map_cloud:
     sensor_frame: /base_footprint, 
     data_type: PointCloud2,  
     topic: /octomap_point_cloud_centers, 
+    marking: true, 
+    clearing: false,
+    max_obstacle_height: 2.0, 
+    min_obstacle_height: 0.1,
+    observation_persistence: 0.0,
+    expected_update_rate: 0.0,
+    
+    obstacle_range: 9.0,
+    raytrace_range: 10.0
+  }
+  
+cluster_cloud:
+  {
+    sensor_frame: /base_footprint, 
+    data_type: PointCloud2,  
+    topic: /cloud_in, 
     marking: true, 
     clearing: false,
     max_obstacle_height: 2.0, 

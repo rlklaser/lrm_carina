@@ -279,6 +279,7 @@ private:
   ros::Timer m_publisher_timer;
 
   void _publishAll(const ros::Time& rostime = ros::Time::now());
+  void updateTreeProbabilities();
 
 };
 }
