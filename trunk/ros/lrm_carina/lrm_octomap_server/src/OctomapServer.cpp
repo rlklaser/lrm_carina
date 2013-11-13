@@ -61,7 +61,7 @@ OctomapServer::OctomapServer(ros::NodeHandle nh) :
 		m_filterGroundPlane(false), m_groundFilterDistance(0.04),
 		m_groundFilterAngle(0.15), m_groundFilterPlaneDistance(0.07),
 		m_compressMap(false), m_incrementalUpdate(false), m_unknownCost(-1),
-		m_occupancyThres(0)
+		m_occupancyThres(0), m_waitTransform(0.5)
 {
 	ros::NodeHandle private_nh(nh);
 	private_nh.param("frame_id", m_worldFrameId, m_worldFrameId);
@@ -265,7 +265,7 @@ bool OctomapServer::openFile(const std::string& filename) {
 void OctomapServer::insertCloudGroundCallback(const sensor_msgs::PointCloud2::ConstPtr& cloud) {
 	ros::WallTime startTime = ros::WallTime::now();
 
-	//ROS_INFO_STREAM("ground in");
+	ROS_INFO_STREAM("octomap: ground in");
 
 	//
 	// ground filtering in base frame
@@ -279,7 +279,7 @@ void OctomapServer::insertCloudGroundCallback(const sensor_msgs::PointCloud2::Co
 	tf::StampedTransform sensorTf;
 
 	try {
-		m_tfListener.waitForTransform(m_worldFrameId, m_SourceFrameId, cloud->header.stamp, ros::Duration(1.0));
+		m_tfListener.waitForTransform(m_worldFrameId, m_SourceFrameId, cloud->header.stamp, ros::Duration(m_waitTransform));
 		m_tfListener.lookupTransform(m_worldFrameId, m_SourceFrameId, cloud->header.stamp, sensorTf);
 	} catch (tf::TransformException& ex) {
 		ROS_ERROR_STREAM(">Transform error of sensor data: " << ex.what() << ", quitting callback");
@@ -287,10 +287,11 @@ void OctomapServer::insertCloudGroundCallback(const sensor_msgs::PointCloud2::Co
 	}
 
 	if (m_worldFrameId != cloud->header.frame_id) {
+		ROS_WARN_STREAM("tranform ground cloud from " << cloud->header.frame_id <<  " to " << m_worldFrameId);
 		tf::StampedTransform sensorToWorldTf;
 		Eigen::Matrix4f sensorToWorld;
 		try {
-			m_tfListener.waitForTransform(m_worldFrameId, cloud->header.frame_id, cloud->header.stamp, ros::Duration(1.0));
+			m_tfListener.waitForTransform(m_worldFrameId, cloud->header.frame_id, cloud->header.stamp, ros::Duration(m_waitTransform));
 			m_tfListener.lookupTransform(m_worldFrameId, cloud->header.frame_id, cloud->header.stamp, sensorToWorldTf);
 		} catch (tf::TransformException& ex) {
 			ROS_ERROR_STREAM("Transform error of sensor data: " << ex.what() << ", quitting callback");
@@ -318,6 +319,8 @@ void OctomapServer::insertCloudGroundCallback(const sensor_msgs::PointCloud2::Co
 void OctomapServer::insertCloudCallback(const sensor_msgs::PointCloud2::ConstPtr& cloud) {
 	ros::WallTime startTime = ros::WallTime::now();
 
+	ROS_INFO_STREAM("octomap: cluster in");
+
 	//
 	// ground filtering in base frame
 	//
@@ -327,7 +330,7 @@ void OctomapServer::insertCloudCallback(const sensor_msgs::PointCloud2::ConstPtr
 	//rlklaser/////////////////
 	tf::StampedTransform sensorTf;
 	try {
-		m_tfListener.waitForTransform(m_worldFrameId, m_SourceFrameId, cloud->header.stamp, ros::Duration(1.0));
+		m_tfListener.waitForTransform(m_worldFrameId, m_SourceFrameId, cloud->header.stamp, ros::Duration(m_waitTransform));
 		m_tfListener.lookupTransform(m_worldFrameId, m_SourceFrameId, cloud->header.stamp, sensorTf);
 	} catch (tf::TransformException& ex) {
 		ROS_ERROR_STREAM(">Transform error of sensor data: " << ex.what() << ", quitting callback");
@@ -372,7 +375,7 @@ void OctomapServer::insertCloudCallback(const sensor_msgs::PointCloud2::ConstPtr
 			tf::StampedTransform sensorToWorldTf;
 			Eigen::Matrix4f sensorToWorld;
 			try {
-				m_tfListener.waitForTransform(m_worldFrameId, cloud->header.frame_id, cloud->header.stamp, ros::Duration(1.0));
+				m_tfListener.waitForTransform(m_worldFrameId, cloud->header.frame_id, cloud->header.stamp, ros::Duration(m_waitTransform));
 				m_tfListener.lookupTransform(m_worldFrameId, cloud->header.frame_id, cloud->header.stamp, sensorToWorldTf);
 			} catch (tf::TransformException& ex) {
 				ROS_ERROR_STREAM("Transform error of sensor data: " << ex.what() << ", quitting callback");
@@ -877,7 +880,7 @@ bool OctomapServer::clearBBXSrv(BBXSrv::Request& req, BBXSrv::Response& resp) {
 	point3d min = pointMsgToOctomap(req.min);
 	point3d max = pointMsgToOctomap(req.max);
 
-	ROS_DEBUG_STREAM("clear_bbx called " << min.x() << ":" << max.x());
+	//ROS_INFO_STREAM("clear_bbx called " << min.x() << ":" << max.x());
 
 	boost::lock_guard<boost::mutex> guard(m_mutex);
 
@@ -887,8 +890,11 @@ bool OctomapServer::clearBBXSrv(BBXSrv::Request& req, BBXSrv::Response& resp) {
 		//ROS_INFO_STREAM("it: " << m_thresMin);
 
 		//free space
-		it->setLogOdds(octomap::logodds(0));
+		//it->setLogOdds(octomap::logodds(0));
 		//m_octree->updateNode(it.getKey(), octomap::logodds(0));
+		//m_octree->updateNode(it.getKey(), octomap::logodds(m_thresMin));
+		//ROS_INFO_STREAM("clearing key: " << it.getKey()[0]);
+		it->setLogOdds(octomap::logodds(m_thresMin));
 	}
 
 	// TODO: eval which is faster (setLogOdds+updateInner or updateNode)
@@ -1284,6 +1290,9 @@ void OctomapServer::handleFreeNodeInBBX(const OcTreeT::iterator& it) {
 void OctomapServer::update2DMap(const OcTreeT::iterator& it, bool occupied) {
 
 	// update 2D map (occupied always overrides):
+
+	double logg = it->getLogOdds();
+	//double prog = it->getProbability();
 
 	if (it.getDepth() == m_maxTreeDepth) {
 		unsigned idx = mapIdx(it.getKey());
