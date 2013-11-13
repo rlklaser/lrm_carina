@@ -60,7 +60,7 @@ sensor_msgs::PointCloud2 cloud_out;
 
 void pointcloudCallback(const sensor_msgs::PointCloud2::ConstPtr& msg) {
 
-	if (pc_pub.getNumSubscribers() == 0 && pc_rem_pub.getNumSubscribers())
+	if (pc_pub.getNumSubscribers() == 0)// && pc_rem_pub.getNumSubscribers())
 		return;
 
 	pcl::PointCloud<pcl::PointXYZRGB> cloud;

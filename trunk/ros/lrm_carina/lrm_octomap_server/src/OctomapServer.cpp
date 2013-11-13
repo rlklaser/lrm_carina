@@ -112,11 +112,8 @@ OctomapServer::OctomapServer(ros::NodeHandle nh) :
 
 	// initialize octomap object & params
 	m_octree = new OcTreeT(m_res);
-	m_octree->setProbHit(m_probHit);
-	m_octree->setProbMiss(m_probMiss);
-	m_octree->setClampingThresMin(m_thresMin);
-	m_octree->setClampingThresMax(m_thresMax);
-	m_octree->setOccupancyThres(m_occupancyThres);
+
+	updateTreeProbabilities();
 
 	m_treeDepth = m_octree->getTreeDepth();
 	m_maxTreeDepth = m_treeDepth;
@@ -170,6 +167,15 @@ OctomapServer::OctomapServer(ros::NodeHandle nh) :
 
 	m_updated = false;
 	m_publisher_timer = nh.createTimer(ros::Duration(1.0 / rate), &OctomapServer::timerCallback, this);
+}
+
+void OctomapServer::updateTreeProbabilities()
+{
+	m_octree->setProbHit(m_probHit);
+	m_octree->setProbMiss(m_probMiss);
+	m_octree->setClampingThresMin(m_thresMin);
+	m_octree->setClampingThresMax(m_thresMax);
+	m_octree->setOccupancyThres(m_occupancyThres);
 }
 
 void OctomapServer::timerCallback(const ros::TimerEvent& t) {
@@ -265,7 +271,7 @@ bool OctomapServer::openFile(const std::string& filename) {
 void OctomapServer::insertCloudGroundCallback(const sensor_msgs::PointCloud2::ConstPtr& cloud) {
 	ros::WallTime startTime = ros::WallTime::now();
 
-	ROS_INFO_STREAM("octomap: ground in");
+	//ROS_INFO_STREAM("octomap: ground in");
 
 	//
 	// ground filtering in base frame
@@ -319,7 +325,7 @@ void OctomapServer::insertCloudGroundCallback(const sensor_msgs::PointCloud2::Co
 void OctomapServer::insertCloudCallback(const sensor_msgs::PointCloud2::ConstPtr& cloud) {
 	ros::WallTime startTime = ros::WallTime::now();
 
-	ROS_INFO_STREAM("octomap: cluster in");
+	//ROS_INFO_STREAM("octomap: cluster in");
 
 	//
 	// ground filtering in base frame
@@ -494,6 +500,7 @@ void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPo
 			if (m_octree->computeRayKeys(sensorOrigin, point, m_keyRay)) {
 				free_cells.insert(m_keyRay.begin(), m_keyRay.end());
 			}
+
 			// occupied endpoint
 			OcTreeKey key;
 			if (m_octree->coordToKeyChecked(point, key)) {
@@ -508,21 +515,21 @@ void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPo
 
 				//std::cout << "pt x:" << it->x << " y:" << it->y << " z:" << it->z << " r:" << (unsigned int)it->r << " g:" << (unsigned int)it->g << " b:" << (unsigned int)it->b << std::endl;
 
-
 				if(hit_dist<m_probMidDist) {
 					m_octree->updateNode(key, true);
 				}
-				else
+				else {
 					if(hit_dist>m_probFarDist) {
 						m_octree->updateNode(key, octomap::logodds(m_probHitFar));
 					}
 					else {
 						m_octree->updateNode(key, octomap::logodds(m_probHitMid));
 					}
-
+				}
 				updateMinKey(key, m_updateBBXMin);
 				updateMaxKey(key, m_updateBBXMax);
 			}
+
 		} else { // ray longer than maxrange:;
 			point3d new_end = sensorOrigin + (point - sensorOrigin).normalized() * m_maxRange;
 			if (m_octree->computeRayKeys(sensorOrigin, new_end, m_keyRay)) {
@@ -546,10 +553,10 @@ void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPo
 
 	// mark free cells only if not seen occupied in this cloud
 	for (KeySet::iterator it = free_cells.begin(), end = free_cells.end(); it != end; ++it) {
-		//if (occupied_cells.find(*it) == occupied_cells.end()) {
+		if (occupied_cells.find(*it) == occupied_cells.end()) {
 			m_octree->updateNode(*it, false);
 			in++;
-		//}
+		}
 	}
 
 	/*
@@ -574,7 +581,7 @@ void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPo
 
 	// TODO: eval lazy+updateInner vs. proper insertion
 	// non-lazy by default (updateInnerOccupancy() too slow for large maps)
-	m_octree->updateInnerOccupancy();
+	//m_octree->updateInnerOccupancy();
 
 	octomap::point3d minPt, maxPt;
 	ROS_DEBUG_STREAM("Bounding box keys (before): " << m_updateBBXMin[0] << " " <<m_updateBBXMin[1] << " " << m_updateBBXMin[2] << " / " <<m_updateBBXMax[0] << " "<<m_updateBBXMax[1] << " "<< m_updateBBXMax[2]);
@@ -1292,7 +1299,7 @@ void OctomapServer::update2DMap(const OcTreeT::iterator& it, bool occupied) {
 	// update 2D map (occupied always overrides):
 
 	double logg = it->getLogOdds();
-	//double prog = it->getProbability();
+	double prog = it->getOccupancy();
 
 	if (it.getDepth() == m_maxTreeDepth) {
 		unsigned idx = mapIdx(it.getKey());
@@ -1351,6 +1358,17 @@ bool OctomapServer::isSpeckleNode(const OcTreeKey&nKey) const {
 }
 
 void OctomapServer::reconfigureCallback(lrm_octomap_server::OctomapServerConfig& config, uint32_t level) {
+
+	boost::lock_guard<boost::mutex> guard(m_mutex);
+
+	//m_probHit = config.prob_hit;
+	//m_probMiss = config.prob_mis;
+	//m_thresMin = config.clamping_thres_min;
+	//m_thresMax = config.clamping_thres_max;
+	//m_occupancyThres = config.occ_prob_thres;
+
+	updateTreeProbabilities();
+
 	if (m_maxTreeDepth != unsigned(config.max_depth)) {
 		m_maxTreeDepth = unsigned(config.max_depth);
 

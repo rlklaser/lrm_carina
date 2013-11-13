@@ -45,7 +45,7 @@ SBPLLatticePlanner:
 ##that is less harsh and more reasonable. This will make the planner more likely to choose 
 ##to go through more narrow areas such as doorways.
   
-  lethal_obstacle: 100.0               #20 default
+  lethal_obstacle: 80.0               #20 default
   
   
 #initialized search area (in meters)  
