@@ -242,6 +242,8 @@ protected:
   double m_thresMin;
   double m_thresMax;
 
+  double m_waitTransform;
+
   double m_pointcloudMinZ;
   double m_pointcloudMaxZ;
   double m_occupancyMinZ;
