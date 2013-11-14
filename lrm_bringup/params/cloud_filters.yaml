@@ -44,7 +44,7 @@ ground_voxel_grid_nodelet:
   filter_limit_min: -1.0
   filter_limit_max: 1.0
   filter_limit_negative: False
-  leaf_size: 0.15
+  leaf_size: 0.25
   approximate_sync: true
   output_frame: /map
   
