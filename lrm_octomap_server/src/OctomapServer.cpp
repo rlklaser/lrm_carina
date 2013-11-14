@@ -575,7 +575,7 @@ void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPo
 	//reduce the certainty on ocluded readings
 	for (KeySet::iterator it = weak_free_cells.begin(), end = weak_free_cells.end(); it != end; ++it) {
 		if (occupied_cells.find(*it) == occupied_cells.end()) {
-			m_octree->updateNode(*it, octomap::logodds(0.45));
+			m_octree->updateNode(*it, octomap::logodds(0.495));
 			in++;
 		}
 	}
