@@ -439,7 +439,6 @@ void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPo
 		ROS_ERROR_STREAM("Could not generate Key for origin "<<sensorOrigin);
 	}
 
-	
 	double hit_dist = 0;
 	
 	if (!nonground.empty()) {
@@ -467,7 +466,7 @@ void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPo
 	}
 
 	// instead of direct scan insertion, compute update to filter ground:
-	KeySet free_cells, occupied_cells;
+	KeySet free_cells, occupied_cells, weak_free_cells;
 	// insert ground points only as free:
 	for (PCLPointCloud::const_iterator it = ground.begin(); it != ground.end(); ++it) {
 		point3d point(it->x, it->y, it->z);
@@ -530,7 +529,21 @@ void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPo
 				updateMaxKey(key, m_updateBBXMax);
 			}
 
-		} else { // ray longer than maxrange:;
+			//weak free (on occlusion)
+			// free cells
+			point3d new_end = point + (point - sensorOrigin).normalized() * m_maxRange;
+			if (m_octree->computeRayKeys(point, new_end, m_keyRay)) {
+				weak_free_cells.insert(m_keyRay.begin(), m_keyRay.end());
+
+				//ROS_INFO_STREAM("occ ray " <<
+				//		point.x() << " " << point.y() << " " << point.z()
+				//		<< " : " <<
+				//		new_end.x() << " " << new_end.y() << " " << new_end.z()
+				//		<< " > " << m_keyRay.size());
+
+			}
+		}
+		else { // ray longer than maxrange:;
 			point3d new_end = sensorOrigin + (point - sensorOrigin).normalized() * m_maxRange;
 			if (m_octree->computeRayKeys(sensorOrigin, new_end, m_keyRay)) {
 				free_cells.insert(m_keyRay.begin(), m_keyRay.end());
@@ -555,6 +568,14 @@ void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPo
 	for (KeySet::iterator it = free_cells.begin(), end = free_cells.end(); it != end; ++it) {
 		if (occupied_cells.find(*it) == occupied_cells.end()) {
 			m_octree->updateNode(*it, false);
+			in++;
+		}
+	}
+
+	//reduce the certainty on ocluded readings
+	for (KeySet::iterator it = weak_free_cells.begin(), end = weak_free_cells.end(); it != end; ++it) {
+		if (occupied_cells.find(*it) == occupied_cells.end()) {
+			m_octree->updateNode(*it, octomap::logodds(0.45));
 			in++;
 		}
 	}
@@ -760,11 +781,12 @@ void OctomapServer::_publishAll(const ros::Time& rostime) {
 						color.b = b;
 						color.a = 1;
 
-						occupiedNodesVis.markers[idx].colors.push_back(color);
+						//occupiedNodesVis.markers[idx].colors.push_back(color);
 						//occupiedNodesVis.markers[idx].color = color;
 
-						//double h = node->getOccupancy();
-						//occupiedNodesVis.markers[idx].colors.push_back(heightMapColor(h));
+						double occ = it->getOccupancy();
+						double h = (1.0 - std::min(std::max((occ - m_thresMin) / (m_thresMax - m_thresMin), 0.0), 1.0)) * m_colorFactor;
+						occupiedNodesVis.markers[idx].colors.push_back(heightMapColor(h));
 					}
 				}
 
