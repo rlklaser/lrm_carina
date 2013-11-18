@@ -58,6 +58,8 @@ int _max_size;
 int _neighbours;
 double _smoothness;
 double _curvature;
+bool _to_map;
+
 tf::TransformListener* tf_listener;
 
 void pointcloudCallback(const sensor_msgs::PointCloud2::ConstPtr& msg) {
@@ -65,17 +67,19 @@ void pointcloudCallback(const sensor_msgs::PointCloud2::ConstPtr& msg) {
 	if (pc_pub.getNumSubscribers() == 0)
 		return;
 
-	tf::StampedTransform sensorToWorldTf;
-	try {
-		tf_listener->waitForTransform("/map", msg->header.frame_id, msg->header.stamp, ros::Duration(1.0));
-		tf_listener->lookupTransform("/map", msg->header.frame_id, msg->header.stamp, sensorToWorldTf);
-	} catch (tf::TransformException& ex) {
-		ROS_ERROR_STREAM("Transform error of sensor data: " << ex.what() << ", quitting callback");
-		return;
-	}
-
 	Eigen::Matrix4f sensorToWorld;
-	pcl_ros::transformAsMatrix(sensorToWorldTf, sensorToWorld);
+
+	if (_to_map) {
+		tf::StampedTransform sensorToWorldTf;
+		try {
+			tf_listener->waitForTransform("/map", msg->header.frame_id, msg->header.stamp, ros::Duration(1.0));
+			tf_listener->lookupTransform("/map", msg->header.frame_id, msg->header.stamp, sensorToWorldTf);
+		} catch (tf::TransformException& ex) {
+			ROS_ERROR_STREAM("Transform error of sensor data: " << ex.what() << ", quitting callback");
+			return;
+		}
+		pcl_ros::transformAsMatrix(sensorToWorldTf, sensorToWorld);
+	}
 
 	pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud_in(new pcl::PointCloud<pcl::PointXYZRGB>);
 	pcl::fromROSMsg(*msg, *cloud_in);
@@ -87,7 +91,6 @@ void pointcloudCallback(const sensor_msgs::PointCloud2::ConstPtr& msg) {
 	normal_estimator.setInputCloud(cloud_in);
 	normal_estimator.setRadiusSearch(0.2);
 	normal_estimator.compute(*normals);
-
 
 	pcl::RegionGrowing<pcl::PointXYZRGB, pcl::Normal> reg;
 	reg.setMinClusterSize(_min_size);
@@ -103,7 +106,7 @@ void pointcloudCallback(const sensor_msgs::PointCloud2::ConstPtr& msg) {
 	std::vector<pcl::PointIndices> clusters;
 	reg.extract(clusters);
 
-	pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud = cloud_in ;//reg.getColoredCloud();
+	pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud = cloud_in; //reg.getColoredCloud();
 
 	ROS_DEBUG_STREAM("Number of clusters is equal to " << clusters.size());
 
@@ -129,11 +132,13 @@ void pointcloudCallback(const sensor_msgs::PointCloud2::ConstPtr& msg) {
 				pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud_p(new pcl::PointCloud<pcl::PointXYZRGB>);
 				extract.filter (*cloud_p);
 
-				pcl::transformPointCloud(*cloud_p, *cloud_p, sensorToWorld);
+				if(_to_map) {
+					pcl::transformPointCloud(*cloud_p, *cloud_p, sensorToWorld);
+				}
 
 				sensor_msgs::PointCloud2 cloud_out;
 				pcl::toROSMsg(*cloud_p, cloud_out);
-				cloud_out.header.frame_id = "/map";
+				cloud_out.header.frame_id = _to_map ? "/map" : msg->header.frame_id;
 				cloud_out.header.stamp = ros::Time::now();
 				pc_pub.publish(cloud_out);
 
@@ -152,12 +157,13 @@ int main(int argc, char** argv) {
 	ros::Subscriber pc_sub = nh.subscribe("points_in", 10, pointcloudCallback);
 	pc_pub = nh.advertise<sensor_msgs::PointCloud2>(nh_priv.getNamespace() + "/points_out", 30);
 
-	nh_priv.param<double>("k_search", _k_search, 50.0);
+	nh_priv.param<double>("k_search", _k_search, 30.0); //50
 	nh_priv.param<int>("min_size", _min_size, 100);
-	nh_priv.param<int>("max_size", _max_size, 10000);
-	nh_priv.param<int>("neighbours", _neighbours, 32.0);
-	nh_priv.param<double>("curvature", _curvature, 50.0);
-	nh_priv.param<double>("smoothness", _smoothness, 50.0);
+	nh_priv.param<int>("max_size", _max_size, 5000); //100000
+	nh_priv.param<int>("neighbours", _neighbours, 30.0);
+	nh_priv.param<double>("curvature", _curvature, 2.0); //50
+	nh_priv.param<double>("smoothness", _smoothness, 35.0); //50
+	nh_priv.param<bool>("to_map", _to_map, true);
 
 	ros::spin();
 
