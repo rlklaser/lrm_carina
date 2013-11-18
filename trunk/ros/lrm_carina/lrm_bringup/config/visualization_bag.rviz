@@ -337,7 +337,7 @@ Visualization Manager:
       Color: 255; 255; 255
       Color Transformer: RGB8
       Decay Time: 0
-      Enabled: false
+      Enabled: true
       Max Color: 255; 255; 255
       Max Intensity: 4096
       Min Color: 0; 0; 0
@@ -349,10 +349,10 @@ Visualization Manager:
       Size (Pixels): 3
       Size (m): 0.01
       Style: Points
-      Topic: /cloud/points_cluster
+      Topic: /cloud_in
       Use Fixed Frame: true
       Use rainbow: true
-      Value: false
+      Value: true
     - Angle Tolerance: 0.1
       Class: rviz/Odometry
       Color: 0; 0; 255
@@ -642,7 +642,7 @@ Visualization Manager:
       Cell Size: 1
       Class: rviz/Grid
       Color: 255; 0; 0
-      Enabled: true
+      Enabled: false
       Line Style:
         Line Width: 0.03
         Value: Lines
@@ -655,7 +655,7 @@ Visualization Manager:
       Plane: XY
       Plane Cell Count: 19
       Reference Frame: /compass_link
-      Value: true
+      Value: false
   Enabled: true
   Global Options:
     Background Color: 255; 255; 255
@@ -676,17 +676,17 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 23.0766
+      Distance: 10
       Focal Point:
-        X: 3.02615
-        Y: -8.37919
-        Z: 10.5982
+        X: -1.0219
+        Y: -3.38946
+        Z: 4.11366
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 0.530398
+      Pitch: 0.195398
       Target Frame: /base_footprint
       Value: Orbit (rviz)
-      Yaw: 4.92042
+      Yaw: 3.02858
     Saved: ~
 Window Geometry:
   Camera:

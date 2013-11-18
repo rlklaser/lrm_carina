@@ -90,7 +90,7 @@
 		output="screen" />
 
 
-
+	<!-- SLAM ???? -->
 	<node
 		pkg="tf"
 		type="static_transform_publisher"
@@ -103,6 +103,6 @@
 		type="fake_odom_frame"
 		name="fake_odom_frame"
 		respawn="true"
-		output="screen" />
+		output="screen" /> -->
 
 </launch>

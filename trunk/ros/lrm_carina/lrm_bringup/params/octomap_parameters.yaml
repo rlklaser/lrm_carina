@@ -31,12 +31,12 @@ octomap_server:
       #max_range: 15
       max_range: 80
     
-      mid_dist: 7.0
-      far_dist: 15.0
-      hit: 0.60
-      hit_mid: 0.55
-      hit_far: 0.51
-      miss: 0.45
+      mid_dist: 6.0
+      far_dist: 13.0
+      hit: 0.65
+      hit_mid: 0.60
+      hit_far: 0.55
+      miss: 0.25
       occ: 0.75
     
       #max: 0.75
