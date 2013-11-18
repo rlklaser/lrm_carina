@@ -47,7 +47,10 @@
 //#include <arm_navigation_msgs/CollisionMap.h>
 // #include <moveit_msgs/CollisionObject.h>
 // #include <moveit_msgs/CollisionMap.h>
+
 #include <sensor_msgs/PointCloud2.h>
+#include <sensor_msgs/LaserScan.h>
+
 #include <std_srvs/Empty.h>
 #include <dynamic_reconfigure/server.h>
 #include <lrm_octomap_server/OctomapServerConfig.h>
@@ -204,7 +207,8 @@ protected:
 
   static std_msgs::ColorRGBA heightMapColor(double h);
   ros::NodeHandle m_nh;
-  ros::Publisher m_markerPub, m_markerSinglePub, m_binaryMapPub, m_fullMapPub, m_pointCloudPub, m_collisionObjectPub, m_mapPub, m_cmapPub;
+  ros::Publisher m_markerPub, m_markerSinglePub, m_binaryMapPub, m_laserPub;
+  ros::Publisher m_fullMapPub, m_pointCloudPub, m_collisionObjectPub, m_mapPub, m_cmapPub;
   message_filters::Subscriber<sensor_msgs::PointCloud2>* m_pointCloudSub;
   message_filters::Subscriber<sensor_msgs::PointCloud2>* m_pointCloudGroundSub;
   tf::MessageFilter<sensor_msgs::PointCloud2>* m_tfPointCloudSub;

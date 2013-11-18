@@ -145,6 +145,8 @@ OctomapServer::OctomapServer(ros::NodeHandle nh) :
 	m_mapPub = m_nh.advertise<nav_msgs::OccupancyGrid>("projected_map", 5, m_latchedTopics);
 	//m_cmapPub = m_nh.advertise<arm_navigation_msgs::CollisionMap>("collision_map_out", 1, m_latchedTopics);
 
+	m_laserPub = m_nh.advertise<sensor_msgs::LaserScan>("laser_scan", 1, m_latchedTopics);
+
 	m_pointCloudSub = new message_filters::Subscriber<sensor_msgs::PointCloud2>(m_nh, "cloud_in", 50);
 	m_pointCloudGroundSub = new message_filters::Subscriber<sensor_msgs::PointCloud2>(m_nh, "ground_cloud_in", 50);
 
