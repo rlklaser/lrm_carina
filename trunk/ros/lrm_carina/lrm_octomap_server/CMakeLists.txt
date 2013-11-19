@@ -20,6 +20,7 @@ include_directories(${OCTOMAP_INCLUDE_DIRS})
 link_directories(${OCTOMAP_LIBRARY_DIRS})
 add_definitions(-DOCTOMAP_NODEBUGOUT)
 
+add_definitions(-Wno-deprecated -DEIGEN_VECTORIZE -DEIGEN_DISABLE_UNALIGNED_ARRAY_ASSERT)
 add_definitions(-msse3 -msse4.1 -msse4.2 -mfpmath=sse)
 #add_definitions(-mavx -mfpmath=sse)
 
