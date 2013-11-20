@@ -20,7 +20,7 @@
 		name="gazebo_gui"
 		pkg="gazebo"
 		type="gui"
-		respawn="false"
+		respawn="true"
 		output="screen" />
 		
 	<node
