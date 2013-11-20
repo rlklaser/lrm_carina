@@ -1,0 +1,14 @@
+\subsubsection parameters ROS parameters
+
+Reads and maintains the following parameters on the ROS server
+
+- \b "~min_height" : \b [double] The minimum height to include from the point cloud. min: -10.0, default: 0.1, max: 10.0
+- \b "~max_height" : \b [double] The maximum height to include from the point cloud. min: -10.0, default: 0.15, max: 10.0
+- \b "~angle_min" : \b [double] The minimum angle of the resulting laser scan. min: -3.14159265359, default: -1.57079632679, max: 3.14159265359
+- \b "~angle_max" : \b [double] The maximum angle of the resulting laser scan. min: -3.14159265359, default: 1.57079632679, max: 3.14159265359
+- \b "~angle_increment" : \b [double] The angle increment of the resulting laser scan. min: 0.0, default: 0.00872664625997, max: 3.14159265359
+- \b "~scan_time" : \b [double] The scan time of the resulting laser scan. min: 0.0, default: 0.0333333333333, max: 1.0
+- \b "~range_min" : \b [double] The minimum range of the resulting laser scan. min: 0.0, default: 0.45, max: 100.0
+- \b "~range_max" : \b [double] The maximum range of the resulting laser scan. min: 0.0, default: 10.0, max: 100.0
+- \b "~output_frame_id" : \b [str] The frame id of the resulting laser scan. min: , default: /openi_depth_frame, max: 
+

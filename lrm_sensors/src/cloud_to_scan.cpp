@@ -89,8 +89,8 @@ int main(int argc, char** argv) {
       
    nh_.param("angle_min", angle_min_, -M_PI);
    nh_.param("angle_max", angle_max_, M_PI);
-   nh_.param("angle_increment", angle_increment_, M_PI/180.0/1.0);
-   nh_.param("scan_time", scan_time_, 1.0/20.0);
+   nh_.param("angle_increment", angle_increment_, M_PI/360.0/1.0);
+   nh_.param("scan_time", scan_time_, 1.0/10.0);
    nh_.param("range_min", range_min_, 0.0);
    nh_.param("range_max", range_max_, 30.0);
    

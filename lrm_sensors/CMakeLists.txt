@@ -51,4 +51,11 @@ rosbuild_add_executable(fake_clock_node
 rosbuild_add_executable(cloud_to_scan 
     src/cloud_to_scan.cpp)
     
-    
+#add dynamic reconfigure api
+rosbuild_find_ros_package(dynamic_reconfigure)
+include(${dynamic_reconfigure_PACKAGE_PATH}/cmake/cfgbuild.cmake)
+gencfg()
+
+rosbuild_add_library(pointcloud_to_scan 
+    src/pointcloud_to_scan.cpp 
+    src/cloud_throttle.cpp)
