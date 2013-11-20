@@ -6,7 +6,7 @@ global_costmap:
   #robot_base_frame: base_odometry
   #robot_base_frame: heading_link
   update_frequency: 5.0
-  publish_frequency: 5.0
+  publish_frequency: 2.0
   static_map: true
   rolling_window: false
 

@@ -25,5 +25,11 @@ subscribers:
     timeout:     1.0
     priority:    10
     short_desc:  "keyboard commands"
-    
+
+  - name:        "E-Stop operation"
+    topic:       "/emergency/cmd_vel"
+    timeout:     10.0
+    priority:    20
+    short_desc:  "emergency commands"
+        
 publisher:       "/carina_controller/cmd_vel"
