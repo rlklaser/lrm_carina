@@ -1,0 +1,15 @@
+\subsubsection usage Usage
+\verbatim
+<node name="cloud_to_scan_dynamic_reconfigure" pkg="lrm_sensors" type="cloud_to_scan_dynamic_reconfigure">
+  <param name="min_height" type="double" value="0.1" />
+  <param name="max_height" type="double" value="0.15" />
+  <param name="angle_min" type="double" value="-1.57079632679" />
+  <param name="angle_max" type="double" value="1.57079632679" />
+  <param name="angle_increment" type="double" value="0.00872664625997" />
+  <param name="scan_time" type="double" value="0.0333333333333" />
+  <param name="range_min" type="double" value="0.45" />
+  <param name="range_max" type="double" value="10.0" />
+  <param name="output_frame_id" type="str" value="/openi_depth_frame" />
+</node>
+\endverbatim
+

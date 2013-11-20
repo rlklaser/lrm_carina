@@ -23,5 +23,26 @@
 	>
 		<description>Nodelet to split left/right narrow/wide images from Format7 bumblebee xb3 stereo image</description>
 	</class>
-		
+
+</library>
+
+<library path="lib/libpointcloud_to_scan">
+	<class
+		name="lrm_sensors/CloudThrottle"
+		type="lrm_sensors::CloudThrottle"
+		base_class_type="nodelet::Nodelet"
+	>
+		<description>
+			Throttle point clouds
+		</description>
+	</class>
+	<class
+		name="lrm_sensors/CloudToScan"
+		type="lrm_sensors::CloudToScan"
+		base_class_type="nodelet::Nodelet"
+	>
+		<description>
+			A nodelet to convert a point cloud to a laser scan.
+		</description>
+	</class>
 </library>
