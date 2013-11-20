@@ -1,0 +1,31 @@
+<launch>
+
+	<env
+		name="GAZEBO_MODEL_PATH"
+		value="$GAZEBO_MODEL_PATH:$(find lrm_carina_description)/models:$(find lrm_carina_description)/models/trees" />
+
+	<env
+		name="GAZEBO_RESOURCE_PATH"
+		value="$GAZEBO_RESOURCE_PATH:$(find lrm_gazebo_ros)" />
+
+	<param
+		name="/use_sim_time"
+		value="true" />
+
+    <!-- start gazebo server-->
+	<node
+		name="gazebo"
+		pkg="gazebo_ros"
+		type="gzserver"
+		respawn="true"
+		output="screen"
+		args="$(find lrm_gazebo_ros)/worlds/terrain-trees-uneven.world" />
+
+	<node
+		name="gazebo_gui"
+		pkg="gazebo_ros"
+		type="gzclient"
+		respawn="true"
+		output="screen" />
+
+</launch>
