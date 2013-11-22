@@ -188,7 +188,7 @@ protected:
 
   }
 
-  void putCenterMarker(tf::Quaternion orientation, Eigen::Vector4f centroid, Eigen::Vector4f max, Eigen::Vector4f min, double distance);
+  void putCenterMarker(tf::Quaternion orientation, Eigen::Vector4f centroid, Eigen::Vector4f max, Eigen::Vector4f min, double distance, double);
 
   /**
    * Adjust data of map due to a change in its info properties (origin or size,
@@ -207,7 +207,7 @@ protected:
 
   static std_msgs::ColorRGBA heightMapColor(double h);
   ros::NodeHandle m_nh;
-  ros::Publisher m_markerPub, m_markerSinglePub, m_binaryMapPub, m_laserPub;
+  ros::Publisher m_markerPub, m_markerSinglePub, m_binaryMapPub, m_laserPub, m_clusterPosePub;
   ros::Publisher m_fullMapPub, m_pointCloudPub, m_collisionObjectPub, m_mapPub, m_cmapPub;
   message_filters::Subscriber<sensor_msgs::PointCloud2>* m_pointCloudSub;
   message_filters::Subscriber<sensor_msgs::PointCloud2>* m_pointCloudGroundSub;
@@ -221,6 +221,8 @@ protected:
   octomap::KeyRay m_keyRay;  // temp storage for ray casting
   octomap::OcTreeKey m_updateBBXMin;
   octomap::OcTreeKey m_updateBBXMax;
+
+  int m_pose_seq;
 
   bool m_updated;
 
@@ -261,6 +263,7 @@ protected:
   double m_groundFilterAngle;
   double m_groundFilterPlaneDistance;
 
+  double m_updateOcclusion;
 
   double m_occupancyThres;
   bool m_compressMap;

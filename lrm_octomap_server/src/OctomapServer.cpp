@@ -61,9 +61,11 @@ OctomapServer::OctomapServer(ros::NodeHandle nh) :
 		m_filterGroundPlane(false), m_groundFilterDistance(0.04),
 		m_groundFilterAngle(0.15), m_groundFilterPlaneDistance(0.07),
 		m_compressMap(false), m_incrementalUpdate(false), m_unknownCost(-1),
-		m_occupancyThres(0), m_waitTransform(0.5)
+		m_occupancyThres(0.95), m_waitTransform(2.0), m_updateOcclusion(0.5)
 {
+
 	ros::NodeHandle private_nh(nh);
+
 	private_nh.param("frame_id", m_worldFrameId, m_worldFrameId);
 	private_nh.param("source_frame_id", m_SourceFrameId, m_SourceFrameId);
 	private_nh.param("base_frame_id", m_baseFrameId, m_baseFrameId);
@@ -86,9 +88,9 @@ OctomapServer::OctomapServer(ros::NodeHandle nh) :
 	// distance of found plane from z=0 to be detected as ground (e.g. to exclude tables)
 	private_nh.param("ground_filter/plane_distance", m_groundFilterPlaneDistance, m_groundFilterPlaneDistance);
 
-	private_nh.param("sensor_model/max_range", m_maxRange, m_maxRange);
-
 	private_nh.param("resolution", m_res, m_res);
+
+	private_nh.param("sensor_model/max_range", m_maxRange, m_maxRange);
 	private_nh.param("sensor_model/hit", m_probHit, m_probHit);
 	private_nh.param("sensor_model/hit_mid", m_probHitMid, m_probHitMid);
 	private_nh.param("sensor_model/hit_far", m_probHitFar, m_probHitFar);
@@ -98,8 +100,12 @@ OctomapServer::OctomapServer(ros::NodeHandle nh) :
 	private_nh.param("sensor_model/min", m_thresMin, m_thresMin);
 	private_nh.param("sensor_model/max", m_thresMax, m_thresMax);
 	private_nh.param("sensor_model/occ", m_occupancyThres, m_occupancyThres);
+
 	private_nh.param("compress_map", m_compressMap, m_compressMap);
 	private_nh.param("incremental_2D_projection", m_incrementalUpdate, m_incrementalUpdate);
+
+	private_nh.param("wait_tf", m_waitTransform, m_waitTransform);
+	private_nh.param("update_occlusion", m_updateOcclusion, m_updateOcclusion);
 
 	private_nh.param("unknown_cost", m_unknownCost, m_unknownCost);
 
@@ -109,6 +115,8 @@ OctomapServer::OctomapServer(ros::NodeHandle nh) :
 	if (m_filterGroundPlane && (m_pointcloudMinZ > 0.0 || m_pointcloudMaxZ < 0.0)) {
 		ROS_WARN_STREAM("You enabled ground filtering but incoming pointclouds will be pre-filtered in [" << m_pointcloudMinZ <<", "<< m_pointcloudMaxZ << "], excluding the ground level z=0. " << "This will not work.");
 	}
+
+	m_pose_seq = 0;
 
 	// initialize octomap object & params
 	m_octree = new OcTreeT(m_res);
@@ -146,6 +154,8 @@ OctomapServer::OctomapServer(ros::NodeHandle nh) :
 	//m_cmapPub = m_nh.advertise<arm_navigation_msgs::CollisionMap>("collision_map_out", 1, m_latchedTopics);
 
 	m_laserPub = m_nh.advertise<sensor_msgs::LaserScan>("laser_scan", 1, m_latchedTopics);
+
+	m_clusterPosePub = m_nh.advertise<geometry_msgs::PoseStamped>("cluster_pose", 1, m_latchedTopics);
 
 	m_pointCloudSub = new message_filters::Subscriber<sensor_msgs::PointCloud2>(m_nh, "cloud_in", 50);
 	m_pointCloudGroundSub = new message_filters::Subscriber<sensor_msgs::PointCloud2>(m_nh, "ground_cloud_in", 50);
@@ -290,8 +300,10 @@ void OctomapServer::insertCloudGroundCallback(const sensor_msgs::PointCloud2::Co
 		m_tfListener.waitForTransform(m_worldFrameId, m_SourceFrameId, cloud->header.stamp, ros::Duration(m_waitTransform));
 		m_tfListener.lookupTransform(m_worldFrameId, m_SourceFrameId, cloud->header.stamp, sensorTf);
 	} catch (tf::TransformException& ex) {
-		ROS_ERROR_STREAM(">Transform error of sensor data: " << ex.what() << ", quitting callback");
-		return;
+		//ROS_ERROR_STREAM(">GD(S):Transform error of sensor data: " << ex.what() << ", quitting callback");
+		//return;
+		ROS_WARN_STREAM("(GD)TF error::" << ex.what() << ", using the more recent transform");
+		m_tfListener.lookupTransform(m_worldFrameId, m_SourceFrameId, ros::Time(0), sensorTf);
 	}
 
 	if (m_worldFrameId != cloud->header.frame_id) {
@@ -302,7 +314,7 @@ void OctomapServer::insertCloudGroundCallback(const sensor_msgs::PointCloud2::Co
 			m_tfListener.waitForTransform(m_worldFrameId, cloud->header.frame_id, cloud->header.stamp, ros::Duration(m_waitTransform));
 			m_tfListener.lookupTransform(m_worldFrameId, cloud->header.frame_id, cloud->header.stamp, sensorToWorldTf);
 		} catch (tf::TransformException& ex) {
-			ROS_ERROR_STREAM("Transform error of sensor data: " << ex.what() << ", quitting callback");
+			ROS_ERROR_STREAM("GD:Transform error of sensor data: " << ex.what() << ", quitting callback");
 			return;
 		}
 		pcl_ros::transformAsMatrix(sensorToWorldTf, sensorToWorld);
@@ -341,8 +353,10 @@ void OctomapServer::insertCloudCallback(const sensor_msgs::PointCloud2::ConstPtr
 		m_tfListener.waitForTransform(m_worldFrameId, m_SourceFrameId, cloud->header.stamp, ros::Duration(m_waitTransform));
 		m_tfListener.lookupTransform(m_worldFrameId, m_SourceFrameId, cloud->header.stamp, sensorTf);
 	} catch (tf::TransformException& ex) {
-		ROS_ERROR_STREAM(">Transform error of sensor data: " << ex.what() << ", quitting callback");
-		return;
+		//ROS_ERROR_STREAM(">NGD(S):Transform error of sensor data: " << ex.what() << ", quitting callback");
+		//return;
+		ROS_WARN_STREAM("(NGD)TF error::" << ex.what() << ", using the more recent transform");
+		m_tfListener.lookupTransform(m_worldFrameId, m_SourceFrameId, ros::Time(0), sensorTf);
 	}
 	/////////////////
 
@@ -386,7 +400,7 @@ void OctomapServer::insertCloudCallback(const sensor_msgs::PointCloud2::ConstPtr
 				m_tfListener.waitForTransform(m_worldFrameId, cloud->header.frame_id, cloud->header.stamp, ros::Duration(m_waitTransform));
 				m_tfListener.lookupTransform(m_worldFrameId, cloud->header.frame_id, cloud->header.stamp, sensorToWorldTf);
 			} catch (tf::TransformException& ex) {
-				ROS_ERROR_STREAM("Transform error of sensor data: " << ex.what() << ", quitting callback");
+				ROS_ERROR_STREAM("NGD:Transform error of sensor data: " << ex.what() << ", quitting callback");
 				return;
 			}
 			pcl_ros::transformAsMatrix(sensorToWorldTf, sensorToWorld);
@@ -443,6 +457,8 @@ void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPo
 
 	double hit_dist = 0;
 	
+	double sight_angle;
+
 	if (!nonground.empty()) {
 		Eigen::Vector4f min_point;
 		Eigen::Vector4f max_point;
@@ -460,11 +476,34 @@ void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPo
 		tf::Quaternion oriC = oriA * oriB;
 		tf::Quaternion oriD(0, 0, 0, 1);
 
+		sight_angle = sensorOrigin.angleTo(cloudOrigin);
 		hit_dist = sensorOrigin.distance(cloudOrigin);
 
-		putCenterMarker(oriD, centroid, max_point, min_point, hit_dist);
+
+		tf::Quaternion oriE;
+		oriE.setRPY(0, 0, sight_angle);
+
+		tf::StampedTransform transfCluster;
+		transfCluster.setRotation(oriE);
+
+		tf::Quaternion oriF;
+
+		tf::Transform f;
+
+		f = transfCluster * sensorTf;
+
+		oriF = f.getRotation();
+
+		//double aa = angles::normalize_angle_positive(/*sight_angle +*/ oriB.getAngle());
+
+		double aa = sensorTf.getRotation().getAngle() - sight_angle;
+
+		putCenterMarker(oriD, centroid, max_point, min_point, hit_dist, aa);
 		
 		//pcl::euclideanDistance(cloudOrigin, sensorOrigin);
+
+		//sight_angle = atan2(sensorOrigin[1] - cloudOrigin[1], sensorOrigin[0] - cloudOrigin[0]);
+		std::cout << "angle to cluster " << angles::to_degrees(sight_angle) << " sensor angle:" << angles::to_degrees(sensorTf.getRotation().getAngle()) << std::endl ;
 	}
 
 	// instead of direct scan insertion, compute update to filter ground:
@@ -574,11 +613,13 @@ void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPo
 		}
 	}
 
-	//reduce the certainty on ocluded readings
-	for (KeySet::iterator it = weak_free_cells.begin(), end = weak_free_cells.end(); it != end; ++it) {
-		if (occupied_cells.find(*it) == occupied_cells.end()) {
-			m_octree->updateNode(*it, octomap::logodds(0.495));
-			in++;
+	if(m_updateOcclusion!=0.5) {
+		//reduce the certainty on ocluded readings
+		for (KeySet::iterator it = weak_free_cells.begin(), end = weak_free_cells.end(); it != end; ++it) {
+			if (occupied_cells.find(*it) == occupied_cells.end()) {
+				m_octree->updateNode(*it, octomap::logodds(m_updateOcclusion));
+				in++;
+			}
 		}
 	}
 
@@ -787,7 +828,8 @@ void OctomapServer::_publishAll(const ros::Time& rostime) {
 						//occupiedNodesVis.markers[idx].color = color;
 
 						double occ = it->getOccupancy();
-						double h = (1.0 - std::min(std::max((occ - m_thresMin) / (m_thresMax - m_thresMin), 0.0), 1.0)) * m_colorFactor;
+						//double h = (1.0 - std::min(std::max((occ - m_thresMin) / (m_thresMax - m_thresMin), 0.0), 1.0)) * m_colorFactor;
+						double h = (1.0 - std::min(std::max((occ - 0.5) / (m_thresMax - 0.5), 0.0), 1.0)) * m_colorFactor;
 						occupiedNodesVis.markers[idx].colors.push_back(heightMapColor(h));
 					}
 				}
@@ -1127,7 +1169,7 @@ void OctomapServer::filterGroundPlane(const PCLPointCloud& pc, PCLPointCloud& gr
 
 }
 
-void OctomapServer::putCenterMarker(tf::Quaternion orientation, Eigen::Vector4f centroid, Eigen::Vector4f max, Eigen::Vector4f min, double distance) {
+void OctomapServer::putCenterMarker(tf::Quaternion orientation, Eigen::Vector4f centroid, Eigen::Vector4f max, Eigen::Vector4f min, double distance, double poseAngle) {
 	uint32_t shape = visualization_msgs::Marker::CUBE;
 	visualization_msgs::Marker marker;
 	marker.header.frame_id = m_worldFrameId;
@@ -1173,6 +1215,21 @@ void OctomapServer::putCenterMarker(tf::Quaternion orientation, Eigen::Vector4f 
 	//   marker.lifetime = ros::Duration(0.5);
 	//return marker;
 	m_markerSinglePub.publish(marker);
+
+	tf::Quaternion rot;
+	rot.setRPY(0, 0, poseAngle);
+
+	geometry_msgs::PoseStamped pose;
+	pose.header = marker.header;
+	pose.header.seq = m_pose_seq++;
+	pose.pose.position = marker.pose.position;
+	//pose.pose.orientation = marker.pose.orientation;
+	pose.pose.orientation.x = rot.getX();
+	pose.pose.orientation.y = rot.getY();
+	pose.pose.orientation.z = rot.getZ();
+	pose.pose.orientation.w = rot.getW();
+
+	m_clusterPosePub.publish(pose);
 }
 
 void OctomapServer::handlePreNodeTraversal(const ros::Time& rostime) {

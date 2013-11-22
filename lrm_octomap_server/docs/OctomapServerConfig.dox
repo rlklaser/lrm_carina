@@ -3,9 +3,9 @@
 Reads and maintains the following parameters on the ROS server
 
 - \b "~max_depth" : \b [int] Maximum depth when traversing the octree to send out markers. 16: full depth / max. resolution min: 1, default: 16, max: 16
-- \b "~occ" : \b [double] Occupancy threshold min: 0.8, default: 0.001, max: 1.0
-- \b "~max" : \b [double] Clamping max threshold min: 0.97, default: 0.001, max: 1.0
-- \b "~min" : \b [double] Clamping min threshold min: 0.12, default: 0.001, max: 1.0
-- \b "~hit" : \b [double] Hit sensor model probability min: 0.7, default: 0.501, max: 1.0
-- \b "~mis" : \b [double] Miss sensor model probability min: 0.4, default: 0.01, max: 0.499
+- \b "~occ" : \b [double] Occupancy threshold min: 0.001, default: 0.8, max: 1.0
+- \b "~max" : \b [double] Clamping max threshold min: 0.001, default: 0.97, max: 1.0
+- \b "~min" : \b [double] Clamping min threshold min: 0.001, default: 0.12, max: 1.0
+- \b "~hit" : \b [double] Hit sensor model probability min: 0.501, default: 0.7, max: 1.0
+- \b "~mis" : \b [double] Miss sensor model probability min: 0.01, default: 0.4, max: 0.499
 
