@@ -10,7 +10,7 @@
 	<include file="$(find lrm_bringup)/launch/stereo_vision_filters.launch" />
 	<include file="$(find lrm_bringup)/launch/stereo_vision_clustering.launch" />
 	<include file="$(find lrm_bringup)/launch/stereo_vision_relay.launch" />
-
+<!-- 
 	<node
 		pkg="lrm_stereo"
 		type="fake_cloud"
@@ -32,5 +32,5 @@
 			from="cloud"
 			to="/fake_cloud_in" />
 	</node>
-
+ -->
 </launch>
