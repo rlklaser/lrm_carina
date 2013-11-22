@@ -61,7 +61,8 @@ OctomapServer::OctomapServer(ros::NodeHandle nh) :
 		m_filterGroundPlane(false), m_groundFilterDistance(0.04),
 		m_groundFilterAngle(0.15), m_groundFilterPlaneDistance(0.07),
 		m_compressMap(false), m_incrementalUpdate(false), m_unknownCost(-1),
-		m_occupancyThres(0.95), m_waitTransform(2.0), m_updateOcclusion(0.5)
+		m_occupancyThres(0.95), m_waitTransform(2.0), m_updateOcclusion(0.5),
+		m_maximumCost(120), m_decayCost(0.8)
 {
 
 	ros::NodeHandle private_nh(nh);
@@ -108,6 +109,8 @@ OctomapServer::OctomapServer(ros::NodeHandle nh) :
 	private_nh.param("update_occlusion", m_updateOcclusion, m_updateOcclusion);
 
 	private_nh.param("unknown_cost", m_unknownCost, m_unknownCost);
+	private_nh.param("maximum_cost", m_maximumCost, m_maximumCost);
+	private_nh.param("decay_cost", m_decayCost, m_decayCost);
 
 	double rate;
 	private_nh.param("rate", rate, 5.0);
@@ -1385,17 +1388,17 @@ void OctomapServer::update2DMap(const OcTreeT::iterator& it, bool occupied) {
 	if (it.getDepth() == m_maxTreeDepth) {
 		unsigned idx = mapIdx(it.getKey());
 		if (occupied) {
-			m_gridmap.data[mapIdx(it.getKey())] = 100;
+			m_gridmap.data[idx] = prog * m_maximumCost;
 		}
 //		else if (m_gridmap.data[idx] == -1) {
 //			m_gridmap.data[idx] = 0;
 //		}
 //rlklaser:loss of occupancy
 		else {
-			m_gridmap.data[idx] *= 0.8;
+			m_gridmap.data[idx] *= m_decayCost;
 		}
-
-	} else {
+	}
+	else {
 		int intSize = 1 << (m_maxTreeDepth - it.getDepth());
 		octomap::OcTreeKey minKey = it.getIndexKey();
 		for (int dx = 0; dx < intSize; dx++) {
@@ -1403,14 +1406,14 @@ void OctomapServer::update2DMap(const OcTreeT::iterator& it, bool occupied) {
 			for (int dy = 0; dy < intSize; dy++) {
 				unsigned idx = mapIdx(i, (minKey[1] + dy - m_paddedMinKey[1]) / m_multires2DScale);
 				if (occupied) {
-					m_gridmap.data[idx] = 100;
+					m_gridmap.data[idx] = prog * m_maximumCost;
 				}
 //				else if (m_gridmap.data[idx] == -1) {
 //					m_gridmap.data[idx] = 0;
 //				}
 //rlklaser:loss of occupancy
 				else {
-					m_gridmap.data[idx] *= 0.8;
+					m_gridmap.data[idx] *= m_decayCost;
 				}
 			}
 		}

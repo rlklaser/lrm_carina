@@ -278,6 +278,8 @@ protected:
   bool m_projectCompleteMap;
 
   int m_unknownCost;
+  int m_maximumCost;
+  double m_decayCost;
 
   int _single_marker_id;
 private:
