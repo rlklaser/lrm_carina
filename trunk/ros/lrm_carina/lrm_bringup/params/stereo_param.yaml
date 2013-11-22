@@ -1,0 +1,6 @@
+point_cloud:
+  approximate_sync: true
+  
+point_cloud_unmatched:
+  approximate_sync: true
+  publish_unmatched: true

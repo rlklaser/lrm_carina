@@ -1,12 +1,14 @@
 octomap_server:
     latch: false
+    wait_tf: 0.5
     rate: 5.0
     frame_id: /map
     base_frame_id: /base_footprint
     source_frame_id: /stereo_camera
     #height_map: true
     height_map: false
-    resolution: 0.1
+    resolution: 0.10
+    update_occlusion: 0.5
     
     filter_speckles: false      #no effect on map
     #filter_speckles: true
@@ -31,17 +33,17 @@ octomap_server:
       #max_range: 15
       max_range: 80
     
-      mid_dist: 6.0
-      far_dist: 13.0
+      mid_dist: 5.0
+      far_dist: 9.0
       hit: 0.65
       hit_mid: 0.60
       hit_far: 0.55
-      miss: 0.25
+      miss: 0.35
       occ: 0.75
     
       #max: 0.75
       #min: 0.25
       #no clamping
-      max: 0.99
-      min: 0.05
+      max: 0.975
+      min: 0.115
     
