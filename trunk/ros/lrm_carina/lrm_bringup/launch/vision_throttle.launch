@@ -6,6 +6,7 @@
 		value="true" />
 	-->
 
+<!-- 
 	<node
 		name="throttle_stereo"
 		pkg="nodelet"
@@ -24,7 +25,8 @@
 			name="rate"
 			value="5" />
 	</node>
-<!-- 
+ -->
+ 
 	<node
 		name="throttle_stereo"
 		pkg="lrm_stereo"
@@ -43,6 +45,7 @@
 			value="6" />
 	</node>
 
+<!--
 	<group ns="/stereo">
 		<node
 			name="throttle_stereo"
