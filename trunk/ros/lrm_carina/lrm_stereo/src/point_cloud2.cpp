@@ -75,6 +75,8 @@ class PointCloud2Nodelet : public nodelet::Nodelet
   boost::mutex connect_mutex_;
   ros::Publisher pub_points2_;
 
+  bool publish_unmatched_;
+
   // Processing state (note: only safe because we're single-threaded!)
   image_geometry::StereoCameraModel model_;
   cv::Mat_<cv::Vec3f> points_mat_; // scratch buffer
@@ -117,6 +119,8 @@ void PointCloud2Nodelet::onInit()
     exact_sync_->registerCallback(boost::bind(&PointCloud2Nodelet::imageCb,
                                               this, _1, _2, _3, _4));
   }
+
+  private_nh.param("publish_unmatched", publish_unmatched_, false);
 
   // Monitor whether anyone is subscribed to the output
   ros::SubscriberStatusCallback connect_cb = boost::bind(&PointCloud2Nodelet::connectCb, this);
@@ -204,7 +208,7 @@ void PointCloud2Nodelet::imageCb(const ImageConstPtr& l_image_msg,
   {
     for (int u = 0; u < mat.cols; ++u, offset += STEP)
     {
-      if (isValidPoint(mat(v,u)))
+      if (isValidPoint(mat(v,u)) && !publish_unmatched_)
       {
         // x,y,z,rgba
         memcpy (&points_msg->data[offset + 0], &mat(v,u)[0], sizeof (float));
@@ -213,19 +217,19 @@ void PointCloud2Nodelet::imageCb(const ImageConstPtr& l_image_msg,
       }
       else
       {
-
-        memcpy (&points_msg->data[offset + 0], &bad_point, sizeof (float));
-        memcpy (&points_msg->data[offset + 4], &bad_point, sizeof (float));
-        memcpy (&points_msg->data[offset + 8], &bad_point, sizeof (float));
-
-        /*
-    	mat(v,u)[2] = 100.0;
-    	mat(v,u)[0] *= -1;
-    	mat(v,u)[1] *= -1;
-    	memcpy (&points_msg->data[offset + 0], &mat(v,u)[0], sizeof (float));
-    	memcpy (&points_msg->data[offset + 4], &mat(v,u)[1], sizeof (float));
-    	memcpy (&points_msg->data[offset + 8], &mat(v,u)[2], sizeof (float));
-    	*/
+    	if(!publish_unmatched_) {
+            memcpy (&points_msg->data[offset + 0], &bad_point, sizeof (float));
+            memcpy (&points_msg->data[offset + 4], &bad_point, sizeof (float));
+            memcpy (&points_msg->data[offset + 8], &bad_point, sizeof (float));
+    	}
+    	else {
+			mat(v,u)[2] = 100.0;
+			mat(v,u)[0] *= -1;
+			mat(v,u)[1] *= -1;
+			memcpy (&points_msg->data[offset + 0], &mat(v,u)[0], sizeof (float));
+			memcpy (&points_msg->data[offset + 4], &mat(v,u)[1], sizeof (float));
+			memcpy (&points_msg->data[offset + 8], &mat(v,u)[2], sizeof (float));
+    	}
       }
     }
   }
