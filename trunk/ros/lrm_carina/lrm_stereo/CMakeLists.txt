@@ -47,7 +47,8 @@ rosbuild_add_library(lrm_stereo
 	src/disparity_bm.cpp 
 	src/feature_matcher.cpp
 	src/ros_pcl_stereo.cpp
-	#src/disparity_bm_cuda.cpp 
+	src/disparity_bm_cuda.cpp 
+	src/throttle_stereo.cpp
 	src/throttle_stereo_nodelet.cpp
 	src/point_cloud_colorless.cpp
 	src/point_cloud2.cpp
