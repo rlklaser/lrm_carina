@@ -137,6 +137,22 @@
 		<node
 			pkg="nodelet"
 			type="nodelet"
+			name="disparity_bm_cuda"
+			args="load lrm_stereo/disparity_bm_cuda $(arg manager) $(arg bond)"
+			respawn="true"
+			output="screen"
+		>
+			<remap
+				from="disparity"
+				to="disparity_bm_cuda" />
+
+		</node>
+-->
+
+<!-- 
+		<node
+			pkg="nodelet"
+			type="nodelet"
 			name="disparity_sgbm"
 			args="load lrm_stereo/disparity_sgbm $(arg manager) $(arg bond)"
 			respawn="true"
