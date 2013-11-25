@@ -45,7 +45,7 @@ using octomap_msgs::Octomap;
 namespace octomap_server {
 
 OctomapServer::OctomapServer(ros::NodeHandle nh) :
-		m_nh(), m_pointCloudSub(NULL), m_tfPointCloudSub(NULL),
+		m_nh(), /*m_pointCloudSub(NULL), m_tfPointCloudSub(NULL),*/
 		m_octree(NULL), m_maxRange(-1.0), m_worldFrameId("/map"),
 		m_baseFrameId("base_footprint"), m_SourceFrameId("stereo_camera"),
 		m_useHeightMap(true), m_colorFactor(0.8), m_latchedTopics(true),
@@ -143,31 +143,29 @@ OctomapServer::OctomapServer(ros::NodeHandle nh) :
 	private_nh.param("latch", m_latchedTopics, m_latchedTopics);
 	if (m_latchedTopics) {
 		ROS_INFO("Publishing latched (single publish will take longer, all topics are prepared)");
-	} else
+	} else {
 		ROS_INFO("Publishing non-latched (topics are only prepared as needed, will only be re-published on map change");
+	}
 
 	m_markerPub = m_nh.advertise<visualization_msgs::MarkerArray>("occupied_cells_vis_array", 1, m_latchedTopics);
 	m_markerSinglePub = m_nh.advertise<visualization_msgs::Marker>("occupied_cells_vis", 1, m_latchedTopics);
-
 	m_binaryMapPub = m_nh.advertise<Octomap>("octomap_binary", 1, m_latchedTopics);
 	m_fullMapPub = m_nh.advertise<Octomap>("octomap_full", 1, m_latchedTopics);
 	m_pointCloudPub = m_nh.advertise<sensor_msgs::PointCloud2>("octomap_point_cloud_centers", 1, m_latchedTopics);
-	//m_collisionObjectPub = m_nh.advertise<arm_navigation_msgs::CollisionObject>("octomap_collision_object", 1, m_latchedTopics);
 	m_mapPub = m_nh.advertise<nav_msgs::OccupancyGrid>("projected_map", 5, m_latchedTopics);
-	//m_cmapPub = m_nh.advertise<arm_navigation_msgs::CollisionMap>("collision_map_out", 1, m_latchedTopics);
-
 	m_laserPub = m_nh.advertise<sensor_msgs::LaserScan>("laser_scan", 1, m_latchedTopics);
-
 	m_clusterPosePub = m_nh.advertise<geometry_msgs::PoseStamped>("cluster_pose", 1, m_latchedTopics);
 
-	m_pointCloudSub = new message_filters::Subscriber<sensor_msgs::PointCloud2>(m_nh, "cloud_in", 50);
-	m_pointCloudGroundSub = new message_filters::Subscriber<sensor_msgs::PointCloud2>(m_nh, "ground_cloud_in", 50);
+//	m_pointCloudSub = new message_filters::Subscriber<sensor_msgs::PointCloud2>(m_nh, "cloud_in", 100);
+//	m_pointCloudGroundSub = new message_filters::Subscriber<sensor_msgs::PointCloud2>(m_nh, "ground_cloud_in", 100);
+	m_pointCloudSubs = m_nh.subscribe<sensor_msgs::PointCloud2>("cloud_in", 50, &OctomapServer::insertCloudCallback, this);
+	m_pointCloudGroundSubs = m_nh.subscribe<sensor_msgs::PointCloud2>("ground_cloud_in", 50, &OctomapServer::insertCloudGroundCallback, this);
 
-	m_tfPointCloudSub = new tf::MessageFilter<sensor_msgs::PointCloud2>(*m_pointCloudSub, m_tfListener, m_worldFrameId, 50);
-	m_tfPointCloudSub->registerCallback(boost::bind(&OctomapServer::insertCloudCallback, this, _1));
+//	m_tfPointCloudSub = new tf::MessageFilter<sensor_msgs::PointCloud2>(*m_pointCloudSub, m_tfListener, m_worldFrameId, 50);
+//	m_tfPointCloudSub->registerCallback(boost::bind(&OctomapServer::insertCloudCallback, this, _1));
 
-	m_tfPointCloudGroundSub = new tf::MessageFilter<sensor_msgs::PointCloud2>(*m_pointCloudGroundSub, m_tfListener, m_worldFrameId, 50);
-	m_tfPointCloudGroundSub->registerCallback(boost::bind(&OctomapServer::insertCloudGroundCallback, this, _1));
+//	m_tfPointCloudGroundSub = new tf::MessageFilter<sensor_msgs::PointCloud2>(*m_pointCloudGroundSub, m_tfListener, m_worldFrameId, 50);
+//	m_tfPointCloudGroundSub->registerCallback(boost::bind(&OctomapServer::insertCloudGroundCallback, this, _1));
 
 	m_octomapBinaryService = m_nh.advertiseService("octomap_binary", &OctomapServer::octomapBinarySrv, this);
 	m_octomapFullService = m_nh.advertiseService("octomap_full", &OctomapServer::octomapFullSrv, this);
@@ -203,25 +201,25 @@ void OctomapServer::timerCallback(const ros::TimerEvent& t) {
 }
 
 OctomapServer::~OctomapServer() {
-	if (m_tfPointCloudSub) {
-		delete m_tfPointCloudSub;
-		m_tfPointCloudSub = NULL;
-	}
+	//if (m_tfPointCloudSub) {
+	//	delete m_tfPointCloudSub;
+	//	m_tfPointCloudSub = NULL;
+	//}
 
-	if (m_tfPointCloudGroundSub) {
-		delete m_tfPointCloudGroundSub;
-		m_tfPointCloudGroundSub = NULL;
-	}
+	//if (m_tfPointCloudGroundSub) {
+	//	delete m_tfPointCloudGroundSub;
+	//	m_tfPointCloudGroundSub = NULL;
+	//}
 
-	if (m_pointCloudSub) {
-		delete m_pointCloudSub;
-		m_pointCloudSub = NULL;
-	}
+	//if (m_pointCloudSub) {
+	//	delete m_pointCloudSub;
+	//	m_pointCloudSub = NULL;
+	//}
 
-	if (m_pointCloudGroundSub) {
-		delete m_pointCloudGroundSub;
-		m_pointCloudGroundSub = NULL;
-	}
+	//if (m_pointCloudGroundSub) {
+	//	delete m_pointCloudGroundSub;
+	//	m_pointCloudGroundSub = NULL;
+	//}
 
 	if (m_octree) {
 		delete m_octree;
@@ -501,7 +499,7 @@ void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPo
 
 		double aa = sensorTf.getRotation().getAngle() - sight_angle;
 
-		putCenterMarker(oriD, centroid, max_point, min_point, hit_dist, aa);
+		putCenterMarker(oriD, centroid, max_point, min_point, hit_dist, sight_angle);
 		
 		//pcl::euclideanDistance(cloudOrigin, sensorOrigin);
 
@@ -1383,12 +1381,12 @@ void OctomapServer::update2DMap(const OcTreeT::iterator& it, bool occupied) {
 	// update 2D map (occupied always overrides):
 
 	double logg = it->getLogOdds();
-	double prog = it->getOccupancy();
+	double prob = it->getOccupancy();
 
 	if (it.getDepth() == m_maxTreeDepth) {
 		unsigned idx = mapIdx(it.getKey());
 		if (occupied) {
-			m_gridmap.data[idx] = prog * m_maximumCost;
+			m_gridmap.data[idx] = prob * m_maximumCost;
 		}
 //		else if (m_gridmap.data[idx] == -1) {
 //			m_gridmap.data[idx] = 0;
@@ -1406,7 +1404,7 @@ void OctomapServer::update2DMap(const OcTreeT::iterator& it, bool occupied) {
 			for (int dy = 0; dy < intSize; dy++) {
 				unsigned idx = mapIdx(i, (minKey[1] + dy - m_paddedMinKey[1]) / m_multires2DScale);
 				if (occupied) {
-					m_gridmap.data[idx] = prog * m_maximumCost;
+					m_gridmap.data[idx] = prob * m_maximumCost;
 				}
 //				else if (m_gridmap.data[idx] == -1) {
 //					m_gridmap.data[idx] = 0;

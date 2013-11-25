@@ -74,7 +74,7 @@ int main(int argc, char** argv){
   }
 */
 
-  //ros::MultiThreadedSpinner spinner(3); //one for the money, two for the show, three to get ready...
+  //ros::MultiThreadedSpinner spinner(5); //one for the money, two for the show, three to get ready...
   //spinner.spin(); // spin() will not return until the node has been shutdown
   ros::spin();
 
