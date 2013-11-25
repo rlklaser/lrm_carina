@@ -158,7 +158,7 @@ OctomapServer::OctomapServer(ros::NodeHandle nh) :
 
 //	m_pointCloudSub = new message_filters::Subscriber<sensor_msgs::PointCloud2>(m_nh, "cloud_in", 100);
 //	m_pointCloudGroundSub = new message_filters::Subscriber<sensor_msgs::PointCloud2>(m_nh, "ground_cloud_in", 100);
-	m_pointCloudSubs = m_nh.subscribe<sensor_msgs::PointCloud2>("cloud_in", 50, &OctomapServer::insertCloudCallback, this);
+	m_pointCloudSubs = m_nh.subscribe<sensor_msgs::PointCloud2>("cloud_in", 100, &OctomapServer::insertCloudCallback, this);
 	m_pointCloudGroundSubs = m_nh.subscribe<sensor_msgs::PointCloud2>("ground_cloud_in", 50, &OctomapServer::insertCloudGroundCallback, this);
 
 //	m_tfPointCloudSub = new tf::MessageFilter<sensor_msgs::PointCloud2>(*m_pointCloudSub, m_tfListener, m_worldFrameId, 50);
@@ -298,13 +298,18 @@ void OctomapServer::insertCloudGroundCallback(const sensor_msgs::PointCloud2::Co
 	tf::StampedTransform sensorTf;
 
 	try {
-		m_tfListener.waitForTransform(m_worldFrameId, m_SourceFrameId, cloud->header.stamp, ros::Duration(m_waitTransform));
+		if(!m_waitTransform<0) {
+			m_tfListener.waitForTransform(m_worldFrameId, m_SourceFrameId, cloud->header.stamp, ros::Duration(m_waitTransform));
+		}
 		m_tfListener.lookupTransform(m_worldFrameId, m_SourceFrameId, cloud->header.stamp, sensorTf);
 	} catch (tf::TransformException& ex) {
-		//ROS_ERROR_STREAM(">GD(S):Transform error of sensor data: " << ex.what() << ", quitting callback");
-		//return;
-		ROS_WARN_STREAM("(GD)TF error::" << ex.what() << ", using the more recent transform");
-		m_tfListener.lookupTransform(m_worldFrameId, m_SourceFrameId, ros::Time(0), sensorTf);
+		if(m_waitTransform<0) {
+			ROS_ERROR_STREAM(">GD(S):Transform error of sensor data: " << ex.what() << ", quitting callback");
+			return;
+		} else {
+			ROS_WARN_STREAM("(GD)TF error::" << ex.what() << ", using the more recent transform");
+			m_tfListener.lookupTransform(m_worldFrameId, m_SourceFrameId, ros::Time(0), sensorTf);
+		}
 	}
 
 	if (m_worldFrameId != cloud->header.frame_id) {
@@ -351,13 +356,18 @@ void OctomapServer::insertCloudCallback(const sensor_msgs::PointCloud2::ConstPtr
 	//rlklaser/////////////////
 	tf::StampedTransform sensorTf;
 	try {
-		m_tfListener.waitForTransform(m_worldFrameId, m_SourceFrameId, cloud->header.stamp, ros::Duration(m_waitTransform));
+		if(!m_waitTransform<0) {
+			m_tfListener.waitForTransform(m_worldFrameId, m_SourceFrameId, cloud->header.stamp, ros::Duration(m_waitTransform));
+		}
 		m_tfListener.lookupTransform(m_worldFrameId, m_SourceFrameId, cloud->header.stamp, sensorTf);
 	} catch (tf::TransformException& ex) {
-		//ROS_ERROR_STREAM(">NGD(S):Transform error of sensor data: " << ex.what() << ", quitting callback");
-		//return;
-		ROS_WARN_STREAM("(NGD)TF error::" << ex.what() << ", using the more recent transform");
-		m_tfListener.lookupTransform(m_worldFrameId, m_SourceFrameId, ros::Time(0), sensorTf);
+		if(m_waitTransform<0) {
+			ROS_ERROR_STREAM(">NGD(S):Transform error of sensor data: " << ex.what() << ", quitting callback");
+			return;
+		} else {
+			ROS_WARN_STREAM("(NGD)TF error::" << ex.what() << ", using the more recent transform");
+			m_tfListener.lookupTransform(m_worldFrameId, m_SourceFrameId, ros::Time(0), sensorTf);
+		}
 	}
 	/////////////////
 
@@ -398,11 +408,19 @@ void OctomapServer::insertCloudCallback(const sensor_msgs::PointCloud2::ConstPtr
 			tf::StampedTransform sensorToWorldTf;
 			Eigen::Matrix4f sensorToWorld;
 			try {
-				m_tfListener.waitForTransform(m_worldFrameId, cloud->header.frame_id, cloud->header.stamp, ros::Duration(m_waitTransform));
+				if(!m_waitTransform<0) {
+					m_tfListener.waitForTransform(m_worldFrameId, cloud->header.frame_id, cloud->header.stamp, ros::Duration(m_waitTransform));
+				}
 				m_tfListener.lookupTransform(m_worldFrameId, cloud->header.frame_id, cloud->header.stamp, sensorToWorldTf);
 			} catch (tf::TransformException& ex) {
-				ROS_ERROR_STREAM("NGD:Transform error of sensor data: " << ex.what() << ", quitting callback");
-				return;
+				if(m_waitTransform<0) {
+					ROS_ERROR_STREAM("NGD:Transform error of sensor data: " << ex.what() << ", quitting callback");
+					return;
+				}
+				else {
+					ROS_WARN_STREAM("(NGD)TF error::" << ex.what() << ", using the more recent transform");
+					m_tfListener.lookupTransform(m_worldFrameId, cloud->header.frame_id, ros::Time(0), sensorToWorldTf);
+				}
 			}
 			pcl_ros::transformAsMatrix(sensorToWorldTf, sensorToWorld);
 			// directly transform to map frame:
