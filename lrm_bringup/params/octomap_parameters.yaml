@@ -28,21 +28,21 @@ octomap_server:
     #incremental_2D_projection: true
     
     unknown_cost: 50
-    maximum_cost: 100
-    decay_cost: 0.9
+    maximum_cost: 90
+    decay_cost: 0.85
     update_occlusion: 0.495
      
     sensor_model:
       #max_range: 15
       max_range: 80
     
-      mid_dist: 5.0
-      far_dist: 9.0
-      hit: 0.65
-      hit_mid: 0.60
-      hit_far: 0.55
-      miss: 0.35
-      occ: 0.65
+      mid_dist: 6.5
+      far_dist: 13.0
+      hit: 0.60
+      hit_mid: 0.55
+      hit_far: 0.51
+      miss: 0.25
+      occ: 0.501
     
       #max: 0.75
       #min: 0.25
