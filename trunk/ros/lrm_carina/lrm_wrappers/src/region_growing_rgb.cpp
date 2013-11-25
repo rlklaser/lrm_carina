@@ -52,6 +52,7 @@
 
 ros::Publisher pc_pub;
 
+double _radius;
 double _k_search;
 int _min_size;
 int _max_size;
@@ -89,7 +90,7 @@ void pointcloudCallback(const sensor_msgs::PointCloud2::ConstPtr& msg) {
 	pcl::NormalEstimation<pcl::PointXYZRGB, pcl::Normal> normal_estimator;
 	normal_estimator.setSearchMethod(tree);
 	normal_estimator.setInputCloud(cloud_in);
-	normal_estimator.setRadiusSearch(0.2);
+	normal_estimator.setRadiusSearch(_radius);
 	normal_estimator.compute(*normals);
 
 	pcl::RegionGrowing<pcl::PointXYZRGB, pcl::Normal> reg;
@@ -157,6 +158,7 @@ int main(int argc, char** argv) {
 	ros::Subscriber pc_sub = nh.subscribe("points_in", 10, pointcloudCallback);
 	pc_pub = nh.advertise<sensor_msgs::PointCloud2>(nh_priv.getNamespace() + "/points_out", 30);
 
+	nh_priv.param<double>("radius", _radius, 0.2);
 	nh_priv.param<double>("k_search", _k_search, 30.0); //50
 	nh_priv.param<int>("min_size", _min_size, 100);
 	nh_priv.param<int>("max_size", _max_size, 5000); //100000
