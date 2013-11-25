@@ -1,6 +1,7 @@
 octomap_server:
     latch: false
-    wait_tf: 0.5
+    wait_tf: 0.05
+    #wait_tf: -1 #do not wait
     rate: 5.0
     frame_id: /map
     base_frame_id: /base_footprint
