@@ -209,10 +209,12 @@ protected:
   ros::NodeHandle m_nh;
   ros::Publisher m_markerPub, m_markerSinglePub, m_binaryMapPub, m_laserPub, m_clusterPosePub;
   ros::Publisher m_fullMapPub, m_pointCloudPub, m_collisionObjectPub, m_mapPub, m_cmapPub;
-  message_filters::Subscriber<sensor_msgs::PointCloud2>* m_pointCloudSub;
-  message_filters::Subscriber<sensor_msgs::PointCloud2>* m_pointCloudGroundSub;
-  tf::MessageFilter<sensor_msgs::PointCloud2>* m_tfPointCloudSub;
-  tf::MessageFilter<sensor_msgs::PointCloud2>* m_tfPointCloudGroundSub;
+//  message_filters::Subscriber<sensor_msgs::PointCloud2>* m_pointCloudSub;
+//  message_filters::Subscriber<sensor_msgs::PointCloud2>* m_pointCloudGroundSub;
+//  tf::MessageFilter<sensor_msgs::PointCloud2>* m_tfPointCloudSub;
+//  tf::MessageFilter<sensor_msgs::PointCloud2>* m_tfPointCloudGroundSub;
+  ros::Subscriber m_pointCloudSubs, m_pointCloudGroundSubs;
+
   ros::ServiceServer m_octomapBinaryService, m_octomapFullService, m_clearBBXService, m_resetService, m_pruneService;
   tf::TransformListener m_tfListener;
   dynamic_reconfigure::Server<lrm_octomap_server::OctomapServerConfig> m_reconfigureServer;
