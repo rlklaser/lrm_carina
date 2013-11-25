@@ -108,6 +108,7 @@ double minimize_fuction (double x, void * params)
 	return minim;
 }
 
+#if 0
 int optimize (struct st_odometry *odo)
 {
 	int status;
@@ -161,7 +162,7 @@ int optimize (struct st_odometry *odo)
 
 	return status;
 }
-
+#endif
 
 void WheelOdometryExtended::calcOdometry()
 {

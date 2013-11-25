@@ -33,10 +33,7 @@ WheelOdometry::WheelOdometry(ros::NodeHandle n) :
 		nh(n), nh_priv("~") {
 
 	getParams();
-	ROS_INFO_STREAM(
-			"imu:" << odo.p.use_imu <<
-			" tf:" << odo.p.publish_tf <<
-			" js:" << odo.p.publish_js);
+	ROS_INFO_STREAM("imu:" << odo.p.use_imu << " tf:" << odo.p.publish_tf << " js:" << odo.p.publish_js);
 
 	// Set the covariance matrixes relate odom message
 	odom.pose.covariance.elems[0] = odo.p.pos_cov;
@@ -115,7 +112,6 @@ WheelOdometry::WheelOdometry(ros::NodeHandle n) :
 	if (odo.p.use_imu) {
 		imu_sub = nh.subscribe<sensor_msgs::Imu>("imu_data", 1, &WheelOdometry::imuCallback, this);
 	}
-	//encoders_sub = nh.subscribe<atuacao::Encoders> ("encoders", 2, &WheelOdometry::encodersCallback, this);
 	encoders_sub = nh.subscribe<lrm_msgs::Encoders>("encoders", 1, &WheelOdometry::encodersCallback, this);
 
 	pose_pub = nh.advertise<geometry_msgs::Pose2D>(nh_priv.getNamespace() + "/pose2d", 1/*odo.p.rate*/);
@@ -127,8 +123,12 @@ WheelOdometry::WheelOdometry(ros::NodeHandle n) :
 
 	//if(odo.p.publish_tf) {
 	odom_publisher_timer = n.createTimer(ros::Duration(1.0 / odo.p.rate), &WheelOdometry::odomCallback, this, false, false);
+	tf_publisher_timer = n.createTimer(ros::Duration(1.0 / odo.p.tf_rate), &WheelOdometry::tfCallback, this, false, false);
 	//odom_publisher_timer.start();
 	//}
+
+	odo.current_time = ros::Time::now();
+	base_to_odom_msg.setIdentity();
 }
 
 /**
@@ -137,9 +137,9 @@ WheelOdometry::WheelOdometry(ros::NodeHandle n) :
 WheelOdometry::~WheelOdometry() {
 }
 
-
 void WheelOdometry::start() {
 	odom_publisher_timer.start();
+	tf_publisher_timer.start();
 }
 
 void WheelOdometry::getParams() {
@@ -160,6 +160,7 @@ void WheelOdometry::getParams() {
 	nh_priv.param("publish_js", odo.p.publish_js, false);
 	nh_priv.param("animation_only", odo.p.animation_only, false);
 	nh_priv.param("rate", odo.p.rate, DEFAULT_RATE);
+	nh_priv.param("tf_rate", odo.p.tf_rate, DEFAULT_RATE);
 
 	nh_priv.param("rot_cov", odo.p.rot_cov, DEFAULT_ROT_COV);
 	nh_priv.param("pos_cov", odo.p.pos_cov, DEFAULT_POS_COV);
@@ -176,11 +177,11 @@ void WheelOdometry::getParams() {
 	//ROS_INFO_STREAM(tf_prefix << std::endl);
 
 	/*
-	joint_state.header.frame_id = tf_prefix + "/" + odo.p.base_link;
-	odom.header.frame_id = tf_prefix + "/" + odo.p.fixed_odometry;
-    odom.child_frame_id = tf_prefix + "/" + odo.p.base_footprint;
-    current_posestamped.header.frame_id = tf_prefix + "/" + odo.p.base_footprint;
-	*/
+	 joint_state.header.frame_id = tf_prefix + "/" + odo.p.base_link;
+	 odom.header.frame_id = tf_prefix + "/" + odo.p.fixed_odometry;
+	 odom.child_frame_id = tf_prefix + "/" + odo.p.base_footprint;
+	 current_posestamped.header.frame_id = tf_prefix + "/" + odo.p.base_footprint;
+	 */
 
 	//multi-robot aware
 	odo.p.base_link = tf_prefix + "/" + odo.p.base_link;
@@ -194,8 +195,7 @@ void WheelOdometry::getParams() {
 
 	calcParams();
 
-
-	if(odo.p.absolute && !odo.p.use_imu) {
+	if (odo.p.absolute && !odo.p.use_imu) {
 		ROS_ERROR_STREAM("Odometry: absolute only works with a compass, must set use_imu to true");
 	}
 
@@ -219,7 +219,6 @@ void WheelOdometry::reconfigure(lrm_odometry::OdometryConfig &config, uint32_t l
 	odo.p.robot_width = config.robot_width;
 	odo.p.wheel_diameter = config.wheel_diameter;
 
-
 	odo.p.absolute = config.absolute;
 	odo.p.use_imu = config.use_imu;
 	odo.p.use_6dof = config.use_6dof;
@@ -238,10 +237,9 @@ void WheelOdometry::imuCallback(const sensor_msgs::Imu::ConstPtr& msg) {
 		odo.last_orientation = odo.initial_orientation;
 	}
 
-	if(odo.p.absolute) {
+	if (odo.p.absolute) {
 		odo.yaw = tf::getYaw(msg->orientation) + angles::from_degrees(90) /*- odo.initial_orientation*/;
-	}
-	else {
+	} else {
 		odo.yaw = tf::getYaw(msg->orientation) - odo.initial_orientation;
 	}
 
@@ -249,39 +247,28 @@ void WheelOdometry::imuCallback(const sensor_msgs::Imu::ConstPtr& msg) {
 	odo.imu_ang_vel_y = msg->angular_velocity.y;
 	odo.imu_ang_vel_z = msg->angular_velocity.z;
 
-	if(odo.p.use_6dof) {
-		if(!odo.cached_transform) {
+	if (odo.p.use_6dof) {
+		if (!odo.cached_transform) {
 			try {
-				listener.waitForTransform(
-					msg->header.frame_id,
-					odo.p.base_odometry,
-					ros::Time(0),
-					ros::Duration(5.0));
+				listener.waitForTransform(msg->header.frame_id, odo.p.base_odometry, ros::Time(0), ros::Duration(5.0));
 				try {
-					listener.lookupTransform(
-							msg->header.frame_id,
-							odo.p.base_odometry,
-							ros::Time(0),
-							odo.trans_base_imu);
+					listener.lookupTransform(msg->header.frame_id, odo.p.base_odometry, ros::Time(0), odo.trans_base_imu);
 					odo.cached_transform = true;
 				} catch (tf::TransformException &ex) {
-					ROS_ERROR("lrm_odometry: %s", ex.what());
+					ROS_ERROR("lrm_odometry (3): %s", ex.what());
 				}
 			} catch (tf::TransformException &ex) {
-					ROS_ERROR("lrm_odometry wait: %s", ex.what());
+				ROS_ERROR("lrm_odometry (4): %s", ex.what());
 			}
 		}
 
-		if(odo.cached_transform) {
+		if (odo.cached_transform) {
 			tf::Quaternion orientation(msg->orientation.x, msg->orientation.y, msg->orientation.z, msg->orientation.w);
 			//geometry_msgs::Quaternion qt;
 			//qt = msg->orientation.normalize();
 			//tf::quaternionMsgToTF(qt, orientation);
 			orientation.normalize();
-			tf::Transform transf(
-					orientation,
-					tf::Vector3(0, 0, 0)
-			);
+			tf::Transform transf(orientation, tf::Vector3(0, 0, 0));
 			transf *= odo.trans_base_imu;
 			orientation = transf.getRotation();
 			double yaw;
@@ -310,14 +297,23 @@ void WheelOdometry::encodersCallback(const lrm_msgs::Encoders::ConstPtr& encoder
 	odo.encWheelValue += encoder->wheel.relative;
 	odo.encSteerValue = encoder->steering.absolute;
 
-	dbg_acc+=encoder->wheel.relative;
+	dbg_acc += encoder->wheel.relative;
+}
+
+void WheelOdometry::tfCallback(const ros::TimerEvent& t) {
+	boost::unique_lock < boost::mutex > scoped_lock(mutex);
+	if(calcTransform()) {
+		if (odo.p.publish_tf) {
+			publishTF();
+		}
+	}
 }
 
 void WheelOdometry::odomCallback(const ros::TimerEvent& t) {
-	ros::Time stamp;
+	boost::unique_lock < boost::mutex > scoped_lock(mutex);
 
 	//stamp = encoder->header.stamp;
-	stamp = ros::Time::now();
+	ros::Time stamp = ros::Time::now();
 
 	if (odo.current_time == ros::Time(0)) {
 		odo.last_time = stamp;
@@ -331,7 +327,7 @@ void WheelOdometry::odomCallback(const ros::TimerEvent& t) {
 	//odo.encWheelValue = encoder->wheel.relative;
 	//odo.encSteerValue = encoder->steering.absolute;
 
-	boost::unique_lock<boost::mutex> scoped_lock(mutex);
+	//boost::unique_lock < boost::mutex > scoped_lock(mutex);
 	calcOdometry();
 
 	//velocity
@@ -348,7 +344,7 @@ void WheelOdometry::odomCallback(const ros::TimerEvent& t) {
 	}
 	//odo.theta = angles::normalize_angle_positive(odo.theta);
 
-    //ROS_INFO_STREAM("angle:" << angles::to_degrees(odo.theta));
+	//ROS_INFO_STREAM("angle:" << angles::to_degrees(odo.theta));
 
 	//(x,y) from polar coordinate (alpha, rho)
 	odo.alpha = odo.theta + odo.delta_theta / 2;
@@ -361,33 +357,26 @@ void WheelOdometry::odomCallback(const ros::TimerEvent& t) {
 
 	if (odo.p.print_info) {
 		ROS_INFO_STREAM(
-			"v:" << odo.v*3.6 <<
-			" dt:" << odo.distance <<
-			" phi:" << odo.phi*180/M_PI <<
-			//" nphi:" << odo.new_phi*180/M_PI <<
-			//" d:" << dist_r <<
-			//" d2: " << dist_r_2 <<
-			" (phi" <<
-			" L:" << odo.phi_l*180/M_PI <<
-			" R:" << odo.phi_r*180/M_PI <<
-			")(d" <<
-			" L:" << odo.dist_f_l <<
-			" R:" << odo.dist_f_r <<
-			")" <<
-
-			" enc: " << odo.encSteerValue <<
-			" / " << odo.encWheelValue <<
-			//<< " rl:" << R_f_l
-			//<< " rr:" << R_f_r
-			//<< " r:" << ratio
-
-			" dth:" << odo.delta_theta*180/M_PI <<
-			" dth2:" << odo.delta_theta_2*180/M_PI <<
-			" th:" << odo.theta*180/M_PI <<
-
-			" acc: " << dbg_acc <<
-
-			"");
+		"v:" << odo.v*3.6 <<
+		" dt:" << odo.distance <<
+		" phi:" << odo.phi*180/M_PI <<
+		//" nphi:" << odo.new_phi*180/M_PI <<
+		//" d:" << dist_r <<
+		//" d2: " << dist_r_2 <<
+		" (phi" <<
+		" L:" << odo.phi_l*180/M_PI <<
+		" R:" << odo.phi_r*180/M_PI << ")(d" <<
+		" L:" << odo.dist_f_l <<
+		" R:" << odo.dist_f_r << ")" <<
+		" enc: " << odo.encSteerValue << " / " << odo.encWheelValue <<
+		//<< " rl:" << R_f_l
+		//<< " rr:" << R_f_r
+		//<< " r:" << ratio
+		" dth:" << odo.delta_theta*180/M_PI <<
+		" dth2:" << odo.delta_theta_2*180/M_PI <<
+		" th:" << odo.theta*180/M_PI <<
+		" acc: " << dbg_acc <<
+		"");
 	}
 
 	odo.encWheelValue = 0;
@@ -396,13 +385,19 @@ void WheelOdometry::odomCallback(const ros::TimerEvent& t) {
 	if (odo.p.publish_js) {
 		publishJointStates();
 	}
-	if (calcTransform()) {
-		if (odo.p.publish_tf) {
-			publishTF();
-		}
-		publishOdometry();
-	}
+	//if (calcTransform()) {
+		//if (odo.p.publish_tf) {
+		//	publishTF();
+		//}
+		//publishOdometry();
+	//}
+	publishOdometry();
 	publishVelocity();
+
+	//if(!tf_publisher_timer_started) {
+	//	tf_publisher_timer_started = true;
+	//	tf_publisher_timer.start();
+	//}
 }
 
 void WheelOdometry::calcJointStates() {
@@ -415,10 +410,14 @@ void WheelOdometry::calcJointStates() {
 		joint_state.position[joints.ndx_joint_front_right_wheel] += odo.dist_f_r / odo.p.wheel_ray;
 
 		//keep into 2*PI
-		//fmod(joint_state.position[0], (2.0 * M_PI));
-		//fmod(joint_state.position[1], (2.0 * M_PI));
-		//fmod(joint_state.position[2], (2.0 * M_PI));
-		//fmod(joint_state.position[3], (2.0 * M_PI));
+		joint_state.position[joints.ndx_joint_rear_left_wheel] =
+				angles::normalize_angle_positive(joint_state.position[joints.ndx_joint_rear_left_wheel]);
+		joint_state.position[joints.ndx_joint_rear_right_wheel] =
+				angles::normalize_angle_positive(joint_state.position[joints.ndx_joint_rear_right_wheel]);
+		joint_state.position[joints.ndx_joint_front_left_wheel] =
+				angles::normalize_angle_positive(joint_state.position[joints.ndx_joint_front_left_wheel]);
+		joint_state.position[joints.ndx_joint_front_right_wheel] =
+				angles::normalize_angle_positive(joint_state.position[joints.ndx_joint_front_right_wheel]);
 
 		joint_state.position[joints.ndx_joint_front_left_bar] = odo.phi_l;
 		joint_state.position[joints.ndx_joint_front_right_bar] = odo.phi_r;
@@ -430,7 +429,7 @@ void WheelOdometry::publishPose() {
 	current_pose.x = odo.x; //base_to_odom_msg.transform.translation.x;
 	current_pose.y = odo.y; //base_to_odom_msg.transform.translation.y;
 	current_pose.theta = odo.theta; //tf::getYaw(odom.pose.pose.orientation);
-	if(pose_pub.getNumSubscribers()>0) {
+	if (pose_pub.getNumSubscribers() > 0) {
 		pose_pub.publish(current_pose);
 	}
 
@@ -438,7 +437,7 @@ void WheelOdometry::publishPose() {
 	current_posestamped.pose.position.x = odo.x;
 	current_posestamped.pose.position.y = odo.y;
 	current_posestamped.pose.orientation.z = odo.theta;
-	if(posestamped_pub.getNumSubscribers()>0) {
+	if (posestamped_pub.getNumSubscribers() > 0) {
 		posestamped_pub.publish(current_posestamped);
 	}
 }
@@ -449,24 +448,24 @@ void WheelOdometry::publishOdometry() {
 
 	//set the position
 	/*
-	odom.pose.pose.position.x = base_to_odom_msg.transform.translation.x;
-	odom.pose.pose.position.y = base_to_odom_msg.transform.translation.y;
-	odom.pose.pose.position.z = base_to_odom_msg.transform.translation.z;
-	odom.pose.pose.orientation.w = base_to_odom_msg.transform.rotation.w;
-	odom.pose.pose.orientation.x = base_to_odom_msg.transform.rotation.x;
-	odom.pose.pose.orientation.y = base_to_odom_msg.transform.rotation.y;
-	odom.pose.pose.orientation.z = base_to_odom_msg.transform.rotation.z;
-	*/
+	 odom.pose.pose.position.x = base_to_odom_msg.transform.translation.x;
+	 odom.pose.pose.position.y = base_to_odom_msg.transform.translation.y;
+	 odom.pose.pose.position.z = base_to_odom_msg.transform.translation.z;
+	 odom.pose.pose.orientation.w = base_to_odom_msg.transform.rotation.w;
+	 odom.pose.pose.orientation.x = base_to_odom_msg.transform.rotation.x;
+	 odom.pose.pose.orientation.y = base_to_odom_msg.transform.rotation.y;
+	 odom.pose.pose.orientation.z = base_to_odom_msg.transform.rotation.z;
+	 */
 
 	//set the velocity
 	/*
-	tf::Transform orientation(
-			tf::Quaternion(
-					base_to_odom_msg.transform.rotation.x,
-					base_to_odom_msg.transform.rotation.y,
-					base_to_odom_msg.transform.rotation.z,
-					base_to_odom_msg.transform.rotation.w));
-	*/
+	 tf::Transform orientation(
+	 tf::Quaternion(
+	 base_to_odom_msg.transform.rotation.x,
+	 base_to_odom_msg.transform.rotation.y,
+	 base_to_odom_msg.transform.rotation.z,
+	 base_to_odom_msg.transform.rotation.w));
+	 */
 	tf::Quaternion rotation = base_to_odom_msg.getRotation();
 	tf::Vector3 translation = base_to_odom_msg.getOrigin();
 	tf::Transform orientation(rotation);
@@ -490,13 +489,11 @@ void WheelOdometry::publishOdometry() {
 	odom.twist.twist.linear.y = vel.y();
 	odom.twist.twist.linear.z = vel.z();
 
-
-	if(odo.p.use_imu) {
+	if (odo.p.use_imu) {
 		odom.twist.twist.angular.x = odo.imu_ang_vel_x;
 		odom.twist.twist.angular.y = odo.imu_ang_vel_y;
 		odom.twist.twist.angular.z = odo.imu_ang_vel_z;
-	}
-	else {
+	} else {
 		odom.twist.twist.angular.x = 0;
 		odom.twist.twist.angular.y = 0;
 		odom.twist.twist.angular.z = 0;
@@ -515,67 +512,57 @@ bool WheelOdometry::calcTransform() {
 	//ros::Time current_time = odo.current_time - ros::Duration(0.5); //past publish by 0.5
 	ros::Time current_time = odo.current_time - ros::Duration(odo.p.tf_delay); //slight delay
 
-	try {
-		listener.waitForTransform(
-			odo.p.base_footprint,
-			odo.p.base_odometry,
-			ros::Time(0),
-			ros::Duration(5.0));
-	} catch (tf::TransformException &ex) {
-			ROS_ERROR("lrm_odometry wait: %s", ex.what());
-			return false;
+	if(!current_time.isValid()){
+		return false;
 	}
+
+	//try {
+	//	listener.waitForTransform(odo.p.base_footprint, odo.p.base_odometry, ros::Time(0), ros::Duration(5.0));
+	//} catch (tf::TransformException &ex) {
+	//	ROS_ERROR("lrm_odometry (1): %s", ex.what());
+	//	return false;
+	//}
 
 	/*publish transformed*/
 	//desnecessario se o base_footprint estiver no meio do eixo traseiro
 	//fixed transform
 	tf::StampedTransform trans_base_enc;
 	try {
-		listener.lookupTransform(
-				odo.p.base_footprint,
-				odo.p.base_odometry,
-				ros::Time(0),
-				trans_base_enc);
+		listener.lookupTransform(odo.p.base_footprint, odo.p.base_odometry, ros::Time(0), trans_base_enc);
 	} catch (tf::TransformException &ex) {
-		ROS_ERROR("lrm_odometry: %s", ex.what());
-		return false;
+		ROS_WARN_THROTTLE(1, "lrm_odometry (2): %s", ex.what());
+		trans_base_enc.setIdentity();
+		//return false;
 	}
 
 	/*
-	std::cout <<
-			"x:" << trans_base_enc.getOrigin().x() <<
-			"y:" << trans_base_enc.getOrigin().y() <<
-			"z:" << trans_base_enc.getOrigin().z() <<
-			"rx:" << trans_base_enc.getRotation().x() <<
-			"ry:" << trans_base_enc.getRotation().y() <<
-			"rz:" << trans_base_enc.getRotation().z() <<
-			"rw:" << trans_base_enc.getRotation().w() <<
-			std::endl;
-	*/
+	 std::cout <<
+	 "x:" << trans_base_enc.getOrigin().x() <<
+	 "y:" << trans_base_enc.getOrigin().y() <<
+	 "z:" << trans_base_enc.getOrigin().z() <<
+	 "rx:" << trans_base_enc.getRotation().x() <<
+	 "ry:" << trans_base_enc.getRotation().y() <<
+	 "rz:" << trans_base_enc.getRotation().z() <<
+	 "rw:" << trans_base_enc.getRotation().w() <<
+	 std::endl;
+	 */
 
 	tf::Quaternion qt;
 
-	if(odo.p.use_imu && odo.p.use_6dof) {
-		if(odo.p.inverse) {
+	if (odo.p.use_imu && odo.p.use_6dof) {
+		if (odo.p.inverse) {
 			qt = tf::createQuaternionFromRPY(odo.roll, -odo.pitch, odo.theta);
-		}
-		else {
+		} else {
 			qt = tf::createQuaternionFromRPY(odo.roll, odo.pitch, odo.theta);
 		}
-	}
-	else {
+	} else {
 		qt = tf::createQuaternionFromYaw(odo.theta);
 	}
 
-	tf::Transform trans_odom_encoder(
-			qt,
-			tf::Vector3(odo.x, odo.y, 0.0));
+	tf::Transform trans_odom_encoder(qt, tf::Vector3(odo.x, odo.y, 0.0));
 
-	tf::StampedTransform trans_odom_base_st(
-			trans_odom_encoder,
-			current_time, // - ros::Duration(0.5), /*trans_base_enc.stamp_,*/
-			odo.p.frame_id,
-			odo.p.base_footprint);
+	tf::StampedTransform trans_odom_base_st(trans_odom_encoder, current_time, // - ros::Duration(0.5), /*trans_base_enc.stamp_,*/
+			odo.p.frame_id, odo.p.base_footprint);
 
 	//tf::Transform trans_compass(
 	//		tf::createQuaternionFromYaw(angles::from_degrees(90)/* odo.initial_orientation*/),
@@ -583,7 +570,7 @@ bool WheelOdometry::calcTransform() {
 	//);
 	//trans_odom_base_st *= trans_compass;
 
-    trans_odom_base_st *= trans_base_enc.inverse();
+	trans_odom_base_st *= trans_base_enc.inverse();
 	//tf::transformStampedTFToMsg(trans_odom_base_st, base_to_odom_msg);
 	//base_to_odom_msg.header.stamp = current_time;
 	base_to_odom_msg = trans_odom_base_st;
@@ -600,7 +587,7 @@ void WheelOdometry::publishJointStates() {
 }
 
 void WheelOdometry::publishVelocity() {
-	if(velocity_pub.getNumSubscribers()>0) {
+	if (velocity_pub.getNumSubscribers() > 0) {
 		lrm_msgs::Velocity msg;
 		msg.header.stamp = odo.current_time;
 		//msg.header.frame_id = "base_footprint"
@@ -609,21 +596,12 @@ void WheelOdometry::publishVelocity() {
 	}
 }
 
-
-//void WheelOdometry::odomCallback(const ros::TimerEvent& t)
-//{
-//publishTF();
-//publishJointStates();
-//}
-
-void WheelOdometry::resetPose()
-{
+void WheelOdometry::resetPose() {
 	setPose(0, 0, 0);
 }
 
-void WheelOdometry::setPose(double x, double y, double theta)
-{
-	boost::unique_lock<boost::mutex> scoped_lock(mutex);
+void WheelOdometry::setPose(double x, double y, double theta) {
+	boost::unique_lock < boost::mutex > scoped_lock(mutex);
 	odo.x = x;
 	odo.y = y;
 	odo.delta_x = 0;
