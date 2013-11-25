@@ -452,7 +452,7 @@ void OctomapServer::insertCloudCallback(const sensor_msgs::PointCloud2::ConstPtr
 	publishAll(cloud->header.stamp);
 }
 
-OcTreeKey getIndexKey(const OcTreeKey & key, unsigned short depth) {
+inline OcTreeKey getIndexKey(const OcTreeKey & key, unsigned short depth) {
 	// TODO: replace with helper function from next octomap (> 1.5)
 	unsigned short int mask = 65535 << (16 - depth);
 	OcTreeKey result = key;
@@ -848,7 +848,7 @@ void OctomapServer::_publishAll(const ros::Time& rostime) {
 
 						double occ = it->getOccupancy();
 						//double h = (1.0 - std::min(std::max((occ - m_thresMin) / (m_thresMax - m_thresMin), 0.0), 1.0)) * m_colorFactor;
-						double h = (1.0 - std::min(std::max((occ - 0.5) / (m_thresMax - 0.5), 0.0), 1.0)) * m_colorFactor;
+						double h = (1.0 - std::min(std::max((occ - m_occupancyThres) / (m_thresMax - m_occupancyThres), 0.0), 1.0)) * m_colorFactor;
 						occupiedNodesVis.markers[idx].colors.push_back(heightMapColor(h));
 					}
 				}
@@ -1083,6 +1083,7 @@ void OctomapServer::publishFullOctoMap(const ros::Time& rostime) const {
 
 }
 
+#if 0
 void OctomapServer::filterGroundPlane(const PCLPointCloud& pc, PCLPointCloud& ground, PCLPointCloud& nonground) const {
 	ground.header = pc.header;
 	nonground.header = pc.header;
@@ -1187,6 +1188,7 @@ void OctomapServer::filterGroundPlane(const PCLPointCloud& pc, PCLPointCloud& gr
 	}
 
 }
+#endif
 
 void OctomapServer::putCenterMarker(tf::Quaternion orientation, Eigen::Vector4f centroid, Eigen::Vector4f max, Eigen::Vector4f min, double distance, double poseAngle) {
 	uint32_t shape = visualization_msgs::Marker::CUBE;
