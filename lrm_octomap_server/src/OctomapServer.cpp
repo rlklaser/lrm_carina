@@ -45,7 +45,7 @@ using octomap_msgs::Octomap;
 namespace octomap_server {
 
 OctomapServer::OctomapServer(ros::NodeHandle nh) :
-		m_nh(), /*m_pointCloudSub(NULL), m_tfPointCloudSub(NULL),*/
+		m_nh(), m_pointCloudSub(NULL), m_tfPointCloudSub(NULL),
 		m_octree(NULL), m_maxRange(-1.0), m_worldFrameId("/map"),
 		m_baseFrameId("base_footprint"), m_SourceFrameId("stereo_camera"),
 		m_useHeightMap(true), m_colorFactor(0.8), m_latchedTopics(true),
@@ -119,6 +119,9 @@ OctomapServer::OctomapServer(ros::NodeHandle nh) :
 		ROS_WARN_STREAM("You enabled ground filtering but incoming pointclouds will be pre-filtered in [" << m_pointcloudMinZ <<", "<< m_pointcloudMaxZ << "], excluding the ground level z=0. " << "This will not work.");
 	}
 
+	//m_tfListener.setUsingDedicatedThread(true);
+	m_tfListener.setExtrapolationLimit(ros::Duration(2));
+
 	m_pose_seq = 0;
 
 	// initialize octomap object & params
@@ -152,7 +155,7 @@ OctomapServer::OctomapServer(ros::NodeHandle nh) :
 	m_binaryMapPub = m_nh.advertise<Octomap>("octomap_binary", 1, m_latchedTopics);
 	m_fullMapPub = m_nh.advertise<Octomap>("octomap_full", 1, m_latchedTopics);
 	m_pointCloudPub = m_nh.advertise<sensor_msgs::PointCloud2>("octomap_point_cloud_centers", 1, m_latchedTopics);
-	m_mapPub = m_nh.advertise<nav_msgs::OccupancyGrid>("projected_map", 5, m_latchedTopics);
+	m_mapPub = m_nh.advertise<nav_msgs::OccupancyGrid>("projected_map", 1, m_latchedTopics);
 	m_laserPub = m_nh.advertise<sensor_msgs::LaserScan>("laser_scan", 1, m_latchedTopics);
 	m_clusterPosePub = m_nh.advertise<geometry_msgs::PoseStamped>("cluster_pose", 1, m_latchedTopics);
 
@@ -321,7 +324,6 @@ void OctomapServer::insertCloudGroundCallback(const sensor_msgs::PointCloud2::Co
 		return;
 	}
 
-
 	if (m_worldFrameId != cloud->header.frame_id) {
 		ROS_WARN_STREAM("tranform ground cloud from " << cloud->header.frame_id <<  " to " << m_worldFrameId);
 		tf::StampedTransform sensorToWorldTf;
@@ -422,7 +424,6 @@ void OctomapServer::insertCloudCallback(const sensor_msgs::PointCloud2::ConstPtr
 	 else
 	 */
 	{
-
 		if (m_worldFrameId != cloud->header.frame_id) {
 			tf::StampedTransform sensorToWorldTf;
 			Eigen::Matrix4f sensorToWorld;
@@ -536,6 +537,7 @@ void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPo
 
 		oriF = f.getRotation();
 
+		double y = tf::getYaw(sensorTf.getRotation());
 		//double aa = angles::normalize_angle_positive(/*sight_angle +*/ oriB.getAngle());
 
 		double aa = sensorTf.getRotation().getAngle() - sight_angle;
@@ -545,7 +547,7 @@ void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPo
 		//pcl::euclideanDistance(cloudOrigin, sensorOrigin);
 
 		//sight_angle = atan2(sensorOrigin[1] - cloudOrigin[1], sensorOrigin[0] - cloudOrigin[0]);
-		std::cout << "angle to cluster " << angles::to_degrees(sight_angle) << " sensor angle:" << angles::to_degrees(sensorTf.getRotation().getAngle()) << std::endl ;
+		std::cout << "angle to cluster " << angles::to_degrees(sight_angle) << " sensor angle:" << angles::to_degrees(y) << std::endl ;
 	}
 
 	// instead of direct scan insertion, compute update to filter ground:
@@ -881,12 +883,13 @@ void OctomapServer::_publishAll(const ros::Time& rostime) {
 
 					//pclCloud.push_back(pcl::PointXYZ(x, y, z));
 
-					pcl::PointXYZRGB pt(r, g, b);
-					pt.x = x;
-					pt.y = y;
-					pt.z = z;
-					pclCloud.push_back(pt);
-
+					if(it->getOccupancy()>=m_thresMax) {
+						pcl::PointXYZRGB pt(r, g, b);
+						pt.x = x;
+						pt.y = y;
+						pt.z = z;
+						pclCloud.push_back(pt);
+					}
 					//pclCloud.push_back(pcl::PointXYZRGB(x, y, z, pcl::RGB(r, g, b)));
 					/*
 					 int rgb = ((int)r) << 16 | ((int)g) << 8 | ((int)b);
@@ -1260,9 +1263,11 @@ void OctomapServer::putCenterMarker(tf::Quaternion orientation, Eigen::Vector4f 
 	// return marker;
 	m_markerSinglePub.publish(marker);
 
+	double y = tf::getYaw(sensorOrientation);
+
 	tf::Quaternion rot;
-	rot.setRPY(0, 0, poseAngle);
-	rot += sensorOrientation;
+	rot.setRPY(0, 0, y+poseAngle);
+	//rot -= sensorOrientation;
 
 	geometry_msgs::PoseStamped pose;
 	pose.header = marker.header;
