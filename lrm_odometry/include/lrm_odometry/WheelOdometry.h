@@ -212,7 +212,7 @@ private:
 	long long dbg_acc;
 	boost::mutex mutex;
 
-	//bool tf_publisher_timer_started;
+	bool tf_publisher_timer_started;
 
 	void imuCallback(const sensor_msgs::Imu::ConstPtr& msg);
 	//void encodersCallback(const atuacao::Encoders::ConstPtr& encoder);
