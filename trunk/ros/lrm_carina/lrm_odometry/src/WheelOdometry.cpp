@@ -178,6 +178,8 @@ void WheelOdometry::getParams() {
 	nh_priv.param("rot_cov", odo.p.rot_cov, DEFAULT_ROT_COV);
 	nh_priv.param("pos_cov", odo.p.pos_cov, DEFAULT_POS_COV);
 
+	nh_priv.param("absolute_heading", odo.p.absolute_heading, 90.0);
+
 	nh_priv.param("base_odometry", odo.p.base_odometry, std::string("base_odometry"));
 	nh_priv.param("base_footprint", odo.p.base_footprint, std::string("base_footprint"));
 	nh_priv.param("base_link", odo.p.base_link, std::string("base_link"));
@@ -251,7 +253,7 @@ void WheelOdometry::imuCallback(const sensor_msgs::Imu::ConstPtr& msg) {
 	}
 
 	if (odo.p.absolute) {
-		odo.yaw = tf::getYaw(msg->orientation) + angles::from_degrees(90) /*- odo.initial_orientation*/;
+		odo.yaw = tf::getYaw(msg->orientation) + angles::from_degrees(odo.p.absolute_heading);
 	} else {
 		odo.yaw = tf::getYaw(msg->orientation) - odo.initial_orientation;
 	}
@@ -547,6 +549,7 @@ bool WheelOdometry::calcTransform() {
 	/*publish transformed*/
 	//desnecessario se o base_footprint estiver no meio do eixo traseiro
 	//fixed transform
+
 	tf::StampedTransform trans_base_enc(
 			tf::Transform::getIdentity(),
 			ros::Time::now(),
