@@ -148,7 +148,7 @@ void pointcloudCallback(const sensor_msgs::PointCloud2::ConstPtr& msg) {
 				pcl::toROSMsg(*cloud_p, cloud_out);
 				cloud_out.header.frame_id = "/map";
 //				cloud_out.header.frame_id = msg->header.frame_id;
-				cloud_out.header.stamp = ros::Time::now();
+				cloud_out.header.stamp = msg->header.stamp; //ros::Time::now();
 				pc_pub.publish(cloud_out);
 
 			}
