@@ -11,13 +11,11 @@ inflation_radius: 1.95
 #robot_radius: 0.8
 #max_obstacle_height: 1.0
 #footprint_padding: 0.001
-#
-cost_scaling_factor: 10
-#
-lethal_cost_threshold: 100
+#cost_scaling_factor: 10
+#lethal_cost_threshold: 100
 
-unknown_cost_value: 20
-track_unknown_space: false
+#unknown_cost_value: 50
+#track_unknown_space: false
 
 cloud: 
   {
