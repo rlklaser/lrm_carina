@@ -1,30 +1,3 @@
 wheel_odometry:
-
-  publish_tf: true
-    
-  #odometry
-  robot_lenght: 1.64
-  robot_width: 1.06
-  wheel_diameter: 0.48
-  max_angle_left: 32
-  max_angle_right: 32
-  steer_bar_zero: 0
-  print_info: false
-  
-  #node
-  rate: 20
-  
-  absolute: true
-  use_imu: true
-  use_6dof: true
-  publish_js: true
   animation_only: false
-  
-  pos_cov: 0.00001
-  rot_cov: 0.00001
-  
-  frame_id: odom
-  base_odometry: base_odometry
-  base_footprint: base_footprint
-  base_link: base_link
-  
+  absolute_heading: 90.0

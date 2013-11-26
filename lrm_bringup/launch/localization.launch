@@ -10,10 +10,11 @@
 	<!-- ajuste entre o norte geografico (gps) e o norte magnetico (bussola/imu)
 	http://revistapesquisa.fapesp.br/2012/07/16/o-que-e-o-que-e-8/
 	 -->
+	 <!-- 
 		<param
 			name="offset"
 			value="23.0" />
-
+      -->
 		<remap
 			from="imu_data"
 			to="/lse_xsens_mti/xsens/imu/data" />
