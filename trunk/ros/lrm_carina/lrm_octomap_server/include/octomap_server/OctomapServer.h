@@ -188,7 +188,7 @@ protected:
 
   }
 
-  void putCenterMarker(tf::Quaternion orientation, Eigen::Vector4f centroid, Eigen::Vector4f max, Eigen::Vector4f min, double distance, double);
+  void putCenterMarker(tf::Quaternion orientation, Eigen::Vector4f centroid, Eigen::Vector4f max, Eigen::Vector4f min, double distance, tf::Quaternion, double);
 
   /**
    * Adjust data of map due to a change in its info properties (origin or size,
