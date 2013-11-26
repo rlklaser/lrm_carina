@@ -32,4 +32,12 @@
 		args="0.0 0.0 0.5 0 0 0 base_odometry imu_link 30"
 		output="screen" />
 		
+		
+	<node
+		pkg="tf"
+		type="static_transform_publisher"
+		name="wheel_odom_broadcaster_e"
+		args="0.0 0.0 0.0 0 0 0 map base_footprint 30"
+		output="screen" />
+		
 </launch>

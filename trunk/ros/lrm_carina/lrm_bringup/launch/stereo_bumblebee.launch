@@ -80,7 +80,14 @@
 			<param
 				name="right/camera_info_url"
 				value="package://lrm_bringup/params/cameras/00b09d0100ac7cc8_right.yaml" />
-
+			<!-- 
+			<param
+				name="left/camera_info_url"
+				value="package://lrm_bringup/params/cameras/bumblebee_60_left.yaml" />
+			<param
+				name="right/camera_info_url"
+				value="package://lrm_bringup/params/cameras/bumblebee_60_right.yaml" />
+			 -->
 		</node>
 	</group>
 		
