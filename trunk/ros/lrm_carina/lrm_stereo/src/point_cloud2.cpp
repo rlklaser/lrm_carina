@@ -100,7 +100,7 @@ void PointCloud2Nodelet::onInit()
   // Synchronize inputs. Topic subscriptions happen on demand in the connection
   // callback. Optionally do approximate synchronization.
   int queue_size;
-  private_nh.param("queue_size", queue_size, 5);
+  private_nh.param("queue_size", queue_size, 30);
   bool approx;
   private_nh.param("approximate_sync", approx, false);
   if (approx)
@@ -126,7 +126,7 @@ void PointCloud2Nodelet::onInit()
   ros::SubscriberStatusCallback connect_cb = boost::bind(&PointCloud2Nodelet::connectCb, this);
   // Make sure we don't enter connectCb() between advertising and assigning to pub_points2_
   boost::lock_guard<boost::mutex> lock(connect_mutex_);
-  pub_points2_  = nh.advertise<PointCloud2>("points2",  1, connect_cb, connect_cb);
+  pub_points2_  = nh.advertise<PointCloud2>("points2", 1, connect_cb, connect_cb);
 }
 
 // Handles (un)subscribing when clients (un)subscribe
