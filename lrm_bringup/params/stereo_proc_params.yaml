@@ -1,5 +1,5 @@
 stereo_proc:
-  queue_size: 10
+  queue_size: 30
   #prefilter_size: 31
   texture_threshold: 512
   speckle_size: 100
