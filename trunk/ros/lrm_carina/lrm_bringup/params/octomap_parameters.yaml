@@ -43,8 +43,8 @@ octomap_server:
       hit: 0.60
       hit_mid: 0.55
       hit_far: 0.51
-      miss: 0.25
-      occ: 0.501
+      miss: 0.4
+      occ: 0.60
     
       #max: 0.75
       #min: 0.25
