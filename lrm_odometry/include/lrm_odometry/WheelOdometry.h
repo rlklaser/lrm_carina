@@ -72,6 +72,7 @@ struct st_param
 	double wheel_ray;
 	double steer_bar_zero;
 
+	double absolute_heading; //heading for absolute orientation
 	bool absolute;		//absolute odometry - use compass orientation
 	bool use_imu;
 	bool use_6dof;		//publish odometry with rpy orientations
