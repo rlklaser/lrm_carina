@@ -30,6 +30,7 @@
 #include <ros/ros.h>
 #include <sensor_msgs/JointState.h>
 #include <gazebo_msgs/ModelStates.h>
+#include <gazebo_msgs/LinkStates.h>
 #include <geometry_msgs/Pose.h>
 #include <geometry_msgs/Twist.h>
 #include <visualization_msgs/MarkerArray.h>
@@ -44,12 +45,16 @@ struct st_model {
 ros::Publisher markersPub;
 ros::Publisher markerPub;
 ros::Subscriber modelSub;
-std::vector<st_model> models;
+
 bool published;
 
-void modelsCallback(gazebo_msgs::ModelStates::ConstPtr msg) {
+//void modelsCallback(gazebo_msgs::ModelStates::ConstPtr msg) {
+void modelsCallback(gazebo_msgs::LinkStates::ConstPtr msg) {
 
-	//if(published) return;
+	if(published) return;
+	published = true;
+
+	std::vector<st_model> models;
 
 	for (unsigned i = 0; i < msg->name.size(); i++) {
 		//std::cout << msg->name[i] << std::endl;
@@ -58,7 +63,16 @@ void modelsCallback(gazebo_msgs::ModelStates::ConstPtr msg) {
 			model.name = msg->name[i];
 			model.pose = msg->pose[i];
 			model.twist = msg->twist[i];
+
+			if(model.pose.position.x == 0 && model.pose.position.y == 0 && model.pose.position.z == 0) {
+				continue;
+			}
+
 			models.push_back(model);
+		}
+
+		if (strncmp(msg->name[i].c_str(), "carina::base_footprint", 22) == 0) {
+			std::cout << "x: " << msg->pose[i].position.x << " y: " <<  msg->pose[i].position.y << std::endl;
 		}
 	}
 
@@ -81,9 +95,9 @@ void modelsCallback(gazebo_msgs::ModelStates::ConstPtr msg) {
 		markers.markers[i].scale.y = 1;
 		markers.markers[i].scale.z = 1;
 		markers.markers[i].pose = models[i].pose;
-		markers.markers[i].color.r = 0;
+		markers.markers[i].color.r = 0.3;
 		markers.markers[i].color.g = 1;
-		markers.markers[i].color.b = 0;
+		markers.markers[i].color.b = 0.3;
 		markers.markers[i].color.a = 1;
 		markers.markers[i].mesh_resource = "package://lrm_description/models/trees/finihed/meshes/finihed.dae";
 		markers.markers[i].text = models[i].name;
@@ -95,7 +109,7 @@ void modelsCallback(gazebo_msgs::ModelStates::ConstPtr msg) {
 	std::cout << "markers : " << models.size() << std::endl;
 
 	markersPub.publish(markers);
-	//modelSub.shutdown();
+	modelSub.shutdown();
 
 }
 
@@ -106,7 +120,8 @@ int main(int argc, char** argv) {
 	published = false;
 	markersPub = nh.advertise<visualization_msgs::MarkerArray>("viz_gazebo_models_array", 1, true);
 	//markerPub = nh.advertise<visualization_msgs::Marker("viz_gazebo_models", 1, true);
-	modelSub = nh.subscribe<gazebo_msgs::ModelStates>("/gazebo/model_states", 1, &modelsCallback);
+	//modelSub = nh.subscribe<gazebo_msgs::ModelStates>("/gazebo/model_states", 1, &modelsCallback);
+	modelSub = nh.subscribe<gazebo_msgs::LinkStates>("/gazebo/link_states", 1, &modelsCallback);
 
 	ros::spin();
 }
