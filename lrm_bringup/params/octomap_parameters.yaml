@@ -5,11 +5,12 @@ octomap_server:
     rate: 5.0
     frame_id: /map
     base_frame_id: /base_footprint
-    source_frame_id: /base_stereo_camera
+    #source_frame_id: /base_stereo_camera
+    source_frame_id: /camera_center_link
     #height_map: true
     height_map: false
     resolution: 0.10
-       
+    
     filter_speckles: false      #no effect on map
     #filter_speckles: true
     

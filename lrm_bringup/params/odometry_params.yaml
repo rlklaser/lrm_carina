@@ -1,6 +1,7 @@
 wheel_odometry:
   
   publish_tf: true
+  tf_rate: 50
   
   #odometry
   robot_lenght: 1.64
