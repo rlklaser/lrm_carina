@@ -540,7 +540,7 @@ void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPo
 
 		double aa = sensorTf.getRotation().getAngle() - sight_angle;
 
-		putCenterMarker(oriD, centroid, max_point, min_point, hit_dist, sight_angle);
+		putCenterMarker(oriD, centroid, max_point, min_point, hit_dist, oriB, sight_angle);
 		
 		//pcl::euclideanDistance(cloudOrigin, sensorOrigin);
 
@@ -1213,7 +1213,7 @@ void OctomapServer::filterGroundPlane(const PCLPointCloud& pc, PCLPointCloud& gr
 }
 #endif
 
-void OctomapServer::putCenterMarker(tf::Quaternion orientation, Eigen::Vector4f centroid, Eigen::Vector4f max, Eigen::Vector4f min, double distance, double poseAngle) {
+void OctomapServer::putCenterMarker(tf::Quaternion orientation, Eigen::Vector4f centroid, Eigen::Vector4f max, Eigen::Vector4f min, double distance, tf::Quaternion sensorOrientation, double poseAngle) {
 	uint32_t shape = visualization_msgs::Marker::CUBE;
 	visualization_msgs::Marker marker;
 	marker.header.frame_id = m_worldFrameId;
@@ -1262,7 +1262,7 @@ void OctomapServer::putCenterMarker(tf::Quaternion orientation, Eigen::Vector4f 
 
 	tf::Quaternion rot;
 	rot.setRPY(0, 0, poseAngle);
-	rot += orientation;
+	rot += sensorOrientation;
 
 	geometry_msgs::PoseStamped pose;
 	pose.header = marker.header;
