@@ -109,10 +109,10 @@ WheelOdometry::WheelOdometry(ros::NodeHandle n) :
 	joint_state.position.push_back(0);
 	joints.ndx_joint_steering_wheel = position++;
 
-	if (odo.p.use_imu) {
-		imu_sub = nh.subscribe<sensor_msgs::Imu>("imu_data", 1, &WheelOdometry::imuCallback, this);
-	}
-	encoders_sub = nh.subscribe<lrm_msgs::Encoders>("encoders", 1, &WheelOdometry::encodersCallback, this);
+//	if (odo.p.use_imu) {
+//		imu_sub = nh.subscribe<sensor_msgs::Imu>("imu_data", 1, &WheelOdometry::imuCallback, this);
+//	}
+//	encoders_sub = nh.subscribe<lrm_msgs::Encoders>("encoders", 1, &WheelOdometry::encodersCallback, this);
 
 	pose_pub = nh.advertise<geometry_msgs::Pose2D>(nh_priv.getNamespace() + "/pose2d", 1/*odo.p.rate*/);
 	posestamped_pub = nh.advertise<geometry_msgs::PoseStamped>(nh_priv.getNamespace() + "/pose", 1/*odo.p.rate*/);
@@ -120,6 +120,11 @@ WheelOdometry::WheelOdometry(ros::NodeHandle n) :
 	velocity_pub = nh.advertise<lrm_msgs::Velocity>(nh_priv.getNamespace() + "/velocity", 1);
 
 	joint_pub = nh.advertise<sensor_msgs::JointState>("joint_states", 1);
+
+	if(odo.p.rate==0)
+		odo.p.rate = 1;
+	if(odo.p.tf_rate==0)
+		odo.p.tf_rate = 1;
 
 	//if(odo.p.publish_tf) {
 	odom_publisher_timer = n.createTimer(ros::Duration(1.0 / odo.p.rate), &WheelOdometry::odomCallback, this, false, false);
@@ -139,7 +144,15 @@ WheelOdometry::~WheelOdometry() {
 
 void WheelOdometry::start() {
 	odom_publisher_timer.start();
-	tf_publisher_timer.start();
+
+	//if (odo.p.publish_tf) {
+	//	tf_publisher_timer.start();
+	//}
+
+	if (odo.p.use_imu) {
+		imu_sub = nh.subscribe<sensor_msgs::Imu>("imu_data", 1, &WheelOdometry::imuCallback, this);
+	}
+	encoders_sub = nh.subscribe<lrm_msgs::Encoders>("encoders", 1, &WheelOdometry::encodersCallback, this);
 }
 
 void WheelOdometry::getParams() {
@@ -303,14 +316,12 @@ void WheelOdometry::encodersCallback(const lrm_msgs::Encoders::ConstPtr& encoder
 void WheelOdometry::tfCallback(const ros::TimerEvent& t) {
 	boost::unique_lock < boost::mutex > scoped_lock(mutex);
 	if(calcTransform()) {
-		if (odo.p.publish_tf) {
-			publishTF();
-		}
+		publishTF();
 	}
 }
 
 void WheelOdometry::odomCallback(const ros::TimerEvent& t) {
-	boost::unique_lock < boost::mutex > scoped_lock(mutex);
+	//boost::unique_lock < boost::mutex > scoped_lock(mutex);
 
 	//stamp = encoder->header.stamp;
 	ros::Time stamp = ros::Time::now();
@@ -327,7 +338,7 @@ void WheelOdometry::odomCallback(const ros::TimerEvent& t) {
 	//odo.encWheelValue = encoder->wheel.relative;
 	//odo.encSteerValue = encoder->steering.absolute;
 
-	//boost::unique_lock < boost::mutex > scoped_lock(mutex);
+	boost::unique_lock < boost::mutex > scoped_lock(mutex);
 	calcOdometry();
 
 	//velocity
@@ -385,19 +396,28 @@ void WheelOdometry::odomCallback(const ros::TimerEvent& t) {
 	if (odo.p.publish_js) {
 		publishJointStates();
 	}
+
 	//if (calcTransform()) {
 		//if (odo.p.publish_tf) {
 		//	publishTF();
 		//}
 		//publishOdometry();
 	//}
-	publishOdometry();
+	if (!odo.p.publish_tf) {
+		if(calcTransform()) {
+			publishOdometry();
+		}
+	}
+	else {
+		publishOdometry();
+	}
+
 	publishVelocity();
 
-	//if(!tf_publisher_timer_started) {
-	//	tf_publisher_timer_started = true;
-	//	tf_publisher_timer.start();
-	//}
+	if(!tf_publisher_timer_started && odo.p.publish_tf) {
+		tf_publisher_timer_started = true;
+		tf_publisher_timer.start();
+	}
 }
 
 void WheelOdometry::calcJointStates() {
@@ -513,6 +533,7 @@ bool WheelOdometry::calcTransform() {
 	ros::Time current_time = odo.current_time - ros::Duration(odo.p.tf_delay); //slight delay
 
 	if(!current_time.isValid()){
+		ROS_ERROR("invalid time");
 		return false;
 	}
 
@@ -526,12 +547,15 @@ bool WheelOdometry::calcTransform() {
 	/*publish transformed*/
 	//desnecessario se o base_footprint estiver no meio do eixo traseiro
 	//fixed transform
-	tf::StampedTransform trans_base_enc;
+	tf::StampedTransform trans_base_enc(
+			tf::Transform::getIdentity(),
+			ros::Time::now(),
+			odo.p.base_odometry,
+			odo.p.base_footprint);
 	try {
 		listener.lookupTransform(odo.p.base_footprint, odo.p.base_odometry, ros::Time(0), trans_base_enc);
 	} catch (tf::TransformException &ex) {
 		ROS_WARN_THROTTLE(1, "lrm_odometry (2): %s", ex.what());
-		trans_base_enc.setIdentity();
 		//return false;
 	}
 
