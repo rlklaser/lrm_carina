@@ -92,4 +92,6 @@ rosbuild_link_boost(lrm_gazebo_ros_imu thread)
 
 rosbuild_add_library(lrm_gazebo_ros_magnetic src/gazebo_ros_magnetic.cpp)
 
-
+rosbuild_add_executable(viz_gazebo_models_node 
+    src/viz_gazebo_models_node.cpp)
+    

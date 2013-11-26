@@ -163,7 +163,7 @@
         <gravity>1</gravity>
       </link>
     </model>
-    <model name='tree_1'>
+    <model name='finihed_101'>
       <pose>-8.457250 15.462320 0.000000 0.000000 0.000000 0.000000</pose>
       <static>1</static>
       <allow_auto_disable>1</allow_auto_disable>
@@ -198,7 +198,7 @@
         <gravity>1</gravity>
       </link>
     </model>
-    <model name='tree_2'>
+    <model name='finihed_102'>
       <static>1</static>
       <allow_auto_disable>1</allow_auto_disable>
       <link name='finihed::link'>
@@ -232,7 +232,7 @@
         <gravity>1</gravity>
       </link>
     </model>
-    <model name='tree_3'>
+    <model name='finihed_103'>
       <static>1</static>
       <allow_auto_disable>1</allow_auto_disable>
       <link name='finihed::link'>

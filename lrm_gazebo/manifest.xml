@@ -22,7 +22,8 @@
   <depend package="gazebo"/>
   <depend package="cv_bridge" />
   <depend package="angles" />
-  
+  <depend package="visualization_msgs" />
+   
   <depend package="lrm_description"/>
   <depend package="lrm_msgs"/>
   
