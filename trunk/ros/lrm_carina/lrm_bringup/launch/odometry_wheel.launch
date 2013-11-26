@@ -14,7 +14,9 @@
 		args="0 0 0 0 0 0 map wheel_odom 50"
 		output="screen" />
     -->
- 
+	<rosparam
+		command="load"
+		file="$(find lrm_bringup)/params/odometry_params.yaml" />
 	<rosparam
 		command="load"
 		file="$(find lrm_bringup)/params/odometry_real_params.yaml" />

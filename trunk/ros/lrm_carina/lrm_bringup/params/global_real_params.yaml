@@ -1,1 +1,5 @@
 use_sim_time: false
+
+#compass declination
+imu_calibrate_node:
+  offset: 23.0

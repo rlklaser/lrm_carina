@@ -19,7 +19,7 @@ wheel_odometry:
   use_imu: true
   use_6dof: true
   publish_js: true
-  animation_only: true
+  #animation_only: true
   
   pos_cov: 0.00001
   rot_cov: 0.00001
