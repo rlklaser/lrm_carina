@@ -1,6 +1,8 @@
 point_cloud:
+  queue_size: 30
   approximate_sync: true
   
 point_cloud_unmatched:
+  queue_size: 30
   approximate_sync: true
   publish_unmatched: true
