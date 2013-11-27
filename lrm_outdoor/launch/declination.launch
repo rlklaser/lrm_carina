@@ -1,0 +1,16 @@
+<launch>
+
+	<node
+		pkg="lrm_outdoor"
+		type="compute.py"
+		name="declination_compute"
+		output="screen"
+		respawn="true"
+		cwd="node"
+	>
+		<remap
+			from="fix"
+			to="/lse_xsens_mti/xsens/fix" />
+	</node>
+
+</launch>
