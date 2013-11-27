@@ -9,7 +9,7 @@ octomap_server:
     source_frame_id: /camera_center_link
     #height_map: true
     height_map: false
-    resolution: 0.10
+    resolution: 0.1
     
     filter_speckles: false      #no effect on map
     #filter_speckles: true
