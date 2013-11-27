@@ -41,7 +41,7 @@ add_definitions(-msse3 -msse4.1 -msse4.2 -mfpmath=sse)
 #rosbuild_add_executable(example examples/example.cpp)
 #target_link_libraries(example ${PROJECT_NAME})
 
-rosbuild_add_library(sbpl
+rosbuild_add_library(lrm_sbpl
   src/discrete_space_information/environment_nav2D.cpp
   src/discrete_space_information/environment_navxythetalat.cpp
   src/discrete_space_information/environment_navxythetamlevlat.cpp
