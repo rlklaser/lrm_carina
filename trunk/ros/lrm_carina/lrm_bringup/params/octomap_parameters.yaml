@@ -11,6 +11,8 @@ octomap_server:
     height_map: false
     resolution: 0.1
     
+    max_depth: 16
+    
     filter_speckles: false      #no effect on map
     #filter_speckles: true
     
@@ -36,7 +38,7 @@ octomap_server:
      
     sensor_model:
       #max_range: 15
-      max_range: 80
+      max_range: 65
     
       mid_dist: 5.0
       far_dist: 10.0

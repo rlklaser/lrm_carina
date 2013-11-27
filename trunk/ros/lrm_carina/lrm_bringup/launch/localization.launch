@@ -98,12 +98,14 @@
 		name="wheel_odom_broadcaster"
 		args="0 0 0 0 0 0 map odom 50"
 		output="screen" />
-		
+	
+	<!-- 	
 	<node
 		pkg="lrm_odometry"
 		type="fake_odom_frame"
 		name="fake_odom_frame"
 		respawn="true"
-		output="screen" /> -->
-
+		output="screen" />
+	-->
+	
 </launch>

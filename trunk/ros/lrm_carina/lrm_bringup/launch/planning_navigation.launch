@@ -27,6 +27,10 @@
 			command="load" />
 
 		<rosparam
+			file="$(find lrm_bringup)/params/planning/observation_sources_param.yaml"
+			command="load"
+			ns="local_costmap" />
+		<rosparam
 			file="$(find lrm_bringup)/params/planning/costmap_common_params.yaml"
 			command="load"
 			ns="local_costmap" />

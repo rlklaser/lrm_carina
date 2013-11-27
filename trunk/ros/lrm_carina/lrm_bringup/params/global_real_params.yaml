@@ -2,4 +2,5 @@ use_sim_time: false
 
 #compass declination
 imu_calibrate_node:
-  offset: 23.0
+  declination: 23.0
+  fixed_declination: false #if false will subscribe declination topic

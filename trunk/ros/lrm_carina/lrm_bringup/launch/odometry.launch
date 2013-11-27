@@ -6,7 +6,9 @@
 		value="true" />
 	-->
 	
+	<!-- 
 	<include file="$(find lrm_bringup)/launch/odometry_vo.launch" />
+	 -->
 	<include file="$(find lrm_bringup)/launch/odometry_gps.launch" />
 	<include file="$(find lrm_bringup)/launch/odometry_ekf.launch" />
 	<!-- localization

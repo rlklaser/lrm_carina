@@ -14,113 +14,12 @@ inflation_radius: 1.95
 #cost_scaling_factor: 10
 #lethal_cost_threshold: 100
 
-lethal_cost_threshold: 60
-
-#unknown_cost_value: 50
+transform_tolerance: 0.4                    # default 0.3
+cost_scaling_factor: 10                     # default 10
+robot_radius: 0.0                           # using footprint
+max_obstacle_height: 2.5
+raytrace_range: 65.0
+lethal_cost_threshold: 75
+unknown_cost_value: 50
 track_unknown_space: false
-
-cloud: 
-  {
-    #sensor_frame: /stereo_camera, 
-    #point cloud are transformed
-    sensor_frame: /base_footprint, 
-    data_type: PointCloud2,  
-    topic: /fake_cloud_in, 
-    marking: true, 
-    clearing: false,
-    max_obstacle_height: 2.0, 
-    min_obstacle_height: 0.1,
-    observation_persistence: 0.0,
-    expected_update_rate: 1.0,
-    
-    obstacle_range: 9.0,
-    raytrace_range: 10.0
-    
-    #inf_is_valid: true
-  }
-
-ground_cloud: 
-  {
-    #sensor_frame: /stereo_camera, 
-    #point cloud are transformed
-    sensor_frame: /base_footprint,  
-    data_type: PointCloud2,  
-    topic: /ground_cloud_in, 
-    marking: false, 
-    clearing: true,
-    max_obstacle_height: 0.1, 
-    min_obstacle_height: 0.0,
-    observation_persistence: 0.0,
-    expected_update_rate: 0.0,
-    
-    obstacle_range: 9.0,
-    raytrace_range: 10.0
-    
-    #inf_is_valid: true
-  }
-  
-local_cloud: 
-  {
-    sensor_frame: /base_footprint, 
-    data_type: PointCloud2,  
-    topic: /local_cloud_in, 
-    marking: true, 
-    clearing: false,
-    max_obstacle_height: 2.0, 
-    min_obstacle_height: 0.1,
-    observation_persistence: 0.0,
-    expected_update_rate: 5.0,
-    
-    obstacle_range: 9.0,
-    raytrace_range: 10.0
-  }  
-  
-global_cloud: 
-  {
-    sensor_frame: /base_footprint, 
-    data_type: PointCloud2,  
-    topic: /cloud_in, 
-    marking: true, 
-    clearing: false,
-    max_obstacle_height: 2.0, 
-    min_obstacle_height: 0.1,
-    observation_persistence: 0.0,
-    expected_update_rate: 0.0,
-    
-    obstacle_range: 9.0,
-    raytrace_range: 10.0
-  }
-  
-  
-map_cloud:
-  {
-    sensor_frame: /base_footprint, 
-    data_type: PointCloud2,  
-    topic: /octomap_point_cloud_centers, 
-    marking: true, 
-    clearing: false,
-    max_obstacle_height: 2.0, 
-    min_obstacle_height: 0.0,
-    observation_persistence: 0.0,
-    expected_update_rate: 0.0,
-    
-    obstacle_range: 9.0,
-    raytrace_range: 10.0
-  }
-  
-cluster_cloud:
-  {
-    sensor_frame: /base_footprint, 
-    data_type: PointCloud2,  
-    topic: /cloud_in, 
-    marking: true, 
-    clearing: false,
-    max_obstacle_height: 1.0, 
-    min_obstacle_height: 0.5,
-    observation_persistence: 0.0,
-    expected_update_rate: 0.0,
-    
-    obstacle_range: 9.0,
-    raytrace_range: 10.0
-  }
-  
+mark_threshold: 0                           #for voxel grid

@@ -44,7 +44,7 @@ latch_xy_goal_tolerance: false      #stop when reached or rotate in place, false
 
 heading_scoring: true
 heading_scoring_timestep: 0.05
-heading_lookahead: 2.0
+heading_lookahead: 0.3
 
 escape_reset_dist: 1.5
 escape_reset_theta: 0.0

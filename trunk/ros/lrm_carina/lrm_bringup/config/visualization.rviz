@@ -9,6 +9,7 @@ Panels:
         - /Camera1/Visibility1
         - /Camera2/Visibility1
         - /PointCloud1/PointCloud26
+        - /Navigation1/GridCells5
       Splitter Ratio: 0.470588
     Tree Height: 747
   - Class: rviz/Tool Properties
@@ -354,7 +355,7 @@ Visualization Manager:
       Marker Topic: /occupied_cells_vis_array
       Name: MarkerArray
       Namespaces:
-        map: true
+        {}
       Queue Size: 100
       Value: true
     - Class: rviz/MarkerArray
@@ -757,6 +758,13 @@ Visualization Manager:
           Name: GridCells
           Topic: /move_base/local_costmap/obstacles
           Value: true
+        - Alpha: 0.2
+          Class: rviz/GridCells
+          Color: 255; 170; 0
+          Enabled: true
+          Name: GridCells
+          Topic: /move_base/global_costmap/obstacles
+          Value: true
         - Alpha: 0.6
           Class: rviz/GridCells
           Color: 25; 255; 0
@@ -810,17 +818,17 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 36.9704
+      Distance: 32.1426
       Focal Point:
-        X: 16.1671
-        Y: -0.149884
-        Z: 1.30264
+        X: 21.7186
+        Y: -0.756242
+        Z: -3.62383
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 0.534797
+      Pitch: 0.3198
       Target Frame: /base_footprint
       Value: Orbit (rviz)
-      Yaw: 3.14586
+      Yaw: 3.10586
     Saved: ~
 Window Geometry:
   Camera:
@@ -842,5 +850,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1427
-  X: 1350
+  X: 1338
   Y: 24
