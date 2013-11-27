@@ -30,7 +30,7 @@ octomap_server:
     #incremental_2D_projection: true
     
     unknown_cost: 50
-    maximum_cost: 90
+    maximum_cost: 110
     decay_cost: 0.85
     update_occlusion: 0.495
      
