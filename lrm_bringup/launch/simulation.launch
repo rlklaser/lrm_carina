@@ -4,8 +4,6 @@
 		name="/use_sim_time"
 		value="true" />
 
-	<include file="$(find lrm_bringup)/launch/simulator_terrain.launch" />
-
 	<group ns="/stereo_camera">
 		<rosparam
 			command="load"
@@ -15,6 +13,7 @@
 	<!-- 
 	<include file="$(find lrm_bringup)/launch/camera_nodelet_manager.launch" />
 	 -->
+	<include file="$(find lrm_bringup)/launch/simulator_terrain.launch" />
 	<include file="$(find lrm_bringup)/launch/vision_throttle.launch" />
 	
 	<rosparam

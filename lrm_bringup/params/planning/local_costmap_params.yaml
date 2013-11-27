@@ -16,12 +16,10 @@ local_costmap:
   origin_x: 0.0
   origin_y: 0.0
   
+  save_debug_pgm: false
+  
   #observation_sources: cloud ground_cloud
   #observation_sources: local_cloud global_cloud ground_cloud
   #observation_sources:  local_cloud global_cloud
   #observation_sources: cloud map_cloud
   observation_sources: cluster_cloud map_cloud
-  
-  #source
-  #obstacle_range: 7.0
-  #raytrace_range: 10.0
