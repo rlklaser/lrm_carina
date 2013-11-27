@@ -310,7 +310,12 @@ void OctomapServer::insertCloudGroundCallback(const sensor_msgs::PointCloud2::Co
 			m_tfListener.waitForTransform(m_worldFrameId, m_SourceFrameId, cloud->header.stamp, ros::Duration(m_waitTransform));
 		}
 		m_tfListener.lookupTransform(m_worldFrameId, m_SourceFrameId, cloud->header.stamp, sensorTf);
-	} catch (tf::TransformException& ex) {
+	}
+	catch (tf::ExtrapolationException& ex) {
+		ROS_ERROR_STREAM(">GD(S):Transform error of sensor data: " << ex.what() << ", quitting callback");
+		return;
+	}
+	catch (tf::TransformException& ex) {
 		if(m_waitTransform<0) {
 			ROS_ERROR_STREAM(">GD(S):Transform error of sensor data: " << ex.what() << ", quitting callback");
 			return;
@@ -318,10 +323,6 @@ void OctomapServer::insertCloudGroundCallback(const sensor_msgs::PointCloud2::Co
 			ROS_WARN_STREAM("GD(S)TF error::" << ex.what() << ", using the more recent transform");
 			m_tfListener.lookupTransform(m_worldFrameId, m_SourceFrameId, ros::Time(0), sensorTf);
 		}
-	}
-	catch (tf::ExtrapolationException& ex) {
-		ROS_ERROR_STREAM(">GD(S):Transform error of sensor data: " << ex.what() << ", quitting callback");
-		return;
 	}
 
 	if (m_worldFrameId != cloud->header.frame_id) {
@@ -331,14 +332,16 @@ void OctomapServer::insertCloudGroundCallback(const sensor_msgs::PointCloud2::Co
 		try {
 			m_tfListener.waitForTransform(m_worldFrameId, cloud->header.frame_id, cloud->header.stamp, ros::Duration(m_waitTransform));
 			m_tfListener.lookupTransform(m_worldFrameId, cloud->header.frame_id, cloud->header.stamp, sensorToWorldTf);
-		} catch (tf::TransformException& ex) {
-			ROS_ERROR_STREAM("GD:Transform error of sensor data: " << ex.what() << ", quitting callback");
-			return;
 		}
 		catch (tf::ExtrapolationException& ex) {
 			ROS_ERROR_STREAM(">GD:Transform error of sensor data: " << ex.what() << ", quitting callback");
 			return;
 		}
+		catch (tf::TransformException& ex) {
+			ROS_ERROR_STREAM("GD:Transform error of sensor data: " << ex.what() << ", quitting callback");
+			return;
+		}
+
 		pcl_ros::transformAsMatrix(sensorToWorldTf, sensorToWorld);
 		pcl::transformPointCloud(pc, pc, sensorToWorld);
 	}
@@ -377,6 +380,10 @@ void OctomapServer::insertCloudCallback(const sensor_msgs::PointCloud2::ConstPtr
 		}
 		m_tfListener.lookupTransform(m_worldFrameId, m_SourceFrameId, cloud->header.stamp, sensorTf);
 	}
+	catch (tf::ExtrapolationException& ex) {
+		ROS_ERROR_STREAM(">NGD(S):Transform error of sensor data: " << ex.what() << ", quitting callback");
+		return;
+	}
 	catch (tf::TransformException& ex) {
 		if(m_waitTransform<0) {
 			ROS_ERROR_STREAM(">NGD(S):Transform error of sensor data: " << ex.what() << ", quitting callback");
@@ -386,10 +393,7 @@ void OctomapServer::insertCloudCallback(const sensor_msgs::PointCloud2::ConstPtr
 			m_tfListener.lookupTransform(m_worldFrameId, m_SourceFrameId, ros::Time(0), sensorTf);
 		}
 	}
-	catch (tf::ExtrapolationException& ex) {
-		ROS_ERROR_STREAM(">NGD(S):Transform error of sensor data: " << ex.what() << ", quitting callback");
-		return;
-	}
+
 	/////////////////
 
 	PCLPointCloud pc_ground; // segmented ground plane
@@ -432,7 +436,12 @@ void OctomapServer::insertCloudCallback(const sensor_msgs::PointCloud2::ConstPtr
 					m_tfListener.waitForTransform(m_worldFrameId, cloud->header.frame_id, cloud->header.stamp, ros::Duration(m_waitTransform));
 				}
 				m_tfListener.lookupTransform(m_worldFrameId, cloud->header.frame_id, cloud->header.stamp, sensorToWorldTf);
-			} catch (tf::TransformException& ex) {
+			}
+			catch (tf::ExtrapolationException& ex) {
+				ROS_ERROR_STREAM(">(NGD):Transform error of sensor data: " << ex.what() << ", quitting callback");
+				return;
+			}
+			catch (tf::TransformException& ex) {
 				if(m_waitTransform<0) {
 					ROS_ERROR_STREAM("(NGD):Transform error of sensor data: " << ex.what() << ", quitting callback");
 					return;
@@ -442,10 +451,7 @@ void OctomapServer::insertCloudCallback(const sensor_msgs::PointCloud2::ConstPtr
 					m_tfListener.lookupTransform(m_worldFrameId, cloud->header.frame_id, ros::Time(0), sensorToWorldTf);
 				}
 			}
-			catch (tf::ExtrapolationException& ex) {
-				ROS_ERROR_STREAM(">(NGD):Transform error of sensor data: " << ex.what() << ", quitting callback");
-				return;
-			}
+
 			pcl_ros::transformAsMatrix(sensorToWorldTf, sensorToWorld);
 			// directly transform to map frame:
 			pcl::transformPointCloud(pc, pc, sensorToWorld);
@@ -547,7 +553,7 @@ void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPo
 		//pcl::euclideanDistance(cloudOrigin, sensorOrigin);
 
 		//sight_angle = atan2(sensorOrigin[1] - cloudOrigin[1], sensorOrigin[0] - cloudOrigin[0]);
-		std::cout << "angle to cluster " << angles::to_degrees(sight_angle) << " sensor angle:" << angles::to_degrees(y) << std::endl ;
+		//std::cout << "angle to cluster " << angles::to_degrees(sight_angle) << " sensor angle:" << angles::to_degrees(y) << std::endl ;
 	}
 
 	// instead of direct scan insertion, compute update to filter ground:
