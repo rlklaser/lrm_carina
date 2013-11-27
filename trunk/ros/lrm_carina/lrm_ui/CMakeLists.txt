@@ -29,13 +29,13 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 #rosbuild_include(qt_build qt-ros)
 #rosbuild_prepare_qt4(QtCore QtGui)
 
-#file(GLOB QT_FORMS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} ui/*.ui)
-#file(GLOB QT_RESOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} resources/*.qrc)
-#file(GLOB_RECURSE QT_MOC RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} FOLLOW_SYMLINKS 
-#    include/ihm/*.hpp 
-#    include/analogwidgets/*.h 
-#    include/analogwidgets/chart/*.h 
-#    include/analogwidgets/chart/standard/*.h)
+file(GLOB QT_FORMS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} ui/*.ui)
+file(GLOB QT_RESOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} resources/*.qrc)
+file(GLOB_RECURSE QT_MOC RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} FOLLOW_SYMLINKS 
+    include/ihm/*.hpp 
+    include/analogwidgets/*.h 
+    include/analogwidgets/chart/*.h 
+    include/analogwidgets/chart/standard/*.h)
 
 #QT4_ADD_RESOURCES(QT_RESOURCES_CPP ${QT_RESOURCES})
 #QT4_WRAP_UI(QT_FORMS_HPP ${QT_FORMS})
@@ -49,7 +49,7 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 #rosbuild_add_executable(example examples/example.cpp)
 #target_link_libraries(example ${PROJECT_NAME})
 
-#file(GLOB_RECURSE QT_SOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} FOLLOW_SYMLINKS src/*.cpp)
+file(GLOB_RECURSE QT_SOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} FOLLOW_SYMLINKS src/*.cpp)
 
 #INCLUDE(${QT_USE_FILE})
 #ADD_DEFINITIONS(${QT_DEFINITIONS})
@@ -59,16 +59,16 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 #   SET(COMPILE_ANALOG_LIB TRUE)
 #ENDIF(NOT GTK_PKG_FLAGS)
 
-#LINK_DIRECTORIES(${PROJECT_SOURCE_DIR}/AnalogWidgets/analogwidgets)
+LINK_DIRECTORIES(${PROJECT_SOURCE_DIR}/AnalogWidgets/analogwidgets)
 
-#rosbuild_add_executable(ihm 
-#    ${QT_SOURCES} 
-#    ${QT_RESOURCES_CPP} 
-#    ${QT_FORMS_HPP} 
-#    ${QT_MOC_HPP})
+rosbuild_add_executable(ihm 
+    ${QT_SOURCES} 
+    ${QT_RESOURCES_CPP} 
+    ${QT_FORMS_HPP} 
+    ${QT_MOC_HPP})
     
-#target_link_libraries(ihm 
-#    ${QT_LIBRARIES} 
-#    -lanalogwidgets 
-#    -lQtSvg 
-#    -lQtScript)
+target_link_libraries(ihm 
+    ${QT_LIBRARIES} 
+    -lanalogwidgets 
+    -lQtSvg 
+    -lQtScript)
