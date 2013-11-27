@@ -14,6 +14,7 @@
 
 	<include file="$(find lrm_bringup)/launch/run_carina.launch" />
 	<include file="$(find lrm_bringup)/launch/simulation.launch" />
+	<include file="$(find lrm_bringup)/launch/localization.launch" />
 	<include file="$(find lrm_bringup)/launch/odometry_sim.launch" />
 	
 	<!-- 	
