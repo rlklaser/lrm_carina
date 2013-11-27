@@ -155,7 +155,7 @@ OctomapServer::OctomapServer(ros::NodeHandle nh) :
 	m_binaryMapPub = m_nh.advertise<Octomap>("octomap_binary", 1, m_latchedTopics);
 	m_fullMapPub = m_nh.advertise<Octomap>("octomap_full", 1, m_latchedTopics);
 	m_pointCloudPub = m_nh.advertise<sensor_msgs::PointCloud2>("octomap_point_cloud_centers", 1, m_latchedTopics);
-	m_mapPub = m_nh.advertise<nav_msgs::OccupancyGrid>("projected_map", 1, m_latchedTopics);
+	m_mapPub = m_nh.advertise<nav_msgs::OccupancyGrid>("projected_map", 1, true/*m_latchedTopics*/);
 	m_laserPub = m_nh.advertise<sensor_msgs::LaserScan>("laser_scan", 1, m_latchedTopics);
 	m_clusterPosePub = m_nh.advertise<geometry_msgs::PoseStamped>("cluster_pose", 1, m_latchedTopics);
 
