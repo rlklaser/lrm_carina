@@ -29,8 +29,10 @@
 
 #include <ros/ros.h>
 #include <sensor_msgs/Imu.h>
+#include <std_msgs/Float32.h>
 #include <tf/tf.h>
 #include <angles/angles.h>
+#include <boost/thread/mutex.hpp>
 
 #include "lrm_odometry/SetIMUOffset.h"
 
@@ -39,6 +41,14 @@ double _offset;
 double _drift;
 double _time_drift;
 ros::Time _start_time;
+boost::mutex mutex;
+
+void offsetCallback(std_msgs::Float32::ConstPtr msg)
+{
+	boost::unique_lock < boost::mutex > scoped_lock(mutex);
+
+	_offset = msg->data;
+}
 
 void imuCallback(sensor_msgs::Imu::ConstPtr msg)
 {
@@ -46,6 +56,8 @@ void imuCallback(sensor_msgs::Imu::ConstPtr msg)
 		ROS_INFO_STREAM("time not initialized");
 		return;
 	}
+
+	boost::unique_lock < boost::mutex > scoped_lock(mutex);
 
 	//ROS_INFO_STREAM("yaw:" << angles::to_degrees(tf::getYaw(msg->orientation)));
 	//double yaw = tf::getYaw(msg->orientation);
@@ -67,12 +79,15 @@ void imuCallback(sensor_msgs::Imu::ConstPtr msg)
 	imu_pub.publish(imu);
 
 	//int int_secs = (int)sec;
-	if(sec % 10 == 0)
-		ROS_DEBUG_STREAM("time drift:" << angles::to_degrees(_time_drift) << " secs:" << sec << " start:" << _start_time);
+	//if(sec % 10 == 0)
+	//	ROS_DEBUG_STREAM("time drift:" << angles::to_degrees(_time_drift) << " secs:" << sec << " start:" << _start_time);
+	ROS_DEBUG_STREAM_THROTTLE(1, "time drift:" << angles::to_degrees(_time_drift) << " secs:" << sec << " start:" << _start_time);
 }
 
 bool offsetService(lrm_odometry::SetIMUOffset::Request& req, lrm_odometry::SetIMUOffset::Response& res)
 {
+	boost::unique_lock<boost::mutex>scoped_lock(mutex);
+
 	_offset = angles::from_degrees(req.offset);
 	return true;
 }
@@ -87,18 +102,25 @@ int main(int argc, char **argv)
 	_time_drift = 0;
 
 	imu_pub = nh.advertise<sensor_msgs::Imu>(nh_priv.getNamespace() + "/imu/data", 10);
-	ros::ServiceServer service = nh.advertiseService(nh_priv.getNamespace() + "/set_offset", offsetService);
+	ros::ServiceServer service = nh.advertiseService(nh_priv.getNamespace() + "/set_declination", offsetService);
 	ros::Subscriber imu_sub = nh.subscribe<sensor_msgs::Imu>("imu_data", 1, imuCallback);
 
 	double offset_deg;
 	double drift_deg;
+	bool fixed_offset;
 
-	nh_priv.param<double>("offset", offset_deg, 0.0);
-	nh_priv.param<double>("drift", drift_deg, angles::to_degrees(0.0001)); //from xsens datasheet
+	nh_priv.param<bool>("fixed_declination", fixed_offset, true);
+	nh_priv.param<double>("declination", offset_deg, 0.0);
+	nh_priv.param<double>("time_drift", drift_deg, angles::to_degrees(0.0001)); //from xsens datasheet
 	_offset = angles::from_degrees(offset_deg);
 	_drift = angles::from_degrees(drift_deg);
 
 	ROS_INFO_STREAM("imu calibration node started (offset:" << offset_deg << ")");
+
+	if(!fixed_offset) {
+		ros::Subscriber decl_sub = nh.subscribe<std_msgs::Float32>("declination", 1, offsetCallback);
+		ROS_WARN_STREAM("imu calibration node subscribed to declination");
+	}
 
 	ros::spin();
 }

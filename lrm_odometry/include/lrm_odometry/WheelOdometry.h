@@ -39,6 +39,7 @@
 #include <geometry_msgs/Pose2D.h>
 
 //#include <atuacao/Encoders.h>
+#include <boost/thread/mutex.hpp>
 
 #include <lrm_description/Constants.h>
 #include <lrm_msgs/Encoders.h>
