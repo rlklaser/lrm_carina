@@ -1,0 +1,13 @@
+<launch>
+
+	<node
+		pkg="lrm_outdoor"
+		type="test_declination.py"
+		name="test_declination_compute"
+		output="screen"
+		respawn="false"
+		cwd="node"
+	>
+	</node>
+
+</launch>

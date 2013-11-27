@@ -16,19 +16,23 @@ class Declination:
         rospy.init_node("declination_provider")
 
         self.fix = None
+        self.declination = 0.0
         self.sub = rospy.Subscriber("fix", NavSatFix, self._fix)
         self.pub = rospy.Publisher("declination", Float32, latch=True)
 
     def _fix(self, msg):
-        if self.fix:
-            # For now, return. Later, figure out conditions under which to recompute.
-            return
+        #if self.fix:
+        #    # For now, return. Later, figure out conditions under which to recompute.
+        #    return
 
         if msg.latitude and msg.longitude:
             self.fix = msg
-            if not msg.altitude: msg.altitude = 0
+            if not msg.altitude: 
+                msg.altitude = 0
             result = self.gm.calc(msg.latitude, msg.longitude, msg.altitude)
-            self.pub.publish(radians(result.dec)) 
+            if self.declination != result.dec:
+                self.pub.publish(radians(result.dec))
+                self.declination = result.dec
 
     def spin(self):
         rospy.spin()
