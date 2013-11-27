@@ -9,8 +9,8 @@ include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
 #  RelWithDebInfo : w/ debug symbols, w/ optimization
 #  MinSizeRel     : w/o debug symbols, w/ optimization, stripped binaries
 
-#set(ROS_BUILD_TYPE Debug)
-set(ROS_BUILD_TYPE RelWithDebInfo)
+set(ROS_BUILD_TYPE Debug)
+#set(ROS_BUILD_TYPE RelWithDebInfo)
 #set(ROS_BUILD_TYPE Release)
 
 rosbuild_init()
@@ -24,11 +24,11 @@ add_definitions(-Wno-deprecated -DEIGEN_VECTORIZE -DEIGEN_DISABLE_UNALIGNED_ARRA
 add_definitions(-msse3 -msse4.1 -msse4.2 -mfpmath=sse)
 #add_definitions(-mavx -mfpmath=sse)
 
-find_package(PCL REQUIRED)
-include_directories(${PCL_INCLUDE_DIRS})
+#find_package(PCL REQUIRED)
+#include_directories(${PCL_INCLUDE_DIRS})
 
-find_package(nodelet REQUIRED)
-include_directories(${nodelet_INCLUDE_DIRS})
+#find_package(nodelet REQUIRED)
+#include_directories(${nodelet_INCLUDE_DIRS})
 
 #set the default path for built executables to the "bin" directory
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
@@ -45,8 +45,6 @@ rosbuild_find_ros_package(dynamic_reconfigure)
 include(${dynamic_reconfigure_PACKAGE_PATH}/cmake/cfgbuild.cmake)
 gencfg()
 
-add_definitions(-Wno-deprecated -DEIGEN_DONT_VECTORIZE -DEIGEN_DISABLE_UNALIGNED_ARRAY_ASSERT )
-
 #common commands for building c++ executables and libraries
 rosbuild_add_library(${PROJECT_NAME} 
 	src/OctomapServer.cpp 
@@ -54,12 +52,12 @@ rosbuild_add_library(${PROJECT_NAME}
 	#src/TrackingOctomapServer.cpp
 	)
 
-target_link_libraries(
-  ${PROJECT_NAME}
-  ${PCL_COMMON_LIBRARIES}
-  ${OCTOMAP_LIBRARIES}
-  ${nodelet_LIBRARIES}
-)
+#target_link_libraries(
+#  ${PROJECT_NAME}
+#  ${PCL_COMMON_LIBRARIES}
+#  ${OCTOMAP_LIBRARIES}
+#  ${nodelet_LIBRARIES}
+#)
 
 rosbuild_add_executable(octomap_server_node src/octomap_server_node.cpp)
 target_link_libraries(octomap_server_node ${PROJECT_NAME} ${OCTOMAP_LIBRARIES})
