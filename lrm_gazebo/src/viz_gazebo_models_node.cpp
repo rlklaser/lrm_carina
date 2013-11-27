@@ -88,19 +88,24 @@ void modelsCallback(gazebo_msgs::LinkStates::ConstPtr msg) {
 		//markers.markers[i].type = visualization_msgs::Marker::CYLINDER;
 		markers.markers[i].type = visualization_msgs::Marker::MESH_RESOURCE;
 		markers.markers[i].action = visualization_msgs::Marker::ADD;
+
 		//markers.markers[i].scale.x = 0.4;
 		//markers.markers[i].scale.y = 0.4;
 		//markers.markers[i].scale.z = 3;
+
 		markers.markers[i].scale.x = 1;
 		markers.markers[i].scale.y = 1;
 		markers.markers[i].scale.z = 1;
 		markers.markers[i].pose = models[i].pose;
-		markers.markers[i].color.r = 0.3;
-		markers.markers[i].color.g = 1;
-		markers.markers[i].color.b = 0.3;
-		markers.markers[i].color.a = 1;
+
+		//markers.markers[i].color.r = 0.3;
+		//markers.markers[i].color.g = 1;
+		//markers.markers[i].color.b = 0.3;
+		//markers.markers[i].color.a = 1;
+
 		markers.markers[i].mesh_resource = "package://lrm_description/models/trees/finihed/meshes/finihed.dae";
 		markers.markers[i].text = models[i].name;
+		markers.markers[i].mesh_use_embedded_materials = true;
 		//markers.markers[i].pose.orientation = models[i].twist;
 
 		//markerPub.publish(markers.markers[i]);
