@@ -1,0 +1,15 @@
+<package>
+  <description brief="lrm_octomap">
+
+     lrm_octomap
+
+  </description>
+  <author>Rafael Luiz Klaser</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/lrm_octomap</url>
+  <depend package="roscpp"/>
+
+</package>
+
+
