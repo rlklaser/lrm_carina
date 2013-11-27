@@ -8,7 +8,7 @@
 	<rosparam
 		command="load"
 		file="$(find lrm_bringup)/params/global_sim_params.yaml" />
-		
+
 	<env
 		name="GAZEBO_MODEL_PATH"
 		value="$GAZEBO_MODEL_PATH:$(find lrm_description)/models:$(find lrm_description)/models/trees:/home/rlklaser/Work/ros/libraries/drcsim/gazebo_models/environments" />
@@ -16,13 +16,13 @@
 		name="GAZEBO_PLUGIN_PATH"
 		value="$GAZEBO_PLUGIN_PATH:$(find lrm_gazebo)/lib" />
 
- 	<node
+	<node
 		name="gazebo_gui"
 		pkg="gazebo"
 		type="gui"
-		respawn="true"
+		respawn="false"
 		output="screen" />
-		
+
 	<node
 		name="rviz"
 		pkg="rviz"
@@ -30,5 +30,12 @@
 		respawn="true"
 		output="screen"
 		args="-d $(find lrm_bringup)/config/visualization.rviz" />
+
+	<node
+		name="viz_gazebo_models"
+		pkg="lrm_gazebo"
+		type="viz_gazebo_models_node"
+		respawn="true"
+		output="screen" />
 
 </launch>
