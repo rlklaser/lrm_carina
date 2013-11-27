@@ -872,7 +872,7 @@ void OctomapServer::_publishAll(const ros::Time& rostime) {
 						color.r = r;
 						color.g = g;
 						color.b = b;
-						color.a = 1;
+						color.a = 0.5;
 
 						//occupiedNodesVis.markers[idx].colors.push_back(color);
 						//occupiedNodesVis.markers[idx].color = color;
@@ -934,7 +934,9 @@ void OctomapServer::_publishAll(const ros::Time& rostime) {
 
 			occupiedNodesVis.markers[i].header.frame_id = m_worldFrameId;
 			occupiedNodesVis.markers[i].header.stamp = rostime;
-			occupiedNodesVis.markers[i].ns = "map";
+			char ns[64];
+			sprintf(ns, "depth_%d", i);
+			occupiedNodesVis.markers[i].ns = ns;
 			occupiedNodesVis.markers[i].id = i;
 			occupiedNodesVis.markers[i].type = visualization_msgs::Marker::CUBE_LIST;
 			occupiedNodesVis.markers[i].scale.x = size;
@@ -1061,7 +1063,9 @@ bool OctomapServer::resetSrv(std_srvs::Empty::Request& req, std_srvs::Empty::Res
 
 		occupiedNodesVis.markers[i].header.frame_id = m_worldFrameId;
 		occupiedNodesVis.markers[i].header.stamp = rostime;
-		occupiedNodesVis.markers[i].ns = "map";
+		char ns[64];
+		sprintf(ns, "depth_%d", i);
+		occupiedNodesVis.markers[i].ns = ns;
 		occupiedNodesVis.markers[i].id = i;
 		occupiedNodesVis.markers[i].type = visualization_msgs::Marker::CUBE_LIST;
 		occupiedNodesVis.markers[i].action = visualization_msgs::Marker::DELETE;
@@ -1438,10 +1442,12 @@ void OctomapServer::update2DMap(const OcTreeT::iterator& it, bool occupied) {
 	double logg = it->getLogOdds();
 	double prob = it->getOccupancy();
 
+	signed char newCost = prob * m_maximumCost;
+
 	if (it.getDepth() == m_maxTreeDepth) {
 		unsigned idx = mapIdx(it.getKey());
 		if (occupied) {
-			m_gridmap.data[idx] = prob * m_maximumCost;
+			m_gridmap.data[idx] = std::max(newCost, m_gridmap.data[idx]);
 		}
 //		else if (m_gridmap.data[idx] == -1) {
 //			m_gridmap.data[idx] = 0;
@@ -1459,7 +1465,7 @@ void OctomapServer::update2DMap(const OcTreeT::iterator& it, bool occupied) {
 			for (int dy = 0; dy < intSize; dy++) {
 				unsigned idx = mapIdx(i, (minKey[1] + dy - m_paddedMinKey[1]) / m_multires2DScale);
 				if (occupied) {
-					m_gridmap.data[idx] = prob * m_maximumCost;
+					m_gridmap.data[idx] = std::max(newCost, m_gridmap.data[idx]);
 				}
 //				else if (m_gridmap.data[idx] == -1) {
 //					m_gridmap.data[idx] = 0;

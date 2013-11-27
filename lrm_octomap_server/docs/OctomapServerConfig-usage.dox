@@ -2,11 +2,6 @@
 \verbatim
 <node name="octomap_server_node" pkg="lrm_octomap_server" type="octomap_server_node">
   <param name="max_depth" type="int" value="16" />
-  <param name="occ" type="double" value="0.8" />
-  <param name="max" type="double" value="0.97" />
-  <param name="min" type="double" value="0.12" />
-  <param name="hit" type="double" value="0.7" />
-  <param name="mis" type="double" value="0.4" />
 </node>
 \endverbatim
 
