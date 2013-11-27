@@ -1,0 +1,22 @@
+<launch>
+
+	<!-- 
+	<param
+		name="/use_sim_time"
+		value="true" />
+    -->
+ 
+	<node
+		pkg="nodelet"
+		type="nodelet"
+		name="bumblebee_nodelet_manager"
+		args="manager"
+		respawn="true"
+		output="screen"
+	>
+		<param
+			name="num_worker_threads"
+			value="8" />
+	</node>
+
+</launch>

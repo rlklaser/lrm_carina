@@ -6,6 +6,8 @@
 		value="true" />
 	-->
 
+	<include file="$(find lrm_bringup)/launch/camera_nodelet_manager.launch" />
+
 	<include file="$(find lrm_bringup)/launch/stereo_vision_nodelet.launch" />
 	<include file="$(find lrm_bringup)/launch/stereo_vision_filters.launch" />
 	<include file="$(find lrm_bringup)/launch/stereo_vision_clustering.launch" />
