@@ -1449,15 +1449,21 @@ void OctomapServer::update2DMap(const OcTreeT::iterator& it, bool occupied) {
 		if (occupied) {
 			m_gridmap.data[idx] = std::max(newCost, m_gridmap.data[idx]);
 		}
+		else if(logg==0) {
+			m_gridmap.data[idx] = m_unknownCost;
+		}
 //		else if (m_gridmap.data[idx] == -1) {
 //			m_gridmap.data[idx] = 0;
 //		}
 //rlklaser:loss of occupancy
 		else {
-			m_gridmap.data[idx] *= m_decayCost;
+			m_gridmap.data[idx] = m_gridmap.data[idx] *= m_decayCost;
 		}
 	}
 	else {
+
+		ROS_WARN("usgin lower resolution");
+
 		int intSize = 1 << (m_maxTreeDepth - it.getDepth());
 		octomap::OcTreeKey minKey = it.getIndexKey();
 		for (int dx = 0; dx < intSize; dx++) {
