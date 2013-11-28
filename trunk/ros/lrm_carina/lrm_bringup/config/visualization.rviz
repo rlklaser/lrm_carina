@@ -270,14 +270,14 @@ Visualization Manager:
       Value: true
       Visual Enabled: true
     - Class: rviz/Camera
-      Enabled: false
+      Enabled: true
       Image Rendering: background and overlay
       Image Topic: /stereo/left/image_color
       Name: Camera
       Overlay Alpha: 0.5
       Queue Size: 2
       Transport Hint: raw
-      Value: false
+      Value: true
       Visibility:
         Axes: true
         Camera: false
@@ -295,6 +295,7 @@ Visualization Manager:
           Pose: true
           Value: true
         OSM Map: true
+        Obstacles: true
         Odometry:
           Odometry: true
           Value: true
@@ -332,6 +333,7 @@ Visualization Manager:
           Pose: true
           Value: true
         OSM Map: true
+        Obstacles: true
         Odometry:
           Odometry: true
           Value: true
@@ -453,13 +455,13 @@ Visualization Manager:
       Topic: /cluster_pose
       Value: true
     - Class: rviz/MarkerArray
-      Enabled: true
+      Enabled: false
       Marker Topic: /viz_gazebo_models_array
-      Name: MarkerArray
+      Name: Obstacles
       Namespaces:
-        trees: true
+        {}
       Queue Size: 100
-      Value: true
+      Value: false
     - Class: rviz/Group
       Displays:
         - Angle Tolerance: 0.1
@@ -818,17 +820,17 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 36.8018
+      Distance: 33.2446
       Focal Point:
-        X: 13.3313
-        Y: -0.190617
-        Z: -11.9234
+        X: 16.33
+        Y: -1.70582
+        Z: -12.1185
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 1.1348
+      Pitch: 0.699798
       Target Frame: /base_footprint
       Value: Orbit (rviz)
-      Yaw: 3.12586
+      Yaw: 3.13585
     Saved: ~
 Window Geometry:
   Camera:

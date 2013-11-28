@@ -10,8 +10,8 @@ local_costmap:
   
   static_map: false
   rolling_window: true
-  width: 15.0
-  height: 15.0
+  width: 14.0
+  height: 14.0
   resolution: 0.1
   origin_x: 0.0
   origin_y: 0.0

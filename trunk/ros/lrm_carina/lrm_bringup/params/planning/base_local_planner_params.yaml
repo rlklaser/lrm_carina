@@ -43,8 +43,8 @@ yaw_goal_tolerance: 1.57
 latch_xy_goal_tolerance: false      #stop when reached or rotate in place, false = stop
 
 heading_scoring: true
-heading_scoring_timestep: 0.05
-heading_lookahead: 1.0
+heading_scoring_timestep: 0.1
+heading_lookahead: 1.5
 
 escape_reset_dist: 2.0
 escape_reset_theta: 0.0
