@@ -17,6 +17,9 @@ IF (CMAKE_COMPILER_IS_GNUCC)
   ADD_DEFINITIONS(-fPIC)
 ENDIF()
 
+add_definitions(-Wno-deprecated -DEIGEN_VECTORIZE -DEIGEN_DISABLE_UNALIGNED_ARRAY_ASSERT)
+add_definitions(-msse3 -msse4.1 -msse4.2 -mfpmath=sse)
+
 
 # Set full rpath http://www.paraview.org/Wiki/CMake_RPATH_handling
 # (good to have and required with ROS)
