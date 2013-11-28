@@ -2,7 +2,7 @@ octomap_server:
     latch: false
     wait_tf: 0.05
     #wait_tf: -1 #do not wait
-    rate: 5.0
+    rate: 5
     frame_id: /map
     base_frame_id: /base_footprint
     #source_frame_id: /base_stereo_camera
@@ -29,23 +29,25 @@ octomap_server:
     #ground_filter/plane_distance: 0.15
     
     compress_map: false
-    #incremental_2D_projection: true
+    incremental_2D_projection: true
     
-    unknown_cost: 50
+    unknown_cost: 25     #first miss
     maximum_cost: 100
     decay_cost: 0.85
-    update_occlusion: 0.495
+    update_occlusion: 0.5 #0.495
      
     sensor_model:
       #max_range: 15
-      max_range: 65
+      max_range: 45
+      max_range_occ: 1.0
     
       mid_dist: 5.0
       far_dist: 10.0
-      hit: 0.59
-      hit_mid: 0.55
-      hit_far: 0.52
-      miss: 0.35
+      hit: 0.57
+      hit_mid: 0.53
+      hit_far: 0.51
+      miss_to_gnd: 0.35
+      miss_to_obs: 0.25
       occ: 0.65
     
       #max: 0.75
