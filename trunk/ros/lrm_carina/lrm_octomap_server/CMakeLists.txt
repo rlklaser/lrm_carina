@@ -15,10 +15,10 @@ set(ROS_BUILD_TYPE Debug)
 
 rosbuild_init()
 
-find_package(octomap REQUIRED)
-include_directories(${OCTOMAP_INCLUDE_DIRS})
-link_directories(${OCTOMAP_LIBRARY_DIRS})
-add_definitions(-DOCTOMAP_NODEBUGOUT)
+#find_package(octomap REQUIRED)
+#include_directories(${OCTOMAP_INCLUDE_DIRS})
+#link_directories(${OCTOMAP_LIBRARY_DIRS})
+#add_definitions(-DOCTOMAP_NODEBUGOUT)
 
 add_definitions(-Wno-deprecated -DEIGEN_VECTORIZE -DEIGEN_DISABLE_UNALIGNED_ARRAY_ASSERT)
 add_definitions(-msse3 -msse4.1 -msse4.2 -mfpmath=sse)
@@ -60,7 +60,7 @@ rosbuild_add_library(${PROJECT_NAME}
 #)
 
 rosbuild_add_executable(octomap_server_node src/octomap_server_node.cpp)
-target_link_libraries(octomap_server_node ${PROJECT_NAME} ${OCTOMAP_LIBRARIES})
+target_link_libraries(octomap_server_node ${PROJECT_NAME})# ${OCTOMAP_LIBRARIES})
 
 #rosbuild_add_compile_flags(octomap_server_node -msse4.2 -mpreferred-stack-boundary=4 -march=native)
 
@@ -68,7 +68,7 @@ target_link_libraries(octomap_server_node ${PROJECT_NAME} ${OCTOMAP_LIBRARIES})
 #target_link_libraries(octomap_server_multilayer ${PROJECT_NAME} ${OCTOMAP_LIBRARIES})
 
 rosbuild_add_executable(octomap_saver src/octomap_saver.cpp)
-target_link_libraries(octomap_saver ${PROJECT_NAME} ${OCTOMAP_LIBRARIES})
+target_link_libraries(octomap_saver ${PROJECT_NAME})# ${OCTOMAP_LIBRARIES})
 
 #rosbuild_add_executable(octomap_tracking_server_node src/octomap_tracking_server_node.cpp)
 #target_link_libraries(octomap_tracking_server_node ${PROJECT_NAME} ${OCTOMAP_LIBRARIES})

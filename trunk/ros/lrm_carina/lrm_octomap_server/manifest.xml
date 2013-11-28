@@ -41,7 +41,7 @@
 	
 	<depend package="angles" />
 
-	<!-- <depend package="lrm_octomap" /> -->
+	<depend package="lrm_octomap" />
 
 	<export>
 		<cpp
