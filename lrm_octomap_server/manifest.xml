@@ -16,7 +16,7 @@
 
 	<depend package="visualization_msgs" />
 	<depend package="sensor_msgs" />
-	
+
 	<depend package="pcl_ros" />
 	<depend package="pcl" />
 	<depend package="nodelet" />
@@ -25,7 +25,7 @@
 	<depend package="nav_msgs" />
 	<depend package="arm_navigation_msgs" />
 	 -->
-	<depend package="std_msgs" />	
+	<depend package="std_msgs" />
 	<depend package="std_srvs" />
 	<!-- 
 	<depend package="octomap_ros" />
@@ -38,9 +38,10 @@
 	<rosdep name="octomap_msgs" />
 	<rosdep name="nodelet" />
     -->
-	
+
 	<depend package="angles" />
 
+	<depend package="octomap_msgs" />
 	<depend package="lrm_octomap" />
 
 	<export>

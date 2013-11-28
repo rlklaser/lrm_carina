@@ -48,6 +48,7 @@ gencfg()
 #common commands for building c++ executables and libraries
 rosbuild_add_library(${PROJECT_NAME} 
 	src/OctomapServer.cpp 
+	src/conversions.cpp
 	#src/OctomapServerMultilayer.cpp 
 	#src/TrackingOctomapServer.cpp
 	)
