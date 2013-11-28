@@ -1,15 +1,25 @@
 <package>
-  <description brief="lrm_octomap">
+	<description brief="lrm_octomap">
 
-     lrm_octomap
+		lrm_octomap
 
-  </description>
-  <author>Rafael Luiz Klaser</author>
-  <license>BSD</license>
-  <review status="unreviewed" notes=""/>
-  <url>http://ros.org/wiki/lrm_octomap</url>
-  <depend package="roscpp"/>
+	</description>
+	<author>Rafael Luiz Klaser</author>
+	<license>BSD</license>
+	<review
+		status="unreviewed"
+		notes="" />
+	<url>http://ros.org/wiki/lrm_octomap</url>
+	<depend package="roscpp" />
 
+	<export>
+		<cpp
+			cflags="-I${prefix}/include"
+			lflags="-L${prefix}/lib -Wl,-rpath,$/usr/lib:${prefix}/lib
+				-loctomap
+				-loctomath
+				" />
+	</export>
 </package>
 
 
