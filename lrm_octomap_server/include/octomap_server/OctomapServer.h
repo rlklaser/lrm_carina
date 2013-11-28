@@ -98,15 +98,15 @@ public:
 
   OctomapServer(ros::NodeHandle nh = ros::NodeHandle("~"));
   virtual ~OctomapServer();
-  virtual bool octomapBinarySrv(OctomapSrv::Request  &req, OctomapSrv::GetOctomap::Response &res);
-  virtual bool octomapFullSrv(OctomapSrv::Request  &req, OctomapSrv::GetOctomap::Response &res);
+  bool octomapBinarySrv(OctomapSrv::Request  &req, OctomapSrv::GetOctomap::Response &res);
+  bool octomapFullSrv(OctomapSrv::Request  &req, OctomapSrv::GetOctomap::Response &res);
   bool clearBBXSrv(BBXSrv::Request& req, BBXSrv::Response& resp);
   bool resetSrv(std_srvs::Empty::Request& req, std_srvs::Empty::Response& resp);
   bool pruneSrv(std_srvs::Empty::Request& req, std_srvs::Empty::Response& resp);
 
-  virtual void insertCloudCallback(const sensor_msgs::PointCloud2::ConstPtr& cloud);
-  virtual void insertCloudGroundCallback(const sensor_msgs::PointCloud2::ConstPtr& cloud);
-  virtual bool openFile(const std::string& filename);
+  void insertCloudCallback(const sensor_msgs::PointCloud2::ConstPtr& cloud);
+  void insertCloudGroundCallback(const sensor_msgs::PointCloud2::ConstPtr& cloud);
+  bool openFile(const std::string& filename);
 
 protected:
   inline static void updateMinKey(const octomap::OcTreeKey& in, octomap::OcTreeKey& min){
@@ -139,7 +139,7 @@ protected:
   * @param ground scan endpoints on the ground plane (only clear space)
   * @param nonground all other endpoints (clear up to occupied endpoint)
   */
-  virtual void insertScan(const tf::StampedTransform& sensorOrigin, const PCLPointCloud& ground, const PCLPointCloud& nonground);
+  void insertScan(const tf::StampedTransform& sensorOrigin, const PCLPointCloud& ground, const PCLPointCloud& nonground);
 
   /// label the input cloud "pc" into ground and nonground. Should be in the robot's fixed frame (not world!)
   //void filterGroundPlane(const PCLPointCloud& pc, PCLPointCloud& ground, PCLPointCloud& nonground) const;
@@ -152,31 +152,32 @@ protected:
   bool isSpeckleNode(const octomap::OcTreeKey& key) const;
 
   /// hook that is called after traversing all nodes
-  virtual void handlePreNodeTraversal(const ros::Time& rostime);
+  void handlePreNodeTraversal(const ros::Time& rostime);
 
   /// hook that is called when traversing all nodes of the updated Octree (does nothing here)
-  virtual void handleNode(const OcTreeT::iterator& it) {};
+  //void handleNode(const OcTreeT::iterator& it) {};
 
   /// hook that is called when traversing all nodes of the updated Octree in the updated area (does nothing here)
-  virtual void handleNodeInBBX(const OcTreeT::iterator& it) {};
+  //void handleNodeInBBX(const OcTreeT::iterator& it) {};
 
   /// hook that is called when traversing occupied nodes of the updated Octree
-  virtual void handleOccupiedNode(const OcTreeT::iterator& it);
+  void handleOccupiedNode(const OcTreeT::iterator& it);
 
   /// hook that is called when traversing occupied nodes in the updated area (updates 2D map projection here)
-  virtual void handleOccupiedNodeInBBX(const OcTreeT::iterator& it);
+  void handleOccupiedNodeInBBX(const OcTreeT::iterator& it);
 
   /// hook that is called when traversing free nodes of the updated Octree
-  virtual void handleFreeNode(const OcTreeT::iterator& it);
+  void handleFreeNode(const OcTreeT::iterator& it);
 
   /// hook that is called when traversing free nodes in the updated area (updates 2D map projection here)
-  virtual void handleFreeNodeInBBX(const OcTreeT::iterator& it);
+  void handleFreeNodeInBBX(const OcTreeT::iterator& it);
 
   /// hook that is called after traversing all nodes
-  virtual void handlePostNodeTraversal(const ros::Time& rostime);
+  void handlePostNodeTraversal(const ros::Time& rostime);
 
   /// updates the downprojected 2D map as either occupied or free
-  virtual void update2DMap(const OcTreeT::iterator& it, bool occupied);
+  void update2DMap(const OcTreeT::iterator& it, bool occupied);
+  void update2DMap(const OcTreeT::iterator& it, int idx, bool occupied);
 
   inline unsigned mapIdx(int i, int j) const{
     return m_gridmap.info.width*j + i;
@@ -205,6 +206,7 @@ protected:
              || oldMapInfo.origin.position.y != newMapInfo.origin.position.y);
   }
 
+  static std_msgs::ColorRGBA probMapColor(double h);
   static std_msgs::ColorRGBA heightMapColor(double h);
   ros::NodeHandle m_nh;
   ros::Publisher m_markerPub, m_markerSinglePub, m_binaryMapPub, m_laserPub, m_clusterPosePub;
@@ -229,6 +231,7 @@ protected:
   bool m_updated;
 
   double m_maxRange;
+  double m_maxRangeOcc;
   std::string m_worldFrameId; // the map frame
   std::string m_baseFrameId; // base of the robot for ground plane filtering
   std::string m_SourceFrameId; //sensor frame (cloud message can be for any frame)
@@ -246,7 +249,8 @@ protected:
   double m_probHitFar;
   double m_probFarDist;
   double m_probMidDist;
-  double m_probMiss;
+  double m_probMissGnd;
+  double m_probMissObs;
   double m_thresMin;
   double m_thresMax;
 
