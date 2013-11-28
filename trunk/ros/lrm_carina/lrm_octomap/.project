@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>lrm_octomap-RelWithDebInfo@lrm_octomap</name>
+	<name>octomap-Release@lrm_octomap</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -114,82 +114,1027 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>[Subprojects]/gtest</name>
-			<type>2</type>
-			<location>/usr/src/gtest</location>
-		</link>
-		<link>
 			<name>[Targets]</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>[Targets]/[lib] gtest</name>
+			<name>[Targets]/[lib] octomath</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>[Targets]/[lib] gtest/</name>
+			<name>[Targets]/[lib] octomath/</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>[Targets]/[lib] gtest/Source Files</name>
+			<name>[Targets]/[lib] octomath/Source Files</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>[Targets]/[lib] gtest/Source Files/gtest-all.cc</name>
+			<name>[Targets]/[lib] octomath/Source Files/Vector3.cpp</name>
 			<type>1</type>
-			<location>/usr/src/gtest/src/gtest-all.cc</location>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/math/Vector3.cpp</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] gtest/Header Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[lib] gtest/CMake Rules</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[lib] gtest/Resources</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[lib] gtest_main</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[lib] gtest_main/</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[lib] gtest_main/Source Files</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Targets]/[lib] gtest_main/Source Files/gtest_main.cc</name>
+			<name>[Targets]/[lib] octomath/Source Files/Quaternion.cpp</name>
 			<type>1</type>
-			<location>/usr/src/gtest/src/gtest_main.cc</location>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/math/Quaternion.cpp</location>
 		</link>
 		<link>
-			<name>[Targets]/[lib] gtest_main/Header Files</name>
+			<name>[Targets]/[lib] octomath/Source Files/Pose6D.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/math/Pose6D.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] octomath/Header Files</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>[Targets]/[lib] gtest_main/CMake Rules</name>
+			<name>[Targets]/[lib] octomath/CMake Rules</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>[Targets]/[lib] gtest_main/Resources</name>
+			<name>[Targets]/[lib] octomath/Resources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] octomath-static</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] octomath-static/</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] octomath-static/Source Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] octomath-static/Source Files/Vector3.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/math/Vector3.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] octomath-static/Source Files/Quaternion.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/math/Quaternion.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] octomath-static/Source Files/Pose6D.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/math/Pose6D.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] octomath-static/Header Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] octomath-static/CMake Rules</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] octomath-static/Resources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] binvox2bt</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] binvox2bt/</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] binvox2bt/Source Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] binvox2bt/Source Files/binvox2bt.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/binvox2bt.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] binvox2bt/Header Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] binvox2bt/CMake Rules</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] binvox2bt/Resources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] bt2vrml</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] bt2vrml/</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] bt2vrml/Source Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] bt2vrml/Source Files/bt2vrml.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/bt2vrml.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] bt2vrml/Header Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] bt2vrml/CMake Rules</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] bt2vrml/Resources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] compare_octrees</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] compare_octrees/</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] compare_octrees/Source Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] compare_octrees/Source Files/compare_octrees.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/compare_octrees.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] compare_octrees/Header Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] compare_octrees/CMake Rules</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] compare_octrees/Resources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] convert_octree</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] convert_octree/</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] convert_octree/Source Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] convert_octree/Source Files/convert_octree.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/convert_octree.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] convert_octree/Header Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] convert_octree/CMake Rules</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] convert_octree/Resources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] edit_octree</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] edit_octree/</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] edit_octree/Source Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] edit_octree/Source Files/edit_octree.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/edit_octree.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] edit_octree/Header Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] edit_octree/CMake Rules</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] edit_octree/Resources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] eval_octree_accuracy</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] eval_octree_accuracy/</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] eval_octree_accuracy/Source Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] eval_octree_accuracy/Source Files/eval_octree_accuracy.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/eval_octree_accuracy.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] eval_octree_accuracy/Header Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] eval_octree_accuracy/CMake Rules</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] eval_octree_accuracy/Resources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] graph2tree</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] graph2tree/</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] graph2tree/Source Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] graph2tree/Source Files/graph2tree.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/graph2tree.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] graph2tree/Header Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] graph2tree/CMake Rules</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] graph2tree/Resources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] intersection_example</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] intersection_example/</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] intersection_example/Source Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] intersection_example/Source Files/intersection_example.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/intersection_example.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] intersection_example/Header Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] intersection_example/CMake Rules</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] intersection_example/Resources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] log2graph</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] log2graph/</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] log2graph/Source Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] log2graph/Source Files/log2graph.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/log2graph.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] log2graph/Header Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] log2graph/CMake Rules</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] log2graph/Resources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] normals_example</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] normals_example/</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] normals_example/Source Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] normals_example/Source Files/normals_example.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/normals_example.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] normals_example/Header Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] normals_example/CMake Rules</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] normals_example/Resources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] octomap</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] octomap/</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] octomap/Source Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] octomap/Source Files/AbstractOcTree.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/AbstractOcTree.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] octomap/Source Files/AbstractOccupancyOcTree.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/AbstractOccupancyOcTree.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] octomap/Source Files/Pointcloud.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/Pointcloud.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] octomap/Source Files/ScanGraph.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/ScanGraph.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] octomap/Source Files/CountingOcTree.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/CountingOcTree.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] octomap/Source Files/OcTree.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/OcTree.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] octomap/Source Files/OcTreeNode.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/OcTreeNode.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] octomap/Source Files/OcTreeStamped.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/OcTreeStamped.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] octomap/Source Files/OcTreeLUT.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/OcTreeLUT.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] octomap/Source Files/ColorOcTree.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/ColorOcTree.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] octomap/Header Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] octomap/CMake Rules</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] octomap/Resources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] octomap-static</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] octomap-static/</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] octomap-static/Source Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] octomap-static/Source Files/AbstractOcTree.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/AbstractOcTree.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] octomap-static/Source Files/AbstractOccupancyOcTree.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/AbstractOccupancyOcTree.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] octomap-static/Source Files/Pointcloud.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/Pointcloud.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] octomap-static/Source Files/ScanGraph.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/ScanGraph.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] octomap-static/Source Files/CountingOcTree.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/CountingOcTree.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] octomap-static/Source Files/OcTree.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/OcTree.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] octomap-static/Source Files/OcTreeNode.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/OcTreeNode.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] octomap-static/Source Files/OcTreeStamped.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/OcTreeStamped.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] octomap-static/Source Files/OcTreeLUT.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/OcTreeLUT.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] octomap-static/Source Files/ColorOcTree.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/ColorOcTree.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] octomap-static/Header Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] octomap-static/CMake Rules</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] octomap-static/Resources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] simple_example</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] simple_example/</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] simple_example/Source Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] simple_example/Source Files/simple_example.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/simple_example.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] simple_example/Header Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] simple_example/CMake Rules</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] simple_example/Resources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] color_tree_histogram</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] color_tree_histogram/</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] color_tree_histogram/Source Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] color_tree_histogram/Source Files/color_tree_histogram.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/testing/color_tree_histogram.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] color_tree_histogram/Header Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] color_tree_histogram/CMake Rules</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] color_tree_histogram/Resources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_changedkeys</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_changedkeys/</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_changedkeys/Source Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_changedkeys/Source Files/test_changedkeys.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/testing/test_changedkeys.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_changedkeys/Header Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_changedkeys/CMake Rules</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_changedkeys/Resources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_color_tree</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_color_tree/</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_color_tree/Source Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_color_tree/Source Files/test_color_tree.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/testing/test_color_tree.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_color_tree/Header Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_color_tree/CMake Rules</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_color_tree/Resources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_io</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_io/</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_io/Source Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_io/Source Files/test_io.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/testing/test_io.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_io/Header Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_io/CMake Rules</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_io/Resources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_iterators</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_iterators/</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_iterators/Source Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_iterators/Source Files/test_iterators.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/testing/test_iterators.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_iterators/Header Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_iterators/CMake Rules</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_iterators/Resources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_lut</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_lut/</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_lut/Source Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_lut/Source Files/test_lut.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/testing/test_lut.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_lut/Header Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_lut/CMake Rules</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_lut/Resources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_mapcollection</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_mapcollection/</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_mapcollection/Source Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_mapcollection/Source Files/test_mapcollection.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/testing/test_mapcollection.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_mapcollection/Header Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_mapcollection/CMake Rules</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_mapcollection/Resources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_pruning</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_pruning/</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_pruning/Source Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_pruning/Source Files/test_pruning.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/testing/test_pruning.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_pruning/Header Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_pruning/CMake Rules</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_pruning/Resources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_raycasting</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_raycasting/</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_raycasting/Source Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_raycasting/Source Files/test_raycasting.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/testing/test_raycasting.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_raycasting/Header Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_raycasting/CMake Rules</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_raycasting/Resources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_scans</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_scans/</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_scans/Source Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_scans/Source Files/test_scans.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/testing/test_scans.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_scans/Header Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_scans/CMake Rules</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] test_scans/Resources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] unit_tests</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] unit_tests/</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] unit_tests/Source Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] unit_tests/Source Files/unit_tests.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_octomap/src/testing/unit_tests.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] unit_tests/Header Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] unit_tests/CMake Rules</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] unit_tests/Resources</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
