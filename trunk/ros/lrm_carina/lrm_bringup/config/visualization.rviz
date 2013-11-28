@@ -270,14 +270,14 @@ Visualization Manager:
       Value: true
       Visual Enabled: true
     - Class: rviz/Camera
-      Enabled: true
+      Enabled: false
       Image Rendering: background and overlay
       Image Topic: /stereo/left/image_color
       Name: Camera
       Overlay Alpha: 0.5
       Queue Size: 2
       Transport Hint: raw
-      Value: true
+      Value: false
       Visibility:
         Axes: true
         Camera: false
@@ -307,14 +307,14 @@ Visualization Manager:
         Value: true
       Zoom Factor: 1
     - Class: rviz/Camera
-      Enabled: false
+      Enabled: true
       Image Rendering: background and overlay
       Image Topic: /stereo/right/image_raw
       Name: Camera
       Overlay Alpha: 0.2
       Queue Size: 2
       Transport Hint: raw
-      Value: false
+      Value: true
       Visibility:
         Axes: true
         Camera: true
@@ -339,9 +339,9 @@ Visualization Manager:
           PointCloud2: true
           Value: true
         Pose: true
-        RobotModel: true
+        RobotModel: false
         TF: true
-        Value: false
+        Value: true
       Zoom Factor: 1
     - Alpha: 0.9
       Class: rviz/Map
@@ -355,7 +355,7 @@ Visualization Manager:
       Marker Topic: /occupied_cells_vis_array
       Name: MarkerArray
       Namespaces:
-        {}
+        depth_16: true
       Queue Size: 100
       Value: true
     - Class: rviz/MarkerArray
@@ -818,17 +818,17 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 32.1426
+      Distance: 36.8018
       Focal Point:
-        X: 21.7186
-        Y: -0.756242
-        Z: -3.62383
+        X: 13.3313
+        Y: -0.190617
+        Z: -11.9234
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 0.3198
+      Pitch: 1.1348
       Target Frame: /base_footprint
       Value: Orbit (rviz)
-      Yaw: 3.10586
+      Yaw: 3.12586
     Saved: ~
 Window Geometry:
   Camera:
