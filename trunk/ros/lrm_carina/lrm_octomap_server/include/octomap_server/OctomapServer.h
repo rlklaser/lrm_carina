@@ -80,8 +80,13 @@
 #include <octomap/octomap.h>
 #include <octomap/OcTreeKey.h>
 #include <octomap/ColorOcTree.h>
+#include <octomap/OcTreeStamped.h>
 
 #include <angles/angles.h>
+
+#include <boost/thread/mutex.hpp>
+
+//#define USE_COLOR
 
 namespace octomap_server {
 class OctomapServer{
@@ -93,8 +98,12 @@ public:
   typedef octomap_msgs::GetOctomap OctomapSrv;
   typedef octomap_msgs::BoundingBoxQuery BBXSrv;
 
+#ifdef USE_COLOR
   typedef octomap::ColorOcTree OcTreeT;
+#else
   //typedef octomap::OcTree OcTreeT;
+  typedef octomap::OcTreeStamped OcTreeT;
+#endif
 
   OctomapServer(ros::NodeHandle nh = ros::NodeHandle("~"));
   virtual ~OctomapServer();
@@ -178,6 +187,7 @@ protected:
   /// updates the downprojected 2D map as either occupied or free
   void update2DMap(const OcTreeT::iterator& it, bool occupied);
   void update2DMap(const OcTreeT::iterator& it, int idx, bool occupied);
+  void update2DMap(int idx, const OcTreeT::iterator& it);
 
   inline unsigned mapIdx(int i, int j) const{
     return m_gridmap.info.width*j + i;
@@ -222,11 +232,11 @@ protected:
   dynamic_reconfigure::Server<lrm_octomap_server::OctomapServerConfig> m_reconfigureServer;
 
   OcTreeT* m_octree;
-  octomap::KeyRay m_keyRay;  // temp storage for ray casting
+  //octomap::KeyRay m_keyRay;  // temp storage for ray casting
   octomap::OcTreeKey m_updateBBXMin;
   octomap::OcTreeKey m_updateBBXMax;
 
-  int m_pose_seq;
+  int m_poseSeq;
 
   bool m_updated;
 
@@ -234,7 +244,7 @@ protected:
   double m_maxRangeOcc;
   std::string m_worldFrameId; // the map frame
   std::string m_baseFrameId; // base of the robot for ground plane filtering
-  std::string m_SourceFrameId; //sensor frame (cloud message can be for any frame)
+  std::string m_sourceFrameId; //sensor frame (cloud message can be for any frame)
   bool m_useHeightMap;
   std_msgs::ColorRGBA m_color;
   double m_colorFactor;
@@ -254,7 +264,7 @@ protected:
   double m_thresMin;
   double m_thresMax;
 
-  double m_waitTransform;
+
 
   double m_pointcloudMinZ;
   double m_pointcloudMaxZ;
@@ -270,8 +280,9 @@ protected:
   double m_groundFilterPlaneDistance;
 
   double m_updateOcclusion;
-
   double m_occupancyThres;
+  double m_waitTransform;
+
   bool m_compressMap;
 
   // downprojected 2D map:
@@ -287,11 +298,17 @@ protected:
   int m_maximumCost;
   double m_decayCost;
 
-  int _single_marker_id;
+  int m_singleMarkerId;
+
+  double m_degradeTime;
+
 private:
   boost::mutex m_mutex;
 
-  ros::Timer m_publisher_timer;
+  ros::Timer m_publisherTimer;
+
+  int m_ticksOnSec;
+  double m_rate;
 
   void _publishAll(const ros::Time& rostime = ros::Time::now());
   void updateTreeProbabilities();
