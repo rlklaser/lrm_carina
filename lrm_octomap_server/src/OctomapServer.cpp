@@ -1496,13 +1496,10 @@ void OctomapServer::update2DMap(int idx, const OcTreeT::iterator& it) {
 	double max, min, prob, logg;
 	double x, y, z;
 	octomap::KeyRay keyRay;
+	signed char newCost, actualCost;
 
 	//logg = it->getLogOdds();
 	prob = it->getOccupancy();
-
-
-	signed char newCost, actualCost;
-
 	actualCost = m_gridmap.data[idx];
 	newCost = prob * m_maximumCost;
 
@@ -1519,8 +1516,8 @@ void OctomapServer::update2DMap(int idx, const OcTreeT::iterator& it) {
 	point3d ptFloor(x, y, m_occupancyMinZ);
 	point3d ptCeiling(x, y, m_occupancyMaxZ);
 
-	max = 0.5;
-	min = 0.5;
+	max = m_occupancyThres;
+	min = m_occupancyThres;
 
 	//char mapCost;
 
@@ -1533,6 +1530,7 @@ void OctomapServer::update2DMap(int idx, const OcTreeT::iterator& it) {
 				if(node->getOccupancy() > max) max = node->getOccupancy();
 				if(node->getOccupancy() < min) min = node->getOccupancy();
 			}
+			if(max>m_thresMax) break;
 		}
 	}
 
