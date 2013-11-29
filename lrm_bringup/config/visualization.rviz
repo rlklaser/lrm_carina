@@ -444,13 +444,13 @@ Visualization Manager:
       Axes Length: 1
       Axes Radius: 0.1
       Class: rviz/Pose
-      Color: 255; 25; 0
+      Color: 0; 170; 255
       Enabled: true
       Head Length: 0.3
-      Head Radius: 0.15
+      Head Radius: 0.35
       Name: Pose
-      Shaft Length: 1
-      Shaft Radius: 0.1
+      Shaft Length: 2
+      Shaft Radius: 0.2
       Shape: Arrow
       Topic: /cluster_pose
       Value: true
@@ -820,17 +820,17 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 33.2446
+      Distance: 19.586
       Focal Point:
-        X: 16.33
-        Y: -1.70582
-        Z: -12.1185
+        X: 10.1881
+        Y: 0.0370335
+        Z: -1.18001
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 0.699798
+      Pitch: 0.404797
       Target Frame: /base_footprint
       Value: Orbit (rviz)
-      Yaw: 3.13585
+      Yaw: 3.14904
     Saved: ~
 Window Geometry:
   Camera:
