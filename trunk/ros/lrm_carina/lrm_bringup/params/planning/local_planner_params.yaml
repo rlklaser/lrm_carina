@@ -46,14 +46,14 @@ heading_scoring: true
 heading_scoring_timestep: 0.1
 heading_lookahead: 1.5
 
-escape_reset_dist: 2.0
+escape_reset_dist: 0.0
 escape_reset_theta: 0.0
-escape_vel: -1.0
+escape_vel: -0.00000001
 
 simple_attractor: true             # follow strictly the global path
 #simple_attractor: false
 meter_scoring: true                # If true, distances are expressed in meters; otherwise grid cells
-prune_plan: false
+prune_plan: true
 
 #carlike planner
 base_wheels: 1.65

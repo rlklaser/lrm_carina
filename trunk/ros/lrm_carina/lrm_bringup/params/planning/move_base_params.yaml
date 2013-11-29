@@ -9,6 +9,13 @@ clearing_rotation_allowed: false
 oscillation_timeout: 0.0
 oscillation_distance: 0.0
 
+robot_base_frame: base_footprint
+global_frame: /map
+
+#calc from footprint
+inscribed_radius: 0.585
+circumscribed_radius: 2.74
+
 # Recovery
 recovery_behavior_enabled: true
 
@@ -31,6 +38,10 @@ recovery_behaviors: [
   type: clear_costmap_recovery/ClearCostmapRecovery
   },
   {
+  name: backward_recover, 
+  type: twist_recovery/TwistRecovery
+  },
+  {
   name: aggressive_reset, 
   type: clear_costmap_recovery/ClearCostmapRecovery
   }
@@ -42,6 +53,20 @@ conservative_reset:
 
 aggressive_reset:
   reset_distance: 1.0
-  global_clear: false
+  global_clear: true
+  
+backward_recover:
+  duration: 3
+  linear_speed_limit: -3.0
+  angular_speed_limit: 0.0
+  linear_acceleration_limit: -3.0
+  angular_acceleration_limit: 0.0
+  controller_frequency: 10
+  #simulation_inc:
+  
+  linear_x: -1.0
+  linear_y: 0.0
+  angular_z: 0.0
+  
   
   
