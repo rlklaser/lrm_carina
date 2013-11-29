@@ -63,7 +63,7 @@ OctomapServer::OctomapServer(ros::NodeHandle nh) :
 		m_compressMap(false), m_incrementalUpdate(false), m_waitTransform(2.0),
 		m_occupancyThres(0.95), m_updateOcclusion(0.5),
 		m_unknownCost(-1), m_maximumCost(120), m_decayCost(0.8), m_ticksOnSec(0), m_rate(5),
-		m_degradeTime(0)
+		m_degradeTime(0), m_fullDownProjectMap(false)
 {
 
 	ros::NodeHandle private_nh(nh);
@@ -92,6 +92,7 @@ OctomapServer::OctomapServer(ros::NodeHandle nh) :
 
 	private_nh.param("resolution", m_res, m_res);
 	private_nh.param("degrade_time", m_degradeTime, m_degradeTime);
+	private_nh.param("full_down_project_map", m_fullDownProjectMap, m_fullDownProjectMap);
 
 	private_nh.param("sensor_model/max_range", m_maxRange, m_maxRange);
 	private_nh.param("sensor_model/max_range_occ", m_maxRangeOcc, m_maxRangeOcc);
@@ -1074,7 +1075,7 @@ bool OctomapServer::clearBBXSrv(BBXSrv::Request& req, BBXSrv::Response& resp) {
 		//it->setLogOdds(octomap::logodds(0));
 		//m_octree->updateNode(it.getKey(), octomap::logodds(0));
 		m_octree->updateNode(it.getKey(), octomap::logodds(m_thresMin));
-		ROS_INFO_STREAM("clearing key: " << it.getKey()[0]);
+		//ROS_INFO_STREAM("clearing key: " << it.getKey()[0]);
 		//it->setLogOdds(octomap::logodds(m_thresMin));
 		m_updated = true;
 	}
@@ -1590,8 +1591,10 @@ void OctomapServer::update2DMap(const OcTreeT::iterator& it, bool occupied) {
 
 	if (it.getDepth() == m_maxTreeDepth) {
 		unsigned idx = mapIdx(it.getKey());
-		//update2DMap(it, idx, occupied);
-		update2DMap(idx, it);
+		if(!m_fullDownProjectMap)
+			update2DMap(it, idx, occupied);
+		else
+			update2DMap(idx, it);
 	}
 	else {
 		int intSize = 1 << (m_maxTreeDepth - it.getDepth());
@@ -1600,8 +1603,10 @@ void OctomapServer::update2DMap(const OcTreeT::iterator& it, bool occupied) {
 			int i = (minKey[0] + dx - m_paddedMinKey[0]) / m_multires2DScale;
 			for (int dy = 0; dy < intSize; dy++) {
 				unsigned idx = mapIdx(i, (minKey[1] + dy - m_paddedMinKey[1]) / m_multires2DScale);
-				//update2DMap(it, idx, occupied);
-				update2DMap(idx, it);
+				if(!m_fullDownProjectMap)
+					update2DMap(it, idx, occupied);
+				else
+					update2DMap(idx, it);
 			}
 		}
 	}
