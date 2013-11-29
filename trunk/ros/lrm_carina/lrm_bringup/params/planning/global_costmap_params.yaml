@@ -18,3 +18,5 @@ global_costmap:
   
   #save_debug_pgm: true
   save_debug_pgm: false
+  
+  inflation_radius: 1.5
