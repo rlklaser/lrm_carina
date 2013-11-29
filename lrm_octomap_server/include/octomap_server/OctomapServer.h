@@ -301,6 +301,7 @@ protected:
   int m_singleMarkerId;
 
   double m_degradeTime;
+  bool m_fullDownProjectMap;
 
 private:
   boost::mutex m_mutex;
