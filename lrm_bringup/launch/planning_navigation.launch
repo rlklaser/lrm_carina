@@ -58,6 +58,15 @@
 			file="$(find lrm_bringup)/params/planning/local_planner_params.yaml"
 			command="load"
 			ns="TrajectoryPlannerROS" />
+		<!-- or
+		<param
+			name="base_local_planner"
+			value="dwa_local_planner/DWAPlannerROS" />
+		<rosparam
+			file="$(find lrm_bringup)/params/planning/local_planner_params.yaml"
+			command="load"
+			ns="DWAPlannerROS" />
+		-->	
 <!--
 		<param
 			name="base_local_planner"

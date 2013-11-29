@@ -2,9 +2,9 @@ local_costmap:
   map_type: costmap
   #global_frame: /wheel_odom
   global_frame: /odom
-  robot_base_frame: base_footprint
+  #robot_base_frame: base_footprint
   #robot_base_frame: base_odometry
-  #robot_base_frame: heading_link
+  robot_base_frame: heading_link
   update_frequency: 5.0
   publish_frequency: 5.0
   
@@ -25,4 +25,4 @@ local_costmap:
   #observation_sources: cloud map_cloud
   observation_sources: cluster_cloud map_cloud
 
-  inflation_radius: 2.1
+  inflation_radius: 2.9

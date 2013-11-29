@@ -70,7 +70,7 @@
 
 #define SBPL_FOPEN(...)     (FILE*)1
 #define SBPL_FCLOSE(...)
-#define SBPL_PRINTF         ROS_DEBUG
+#define SBPL_PRINTF         ROS_INFO
 #define SBPL_FPRINTF(a,...) ROS_DEBUG_NAMED("SBPL_" #a,__VA_ARGS__)
 #define SBPL_FFLUSH(...)
 #else
