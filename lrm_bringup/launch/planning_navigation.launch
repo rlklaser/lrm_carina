@@ -44,15 +44,18 @@
 		<param
 			name="SBPLLatticePlanner/primitive_filename"
 			value="$(find lrm_bringup)/params/planning/prim/carina.mprim" />
+
 		<rosparam
-			file="$(find lrm_bringup)/params/planning/sbpl_global_params.yaml"
-			command="load" />
+			file="$(find lrm_bringup)/params/planning/global_planner_params.yaml"
+			command="load"
+			ns="SBPLLatticePlanner" />
 
 		<param
 			name="base_local_planner"
 			value="base_local_planner/TrajectoryPlannerROS" />
+
 		<rosparam
-			file="$(find lrm_bringup)/params/planning/base_local_planner_params.yaml"
+			file="$(find lrm_bringup)/params/planning/local_planner_params.yaml"
 			command="load"
 			ns="TrajectoryPlannerROS" />
 <!--
@@ -70,7 +73,6 @@
 			file="$(find lrm_bringup)/params/planning/base_local_planner_params.yaml"
 			command="load"
 			ns="DWAPlannerROS" />
--->
 
 		<rosparam
 			file="$(find lrm_bringup)/params/planning/sbpl_global_params.yaml"
@@ -84,8 +86,7 @@
 			file="$(find lrm_bringup)/params/planning/base_local_planner_params.yaml"
 			command="load"
 			ns="pose_follower" />
-
-<!--  
+  
 		<remap
 			from="cmd_vel"
 			to="/navigation/cmd_vel" />
