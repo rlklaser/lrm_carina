@@ -633,7 +633,7 @@ bool EnvironmentNAVXYTHETALATTICE::ReadMotionPrimitives(FILE* fMotPrims)
 
         EnvNAVXYTHETALATCfg.mprimV.push_back(motprim);
     }
-    SBPL_PRINTF("done ");
+    //SBPL_PRINTF("done ");
 
     return true;
 }
@@ -1166,7 +1166,7 @@ void EnvironmentNAVXYTHETALATTICE::InitializeEnvConfig(vector<SBPL_xytheta_mprim
     SBPL_PRINTF("number of cells in footprint of the robot = %d", (unsigned int)footprint.size());
 
     for (vector<sbpl_2Dcell_t>::iterator it = footprint.begin(); it != footprint.end(); ++it) {
-        SBPL_PRINTF("Footprint cell at (%d, %d)", it->x, it->y);
+    	SBPL_DEBUG("Footprint cell at (%d, %d)", it->x, it->y);
     }
 
 #if DEBUG
@@ -1502,7 +1502,7 @@ void EnvironmentNAVXYTHETALATTICE::ComputeHeuristicValues()
     grid2Dsearchfromstart->setOPENdatastructure(SBPL_2DGRIDSEARCH_OPENTYPE_SLIDINGBUCKETS);
     grid2Dsearchfromgoal->setOPENdatastructure(SBPL_2DGRIDSEARCH_OPENTYPE_SLIDINGBUCKETS);
 
-    SBPL_PRINTF("done");
+    //SBPL_PRINTF("done");
 }
 
 //------------debugging functions---------------------------------------------

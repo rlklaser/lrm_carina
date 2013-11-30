@@ -29,7 +29,7 @@
 
 // library for processing camera data for gazebo / ros conversions
 #include <gazebo_plugins/gazebo_ros_camera_utils.h>
-#include "plugins/DepthCameraPlugin.hh"
+#include "gazebo/plugins/DepthCameraPlugin.hh"
 
 #include <ros/callback_queue.h>
 #include "boost/thread/mutex.hpp"

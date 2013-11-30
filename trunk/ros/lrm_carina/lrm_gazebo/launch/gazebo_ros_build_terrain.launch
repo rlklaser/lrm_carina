@@ -1,0 +1,25 @@
+<launch>
+
+	<env
+		name="GAZEBO_MODEL_PATH"
+		value="$GAZEBO_MODEL_PATH:$(find lrm_description)/models:$(find lrm_description)/models/trees" />
+	<env
+		name="GAZEBO_PLUGIN_PATH"
+		value="$GAZEBO_PLUGIN_PATH:$(find lrm_gazebo)/lib" />
+
+	<node
+		name="gazebo"
+		pkg="gazebo_ros"
+		type="gazebo"
+		args="$(find lrm_gazebo)/worlds/empty_terrain.world"
+		respawn="false"
+		output="screen" />
+
+	<node
+		name="gazebo_gui"
+		pkg="gazebo_ros"
+		type="gzclient"
+		respawn="false"
+		output="screen" />
+
+</launch>

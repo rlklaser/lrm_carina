@@ -33,15 +33,15 @@
 
 #include <pr2_gazebo_plugins/gazebo_ros_prosilica.h>
 
-#include "physics/World.hh"
-#include "physics/HingeJoint.hh"
-#include "sensors/Sensor.hh"
-#include "sdf/interface/SDF.hh"
-#include "sdf/interface/Param.hh"
-#include "common/Exception.hh"
-#include "sensors/CameraSensor.hh"
-#include "sensors/SensorTypes.hh"
-#include "rendering/Camera.hh"
+#include "gazebo/physics/World.hh"
+#include "gazebo/physics/HingeJoint.hh"
+#include "gazebo/sensors/Sensor.hh"
+//#include "gazebo/sdf/interface/SDF.hh"
+//#include "gazebo/sdf/interface/Param.hh"
+#include "gazebo/common/Exception.hh"
+#include "gazebo/sensors/CameraSensor.hh"
+#include "gazebo/sensors/SensorTypes.hh"
+#include "gazebo/rendering/Camera.hh"
 
 #include <sensor_msgs/Image.h>
 #include <sensor_msgs/CameraInfo.h>
@@ -138,7 +138,7 @@ void GazeboRosProsilica::OnNewImageFrame(const unsigned char *_image,
   //ROS_ERROR("debug image count %d",this->image_connect_count_);
   if (!this->parentSensor->IsActive())
   {
-    if (this->image_connect_count_ > 0)
+    ///if (this->image_connect_count_ > 0)
       // do this first so there's chance for sensor to run 1 frame after activate
       this->parentSensor->SetActive(true);
   }
@@ -148,7 +148,7 @@ void GazeboRosProsilica::OnNewImageFrame(const unsigned char *_image,
 
     if (this->mode_ == "streaming")
     {
-      if (this->image_connect_count_ > 0)
+      ///if (this->image_connect_count_ > 0)
       {
         common::Time cur_time = this->world_->GetSimTime();
         if (cur_time - this->last_update_time_ >= this->update_period_)
@@ -161,7 +161,7 @@ void GazeboRosProsilica::OnNewImageFrame(const unsigned char *_image,
 
   }
   /// publish CameraInfo
-  if (this->info_connect_count_ > 0)
+  ///if (this->info_connect_count_ > 0)
   {
     common::Time cur_time = this->world_->GetSimTime();
     if (cur_time - this->last_info_update_time_ >= this->update_period_)
@@ -212,7 +212,7 @@ void GazeboRosProsilica::pollCallback(polled_camera::GetPolledImage::Request& re
   ROS_ERROR("roidebug %d %d %d %d", req.roi.x_offset, req.roi.y_offset, req.roi.width, req.roi.height);
 
   // signal sensor to start update
-  this->image_connect_count_++;
+  ///this->image_connect_count_++;
 
   // wait until an image has been returned
   while(!src)
@@ -333,7 +333,7 @@ void GazeboRosProsilica::pollCallback(polled_camera::GetPolledImage::Request& re
     }
     usleep(100000);
   }
-  this->image_connect_count_--;
+  ///this->image_connect_count_--;
   rsp.success = true;
   return;
 }

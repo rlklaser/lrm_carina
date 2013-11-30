@@ -17,9 +17,9 @@ set(ROS_BUILD_TYPE Debug)
 #  pkg_check_modules(GAZEBO gazebo)
 #endif()
 
-#find_package(gazebo REQUIRED)
-#include_directories(${GAZEBO_INCLUDE_DIRS})
-#link_directories(${GAZEBO_LIBRARY_DIRS})
+##find_package(gazebo REQUIRED)
+##include_directories(${GAZEBO_INCLUDE_DIRS})
+##link_directories(${GAZEBO_LIBRARY_DIRS})
 
 ##add_library(hello_world SHARED hello_world.cc)
 ##target_link_libraries(hello_world ${GAZEBO_libraries})
@@ -32,7 +32,7 @@ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 #set the default path for built libraries to the "lib" directory
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 
-#set (COMPILE_FLAGS -msse4.2 -mpreferred-stack-boundary=4 -march=native)
+set (COMPILE_FLAGS -msse4.2 -mpreferred-stack-boundary=4 -march=native)
 add_definitions(-Wno-deprecated -DEIGEN_DONT_VECTORIZE -DEIGEN_DISABLE_UNALIGNED_ARRAY_ASSERT)
 
 #uncomment if you have defined messages
@@ -51,10 +51,13 @@ rosbuild_add_boost_directories()
 #target_link_libraries(example ${PROJECT_NAME})
 
 rosbuild_add_library(carina_controller src/CarinaController.cpp)
+##target_link_libraries(carina_controller ${GAZEBO_LIBRARIES})
 
 rosbuild_add_library(suspension_controller src/SuspensionController.cpp)
+##target_link_libraries(suspension_controller ${GAZEBO_LIBRARIES})
 
 rosbuild_add_library(encoders_controller src/EncodersController.cpp)
+##target_link_libraries(encoders_controller ${GAZEBO_LIBRARIES})
 
 #add_definitions(-fPIC)
 #rosbuild_add_library(LRMVehiclePlugin src/DRCVehiclePlugin.cc)
@@ -66,32 +69,38 @@ rosbuild_add_library(encoders_controller src/EncodersController.cpp)
 
 rosbuild_add_library(AckermannControllerPlugin src/AckermannControllerPlugin.cpp)
 rosbuild_link_boost(AckermannControllerPlugin thread)
-
+##target_link_libraries(AckermannControllerPlugin ${GAZEBO_LIBRARIES})
 rosbuild_add_library(carina_world_plugin src/CarinaWorldPlugin.cpp)
 
 #rosbuild_add_library(projector_plugin src/projector.cc)
 
 rosbuild_add_library(AckermannPlugin src/AckermannPlugin.cpp)
 rosbuild_link_boost(AckermannPlugin thread)
+##target_link_libraries(AckermannPlugin ${GAZEBO_LIBRARIES})
+
 
 rosbuild_add_library(lrm_gazebo_ros_controller_manager src/gazebo_ros_controller_manager.cpp)
 rosbuild_link_boost(lrm_gazebo_ros_controller_manager thread)
 #rosbuild_add_compile_flags(lrm_gazebo_ros_controller_manager $COMPILE_FLAGS)
+##target_link_libraries(lrm_gazebo_ros_controller_manager ${GAZEBO_LIBRARIES})
 
 rosbuild_add_library(lrm_gazebo_ros_prosilica src/gazebo_ros_prosilica.cpp)
 rosbuild_link_boost(lrm_gazebo_ros_prosilica thread)
 target_link_libraries(lrm_gazebo_ros_prosilica gazebo_ros_camera_utils DepthCameraPlugin)
 #rosbuild_add_compile_flags(lrm_gazebo_ros_prosilica $COMPILE_FLAGS)
+##target_link_libraries(lrm_gazebo_ros_prosilica ${GAZEBO_LIBRARIES})
 
 rosbuild_add_library(lrm_gazebo_ros_gps src/gazebo_ros_gps.cpp)
 #rosbuild_add_compile_flags(lrm_gazebo_ros_gps $COMPILE_FLAGS)
+##target_link_libraries(lrm_gazebo_ros_gps ${GAZEBO_LIBRARIES})
 
 rosbuild_add_library(lrm_gazebo_ros_imu src/gazebo_ros_imu.cpp)
 rosbuild_link_boost(lrm_gazebo_ros_imu thread)
 #rosbuild_add_compile_flags(lrm_gazebo_ros_imu $COMPILE_FLAGS)
+##target_link_libraries(lrm_gazebo_ros_imu ${GAZEBO_LIBRARIES})
 
 rosbuild_add_library(lrm_gazebo_ros_magnetic src/gazebo_ros_magnetic.cpp)
-
+##target_link_libraries(lrm_gazebo_ros_magnetic ${GAZEBO_LIBRARIES})
 rosbuild_add_executable(viz_gazebo_models_node 
     src/viz_gazebo_models_node.cpp)
     
