@@ -35,7 +35,7 @@ using namespace std;
 void heaperror(const char* ErrorString)
 {
     //need to send a message from here somehow
-    SBPL_PRINTF("%s\n", ErrorString);
+    SBPL_PRINTF("%s", ErrorString);
     throw new SBPL_Exception();
 }
 
@@ -164,7 +164,7 @@ void CHeap::growheap()
     allocated = 2 * allocated;
     if (allocated > HEAPSIZE) allocated = HEAPSIZE;
 
-    SBPL_PRINTF("to %d\n", allocated);
+    SBPL_PRINTF("to %d", allocated);
 
     newheap = new heapelement[allocated];
 
@@ -422,7 +422,7 @@ void CIntHeap::growheap()
     allocated = 2 * allocated;
     if (allocated > HEAPSIZE) allocated = HEAPSIZE;
 
-    SBPL_PRINTF("to %d\n", allocated);
+    SBPL_PRINTF("to %d", allocated);
 
     newheap = new heapintelement[allocated];
 

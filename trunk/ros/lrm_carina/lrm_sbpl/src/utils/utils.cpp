@@ -74,21 +74,21 @@ void EnableMemCheck()
 void checkmdpstate(CMDPSTATE* state)
 {
 #if DEBUG == 0
-    SBPL_ERROR("ERROR: checkMDPstate is too expensive for not in DEBUG mode\n");
+    SBPL_ERROR("ERROR: checkMDPstate is too expensive for not in DEBUG mode");
     throw new SBPL_Exception();
 #endif
 
     for (int aind = 0; aind < (int)state->Actions.size(); aind++) {
         for (int aind1 = 0; aind1 < (int)state->Actions.size(); aind1++) {
             if (state->Actions[aind1]->ActionID == state->Actions[aind]->ActionID && aind1 != aind) {
-                SBPL_ERROR("ERROR in CheckMDP: multiple actions with the same ID exist\n");
+                SBPL_ERROR("ERROR in CheckMDP: multiple actions with the same ID exist");
                 throw new SBPL_Exception();
             }
         }
         for (int sind = 0; sind < (int)state->Actions[aind]->SuccsID.size(); sind++) {
             for (int sind1 = 0; sind1 < (int)state->Actions[aind]->SuccsID.size(); sind1++) {
                 if (state->Actions[aind]->SuccsID[sind] == state->Actions[aind]->SuccsID[sind1] && sind != sind1) {
-                    SBPL_ERROR("ERROR in CheckMDP: multiple outcomes with the same ID exist\n");
+                    SBPL_ERROR("ERROR in CheckMDP: multiple outcomes with the same ID exist");
                     throw new SBPL_Exception();
                 }
             }
@@ -131,7 +131,7 @@ bool PathExists(CMDP* pMarkovChain, CMDPSTATE* sourcestate, CMDPSTATE* targetsta
 
         //Markov Chain should just contain a single policy
         if ((int)state->Actions.size() > 1) {
-            SBPL_ERROR("ERROR in PathExists: Markov Chain is a general MDP\n");
+            SBPL_ERROR("ERROR in PathExists: Markov Chain is a general MDP");
             throw new SBPL_Exception();
         }
 
@@ -148,7 +148,7 @@ bool PathExists(CMDP* pMarkovChain, CMDPSTATE* sourcestate, CMDPSTATE* targetsta
                 if (pMarkovChain->StateArray[i]->StateID == state->Actions[0]->SuccsID[sind]) break;
             }
             if (i == (int)pMarkovChain->StateArray.size()) {
-                SBPL_ERROR("ERROR in PathExists: successor is not found\n");
+                SBPL_ERROR("ERROR in PathExists: successor is not found");
                 throw new SBPL_Exception();
             }
             CMDPSTATE* SuccState = pMarkovChain->StateArray[i];
@@ -170,14 +170,14 @@ int ComputeNumofStochasticActions(CMDP* pMDP)
 {
     int i;
     int nNumofStochActions = 0;
-    SBPL_PRINTF("ComputeNumofStochasticActions...\n");
+    SBPL_PRINTF("ComputeNumofStochasticActions...");
 
     for (i = 0; i < (int)pMDP->StateArray.size(); i++) {
         for (int aind = 0; aind < (int)pMDP->StateArray[i]->Actions.size(); aind++) {
             if ((int)pMDP->StateArray[i]->Actions[aind]->SuccsID.size() > 1) nNumofStochActions++;
         }
     }
-    SBPL_PRINTF("done\n");
+    SBPL_PRINTF("done");
 
     return nNumofStochActions;
 }
@@ -192,7 +192,7 @@ void EvaluatePolicy(CMDP* PolicyMDP, int StartStateID, int GoalStateID, double* 
     *Pcgoal = 0;
     *nMerges = 0;
 
-    SBPL_PRINTF("Evaluating policy...\n");
+    SBPL_PRINTF("Evaluating policy...");
 
     //create and initialize values
     double* vals = new double[PolicyMDP->StateArray.size()];
@@ -239,14 +239,14 @@ void EvaluatePolicy(CMDP* PolicyMDP, int StartStateID, int GoalStateID, double* 
                         if (PolicyMDP->StateArray[j]->StateID == action->SuccsID[oind]) break;
                     }
                     if (j == (int)PolicyMDP->StateArray.size()) {
-                        SBPL_ERROR("ERROR in EvaluatePolicy: incorrect successor %d\n", action->SuccsID[oind]);
+                        SBPL_ERROR("ERROR in EvaluatePolicy: incorrect successor %d", action->SuccsID[oind]);
                         throw new SBPL_Exception();
                     }
                     Q += action->SuccsProb[oind] * (vals[j] + action->Costs[oind]);
                 }
 
                 if (vals[i] > Q) {
-                    SBPL_ERROR("ERROR in EvaluatePolicy: val is decreasing\n");
+                    SBPL_ERROR("ERROR in EvaluatePolicy: val is decreasing");
                     throw new SBPL_Exception();
                 }
 
@@ -293,7 +293,7 @@ void EvaluatePolicy(CMDP* PolicyMDP, int StartStateID, int GoalStateID, double* 
 
     *PolValue = vals[startind];
 
-    SBPL_PRINTF("done\n");
+    SBPL_PRINTF("done");
 }
 
 void get_bresenham_parameters(int p1x, int p1y, int p2x, int p2y, bresenham_param_t *params)
@@ -398,7 +398,7 @@ double normalizeAngle(double angle)
     if (retangle < 0) retangle += 2 * PI_CONST;
 
     if (retangle < 0 || retangle > 2 * PI_CONST) {
-        SBPL_ERROR("ERROR: after normalization of angle=%f we get angle=%f\n", angle, retangle);
+        SBPL_ERROR("ERROR: after normalization of angle=%f we get angle=%f", angle, retangle);
     }
 
     return retangle;

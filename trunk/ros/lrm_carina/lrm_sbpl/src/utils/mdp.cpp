@@ -118,7 +118,7 @@ bool CMDPSTATE::Delete()
     CMDPACTION* action;
 
     if (this->PlannerSpecificData != NULL) {
-        SBPL_ERROR("ERROR deleting state: planner specific data is not deleted\n");
+        SBPL_ERROR("ERROR deleting state: planner specific data is not deleted");
         throw new SBPL_Exception();
     }
 
@@ -247,7 +247,7 @@ bool CMDP::Create(int numofstates)
     CMDPSTATE* state;
 
     if (numofstates > MAXSTATESPACESIZE) {
-        SBPL_ERROR("ERROR in Create: maximum MDP size is reached\n");
+        SBPL_ERROR("ERROR in Create: maximum MDP size is reached");
         throw new SBPL_Exception();
     }
 
@@ -273,7 +273,7 @@ CMDPSTATE* CMDP::AddState(int StateID)
     CMDPSTATE* state;
 
     if ((int)StateArray.size() + 1 > MAXSTATESPACESIZE) {
-        SBPL_ERROR("ERROR: maximum of states is reached in MDP\n");
+        SBPL_ERROR("ERROR: maximum of states is reached in MDP");
         throw new SBPL_Exception();
     }
 
