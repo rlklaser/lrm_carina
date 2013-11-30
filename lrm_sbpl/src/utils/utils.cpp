@@ -177,7 +177,7 @@ int ComputeNumofStochasticActions(CMDP* pMDP)
             if ((int)pMDP->StateArray[i]->Actions[aind]->SuccsID.size() > 1) nNumofStochActions++;
         }
     }
-    SBPL_PRINTF("done");
+    //SBPL_PRINTF("done");
 
     return nNumofStochActions;
 }
@@ -293,7 +293,7 @@ void EvaluatePolicy(CMDP* PolicyMDP, int StartStateID, int GoalStateID, double* 
 
     *PolValue = vals[startind];
 
-    SBPL_PRINTF("done");
+    //SBPL_PRINTF("done");
 }
 
 void get_bresenham_parameters(int p1x, int p1y, int p2x, int p2y, bresenham_param_t *params)

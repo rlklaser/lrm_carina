@@ -184,7 +184,8 @@ OctomapServer::OctomapServer(ros::NodeHandle nh) :
 	f = boost::bind(&OctomapServer::reconfigureCallback, this, _1, _2);
 	m_reconfigureServer.setCallback(f);
 
-	m_updated = false;
+	m_octree->updateNode(0, 0, 0, false);
+	m_updated = true;
 	m_publisherTimer = nh.createTimer(ros::Duration(1.0 / m_rate), &OctomapServer::timerCallback, this);
 
 	m_octomapBinaryService = m_nh.advertiseService("octomap_binary", &OctomapServer::octomapBinarySrv, this);

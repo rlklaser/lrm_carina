@@ -92,7 +92,7 @@ bool SBPL2DGridSearch::setOPENdatastructure(SBPL_2DGRIDSEARCH_OPENTYPE OPENtype)
             SBPL_PRINTF("creating sliding bucket-based OPEN2D %d buckets, each bucket of size %d ...", numofbuckets,
                         bucketsize);
             OPEN2DBLIST_ = new CSlidingBucket(numofbuckets, bucketsize);
-            SBPL_PRINTF("done");
+            //SBPL_PRINTF("done");
         }
         //delete other data structures
         if (OPEN2D_ != NULL) {

@@ -70,12 +70,211 @@
 
 		<include>
 			<name>terrain</name>
-
 			<uri>model://carina_uneven_terrain</uri>
-			<!-- 
-			<uri>model://greece_terrain</uri>
-			-->
 		</include>
+
+
+		<model name='finihed_0'>
+			<include>
+				<uri>model://finihed</uri>
+				<pose>-9.406170 0.582100 0.000000 0.000000 0.000000 0.000000</pose>
+			</include>
+		</model>
+		<model name='finihed_1'>
+			<include>
+				<uri>model://finihed</uri>
+				<pose>5.000000 -11.000000 0.000000 0.000000 0.000000 0.000000</pose>
+			</include>
+		</model>
+		<model name='finihed_2'>
+			<include>
+				<uri>model://finihed</uri>
+				<pose>-4.563540 -9.000000 0.000000 0.000000 0.000000 0.000000</pose>
+			</include>
+		</model>
+		<model name='finihed_16'>
+			<include>
+				<uri>model://finihed</uri>
+				<pose>-52.000000 46.000000 0.000000 0.000000 0.000000 0.000000</pose>
+			</include>
+		</model>
+		<model name='finihed_17'>
+			<include>
+				<uri>model://finihed</uri>
+				<pose>-34.000000 9.000000 0.000000 0.000000 0.000000 0.000000</pose>
+			</include>
+		</model>
+		<model name='finihed_18'>
+			<include>
+				<uri>model://finihed</uri>
+				<pose>22.000000 -2.000000 0.000000 0.000000 0.000000 0.000000</pose>
+			</include>
+		</model>
+		<model name='finihed_19'>
+			<include>
+				<uri>model://finihed</uri>
+				<pose>8.000000 -2.000000 0.000000 0.000000 0.000000 0.000000</pose>
+			</include>
+		</model>
+		<model name='finihed_20'>
+			<include>
+				<uri>model://finihed</uri>
+				<pose>-27.000000 26.000000 0.000000 0.000000 0.000000 0.000000</pose>
+			</include>
+		</model>
+		<model name='finihed_21'>
+			<include>
+				<uri>model://finihed</uri>
+				<pose>-21.000000 8.000000 0.000000 0.000000 0.000000 0.000000</pose>
+			</include>
+		</model>
+		<model name='finihed_22'>
+			<include>
+				<uri>model://finihed</uri>
+				<pose>-20.000000 -2.000000 0.000000 0.000000 0.000000 0.000000</pose>
+			</include>
+		</model>
+		<model name='finihed_23'>
+			<include>
+				<uri>model://finihed</uri>
+				<pose>-16.000000 -18.000000 0.000000 0.000000 0.000000 0.000000</pose>
+			</include>
+		</model>
+		<model name='fanPalm'>
+			<include>
+				<uri>model://fanPalm</uri>
+				<pose>0.000000 -24.000000 0.000000 0.000000 0.000000 0.000000</pose>
+			</include>
+		</model>
+		<model name='fanPalm_0'>
+			<include>
+				<uri>model://fanPalm</uri>
+				<pose>-41.561400 -0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+			</include>
+		</model>
+		<model name='fanPalm_1'>
+			<include>
+				<uri>model://fanPalm</uri>
+				<pose>-1.481720 74.000000 0.000000 0.000000 0.000000 0.000000</pose>
+			</include>
+		</model>
+		<model name='fanPalm_2'>
+			<include>
+				<uri>model://fanPalm</uri>
+				<pose>-19.000000 63.562700 0.000000 0.000000 0.000000 0.000000</pose>
+			</include>
+		</model>
+		<model name='finihed_24'>
+			<include>
+				<uri>model://finihed</uri>
+				<pose>0.000000 -30.000000 0.000000 0.000000 0.000000 0.000000</pose>
+			</include>
+		</model>
+		<model name='finihed_25'>
+			<include>
+				<uri>model://finihed</uri>
+				<pose>3.431760 -28.000000 0.000000 0.000000 0.000000 0.000000</pose>
+			</include>
+		</model>
+		<model name='finihed_26'>
+			<include>
+				<uri>model://finihed</uri>
+				<pose>-6.000000 -27.000000 0.000000 0.000000 0.000000 0.000000</pose>
+			</include>
+		</model>
+		<model name='finihed_27'>
+			<include>
+				<uri>model://finihed</uri>
+				<pose>-7.491620 -21.000000 0.000000 0.000000 0.000000 0.000000</pose>
+			</include>
+		</model>
+		<model name='finihed_28'>
+			<include>
+				<uri>model://finihed</uri>
+				<pose>-1.000000 -34.532300 0.000000 0.000000 0.000000 0.000000</pose>
+			</include>
+		</model>
+		<model name='finihed_29'>
+			<include>
+				<uri>model://finihed</uri>
+				<pose>5.553360 -38.000000 0.000000 0.000000 0.000000 0.000000</pose>
+			</include>
+		</model>
+		<model name='finihed_30'>
+			<include>
+				<uri>model://finihed</uri>
+				<pose>11.000000 -38.000000 0.000000 0.000000 0.000000 0.000000</pose>
+			</include>
+		</model>
+		<model name='finihed_31'>
+			<include>
+				<uri>model://finihed</uri>
+				<pose>16.000000 -42.000000 0.000000 0.000000 0.000000 0.000000</pose>
+			</include>
+		</model>
+
+		<model name='Spathaphylum_33'>
+			<include>
+				<uri>model://spathaphylum</uri>
+				<pose>19.000000 -34.000000 0.000000 0.000000 0.000000 0.000000</pose>
+			</include>
+		</model>
+		<model name='Spathaphylum_34'>
+			<include>
+				<uri>model://spathaphylum</uri>
+				<pose>20.000000 -35.000000 0.000000 0.000000 0.000000 0.000000</pose>
+			</include>
+		</model>
+		<model name='Spathaphylum_35'>
+			<include>
+				<uri>model://spathaphylum</uri>
+				<pose>23.520400 -35.000000 0.000000 0.000000 0.000000 0.000000</pose>
+			</include>
+		</model>
+		<model name='Spathaphylum_36'>
+			<include>
+				<uri>model://spathaphylum</uri>
+				<pose>22.536700 -38.000000 0.000000 0.000000 0.000000 0.000000</pose>
+			</include>
+		</model>
+		<model name='Spathaphylum_37'>
+			<include>
+				<uri>model://spathaphylum</uri>
+				<pose>21.000000 -37.000000 0.000000 0.000000 0.000000 0.000000</pose>
+			</include>
+		</model>
+		<model name='Spathaphylum_38'>
+			<include>
+				<uri>model://spathaphylum</uri>
+				<pose>22.000000 -36.000000 0.000000 0.000000 0.000000 0.000000</pose>
+			</include>
+		</model>
+		<model name='Spathaphylum_39'>
+			<include>
+				<uri>model://spathaphylum</uri>
+				<pose>26.000000 -38.000000 0.000000 0.000000 0.000000 0.000000</pose>
+			</include>
+		</model>
+		<model name='Spathaphylum_40'>
+			<include>
+				<uri>model://spathaphylum</uri>
+				<pose>28.000000 -37.000000 0.000000 0.000000 0.000000 0.000000</pose>
+			</include>
+		</model>
+		<model name='Spathaphylum_41'>
+			<include>
+				<uri>model://spathaphylum</uri>
+				<pose>31.000000 -35.577500 0.000000 0.000000 0.000000 0.000000</pose>
+			</include>
+		</model>
+		<model name='Spathaphylum_42'>
+			<include>
+				<uri>model://spathaphylum</uri>
+				<pose>25.000000 -33.000000 0.000000 0.000000 0.000000 0.000000</pose>
+			</include>
+		</model>
+
+
 
 	</world>
 </sdf>
