@@ -53,27 +53,27 @@ ADPlanner::ADPlanner(DiscreteSpaceInformation* environment, bool bForwardSearch)
     searchexpands = 0;
     MaxMemoryCounter = 0;
 
-#ifndef ROS
-    const char* debug = "debug.txt";
-#endif
-    fDeb = SBPL_FOPEN(debug, "w");
-    if (fDeb == NULL) {
-        SBPL_ERROR("ERROR: could not open planner debug file\n");
-        throw new SBPL_Exception();
-    }
-    SBPL_PRINTF("debug on\n");
+//#ifndef ROS
+//    const char* debug = "debug.txt";
+//#endif
+//    fDeb = SBPL_FOPEN(debug, "w");
+//    if (fDeb == NULL) {
+//        SBPL_ERROR("ERROR: could not open planner debug file");
+//        throw new SBPL_Exception();
+//    }
+//    SBPL_PRINTF("debug on");
 
     pSearchStateSpace_ = new ADSearchStateSpace_t;
 
     //create the AD planner
     if (CreateSearchStateSpace(pSearchStateSpace_) != 1) {
-        SBPL_ERROR("ERROR: failed to create statespace\n");
+        SBPL_ERROR("ERROR: failed to create statespace");
         return;
     }
 
     //set the start and goal states
     if (InitializeSearchStateSpace(pSearchStateSpace_) != 1) {
-        SBPL_ERROR("ERROR: failed to create statespace\n");
+        SBPL_ERROR("ERROR: failed to create statespace");
         return;
     }
 
@@ -89,7 +89,7 @@ ADPlanner::~ADPlanner()
     DeleteSearchStateSpace( pSearchStateSpace_);
     delete pSearchStateSpace_;
 
-    SBPL_FCLOSE( fDeb);
+    //SBPL_FCLOSE( fDeb);
 }
 
 void ADPlanner::Initialize_searchinfo(CMDPSTATE* state, ADSearchStateSpace_t* pSearchStateSpace)
@@ -137,7 +137,7 @@ CMDPSTATE* ADPlanner::CreateState(int stateID, ADSearchStateSpace_t* pSearchStat
 CMDPSTATE* ADPlanner::GetState(int stateID, ADSearchStateSpace_t* pSearchStateSpace)
 {
     if (stateID >= (int)environment_->StateID2IndexMapping.size()) {
-        SBPL_ERROR("ERROR int GetState: stateID is invalid\n");
+        SBPL_ERROR("ERROR int GetState: stateID is invalid");
         throw new SBPL_Exception();
     }
 
@@ -479,7 +479,7 @@ int ADPlanner::ComputePath(ADSearchStateSpace_t* pSearchStateSpace, double MaxNu
     expands = 0;
 
     if (pSearchStateSpace->searchgoalstate == NULL) {
-        SBPL_ERROR("ERROR searching: no goal state is set\n");
+        SBPL_ERROR("ERROR searching: no goal state is set");
         throw new SBPL_Exception();
     }
 
@@ -531,7 +531,7 @@ int ADPlanner::ComputePath(ADSearchStateSpace_t* pSearchStateSpace, double MaxNu
 #endif
 
         if (state->v == state->g) {
-            SBPL_ERROR("ERROR: consistent state is being expanded\n");
+            SBPL_ERROR("ERROR: consistent state is being expanded");
             throw new SBPL_Exception();
         }
 
@@ -579,13 +579,13 @@ int ADPlanner::ComputePath(ADSearchStateSpace_t* pSearchStateSpace, double MaxNu
         goalkey = ComputeKey(searchgoalstate);
 
         if (expands % 100000 == 0 && expands > 0) {
-            SBPL_PRINTF("expands so far=%u\n", expands);
+            SBPL_PRINTF("expands so far=%u", expands);
         }
     }
 
     int retv = 1;
     if (searchgoalstate->g == INFINITECOST && pSearchStateSpace->heap->emptyheap()) {
-        SBPL_PRINTF("solution does not exist: search exited because heap is empty\n");
+        SBPL_PRINTF("solution does not exist: search exited because heap is empty");
 
 #if DEBUG
         SBPL_FPRINTF(fDeb, "solution does not exist: search exited because heap is empty\n");
@@ -594,7 +594,7 @@ int ADPlanner::ComputePath(ADSearchStateSpace_t* pSearchStateSpace, double MaxNu
         retv = 0;
     }
     else if (!pSearchStateSpace->heap->emptyheap() && (goalkey > minkey || searchgoalstate->g > searchgoalstate->v)) {
-        SBPL_PRINTF("search exited because it ran out of time\n");
+        SBPL_PRINTF("search exited because it ran out of time");
 #if DEBUG
         SBPL_FPRINTF(fDeb, "search exited because it ran out of time\n");
 #endif
@@ -602,7 +602,7 @@ int ADPlanner::ComputePath(ADSearchStateSpace_t* pSearchStateSpace, double MaxNu
     }
     else if (searchgoalstate->g == INFINITECOST && !pSearchStateSpace->heap->emptyheap()) {
         SBPL_PRINTF("solution does not exist: search exited because all candidates for expansion have infinite "
-                    "heuristics\n");
+                    "heuristics");
 #if DEBUG
         SBPL_FPRINTF(fDeb, "solution does not exist: search exited because all candidates for expansion have infinite "
                      "heuristics\n");
@@ -610,7 +610,7 @@ int ADPlanner::ComputePath(ADSearchStateSpace_t* pSearchStateSpace, double MaxNu
         retv = 0;
     }
     else {
-        SBPL_PRINTF("search exited with a solution for eps=%.3f\n", pSearchStateSpace->eps);
+        SBPL_PRINTF("search exited with a solution for eps=%.3f", pSearchStateSpace->eps);
 #if DEBUG
         SBPL_FPRINTF(fDeb, "search exited with a solution for eps=%.3f\n", pSearchStateSpace->eps);
 #endif
@@ -770,7 +770,7 @@ void ADPlanner::ReInitializeSearchStateSpace(ADSearchStateSpace_t* pSearchStateS
 int ADPlanner::InitializeSearchStateSpace(ADSearchStateSpace_t* pSearchStateSpace)
 {
     if (pSearchStateSpace->heap->currentsize != 0 || pSearchStateSpace->inconslist->currentsize != 0) {
-        SBPL_ERROR("ERROR in InitializeSearchStateSpace: heap or list is not empty\n");
+        SBPL_ERROR("ERROR in InitializeSearchStateSpace: heap or list is not empty");
         throw new SBPL_Exception();
     }
 
@@ -857,7 +857,7 @@ int ADPlanner::ReconstructPath(ADSearchStateSpace_t* pSearchStateSpace)
             }
 
             if (stateinfo->bestpredstate == NULL) {
-                SBPL_ERROR("ERROR in ReconstructPath: bestpred is NULL\n");
+                SBPL_ERROR("ERROR in ReconstructPath: bestpred is NULL");
                 throw new SBPL_Exception();
             }
 
@@ -870,7 +870,7 @@ int ADPlanner::ReconstructPath(ADSearchStateSpace_t* pSearchStateSpace)
 
             //check the decrease of g-values along the path
             if (predstateinfo->v >= stateinfo->g) {
-                SBPL_ERROR("ERROR in ReconstructPath: g-values are non-decreasing\n");
+                SBPL_ERROR("ERROR in ReconstructPath: g-values are non-decreasing");
                 throw new SBPL_Exception();
             }
 
@@ -879,7 +879,7 @@ int ADPlanner::ReconstructPath(ADSearchStateSpace_t* pSearchStateSpace)
         }
 
         if (MDPstate != pSearchStateSpace->searchstartstate) {
-            SBPL_ERROR("ERROR: Failed to reconstruct path (compute bestnextstate pointers): steps processed=%d\n",
+            SBPL_ERROR("ERROR: Failed to reconstruct path (compute bestnextstate pointers): steps processed=%d",
                        steps);
             return 0;
         }
@@ -916,9 +916,9 @@ void ADPlanner::PrintSearchPath(ADSearchStateSpace_t* pSearchStateSpace, FILE* f
 
     int PathCost = ((ADState*)pSearchStateSpace->searchgoalstate->PlannerSpecificData)->g;
 
-    SBPL_FPRINTF(fOut, "Printing a path from state %d to the search start state %d\n", state->StateID,
+    SBPL_FPRINTF(fOut, "Printing a path from state %d to the search start state %d", state->StateID,
                  pSearchStateSpace->searchstartstate->StateID);
-    SBPL_FPRINTF(fOut, "Path cost = %d:\n", PathCost);
+    SBPL_FPRINTF(fOut, "Path cost = %d:", PathCost);
 
     environment_->PrintState(state->StateID, true, fOut);
 
@@ -931,7 +931,7 @@ void ADPlanner::PrintSearchPath(ADSearchStateSpace_t* pSearchStateSpace, FILE* f
         SBPL_FPRINTF(fOut, "state %d ", state->StateID);
 
         if (state->PlannerSpecificData == NULL) {
-            SBPL_FPRINTF(fOut, "path does not exist since search data does not exist\n");
+            SBPL_FPRINTF(fOut, "path does not exist since search data does not exist");
             break;
         }
 
@@ -943,11 +943,11 @@ void ADPlanner::PrintSearchPath(ADSearchStateSpace_t* pSearchStateSpace, FILE* f
             nextstate = searchstateinfo->bestnextstate;
 
         if (nextstate == NULL) {
-            SBPL_FPRINTF(fOut, "path does not exist since nextstate == NULL\n");
+            SBPL_FPRINTF(fOut, "path does not exist since nextstate == NULL");
             break;
         }
         if (searchstateinfo->g == INFINITECOST) {
-            SBPL_FPRINTF(fOut, "path does not exist since state->g == NULL\n");
+            SBPL_FPRINTF(fOut, "path does not exist since state->g == NULL");
             break;
         }
 
@@ -981,7 +981,7 @@ void ADPlanner::PrintSearchPath(ADSearchStateSpace_t* pSearchStateSpace, FILE* f
     }
 
     if (state->StateID != pSearchStateSpace->searchstartstate->StateID) {
-        SBPL_ERROR("ERROR: Failed to printsearchpath, max_steps reached\n");
+        SBPL_ERROR("ERROR: Failed to printsearchpath, max_steps reached");
         return;
     }
 }
@@ -1029,7 +1029,7 @@ vector<int> ADPlanner::GetSearchPath(ADSearchStateSpace_t* pSearchStateSpace, in
 
     FILE* fOut = stdout;
     if (fOut == NULL) {
-        SBPL_ERROR("ERROR: could not open file\n");
+        SBPL_ERROR("ERROR: could not open file");
         throw new SBPL_Exception();
     }
     int steps = 0;
@@ -1038,18 +1038,18 @@ vector<int> ADPlanner::GetSearchPath(ADSearchStateSpace_t* pSearchStateSpace, in
         steps++;
 
         if (state->PlannerSpecificData == NULL) {
-            SBPL_FPRINTF(fOut, "path does not exist since search data does not exist\n");
+            SBPL_FPRINTF(fOut, "path does not exist since search data does not exist");
             break;
         }
 
         searchstateinfo = (ADState*)state->PlannerSpecificData;
 
         if (searchstateinfo->bestnextstate == NULL) {
-            SBPL_FPRINTF(fOut, "path does not exist since bestnextstate == NULL\n");
+            SBPL_FPRINTF(fOut, "path does not exist since bestnextstate == NULL");
             break;
         }
         if (searchstateinfo->g == INFINITECOST) {
-            SBPL_FPRINTF(fOut, "path does not exist since bestnextstate == NULL\n");
+            SBPL_FPRINTF(fOut, "path does not exist since bestnextstate == NULL");
             break;
         }
 
@@ -1063,7 +1063,7 @@ vector<int> ADPlanner::GetSearchPath(ADSearchStateSpace_t* pSearchStateSpace, in
         solcost += actioncost;
 
         if (searchstateinfo->v < searchstateinfo->g) {
-            SBPL_ERROR("ERROR: underconsistent state on the path\n");
+            SBPL_ERROR("ERROR: underconsistent state on the path");
             PrintSearchState(searchstateinfo, stdout);
             //SBPL_FPRINTF(fDeb, "ERROR: underconsistent state on the path\n");
             //PrintSearchState(searchstateinfo, fDeb);
@@ -1081,7 +1081,7 @@ vector<int> ADPlanner::GetSearchPath(ADSearchStateSpace_t* pSearchStateSpace, in
     }
 
     if (state->StateID != goalstate->StateID) {
-        SBPL_ERROR("ERROR: Failed to getsearchpath, steps processed=%d\n", steps);
+        SBPL_ERROR("ERROR: Failed to getsearchpath, steps processed=%d", steps);
         wholePathIds.clear();
         solcost = INFINITECOST;
         return wholePathIds;
@@ -1159,7 +1159,7 @@ bool ADPlanner::Search(ADSearchStateSpace_t* pSearchStateSpace, vector<int>& pat
         }
 
         //print the solution cost and eps bound
-        SBPL_PRINTF("eps=%f expands=%d g(sstart)=%d\n", pSearchStateSpace->eps_satisfied, searchexpands - prevexpands,
+        SBPL_PRINTF("eps=%f expands=%d g(sstart)=%d", pSearchStateSpace->eps_satisfied, searchexpands - prevexpands,
                     ((ADState*)pSearchStateSpace->searchgoalstate->PlannerSpecificData)->g);
 
         if (pSearchStateSpace->eps_satisfied == finitial_eps && pSearchStateSpace->eps == finitial_eps) {
@@ -1199,22 +1199,22 @@ bool ADPlanner::Search(ADSearchStateSpace_t* pSearchStateSpace, vector<int>& pat
     PathCost = ((ADState*)pSearchStateSpace->searchgoalstate->PlannerSpecificData)->g;
     MaxMemoryCounter += environment_->StateID2IndexMapping.size() * sizeof(int);
 
-    SBPL_PRINTF("MaxMemoryCounter = %d\n", MaxMemoryCounter);
+    SBPL_PRINTF("MaxMemoryCounter = %d", MaxMemoryCounter);
 
     int solcost = INFINITECOST;
     bool ret = false;
     if (PathCost == INFINITECOST || pSearchStateSpace_->eps_satisfied == INFINITECOST) {
-        SBPL_PRINTF("could not find a solution\n");
+        SBPL_PRINTF("could not find a solution");
         ret = false;
     }
     else {
-        SBPL_PRINTF("solution is found\n");
+        SBPL_PRINTF("solution is found");
 
         pathIds = GetSearchPath(pSearchStateSpace, solcost);
         ret = true;
     }
 
-    SBPL_PRINTF("total expands this call = %d, planning time = %.3f secs, solution cost=%d\n", searchexpands, (clock()
+    SBPL_PRINTF("total expands this call = %d, planning time = %.3f secs, solution cost=%d", searchexpands, (clock()
         - TimeStarted) / ((double)CLOCKS_PER_SEC), solcost);
     final_eps_planning_time = (clock() - TimeStarted) / ((double)CLOCKS_PER_SEC);
     final_eps = pSearchStateSpace->eps_satisfied;
@@ -1227,10 +1227,10 @@ bool ADPlanner::Search(ADSearchStateSpace_t* pSearchStateSpace, vector<int>& pat
 
 void ADPlanner::Update_SearchSuccs_of_ChangedEdges(vector<int> const * statesIDV)
 {
-    SBPL_PRINTF("updating %d affected states\n", (unsigned int)statesIDV->size());
+    SBPL_PRINTF("updating %d affected states", (unsigned int)statesIDV->size());
 
     if (statesIDV->size() > environment_->StateID2IndexMapping.size() / 10) {
-        SBPL_PRINTF("skipping affected states and instead restarting planner from scratch\n");
+        SBPL_PRINTF("skipping affected states and instead restarting planner from scratch");
         pSearchStateSpace_->bReinitializeSearchStateSpace = true;
     }
 
@@ -1277,7 +1277,7 @@ void ADPlanner::Update_SearchSuccs_of_ChangedEdges(vector<int> const * statesIDV
     //TODO - check. I believe that there are cases when number of states
     //generated is drastically smaller than the number of states really
     //affected, which is a bug!
-    SBPL_PRINTF("%d states really affected (%d states generated total so far)\n", numofstatesaffected,
+    SBPL_PRINTF("%d states really affected (%d states generated total so far)", numofstatesaffected,
                 (int)environment_->StateID2IndexMapping.size());
 
     //reset eps for which we know a path was computed
@@ -1326,12 +1326,12 @@ int ADPlanner::replan(double allocated_time_secs, vector<int>* solution_stateIDs
     *psolcost = 0;
     bool bOptimalSolution = false;
 
-    SBPL_PRINTF("planner: replan called (bFirstSol=%d, bOptSol=%d)\n", bsearchuntilfirstsolution, bOptimalSolution);
+    SBPL_PRINTF("planner: replan called (bFirstSol=%d, bOptSol=%d)", bsearchuntilfirstsolution, bOptimalSolution);
 
     //plan for the first solution only
     if ((bFound = Search(pSearchStateSpace_, pathIds, PathCost, bsearchuntilfirstsolution, bOptimalSolution,
                          allocated_time_secs)) == false) {
-        SBPL_PRINTF("failed to find a solution\n");
+        SBPL_PRINTF("failed to find a solution");
     }
 
     //copy the solution
@@ -1343,7 +1343,7 @@ int ADPlanner::replan(double allocated_time_secs, vector<int>* solution_stateIDs
 
 int ADPlanner::set_goal(int goal_stateID)
 {
-    SBPL_PRINTF("planner: setting goal to %d\n", goal_stateID);
+    SBPL_PRINTF("planner: setting goal to %d", goal_stateID);
     environment_->PrintState(goal_stateID, true, stdout);
 
     //it will be a new search iteration
@@ -1352,13 +1352,13 @@ int ADPlanner::set_goal(int goal_stateID)
 
     if (bforwardsearch) {
         if (SetSearchGoalState(goal_stateID, pSearchStateSpace_) != 1) {
-            SBPL_ERROR("ERROR: failed to set search goal state\n");
+            SBPL_ERROR("ERROR: failed to set search goal state");
             return 0;
         }
     }
     else {
         if (SetSearchStartState(goal_stateID, pSearchStateSpace_) != 1) {
-            SBPL_ERROR("ERROR: failed to set search start state\n");
+            SBPL_ERROR("ERROR: failed to set search start state");
             return 0;
         }
     }
@@ -1368,7 +1368,7 @@ int ADPlanner::set_goal(int goal_stateID)
 
 int ADPlanner::set_start(int start_stateID)
 {
-    SBPL_PRINTF("planner: setting start to %d\n", start_stateID);
+    SBPL_PRINTF("planner: setting start to %d", start_stateID);
     environment_->PrintState(start_stateID, true, stdout);
 
     //it will be a new search iteration
@@ -1377,13 +1377,13 @@ int ADPlanner::set_start(int start_stateID)
 
     if (bforwardsearch) {
         if (SetSearchStartState(start_stateID, pSearchStateSpace_) != 1) {
-            SBPL_ERROR("ERROR: failed to set search start state\n");
+            SBPL_ERROR("ERROR: failed to set search start state");
             return 0;
         }
     }
     else {
         if (SetSearchGoalState(start_stateID, pSearchStateSpace_) != 1) {
-            SBPL_ERROR("ERROR: failed to set search goal state\n");
+            SBPL_ERROR("ERROR: failed to set search goal state");
             return 0;
         }
     }
@@ -1393,21 +1393,21 @@ int ADPlanner::set_start(int start_stateID)
 
 void ADPlanner::update_succs_of_changededges(vector<int>* succstatesIDV)
 {
-    SBPL_PRINTF("UpdateSuccs called on %d succs\n", (unsigned int)succstatesIDV->size());
+    SBPL_PRINTF("UpdateSuccs called on %d succs", (unsigned int)succstatesIDV->size());
 
     Update_SearchSuccs_of_ChangedEdges(succstatesIDV);
 }
 
 void ADPlanner::update_preds_of_changededges(vector<int>* predstatesIDV)
 {
-    SBPL_PRINTF("UpdatePreds called on %d preds\n", (unsigned int)predstatesIDV->size());
+    SBPL_PRINTF("UpdatePreds called on %d preds", (unsigned int)predstatesIDV->size());
 
     Update_SearchSuccs_of_ChangedEdges(predstatesIDV);
 }
 
 int ADPlanner::force_planning_from_scratch()
 {
-    SBPL_PRINTF("planner: forceplanfromscratch set\n");
+    SBPL_PRINTF("planner: forceplanfromscratch set");
 
     pSearchStateSpace_->bReinitializeSearchStateSpace = true;
 
@@ -1416,7 +1416,7 @@ int ADPlanner::force_planning_from_scratch()
 
 int ADPlanner::force_planning_from_scratch_and_free_memory()
 {
-    SBPL_PRINTF("planner: forceplanfromscratch set\n");
+    SBPL_PRINTF("planner: forceplanfromscratch set");
     int start_id = -1;
     int goal_id = -1;
     if (pSearchStateSpace_->searchstartstate) start_id = pSearchStateSpace_->searchstartstate->StateID;
@@ -1442,7 +1442,7 @@ int ADPlanner::force_planning_from_scratch_and_free_memory()
 
 int ADPlanner::set_search_mode(bool bSearchUntilFirstSolution)
 {
-    SBPL_PRINTF("planner: search mode set to %d\n", bSearchUntilFirstSolution);
+    SBPL_PRINTF("planner: search mode set to %d", bSearchUntilFirstSolution);
 
     bsearchuntilfirstsolution = bSearchUntilFirstSolution;
 

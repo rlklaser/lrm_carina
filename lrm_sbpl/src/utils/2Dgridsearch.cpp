@@ -61,7 +61,7 @@ SBPL2DGridSearch::SBPL2DGridSearch(int width_x, int height_y, float cellsize_m)
     //allocate memory
     OPEN2D_ = new CIntHeap(width_x * height_y);
     if (!createSearchStates2D()) {
-        SBPL_ERROR("ERROR: failed to create searchstatespace2D\n");
+        SBPL_ERROR("ERROR: failed to create searchstatespace2D");
         throw new SBPL_Exception();
     }
 
@@ -79,7 +79,7 @@ bool SBPL2DGridSearch::setOPENdatastructure(SBPL_2DGRIDSEARCH_OPENTYPE OPENtype)
         //this is the default, nothing else needs to be done
         break;
     case SBPL_2DGRIDSEARCH_OPENTYPE_SLIDINGBUCKETS:
-        SBPL_PRINTF("setting OPEN2D data structure to sliding buckets\n");
+        SBPL_PRINTF("setting OPEN2D data structure to sliding buckets");
         if (OPEN2DBLIST_ == NULL) {
             //create sliding buckets
             //compute max distance for edge
@@ -92,7 +92,7 @@ bool SBPL2DGridSearch::setOPENdatastructure(SBPL_2DGRIDSEARCH_OPENTYPE OPENtype)
             SBPL_PRINTF("creating sliding bucket-based OPEN2D %d buckets, each bucket of size %d ...", numofbuckets,
                         bucketsize);
             OPEN2DBLIST_ = new CSlidingBucket(numofbuckets, bucketsize);
-            SBPL_PRINTF("done\n");
+            SBPL_PRINTF("done");
         }
         //delete other data structures
         if (OPEN2D_ != NULL) {
@@ -103,7 +103,7 @@ bool SBPL2DGridSearch::setOPENdatastructure(SBPL_2DGRIDSEARCH_OPENTYPE OPENtype)
 
         break;
     default:
-        SBPL_ERROR("ERROR: unknown data structure type = %d for OPEN2D\n", OPENtype_);
+        SBPL_ERROR("ERROR: unknown data structure type = %d for OPEN2D", OPENtype_);
         throw new SBPL_Exception();
     };
 
@@ -115,7 +115,7 @@ bool SBPL2DGridSearch::createSearchStates2D(void)
     int x, y;
 
     if (searchStates2D_ != NULL) {
-        SBPL_ERROR("ERROR: We already have a non-NULL search states array\n");
+        SBPL_ERROR("ERROR: We already have a non-NULL search states array");
         return false;
     }
 
@@ -263,7 +263,7 @@ bool SBPL2DGridSearch::search(unsigned char** Grid2D, unsigned char obsthresh, i
                                                            termination_condition);
         break;
     default:
-        SBPL_ERROR("ERROR: unknown data structure type = %d for OPEN2D\n", OPENtype_);
+        SBPL_ERROR("ERROR: unknown data structure type = %d for OPEN2D", OPENtype_);
         throw new SBPL_Exception();
     };
     return false;
@@ -336,7 +336,7 @@ bool SBPL2DGridSearch::search_withheap(unsigned char** Grid2D, unsigned char obs
         term_factor = 0.0;
         break;
     default:
-        SBPL_ERROR("ERROR: incorrect termination factor for grid2Dsearch\n");
+        SBPL_ERROR("ERROR: incorrect termination factor for grid2Dsearch");
         term_factor = 0.0;
     };
 
@@ -411,7 +411,7 @@ bool SBPL2DGridSearch::search_withheap(unsigned char** Grid2D, unsigned char obs
     delete[] pbClosed;
 
     SBPL_PRINTF( "# of expands during 2dgridsearch=%d time=%d msecs 2Dsolcost_inmm=%d "
-                "largestoptfval=%d (start=%d %d goal=%d %d)\n",
+                "largestoptfval=%d (start=%d %d goal=%d %d)",
                 numofExpands, (int)(((clock() - starttime) / (double)CLOCKS_PER_SEC) * 1000),
                 searchStates2D_[goalx_c][goaly_c].g, largestcomputedoptf_, startx_c, starty_c, goalx_c, goaly_c);
 
@@ -444,7 +444,7 @@ bool SBPL2DGridSearch::search_exp(unsigned char** Grid2D, unsigned char obsthres
 
     //check the validity of start/goal
     if (!withinMap(startx_c, starty_c) || !withinMap(goalx_c, goaly_c)) {
-        SBPL_ERROR("ERROR: grid2Dsearch is called on invalid start (%d %d) or goal(%d %d)\n", startx_c, starty_c,
+        SBPL_ERROR("ERROR: grid2Dsearch is called on invalid start (%d %d) or goal(%d %d)", startx_c, starty_c,
                    goalx_c, goaly_c);
         return false;
     }
@@ -505,7 +505,7 @@ bool SBPL2DGridSearch::search_exp(unsigned char** Grid2D, unsigned char obsthres
                 searchPredState->g = __min(INFINITECOST, cost + searchExpState->g);
 
                 if (searchPredState->g >= INFINITECOST) {
-                    SBPL_ERROR("ERROR: infinite g\n");
+                    SBPL_ERROR("ERROR: infinite g");
                     throw new SBPL_Exception();
                 }
 
@@ -521,7 +521,7 @@ bool SBPL2DGridSearch::search_exp(unsigned char** Grid2D, unsigned char obsthres
     largestcomputedoptf_ = INFINITECOST;
 
     SBPL_PRINTF( "# of expands during 2dgridsearch=%d time=%d msecs 2Dsolcost_inmm=%d "
-                "largestoptfval=%d (start=%d %d goal=%d %d)\n",
+                "largestoptfval=%d (start=%d %d goal=%d %d)",
                 numofExpands, (int)(((clock() - starttime) / (double)CLOCKS_PER_SEC) * 1000),
                 searchStates2D_[goalx_c][goaly_c].g, largestcomputedoptf_, startx_c, starty_c, goalx_c, goaly_c);
 
@@ -542,11 +542,11 @@ bool SBPL2DGridSearch::search_withbuckets(unsigned char** Grid2D, unsigned char 
 
     //int max_bucketed_priority = obsthresh*10*__max(this->width_, this->height_);
     int max_bucketed_priority = (int)(0.1 * obsthresh * dxy_distance_mm_[0] * __max(this->width_, this->height_));
-    SBPL_PRINTF("bucket-based OPEN2D has up to %d bucketed priorities, the rest will be unsorted\n",
+    SBPL_PRINTF("bucket-based OPEN2D has up to %d bucketed priorities, the rest will be unsorted",
                 max_bucketed_priority);
     CBucket OPEN2DBLIST(0, max_bucketed_priority);
 
-    SBPL_PRINTF("OPEN2D allocation time=%d msecs\n", (int)(((clock() - starttime) / (double)CLOCKS_PER_SEC) * 1000));
+    SBPL_PRINTF("OPEN2D allocation time=%d msecs", (int)(((clock() - starttime) / (double)CLOCKS_PER_SEC) * 1000));
 
     //closed = 0
     iteration_++;
@@ -559,7 +559,7 @@ bool SBPL2DGridSearch::search_withbuckets(unsigned char** Grid2D, unsigned char 
 
     //check the validity of start/goal
     if (!withinMap(startx_c, starty_c) || !withinMap(goalx_c, goaly_c)) {
-        SBPL_ERROR("ERROR: grid2Dsearch is called on invalid start (%d %d) or goal(%d %d)\n", startx_c, starty_c,
+        SBPL_ERROR("ERROR: grid2Dsearch is called on invalid start (%d %d) or goal(%d %d)", startx_c, starty_c,
                    goalx_c, goaly_c);
         return false;
     }
@@ -619,7 +619,7 @@ bool SBPL2DGridSearch::search_withbuckets(unsigned char** Grid2D, unsigned char 
                 searchPredState->g = __min(INFINITECOST, cost + searchExpState->g);
 
                 if (searchPredState->g >= INFINITECOST) {
-                    SBPL_ERROR("ERROR: infinite g\n");
+                    SBPL_ERROR("ERROR: infinite g");
                     throw new SBPL_Exception();
                 }
 
@@ -637,7 +637,7 @@ bool SBPL2DGridSearch::search_withbuckets(unsigned char** Grid2D, unsigned char 
         largestcomputedoptf_ = INFINITECOST;
 
     SBPL_PRINTF( "# of expands during 2dgridsearch=%d time=%d msecs 2Dsolcost_inmm=%d "
-                "largestoptfval=%d bucketassortedarraymaxsize=%d (start=%d %d goal=%d %d)\n",
+                "largestoptfval=%d bucketassortedarraymaxsize=%d (start=%d %d goal=%d %d)",
                 numofExpands, (int)(((clock() - starttime) / (double)CLOCKS_PER_SEC) * 1000),
                 searchStates2D_[goalx_c][goaly_c].g, largestcomputedoptf_, OPEN2DBLIST.maxassortedpriorityVsize,
                 startx_c, starty_c, goalx_c, goaly_c);
@@ -673,7 +673,7 @@ bool SBPL2DGridSearch::search_withslidingbuckets(unsigned char** Grid2D, unsigne
 
     //check the validity of start/goal
     if (!withinMap(startx_c, starty_c) || !withinMap(goalx_c, goaly_c)) {
-        SBPL_ERROR("ERROR: grid2Dsearch is called on invalid start (%d %d) or goal(%d %d)\n", startx_c, starty_c,
+        SBPL_ERROR("ERROR: grid2Dsearch is called on invalid start (%d %d) or goal(%d %d)", startx_c, starty_c,
                    goalx_c, goaly_c);
 #if DEBUG
         SBPL_FCLOSE(f2Dsearch);
@@ -716,7 +716,7 @@ bool SBPL2DGridSearch::search_withslidingbuckets(unsigned char** Grid2D, unsigne
         term_factor = 0.0;
         break;
     default:
-        SBPL_ERROR("ERROR: incorrect termination factor for grid2Dsearch\n");
+        SBPL_ERROR("ERROR: incorrect termination factor for grid2Dsearch");
         term_factor = 0.0;
     };
 
@@ -726,7 +726,7 @@ bool SBPL2DGridSearch::search_withslidingbuckets(unsigned char** Grid2D, unsigne
     char *pbClosed = (char*)calloc(1, width_ * height_);
 
     //the main repetition of expansions
-    SBPL_PRINTF("2D search with sliding buckets and term_factor=%.3f\n", term_factor);
+    SBPL_PRINTF("2D search with sliding buckets and term_factor=%.3f", term_factor);
     int prevg = 0;
     while (!OPEN2DBLIST_->empty() && search2DGoalState->g > term_factor * OPEN2DBLIST_->getminkey()) {
 #if DEBUG
@@ -737,7 +737,7 @@ bool SBPL2DGridSearch::search_withslidingbuckets(unsigned char** Grid2D, unsigne
         searchExpState = (SBPL_2DGridSearchState*)OPEN2DBLIST_->popminelement();
 
         if (searchExpState->g > OPEN2DBLIST_->getminkey()) {
-            SBPL_ERROR("ERROR: g=%d for state %d %d but minpriority=%d (prevg=%d)\n", searchExpState->g,
+            SBPL_ERROR("ERROR: g=%d for state %d %d but minpriority=%d (prevg=%d)", searchExpState->g,
                        searchExpState->x, searchExpState->y, OPEN2DBLIST_->getminkey(), prevg);
         }
         prevg = searchExpState->g;
@@ -812,7 +812,7 @@ bool SBPL2DGridSearch::search_withslidingbuckets(unsigned char** Grid2D, unsigne
     delete[] pbClosed;
 
     SBPL_PRINTF( "# of expands during 2dgridsearch=%d time=%d msecs 2Dsolcost_inmm=%d "
-                "largestoptfval=%d (start=%d %d goal=%d %d)\n",
+                "largestoptfval=%d (start=%d %d goal=%d %d)",
                 numofExpands, (int)(((clock() - starttime) / (double)CLOCKS_PER_SEC) * 1000),
                 searchStates2D_[goalx_c][goaly_c].g, largestcomputedoptf_, startx_c, starty_c, goalx_c, goaly_c);
 
