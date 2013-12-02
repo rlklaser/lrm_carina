@@ -1,0 +1,7 @@
+point_to_scan:
+angle_min
+angle_max
+angle_increment
+scan_time
+range_min
+range_max

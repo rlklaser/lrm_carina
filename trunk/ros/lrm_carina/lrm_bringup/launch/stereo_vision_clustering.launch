@@ -12,6 +12,7 @@
 			command="load"
 			file="$(find lrm_bringup)/params/clustering_filters.yaml" />
 
+<!--  
 		<node
 			name="region_growing_rgb_seg"
 			pkg="lrm_wrappers"
@@ -41,7 +42,58 @@
 				from="~points_out"
 				to="points_cluster" />
 		</node>
+-->
 
+		<node
+			pkg="nodelet"
+			type="nodelet"
+			name="region_growing_rgb_seg"
+			args="load lrm_stereo/region_growing /camera_nodelet_manager --no-bond"
+			output="screen"
+			respawn="true"
+		>
+			<remap
+				from="points_in"
+				to="points_stat" />
+			<remap
+				from="~points_out"
+				to="points_cluster_rgb" />
+		</node>
+
+		<node
+			pkg="nodelet"
+			type="nodelet"
+			name="zigzag_filter_node"
+			args="load lrm_stereo/zigzag_cut /camera_nodelet_manager --no-bond"
+			output="screen"
+			respawn="true"
+		>
+			<remap
+				from="points_in"
+				to="points_cluster_rgb" />
+			<remap
+				from="~points_out"
+				to="points_zigzag_filter" />
+		</node>
+		
+<!-- 
+		<node
+			name="zigzag_filter_node"
+			pkg="lrm_wrappers"
+			type="zigzag_filter_node"
+			respawn="true"
+			output="screen"
+		>
+			<remap
+				from="points_in"
+				to="points_cluster_rgb" />
+			<remap
+				from="~points_out"
+				to="points_zigzag_filter" />
+		</node>
+ -->
+ 
+<!-- 		
 		<node
 			name="cluster_filter_node"
 			pkg="lrm_wrappers"
@@ -51,7 +103,7 @@
 		>
 			<remap
 				from="points_in"
-				to="points_cluster_rgb" />
+				to="points_zigzag_filter" />
 			<remap
 				from="~points_out"
 				to="points_cluster_filter" />
@@ -64,37 +116,12 @@
 			respawn="true"
 			output="screen"
 		>
-			<!-- 
 			<remap
 				from="points_in"
 				to="points_cluster_filter" />
-			 -->
-			<remap
-				from="points_in"
-				to="points_cluster" />
 			<remap
 				from="~points_out"
 				to="points_cluster_sum" />
-		</node>
-
-		<node
-			name="zigzag_filter_node"
-			pkg="lrm_wrappers"
-			type="zigzag_filter_node"
-			respawn="true"
-			output="screen"
-		>
-			<!-- 
-			<remap
-				from="points_in"
-				to="points_cluster_filter" />
-			 -->
-			<remap
-				from="points_in"
-				to="points_cluster_rgb" />
-			<remap
-				from="~points_out"
-				to="points_zigzag_filter" />
 		</node>
 
 		<node
@@ -111,7 +138,22 @@
 				from="~points_out"
 				to="ground_points_flattened" />
 		</node>
-
+-->
+		<node
+			pkg="nodelet"
+			type="nodelet"
+			name="flatten_ground_filter_node"
+			args="load lrm_stereo/flatten_ground /camera_nodelet_manager --no-bond"
+			output="screen"
+			respawn="true"
+		>
+			<remap
+				from="points_in"
+				to="ground_points_through_voxel" />
+			<remap
+				from="~points_out"
+				to="ground_points_flattened" />
+		</node>
 
 	</group>
 
