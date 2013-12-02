@@ -304,6 +304,8 @@ protected:
   double m_degradeTime;
   bool m_fullDownProjectMap;
 
+  bool m_useGround;
+
 private:
   boost::mutex m_mutex;
   //boost::recursive_mutex m_mutex;
