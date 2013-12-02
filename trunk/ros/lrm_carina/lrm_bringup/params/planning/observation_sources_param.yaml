@@ -10,7 +10,7 @@ cloud:
     max_obstacle_height: 2.0, 
     min_obstacle_height: 0.1,
     observation_persistence: 0.0,
-    expected_update_rate: 1.0,
+    expected_update_rate: 0.0,
     
     obstacle_range: 15.0,
     raytrace_range: 45.0
@@ -83,8 +83,8 @@ map_cloud:
     observation_persistence: 0.0,
     expected_update_rate: 0.0,
     
-    obstacle_range: 15.0,
-    raytrace_range: 45.0
+    obstacle_range: 9.0,
+    raytrace_range: 10.0
   }
   
 cluster_cloud:
@@ -99,7 +99,7 @@ cluster_cloud:
     observation_persistence: 0.0,
     expected_update_rate: 0.0,
     
-    obstacle_range: 15.0,
-    raytrace_range: 45.0
+    obstacle_range: 9.0,
+    raytrace_range: 10.0
   }
   

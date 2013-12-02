@@ -10,14 +10,14 @@ footprint: [[0.25, -0.8], [0.5, -0.4], [0.6, 0.0], [0.5, 0.4], [0.25, 0.8], [-2.
 
 #different for local and global
 #inflation_radius: 1.95
-inflation_radius: 2.74
+inflation_radius: 2.8
 
 transform_tolerance: 0.4                    # default 0.3
-cost_scaling_factor: 10                     # default 10
-robot_radius: 2.5                           # using footprint
+cost_scaling_factor: 10                      # default 10
+#robot_radius: 2.5                          # using footprint
 
-lethal_cost_threshold: 75
-unknown_cost_value: 255
+lethal_cost_threshold: 70
+unknown_cost_value: 50
 track_unknown_space: false
 
 #robot_radius: 2.740               # circunscribed
