@@ -31,22 +31,63 @@
 #define REGION_GROWING_H_
 
 #include <ros/ros.h>
+
+#include <sensor_msgs/PointCloud2.h>
+
+#include <pcl/point_types.h>
+#include <pcl/search/search.h>
+#include <pcl/search/kdtree.h>
+#include <pcl/features/normal_3d.h>
+#include <pcl/filters/passthrough.h>
+#include <pcl/segmentation/region_growing.h>
+#include <pcl/filters/extract_indices.h>
+
+#include <pcl/ros/conversions.h>
 #include <pcl_ros/transforms.h>
-#include <pcl_ros/filters/filter.h>
-#include <nodelet/nodelet.h>
+
+#include <tf/transform_listener.h>
+#include <tf/message_filter.h>
+
+#include <vector>
+
+#include <boost/foreach.hpp>
+#include <boost/make_shared.hpp>
+#include <dynamic_reconfigure/server.h>
+
+#include "lrm_stereo/RegionGrowingFilterConfig.h"
 
 namespace lrm_stereo {
 
-class RegionGrowingFilter: public pcl_ros::Filter {
+class RegionGrowingFilter {
+private:
+	ros::NodeHandle& nh_;
+	ros::NodeHandle& nh_priv_;
+	ros::Publisher cloud_pub_;
+	ros::Subscriber cloud_sub_;
+
+	dynamic_reconfigure::Server<RegionGrowingFilterConfig> srv_;
+
+	int _queue_size;
+	double _radius;
+	double _k_search;
+	int _min_size;
+	int _max_size;
+	int _neighbours;
+	double _smoothness;
+	double _curvature;
+	bool _to_map;
+	bool _use_cloud_color;
+	std::string _map_frame_id;
+
+	boost::shared_ptr<tf::TransformListener> tf_listener_;
+
 protected:
-	void filter(const PointCloud2::ConstPtr &input, const IndicesPtr &indices, PointCloud2 &output);
+	void pointcloudCallback(const sensor_msgs::PointCloud2::ConstPtr& msg);
 public:
-	EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+	RegionGrowingFilter(ros::NodeHandle& nh, ros::NodeHandle& nh_priv);
+	//virtual ~RegionGrowingFilter();
+	void reconfig(RegionGrowingFilterConfig &config, uint32_t level);
 };
 }
-
-#include <pluginlib/class_list_macros.h>
-typedef lrm_stereo::RegionGrowingFilter RegionGrowingFilter;
-PLUGINLIB_EXPORT_CLASS(RegionGrowingFilter, nodelet::Nodelet);
 
 #endif /* REGION_GROWING_H_ */

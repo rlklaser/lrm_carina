@@ -29,30 +29,65 @@
 
 #include "lrm_stereo/region_growing.h"
 
-void lrm_stereo::RegionGrowingFilter::filter(const PointCloud2::ConstPtr &input, const IndicesPtr &indices, PointCloud2 &output) {
-	//pcl::PointCloud<pcl::PointXYZ> cloud_in;
-	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_in(new pcl::PointCloud<pcl::PointXYZ>);
-	pcl::fromROSMsg(*input, *cloud_in);
+namespace lrm_stereo {
 
-	pcl::search::Search<pcl::PointXYZ>::Ptr tree = boost::shared_ptr<pcl::search::Search<pcl::PointXYZ> >(new pcl::search::KdTree<pcl::PointXYZ>);
+RegionGrowingFilter::RegionGrowingFilter(ros::NodeHandle& nh, ros::NodeHandle& nh_priv) :
+		nh_(nh), nh_priv_(nh_priv) {
+
+	tf_listener_.reset(new tf::TransformListener(nh_));
+
+	nh_priv_.param("queue_size", _queue_size, 100);
+
+	cloud_sub_ = nh_.subscribe("points_in", _queue_size, &RegionGrowingFilter::pointcloudCallback, this);
+	cloud_pub_ = nh_.advertise<sensor_msgs::PointCloud2>(nh_priv_.getNamespace() + "/points_out", 1);
+
+	nh_priv_.param("radius", _radius, 0.2);
+	nh_priv_.param("k_search", _k_search, 30.0); //50
+	nh_priv_.param("min_size", _min_size, 100);
+	nh_priv_.param("max_size", _max_size, 5000); //100000
+	nh_priv_.param("neighbours", _neighbours, 30);
+	nh_priv_.param("curvature", _curvature, 2.0); //50
+	nh_priv_.param("smoothness", _smoothness, 35.0); //50
+	nh_priv_.param("to_map", _to_map, true);
+	nh_priv_.param("map_frame_id", _map_frame_id, std::string("/map"));
+	nh_priv_.param("use_cloud_color", _use_cloud_color, false);
+
+	dynamic_reconfigure::Server<lrm_stereo::RegionGrowingFilterConfig>::CallbackType
+		f = boost::bind(&RegionGrowingFilter::reconfig, this, _1, _2);
+	srv_.setCallback(f);
+}
+
+void RegionGrowingFilter::pointcloudCallback(const sensor_msgs::PointCloud2::ConstPtr& msg) {
+
+	if (cloud_pub_.getNumSubscribers() == 0)
+		return;
+
+	Eigen::Matrix4f sensorToWorld;
+
+	if (_to_map) {
+		tf::StampedTransform sensorToWorldTf;
+		try {
+			tf_listener_->waitForTransform(_map_frame_id, msg->header.frame_id, msg->header.stamp, ros::Duration(1.0));
+			tf_listener_->lookupTransform(_map_frame_id, msg->header.frame_id, msg->header.stamp, sensorToWorldTf);
+		} catch (tf::TransformException& ex) {
+			ROS_ERROR_STREAM("Transform error of sensor data: " << ex.what() << ", quitting callback");
+			return;
+		}
+		pcl_ros::transformAsMatrix(sensorToWorldTf, sensorToWorld);
+	}
+
+	pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud_in(new pcl::PointCloud<pcl::PointXYZRGB>);
+	pcl::fromROSMsg(*msg, *cloud_in);
+
+	pcl::search::Search<pcl::PointXYZRGB>::Ptr tree = boost::shared_ptr<pcl::search::Search<pcl::PointXYZRGB> >(new pcl::search::KdTree<pcl::PointXYZRGB>);
 	pcl::PointCloud<pcl::Normal>::Ptr normals(new pcl::PointCloud<pcl::Normal>);
-	pcl::NormalEstimation<pcl::PointXYZ, pcl::Normal> normal_estimator;
+	pcl::NormalEstimation<pcl::PointXYZRGB, pcl::Normal> normal_estimator;
 	normal_estimator.setSearchMethod(tree);
 	normal_estimator.setInputCloud(cloud_in);
-	//normal_estimator.setKSearch(_k_search);
-	normal_estimator.setRadiusSearch(0.2);
+	normal_estimator.setRadiusSearch(_radius);
 	normal_estimator.compute(*normals);
 
-	/*
-	 pcl::IndicesPtr indices(new std::vector<int>);
-	 pcl::PassThrough<pcl::PointXYZ> pass;
-	 pass.setInputCloud(cloud_in);
-	 pass.setFilterFieldName("z");
-	 pass.setFilterLimits(0.0, 1.0);
-	 pass.filter(*indices);
-	 */
-
-	pcl::RegionGrowing<pcl::PointXYZ, pcl::Normal> reg;
+	pcl::RegionGrowing<pcl::PointXYZRGB, pcl::Normal> reg;
 	reg.setMinClusterSize(_min_size);
 	reg.setMaxClusterSize(_max_size);
 	reg.setSearchMethod(tree);
@@ -66,7 +101,13 @@ void lrm_stereo::RegionGrowingFilter::filter(const PointCloud2::ConstPtr &input,
 	std::vector<pcl::PointIndices> clusters;
 	reg.extract(clusters);
 
-	pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud = reg.getColoredCloud();
+	pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud;
+
+	if (_use_cloud_color) {
+		cloud = cloud_in;
+	} else {
+		cloud = reg.getColoredCloud();
+	}
 
 	ROS_DEBUG_STREAM("Number of clusters is equal to " << clusters.size());
 
@@ -82,9 +123,6 @@ void lrm_stereo::RegionGrowingFilter::filter(const PointCloud2::ConstPtr &input,
 		BOOST_FOREACH(pcl::PointIndices indice, clusters)
 		{
 			ROS_DEBUG_STREAM("Number of points in cluster " << k << ":" << indice.indices.size());
-			//BOOST_FOREACH(int i, indices.indices) {
-			//	pcl::PointXYZ* pt = &cloud_in->points[i];
-			//}
 			k++;
 
 			if(indice.indices.size()>0) {
@@ -95,28 +133,23 @@ void lrm_stereo::RegionGrowingFilter::filter(const PointCloud2::ConstPtr &input,
 				pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud_p(new pcl::PointCloud<pcl::PointXYZRGB>);
 				extract.filter (*cloud_p);
 
-				//pcl::transformPointCloud(*cloud_p, *cloud_p, sensorToWorld);
+				if(_to_map) {
+					pcl::transformPointCloud(*cloud_p, *cloud_p, sensorToWorld);
+				}
 
-				//sensor_msgs::PointCloud2 cloud_out;
-				pcl::toROSMsg(*cloud_p, output);
-				//output.header.frame_id = "/map";
-				//cloud_out.header.frame_id = msg->header.frame_id;
-				//output.header.stamp = ros::Time::now();
-				//pc_pub.publish(cloud_out);
+				sensor_msgs::PointCloud2 cloud_out;
+				pcl::toROSMsg(*cloud_p, cloud_out);
+				cloud_out.header.frame_id = _to_map ? _map_frame_id : msg->header.frame_id;
+				cloud_out.header.stamp = msg->header.stamp; // ros::Time::now();
+				cloud_pub_.publish(cloud_out);
 
 			}
 		}
-
-		//out all cloud, red points is the ones not segmented
-
-		/*
-		 sensor_msgs::PointCloud2 cloud_out;
-		 pcl::toROSMsg(*cloud, cloud_out);
-		 //cloud_out.header.frame_id = "/map";
-		 //cloud_out.header.stamp = ros::Time::now();
-		 cloud_out.header = msg->header;
-		 pc_pub.publish(cloud_out);
-		 */
 	}
 }
 
+void RegionGrowingFilter::reconfig(lrm_stereo::RegionGrowingFilterConfig &config, uint32_t level) {
+	_use_cloud_color = config.use_cloud_color;
+}
+
+}
