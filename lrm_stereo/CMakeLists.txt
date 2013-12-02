@@ -48,14 +48,22 @@ rosbuild_add_library(lrm_stereo
 	src/feature_matcher.cpp
 	src/ros_pcl_stereo.cpp
 	src/disparity_bm_cuda.cpp 
-	src/throttle_stereo.cpp
-	src/throttle_stereo_nodelet.cpp
 	src/point_cloud_colorless.cpp
 	src/point_cloud2.cpp
 	src/segmentation_nodelet.cpp
 	src/moving_roi_nodelet.cpp
+
+	src/throttle_stereo.cpp
+	src/throttle_stereo_nodelet.cpp
+		
 	src/region_growing.cpp
 	src/region_growing_nodelet.cpp
+	
+	src/flatten_ground.cpp
+	src/flatten_ground_nodelet.cpp
+
+	src/zigzag_cut.cpp
+	src/zigzag_cut_nodelet.cpp
 	)
 rosbuild_add_boost_directories()
 #target_link_libraries(lrm_stereo pcl_ros_filters)

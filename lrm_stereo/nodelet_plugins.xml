@@ -88,5 +88,23 @@
 		<description>Region Growing Cloud Filter
 		</description>
 	</class>
-	
+
+	<class
+		name="lrm_stereo/flatten_ground"
+		type="lrm_stereo::FlattenGroundNodelet"
+		base_class_type="nodelet::Nodelet"
+	>
+		<description>Flatten Ground Cloud Filter
+		</description>
+	</class>
+
+	<class
+		name="lrm_stereo/zigzag_cut"
+		type="lrm_stereo::ZigzagCutNodelet"
+		base_class_type="nodelet::Nodelet"
+	>
+		<description>ZigZag Cut Filter
+		</description>
+	</class>
+
 </library>

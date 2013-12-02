@@ -20,7 +20,7 @@
  */
 
 /**
- * @file region_growing_nodelet.cpp
+ * @file flatten_ground_nodelet.cpp
  * @brief 
  * @author Rafael Luiz Klaser <rlklaser@gmail.com>
  * @date Dec 2, 2013
@@ -30,29 +30,29 @@
 #include <nodelet/nodelet.h>
 #include <pluginlib/class_list_macros.h>
 
-#include "lrm_stereo/region_growing.h"
+#include "lrm_stereo/flatten_ground.h"
 
 namespace lrm_stereo
 {
 
-class RegionGrowingNodelet: public nodelet::Nodelet
+class FlattenGroundNodelet: public nodelet::Nodelet
 {
 public:
 	virtual void onInit();
 private:
-	boost::shared_ptr<RegionGrowingFilter> server_;
+	boost::shared_ptr<FlattenGroundFilter> server_;
 
 };
 
-void RegionGrowingNodelet::onInit()
+void FlattenGroundNodelet::onInit()
 {
-	ROS_WARN("region growing nodelet init");
+	ROS_WARN("flatten ground nodelet init");
 	ros::NodeHandle& nh = getNodeHandle();
 	ros::NodeHandle& private_nh = getPrivateNodeHandle();
 
-	server_.reset(new RegionGrowingFilter(nh, private_nh));
+	server_.reset(new FlattenGroundFilter(nh, private_nh));
 }
 
 }
 // Register nodelet
-PLUGINLIB_EXPORT_CLASS(lrm_stereo::RegionGrowingNodelet, nodelet::Nodelet)
+PLUGINLIB_EXPORT_CLASS(lrm_stereo::FlattenGroundNodelet, nodelet::Nodelet)
