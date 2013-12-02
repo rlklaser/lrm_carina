@@ -10,14 +10,14 @@ local_costmap:
   
   static_map: false
   rolling_window: true
-  width: 14.0
-  height: 14.0
+  width: 12.0
+  height: 12.0
   resolution: 0.1
   origin_x: 0.0
   origin_y: 0.0
   
-  #save_debug_pgm: false
-  save_debug_pgm: true
+  save_debug_pgm: false
+  #save_debug_pgm: true
   
   #observation_sources: cloud ground_cloud
   #observation_sources: local_cloud global_cloud ground_cloud
@@ -25,4 +25,4 @@ local_costmap:
   #observation_sources: cloud map_cloud
   observation_sources: cluster_cloud map_cloud
 
-  inflation_radius: 2.9
+  #inflation_radius: 2.9

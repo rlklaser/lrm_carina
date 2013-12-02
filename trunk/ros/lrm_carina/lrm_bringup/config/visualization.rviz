@@ -358,7 +358,7 @@ Visualization Manager:
       Marker Topic: /occupied_cells_vis_array
       Name: MarkerArray
       Namespaces:
-        {}
+        depth_16: true
       Queue Size: 100
       Value: true
     - Class: rviz/MarkerArray
@@ -746,8 +746,8 @@ Visualization Manager:
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
-            Max Value: 66.5334
-            Min Value: 5.07351
+            Max Value: 53.8424
+            Min Value: 5.32529
             Value: true
           Axis: X
           Channel Name: intensity
@@ -771,7 +771,7 @@ Visualization Manager:
           Use Fixed Frame: true
           Use rainbow: true
           Value: true
-      Enabled: true
+      Enabled: false
       Name: PointCloud
     - Class: rviz/Group
       Displays:
