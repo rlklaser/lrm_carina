@@ -12,6 +12,8 @@ region_growing_seg:
   curvature: 2.0
   smoothness: 35.0
 
+  use_cloud_color: false
+
 region_growing_rgb_seg:
   k_search: 30
   min_size: 100
@@ -22,7 +24,11 @@ region_growing_rgb_seg:
   smoothness: 35.0
   
   to_map: true   #necessary if will sum
+  use_cloud_color: true
   
 cluster_sum_filtered:
   frame_count: 3
   incremental: false
+
+#zigzag_filter_node:
+#flatten_ground_filter_node:

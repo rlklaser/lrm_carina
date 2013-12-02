@@ -23,6 +23,7 @@ pointcloud_max_z: 0.0
 occupancy_min_z: 0.0
 occupancy_max_z: 2.1
     
+use_ground: false
 filter_ground: false
 #ground_filter/distance: 0.1
 #ground_filter/angle: 0.4

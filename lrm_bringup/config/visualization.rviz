@@ -8,7 +8,6 @@ Panels:
         - /TF1/Tree1
         - /Camera1/Visibility1
         - /Camera2/Visibility1
-        - /PointCloud1/PointCloud26
         - /Navigation1/GridCells5
       Splitter Ratio: 0.470588
     Tree Height: 747
@@ -303,6 +302,7 @@ Visualization Manager:
           PointCloud2: true
           Value: true
         Pose: true
+        PoseArray: true
         RobotModel: false
         TF: false
         Value: true
@@ -341,6 +341,7 @@ Visualization Manager:
           PointCloud2: true
           Value: true
         Pose: true
+        PoseArray: true
         RobotModel: false
         TF: true
         Value: true
@@ -357,7 +358,7 @@ Visualization Manager:
       Marker Topic: /occupied_cells_vis_array
       Name: MarkerArray
       Namespaces:
-        depth_16: true
+        {}
       Queue Size: 100
       Value: true
     - Class: rviz/MarkerArray
@@ -424,7 +425,7 @@ Visualization Manager:
       Color: 255; 85; 0
       Color Transformer: FlatColor
       Decay Time: 0
-      Enabled: false
+      Enabled: true
       Max Color: 255; 255; 255
       Max Intensity: 4096
       Min Color: 0; 0; 0
@@ -439,7 +440,7 @@ Visualization Manager:
       Topic: /base_scan
       Use Fixed Frame: true
       Use rainbow: true
-      Value: false
+      Value: true
     - Alpha: 1
       Axes Length: 1
       Axes Radius: 0.1
@@ -514,7 +515,7 @@ Visualization Manager:
           Position Tolerance: 0.1
           Topic: /vo_odometry/odom
           Value: true
-      Enabled: true
+      Enabled: false
       Name: Odometry
     - Class: rviz/Group
       Displays:
@@ -670,7 +671,7 @@ Visualization Manager:
           Color: 255; 255; 255
           Color Transformer: RGB8
           Decay Time: 0
-          Enabled: true
+          Enabled: false
           Max Color: 255; 255; 255
           Max Intensity: 4096
           Min Color: 0; 0; 0
@@ -685,7 +686,7 @@ Visualization Manager:
           Topic: /stereo/points2
           Use Fixed Frame: true
           Use rainbow: true
-          Value: true
+          Value: false
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -714,7 +715,63 @@ Visualization Manager:
           Use Fixed Frame: true
           Use rainbow: true
           Value: false
-      Enabled: false
+        - Alpha: 1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 255; 255; 255
+          Color Transformer: RGB8
+          Decay Time: 0
+          Enabled: true
+          Max Color: 255; 255; 255
+          Max Intensity: 4096
+          Min Color: 0; 0; 0
+          Min Intensity: 0
+          Name: PointCloud2
+          Position Transformer: XYZ
+          Queue Size: 10
+          Selectable: true
+          Size (Pixels): 3
+          Size (m): 0.01
+          Style: Points
+          Topic: /cloud_in
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: true
+        - Alpha: 1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 66.5334
+            Min Value: 5.07351
+            Value: true
+          Axis: X
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 255; 255; 255
+          Color Transformer: AxisColor
+          Decay Time: 0
+          Enabled: true
+          Max Color: 255; 255; 255
+          Max Intensity: 4096
+          Min Color: 0; 0; 0
+          Min Intensity: 0
+          Name: PointCloud2
+          Position Transformer: XYZ
+          Queue Size: 10
+          Selectable: true
+          Size (Pixels): 3
+          Size (m): 0.01
+          Style: Points
+          Topic: /ground_cloud_in
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: true
+      Enabled: true
       Name: PointCloud
     - Class: rviz/Group
       Displays:
@@ -800,6 +857,27 @@ Visualization Manager:
           Value: true
       Enabled: true
       Name: Navigation
+    - Arrow Length: 0.3
+      Class: rviz/PoseArray
+      Color: 85; 0; 0
+      Enabled: true
+      Name: PoseArray
+      Topic: /particlecloud
+      Value: true
+    - Alpha: 1
+      Axes Length: 1
+      Axes Radius: 0.1
+      Class: rviz/Pose
+      Color: 255; 25; 0
+      Enabled: false
+      Head Length: 0.3
+      Head Radius: 0.1
+      Name: Pose
+      Shaft Length: 1
+      Shaft Radius: 0.05
+      Shape: Arrow
+      Topic: ""
+      Value: false
   Enabled: true
   Global Options:
     Background Color: 255; 255; 255
@@ -820,17 +898,17 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 19.586
+      Distance: 23.3591
       Focal Point:
-        X: 10.1881
-        Y: 0.0370335
-        Z: -1.18001
+        X: 10.6582
+        Y: 0.154993
+        Z: -2.68766
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 0.404797
+      Pitch: 0.484797
       Target Frame: /base_footprint
       Value: Orbit (rviz)
-      Yaw: 3.14904
+      Yaw: 3.12404
     Saved: ~
 Window Geometry:
   Camera:
