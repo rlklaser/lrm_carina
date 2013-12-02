@@ -91,8 +91,8 @@ rosbuild_add_executable(cluster_filter_node src/cluster_filter_node.cpp)
 rosbuild_add_executable(principal_curvature_node 
     src/principal_curvature_node.cpp)
 
-rosbuild_add_executable(zigzag_filter_node 
-    src/zigzag_filter.cpp)
+#rosbuild_add_executable(zigzag_filter_node 
+#    src/zigzag_filter.cpp)
 
 rosbuild_add_executable(moving_leastsquares_node 
     src/moving_leastsquares_node.cpp)
@@ -100,8 +100,8 @@ rosbuild_add_executable(moving_leastsquares_node
 rosbuild_add_executable(smooth_axis_filter_node 
     src/smooth_axis_filter.cpp)
 
-rosbuild_add_executable(flatten_ground_filter_node 
-    src/flatten_ground_filter_node.cpp)    
+#rosbuild_add_executable(flatten_ground_filter_node 
+#    src/flatten_ground_filter_node.cpp)    
     
 rosbuild_add_executable(interactive_tf 
     src/interactive_tf.cpp)
