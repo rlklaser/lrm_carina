@@ -54,8 +54,10 @@ void FlattenGroundFilter::pointcloudCallback(const sensor_msgs::PointCloud2::Con
 
 	itrtor end = cloud.points.end();
 	for (itrtor itr = cloud.points.begin(); itr != end; ++itr) {
-		itr->z = 0;
-		cloud_out.points.push_back(*itr);
+		//if(itr->z<0.15) {
+			itr->z = 0;
+			cloud_out.points.push_back(*itr);
+		//}
 	}
 
 	pcl::toROSMsg(cloud_out, msg_out);
