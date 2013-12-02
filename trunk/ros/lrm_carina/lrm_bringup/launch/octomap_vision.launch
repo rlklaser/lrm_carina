@@ -1,20 +1,6 @@
 <launch>
 
 	<include file="$(find lrm_bringup)/launch/stereo_vision.launch" />
-
-	<rosparam
-		command="load"
-		file="$(find lrm_bringup)/params/octomap_parameters.yaml" />
-	<node
-		pkg="lrm_octomap_server"
-		type="octomap_server_node"
-		name="octomap_server"
-		output="screen"
-		respawn="true"
-	>
-		<remap
-			from="projected_map"
-			to="map" />
-	</node>
+	<include file="$(find lrm_bringup)/launch/octomap_mapping.launch" />
 
 </launch>

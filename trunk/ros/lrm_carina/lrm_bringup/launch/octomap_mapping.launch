@@ -5,13 +5,14 @@
 		name="/use_sim_time"
 		value="true" />
 	-->
-	
+
 	<rosparam
 		command="load"
-		file="$(find lrm_bringup)/params/octomap_parameters.yaml" />
+		file="$(find lrm_bringup)/params/octomap_parameters.yaml"
+		ns="octomap_server" />
 		
     <!-- launch-prefix="valgrind -v - -tool=callgrind" -->
-    
+
 	<node
 		pkg="lrm_octomap_server"
 		type="octomap_server_node"
@@ -35,7 +36,7 @@
 -->
 		<remap
 			from="projected_map"
-			to="map" />
+			to="/map" />
 
 <!-- 
 octomap_saver
