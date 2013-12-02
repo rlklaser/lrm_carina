@@ -30,29 +30,29 @@
 #include <nodelet/nodelet.h>
 #include <pluginlib/class_list_macros.h>
 
-#include "lrm_stereo/region_growing.h"
+#include "lrm_stereo/zigzag_cut.h"
 
 namespace lrm_stereo
 {
 
-class RegionGrowingNodelet: public nodelet::Nodelet
+class ZigzagCutNodelet: public nodelet::Nodelet
 {
 public:
 	virtual void onInit();
 private:
-	boost::shared_ptr<RegionGrowingFilter> server_;
+	boost::shared_ptr<ZigzagCutFilter> server_;
 
 };
 
-void RegionGrowingNodelet::onInit()
+void ZigzagCutNodelet::onInit()
 {
-	ROS_WARN("region growing nodelet init");
+	ROS_WARN("zigzag cut nodelet init");
 	ros::NodeHandle& nh = getNodeHandle();
 	ros::NodeHandle& private_nh = getPrivateNodeHandle();
 
-	server_.reset(new RegionGrowingFilter(nh, private_nh));
+	server_.reset(new ZigzagCutFilter(nh, private_nh));
 }
 
 }
 // Register nodelet
-PLUGINLIB_EXPORT_CLASS(lrm_stereo::RegionGrowingNodelet, nodelet::Nodelet)
+PLUGINLIB_EXPORT_CLASS(lrm_stereo::ZigzagCutNodelet, nodelet::Nodelet)
