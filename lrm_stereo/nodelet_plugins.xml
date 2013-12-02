@@ -80,4 +80,13 @@
 		<description>Nodelet to produce XYZRGB PointCloud2 messages</description>
 	</class>
 
+	<class
+		name="lrm_stereo/region_growing"
+		type="lrm_stereo::RegionGrowingNodelet"
+		base_class_type="nodelet::Nodelet"
+	>
+		<description>Region Growing Cloud Filter
+		</description>
+	</class>
+	
 </library>
