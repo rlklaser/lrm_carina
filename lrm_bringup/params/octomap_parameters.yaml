@@ -1,63 +1,63 @@
-octomap_server:
-    latch: false
-    wait_tf: 0.05
-    #wait_tf: -1 #do not wait
-    rate: 5
-    frame_id: /map
-    base_frame_id: /base_footprint
-    #source_frame_id: /base_stereo_camera
-    source_frame_id: /camera_center_link
-    #height_map: true
-    height_map: false
-    resolution: 0.1
+
+latch: false
+wait_tf: 0.05
+#wait_tf: -1 #do not wait
+rate: 5
+frame_id: /map
+base_frame_id: /base_footprint
+#source_frame_id: /base_stereo_camera
+source_frame_id: /camera_center_link
+#height_map: true
+height_map: false
+resolution: 0.1
     
-    max_depth: 16
+max_depth: 16
     
-    #filter_speckles: false
-    filter_speckles: true
+#filter_speckles: false
+filter_speckles: true
     
-    #if max==min==0, no filter
-    pointcloud_min_z: 0.0
-    pointcloud_max_z: 0.0
+#if max==min==0, no filter
+pointcloud_min_z: 0.0
+pointcloud_max_z: 0.0
     
-    occupancy_min_z: 0.0
-    occupancy_max_z: 2.1
+occupancy_min_z: 0.0
+occupancy_max_z: 2.1
     
-    filter_ground: false
-    #ground_filter/distance: 0.1
-    #ground_filter/angle: 0.4
-    #ground_filter/plane_distance: 0.15
+filter_ground: false
+#ground_filter/distance: 0.1
+#ground_filter/angle: 0.4
+#ground_filter/plane_distance: 0.15
     
-    compress_map: false                      #automatic after updateNode
-    incremental_2D_projection: true
-    #incremental_2D_projection: false
+compress_map: false                      #automatic after updateNode
+incremental_2D_projection: true
+#incremental_2D_projection: false
     
-    unknown_cost: 25     #first miss
-    maximum_cost: 100
-    decay_cost: 0.90
-    update_occlusion: 0.495
+unknown_cost: 25     #first miss
+maximum_cost: 100
+decay_cost: 0.90
+update_occlusion: 0.495
     
-    degrade_time: 0.0 # 0 means no degradation
+degrade_time: 0.0 # 0 means no degradation
     
-    full_down_project_map: true
-     
-    sensor_model:
-      #max_range: 15
-      max_range: 45
-      max_range_occ: 1.0
+full_down_project_map: true
     
-      mid_dist: 5.0
-      far_dist: 10.0
-      hit: 0.57
-      hit_mid: 0.54
-      hit_far: 0.52
-      miss_to_gnd: 0.35
-      miss_to_obs: 0.25
-      occ: 0.7
+sensor_model:
+  #max_range: 15
+  max_range: 45
+  max_range_occ: 1.0
     
-      #max: 0.75
-      #min: 0.25
-      #no clamping
-      max: 0.98
-      min: 0.05
+  mid_dist: 5.0
+  far_dist: 10.0
+  hit: 0.57
+  hit_mid: 0.54
+  hit_far: 0.52
+  miss_to_gnd: 0.35
+  miss_to_obs: 0.25
+  occ: 0.7
+    
+  #max: 0.75
+  #min: 0.25
+  #no clamping
+  max: 0.98
+  min: 0.05
     

@@ -1,0 +1,40 @@
+<launch>
+	
+	<!-- 
+	<param
+		name="use_sim_time"
+		value="true" />
+	 -->
+
+	<node
+		pkg="lrm_sensors"
+		type="cloud_to_scan"
+		name="point_to_scan"
+		output="screen"
+	>
+		<remap
+			from="cloud"
+			to="/cloud_in" />
+		<remap
+			from="scan"
+			to="/base_scan" />
+	</node>
+
+	<rosparam
+		command="load"
+		file="$(find lrm_bringup)/params/amcl_params.yaml"
+		ns="amcl" />
+
+	<node
+		pkg="amcl"
+		type="amcl"
+		name="amcl"
+		output="screen"
+		respawn="true"
+	>
+		<remap
+			from="scan"
+			to="/base_scan" />
+	</node>
+
+</launch>
