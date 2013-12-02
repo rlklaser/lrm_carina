@@ -16,7 +16,7 @@ transform_tolerance: 0.4                    # default 0.3
 cost_scaling_factor: 10                      # default 10
 #robot_radius: 2.5                          # using footprint
 
-lethal_cost_threshold: 70
+lethal_cost_threshold: 60
 unknown_cost_value: 50
 track_unknown_space: false
 
