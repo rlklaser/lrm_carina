@@ -63,7 +63,7 @@ OctomapServer::OctomapServer(ros::NodeHandle nh) :
 		m_compressMap(false), m_incrementalUpdate(false), m_waitTransform(2.0),
 		m_occupancyThres(0.95), m_updateOcclusion(0.5),
 		m_unknownCost(-1), m_maximumCost(120), m_decayCost(0.8), m_ticksOnSec(0), m_rate(5),
-		m_degradeTime(0), m_fullDownProjectMap(false)
+		m_degradeTime(0), m_fullDownProjectMap(false), m_useGround(true)
 {
 
 	ros::NodeHandle private_nh(nh);
@@ -117,6 +117,8 @@ OctomapServer::OctomapServer(ros::NodeHandle nh) :
 	private_nh.param("maximum_cost", m_maximumCost, m_maximumCost);
 	private_nh.param("decay_cost", m_decayCost, m_decayCost);
 
+	private_nh.param("use_ground", m_useGround, m_useGround);
+
 	private_nh.param("rate", m_rate, m_rate);
 
 	if (m_filterGroundPlane && (m_pointcloudMinZ > 0.0 || m_pointcloudMaxZ < 0.0)) {
@@ -167,7 +169,9 @@ OctomapServer::OctomapServer(ros::NodeHandle nh) :
 //	m_pointCloudGroundSub = new message_filters::Subscriber<sensor_msgs::PointCloud2>(m_nh, "ground_cloud_in", 100);
 
 	m_pointCloudSubs = m_nh.subscribe<sensor_msgs::PointCloud2>("cloud_in", 100, &OctomapServer::insertCloudCallback, this);
-	m_pointCloudGroundSubs = m_nh.subscribe<sensor_msgs::PointCloud2>("ground_cloud_in", 50, &OctomapServer::insertCloudGroundCallback, this);
+	if(m_useGround) {
+		m_pointCloudGroundSubs = m_nh.subscribe<sensor_msgs::PointCloud2>("ground_cloud_in", 50, &OctomapServer::insertCloudGroundCallback, this);
+	}
 
 //	m_tfPointCloudSub = new tf::MessageFilter<sensor_msgs::PointCloud2>(*m_pointCloudSub, m_tfListener, m_worldFrameId, 50);
 //	m_tfPointCloudSub->registerCallback(boost::bind(&OctomapServer::insertCloudCallback, this, _1));
