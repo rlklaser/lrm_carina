@@ -85,6 +85,7 @@
 #include <angles/angles.h>
 
 #include <boost/thread/mutex.hpp>
+#include <boost/thread/recursive_mutex.hpp>
 
 //#define USE_COLOR
 
@@ -304,7 +305,8 @@ protected:
   bool m_fullDownProjectMap;
 
 private:
-  boost::mutex m_mutex;
+  //boost::mutex m_mutex;
+  boost::recursive_mutex m_mutex;
 
   ros::Timer m_publisherTimer;
 
