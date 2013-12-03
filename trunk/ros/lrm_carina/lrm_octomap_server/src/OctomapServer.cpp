@@ -1081,10 +1081,10 @@ bool OctomapServer::clearBBXSrv(BBXSrv::Request& req, BBXSrv::Response& resp) {
 	OcTreeKey kmin = m_octree->coordToKey(min);
 	OcTreeKey kmax = m_octree->coordToKey(max);
 
-	if(kmin[3] <= 0 || kmax[3] <= 0) {
-		ROS_WARN_STREAM("Cannot clear these coordinates");
-		return false;
-	}
+	//if(kmin[3] <= 0 || kmax[3] <= 0) {
+	//	ROS_WARN_STREAM("Cannot clear these coordinates");
+	//	return false;
+	//}
 
 	if (m_octree->size()<8) {
 		return false;
