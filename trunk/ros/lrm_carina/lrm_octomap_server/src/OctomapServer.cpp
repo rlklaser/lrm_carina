@@ -1081,8 +1081,12 @@ bool OctomapServer::clearBBXSrv(BBXSrv::Request& req, BBXSrv::Response& resp) {
 	OcTreeKey kmin = m_octree->coordToKey(min);
 	OcTreeKey kmax = m_octree->coordToKey(max);
 
-	if(kmin[0] <0 || kmax[0] <0) {
+	if(kmin[3] <= 0 || kmax[3] <= 0) {
 		ROS_WARN_STREAM("Cannot clear these coordinates");
+		return false;
+	}
+
+	if (m_octree->size()<8) {
 		return false;
 	}
 
@@ -1468,9 +1472,10 @@ void OctomapServer::handlePreNodeTraversal(const ros::Time& rostime) {
 
 			// test for max idx:
 			uint max_idx = m_gridmap.info.width * mapUpdateBBXMaxY + mapUpdateBBXMaxX;
-			if (max_idx >= m_gridmap.data.size())
+			if (max_idx >= m_gridmap.data.size()) {
 				ROS_ERROR("BBX index not valid: %d (max index %zu for size %d x %d) update-BBX is: [%zu %zu]-[%zu %zu]", max_idx, m_gridmap.data.size(), m_gridmap.info.width, m_gridmap.info.height, mapUpdateBBXMinX, mapUpdateBBXMinY, mapUpdateBBXMaxX, mapUpdateBBXMaxY);
-
+				return;
+			}
 			// reset proj. 2D map in bounding box:
 			for (unsigned int j = mapUpdateBBXMinY; j <= mapUpdateBBXMaxY; ++j) {
 				//std::fill_n(m_gridmap.data.begin() + m_gridmap.info.width * j + mapUpdateBBXMinX, numCols, -1);
