@@ -3,7 +3,7 @@
 	<model name="finihed">
 		<pose>0 0 0 0 0 0</pose>
 		<static>true</static>
-		<allow_auto_disable>true</allow_auto_disable>
+		<allow_auto_disable>false</allow_auto_disable>
 		<link name="link">
 			<pose>0 0 0 0 0 0</pose>
 			<inertial>
@@ -25,14 +25,12 @@
 					<mesh>
 						<uri>model://finihed/meshes/finihed.dae</uri>
 					</mesh>
-					
+					-->
 					<pose>0 -0.05 0 0 0 0</pose>
-
 					<cylinder>
 						<radius>0.15</radius>
-						<length>5.0</length>
+						<length>0.001</length>
 					</cylinder>
-					-->
 				</geometry>
 			</collision>
 			<visual name="visual">
@@ -42,17 +40,7 @@
 						<scale>1 1 1</scale>
 					</mesh>
 				</geometry>
-				<!-- 
-				<transparency>0</transparency>
-				<material>
-					<shader type="vertex" />
-				</material>
-				 -->
 			</visual>
-			<velocity_decay>
-				<linear>0.0</linear>
-				<angular>0.0</angular>
-			</velocity_decay>
 			<self_collide>false</self_collide>
 			<kinematic>false</kinematic>
 			<gravity>true</gravity>
