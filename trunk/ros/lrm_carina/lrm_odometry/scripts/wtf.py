@@ -3,7 +3,7 @@
 import roslib; roslib.load_manifest('lrm_odometry')
 import sys
 import rospy
-from robot_pose_ekf.srv import *
+from lrm_odometry.srv import *
 
 if __name__ == '__main__':
     rospy.init_node('spawner', anonymous=True)

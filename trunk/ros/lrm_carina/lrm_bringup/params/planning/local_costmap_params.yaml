@@ -16,8 +16,8 @@ local_costmap:
   origin_x: 0.0
   origin_y: 0.0
   
-  save_debug_pgm: false
-  #save_debug_pgm: true
+  #save_debug_pgm: false
+  save_debug_pgm: true
   
   #observation_sources: cloud ground_cloud
   #observation_sources: local_cloud global_cloud ground_cloud
