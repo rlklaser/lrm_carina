@@ -1,13 +1,13 @@
 #defaults
 controller_frequency: 10.0
 controller_patience: 10.0
-planner_patience: 15.0
-planner_frequency: 0.1
+planner_patience: 10.0
+planner_frequency: 0.2
 
 clearing_rotation_allowed: false
 
-oscillation_timeout: 0.0
-oscillation_distance: 0.0
+oscillation_timeout: 5.0
+oscillation_distance: 1.0
 
 robot_base_frame: base_footprint
 global_frame: /map

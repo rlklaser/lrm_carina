@@ -9,14 +9,14 @@ global_costmap:
   publish_frequency: 5.0
   
   static_map: true
-  rolling_window: false
+  #rolling_window: false
   #width: 0
   #height: 0
   #resolution: 0.1
   #origin_x: 0.0
   #origin_y: 0.0
   
-  save_debug_pgm: true
-  #save_debug_pgm: false
+  #save_debug_pgm: true
+  save_debug_pgm: false
   
-  inflation_radius: 3.0
+  inflation_radius: 3.2
