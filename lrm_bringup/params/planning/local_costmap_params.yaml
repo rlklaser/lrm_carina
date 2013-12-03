@@ -25,4 +25,4 @@ local_costmap:
   #observation_sources: cloud map_cloud
   observation_sources: cluster_cloud map_cloud
 
-  #inflation_radius: 2.9
+  inflation_radius: 2.8
