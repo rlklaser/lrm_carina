@@ -66,23 +66,17 @@
 			file="$(find lrm_bringup)/params/planning/local_planner_params.yaml"
 			command="load"
 			ns="DWAPlannerROS" />
-		-->	
-<!--
+		-->
+		<!-- 
 		<param
 			name="base_local_planner"
 			value="carlike_local_planner/CarLikeTrajectoryPlannerROS" />
 		<rosparam
-			file="$(find lrm_bringup)/params/planning/base_local_planner_params.yaml"
+			file="$(find lrm_bringup)/params/planning/local_planner_params.yaml"
 			command="load"
 			ns="CarLikeTrajectoryPlannerROS" />	
-		<param
-			name="base_local_planner"
-			value="dwa_local_planner/DWAPlannerROS" />
-		<rosparam
-			file="$(find lrm_bringup)/params/planning/base_local_planner_params.yaml"
-			command="load"
-			ns="DWAPlannerROS" />
-
+		 -->
+		<!-- 
 		<rosparam
 			file="$(find lrm_bringup)/params/planning/sbpl_global_params.yaml"
 			command="load"
@@ -99,7 +93,8 @@
 		<remap
 			from="cmd_vel"
 			to="/navigation/cmd_vel" />
--->
+		-->
+		
 		<remap
 			from="cmd_vel"
 			to="/planning/cmd_vel" />

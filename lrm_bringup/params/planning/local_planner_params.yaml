@@ -40,21 +40,21 @@ oscillation_reset_angle: 0.15
 vx_samples: 10
 vtheta_samples: 65
 
-xy_goal_tolerance: 0.75
+xy_goal_tolerance: 0.5
 yaw_goal_tolerance: 1.57
 
 latch_xy_goal_tolerance: false      #stop when reached or rotate in place, false = stop
 
 heading_scoring: true
 heading_scoring_timestep: 0.2
-heading_lookahead: 0.01
+heading_lookahead: 0.5
 
 escape_reset_dist: 1.0
 escape_reset_theta: 0.559
 escape_vel: -0.5
 
-#simple_attractor: true             # follow strictly the global path
-simple_attractor: false
+simple_attractor: true             # follow strictly the global path
+#simple_attractor: false
 meter_scoring: true                # If true, distances are expressed in meters; otherwise grid cells
 prune_plan: true
 

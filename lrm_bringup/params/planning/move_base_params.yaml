@@ -56,7 +56,7 @@ aggressive_reset:
   global_clear: true
   
 backward_recover:
-  duration: 3
+  duration: 2
   linear_speed_limit: -3.0
   angular_speed_limit: 0.0
   linear_acceleration_limit: -3.0
