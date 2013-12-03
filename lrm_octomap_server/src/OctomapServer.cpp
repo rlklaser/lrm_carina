@@ -1077,6 +1077,15 @@ bool OctomapServer::clearBBXSrv(BBXSrv::Request& req, BBXSrv::Response& resp) {
 	//boost::recursive_mutex::scoped_lock monitor(m_mutex);
 	boost::unique_lock<boost::mutex> scoped_lock(m_mutex);
 
+
+	OcTreeKey kmin = m_octree->coordToKey(min);
+	OcTreeKey kmax = m_octree->coordToKey(max);
+
+	if(kmin[0] <0 || kmax[0] <0) {
+		ROS_WARN_STREAM("Cannot clear these coordinates");
+		return false;
+	}
+
 	for (OcTreeT::leaf_bbx_iterator it = m_octree->begin_leafs_bbx(min, max), end = m_octree->end_leafs_bbx(); it != end; ++it) {
 		//it->setLogOdds(octomap::logodds(m_thresMin));
 		//			m_octree->updateNode(it.getKey(), -6.0f);
@@ -1089,6 +1098,9 @@ bool OctomapServer::clearBBXSrv(BBXSrv::Request& req, BBXSrv::Response& resp) {
 			//ROS_INFO_STREAM("clearing key: " << it.getKey()[0]);
 			//it->setLogOdds(octomap::logodds(m_thresMin));
 			m_updated = true;
+		//}
+		//else {
+		//	break;
 		//}
 	}
 
