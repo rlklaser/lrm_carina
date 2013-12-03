@@ -21,8 +21,9 @@
 	<depend package="opencv2" />
 	<depend package="gps_common" />
 	<depend package="bfl" />
+	<!-- 
 	<depend package="robot_pose_ekf" />
-
+ 	-->
 	<depend package="lrm_msgs" />
 	<depend package="lrm_description" />
 

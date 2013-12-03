@@ -462,7 +462,7 @@ namespace estimation
   };
 
 
-bool OdomEstimationNode::getStatus(robot_pose_ekf::GetStatus::Request& req, robot_pose_ekf::GetStatus::Response& resp)
+bool OdomEstimationNode::getStatus(lrm_odometry::GetStatus::Request& req, lrm_odometry::GetStatus::Response& resp)
 {
   stringstream ss;
   ss << "Input:" << endl;
