@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<sdf version="1.4">
+	<model name="carina_terrain">
+		<static>true</static>
+		<link name='link'>
+			<collision name='collision'>
+				<geometry>
+					<heightmap>
+						<uri>file://media/materials/textures/terrain.png</uri>
+						<size>1025.0 1025.0 10.0</size>
+						<pos>0.0 0.0 -5.2</pos>
+					</heightmap>
+				</geometry>
+				<surface>
+					<bounce />
+					<friction>
+						<ode />
+					</friction>
+					<contact>
+						<ode />
+					</contact>
+				</surface>
+			</collision>
+			<visual name='visual'>
+				<geometry>
+					<heightmap>
+						<uri>file://media/materials/textures/terrain.png</uri>
+						<size>1025.0 1025.0 10.0</size>
+						<pos>0.0 0.0 -5.2</pos>
+						<texture>
+							<diffuse>file://media/materials/textures/dirt_diffusespecular.png</diffuse>
+							<normal>file://media/materials/textures/dirt_normal.png</normal>
+							<size>48.0</size>
+						</texture>
+						<blend>
+							<min_height>2.0</min_height>
+							<fade_dist>5.0</fade_dist>
+						</blend>
+						<texture>
+							<diffuse>file://media/materials/textures/grass_diffusespecular.png</diffuse>
+							<normal>file://media/materials/textures/grass_normal.png</normal>
+							<size>24.0</size>
+						</texture>
+						<blend>
+							<min_height>4.0</min_height>
+							<fade_dist>5.0</fade_dist>
+						</blend>
+						<texture>
+							<diffuse>file://media/materials/textures/fungus_diffusespecular.png</diffuse>
+							<normal>file://media/materials/textures/fungus_normal.png</normal>
+							<size>96.0</size>
+						</texture>
+					</heightmap>
+				</geometry>
+			</visual>
+			<velocity_decay>
+				<linear>0.000000</linear>
+				<angular>0.000000</angular>
+			</velocity_decay>
+			<self_collide>false</self_collide>
+			<kinematic>false</kinematic>
+			<gravity>true</gravity>
+		</link>
+	</model>
+</sdf>
