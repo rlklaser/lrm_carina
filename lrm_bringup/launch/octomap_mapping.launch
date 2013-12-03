@@ -18,9 +18,6 @@
 		name="octomap_server"
 		args="load lrm_octomap_server/OctomapServerNodelet /camera_nodelet_manager"
 	>
-		<remap
-			from="projected_map"
-			to="/map" />
 	</node>
 
  	
@@ -32,9 +29,6 @@
 		output="screen"
 		respawn="true"
 	>
-		<remap
-			from="projected_map"
-			to="/map" />
 	</node>
 	-->
 	
