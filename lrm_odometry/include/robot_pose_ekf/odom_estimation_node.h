@@ -42,7 +42,7 @@
 #include <tf/transform_listener.h>
 #include <tf/transform_broadcaster.h>
 #include "odom_estimation.h"
-#include <robot_pose_ekf/GetStatus.h>
+#include <lrm_odometry/GetStatus.h>
 
 // messages
 #include "nav_msgs/Odometry.h"
@@ -101,7 +101,7 @@ private:
 
 
   /// get the status of the filter
-  bool getStatus(robot_pose_ekf::GetStatus::Request& req, robot_pose_ekf::GetStatus::Response& resp);
+  bool getStatus(lrm_odometry::GetStatus::Request& req, lrm_odometry::GetStatus::Response& resp);
 
   ros::NodeHandle node_;
   ros::Timer timer_;

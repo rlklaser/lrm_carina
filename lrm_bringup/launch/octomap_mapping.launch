@@ -10,9 +10,21 @@
 		command="load"
 		file="$(find lrm_bringup)/params/octomap_parameters.yaml"
 		ns="octomap_server" />
-		
-    <!-- launch-prefix="valgrind -v - -tool=callgrind" -->
 
+
+	<node
+		pkg="nodelet"
+		type="nodelet"
+		name="octomap_server"
+		args="load lrm_octomap_server/OctomapServerNodelet /camera_nodelet_manager"
+	>
+		<remap
+			from="projected_map"
+			to="/map" />
+	</node>
+
+ 	
+    <!-- launch-prefix="valgrind -v - -tool=callgrind"
 	<node
 		pkg="lrm_octomap_server"
 		type="octomap_server_node"
@@ -20,36 +32,12 @@
 		output="screen"
 		respawn="true"
 	>
-<!--  			
-		<remap
-			from="cloud_in"
-			to="/stereo/points_stat" />
-		<remap
-			from="cloud_in"
-			to="/stereo/stat_removal_nodelet/output" />
-		<remap
-			from="cloud_in"
-			to="/cluster_filter_node/points_out" />
-		<remap
-			from="ground_cloud_in"
-			to="/stereo/ground_pass_throught_nodelet/output" />
--->
 		<remap
 			from="projected_map"
 			to="/map" />
-
-<!-- 
-octomap_saver
-
-A small command line tool to request octomap files from 
-an octomap_server, similar to map_server#map_saver. 
-Just run "octomap_saver mapfile.bt" to request a 
-compressed binary octomap via service call and save it 
-to mapfile.bt. Run "octomap_saver -f mapfile.ot" 
-to request a full probability octomap instead;
- -->
 	</node>
-
+	-->
+	
 	<node
 		name="footprint_eraser"
 		type="footprint_eraser_node"
@@ -67,4 +55,15 @@ to request a full probability octomap instead;
 		 -->
 	</node>
 
+<!-- 
+octomap_saver
+
+A small command line tool to request octomap files from 
+an octomap_server, similar to map_server#map_saver. 
+Just run "octomap_saver mapfile.bt" to request a 
+compressed binary octomap via service call and save it 
+to mapfile.bt. Run "octomap_saver -f mapfile.ot" 
+to request a full probability octomap instead;
+ -->
+ 
 </launch>

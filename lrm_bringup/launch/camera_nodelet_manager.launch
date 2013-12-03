@@ -16,7 +16,7 @@
 	>
 		<param
 			name="num_worker_threads"
-			value="16" />
+			value="24" />
 	</node>
 
 </launch>
