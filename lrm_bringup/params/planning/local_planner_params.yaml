@@ -6,11 +6,11 @@ dwa: true
 y_vels: [3]
 
 holonomic_robot: false
-acc_lim_y: 0.0
+acc_lim_y: 30.0
 max_vel_y: 0.0
 min_vel_y: 0.0
 
-acc_lim_x: 3.0
+acc_lim_x: 30.0
 max_vel_x: 3.0
 min_vel_x: 0.1
 
@@ -30,9 +30,9 @@ goal_distance_bias: 0.5
 
 stop_time_buffer: 0.2
 
-pdist_scale: 0.65        # The weight for the path distance part of the cost function
-gdist_scale: 0.85        # The weight for the goal distance part of the cost function
-occdist_scale: 0.005     # The weight for the obstacle distance part of the cost function
+pdist_scale: 0.6        # The weight for the path distance part of the cost function
+gdist_scale: 0.8        # The weight for the goal distance part of the cost function
+occdist_scale: 0.01     # The weight for the obstacle distance part of the cost function
                                    
 oscillation_reset_dist: 0.5
 oscillation_reset_angle: 0.15
@@ -49,8 +49,8 @@ heading_scoring: true
 heading_scoring_timestep: 0.2
 heading_lookahead: 0.01
 
-escape_reset_dist: 2.0
-escape_reset_theta: 0.59
+escape_reset_dist: 1.0
+escape_reset_theta: 0.559
 escape_vel: -0.5
 
 #simple_attractor: true             # follow strictly the global path
