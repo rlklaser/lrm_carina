@@ -40,12 +40,12 @@ oscillation_reset_angle: 0.15
 vx_samples: 10
 vtheta_samples: 65
 
-xy_goal_tolerance: 0.5
+xy_goal_tolerance: 0.75
 yaw_goal_tolerance: 1.57
 
 latch_xy_goal_tolerance: false      #stop when reached or rotate in place, false = stop
 
-heading_scoring: true
+heading_scoring: false
 heading_scoring_timestep: 0.2
 heading_lookahead: 0.5
 
