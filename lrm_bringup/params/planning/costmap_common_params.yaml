@@ -22,10 +22,10 @@ footprint: [[0.2, -0.8], [0.65, 0.0], [0.2, 0.8], [-2.5, 0.8], [-2.5, -0.8]]
 
 
 transform_tolerance: 0.3                    # default 0.3
-cost_scaling_factor: 10                     # default 10
+cost_scaling_factor: 1.0                     # default 10
 
 
-lethal_cost_threshold: 100
+lethal_cost_threshold: 80                   #occ from octomap
 unknown_cost_value: 0
 track_unknown_space: false
 

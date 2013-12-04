@@ -5,7 +5,7 @@ disparity_bm:
   prefilter_size: 31
   prefilter_cap: 63
   correlation_window_size: 15
-  min_disparity: 0
+  min_disparity: 2
   #min_disparity: 8
   disparity_range: 64
   

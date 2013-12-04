@@ -158,7 +158,7 @@ OctomapServer::OctomapServer(ros::NodeHandle nh, ros::NodeHandle nh_priv) :
 	m_fullMapPub = m_nh.advertise<Octomap>("octomap_full", 1, m_latchedTopics);
 	m_pointCloudPub = m_nh.advertise<sensor_msgs::PointCloud2>("octomap_point_cloud_centers", 1, m_latchedTopics);
 	m_mapPub = m_nh.advertise<nav_msgs::OccupancyGrid>("map", 1, true/*m_latchedTopics*/);
-	m_laserPub = m_nh.advertise<sensor_msgs::LaserScan>("laser_scan", 1, m_latchedTopics);
+	//m_laserPub = m_nh.advertise<sensor_msgs::LaserScan>("laser_scan", 1, m_latchedTopics);
 	m_clusterPosePub = m_nh.advertise<geometry_msgs::PoseStamped>("cluster_pose", 1, m_latchedTopics);
 
 //	m_pointCloudSub = new message_filters::Subscriber<sensor_msgs::PointCloud2>(m_nh, "cloud_in", 100);
@@ -839,6 +839,7 @@ void OctomapServer::_publishAll(const ros::Time& rostime) {
 
 	// now, traverse all leafs in the tree:
 	for (OcTreeT::iterator it = m_octree->begin(m_maxTreeDepth), end = m_octree->end(); it != end; ++it) {
+	//for (OcTreeT::tree_iterator it = m_octree->begin_tree(m_maxTreeDepth), end = m_octree->end_tree(); it != end; ++it) {
 		bool inUpdateBBX = isInUpdateBBX(it.getKey());
 
 		// call general hook:
