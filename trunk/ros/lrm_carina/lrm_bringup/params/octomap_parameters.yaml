@@ -47,14 +47,14 @@ full_down_project_map: false
 sensor_model:
   #max_range: 15
   max_range: 45
-  max_range_occ: 1.0
+  max_range_occ: 0.25
     
   mid_dist: 5.0
   far_dist: 10.0
   hit: 0.57
   hit_mid: 0.54
   hit_far: 0.52
-  miss_to_gnd: 0.45
+  miss_to_gnd: 0.40
   miss_to_obs: 0.30
   occ: 0.80
     
