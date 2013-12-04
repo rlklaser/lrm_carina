@@ -28,15 +28,15 @@ forward_search: false
 ##since the last plan was generated, the planner will not reuse previous search information and 
 ##instead plan from scratch.
 
-#force_scratch_limit: 500 			#default
+#force_scratch_limit: 500           # default
 
 ##The linear velocity of the robot in meters/sec
 
-nominalvel_mpersecs: 3.0 			# 0.4 default
+nominalvel_mpersecs: 3.0            # 0.4 default
   
 ##The time it takes the robot to turn 45 degrees in place in seconds.
   
-timetoturn45degsinplace_secs: 0.0 	# 0.6 default
+timetoturn45degsinplace_secs: 0.0   # 0.6 default
   
 ##The cost of an obstacle in the planner's version of the costmap. All other values in the 
 ##costmap are scaled accordingly. The obstacle cost is the largest in the costmap2d so by 
