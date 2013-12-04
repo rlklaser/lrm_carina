@@ -37,7 +37,7 @@ incremental_2D_projection: false
 unknown_cost: 10     #first miss
 maximum_cost: 100
 decay_cost: 0.90
-update_occlusion: 0.495
+update_occlusion: 0.5 #0.495
     
 degrade_time: 0.0 # 0 means no degradation
     

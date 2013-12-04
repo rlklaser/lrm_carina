@@ -2,9 +2,9 @@ global_costmap:
   map_type: costmap
   map_topic: /map
   global_frame: /map
-  robot_base_frame: base_footprint
+  #robot_base_frame: base_footprint
   #robot_base_frame: base_odometry
-  #robot_base_frame: heading_link
+  robot_base_frame: heading_link
   update_frequency: 5.0
   publish_frequency: 5.0
   
@@ -19,8 +19,8 @@ global_costmap:
   #save_debug_pgm: true
   save_debug_pgm: false
   
-  inflation_radius: 2.9
+  inflation_radius: 2.84
   
-  robot_radius: 3.5
+  #robot_radius: 3.5
   
   #observation_sources: cluster_cloud 

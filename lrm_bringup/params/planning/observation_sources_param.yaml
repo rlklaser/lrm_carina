@@ -103,3 +103,20 @@ cluster_cloud:
     raytrace_range: 10.0
   }
   
+  
+map_cloud_no_mark:
+  {
+    sensor_frame: /base_footprint, 
+    data_type: PointCloud2,  
+    topic: /octomap_point_cloud_centers, 
+    marking: false, 
+    clearing: false,
+    max_obstacle_height: 1.1, 
+    min_obstacle_height: 1.0,
+    observation_persistence: 0.0,
+    expected_update_rate: 0.0,
+    
+    obstacle_range: 9.0,
+    raytrace_range: 10.0
+  }
+  

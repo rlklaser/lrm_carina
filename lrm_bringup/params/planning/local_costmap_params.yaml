@@ -4,7 +4,7 @@ local_costmap:
   #footprint: [[1.25, -0.8], [1.6, 0.0], [1.25, 0.8], [-1.6, 0.8], [-1.6, -0.8]]
 
   #heading_link
-  footprint: [[0.2, -0.8], [0.65, 0.0], [0.2, 0.8], [-2.5, 0.8], [-2.5, -0.8]]
+  #footprint: [[0.2, -0.8], [0.65, 0.0], [0.2, 0.8], [-2.5, 0.8], [-2.5, -0.8]]
   
   map_type: costmap
   #global_frame: /wheel_odom
@@ -30,6 +30,8 @@ local_costmap:
   #observation_sources: local_cloud global_cloud ground_cloud
   #observation_sources:  local_cloud global_cloud
   #observation_sources: cloud map_cloud
-  observation_sources: cluster_cloud map_cloud
+  #observation_sources: cluster_cloud map_cloud
+
+  observation_sources: map_cloud_no_mark
 
   inflation_radius: 2.8
