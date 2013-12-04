@@ -2047,7 +2047,7 @@ int EnvironmentNAVXYTHETALAT::SetGoal(double x_m, double y_m, double theta_rad)
     int y = CONTXY2DISC(y_m, EnvNAVXYTHETALATCfg.cellsize_m);
     int theta = ContTheta2Disc(theta_rad, EnvNAVXYTHETALATCfg.NumThetaDirs);
 
-    SBPL_PRINTF("env: setting goal to %.3f %.3f %.3f (%d %d %d)", x_m, y_m, theta_rad, x, y, theta);
+    SBPL_INFO("env: setting goal to %.3f %.3f %.3f (%d %d %d)", x_m, y_m, theta_rad, x, y, theta);
 
     if (!IsWithinMapCell(x, y)) {
         SBPL_ERROR("ERROR: trying to set a goal cell %d %d that is outside of map", x, y);
@@ -2055,7 +2055,7 @@ int EnvironmentNAVXYTHETALAT::SetGoal(double x_m, double y_m, double theta_rad)
     }
 
     if (!IsValidConfiguration(x, y, theta)) {
-        SBPL_PRINTF("WARNING: goal configuration is invalid");
+        SBPL_WARN("WARNING: goal configuration is invalid");
     }
 
     EnvNAVXYTHETALATHashEntry_t* OutHashEntry;
@@ -2091,10 +2091,10 @@ int EnvironmentNAVXYTHETALAT::SetStart(double x_m, double y_m, double theta_rad)
         return -1;
     }
 
-    SBPL_PRINTF("env: setting start to %.3f %.3f %.3f (%d %d %d)", x_m, y_m, theta_rad, x, y, theta);
+    SBPL_INFO("env: setting start to %.3f %.3f %.3f (%d %d %d)", x_m, y_m, theta_rad, x, y, theta);
 
     if (!IsValidConfiguration(x, y, theta)) {
-        SBPL_PRINTF("WARNING: start configuration %d %d %d is invalid", x, y, theta);
+        SBPL_WARN("WARNING: start configuration %d %d %d is invalid", x, y, theta);
     }
 
     EnvNAVXYTHETALATHashEntry_t* OutHashEntry;
