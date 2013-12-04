@@ -6,8 +6,8 @@ planner_frequency: 0.2
 
 clearing_rotation_allowed: false
 
-oscillation_timeout: 5.0
-oscillation_distance: 1.0
+oscillation_timeout: 0.0
+oscillation_distance: 0.0
 
 robot_base_frame: base_footprint
 global_frame: /map
@@ -22,7 +22,7 @@ recovery_behavior_enabled: true
 #recovery_behaviors:  [
 #  {
 #  name: sbpl_recovery, 
-#  type: sbpl_recovery/SBPLRecovery
+#  type: lrm_sbpl_recovery/SBPLRecovery
 #  cmd_vel: /carina_controller/cmd_vel
 #  }
 #  ,
@@ -35,21 +35,21 @@ recovery_behavior_enabled: true
 recovery_behaviors: [
   {
   name: conservative_reset, 
-  type: clear_costmap_recovery/ClearCostmapRecovery
+  type: lrm_clear_costmap_recovery/ClearCostmapRecovery
   },
   {
   name: backward_recover, 
-  type: twist_recovery/TwistRecovery
+  type: lrm_twist_recovery/TwistRecovery
   },
   {
   name: aggressive_reset, 
-  type: clear_costmap_recovery/ClearCostmapRecovery
+  type: lrm_clear_costmap_recovery/ClearCostmapRecovery
   }
 ]
 
 conservative_reset:
   reset_distance: 3.0
-  global_clear: false
+  global_clear: true
 
 aggressive_reset:
   reset_distance: 1.0

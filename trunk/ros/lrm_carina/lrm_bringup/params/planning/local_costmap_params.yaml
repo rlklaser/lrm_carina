@@ -1,4 +1,11 @@
 local_costmap:
+
+  #base_footprint
+  #footprint: [[1.25, -0.8], [1.6, 0.0], [1.25, 0.8], [-1.6, 0.8], [-1.6, -0.8]]
+
+  #heading_link
+  footprint: [[0.2, -0.8], [0.65, 0.0], [0.2, 0.8], [-2.5, 0.8], [-2.5, -0.8]]
+  
   map_type: costmap
   #global_frame: /wheel_odom
   global_frame: /odom

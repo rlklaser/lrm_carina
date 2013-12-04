@@ -19,6 +19,10 @@
 			command="load" />
 
 		<rosparam
+			file="$(find lrm_bringup)/params/planning/observation_sources_param.yaml"
+			command="load"
+			ns="global_costmap" />
+		<rosparam
 			file="$(find lrm_bringup)/params/planning/costmap_common_params.yaml"
 			command="load"
 			ns="global_costmap" />
@@ -40,7 +44,7 @@
 
 		<param
 			name="base_global_planner"
-			value="SBPLLatticePlanner" />
+			value="lrm_base_global_planner/SBPLLatticePlanner" />
 		<param
 			name="SBPLLatticePlanner/primitive_filename"
 			value="$(find lrm_bringup)/params/planning/prim/carina.mprim" />
@@ -52,7 +56,7 @@
 
 		<param
 			name="base_local_planner"
-			value="base_local_planner/TrajectoryPlannerROS" />
+			value="lrm_base_local_planner/TrajectoryPlannerROS" />
 
 		<rosparam
 			file="$(find lrm_bringup)/params/planning/local_planner_params.yaml"
