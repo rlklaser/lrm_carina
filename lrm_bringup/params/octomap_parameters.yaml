@@ -23,7 +23,8 @@ pointcloud_max_z: 0.0
 occupancy_min_z: 0.0
 occupancy_max_z: 2.1
     
-use_ground: true
+#use_ground: true
+use_ground: false
 filter_ground: false
 #ground_filter/distance: 0.1
 #ground_filter/angle: 0.4
@@ -40,8 +41,8 @@ update_occlusion: 0.495
     
 degrade_time: 0.0 # 0 means no degradation
     
-#full_down_project_map: false
-full_down_project_map: true
+full_down_project_map: false
+#full_down_project_map: true
     
 sensor_model:
   #max_range: 15
