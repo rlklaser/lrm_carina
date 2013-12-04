@@ -32,7 +32,7 @@ force_scratch_limit: 500000         # 500 default
 
 ##The linear velocity of the robot in meters/sec
 
-nominalvel_mpersecs: 4.0            # 0.4 default
+nominalvel_mpersecs: 3.0            # 0.4 default
   
 ##The time it takes the robot to turn 45 degrees in place in seconds.
   
@@ -44,7 +44,7 @@ timetoturn45degsinplace_secs: 0.0   # 0.6 default
 ##that is less harsh and more reasonable. This will make the planner more likely to choose 
 ##to go through more narrow areas such as doorways.
   
-lethal_obstacle: 20               #20 default
+lethal_obstacle: 60               #20 default
   
   
 #initialized search area (in meters)  

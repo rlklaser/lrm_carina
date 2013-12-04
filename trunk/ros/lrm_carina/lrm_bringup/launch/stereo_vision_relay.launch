@@ -24,6 +24,14 @@
 			args="/cloud/ground_points_flattened /ground_cloud_in"
 			respawn="true"
 			output="screen" />
+
+		<node
+			name="octomap_map_cloud"
+			pkg="topic_tools"
+			type="relay"
+			args="/octomap/map_server/octomap_point_cloud_centers /map_cloud_in"
+			respawn="true"
+			output="screen" />
 	</group>
 	
 <!-- 

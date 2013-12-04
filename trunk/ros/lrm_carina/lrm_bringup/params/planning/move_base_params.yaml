@@ -13,8 +13,8 @@ robot_base_frame: base_footprint
 global_frame: /map
 
 #calc from footprint
-#inscribed_radius: 0.585
-#circumscribed_radius: 2.74
+inscribed_radius: 0.8
+circumscribed_radius: 2.85
 
 # Recovery
 recovery_behavior_enabled: true
@@ -33,18 +33,20 @@ recovery_behavior_enabled: true
 #]
 
 recovery_behaviors: [
-  {
-  name: conservative_reset, 
-  type: lrm_clear_costmap_recovery/ClearCostmapRecovery
-  },
+#  {
+#  name: conservative_reset, 
+#  type: lrm_clear_costmap_recovery/ClearCostmapRecovery
+#  }
+#  ,
   {
   name: backward_recover, 
   type: lrm_twist_recovery/TwistRecovery
-  },
-  {
-  name: aggressive_reset, 
-  type: lrm_clear_costmap_recovery/ClearCostmapRecovery
   }
+#  ,
+#  {
+#  name: aggressive_reset, 
+#  type: lrm_clear_costmap_recovery/ClearCostmapRecovery
+#  }
 ]
 
 conservative_reset:

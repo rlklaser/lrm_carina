@@ -7,7 +7,7 @@
 	-->
 
 	<group ns="octomap">
-	
+
 		<rosparam
 			command="load"
 			file="$(find lrm_bringup)/params/octomap_parameters.yaml" />
@@ -18,6 +18,15 @@
 			name="map_server"
 			args="load lrm_octomap_server/OctomapServerNodelet /camera_nodelet_manager"
 		>
+			<remap
+				from="map"
+				to="/map" />
+			<remap
+				from="cloud_in"
+				to="/cloud_in" />
+			<remap
+				from="ground_cloud_in"
+				to="/ground_cloud_in" />
 		</node>
  	
 	    <!-- launch-prefix="valgrind -v - -tool=callgrind"
