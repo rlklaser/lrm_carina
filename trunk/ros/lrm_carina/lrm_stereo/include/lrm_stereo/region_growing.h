@@ -65,8 +65,6 @@ private:
 	ros::Publisher cloud_pub_;
 	ros::Subscriber cloud_sub_;
 
-	dynamic_reconfigure::Server<RegionGrowingFilterConfig> srv_;
-
 	int _queue_size;
 	double _radius;
 	double _k_search;
@@ -80,6 +78,10 @@ private:
 	std::string _map_frame_id;
 
 	boost::shared_ptr<tf::TransformListener> tf_listener_;
+
+	typedef dynamic_reconfigure::Server<RegionGrowingFilterConfig> ReconfigureServer;
+	boost::shared_ptr<ReconfigureServer> srv_;
+	boost::recursive_mutex config_mutex_;
 
 protected:
 	void pointcloudCallback(const sensor_msgs::PointCloud2::ConstPtr& msg);

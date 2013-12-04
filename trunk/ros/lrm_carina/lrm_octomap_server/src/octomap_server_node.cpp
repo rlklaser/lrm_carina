@@ -53,8 +53,10 @@ int main(int argc, char** argv){
     exit(-1);
   }
 
+  ros::NodeHandle nh;
+  ros::NodeHandle nh_priv("~");
 
-  OctomapServer server;
+  OctomapServer server(nh, nh_priv);
   ros::spinOnce();
 
   if (argc == 2){
@@ -64,15 +66,6 @@ int main(int argc, char** argv){
       exit(1);
     }
   }
-
-/*
-  try{
-    ros::spin();
-  }catch(std::runtime_error& e){
-    ROS_ERROR("octomap_server exception: %s", e.what());
-    return -1;
-  }
-*/
 
 #ifdef DEBUG
   ros::spin();

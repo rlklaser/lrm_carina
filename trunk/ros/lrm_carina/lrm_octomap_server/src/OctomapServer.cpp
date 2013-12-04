@@ -44,11 +44,11 @@ using octomap_msgs::Octomap;
 
 namespace octomap_server {
 
-OctomapServer::OctomapServer(ros::NodeHandle nh) :
-		m_nh(), m_pointCloudSub(NULL), m_tfPointCloudSub(NULL),
-		m_octree(NULL), m_maxRange(-1.0), m_maxRangeOcc(0.0), m_worldFrameId("/map"),
+OctomapServer::OctomapServer(ros::NodeHandle nh, ros::NodeHandle nh_priv) :
+		m_nh(nh), m_nh_priv(nh_priv),  m_pointCloudSub(NULL), m_tfPointCloudSub(NULL),
+		m_octree(NULL), m_maxRange(-1.0), m_maxRangeOcc(0.0), m_worldFrameId("/world"),
 		m_baseFrameId("base_footprint"), m_sourceFrameId("stereo_camera"),
-		m_useHeightMap(true), m_colorFactor(0.8), m_latchedTopics(true),
+		m_useHeightMap(true), m_colorFactor(0.8), m_latchedTopics(false),
 		m_res(0.1), m_treeDepth(0), m_maxTreeDepth(0),
 		m_probHit(0.7), m_probHitMid(0.7), m_probHitFar(0.7),
 		m_probFarDist(25.0), m_probMidDist(15.0),
@@ -58,68 +58,64 @@ OctomapServer::OctomapServer(ros::NodeHandle nh) :
 		m_occupancyMinZ(-std::numeric_limits<double>::max()),
 		m_occupancyMaxZ(std::numeric_limits<double>::max()),
 		m_minSizeX(0.0), m_minSizeY(0.0), m_filterSpeckles(false),
-		m_filterGroundPlane(false), m_groundFilterDistance(0.04),
+		m_filterGroundPlane(true), m_groundFilterDistance(0.04),
 		m_groundFilterAngle(0.15), m_groundFilterPlaneDistance(0.07),
 		m_compressMap(false), m_incrementalUpdate(false), m_waitTransform(2.0),
-		m_occupancyThres(0.95), m_updateOcclusion(0.5),
+		m_occupancyThres(0.5), m_updateOcclusion(0.5),
 		m_unknownCost(-1), m_maximumCost(120), m_decayCost(0.8), m_ticksOnSec(0), m_rate(5),
 		m_degradeTime(0), m_fullDownProjectMap(false), m_useGround(true)
 {
+	m_nh_priv.param("frame_id", m_worldFrameId, m_worldFrameId);
+	m_nh_priv.param("source_frame_id", m_sourceFrameId, m_sourceFrameId);
+	m_nh_priv.param("base_frame_id", m_baseFrameId, m_baseFrameId);
+	m_nh_priv.param("wait_tf", m_waitTransform, m_waitTransform);
 
-	ros::NodeHandle private_nh(nh);
+	m_nh_priv.param("rate", m_rate, m_rate);
 
-	private_nh.param("frame_id", m_worldFrameId, m_worldFrameId);
-	private_nh.param("source_frame_id", m_sourceFrameId, m_sourceFrameId);
-	private_nh.param("base_frame_id", m_baseFrameId, m_baseFrameId);
-	private_nh.param("height_map", m_useHeightMap, m_useHeightMap);
-	private_nh.param("color_factor", m_colorFactor, m_colorFactor);
+	m_nh_priv.param("height_map", m_useHeightMap, m_useHeightMap);
+	m_nh_priv.param("color_factor", m_colorFactor, m_colorFactor);
+	m_nh_priv.param("resolution", m_res, m_res);
 
-	private_nh.param("pointcloud_min_z", m_pointcloudMinZ, m_pointcloudMinZ);
-	private_nh.param("pointcloud_max_z", m_pointcloudMaxZ, m_pointcloudMaxZ);
-	private_nh.param("occupancy_min_z", m_occupancyMinZ, m_occupancyMinZ);
-	private_nh.param("occupancy_max_z", m_occupancyMaxZ, m_occupancyMaxZ);
-	private_nh.param("min_x_size", m_minSizeX, m_minSizeX);
-	private_nh.param("min_y_size", m_minSizeY, m_minSizeY);
+	m_nh_priv.param("pointcloud_min_z", m_pointcloudMinZ, m_pointcloudMinZ);
+	m_nh_priv.param("pointcloud_max_z", m_pointcloudMaxZ, m_pointcloudMaxZ);
+	m_nh_priv.param("occupancy_min_z", m_occupancyMinZ, m_occupancyMinZ);
+	m_nh_priv.param("occupancy_max_z", m_occupancyMaxZ, m_occupancyMaxZ);
+	m_nh_priv.param("min_x_size", m_minSizeX, m_minSizeX);
+	m_nh_priv.param("min_y_size", m_minSizeY, m_minSizeY);
 
-	private_nh.param("filter_speckles", m_filterSpeckles, m_filterSpeckles);
-	private_nh.param("filter_ground", m_filterGroundPlane, m_filterGroundPlane);
+	m_nh_priv.param("compress", m_compressMap, m_compressMap);
+	m_nh_priv.param("filter_speckles", m_filterSpeckles, m_filterSpeckles);
+
+	m_nh_priv.param("use_ground", m_useGround, m_useGround);
+	m_nh_priv.param("filter_ground", m_filterGroundPlane, m_filterGroundPlane);
 	// distance of points from plane for RANSAC
-	private_nh.param("ground_filter/distance", m_groundFilterDistance, m_groundFilterDistance);
+	m_nh_priv.param("ground_filter/distance", m_groundFilterDistance, m_groundFilterDistance);
 	// angular derivation of found plane:
-	private_nh.param("ground_filter/angle", m_groundFilterAngle, m_groundFilterAngle);
+	m_nh_priv.param("ground_filter/angle", m_groundFilterAngle, m_groundFilterAngle);
 	// distance of found plane from z=0 to be detected as ground (e.g. to exclude tables)
-	private_nh.param("ground_filter/plane_distance", m_groundFilterPlaneDistance, m_groundFilterPlaneDistance);
+	m_nh_priv.param("ground_filter/plane_distance", m_groundFilterPlaneDistance, m_groundFilterPlaneDistance);
 
-	private_nh.param("resolution", m_res, m_res);
-	private_nh.param("degrade_time", m_degradeTime, m_degradeTime);
-	private_nh.param("full_down_project_map", m_fullDownProjectMap, m_fullDownProjectMap);
+	m_nh_priv.param("sensor_model/degrade_time", m_degradeTime, m_degradeTime);
+	m_nh_priv.param("sensor_model/max_range", m_maxRange, m_maxRange);
+	m_nh_priv.param("sensor_model/max_range_occ", m_maxRangeOcc, m_maxRangeOcc);
+	m_nh_priv.param("sensor_model/hit", m_probHit, m_probHit);
+	m_nh_priv.param("sensor_model/hit_mid", m_probHitMid, m_probHitMid);
+	m_nh_priv.param("sensor_model/hit_far", m_probHitFar, m_probHitFar);
+	m_nh_priv.param("sensor_model/mid_dist", m_probMidDist, m_probMidDist);
+	m_nh_priv.param("sensor_model/far_dist", m_probFarDist, m_probFarDist);
+	m_nh_priv.param("sensor_model/miss_to_gnd", m_probMissGnd, m_probMissGnd);
+	m_nh_priv.param("sensor_model/miss_to_obs", m_probMissObs, m_probMissObs);
+	m_nh_priv.param("sensor_model/min", m_thresMin, m_thresMin);
+	m_nh_priv.param("sensor_model/max", m_thresMax, m_thresMax);
+	m_nh_priv.param("sensor_model/occ", m_occupancyThres, m_occupancyThres);
+	m_nh_priv.param("sensor_model/decay_cost", m_decayCost, m_decayCost);
+	m_nh_priv.param("sensor_model/update_occlusion", m_updateOcclusion, m_updateOcclusion);
 
-	private_nh.param("sensor_model/max_range", m_maxRange, m_maxRange);
-	private_nh.param("sensor_model/max_range_occ", m_maxRangeOcc, m_maxRangeOcc);
-	private_nh.param("sensor_model/hit", m_probHit, m_probHit);
-	private_nh.param("sensor_model/hit_mid", m_probHitMid, m_probHitMid);
-	private_nh.param("sensor_model/hit_far", m_probHitFar, m_probHitFar);
-	private_nh.param("sensor_model/mid_dist", m_probMidDist, m_probMidDist);
-	private_nh.param("sensor_model/far_dist", m_probFarDist, m_probFarDist);
-	private_nh.param("sensor_model/miss_to_gnd", m_probMissGnd, m_probMissGnd);
-	private_nh.param("sensor_model/miss_to_obs", m_probMissObs, m_probMissObs);
-	private_nh.param("sensor_model/min", m_thresMin, m_thresMin);
-	private_nh.param("sensor_model/max", m_thresMax, m_thresMax);
-	private_nh.param("sensor_model/occ", m_occupancyThres, m_occupancyThres);
+	m_nh_priv.param("cost_map/full_down_project_map", m_fullDownProjectMap, m_fullDownProjectMap);
+	m_nh_priv.param("cost_map/incremental_2D_projection", m_incrementalUpdate, m_incrementalUpdate);
+	m_nh_priv.param("cost_map/unknown_cost", m_unknownCost, m_unknownCost);
+	m_nh_priv.param("cost_map/maximum_cost", m_maximumCost, m_maximumCost);
 
-	private_nh.param("compress_map", m_compressMap, m_compressMap);
-	private_nh.param("incremental_2D_projection", m_incrementalUpdate, m_incrementalUpdate);
-
-	private_nh.param("wait_tf", m_waitTransform, m_waitTransform);
-	private_nh.param("update_occlusion", m_updateOcclusion, m_updateOcclusion);
-
-	private_nh.param("unknown_cost", m_unknownCost, m_unknownCost);
-	private_nh.param("maximum_cost", m_maximumCost, m_maximumCost);
-	private_nh.param("decay_cost", m_decayCost, m_decayCost);
-
-	private_nh.param("use_ground", m_useGround, m_useGround);
-
-	private_nh.param("rate", m_rate, m_rate);
 
 	if (m_filterGroundPlane && (m_pointcloudMinZ > 0.0 || m_pointcloudMaxZ < 0.0)) {
 		ROS_WARN_STREAM("You enabled ground filtering but incoming pointclouds will be pre-filtered in [" << m_pointcloudMinZ <<", "<< m_pointcloudMaxZ << "], excluding the ground level z=0. " << "This will not work.");
@@ -140,16 +136,16 @@ OctomapServer::OctomapServer(ros::NodeHandle nh) :
 	m_gridmap.info.resolution = m_res;
 
 	double r, g, b, a;
-	private_nh.param("color/r", r, 0.0);
-	private_nh.param("color/g", g, 0.0);
-	private_nh.param("color/b", b, 1.0);
-	private_nh.param("color/a", a, 1.0);
+	m_nh_priv.param("color/r", r, 0.0);
+	m_nh_priv.param("color/g", g, 0.0);
+	m_nh_priv.param("color/b", b, 1.0);
+	m_nh_priv.param("color/a", a, 1.0);
 	m_color.r = r;
 	m_color.g = g;
 	m_color.b = b;
 	m_color.a = a;
 
-	private_nh.param("latch", m_latchedTopics, m_latchedTopics);
+	m_nh_priv.param("latch", m_latchedTopics, m_latchedTopics);
 	if (m_latchedTopics) {
 		ROS_INFO("Publishing latched (single publish will take longer, all topics are prepared)");
 	} else {
@@ -183,20 +179,20 @@ OctomapServer::OctomapServer(ros::NodeHandle nh) :
 //>	message_filters::Cache<std_msgs::String> cache(sub, 100);
 //>	cache.registerCallback(myCallback);
 
-	dynamic_reconfigure::Server<lrm_octomap_server::OctomapServerConfig>::CallbackType f;
-
-	f = boost::bind(&OctomapServer::reconfigureCallback, this, _1, _2);
-	m_reconfigureServer.setCallback(f);
+	m_reconfigureServer.reset(new ReconfigureServer(m_config_mutex, m_nh_priv));
+	ReconfigureServer::CallbackType f = boost::bind(&OctomapServer::reconfigureCallback, this, _1, _2);
+	m_reconfigureServer->setCallback(f);
 
 	m_octree->updateNode(0, 0, 0, false);
 	m_updated = true;
-	m_publisherTimer = nh.createTimer(ros::Duration(1.0 / m_rate), &OctomapServer::timerCallback, this);
+	m_publisherTimer = m_nh.createTimer(ros::Duration(1.0 / m_rate), &OctomapServer::timerCallback, this);
 
 	m_octomapBinaryService = m_nh.advertiseService("octomap_binary", &OctomapServer::octomapBinarySrv, this);
 	m_octomapFullService = m_nh.advertiseService("octomap_full", &OctomapServer::octomapFullSrv, this);
-	m_clearBBXService = private_nh.advertiseService("clear_bbx", &OctomapServer::clearBBXSrv, this);
-	m_resetService = private_nh.advertiseService("reset", &OctomapServer::resetSrv, this);
-	m_pruneService = private_nh.advertiseService("prune", &OctomapServer::pruneSrv, this);
+
+	m_clearBBXService = m_nh_priv.advertiseService("clear_bbx", &OctomapServer::clearBBXSrv, this);
+	m_resetService = m_nh_priv.advertiseService("reset", &OctomapServer::resetSrv, this);
+	m_pruneService = m_nh_priv.advertiseService("prune", &OctomapServer::pruneSrv, this);
 }
 
 void OctomapServer::updateTreeProbabilities()

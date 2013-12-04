@@ -52,9 +52,9 @@ RegionGrowingFilter::RegionGrowingFilter(ros::NodeHandle& nh, ros::NodeHandle& n
 	nh_priv_.param("map_frame_id", _map_frame_id, std::string("/map"));
 	nh_priv_.param("use_cloud_color", _use_cloud_color, false);
 
-	dynamic_reconfigure::Server<lrm_stereo::RegionGrowingFilterConfig>::CallbackType
-		f = boost::bind(&RegionGrowingFilter::reconfig, this, _1, _2);
-	srv_.setCallback(f);
+	srv_.reset(new ReconfigureServer(config_mutex_, nh_priv_));
+	ReconfigureServer::CallbackType f = boost::bind(&RegionGrowingFilter::reconfig, this, _1, _2);
+	srv_->setCallback(f);
 }
 
 void RegionGrowingFilter::pointcloudCallback(const sensor_msgs::PointCloud2::ConstPtr& msg) {
