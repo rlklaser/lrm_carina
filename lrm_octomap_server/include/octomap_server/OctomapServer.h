@@ -106,7 +106,7 @@ public:
   typedef octomap::OcTreeStamped OcTreeT;
 #endif
 
-  OctomapServer(ros::NodeHandle nh = ros::NodeHandle("~"));
+  OctomapServer(ros::NodeHandle nh, ros::NodeHandle nh_priv);
   virtual ~OctomapServer();
   bool octomapBinarySrv(OctomapSrv::Request  &req, OctomapSrv::GetOctomap::Response &res);
   bool octomapFullSrv(OctomapSrv::Request  &req, OctomapSrv::GetOctomap::Response &res);
@@ -220,6 +220,7 @@ protected:
   static std_msgs::ColorRGBA probMapColor(double h);
   static std_msgs::ColorRGBA heightMapColor(double h);
   ros::NodeHandle m_nh;
+  ros::NodeHandle m_nh_priv;
   ros::Publisher m_markerPub, m_markerSinglePub, m_binaryMapPub, m_laserPub, m_clusterPosePub;
   ros::Publisher m_fullMapPub, m_pointCloudPub, m_collisionObjectPub, m_mapPub, m_cmapPub;
   message_filters::Subscriber<sensor_msgs::PointCloud2>* m_pointCloudSub;
@@ -230,7 +231,10 @@ protected:
 
   ros::ServiceServer m_octomapBinaryService, m_octomapFullService, m_clearBBXService, m_resetService, m_pruneService;
   tf::TransformListener m_tfListener;
-  dynamic_reconfigure::Server<lrm_octomap_server::OctomapServerConfig> m_reconfigureServer;
+
+  typedef dynamic_reconfigure::Server<lrm_octomap_server::OctomapServerConfig> ReconfigureServer;
+  boost::shared_ptr<ReconfigureServer> m_reconfigureServer;
+  boost::recursive_mutex m_config_mutex;
 
   OcTreeT* m_octree;
   //octomap::KeyRay m_keyRay;  // temp storage for ray casting
@@ -264,8 +268,6 @@ protected:
   double m_probMissObs;
   double m_thresMin;
   double m_thresMax;
-
-
 
   double m_pointcloudMinZ;
   double m_pointcloudMaxZ;

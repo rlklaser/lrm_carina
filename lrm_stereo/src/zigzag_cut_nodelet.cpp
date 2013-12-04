@@ -38,20 +38,18 @@ namespace lrm_stereo
 class ZigzagCutNodelet: public nodelet::Nodelet
 {
 public:
-	virtual void onInit();
+	virtual void onInit()
+	{
+		ROS_WARN("zigzag cut nodelet init");
+		server_.reset(new ZigzagCutFilter(
+				this->getNodeHandle(),
+				this->getPrivateNodeHandle()));
+	}
+
 private:
 	boost::shared_ptr<ZigzagCutFilter> server_;
 
 };
-
-void ZigzagCutNodelet::onInit()
-{
-	ROS_WARN("zigzag cut nodelet init");
-	ros::NodeHandle& nh = getNodeHandle();
-	ros::NodeHandle& private_nh = getPrivateNodeHandle();
-
-	server_.reset(new ZigzagCutFilter(nh, private_nh));
-}
 
 }
 // Register nodelet

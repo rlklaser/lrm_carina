@@ -48,8 +48,10 @@ class OctomapServerNodelet : public nodelet::Nodelet
 public:
   virtual void onInit()
   {
-    NODELET_DEBUG("Initializing octomap server nodelet ...");
-    server_.reset(new OctomapServer(this->getPrivateNodeHandle()));
+    ROS_WARN("Initializing octomap server nodelet ...");
+    server_.reset(new OctomapServer(
+    		this->getNodeHandle(),
+    		this->getPrivateNodeHandle()));
   }
 private:
   boost::shared_ptr<OctomapServer> server_;
@@ -57,6 +59,5 @@ private:
 
 } // namespace
 
-//PLUGINLIB_DECLARE_CLASS(octomap_server, OctomapServerNodelet, octomap_server::OctomapServerNodelet, nodelet::Nodelet);
 PLUGINLIB_EXPORT_CLASS(octomap_server::OctomapServerNodelet, nodelet::Nodelet);
 
