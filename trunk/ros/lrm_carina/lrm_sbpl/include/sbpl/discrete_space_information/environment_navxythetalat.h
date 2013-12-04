@@ -484,6 +484,9 @@ public:
 
     ~EnvironmentNAVXYTHETALAT();
 
+
+    virtual void SaveRawMap(std::string file_name);
+
     /**
      * \brief sets start in meters/radians
      */

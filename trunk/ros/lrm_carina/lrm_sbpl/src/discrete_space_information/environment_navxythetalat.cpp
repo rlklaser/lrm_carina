@@ -2687,4 +2687,17 @@ int EnvironmentNAVXYTHETALAT::SizeofCreatedEnv()
     return (int)StateID2CoordTable.size();
 }
 
+void EnvironmentNAVXYTHETALAT::SaveRawMap(std::string file_name){
+  FILE *fp = fopen(file_name.c_str(), "wb");
+
+  if(!fp){
+    SBPL_WARN("Can't open file %s", file_name.c_str());
+    return;
+  }
+
+  fprintf( fp, "P5\n%d\n%d\n%d\n", EnvNAVXYTHETALATCfg.EnvWidth_c * EnvNAVXYTHETALATCfg.EnvHeight_c, 0xff );
+  fwrite(  EnvNAVXYTHETALATCfg.Grid2D, 1, EnvNAVXYTHETALATCfg.EnvWidth_c * EnvNAVXYTHETALATCfg.EnvHeight_c, fp );
+  fclose( fp );
+}
+
 //------------------------------------------------------------------------------
