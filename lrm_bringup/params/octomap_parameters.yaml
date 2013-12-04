@@ -13,8 +13,8 @@ resolution: 0.1
     
 max_depth: 16
     
-#filter_speckles: false
-filter_speckles: true
+filter_speckles: false
+#filter_speckles: true
     
 #if max==min==0, no filter
 pointcloud_min_z: 0.0
@@ -40,7 +40,7 @@ update_occlusion: 0.495
     
 degrade_time: 0.0 # 0 means no degradation
     
-full_down_project_map: true
+full_down_project_map: false
     
 sensor_model:
   #max_range: 15

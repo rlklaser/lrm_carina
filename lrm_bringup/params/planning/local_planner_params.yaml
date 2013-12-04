@@ -31,30 +31,32 @@ goal_distance_bias: 0.5
 stop_time_buffer: 0.2
 
 pdist_scale: 0.6        # The weight for the path distance part of the cost function
-gdist_scale: 0.8        # The weight for the goal distance part of the cost function
-occdist_scale: 0.01     # The weight for the obstacle distance part of the cost function
+gdist_scale: 0.9        # The weight for the goal distance part of the cost function
+occdist_scale: 0.1      # The weight for the obstacle distance part of the cost function
+heading_scale: 0.3      # fixed
                                    
 oscillation_reset_dist: 0.5
 oscillation_reset_angle: 0.15
 
-vx_samples: 10
-vtheta_samples: 65
+vx_samples: 5
+vtheta_samples: 33
 
-xy_goal_tolerance: 0.75
-yaw_goal_tolerance: 1.57
+xy_goal_tolerance: 1.0
+yaw_goal_tolerance: 0.87
 
 latch_xy_goal_tolerance: false      #stop when reached or rotate in place, false = stop
 
+#heading_scoring: true
 heading_scoring: false
-heading_scoring_timestep: 0.2
-heading_lookahead: 0.5
+heading_scoring_timestep: 0.1
+heading_lookahead: 2.0
 
 escape_reset_dist: 1.0
 escape_reset_theta: 0.559
 escape_vel: -0.5
 
-simple_attractor: true             # follow strictly the global path
-#simple_attractor: false
+#simple_attractor: true             # follow strictly the global path
+simple_attractor: false
 meter_scoring: true                # If true, distances are expressed in meters; otherwise grid cells
 prune_plan: true
 
