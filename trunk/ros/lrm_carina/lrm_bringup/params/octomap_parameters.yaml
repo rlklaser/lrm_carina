@@ -1,66 +1,71 @@
-
-latch: false
-wait_tf: 0.05
-#wait_tf: -1 #do not wait
-rate: 5
-frame_id: /map
-base_frame_id: /base_footprint
-#source_frame_id: /base_stereo_camera
-source_frame_id: /camera_center_link
-#height_map: true
-height_map: false
-resolution: 0.1
+footprint_eraser:
+  min_distance: 0.5
+  timeout: 10
+  
+map_server:
+  latch: false
+  wait_tf: 0.05
+  #wait_tf: -1 #do not wait
+  rate: 5
+  frame_id: /map
+  base_frame_id: /base_footprint
+  #source_frame_id: /base_stereo_camera
+  source_frame_id: /camera_center_link
+  #height_map: true
+  height_map: false
+  resolution: 0.1
     
-max_depth: 16
+  max_depth: 16
     
-filter_speckles: false
-#filter_speckles: true
+  filter_speckles: false
+  #filter_speckles: true
     
-#if max==min==0, no filter
-pointcloud_min_z: 0.0
-pointcloud_max_z: 0.0
+  #if max==min==0, no filter
+  pointcloud_min_z: 0.0
+  pointcloud_max_z: 0.0
     
-occupancy_min_z: 0.0
-occupancy_max_z: 2.1
+  occupancy_min_z: 0.0
+  occupancy_max_z: 2.1
     
-#use_ground: true
-use_ground: false
-filter_ground: false
-#ground_filter/distance: 0.1
-#ground_filter/angle: 0.4
-#ground_filter/plane_distance: 0.15
+  #use_ground: true
+  use_ground: false
+  filter_ground: false
+  ground_filter:
+    distance: 0.1
+    angle: 0.4
+    plane_distance: 0.15
     
-compress_map: false                      #automatic after updateNode
-#incremental_2D_projection: true
-incremental_2D_projection: false
+  compress: false                      #automatic after updateNode
+  
+  cost_map:
+    #incremental_2D_projection: true
+    incremental_2D_projection: false
+    unknown_cost: 40                      #first miss
+    maximum_cost: 100   
+    full_down_project_map: false
+    #full_down_project_map: true
     
-unknown_cost: 40     #first miss
-maximum_cost: 100
-decay_cost: 0.95
-update_occlusion: 0.5 #0.495
+  sensor_model:
+    degrade_time: 0.0 # 0 means no degradation
+    update_occlusion: 0.5 #0.495
+    decay_cost: 0.9
     
-degrade_time: 0.0 # 0 means no degradation
+    #max_range: 15
+    max_range: 45
+    max_range_occ: 0.25
     
-full_down_project_map: false
-#full_down_project_map: true
+    mid_dist: 5.0
+    far_dist: 10.0
+    hit: 0.57
+    hit_mid: 0.54
+    hit_far: 0.52
+    miss_to_gnd: 0.40
+    miss_to_obs: 0.45
+    occ: 0.80
     
-sensor_model:
-  #max_range: 15
-  max_range: 45
-  max_range_occ: 0.25
-    
-  mid_dist: 5.0
-  far_dist: 10.0
-  hit: 0.57
-  hit_mid: 0.54
-  hit_far: 0.52
-  miss_to_gnd: 0.40
-  miss_to_obs: 0.30
-  occ: 0.80
-    
-  #max: 0.75
-  #min: 0.25
-  #no clamping
-  max: 0.98
-  min: 0.05
+    #max: 0.75
+    #min: 0.25
+    #no clamping
+    max: 0.98
+    min: 0.05
     
