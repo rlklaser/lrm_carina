@@ -217,8 +217,8 @@ protected:
              || oldMapInfo.origin.position.y != newMapInfo.origin.position.y);
   }
 
-  static std_msgs::ColorRGBA probMapColor(double h);
-  static std_msgs::ColorRGBA heightMapColor(double h);
+  std_msgs::ColorRGBA probMapColor(double h);
+  std_msgs::ColorRGBA heightMapColor(double h);
   ros::NodeHandle m_nh;
   ros::NodeHandle m_nh_priv;
   ros::Publisher m_markerPub, m_markerSinglePub, m_binaryMapPub, m_laserPub, m_clusterPosePub;
@@ -309,8 +309,8 @@ protected:
   bool m_useGround;
 
 private:
-  boost::mutex m_mutex;
-  //boost::recursive_mutex m_mutex;
+  //boost::mutex m_mutex;
+  boost::recursive_mutex m_mutex;
 
   ros::Timer m_publisherTimer;
 

@@ -109,7 +109,7 @@ OctomapServer::OctomapServer(ros::NodeHandle nh, ros::NodeHandle nh_priv) :
 	m_nh_priv.param("sensor_model/max", m_thresMax, m_thresMax);
 	m_nh_priv.param("sensor_model/occ", m_occupancyThres, m_occupancyThres);
 	m_nh_priv.param("sensor_model/decay_cost", m_decayCost, m_decayCost);
-	m_nh_priv.param("sensor_model/update_occlusion", m_updateOcclusion, m_updateOcclusion);
+	m_nh_priv.param("sensor_model/update_occ", m_updateOcclusion, m_updateOcclusion);
 
 	m_nh_priv.param("cost_map/full_down_project_map", m_fullDownProjectMap, m_fullDownProjectMap);
 	m_nh_priv.param("cost_map/incremental_2D_projection", m_incrementalUpdate, m_incrementalUpdate);
@@ -184,7 +184,7 @@ OctomapServer::OctomapServer(ros::NodeHandle nh, ros::NodeHandle nh_priv) :
 	m_reconfigureServer->setCallback(f);
 
 	m_octree->updateNode(0, 0, 0, false);
-	m_updated = true;
+	m_updated = false;
 	m_publisherTimer = m_nh.createTimer(ros::Duration(1.0 / m_rate), &OctomapServer::timerCallback, this);
 
 	m_octomapBinaryService = m_nh.advertiseService("octomap_binary", &OctomapServer::octomapBinarySrv, this);
@@ -202,12 +202,27 @@ void OctomapServer::updateTreeProbabilities()
 	m_octree->setClampingThresMin(m_thresMin);
 	m_octree->setClampingThresMax(m_thresMax);
 	m_octree->setOccupancyThres(m_occupancyThres);
+
+	ROS_INFO_STREAM(
+			"octomap probabilities:" << std::endl <<
+			"  occupancy % = " << m_octree->getOccupancyThres() << std::endl <<
+			"  occupancy log = " << m_octree->getOccupancyThresLog() << std::endl <<
+			"  hit % = " << m_octree->getProbHit() << std::endl <<
+			"  hit log = " << m_octree->getProbHitLog() << std::endl <<
+			"  miss % = " << m_octree->getProbMiss() << std::endl <<
+			"  miss log = " << m_octree->getProbMissLog() << std::endl <<
+			"  min % = " << m_octree->getClampingThresMin() << std::endl <<
+			"  min log = " << m_octree->getClampingThresMinLog() << std::endl <<
+			"  max % = " << m_octree->getClampingThresMax() << std::endl <<
+			"  max log = " << m_octree->getClampingThresMaxLog() << std::endl <<
+			""
+			);
 }
 
 void OctomapServer::timerCallback(const ros::TimerEvent& t) {
 
-	//boost::recursive_mutex::scoped_lock monitor(m_mutex);
-	boost::unique_lock<boost::mutex> scoped_lock(m_mutex);
+	boost::recursive_mutex::scoped_lock monitor(m_mutex);
+	//boost::unique_lock<boost::mutex> scoped_lock(m_mutex);
 
 	bool reset = false;
 
@@ -529,8 +544,8 @@ inline OcTreeKey getIndexKey(const OcTreeKey & key, unsigned short depth) {
 
 void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPointCloud& ground, const PCLPointCloud& nonground) {
 
-	//boost::recursive_mutex::scoped_lock monitor(m_mutex);
-	boost::unique_lock<boost::mutex> scoped_lock(m_mutex);
+	boost::recursive_mutex::scoped_lock monitor(m_mutex);
+	//boost::unique_lock<boost::mutex> scoped_lock(m_mutex);
 
 	tf::Point sensorOriginTf = sensorTf.getOrigin();
 	point3d sensorOrigin = pointTfToOctomap(sensorOriginTf);
@@ -621,7 +636,8 @@ void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPo
 	for (PCLPointCloud::const_iterator it = nonground.begin(); it != nonground.end(); ++it) {
 		point3d point(it->x, it->y, it->z);
 		// maxrange check
-		if ((m_maxRange < 0.0) || ((point - sensorOrigin).norm() <= m_maxRange)) {
+		double dist_to_point = (point - sensorOrigin).norm();
+		if ((m_maxRange < 0.0) || (dist_to_point <= m_maxRange)) {
 
 			// free cells
 			if (m_octree->computeRayKeys(sensorOrigin, point, m_keyRay)) {
@@ -774,16 +790,14 @@ void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPo
 
 void OctomapServer::publishAll(const ros::Time& rostime) {
 
-	//boost::recursive_mutex::scoped_lock monitor(m_mutex);
-	boost::unique_lock<boost::mutex> scoped_lock(m_mutex);
+	boost::recursive_mutex::scoped_lock monitor(m_mutex);
+	//boost::unique_lock<boost::mutex> scoped_lock(m_mutex);
 
 	m_updated = true;
 	//_publishAll(rostime);
 }
 
 void OctomapServer::_publishAll(const ros::Time& rostime) {
-
-	//boost::lock_guard<boost::mutex> guard(m_mutex);
 
 	ros::WallTime startTime = ros::WallTime::now();
 	size_t octomapSize = m_octree->size();
@@ -837,9 +851,24 @@ void OctomapServer::_publishAll(const ros::Time& rostime) {
 	m_octree->getMetricMin(minX, minY, minZ);
 	m_octree->getMetricMax(maxX, maxY, maxZ);
 
+	//std::vector<const OcTreeNode*> occ_nodes, free_nodes;
+	//std::vector<const OcTreeT::iterator*> occ_nodes, free_nodes;
+
+
+	for (OcTreeT::iterator it = m_octree->begin(m_maxTreeDepth), end = m_octree->end(); it != end; ++it) {
+		bool inUpdateBBX = isInUpdateBBX(it.getKey());
+		if (!m_octree->isNodeOccupied(*it)) {
+			handleFreeNode(it);
+			if (inUpdateBBX)
+				handleFreeNodeInBBX(it);
+		}
+	}
+
 	// now, traverse all leafs in the tree:
 	for (OcTreeT::iterator it = m_octree->begin(m_maxTreeDepth), end = m_octree->end(); it != end; ++it) {
 	//for (OcTreeT::tree_iterator it = m_octree->begin_tree(m_maxTreeDepth), end = m_octree->end_tree(); it != end; ++it) {
+	//OcTreeT::iterator it = m_octree->begin(m_maxTreeDepth), end = m_octree->end();
+	//for (; it != end; ++it) {
 		bool inUpdateBBX = isInUpdateBBX(it.getKey());
 
 		// call general hook:
@@ -887,6 +916,9 @@ void OctomapServer::_publishAll(const ros::Time& rostime) {
 				handleOccupiedNode(it);
 				if (inUpdateBBX)
 					handleOccupiedNodeInBBX(it);
+
+				//const OcTreeT::iterator* tt = &it;
+				//occ_nodes.push_back(tt);
 
 				// create collision object:
 				//if (publishCollisionObject) {
@@ -973,12 +1005,35 @@ void OctomapServer::_publishAll(const ros::Time& rostime) {
 
 				}
 			}
-		} else { // node not occupied => mark as free in 2D map if unknown so far
-			handleFreeNode(it);
-			if (inUpdateBBX)
-				handleFreeNodeInBBX(it);
 		}
+		//else { // node not occupied => mark as free in 2D map if unknown so far
+///			handleFreeNode(it);
+///			if (inUpdateBBX)
+///				handleFreeNodeInBBX(it);
+			//const OcTreeT::iterator* tt = it.iterator_base();
+			//free_nodes.push_back(tt);
+		//}
 	}
+
+	/*
+	ROS_INFO_STREAM("update nodes");
+
+	BOOST_FOREACH(const OcTreeT::iterator* it, free_nodes) {
+	//for(auto i : free_nodes) {
+		handleFreeNode(*it);
+		if(isInUpdateBBX(it->getKey()));
+			handleFreeNodeInBBX(*it);
+	}
+
+	BOOST_FOREACH(const OcTreeT::iterator* it, occ_nodes) {
+	//for(auto i : free_nodes) {
+		handleOccupiedNode(*it);
+		if(isInUpdateBBX(it->getKey()));
+			handleOccupiedNodeInBBX(*it);
+	}
+
+	ROS_INFO_STREAM("nodes updated");
+	*/
 
 	// call post-traversal hook:
 	handlePostNodeTraversal(rostime);
@@ -1032,7 +1087,7 @@ void OctomapServer::_publishAll(const ros::Time& rostime) {
 		publishFullOctoMap(rostime);
 
 	double total_elapsed = (ros::WallTime::now() - startTime).toSec();
-	ROS_DEBUG("Map publishing in OctomapServer took %f sec", total_elapsed);
+	ROS_DEBUG("publishing in OctomapServer took %f sec", total_elapsed);
 
 	m_updated = false;
 }
@@ -1042,8 +1097,8 @@ bool OctomapServer::octomapBinarySrv(OctomapSrv::Request &req, OctomapSrv::Respo
 	res.map.header.frame_id = m_worldFrameId;
 	res.map.header.stamp = ros::Time::now();
 
-	//boost::recursive_mutex::scoped_lock monitor(m_mutex);
-	boost::unique_lock<boost::mutex> scoped_lock(m_mutex);
+	boost::recursive_mutex::scoped_lock monitor(m_mutex);
+	//boost::unique_lock<boost::mutex> scoped_lock(m_mutex);
 
 	if (!octomap_msgs::binaryMapToMsg(*m_octree, res.map))
 		return false;
@@ -1056,8 +1111,8 @@ bool OctomapServer::octomapFullSrv(OctomapSrv::Request &req, OctomapSrv::Respons
 	res.map.header.frame_id = m_worldFrameId;
 	res.map.header.stamp = ros::Time::now();
 
-	//boost::recursive_mutex::scoped_lock monitor(m_mutex);
-	boost::unique_lock<boost::mutex> scoped_lock(m_mutex);
+	boost::recursive_mutex::scoped_lock monitor(m_mutex);
+	//boost::unique_lock<boost::mutex> scoped_lock(m_mutex);
 
 	if (!octomap_msgs::fullMapToMsg(*m_octree, res.map))
 		return false;
@@ -1069,49 +1124,31 @@ bool OctomapServer::clearBBXSrv(BBXSrv::Request& req, BBXSrv::Response& resp) {
 	point3d min = pointMsgToOctomap(req.min);
 	point3d max = pointMsgToOctomap(req.max);
 
+	OcTreeKey kmin, kmax;
+	bool kmin_ok, kmax_ok;
+
 	//ROS_INFO_STREAM("clear_bbx called " << min.x() << ":" << max.x());
 
-	//boost::recursive_mutex::scoped_lock monitor(m_mutex);
-	boost::unique_lock<boost::mutex> scoped_lock(m_mutex);
+	boost::recursive_mutex::scoped_lock monitor(m_mutex);
+	//boost::unique_lock<boost::mutex> scoped_lock(m_mutex);
 
+	m_octree->updateNode(min, false, true);
+	m_octree->updateNode(max, false, true);
 
-	OcTreeKey kmin = m_octree->coordToKey(min);
-	OcTreeKey kmax = m_octree->coordToKey(max);
+	//m_octree->setBBXMax()
 
-	//if(kmin[3] <= 0 || kmax[3] <= 0) {
-	//	ROS_WARN_STREAM("Cannot clear these coordinates");
-	//	return false;
-	//}
+	kmin_ok = m_octree->coordToKeyChecked(min, kmin);
+	kmax_ok = m_octree->coordToKeyChecked(max, kmax);
 
-	if (m_octree->size()<8) {
+	if(!kmin_ok || !kmax_ok) {
+		ROS_WARN_STREAM("Cannot clear these coordinates");
 		return false;
 	}
 
 	for (OcTreeT::leaf_bbx_iterator it = m_octree->begin_leafs_bbx(min, max), end = m_octree->end_leafs_bbx(); it != end; ++it) {
-		//it->setLogOdds(octomap::logodds(m_thresMin));
-		//			m_octree->updateNode(it.getKey(), -6.0f);
-		//ROS_INFO_STREAM("it: " << m_thresMin);
-		//if(it) {
-			//free space
-			//it->setLogOdds(octomap::logodds(0));
-			//m_octree->updateNode(it.getKey(), octomap::logodds(0));
-			m_octree->updateNode(it.getKey(), octomap::logodds(m_thresMin));
-			//ROS_INFO_STREAM("clearing key: " << it.getKey()[0]);
-			//it->setLogOdds(octomap::logodds(m_thresMin));
-			m_updated = true;
-		//}
-		//else {
-		//	break;
-		//}
+		m_octree->updateNode(it.getKey(), octomap::logodds(m_thresMin));
+		//m_updated = true;
 	}
-
-	// TODO: eval which is faster (setLogOdds+updateInner or updateNode)
-	//m_octree->updateInnerOccupancy();
-	//m_updated = true;
-	//rlklaser:: let next read publish all
-	//publishAll(ros::Time::now());
-
-	//ROS_INFO_STREAM("octree updated");
 
 	return true;
 }
@@ -1121,8 +1158,8 @@ bool OctomapServer::resetSrv(std_srvs::Empty::Request& req, std_srvs::Empty::Res
 	occupiedNodesVis.markers.resize(m_treeDepth + 1);
 	ros::Time rostime = ros::Time::now();
 
-	//boost::recursive_mutex::scoped_lock monitor(m_mutex);
-	boost::unique_lock<boost::mutex> scoped_lock(m_mutex);
+	boost::recursive_mutex::scoped_lock monitor(m_mutex);
+	//boost::unique_lock<boost::mutex> scoped_lock(m_mutex);
 
 	m_octree->clear();
 
@@ -1167,8 +1204,8 @@ bool OctomapServer::resetSrv(std_srvs::Empty::Request& req, std_srvs::Empty::Res
 bool OctomapServer::pruneSrv(std_srvs::Empty::Request& req, std_srvs::Empty::Response& resp) {
 	ROS_INFO("pruning octomap...");
 
-	//boost::recursive_mutex::scoped_lock monitor(m_mutex);
-	boost::unique_lock<boost::mutex> scoped_lock(m_mutex);
+	boost::recursive_mutex::scoped_lock monitor(m_mutex);
+	//boost::unique_lock<boost::mutex> scoped_lock(m_mutex);
 
 	m_octree->prune();
 
@@ -1598,17 +1635,20 @@ void OctomapServer::update2DMap(const OcTreeT::iterator& it, int idx, bool occup
 
 	if(prob<=m_thresMin) {
 		m_gridmap.data[idx] = 1; //free
-		ROS_INFO_STREAM("map clamping to min");
+		//ROS_INFO_STREAM("map clamping to min");
 	}
 	else if(prob>=m_thresMax) {
 		m_gridmap.data[idx] = m_maximumCost;
-		ROS_INFO_STREAM("map clamping to max");
+		//ROS_INFO_STREAM("map clamping to max");
 	}
 	else if(occupied) {
 		m_gridmap.data[idx] = std::max(newCost, m_gridmap.data[idx]);
 	}
 	else {
-		m_gridmap.data[idx] *= m_decayCost; //newCost;//std::max(newCost, m_gridmap.data[idx]);
+		//m_gridmap.data[idx] *= m_decayCost; //newCost;
+		//m_gridmap.data[idx] = std::min(newCost, m_gridmap.data[idx]);
+		//average
+		m_gridmap.data[idx] = (newCost + m_gridmap.data[idx]) / 2;
 	}
 
 }
@@ -1663,8 +1703,8 @@ bool OctomapServer::isSpeckleNode(const OcTreeKey&nKey) const {
 
 void OctomapServer::reconfigureCallback(lrm_octomap_server::OctomapServerConfig& config, uint32_t level) {
 
-	//boost::recursive_mutex::scoped_lock monitor(m_mutex);
-	boost::unique_lock<boost::mutex> scoped_lock(m_mutex);
+	boost::recursive_mutex::scoped_lock monitor(m_mutex);
+	//boost::unique_lock<boost::mutex> scoped_lock(m_mutex);
 
 	//m_probHit = config.prob_hit;
 	//m_probMiss = config.prob_mis;
@@ -1726,9 +1766,15 @@ std_msgs::ColorRGBA OctomapServer::probMapColor(double h) {
 
 	int c = 255.0 * h;
 
-	color.r = 255-c;
-	color.g = 255-c;
-	color.b = 255-c;
+	if(h<m_thresMax) {
+		color.r = 255-c;
+		color.g = 255-c;
+		color.b = 255-c;
+	} else {
+		color.r = 255;
+		color.g = 0;
+		color.b = 0;
+	}
 
 	return color;
 }

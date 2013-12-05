@@ -1,6 +1,11 @@
 cmake_minimum_required(VERSION 2.4.6)
 include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
 
+#set(CMAKE_CXX_COMPILER "/usr/bin/g++")
+#set(CMAKE_C_COMPILER "/usr/bin/gcc")
+
+#set(CMAKE_CXX_COMPILER "/usr/bin/clang++")
+#set(CMAKE_C_COMPILER "/usr/bin/clang")
 
 # Set the build type.  Options are:
 #  Coverage       : w/ debug symbols, w/o optimization, w/ code-coverage
@@ -22,6 +27,7 @@ rosbuild_init()
 
 add_definitions(-Wno-deprecated -DEIGEN_VECTORIZE -DEIGEN_DISABLE_UNALIGNED_ARRAY_ASSERT)
 add_definitions(-msse3 -msse4.1 -msse4.2 -mfpmath=sse)
+#add_definitions(-std=c++1x)
 #add_definitions(-mavx -mfpmath=sse)
 
 #find_package(PCL REQUIRED)
