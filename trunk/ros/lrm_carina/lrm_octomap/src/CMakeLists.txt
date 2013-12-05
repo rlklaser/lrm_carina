@@ -14,7 +14,8 @@ SET (octomap_SRCS
 # dynamic and static libs, see CMake FAQ:
 ADD_LIBRARY( octomap SHARED ${octomap_SRCS})
 ADD_LIBRARY( octomap-static STATIC ${octomap_SRCS})
-SET_TARGET_PROPERTIES(octomap-static PROPERTIES OUTPUT_NAME "octomap") 
+SET_TARGET_PROPERTIES(octomap PROPERTIES OUTPUT_NAME "lrm_octomap") 
+SET_TARGET_PROPERTIES(octomap-static PROPERTIES OUTPUT_NAME "lrm_octomap") 
 
 TARGET_LINK_LIBRARIES(octomap octomath)
 
