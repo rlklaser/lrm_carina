@@ -73,8 +73,8 @@ void SplitXB3Nodelet::onInit() {
 		nh_priv.param("narrow/left/camera_info_url", narrow_ctx_.left.url, std::string(""));
 		nh_priv.param("narrow/right/camera_info_url", narrow_ctx_.right.url, std::string(""));
 
-		ros::NodeHandle nh_left(narrow_ctx_.frame_id + "/left");
-		ros::NodeHandle nh_right(narrow_ctx_.frame_id + "/right");
+		ros::NodeHandle nh_left(narrow_ctx_.frame_id + "/narrow/left");
+		ros::NodeHandle nh_right(narrow_ctx_.frame_id + "/narrow/right");
 
 		narrow_ctx_.left.publisher = it_->advertiseCamera(nh.getNamespace() + "/narrow/left/image_raw", 1);
 		narrow_ctx_.right.publisher = it_->advertiseCamera(nh.getNamespace() + "/narrow/right/image_raw", 1);
@@ -96,8 +96,8 @@ void SplitXB3Nodelet::onInit() {
 		nh_priv.param("wide/left/camera_info_url", wide_ctx_.left.url, std::string(""));
 		nh_priv.param("wide/right/camera_info_url", wide_ctx_.right.url, std::string(""));
 
-		ros::NodeHandle nh_left(wide_ctx_.frame_id + "/left");
-		ros::NodeHandle nh_right(wide_ctx_.frame_id + "/right");
+		ros::NodeHandle nh_left(wide_ctx_.frame_id + "/wide/left");
+		ros::NodeHandle nh_right(wide_ctx_.frame_id + "/wide/right");
 
 		wide_ctx_.left.publisher = it_->advertiseCamera(nh.getNamespace() + "/wide/left/image_raw", 1);
 		wide_ctx_.right.publisher = it_->advertiseCamera(nh.getNamespace() + "/wide/right/image_raw", 1);
