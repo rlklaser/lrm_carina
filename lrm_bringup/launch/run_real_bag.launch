@@ -18,7 +18,9 @@
 	<include file="$(find lrm_bringup)/launch/localization.launch" />
 	<include file="$(find lrm_bringup)/launch/odometry_bag.launch" />
 
+	<!-- 
 	<include file="$(find lrm_bringup)/launch/camera_nodelet_manager.launch" />
+	-->
 	<include file="$(find lrm_bringup)/launch/stereo_vision.launch" />
 	
 	<!-- 
