@@ -4,14 +4,14 @@ guid: 00b09d0100bec852
 video_mode: format7_mode3
 frame_id: camera
 
-iso_speed: 400
-frame_rate: 7.5
+#iso_speed: 400
+#frame_rate: 7.5
 
 #iso_speed: 800
 #frame_rate: 15
 
-format7_color_coding: rgb8
-format7_packet_size: 1680
+#format7_color_coding: rgb8
+#format7_packet_size: 1680
 
 auto_brightness: 2
 auto_exposure: 2
