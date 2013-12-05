@@ -6,7 +6,7 @@ global_costmap:
   #robot_base_frame: base_odometry
   robot_base_frame: heading_link
   update_frequency: 5.0
-  publish_frequency: 5.0
+  publish_frequency: 1.0
   
   static_map: true
   #rolling_window: false
@@ -19,8 +19,6 @@ global_costmap:
   save_debug_pgm: true
   #save_debug_pgm: false
   
-  inflation_radius: 2.84
-  
+  #inflation_radius: 2.84
   #robot_radius: 3.5
-  
   #observation_sources: cluster_cloud 

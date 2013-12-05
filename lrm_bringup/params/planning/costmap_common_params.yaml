@@ -14,15 +14,12 @@ footprint: [[0.2, -0.8], [0.65, 0.0], [0.2, 0.8], [-2.5, 0.8], [-2.5, -0.8]]
 #square footprint
 #footprint: [[0.5, -1.0], [0.5, 1.0], [-1.5, 1.0], [-1.5, -1.0]]
 
-#footprint_padding: 0.05
+footprint_padding: 0.05
 
-#different for local and global
-#inflation_radius: 1.95
-#inflation_radius: 2.8
-
+inflation_radius: 2.8
 
 transform_tolerance: 0.3                    # default 0.3
-cost_scaling_factor: 1.0                     # default 10
+cost_scaling_factor: 1.0                    # default 10
 
 
 lethal_cost_threshold: 80                   #occ from octomap
@@ -32,4 +29,4 @@ track_unknown_space: false
 #robot_radius: 2.740               # circunscribed
 #robot_radius: 0.585               # inscribed
 
-max_obstacle_height: 2.1
+#max_obstacle_height: 2.1

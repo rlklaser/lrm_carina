@@ -2,7 +2,7 @@
 
 	<node
 		name="footprint_eraser"
-		type="footprint_eraser"
+		type="footprint_eraser_node"
 		pkg="lrm_octomap_server"
 		output="screen"
 		respawn="true"
