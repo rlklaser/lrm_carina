@@ -1,7 +1,7 @@
 #defaults
 controller_frequency: 20.0
-controller_patience: 5.0
-planner_patience: 5.0
+controller_patience: 10.0
+planner_patience: 15.0
 planner_frequency: 1.0
 
 clearing_rotation_allowed: false
@@ -34,19 +34,24 @@ recovery_behavior_enabled: true
 
 recovery_behaviors: [
 #  {
-#  name: conservative_reset, 
-#  type: lrm_clear_costmap_recovery/ClearCostmapRecovery
+#    name: conservative_reset, 
+#    type: lrm_clear_costmap_recovery/ClearCostmapRecovery
 #  }
 #  ,
   {
-  name: backward_recover, 
-  type: lrm_twist_recovery/TwistRecovery
+    name: backward_recover, 
+    type: lrm_twist_recovery/TwistRecovery
   }
 #  ,
 #  {
-#  name: aggressive_reset, 
-#  type: lrm_clear_costmap_recovery/ClearCostmapRecovery
+#    name: aggressive_reset, 
+#    type: lrm_clear_costmap_recovery/ClearCostmapRecovery
 #  }
+  ,
+  {
+    name: more_backward_recover, 
+    type: lrm_twist_recovery/TwistRecovery
+  }
 ]
 
 conservative_reset:
@@ -70,5 +75,16 @@ backward_recover:
   linear_y: 0.0
   angular_z: 0.0
   
+more_backward_recover:
+  duration: 3
+  linear_speed_limit: -3.0
+  angular_speed_limit: 0.0
+  linear_acceleration_limit: -3.0
+  angular_acceleration_limit: 0.0
+  controller_frequency: 10
+  #simulation_inc:
   
+  linear_x: -1.0
+  linear_y: 0.0
+  angular_z: 0.0  
   
