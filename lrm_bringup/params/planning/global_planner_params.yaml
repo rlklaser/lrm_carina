@@ -3,7 +3,8 @@ environment_type: XYThetaLattice
 
 ##Specifies which planner to use. It can either be "ARAPlanner" for ARA* or "ADPlanner" for AD*.
   
-planner_type: ADPlanner
+#planner_type: ADPlanner
+planner_type: ARAPlanner
   
 ##The amount of time given to the planner to find a solution. If there is still time remaining 
 ##after the planner finds its sub-optimal initial solution (specified by "initial_epsilon"), 
