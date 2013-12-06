@@ -18,85 +18,15 @@
 		name="manager"
 		default="/$(arg camera)_nodelet_manager" />
 
-	<!--
-	<param
-		name="/use_sim_time"
-		value="true" />
-	-->
-
 	<group ns="/stereo">
 
 		<rosparam
 			command="load"
 			file="$(find lrm_bringup)/params/disparity_params.yaml" />
 
-		<group ns="left">
-		    <!-- Debayered images -->
-			<node
-				pkg="nodelet"
-				type="nodelet"
-				name="debayer"
-				args="load image_proc/debayer $(arg manager) $(arg bond)"
-				respawn="true" />
-			<node
-				pkg="nodelet"
-				type="nodelet"
-				name="rectify_mono"
-				args="load image_proc/rectify $(arg manager) $(arg bond)"
-				respawn="true"
-				output="screen" />
-  			<!-- Color rectified image -->
-			<node
-				pkg="nodelet"
-				type="nodelet"
-				name="rectify_color"
-				args="load image_proc/rectify $(arg manager) $(arg bond)"
-				respawn="true"
-				output="screen"
-			>
-				<remap
-					from="image_mono"
-					to="image_color" />
-				<remap
-					from="image_rect"
-					to="image_rect_color" />
-			</node>
-		</group>
+		<include file="$(find lrm_bringup)/launch/image_pipeline_stereo.launch" />
 
-		<group ns="right">
-		    <!-- Debayered images -->
-			<node
-				pkg="nodelet"
-				type="nodelet"
-				name="debayer"
-				args="load image_proc/debayer $(arg manager) $(arg bond)"
-				respawn="true" />
-			<node
-				pkg="nodelet"
-				type="nodelet"
-				name="rectify_mono"
-				args="load image_proc/rectify $(arg manager) $(arg bond)"
-				respawn="true"
-				output="screen" />
-  			<!-- Color rectified image -->
-			<node
-				pkg="nodelet"
-				type="nodelet"
-				name="rectify_color"
-				args="load image_proc/rectify $(arg manager) $(arg bond)"
-				respawn="true"
-				output="screen"
-			>
-				<remap
-					from="image_mono"
-					to="image_color" />
-				<remap
-					from="image_rect"
-					to="image_rect_color" />
-			</node>
-		</group>
-  		
-  		<rosparam
+		<rosparam
 			command="load"
 			file="$(find lrm_bringup)/params/stereo_param.yaml" />
 			
@@ -218,7 +148,7 @@
 				to="unmatched_points" />
 		</node>
 		-->
-		
+
 	</group>
 
 </launch>

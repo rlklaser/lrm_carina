@@ -1,0 +1,6 @@
+<launch>
+
+	<include file="$(find lrm_bringup)/launch/gps_imu_driver.launch" />
+	<include file="$(find lrm_bringup)/launch/stereo_bumblebee_60.launch" />
+
+</launch>

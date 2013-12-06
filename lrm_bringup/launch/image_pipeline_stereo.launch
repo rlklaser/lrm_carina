@@ -1,0 +1,10 @@
+<launch>
+
+	<group ns="left">
+		<include file="$(find lrm_bringup)/launch/image_pipeline.launch" />
+	</group>
+	<group ns="right">
+		<include file="$(find lrm_bringup)/launch/image_pipeline.launch" />
+	</group>
+
+</launch>

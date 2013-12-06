@@ -4,3 +4,7 @@ use_sim_time: true
 imu_calibrate_node:
   declination: 0.0
   fixed_declination: true #if false will subscribe declination topic
+  
+stereo_camera:
+   throttle_stereo_node:
+     rate: 5

@@ -1,0 +1,106 @@
+<launch>
+
+	<arg
+		name="camera"
+		default="camera" />
+	<arg
+		name="respawn"
+		default="false" />
+	<arg
+		if="$(arg respawn)"
+		name="bond"
+		value="" />
+	<arg
+		unless="$(arg respawn)"
+		name="bond"
+		value="--no-bond" />
+	<arg
+		name="manager"
+		default="/$(arg camera)_nodelet_manager" />
+
+	<group ns="/stereo">
+
+		<group ns="wide">
+
+			<rosparam
+				command="load"
+				file="$(find lrm_bringup)/params/disparity_params.yaml" />
+
+			<include file="$(find lrm_bringup)/launch/image_pipeline_stereo.launch" />
+
+			<rosparam
+				command="load"
+				file="$(find lrm_bringup)/params/stereo_param.yaml" />
+
+			<node
+				pkg="nodelet"
+				type="nodelet"
+				name="disparity_bm"
+				args="load lrm_stereo/disparity_bm $(arg manager) $(arg bond)"
+				respawn="true"
+				output="screen"
+			>
+				<remap
+					from="disparity"
+					to="disparity_bm" />
+
+			</node>
+
+  		    <!-- Point cloud, PCL-friendly -->
+			<node
+				pkg="nodelet"
+				type="nodelet"
+				name="point_cloud"
+				args="load lrm_stereo/point_cloud2 $(arg manager) $(arg bond)"
+				respawn="true"
+				output="screen"
+			>
+				<remap
+					from="disparity"
+					to="disparity_bm" />
+			</node>
+		</group>
+
+		<group ns="narrow">
+
+			<rosparam
+				command="load"
+				file="$(find lrm_bringup)/params/disparity_params.yaml" />
+
+			<include file="$(find lrm_bringup)/launch/image_pipeline_stereo.launch" />
+
+			<rosparam
+				command="load"
+				file="$(find lrm_bringup)/params/stereo_param.yaml" />
+
+			<node
+				pkg="nodelet"
+				type="nodelet"
+				name="disparity_bm"
+				args="load lrm_stereo/disparity_bm $(arg manager) $(arg bond)"
+				respawn="true"
+				output="screen"
+			>
+				<remap
+					from="disparity"
+					to="disparity_bm" />
+
+			</node>
+
+  		    <!-- Point cloud, PCL-friendly -->
+			<node
+				pkg="nodelet"
+				type="nodelet"
+				name="point_cloud"
+				args="load lrm_stereo/point_cloud2 $(arg manager) $(arg bond)"
+				respawn="true"
+				output="screen"
+			>
+				<remap
+					from="disparity"
+					to="disparity_bm" />
+			</node>
+		</group>
+	</group>
+
+</launch>

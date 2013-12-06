@@ -1,0 +1,52 @@
+<launch>
+
+	<arg
+		name="camera"
+		default="camera" />
+	<arg
+		name="respawn"
+		default="false" />
+	<arg
+		if="$(arg respawn)"
+		name="bond"
+		value="" />
+	<arg
+		unless="$(arg respawn)"
+		name="bond"
+		value="--no-bond" />
+	<arg
+		name="manager"
+		default="/$(arg camera)_nodelet_manager" />
+		
+    <!-- Debayered images -->
+	<node
+		pkg="nodelet"
+		type="nodelet"
+		name="debayer"
+		args="load image_proc/debayer $(arg manager) $(arg bond)"
+		respawn="true" />
+	<node
+		pkg="nodelet"
+		type="nodelet"
+		name="rectify_mono"
+		args="load image_proc/rectify $(arg manager) $(arg bond)"
+		respawn="true"
+		output="screen" />
+  	<!-- Color rectified image -->
+	<node
+		pkg="nodelet"
+		type="nodelet"
+		name="rectify_color"
+		args="load image_proc/rectify $(arg manager) $(arg bond)"
+		respawn="true"
+		output="screen"
+	>
+		<remap
+			from="image_mono"
+			to="image_color" />
+		<remap
+			from="image_rect"
+			to="image_rect_color" />
+	</node>
+
+</launch>
