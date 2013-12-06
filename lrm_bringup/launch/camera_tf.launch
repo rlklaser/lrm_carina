@@ -5,7 +5,14 @@
 		name="/use_sim_time"
 		value="true" />
 	 -->
-	 	
+
+	<node
+		pkg="tf"
+		type="static_transform_publisher"
+		name="wheel_odom_broadcaster_aa"
+		args="0.0 0.0 0.0  1.57 3.14 1.57 /base_sensors /camera 50"
+		output="screen" />
+			 	
 	<node
 		pkg="tf"
 		type="static_transform_publisher"

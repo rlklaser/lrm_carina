@@ -8,7 +8,7 @@ camera1394_nodelet:
   frame_id: /camera
 
   iso_speed: 400
-  frame_rate: 8
+  frame_rate: 15
 
   #iso_speed: 800
   #frame_rate: 15
@@ -29,9 +29,9 @@ camera1394_nodelet:
   #auto_shutter: 2
   #auto_zoom: 2
 
-  #auto_white_balance: 3
-  #white_balance_BU: 810
-  #white_balance_RV: 550
+  auto_white_balance: 3
+  white_balance_BU: 810
+  white_balance_RV: 550
 
   camera_info_url: package://lrm_bringup/params/cameras/calib/00b09d0100bec852.yaml
 
