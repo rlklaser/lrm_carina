@@ -47,7 +47,10 @@ class SplitXB3Nodelet: public nodelet::Nodelet {
 
 	void publishCam(const sensor_msgs::Image& image);
 
-	bool fillImages(sensor_msgs::Image& narrow_left_image, sensor_msgs::Image& narrow_right_image, sensor_msgs::Image& wide_left_image, sensor_msgs::Image& wide_right_image, std::string encoding_arg, uint32_t rows_arg, uint32_t cols_arg, const void* data_arg);
+	bool fillImages(sensor_msgs::Image& narrow_left_image, sensor_msgs::Image&
+			narrow_right_image, sensor_msgs::Image& wide_left_image,
+			sensor_msgs::Image& wide_right_image, std::string encoding_arg,
+			uint32_t rows_arg, uint32_t cols_arg, const void* data_arg);
 
 	virtual void onInit();
 	void connectCb();
@@ -61,54 +64,50 @@ void SplitXB3Nodelet::onInit() {
 	it_.reset(new image_transport::ImageTransport(nh));
 
 	std::string name;
-	std::string frame_id;
+	std::string narrow_frame_id;
+	std::string wide_frame_id;
 	nh_priv.param("name", name, std::string("camera"));
-	nh_priv.param("frame_id", frame_id, std::string("narrow_camera"));
+
+	ros::NodeHandle nh_narrow(nh.getNamespace() + "/narrow");
+	ros::NodeHandle nh_wide(nh.getNamespace() + "/wide");
+
+	nh_narrow.param("frame_id", narrow_ctx_.frame_id, std::string(""));
+	nh_wide.param("frame_id", wide_ctx_.frame_id, std::string(""));
 
 	{ //narrow
-	  //nh_priv.param("narrow_name", narrow_ctx_.name, std::string("camera"));
-	  //nh_priv.param("narrow_frame_id", narrow_ctx_.frame_id, std::string("narrow_camera"));
 		narrow_ctx_.name = name;
-		narrow_ctx_.frame_id = frame_id;
+
+		ros::NodeHandle nh_left(nh_narrow.getNamespace() + "/left");
+		ros::NodeHandle nh_right(nh_narrow.getNamespace() + "/right");
+
 		nh_priv.param("narrow/left/camera_info_url", narrow_ctx_.left.url, std::string(""));
 		nh_priv.param("narrow/right/camera_info_url", narrow_ctx_.right.url, std::string(""));
 
-		ros::NodeHandle nh_left(narrow_ctx_.frame_id + "/narrow/left");
-		ros::NodeHandle nh_right(narrow_ctx_.frame_id + "/narrow/right");
+		narrow_ctx_.left.publisher = it_->advertiseCamera(nh_left.getNamespace() + "/image_raw", 1);
+		narrow_ctx_.right.publisher = it_->advertiseCamera(nh_right.getNamespace() + "/image_raw", 1);
 
-		narrow_ctx_.left.publisher = it_->advertiseCamera(nh.getNamespace() + "/narrow/left/image_raw", 1);
-		narrow_ctx_.right.publisher = it_->advertiseCamera(nh.getNamespace() + "/narrow/right/image_raw", 1);
-
-		//camera_info_manager::CameraInfoManager info_manager_left(nh_left, narrow_ctx_.name + "_narrow_left", narrow_ctx_.left.url);
-		narrow_ctx_.left.manager.reset(new camera_info_manager::CameraInfoManager(nh_left, narrow_ctx_.name + "_narrow_left", narrow_ctx_.left.url));
-		//narrow_ctx_.left.info = info_manager_left.getCameraInfo();
-
-		//camera_info_manager::CameraInfoManager info_manager_right(nh_right, narrow_ctx_.name + "_narrow_right", narrow_ctx_.right.url);
-		narrow_ctx_.right.manager.reset(new camera_info_manager::CameraInfoManager(nh_right, narrow_ctx_.name + "_narrow_right", narrow_ctx_.right.url));
-		//narrow_ctx_.right.info = info_manager_right.getCameraInfo();
+		narrow_ctx_.left.manager.reset(new camera_info_manager::CameraInfoManager(
+				nh_left, narrow_ctx_.name + "_narrow_left", narrow_ctx_.left.url));
+		narrow_ctx_.right.manager.reset(new camera_info_manager::CameraInfoManager(
+				nh_right, narrow_ctx_.name + "_narrow_right", narrow_ctx_.right.url));
 	}
 
 	{ //wide
-	  //nh_priv.param("wide_name", wide_ctx_.name, std::string("camera"));
-	  //nh_priv.param("wide_frame_id", wide_ctx_.frame_id, std::string("wide_camera"));
 		wide_ctx_.name = name;
-		wide_ctx_.frame_id = frame_id;
+
+		ros::NodeHandle nh_left(nh_wide.getNamespace() + "/left");
+		ros::NodeHandle nh_right(nh_wide.getNamespace() + "/right");
+
 		nh_priv.param("wide/left/camera_info_url", wide_ctx_.left.url, std::string(""));
 		nh_priv.param("wide/right/camera_info_url", wide_ctx_.right.url, std::string(""));
 
-		ros::NodeHandle nh_left(wide_ctx_.frame_id + "/wide/left");
-		ros::NodeHandle nh_right(wide_ctx_.frame_id + "/wide/right");
+		wide_ctx_.left.publisher = it_->advertiseCamera(nh_left.getNamespace() + "/image_raw", 1);
+		wide_ctx_.right.publisher = it_->advertiseCamera(nh_right.getNamespace() + "/image_raw", 1);
 
-		wide_ctx_.left.publisher = it_->advertiseCamera(nh.getNamespace() + "/wide/left/image_raw", 1);
-		wide_ctx_.right.publisher = it_->advertiseCamera(nh.getNamespace() + "/wide/right/image_raw", 1);
-
-		//camera_info_manager::CameraInfoManager info_manager_left(nh_left, wide_ctx_.name + "_wide_left", wide_ctx_.left.url);
-		wide_ctx_.left.manager.reset(new camera_info_manager::CameraInfoManager(nh_left, wide_ctx_.name + "_wide_left", wide_ctx_.left.url));
-		//wide_ctx_.left.info = info_manager_left.getCameraInfo();
-
-		//camera_info_manager::CameraInfoManager info_manager_right(nh_right, wide_ctx_.name + "_wide_right", wide_ctx_.right.url);
-		wide_ctx_.right.manager.reset(new camera_info_manager::CameraInfoManager(nh_right, wide_ctx_.name + "_wide_right", wide_ctx_.right.url));
-		//wide_ctx_.right.info = info_manager_right.getCameraInfo();
+		wide_ctx_.left.manager.reset(new camera_info_manager::CameraInfoManager(
+				nh_left, wide_ctx_.name + "_wide_left", wide_ctx_.left.url));
+		wide_ctx_.right.manager.reset(new camera_info_manager::CameraInfoManager(
+				nh_right, wide_ctx_.name + "_wide_right", wide_ctx_.right.url));
 	}
 
 	image_transport::TransportHints hints("raw", ros::TransportHints(), nh);
@@ -122,32 +121,35 @@ void SplitXB3Nodelet::imageCb(const sensor_msgs::ImageConstPtr& raw_msg) {
 	publishCam(*raw_msg);
 }
 
-bool SplitXB3Nodelet::fillImages(sensor_msgs::Image& narrow_left_image, sensor_msgs::Image& narrow_right_image, sensor_msgs::Image& wide_left_image, sensor_msgs::Image& wide_right_image, std::string encoding_arg, uint32_t rows_arg, uint32_t cols_arg, const void* data_arg) {
+bool SplitXB3Nodelet::fillImages(sensor_msgs::Image& narrow_left_image, sensor_msgs::Image&
+		narrow_right_image, sensor_msgs::Image& wide_left_image, sensor_msgs::Image& wide_right_image,
+		std::string encoding_arg, uint32_t rows_arg, uint32_t cols_arg, const void* data_arg) {
+
 	uint32_t step_arg = cols_arg * sensor_msgs::image_encodings::numChannels(encoding_arg);
 
 	size_t st0 = (step_arg * rows_arg);
 
 	narrow_left_image.encoding = encoding_arg;
-	narrow_left_image.height = rows_arg / 2;
-	narrow_left_image.width = cols_arg / 2;
+	narrow_left_image.height = rows_arg;// / 2;
+	narrow_left_image.width = cols_arg;// / 2;
 	narrow_left_image.step = cols_arg;
 	narrow_left_image.data.resize(st0);
 
 	narrow_right_image.encoding = encoding_arg;
-	narrow_right_image.height = rows_arg / 2;
-	narrow_right_image.width = cols_arg / 2;
+	narrow_right_image.height = rows_arg;// / 2;
+	narrow_right_image.width = cols_arg;// / 2;
 	narrow_right_image.step = cols_arg;
 	narrow_right_image.data.resize(st0);
 
 	wide_left_image.encoding = encoding_arg;
-	wide_left_image.height = rows_arg / 2;
-	wide_left_image.width = cols_arg / 2;
+	wide_left_image.height = rows_arg;// / 2;
+	wide_left_image.width = cols_arg;// / 2;
 	wide_left_image.step = cols_arg;
 	wide_left_image.data.resize(st0);
 
 	wide_right_image.encoding = encoding_arg;
-	wide_right_image.height = rows_arg / 2;
-	wide_right_image.width = cols_arg / 2;
+	wide_right_image.height = rows_arg;// / 2;
+	wide_right_image.width = cols_arg;// / 2;
 	wide_right_image.step = cols_arg;
 	wide_right_image.data.resize(st0);
 
@@ -181,45 +183,56 @@ void SplitXB3Nodelet::publishCam(const sensor_msgs::Image& image) {
 	uint32_t imWidth = image.width;
 	const void *imRaw = image.data.data();
 
-	std::string encoding = sensor_msgs::image_encodings::BAYER_GBRG8;
+	std::string encoding = /*sensor_msgs::image_encodings::MONO8;*/ sensor_msgs::image_encodings::BAYER_GBRG8;
 
-	fillImages(narrow_ctx_.left.image, narrow_ctx_.right.image, wide_ctx_.left.image, wide_ctx_.right.image, encoding, imHeight, imWidth, imRaw);
+	fillImages(narrow_ctx_.left.image, narrow_ctx_.right.image,
+			wide_ctx_.left.image, wide_ctx_.right.image,
+			encoding, imHeight, imWidth, imRaw);
 
 	// Update diagnostics and publish
 	ros::Time stamp = image.header.stamp;
 
+	//narrow
 	narrow_ctx_.frame_id = narrow_ctx_.frame_id == "" ? image.header.frame_id : narrow_ctx_.frame_id;
+
 	narrow_ctx_.left.image.header.frame_id = narrow_ctx_.frame_id;
+	//narrow_ctx_.left.image.header.stamp = stamp;
+	//narrow_ctx_.left.image.encoding = sensor_msgs::image_encodings::BAYER_GBRG8;
+
 	narrow_ctx_.right.image.header.frame_id = narrow_ctx_.frame_id;
-	narrow_ctx_.left.info.header.frame_id = narrow_ctx_.frame_id;
-	narrow_ctx_.left.info.header.stamp = stamp;
-	narrow_ctx_.left.info.height = imHeight;
-	narrow_ctx_.left.info.width = imWidth;
-	narrow_ctx_.right.info.header.frame_id = narrow_ctx_.frame_id;
-	narrow_ctx_.right.info.header.stamp = stamp;
-	narrow_ctx_.right.info.height = imHeight;
-	narrow_ctx_.right.info.width = imWidth;
 
 	narrow_ctx_.left.info = narrow_ctx_.left.manager->getCameraInfo();
+	narrow_ctx_.left.info.header.frame_id = narrow_ctx_.frame_id;
+	//narrow_ctx_.left.info.header.stamp = stamp;
+	narrow_ctx_.left.info.height = imHeight;
+	narrow_ctx_.left.info.width = imWidth;
+
 	narrow_ctx_.right.info = narrow_ctx_.right.manager->getCameraInfo();
+	narrow_ctx_.right.info.header.frame_id = narrow_ctx_.frame_id;
+	//narrow_ctx_.right.info.header.stamp = stamp;
+	narrow_ctx_.right.info.height = imHeight;
+	narrow_ctx_.right.info.width = imWidth;
 
 	narrow_ctx_.left.publisher.publish(narrow_ctx_.left.image, narrow_ctx_.left.info, stamp);
 	narrow_ctx_.right.publisher.publish(narrow_ctx_.right.image, narrow_ctx_.right.info, stamp);
 
+	//wide
 	wide_ctx_.frame_id = wide_ctx_.frame_id == "" ? image.header.frame_id : wide_ctx_.frame_id;
+
 	wide_ctx_.left.image.header.frame_id = wide_ctx_.frame_id;
 	wide_ctx_.right.image.header.frame_id = wide_ctx_.frame_id;
+
+	wide_ctx_.left.info = wide_ctx_.left.manager->getCameraInfo();
 	wide_ctx_.left.info.header.frame_id = wide_ctx_.frame_id;
-	wide_ctx_.left.info.header.stamp = stamp;
+	//wide_ctx_.left.info.header.stamp = stamp;
 	wide_ctx_.left.info.height = imHeight;
 	wide_ctx_.left.info.width = imWidth;
+
+	wide_ctx_.right.info = wide_ctx_.right.manager->getCameraInfo();
 	wide_ctx_.right.info.header.frame_id = wide_ctx_.frame_id;
-	wide_ctx_.right.info.header.stamp = stamp;
+	//wide_ctx_.right.info.header.stamp = stamp;
 	wide_ctx_.right.info.height = imHeight;
 	wide_ctx_.right.info.width = imWidth;
-
-	wide_ctx_.left.info = narrow_ctx_.left.manager->getCameraInfo();
-	wide_ctx_.right.info = narrow_ctx_.right.manager->getCameraInfo();
 
 	wide_ctx_.left.publisher.publish(wide_ctx_.left.image, wide_ctx_.left.info, stamp);
 	wide_ctx_.right.publisher.publish(wide_ctx_.right.image, wide_ctx_.right.info, stamp);
