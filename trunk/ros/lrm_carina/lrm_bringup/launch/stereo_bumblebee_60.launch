@@ -2,7 +2,7 @@
 
 	<include file="$(find lrm_bringup)/launch/stereo_camera.launch" />
 
-	<rosparam file="$(find lrm_bringup)/params/cameras/bumblebee_xb3.yaml" />
+	<rosparam file="$(find lrm_bringup)/params/cameras/bumblebee_60.yaml" />
 
 	<node
 		pkg="nodelet"
@@ -11,19 +11,13 @@
 		args="load camera1394/driver /bumblebee_nodelet_manager"
 		output="screen"
 		respawn="true" />
-	
-	<!-- or 
-	00b09d0100be241e - bb2-38
-	00b09d0100ac7cc8 - bb2-60
-	00b09d0100bec852 - xb3
-	-->
 
-	<group ns="/stereo">
+	<group ns="/stereo_camera">
 		<node
 			pkg="nodelet"
 			type="nodelet"
-			name="xb3_split_nodelet"
-			args="load lrm_sensors/split_xb3 /bumblebee_nodelet_manager"
+			name="bumblebee_split_nodelet"
+			args="load lrm_sensors/split_bb2 /bumblebee_nodelet_manager"
 			output="screen"
 			respawn="true"
 		>
@@ -32,6 +26,5 @@
 				to="/camera/image_raw" />
 		</node>
 	</group>
-
 
 </launch>

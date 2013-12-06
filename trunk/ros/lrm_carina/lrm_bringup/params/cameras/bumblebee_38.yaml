@@ -1,11 +1,24 @@
-#Point Grey Research Bumblebee2 BB2-03S2C
+camera1394_nodelet:
 
-guid: 00b09d0100be241e
-video_mode: format7_mode3
-frame_id: camera
-iso_speed: 400
-frame_rate: 48
-format7_color_coding: raw16
-bayer_pattern: bggr 
+  #Point Grey Research Bumblebee2 BB2-03S2C
+  guid: 00b09d0100be241e
+  video_mode: format7_mode3
+  frame_id: /camera
+  iso_speed: 400
+  frame_rate: 48
+  format7_color_coding: raw16
+  bayer_pattern: bggr 
 
-camera_info_url: package://lrm_bringup/params/cameras/00b09d0100be241e.yaml
+  camera_info_url: package://lrm_bringup/params/cameras/calib/00b09d0100be241e.yaml
+
+
+stereo_camera:
+  bumblebee_split_nodelet:
+
+    name: 00b09d0100be241e
+    frame_id: /stereo_camera
+
+    left:
+      camera_info_url: package://lrm_bringup/params/cameras/calib/00b09d0100be241e_left.yaml
+    right:
+      camera_info_url: package://lrm_bringup/params/cameras/calib/00b09d0100be241e_right.yaml

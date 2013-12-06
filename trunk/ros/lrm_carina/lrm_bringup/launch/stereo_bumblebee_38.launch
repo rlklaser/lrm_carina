@@ -1,66 +1,30 @@
 <launch>
 
-	<!--
-	<param
-		name="/use_sim_time"
-		value="true" />
-	-->
+	<include file="$(find lrm_bringup)/launch/stereo_camera.launch" />
 
-	<include file="$(find lrm_bringup)/launch/camera_nodelet_manager.launch" />
- 
+	<rosparam file="$(find lrm_bringup)/params/cameras/bumblebee_38.yaml" />
+
 	<node
 		pkg="nodelet"
 		type="nodelet"
 		name="camera1394_nodelet"
-		args="load camera1394/driver /camera_nodelet_manager"
-	>
-		<rosparam file="$(find lrm_bringup)/params/cameras/bumblebee_38.yaml" />
-	</node>
+		args="load camera1394/driver /bumblebee_nodelet_manager"
+		output="screen"
+		respawn="true" />
 
 	<group ns="/stereo_camera">
 		<node
 			pkg="nodelet"
 			type="nodelet"
 			name="bumblebee_split_nodelet"
-			args="load lrm_sensors/split_bb2 /camera_nodelet_manager"
+			args="load lrm_sensors/split_bb2 /bumblebee_nodelet_manager"
+			output="screen"
+			respawn="true"
 		>
 			<remap
 				from="image_raw"
 				to="/camera/image_raw" />
-
-			<param
-				name="name"
-				value="00b09d0100be241e" />
-			<param
-				name="frame_id"
-				value="/stereo_camera" />
-
-			<param
-				name="left/camera_info_url"
-				value="package://lrm_bringup/params/cameras/00b09d0100be241e_left.yaml" />
-			<param
-				name="right/camera_info_url"
-				value="package://lrm_bringup/params/cameras/00b09d0100be241e_right.yaml" />
-
 		</node>
 	</group>
 
-	<node
-		name="throttle_stereo"
-		pkg="lrm_stereo"
-		type="throttle_stereo"
-		output="screen"
-		respawn="true"
-	>
-		<param
-			name="input_namespace"
-			value="stereo_camera" />
-		<param
-			name="output_namespace"
-			value="stereo" />
-		<param
-			name="rate"
-			value="5" />
-	</node>
-	
 </launch>
