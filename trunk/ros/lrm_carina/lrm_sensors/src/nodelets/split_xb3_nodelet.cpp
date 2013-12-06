@@ -66,22 +66,19 @@ void SplitXB3Nodelet::onInit() {
 	std::string name;
 	std::string narrow_frame_id;
 	std::string wide_frame_id;
+
 	nh_priv.param("name", name, std::string("camera"));
+	nh_priv.param("narrow/frame_id", narrow_ctx_.frame_id, std::string(""));
+	nh_priv.param("narrow/left/camera_info_url", narrow_ctx_.left.url, std::string(""));
+	nh_priv.param("narrow/right/camera_info_url", narrow_ctx_.right.url, std::string(""));
 
-	ros::NodeHandle nh_narrow(nh.getNamespace() + "/narrow");
-	ros::NodeHandle nh_wide(nh.getNamespace() + "/wide");
-
-	nh_narrow.param("frame_id", narrow_ctx_.frame_id, std::string(""));
-	nh_wide.param("frame_id", wide_ctx_.frame_id, std::string(""));
+	narrow_ctx_.name = name;
+	wide_ctx_.name = name;
 
 	{ //narrow
-		narrow_ctx_.name = name;
-
-		ros::NodeHandle nh_left(nh_narrow.getNamespace() + "/left");
-		ros::NodeHandle nh_right(nh_narrow.getNamespace() + "/right");
-
-		nh_priv.param("narrow/left/camera_info_url", narrow_ctx_.left.url, std::string(""));
-		nh_priv.param("narrow/right/camera_info_url", narrow_ctx_.right.url, std::string(""));
+		ros::NodeHandle nh_baseline(nh.getNamespace() + "/narrow");
+		ros::NodeHandle nh_left(nh_baseline.getNamespace() + "/left");
+		ros::NodeHandle nh_right(nh_baseline.getNamespace() + "/right");
 
 		narrow_ctx_.left.publisher = it_->advertiseCamera(nh_left.getNamespace() + "/image_raw", 1);
 		narrow_ctx_.right.publisher = it_->advertiseCamera(nh_right.getNamespace() + "/image_raw", 1);
@@ -93,10 +90,9 @@ void SplitXB3Nodelet::onInit() {
 	}
 
 	{ //wide
-		wide_ctx_.name = name;
-
-		ros::NodeHandle nh_left(nh_wide.getNamespace() + "/left");
-		ros::NodeHandle nh_right(nh_wide.getNamespace() + "/right");
+		ros::NodeHandle nh_baseline(nh.getNamespace() + "/wide");
+		ros::NodeHandle nh_left(nh_baseline.getNamespace() + "/left");
+		ros::NodeHandle nh_right(nh_baseline.getNamespace() + "/right");
 
 		nh_priv.param("wide/left/camera_info_url", wide_ctx_.left.url, std::string(""));
 		nh_priv.param("wide/right/camera_info_url", wide_ctx_.right.url, std::string(""));
@@ -163,9 +159,15 @@ bool SplitXB3Nodelet::fillImages(sensor_msgs::Image& narrow_left_image, sensor_m
 
 	//deinterlace
 	while (k > 0) {
+		/*
 		*(narrow_right++) = *crt;
 		*(wide_right++) = *(crt++);
 		*(narrow_left++) = *(crt++);
+		*(wide_left++) = *(crt++);
+		*/
+		*(wide_right++) = *(crt++);
+		*(narrow_right++) = *(crt++);
+		*(narrow_left++) = *(crt);
 		*(wide_left++) = *(crt++);
 		k--;
 	}
