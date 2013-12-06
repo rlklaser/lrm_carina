@@ -26,6 +26,7 @@
  * @date Feb 1, 2013
  *
  */
+#if 0
 
 #include <ros/ros.h>
 #include <nodelet/nodelet.h>
@@ -209,3 +210,4 @@ void SplitNodelet::publishCam(const sensor_msgs::Image& image) {
 
 #include <pluginlib/class_list_macros.h>
 PLUGINLIB_EXPORT_CLASS(lrm_sensors::SplitNodelet, nodelet::Nodelet)
+#endif

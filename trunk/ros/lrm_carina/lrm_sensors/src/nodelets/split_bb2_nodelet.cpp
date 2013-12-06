@@ -63,21 +63,18 @@ void SplitBB2Nodelet::onInit() {
 	it_.reset(new image_transport::ImageTransport(nh));
 
 	nh_priv.param("name", ctx_.name, std::string("camera"));
-	nh_priv.param("frame_id", ctx_.frame_id, std::string("stereo_camera"));
+	nh_priv.param("frame_id", ctx_.frame_id, std::string("/stereo_camera"));
 	nh_priv.param("left/camera_info_url", ctx_.left.url, std::string(""));
 	nh_priv.param("right/camera_info_url", ctx_.right.url, std::string(""));
 
-	ros::NodeHandle nh_left(ctx_.frame_id + "/left");
-	ros::NodeHandle nh_right(ctx_.frame_id + "/right");
+	ros::NodeHandle nh_left(nh.getNamespace() + "/left");
+	ros::NodeHandle nh_right(nh.getNamespace() + "/right");
 
-	ctx_.left.publisher = it_->advertiseCamera(nh.getNamespace() + "/left/image_raw", 1);
-	ctx_.right.publisher = it_->advertiseCamera(nh.getNamespace() + "/right/image_raw", 1);
+	ctx_.left.publisher = it_->advertiseCamera(nh_left.getNamespace() + "/image_raw", 1);
+	ctx_.right.publisher = it_->advertiseCamera(nh_right.getNamespace() + "/image_raw", 1);
 
 	ctx_.left.manager.reset(new camera_info_manager::CameraInfoManager(nh_left, ctx_.name + "_left", ctx_.left.url));
-	//ctx_.left.info = ctx_.left.manager->getCameraInfo();
-
 	ctx_.right.manager.reset(new camera_info_manager::CameraInfoManager(nh_right, ctx_.name + "_right", ctx_.right.url));
-	//ctx_.right.info = ctx_.right.manager->getCameraInfo();
 
 	image_transport::TransportHints hints("raw", ros::TransportHints(), nh);
 	sub_ = it_->subscribe("image_raw", 1, &SplitBB2Nodelet::imageCb, this, hints);
@@ -90,7 +87,8 @@ void SplitBB2Nodelet::imageCb(const sensor_msgs::ImageConstPtr& raw_msg) {
 	publishCam(*raw_msg);
 }
 
-bool SplitBB2Nodelet::fillImages(sensor_msgs::Image& left_image, sensor_msgs::Image& right_image, std::string encoding_arg, uint32_t rows_arg, uint32_t cols_arg, const void* data_arg) {
+bool SplitBB2Nodelet::fillImages(sensor_msgs::Image& left_image, sensor_msgs::Image&
+		right_image, std::string encoding_arg, uint32_t rows_arg, uint32_t cols_arg, const void* data_arg) {
 
 	uint32_t step_arg = cols_arg * sensor_msgs::image_encodings::numChannels(encoding_arg);
 
@@ -161,8 +159,7 @@ void SplitBB2Nodelet::publishCam(const sensor_msgs::Image& image) {
 	ctx_.right.publisher.publish(ctx_.right.image, ctx_.right.info, stamp);
 }
 
-}
-;
+};
 
 #include <pluginlib/class_list_macros.h>
 PLUGINLIB_EXPORT_CLASS(lrm_sensors::SplitBB2Nodelet, nodelet::Nodelet)
