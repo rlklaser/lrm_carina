@@ -63,18 +63,21 @@ void SplitBB2Nodelet::onInit() {
 	it_.reset(new image_transport::ImageTransport(nh));
 
 	nh_priv.param("name", ctx_.name, std::string("camera"));
-	nh_priv.param("frame_id", ctx_.frame_id, std::string("/stereo_camera"));
-	nh_priv.param("left/camera_info_url", ctx_.left.url, std::string(""));
-	nh_priv.param("right/camera_info_url", ctx_.right.url, std::string(""));
+	nh_priv.param("frame_id", ctx_.frame_id, std::string(""));
 
 	ros::NodeHandle nh_left(nh.getNamespace() + "/left");
 	ros::NodeHandle nh_right(nh.getNamespace() + "/right");
 
+	nh_priv.param("left/camera_info_url", ctx_.left.url, std::string(""));
+	nh_priv.param("right/camera_info_url", ctx_.right.url, std::string(""));
+
 	ctx_.left.publisher = it_->advertiseCamera(nh_left.getNamespace() + "/image_raw", 1);
 	ctx_.right.publisher = it_->advertiseCamera(nh_right.getNamespace() + "/image_raw", 1);
 
-	ctx_.left.manager.reset(new camera_info_manager::CameraInfoManager(nh_left, ctx_.name + "_left", ctx_.left.url));
-	ctx_.right.manager.reset(new camera_info_manager::CameraInfoManager(nh_right, ctx_.name + "_right", ctx_.right.url));
+	ctx_.left.manager.reset(new camera_info_manager::CameraInfoManager(
+			nh_left, ctx_.name + "_left", ctx_.left.url));
+	ctx_.right.manager.reset(new camera_info_manager::CameraInfoManager(
+			nh_right, ctx_.name + "_right", ctx_.right.url));
 
 	image_transport::TransportHints hints("raw", ros::TransportHints(), nh);
 	sub_ = it_->subscribe("image_raw", 1, &SplitBB2Nodelet::imageCb, this, hints);
