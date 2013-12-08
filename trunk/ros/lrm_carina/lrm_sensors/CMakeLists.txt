@@ -12,6 +12,9 @@ set(ROS_BUILD_TYPE Release)
 
 rosbuild_init()
 
+add_definitions(-msse3 -msse4.1 -msse4.2 -mfpmath=sse)
+#add_definitions(-std=c++1x)
+
 #set the default path for built executables to the "bin" directory
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 #set the default path for built libraries to the "lib" directory
@@ -41,9 +44,6 @@ rosbuild_add_library(sensors_proc
 #	src/cFindPlane.cpp
 #	src/cloud_plane_reproject_node.cpp
 #	)
-
-
-#add_definitions(-std=c++11)
 
 rosbuild_add_executable(fake_clock_node 
     src/fake_clock_node.cpp)

@@ -20,7 +20,7 @@ SET (CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/CMakeModules")
 INCLUDE(CompilerSettings)
 
 # OCTOMAP_OMP = enable OpenMP parallelization (experimental, defaults to OFF)
-SET(OCTOMAP_OMP FALSE CACHE BOOL "Enable/disable OpenMP parallelization")
+SET(OCTOMAP_OMP TRUE CACHE BOOL "Enable/disable OpenMP parallelization")
 IF(DEFINED ENV{OCTOMAP_OMP})
   SET(OCTOMAP_OMP $ENV{OCTOMAP_OMP})
 ENDIF(DEFINED ENV{OCTOMAP_OMP})
