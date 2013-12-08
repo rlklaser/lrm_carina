@@ -55,6 +55,8 @@
 #include <pcl_ros/point_cloud.h>
 #include <pcl/point_types.h>
 
+#include <vector>
+
 namespace lrm_stereo {
 
 typedef pcl::PointCloud<pcl::PointXYZ> PointCloud;
@@ -181,7 +183,7 @@ void FeatureMatcherNodelet::imageCb(const ImageConstPtr& l_image_msg, const Came
 
 	// detecting keypoints
 	SurfFeatureDetector detector(400);
-	vector<KeyPoint> keypoints1, keypoints2;
+	std::vector<KeyPoint> keypoints1, keypoints2;
 	detector.detect(img1->image, keypoints1);
 	detector.detect(img2->image, keypoints2);
 
@@ -193,10 +195,10 @@ void FeatureMatcherNodelet::imageCb(const ImageConstPtr& l_image_msg, const Came
 
 	// matching descriptors
 	BFMatcher matcher(NORM_L2);
-	vector<DMatch> matches;
+	std::vector<DMatch> matches;
 	matcher.match(descriptors1, descriptors2, matches);
 
-	vector<DMatch> matches_filter;
+	std::vector<DMatch> matches_filter;
 
 	Point3d xyz;
 

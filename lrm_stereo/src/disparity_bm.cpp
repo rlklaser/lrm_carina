@@ -232,6 +232,7 @@ void DisparityBMNodelet::configCb(Config &config, uint32_t level) {
 
 	// Note: With single-threaded NodeHandle, configCb and imageCb can't be called
 	// concurrently, so this is thread-safe.
+#if 1
 	block_matcher_.state->preFilterSize = config.prefilter_size;
 	block_matcher_.state->preFilterCap = config.prefilter_cap;
 	block_matcher_.state->SADWindowSize = config.correlation_window_size;
@@ -241,6 +242,17 @@ void DisparityBMNodelet::configCb(Config &config, uint32_t level) {
 	block_matcher_.state->textureThreshold = config.texture_threshold;
 	block_matcher_.state->speckleWindowSize = config.speckle_size;
 	block_matcher_.state->speckleRange = config.speckle_range;
+#else
+	//block_matcher_->setPreFilterSize = config.prefilter_size;
+	block_matcher_.setPreFilterCap = config.prefilter_cap;
+	block_matcher_.setBlockSize = config.correlation_window_size;
+	block_matcher_.setMinDisparity = config.min_disparity;
+	block_matcher_.setNumDisparities = config.disparity_range;
+	block_matcher_.setUniquenessRatio = config.uniqueness_ratio;
+	block_matcher_.setTextureThreshold = config.texture_threshold;
+	block_matcher_.setSpeckleWindowSize = config.speckle_size;
+	block_matcher_.setSpeckleRange = config.speckle_range;
+#endif
 }
 
 } // namespace stereo_image_proc

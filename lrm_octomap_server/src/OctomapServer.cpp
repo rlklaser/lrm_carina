@@ -129,7 +129,7 @@ OctomapServer::OctomapServer(ros::NodeHandle nh, ros::NodeHandle nh_priv) :
 	// initialize octomap object & params
 	m_octree = new OcTreeT(m_res);
 
-	updateTreeProbabilities();
+	//updateTreeProbabilities();
 
 	m_treeDepth = m_octree->getTreeDepth();
 	m_maxTreeDepth = m_treeDepth;
@@ -1723,11 +1723,21 @@ void OctomapServer::reconfigureCallbackSM(lrm_octomap_server::SensorModelConfig&
 
 	boost::recursive_mutex::scoped_lock monitor(m_mutex);
 
-	//m_probHit = config.prob_hit;
-	//m_probMiss = config.prob_mis;
-	//m_thresMin = config.clamping_thres_min;
-	//m_thresMax = config.clamping_thres_max;
-	//m_occupancyThres = config.occ_prob_thres;
+	//m_degradeTime = config.degrade_time;
+	m_maxRange = config.max_range;
+	m_maxRangeOcc = config.max_range_occ;
+	m_probHit = config.hit;
+	m_probHitMid = config.hit_mid;
+	m_probHitFar = config.hit_far;
+	//m_probMidDist = config.mid_dist;
+	//m_probFarDist = config.far_dist;
+	m_probMissGnd = config.miss_to_gnd;
+	m_probMissObs = config.miss_to_obs;
+	m_thresMin = config.min;
+	m_thresMax = config.max;
+	m_occupancyThres = config.occ;
+	//m_decayCost = config.decay_cost;
+	m_updateOcclusion = config.update_occ;
 
 	updateTreeProbabilities();
 
