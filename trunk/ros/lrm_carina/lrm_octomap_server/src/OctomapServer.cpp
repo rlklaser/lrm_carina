@@ -183,6 +183,11 @@ OctomapServer::OctomapServer(ros::NodeHandle nh, ros::NodeHandle nh_priv) :
 	ReconfigureServer::CallbackType f = boost::bind(&OctomapServer::reconfigureCallback, this, _1, _2);
 	m_reconfigureServer->setCallback(f);
 
+	ros::NodeHandle m_nh_priv_sm = ros::NodeHandle(m_nh_priv.getNamespace() + "/sensor_model");
+	m_reconfigureServerSM.reset(new ReconfigureServerSensorModel(m_config_mutex, m_nh_priv_sm));
+	ReconfigureServerSensorModel::CallbackType fsm = boost::bind(&OctomapServer::reconfigureCallbackSM, this, _1, _2);
+	m_reconfigureServerSM->setCallback(fsm);
+
 	m_octree->updateNode(0, 0, 0, false);
 	m_updated = false;
 	m_publisherTimer = m_nh.createTimer(ros::Duration(1.0 / m_rate), &OctomapServer::timerCallback, this);
@@ -1706,6 +1711,18 @@ void OctomapServer::reconfigureCallback(lrm_octomap_server::OctomapServerConfig&
 	boost::recursive_mutex::scoped_lock monitor(m_mutex);
 	//boost::unique_lock<boost::mutex> scoped_lock(m_mutex);
 
+	if (m_maxTreeDepth != unsigned(config.max_depth)) {
+		m_maxTreeDepth = unsigned(config.max_depth);
+
+		publishAll();
+	}
+
+}
+
+void OctomapServer::reconfigureCallbackSM(lrm_octomap_server::SensorModelConfig& config, uint32_t level) {
+
+	boost::recursive_mutex::scoped_lock monitor(m_mutex);
+
 	//m_probHit = config.prob_hit;
 	//m_probMiss = config.prob_mis;
 	//m_thresMin = config.clamping_thres_min;
@@ -1713,12 +1730,6 @@ void OctomapServer::reconfigureCallback(lrm_octomap_server::OctomapServerConfig&
 	//m_occupancyThres = config.occ_prob_thres;
 
 	updateTreeProbabilities();
-
-	if (m_maxTreeDepth != unsigned(config.max_depth)) {
-		m_maxTreeDepth = unsigned(config.max_depth);
-
-		publishAll();
-	}
 
 }
 
