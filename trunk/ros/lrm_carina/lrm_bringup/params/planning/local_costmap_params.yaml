@@ -7,7 +7,7 @@ local_costmap:
   #footprint: [[0.2, -0.8], [0.65, 0.0], [0.2, 0.8], [-2.5, 0.8], [-2.5, -0.8]]
 
   #inflation_radius: 2.8
-  cost_scaling_factor: 10                    # default 10
+  cost_scaling_factor: 5                    # default 10
   
   map_type: costmap
   #global_frame: /wheel_odom
@@ -26,8 +26,8 @@ local_costmap:
   origin_x: 0.0
   origin_y: 0.0
   
-  #save_debug_pgm: false
-  save_debug_pgm: true
+  save_debug_pgm: false
+  #save_debug_pgm: true
   
   #observation_sources: cloud ground_cloud
   #observation_sources: local_cloud global_cloud ground_cloud
