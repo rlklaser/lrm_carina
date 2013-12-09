@@ -7,5 +7,5 @@ imu_calibrate_node:
   fixed_declination: true #if false will subscribe declination topic
   
 stereo_camera:
-   throttle_stereo_node:
-     rate: 5
+  throttle_stereo_node:
+    rate: 5

@@ -1,111 +1,111 @@
 <launch>
 
-	<node
-		name="imu_calibrate_node"
-		pkg="lrm_odometry"
-		type="imu_calibrate_node"
-		output="screen"
-		respawn="true"
-	>
-	<!-- ajuste entre o norte geografico (gps) e o norte magnetico (bussola/imu)
-	http://revistapesquisa.fapesp.br/2012/07/16/o-que-e-o-que-e-8/
-	 -->
-	 <!-- 
-		<param
-			name="offset"
-			value="23.0" />
-      -->
+<!-- <group ns="localization">  -->
+
+		<rosparam
+			command="load"
+			file="$(find lrm_bringup)/params/outdoor_params.yaml" />
+
+		<node
+			name="imu_calibrate_node"
+			pkg="lrm_odometry"
+			type="imu_calibrate_node"
+			output="screen"
+			respawn="true"
+		>
+			<remap
+				from="imu_data"
+				to="/lse_xsens_mti/xsens/imu/data" />
+			<remap
+				from="~imu/data"
+				to="/calibrated/imu/data" />
+		<!-- 
 		<remap
-			from="imu_data"
-			to="/lse_xsens_mti/xsens/imu/data" />
-		<remap
-			from="~imu/data"
-			to="/calibrated/imu/data" />
-	</node>
+			from="declination"
+			to="" />
+		 -->
+		</node>
 
-	<node
-		pkg="lrm_outdoor"
-		type="compute.py"
-		name="declination_compute"
-		output="screen"
-		respawn="true"
-		cwd="node"
-	>
-		<remap
-			from="fix"
-			to="/lse_xsens_mti/xsens/fix" />
-	</node>
+		<node
+			pkg="lrm_outdoor"
+			type="compute.py"
+			name="declination_compute"
+			output="screen"
+			respawn="true"
+			cwd="node"
+		>
+			<remap
+				from="fix"
+				to="/lse_xsens_mti/xsens/fix" />
+		</node>
 
-	<node
-		pkg="lrm_outdoor"
-		type="imu_compass"
-		name="imu_compass"
-		output="screen"
-		respawn="true"
-	>
-		<remap
-			from="imu"
-			to="/lse_xsens_mti/xsens/imu/data" />
-		<remap
-			from="mag"
-			to="/lse_xsens_mti/xsens/mag" />
-	</node>
+		<node
+			pkg="lrm_outdoor"
+			type="imu_compass"
+			name="imu_compass"
+			output="screen"
+			respawn="true"
+		>
+			<remap
+				from="imu"
+				to="/lse_xsens_mti/xsens/imu/data" />
+			<remap
+				from="mag"
+				to="/lse_xsens_mti/xsens/mag" />
+		</node>
 
-<!-- 
-	<node
-		pkg="enu"
-		type="from_fix"
-		name="odom_from_fix"
-		output="screen"
-		respawn="true"
-	>
-		<remap
-			from="fix"
-			to="/lse_xsens_mti/xsens/fix" />
-	</node>
-
-	<node
-		pkg="tf"
-		type="static_transform_publisher"
-		name="from_fix_odom_broadcaster"
-		args="0 0 0 0 0 0 map odom_from_fix 50"
-		output="screen" />
--->
- 
-	<node
-		pkg="tf"
-		type="static_transform_publisher"
-		name="world_map_broadcaster"
-		args="0 0 0 0 0 0 world map 50"
-		output="screen" />
-
-	<rosparam
-		command="load"
-		file="$(find lrm_bringup)/params/outdoor_params.yaml" />
-
-	<node
-		pkg="lrm_outdoor"
-		type="compass_tf_node"
-		name="compass_frame"
-		respawn="true"
-		output="screen" />
-
-
-	<!-- SLAM ???? -->
-	<node
-		pkg="tf"
-		type="static_transform_publisher"
-		name="wheel_odom_broadcaster"
-		args="0 0 0 0 0 0 map odom 50"
-		output="screen" />
+		<!-- 
+		<node
+			pkg="enu"
+			type="from_fix"
+			name="odom_from_fix"
+			output="screen"
+			respawn="true"
+		>
+			<remap
+				from="fix"
+				to="/lse_xsens_mti/xsens/fix" />
+		</node>
 	
-	<!-- 	
-	<node
-		pkg="lrm_odometry"
-		type="fake_odom_frame"
-		name="fake_odom_frame"
-		respawn="true"
-		output="screen" />
-	-->
+		<node
+			pkg="tf"
+			type="static_transform_publisher"
+			name="from_fix_odom_broadcaster"
+			args="0 0 0 0 0 0 map odom_from_fix 50"
+			output="screen" />
+		-->
+
+		<node
+			pkg="tf"
+			type="static_transform_publisher"
+			name="map_frame_broadcaster"
+			args="0 0 0 0 0 0 /world /map 50"
+			output="screen" />
+
+		<node
+			pkg="lrm_outdoor"
+			type="compass_tf_node"
+			name="compass_frame"
+			respawn="true"
+			output="screen" />
+
+
+		<!-- SLAM ???? -->
+		<node
+			pkg="tf"
+			type="static_transform_publisher"
+			name="odom_frame_broadcaster"
+			args="0 0 0 0 0 0 /map /odom 50"
+			output="screen" />
 	
+		<!-- 	
+		<node
+			pkg="lrm_odometry"
+			type="fake_odom_frame"
+			name="fake_odom_frame"
+			respawn="true"
+			output="screen" />
+		-->
+
+<!-- </group>  -->
 </launch>

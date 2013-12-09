@@ -1,3 +1,4 @@
 wheel_odometry:
   animation_only: false
   absolute_heading: 90.0
+  use_6dof: false

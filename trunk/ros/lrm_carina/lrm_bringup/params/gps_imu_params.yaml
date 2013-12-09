@@ -1,6 +1,6 @@
 lse_xsens_mti:
   xsens:
-    port: /dev/ttyUSB1
+    port: /dev/ttyUSB0
     frame_id: imu_link
     temperature: false
     calibrated: true
