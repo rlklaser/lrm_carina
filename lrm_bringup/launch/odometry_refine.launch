@@ -50,6 +50,7 @@
 			to="/lse_xsens_mti/xsens/mag" />
 	</node>
 
+<!--
 	<node
 		pkg="enu"
 		type="from_fix"
@@ -69,7 +70,7 @@
 		args="0 0 0 0 0 0 map odom_from_fix 50"
 		output="screen" />
 		
-<!--
+
 	<node
 		name="reset_pose"
 		pkg="lrm_odometry"
