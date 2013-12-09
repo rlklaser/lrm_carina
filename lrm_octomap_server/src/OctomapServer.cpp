@@ -1139,8 +1139,8 @@ bool OctomapServer::clearBBXSrv(BBXSrv::Request& req, BBXSrv::Response& resp) {
 	boost::recursive_mutex::scoped_lock monitor(m_mutex);
 	//boost::unique_lock<boost::mutex> scoped_lock(m_mutex);
 
-	m_octree->updateNode(min, octomap::logodds(m_thresMin), true);
-	m_octree->updateNode(max, octomap::logodds(m_thresMin), true);
+	m_octree->updateNode(min, octomap::logodds(m_thresMin));
+	m_octree->updateNode(max, octomap::logodds(m_thresMin));
 
 	//m_octree->setBBXMax()
 
@@ -1153,7 +1153,7 @@ bool OctomapServer::clearBBXSrv(BBXSrv::Request& req, BBXSrv::Response& resp) {
 	}
 
 	for (OcTreeT::leaf_bbx_iterator it = m_octree->begin_leafs_bbx(min, max), end = m_octree->end_leafs_bbx(); it != end; ++it) {
-		m_octree->updateNode(it.getKey(), octomap::logodds(m_thresMin), true);
+		m_octree->updateNode(it.getKey(), octomap::logodds(m_thresMin));
 		//m_updated = true;
 	}
 
