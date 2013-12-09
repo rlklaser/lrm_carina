@@ -14,9 +14,9 @@ acc_lim_x: 30.0
 max_vel_x: 3.0
 min_vel_x: 0.1
 
-acc_lim_theta: 6.2
-max_vel_theta: 0.559
-min_vel_theta: -0.559
+acc_lim_theta: 32.0
+max_vel_theta: 1.559
+min_vel_theta: -1.559
 
 max_rotational_vel: 0.0
 min_in_place_rotational_vel: 0.0
