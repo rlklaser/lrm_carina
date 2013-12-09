@@ -240,6 +240,8 @@ void WheelOdometry::reconfigure(lrm_odometry::OdometryConfig &config, uint32_t l
 	odo.p.inverse = config.inverse;
 	odo.p.publish_tf = config.publish_tf;
 
+	odo.p.absolute_heading = config.absolute_heading;
+
 	calcParams();
 
 	ROS_WARN("node reconfigured");
