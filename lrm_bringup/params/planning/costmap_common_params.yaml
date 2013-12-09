@@ -19,7 +19,7 @@ footprint_padding: 0.05
 inflation_radius: 2.8
 
 transform_tolerance: 0.3                    # default 0.3
-cost_scaling_factor: 1.0                    # default 10
+#cost_scaling_factor: 1.0                    # default 10
 
 
 lethal_cost_threshold: 80                   #occ from octomap

@@ -20,5 +20,7 @@ global_costmap:
   #save_debug_pgm: false
   
   #inflation_radius: 2.84
+  cost_scaling_factor: 1.0                    # default 10
+
   #robot_radius: 3.5
   #observation_sources: cluster_cloud 
