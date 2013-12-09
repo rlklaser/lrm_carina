@@ -83,6 +83,7 @@
 #include <octomap/OcTreeKey.h>
 #include <octomap/ColorOcTree.h>
 #include <octomap/OcTreeStamped.h>
+#include <lrm_octomap_server/OcTreeClipped.h>
 
 #include <angles/angles.h>
 
@@ -90,6 +91,9 @@
 #include <boost/thread/recursive_mutex.hpp>
 
 //#define USE_COLOR
+#define USE_CLIPPING
+//#define USE_STAMPTREE
+//#define USE_NORMAL
 
 namespace octomap_server {
 class OctomapServer{
@@ -103,9 +107,18 @@ public:
 
 #ifdef USE_COLOR
   typedef octomap::ColorOcTree OcTreeT;
-#else
-  //typedef octomap::OcTree OcTreeT;
+#endif
+
+#ifdef USE_STAMPTREE
   typedef octomap::OcTreeStamped OcTreeT;
+#endif
+
+#ifdef USE_CLIPPING
+  typedef octomap::OcTreeClipped OcTreeT;
+#endif
+
+#ifdef USE_NORMAL
+  typedef octomap::OcTree OcTreeT;
 #endif
 
   OctomapServer(ros::NodeHandle nh, ros::NodeHandle nh_priv);
@@ -121,6 +134,15 @@ public:
   bool openFile(const std::string& filename);
 
 protected:
+
+  inline void updateNode(const octomap::OcTreeKey& key, float log_odds_update) {
+#ifdef USE_CLIPPING
+	  m_octree->updateNodeClipping(key, log_odds_update);
+#else
+	  m_octree->updateNode(key, log_odds_update);
+#endif
+  }
+
   inline static void updateMinKey(const octomap::OcTreeKey& in, octomap::OcTreeKey& min){
     for (unsigned i=0; i<3; ++i)
       min[i] = std::min(in[i], min[i]);

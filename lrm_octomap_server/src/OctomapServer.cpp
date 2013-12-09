@@ -189,6 +189,7 @@ OctomapServer::OctomapServer(ros::NodeHandle nh, ros::NodeHandle nh_priv) :
 	m_reconfigureServerSM->setCallback(fsm);
 
 	m_octree->updateNode(0, 0, 0, false);
+	m_octree->updateInnerOccupancy();
 	m_updated = false;
 	m_publisherTimer = m_nh.createTimer(ros::Duration(1.0 / m_rate), &OctomapServer::timerCallback, this);
 
@@ -254,11 +255,12 @@ void OctomapServer::timerCallback(const ros::TimerEvent& t) {
 			if (m_compressMap) {
 				m_octree->prune();
 			}
-
+#ifdef USE_STAMPTREE
 			if(m_degradeTime>0) {
 				m_octree->degradeOutdatedNodes(m_degradeTime);
 				ROS_INFO_STREAM("degrading old probabilities");
 			}
+#endif
 		}
 		_publishAll(ros::Time::now());
 	}
@@ -665,14 +667,14 @@ void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPo
 				//std::cout << "pt x:" << it->x << " y:" << it->y << " z:" << it->z << " r:" << (unsigned int)it->r << " g:" << (unsigned int)it->g << " b:" << (unsigned int)it->b << std::endl;
 
 				if(hit_dist<m_probMidDist) {
-					m_octree->updateNode(key, octomap::logodds(m_probHit));
+					updateNode(key, octomap::logodds(m_probHit));
 				}
 				else {
 					if(hit_dist>m_probFarDist) {
-						m_octree->updateNode(key, octomap::logodds(m_probHitFar));
+						updateNode(key, octomap::logodds(m_probHitFar));
 					}
 					else {
-						m_octree->updateNode(key, octomap::logodds(m_probHitMid));
+						updateNode(key, octomap::logodds(m_probHitMid));
 					}
 				}
 				updateMinKey(key, m_updateBBXMin);
@@ -717,7 +719,7 @@ void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPo
 	// mark free cells only if not seen occupied in this cloud
 	for (KeySet::iterator it = free_gnd_cells.begin(), end = free_gnd_cells.end(); it != end; ++it) {
 		if (occupied_cells.find(*it) == occupied_cells.end()) {
-			m_octree->updateNode(*it, octomap::logodds(m_probMissGnd));
+			updateNode(*it, octomap::logodds(m_probMissGnd));
 			in++;
 		}
 	}
@@ -725,7 +727,7 @@ void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPo
 	// mark free cells to obstacle
 	for (KeySet::iterator it = free_obs_cells.begin(), end = free_obs_cells.end(); it != end; ++it) {
 		if (occupied_cells.find(*it) == occupied_cells.end()) {
-			m_octree->updateNode(*it, octomap::logodds(m_probMissObs));
+			updateNode(*it, octomap::logodds(m_probMissObs));
 			in++;
 		}
 	}
@@ -734,7 +736,7 @@ void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPo
 		//reduce the certainty on ocluded readings
 		for (KeySet::iterator it = weak_free_cells.begin(), end = weak_free_cells.end(); it != end; ++it) {
 			if (occupied_cells.find(*it) == occupied_cells.end()) {
-				m_octree->updateNode(*it, octomap::logodds(m_updateOcclusion));
+				updateNode(*it, octomap::logodds(m_updateOcclusion));
 				in++;
 			}
 		}
@@ -1137,8 +1139,8 @@ bool OctomapServer::clearBBXSrv(BBXSrv::Request& req, BBXSrv::Response& resp) {
 	boost::recursive_mutex::scoped_lock monitor(m_mutex);
 	//boost::unique_lock<boost::mutex> scoped_lock(m_mutex);
 
-	m_octree->updateNode(min, false, true);
-	m_octree->updateNode(max, false, true);
+	m_octree->updateNode(min, octomap::logodds(m_thresMin), true);
+	m_octree->updateNode(max, octomap::logodds(m_thresMin), true);
 
 	//m_octree->setBBXMax()
 
@@ -1151,7 +1153,7 @@ bool OctomapServer::clearBBXSrv(BBXSrv::Request& req, BBXSrv::Response& resp) {
 	}
 
 	for (OcTreeT::leaf_bbx_iterator it = m_octree->begin_leafs_bbx(min, max), end = m_octree->end_leafs_bbx(); it != end; ++it) {
-		m_octree->updateNode(it.getKey(), octomap::logodds(m_thresMin));
+		m_octree->updateNode(it.getKey(), octomap::logodds(m_thresMin), true);
 		//m_updated = true;
 	}
 
