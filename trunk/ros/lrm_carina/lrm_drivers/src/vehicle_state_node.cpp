@@ -85,7 +85,7 @@ int main(int argc, char** argv) {
 	while (ros::ok()) {
 		if(!started) {
 			now = ros::Time::now();
-			ROS_WARN_STREAM_THROTTLE(0.1, "wheel encoder no received");
+			ROS_WARN_STREAM_THROTTLE(1, "wheel encoder not received");
 		}
 		ros::Duration dt = now - last_time;
 		dist = (tread_lenght / WHEEL_ENCODER_RESOLUTION) * wheel_encoder;
