@@ -11,15 +11,19 @@
 		<rosparam
 			command="load"
 			file="$(find lrm_bringup)/params/octomap_parameters.yaml" />
+
 <!-- -->
 		<node
 			pkg="nodelet"
 			type="nodelet"
 			name="map_server"
-			args="load lrm_octomap_server/OctomapServerNodelet /camera_nodelet_manager"
+			args="load lrm_octomap_server/OctomapServerNodelet /camera_nodelet_manager --no-bond"
 			output="screen"
 			respawn="true"
 		>
+			<rosparam
+				command="load"
+				file="$(find lrm_bringup)/params/sensormodel_sim_params.yaml" />
 			<remap
 				from="map"
 				to="/map" />
@@ -50,7 +54,7 @@
 				to="/ground_cloud_in" />
 		</node>
 -->
-	
+
 		<include file="$(find lrm_bringup)/launch/footprint_eraser.launch" />
 
 	</group>

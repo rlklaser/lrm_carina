@@ -1,3 +1,4 @@
+simulated: false
 use_sim_time: false
 
 #compass declination

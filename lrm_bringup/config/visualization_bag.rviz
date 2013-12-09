@@ -291,10 +291,10 @@ Visualization Manager:
           Polygon: true
           Value: true
         Odometry:
-          Odometry: true
+          "": true
           Value: true
         PointCloud:
-          PointCloud2: true
+          "": true
           Value: true
         Pose: true
         RobotModel: false
@@ -734,15 +734,15 @@ Visualization Manager:
       Class: rviz/Orbit
       Distance: 10
       Focal Point:
-        X: 0.306148
-        Y: -0.365307
-        Z: 1.15776
+        X: -0.352158
+        Y: 0.0898621
+        Z: 2.47509
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 0.420398
+      Pitch: 0.485398
       Target Frame: /base_footprint
       Value: Orbit (rviz)
-      Yaw: 2.2504
+      Yaw: 5.4354
     Saved: ~
 Window Geometry:
   Camera:
@@ -764,5 +764,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1525
-  X: 1411
+  X: 1404
   Y: 48
