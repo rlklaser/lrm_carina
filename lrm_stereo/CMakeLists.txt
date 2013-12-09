@@ -42,11 +42,13 @@ add_definitions(-msse3 -msse4.1 -msse4.2 -mfpmath=sse)
 #add_definitions(-mavx -mfpmath=sse)
 
 rosbuild_add_library(lrm_stereo 
-	#src/disparity.cpp 
+	src/disparity.cpp 
 	src/disparity_bm.cpp 
+	src/disparity_bm_cuda.cpp 
+	src/disparity_bm_ocl.cpp 
+	
 	src/feature_matcher.cpp
 	src/ros_pcl_stereo.cpp
-	#src/disparity_bm_cuda.cpp 
 	src/point_cloud_colorless.cpp
 	src/point_cloud2.cpp
 	src/segmentation_nodelet.cpp

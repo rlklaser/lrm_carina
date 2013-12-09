@@ -46,6 +46,15 @@
 	</class>
 
 	<class
+		name="lrm_stereo/disparity_bm_ocl"
+		type="lrm_stereo::DisparityBMOCLNodelet"
+		base_class_type="nodelet::Nodelet"
+	>
+		<description>OCL Block Matching
+		</description>
+	</class>
+
+	<class
 		name="lrm_stereo/feature_matcher"
 		type="lrm_stereo::FeatureMatcherNodelet"
 		base_class_type="nodelet::Nodelet"

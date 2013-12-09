@@ -43,7 +43,7 @@
 #include <image_geometry/stereo_camera_model.h>
 #include <opencv2/calib3d/calib3d.hpp>
 
-#include <opencv2/gpu/gpu.hpp>
+#include <opencv2/ocl/ocl.hpp>
 
 #include <sensor_msgs/image_encodings.h>
 #include <stereo_msgs/DisparityImage.h>
@@ -57,7 +57,7 @@ using namespace sensor_msgs;
 using namespace stereo_msgs;
 using namespace message_filters::sync_policies;
 
-class DisparityBMCUDANodelet : public nodelet::Nodelet
+class DisparityBMOCLNodelet : public nodelet::Nodelet
 {
   boost::shared_ptr<image_transport::ImageTransport> it_;
   
@@ -83,7 +83,7 @@ class DisparityBMCUDANodelet : public nodelet::Nodelet
   
   // Processing state (note: only safe because we're single-threaded!)
   image_geometry::StereoCameraModel model_;
-  cv::gpu::StereoBM_GPU block_matcher_; // contains scratch buffers for block matching
+  cv::ocl::StereoBM_OCL block_matcher_; // contains scratch buffers for block matching
 
   virtual void onInit();
 
@@ -95,7 +95,7 @@ class DisparityBMCUDANodelet : public nodelet::Nodelet
   void configCb(Config &config, uint32_t level);
 };
 
-void DisparityBMCUDANodelet::onInit()
+void DisparityBMOCLNodelet::onInit()
 {
   ros::NodeHandle &nh = getNodeHandle();
   ros::NodeHandle &private_nh = getPrivateNodeHandle();
@@ -113,7 +113,7 @@ void DisparityBMCUDANodelet::onInit()
     approximate_sync_.reset( new ApproximateSync(ApproximatePolicy(queue_size),
                                                  sub_l_image_, sub_l_info_,
                                                  sub_r_image_, sub_r_info_) );
-    approximate_sync_->registerCallback(boost::bind(&DisparityBMCUDANodelet::imageCb,
+    approximate_sync_->registerCallback(boost::bind(&DisparityBMOCLNodelet::imageCb,
                                                     this, _1, _2, _3, _4));
   }
   else
@@ -121,25 +121,25 @@ void DisparityBMCUDANodelet::onInit()
     exact_sync_.reset( new ExactSync(ExactPolicy(queue_size),
                                      sub_l_image_, sub_l_info_,
                                      sub_r_image_, sub_r_info_) );
-    exact_sync_->registerCallback(boost::bind(&DisparityBMCUDANodelet::imageCb,
+    exact_sync_->registerCallback(boost::bind(&DisparityBMOCLNodelet::imageCb,
                                               this, _1, _2, _3, _4));
   }
 
   // Set up dynamic reconfiguration
-  ReconfigureServer::CallbackType f = boost::bind(&DisparityBMCUDANodelet::configCb,
+  ReconfigureServer::CallbackType f = boost::bind(&DisparityBMOCLNodelet::configCb,
                                                   this, _1, _2);
   reconfigure_server_.reset(new ReconfigureServer(config_mutex_, private_nh));
   reconfigure_server_->setCallback(f);
 
   // Monitor whether anyone is subscribed to the output
-  ros::SubscriberStatusCallback connect_cb = boost::bind(&DisparityBMCUDANodelet::connectCb, this);
+  ros::SubscriberStatusCallback connect_cb = boost::bind(&DisparityBMOCLNodelet::connectCb, this);
   // Make sure we don't enter connectCb() between advertising and assigning to pub_disparity_
   boost::lock_guard<boost::mutex> lock(connect_mutex_);
   pub_disparity_ = nh.advertise<DisparityImage>("disparity", 1, connect_cb, connect_cb);
 }
 
 // Handles (un)subscribing when clients (un)subscribe
-void DisparityBMCUDANodelet::connectCb()
+void DisparityBMOCLNodelet::connectCb()
 {
   boost::lock_guard<boost::mutex> lock(connect_mutex_);
   if (pub_disparity_.getNumSubscribers() == 0)
@@ -162,7 +162,7 @@ void DisparityBMCUDANodelet::connectCb()
   }
 }
 
-void DisparityBMCUDANodelet::imageCb(const ImageConstPtr& l_image_msg,
+void DisparityBMOCLNodelet::imageCb(const ImageConstPtr& l_image_msg,
                                const CameraInfoConstPtr& l_info_msg,
                                const ImageConstPtr& r_image_msg,
                                const CameraInfoConstPtr& r_info_msg)
@@ -217,12 +217,12 @@ void DisparityBMCUDANodelet::imageCb(const ImageConstPtr& l_image_msg,
                              reinterpret_cast<float*>(&disp_msg->image.data[0]),
                              disp_msg->image.step);
 
-  cv::gpu::GpuMat dispGPU(l_image.size(), CV_8U);
+  cv::ocl::oclMat dispOCL(l_image.size(), CV_8U);
 
-  block_matcher_(cv::gpu::GpuMat(l_image), cv::gpu::GpuMat(r_image), dispGPU);
+  block_matcher_(cv::ocl::oclMat(l_image), cv::ocl::oclMat(r_image), dispOCL);
 
   cv::Mat dispOriginal;
-  dispGPU.download(dispOriginal);
+  dispOCL.download(dispOriginal);
   dispOriginal.copyTo(disp_image);
   // Perform block matching to find the disparities
   //block_matcher_(l_image, r_image, disp_image, CV_32F);
@@ -236,7 +236,7 @@ void DisparityBMCUDANodelet::imageCb(const ImageConstPtr& l_image_msg,
   pub_disparity_.publish(disp_msg);
 }
 
-void DisparityBMCUDANodelet::configCb(Config &config, uint32_t level)
+void DisparityBMOCLNodelet::configCb(Config &config, uint32_t level)
 {
   // Tweak all settings to be valid
   config.prefilter_size |= 0x1; // must be odd
@@ -262,4 +262,4 @@ void DisparityBMCUDANodelet::configCb(Config &config, uint32_t level)
 
 // Register nodelet
 #include <pluginlib/class_list_macros.h>
-PLUGINLIB_EXPORT_CLASS(lrm_stereo::DisparityBMCUDANodelet, nodelet::Nodelet)
+PLUGINLIB_EXPORT_CLASS(lrm_stereo::DisparityBMOCLNodelet, nodelet::Nodelet)
