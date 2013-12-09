@@ -9,13 +9,19 @@ numberofprimsperangle = 9; 	% numero de primitivas de movimento
 
 %numofsamples = 30;          % numero de passos para cada primitiva (poses calculadas)
 
-custo0 = 0.1;
-custo1 = 0.25;
-custo2 = 0.4;
-custo3 = 0.7;
-custo4 = 1.1;
+#custo0 = 0.1;
+#custo1 = 0.25;
+#custo2 = 0.4;
+#custo3 = 0.7;
+#custo4 = 1.1;
 
-cmul = 10;
+custo0 = 1;
+custo1 = 3;
+custo2 = 7;
+custo3 = 9;
+custo4 = 15
+
+cmul = 1;
 
 custo0 *= cmul;
 custo1 *= cmul;
