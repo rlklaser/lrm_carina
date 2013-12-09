@@ -47,6 +47,8 @@
 
 #include <angles/angles.h>
 
+#include <dynamic_reconfigure/server.h>
+
 #include "lrm_odometry/OdometryConfig.h"
 
 
