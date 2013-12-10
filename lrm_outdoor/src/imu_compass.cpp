@@ -39,8 +39,8 @@ IMUCompass::IMUCompass(ros::NodeHandle &n): node_(n) {
   heading_prediction_variance_ = 0.01;
 
   // Setup Subscribers
-  imu_sub_ = node_.subscribe("imu", 1000, &IMUCompass::imuCallback, this);
-  mag_sub_ = node_.subscribe("mag", 1000, &IMUCompass::magCallback, this);
+  imu_sub_ = node_.subscribe("imu", 1, &IMUCompass::imuCallback, this);
+  mag_sub_ = node_.subscribe("mag", 1, &IMUCompass::magCallback, this);
   imu_pub_ = node_.advertise<sensor_msgs::Imu>("/imu/data_compass", 1);
   compass_pub_ = node_.advertise<std_msgs::Float32>("/imu/compass_heading", 1);
   raw_compass_pub_ = node_.advertise<std_msgs::Float32>("/imu/raw_compass_heading", 1);
@@ -78,6 +78,12 @@ void IMUCompass::imuCallback(const sensor_msgs::ImuPtr data) {
   // Transform Data and get the yaw direction
   geometry_msgs::Vector3 gyro_vector;
   geometry_msgs::Vector3 gyro_vector_transformed;
+
+  if(!data) {
+	  ROS_ERROR("imu_compass : imu msg null");
+	  return;
+  }
+
   gyro_vector = data->angular_velocity;
 
   if(!first_gyro_reading_)
