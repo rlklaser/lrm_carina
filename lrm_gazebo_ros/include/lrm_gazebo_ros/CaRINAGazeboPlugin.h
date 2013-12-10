@@ -37,6 +37,9 @@
 #include <stdio.h>
 #include <ros/ros.h>
 
+#include <lrm_description/Constants.h>
+#include <lrm_msgs/Encoders.h>
+
 namespace gazebo
 {
 class CaRINAGazeboPlugin: public ModelPlugin
@@ -46,14 +49,26 @@ private:
 	physics::ModelPtr _model;
 	boost::shared_ptr<ros::NodeHandle> _nh;
 	boost::shared_ptr<ros::NodeHandle> _nh_priv;
-	ros::Subscriber _sub;
+	//ros::Subscriber _sub;
 
 	void SetupSteeringConstraint();
+	void SetupEncoders();
+
+	ros::Time _encoders_last_update;
+	double _encoders_acc_wheel;
+	ros::Publisher _encoders_pub;
+	double _encoders_update_rate;
+	std::string _encoders_topic;
 
 protected:
-	physics::JointPtr l_hinge;
-	physics::JointPtr r_hinge;
+	physics::JointPtr _l_hinge;
+	physics::JointPtr _r_hinge;
 
+	physics::JointPtr _joint_wheel;
+	physics::JointPtr _joint_steering;
+	physics::JointPtr _joint_steering_wheel;
+
+	void OnEncodersUpdate();
 public:
 
 	CaRINAGazeboPlugin();
