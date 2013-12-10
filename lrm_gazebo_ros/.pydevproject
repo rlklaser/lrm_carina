@@ -7,9 +7,11 @@
 <pydev_pathproperty name="org.python.pydev.PROJECT_EXTERNAL_SOURCE_PATH">
 <path>/home/rlklaser/Work/ros/sandbox/lrm_msgs/src</path>
 <path>/home/rlklaser/Work/ros/sandbox/lrm_msgs/lib</path>
+<path>/home/rlklaser/Work/ros/sandbox/lrm_description/lib</path>
 <path>/home/rlklaser/Work/ros/sandbox/lrm_gazebo_ros/src</path>
 <path>/home/rlklaser/Work/ros/sandbox/lrm_gazebo_ros/lib</path>
 <path>/opt/ros/groovy/share/mk</path>
+<path>/home/rlklaser/Work/ros/opencv_ws/install_isolated/lib/python2.7/dist-packages</path>
 <path>/home/rlklaser/Work/ros/pcl_ws/install_isolated/lib/python2.7/dist-packages</path>
 <path>/opt/ros/groovy/lib/python2.7/dist-packages</path>
 <path>/usr/lib/python2.7</path>
