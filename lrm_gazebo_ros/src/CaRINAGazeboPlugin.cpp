@@ -48,9 +48,6 @@ void CaRINAGazeboPlugin::SetupSteeringConstraint()
 	physics::LinkPtr l_bar = _model->GetLink("front_left_bar_link");
 	physics::LinkPtr r_bar = _model->GetLink("front_right_bar_link");
 
-	physics::JointPtr l_hinge;
-	physics::JointPtr r_hinge;
-
 	l_hinge = _model->GetWorld()->GetPhysicsEngine()->CreateJoint("revolute", _model);
 	r_hinge = _model->GetWorld()->GetPhysicsEngine()->CreateJoint("revolute", _model);
 
@@ -90,7 +87,7 @@ CaRINAGazeboPlugin::CaRINAGazeboPlugin()
 
 CaRINAGazeboPlugin::~CaRINAGazeboPlugin()
 {
-	delete _node;
+	//delete _node;
 }
 
 void CaRINAGazeboPlugin::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
@@ -99,7 +96,9 @@ void CaRINAGazeboPlugin::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
 	_model = _parent;
 
 	// ROS Nodehandle
-	_node = new ros::NodeHandle("~");
+	//_node = new ros::NodeHandle("~");
+	_nh.reset(new ros::NodeHandle());
+	_nh_priv.reset(new ros::NodeHandle("~"));
 
 	SetupSteeringConstraint();
 }
@@ -109,5 +108,5 @@ void CaRINAGazeboPlugin::OnUpdate()
 	ros::spinOnce();
 }
 
-GZ_REGISTER_MODEL_PLUGIN (CaRINAGazeboPlugin);
+GZ_REGISTER_MODEL_PLUGIN(CaRINAGazeboPlugin);
 }
