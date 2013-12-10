@@ -109,24 +109,26 @@ public:
 			if(node->isClipped())
 				return;
 
-			this->updateNode(key, log_odds_update);
+			//this->updateNode(key, log_odds_update);
 
 			if (log_odds_update < 0) {
 				if (node->getLogOdds() >= this->getClampingThresMaxLog()) {
 					//return;
 					node->setClipped(clip);
-					ROS_INFO_STREAM("node clipped " << node->getMeanChildLogOdds() );
-				}
-			} else {
-				if (node->getLogOdds() <= this->getClampingThresMinLog()) {
-					//return;
-					//node->setClipped(clip);
+					//ROS_INFO_STREAM("node clipped " << node->getMeanChildLogOdds());
+					return;
 				}
 			}
+			//else {
+			//	if (node->getLogOdds() <= this->getClampingThresMinLog()) {
+			//		return;
+			//		node->setClipped(clip);
+			//	}
+			//}
 		}
-		else {
+		//else {
 			this->updateNode(key, log_odds_update);
-		}
+		//}
 	}
 
 protected:
