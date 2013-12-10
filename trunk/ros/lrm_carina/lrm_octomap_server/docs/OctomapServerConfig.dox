@@ -3,4 +3,5 @@
 Reads and maintains the following parameters on the ROS server
 
 - \b "~max_depth" : \b [int] Maximum depth when traversing the octree to send out markers. 16: full depth / max. resolution min: 1, default: 16, max: 16
+- \b "~use_ground" : \b [bool] Use ground cloud to clean space min: False, default: True, max: True
 

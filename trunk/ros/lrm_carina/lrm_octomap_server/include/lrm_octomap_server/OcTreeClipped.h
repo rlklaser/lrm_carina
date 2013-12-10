@@ -104,10 +104,9 @@ public:
 					return;
 				}
 			} else {
-				OcTreeNodeClipped* node = this->search(key);
-				if (node->getLogOdds() <= this->getClampingThresMinLog()) {
-					return;
-				}
+				//if (node->getLogOdds() <= this->getClampingThresMinLog()) {
+				//	return;
+				//}
 			}
 		}
 		this->updateNode(key, log_odds_update);

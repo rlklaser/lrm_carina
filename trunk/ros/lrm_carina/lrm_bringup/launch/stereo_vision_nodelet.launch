@@ -20,35 +20,12 @@
 
 	<group ns="/stereo">
 
-		<rosparam
-			command="load"
-			file="$(find lrm_bringup)/params/disparity_params.yaml" />
-
 		<include file="$(find lrm_bringup)/launch/image_pipeline_stereo.launch" />
 
 		<rosparam
 			command="load"
-			file="$(find lrm_bringup)/params/stereo_param.yaml" />
-			
-  		<!-- Disparity image 
-		<node
-			pkg="nodelet"
-			type="nodelet"
-			name="disparity_bm"
-			args="load stereo_image_proc/disparity $(arg manager) $(arg bond)"
-			respawn="true"
-			output="screen"
-		>
-			<param
-				name="approximate_sync"
-				value="true" />
+			file="$(find lrm_bringup)/params/disparity_params.yaml" />
 
-			<remap
-				from="disparity"
-				to="disparity_bm" />
-
-		</node>
-		-->
 		<node
 			pkg="nodelet"
 			type="nodelet"
@@ -60,59 +37,12 @@
 			<remap
 				from="disparity"
 				to="disparity_bm" />
-
 		</node>
 
-<!-- 
-		<node
-			pkg="nodelet"
-			type="nodelet"
-			name="disparity_bm_cuda"
-			args="load lrm_stereo/disparity_bm_cuda $(arg manager) $(arg bond)"
-			respawn="true"
-			output="screen"
-		>
-			<remap
-				from="disparity"
-				to="disparity_bm_cuda" />
+		<rosparam
+			command="load"
+			file="$(find lrm_bringup)/params/stereo_param.yaml" />
 
-		</node>
--->
-<!--
-		<node
-			pkg="nodelet"
-			type="nodelet"
-			name="disparity_bm_ocl"
-			args="load lrm_stereo/disparity_bm_ocl $(arg manager) $(arg bond)"
-			respawn="true"
-			output="screen"
-		>
-			<remap
-				from="disparity"
-				to="disparity_bm_ocl" />
-
-		</node>
--->		
-<!-- 
-		<node
-			pkg="nodelet"
-			type="nodelet"
-			name="disparity_sgbm"
-			args="load lrm_stereo/disparity_sgbm $(arg manager) $(arg bond)"
-			respawn="true"
-			output="screen"
-		>
-			<param
-				name="approximate_sync"
-				value="true" />
-
-			<remap
-				from="disparity"
-				to="disparity_sgbm" />
-		</node>
- -->
- 				
-  		<!-- Point cloud, PCL-friendly -->
 		<node
 			pkg="nodelet"
 			type="nodelet"
@@ -125,44 +55,10 @@
 				from="disparity"
 				to="disparity_bm" />
 		</node>
+
+
+		<include file="$(find lrm_bringup)/launch/stereo_vision_nodelet_extras.launch" />
 		
-		<!--
-		<node
-			pkg="nodelet"
-			type="nodelet"
-			name="point_cloud_colorless"
-			args="load lrm_stereo/colorless_stereo $(arg manager) $(arg bond)"
-			respawn="true"
-			output="screen"
-		>
-			<param
-				name="approximate_sync"
-				value="true" />
-
-			<remap
-				from="disparity"
-				to="disparity_bm" />
-		</node>
-		-->
-
-		<!-- Point cloud, PCL-friendly
-		<node
-			pkg="nodelet"
-			type="nodelet"
-			name="point_cloud_unmatched"
-			args="load lrm_stereo/point_cloud2 $(arg manager) $(arg bond)"
-			respawn="true"
-			output="screen"
-		>
-			<remap
-				from="disparity"
-				to="disparity_bm" />
-			<remap
-				from="points2"
-				to="unmatched_points" />
-		</node>
-		-->
-
 	</group>
 
 </launch>

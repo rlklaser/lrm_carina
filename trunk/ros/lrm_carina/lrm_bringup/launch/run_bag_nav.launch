@@ -1,0 +1,10 @@
+<launch>
+
+	<rosparam
+		command="load"
+		file="$(find lrm_bringup)/params/global_bag_params.yaml" />
+
+	<include file="$(find lrm_bringup)/launch/octomap_mapping_real.launch" />
+	<include file="$(find lrm_bringup)/launch/planning_navigation.launch" />
+ 
+</launch>

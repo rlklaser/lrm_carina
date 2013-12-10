@@ -1,0 +1,130 @@
+<launch>
+
+	<arg
+		name="camera"
+		default="camera" />
+	<arg
+		name="respawn"
+		default="false" />
+	<arg
+		if="$(arg respawn)"
+		name="bond"
+		value="" />
+	<arg
+		unless="$(arg respawn)"
+		name="bond"
+		value="--no-bond" />
+	<arg
+		name="manager"
+		default="/$(arg camera)_nodelet_manager" />
+
+			
+	<!-- Disparity image 
+	<node
+		pkg="nodelet"
+		type="nodelet"
+		name="disparity_bm"
+		args="load stereo_image_proc/disparity $(arg manager) $(arg bond)"
+		respawn="true"
+		output="screen"
+	>
+		<param
+			name="approximate_sync"
+			value="true" />
+
+		<remap
+			from="disparity"
+			to="disparity_bm" />
+
+	</node>
+	-->
+
+	<!-- 
+	<node
+		pkg="nodelet"
+		type="nodelet"
+		name="disparity_bm_cuda"
+		args="load lrm_stereo/disparity_bm_cuda $(arg manager) $(arg bond)"
+		respawn="true"
+		output="screen"
+	>
+		<remap
+			from="disparity"
+			to="disparity_bm_cuda" />
+
+	</node>
+	-->
+	
+	<!--
+	<node
+		pkg="nodelet"
+		type="nodelet"
+		name="disparity_bm_ocl"
+		args="load lrm_stereo/disparity_bm_ocl $(arg manager) $(arg bond)"
+		respawn="true"
+		output="screen"
+	>
+		<remap
+			from="disparity"
+			to="disparity_bm_ocl" />
+
+	</node>
+	-->
+			
+	<!-- 
+	<node
+		pkg="nodelet"
+		type="nodelet"
+		name="disparity_sgbm"
+		args="load lrm_stereo/disparity_sgbm $(arg manager) $(arg bond)"
+		respawn="true"
+		output="screen"
+	>
+		<param
+			name="approximate_sync"
+			value="true" />
+
+		<remap
+			from="disparity"
+			to="disparity_sgbm" />
+	</node>
+	 -->
+ 		
+	<!--
+	<node
+		pkg="nodelet"
+		type="nodelet"
+		name="point_cloud_colorless"
+		args="load lrm_stereo/colorless_stereo $(arg manager) $(arg bond)"
+		respawn="true"
+		output="screen"
+	>
+		<param
+			name="approximate_sync"
+			value="true" />
+
+		<remap
+			from="disparity"
+			to="disparity_bm" />
+	</node>
+	-->
+
+	<!-- Point cloud, PCL-friendly
+	<node
+		pkg="nodelet"
+		type="nodelet"
+		name="point_cloud_unmatched"
+		args="load lrm_stereo/point_cloud2 $(arg manager) $(arg bond)"
+		respawn="true"
+		output="screen"
+	>
+		<remap
+			from="disparity"
+			to="disparity_bm" />
+		<remap
+			from="points2"
+			to="unmatched_points" />
+	</node>
+	-->
+
+</launch>

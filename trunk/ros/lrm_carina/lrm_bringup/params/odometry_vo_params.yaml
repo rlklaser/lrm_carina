@@ -14,17 +14,17 @@ vo_odometry:
   refinement: 1
   approximate_sync: true
 
-#Bucketing params
+  #Bucketing params
   max_features: 2
   bucket_width: 50
   bucket_height: 50
 
-#Stereo params
+  #Stereo params
   ransac_iters: 200
   inlier_threshold: 1.5
   reweighting: 1
 
-#Reference frame
+  #Reference frame
   ref_frame_change_method: 0
   ref_frame_motion_threshold: 5
   ref_frame_inlier_threshold: 150

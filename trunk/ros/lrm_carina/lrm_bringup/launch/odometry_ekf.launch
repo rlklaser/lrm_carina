@@ -1,10 +1,6 @@
 <launch>
 
-    <!--
-	<param
-		name="/use_sim_time"
-		value="true" />
-	-->
+
 	<!-- 
 	<node
 		pkg="tf"
@@ -13,9 +9,7 @@
 		args="0 0 0 0 0 0 map ekf_odom 50"
 		output="screen" />
     -->
- 
-<!-- pkg="robot_pose_ekf" -->
-
+    
 	<rosparam
 		command="load"
 		file="$(find lrm_bringup)/params/odometry_ekf_params.yaml" />
@@ -27,44 +21,11 @@
 		output="screen"
 		respawn="true"
 	>
-<!-- 
-		<param
-			name="output_frame"
-			value="/odom_combined" />
-		<param
-			name="freq"
-			value="50.0" />
-		<param
-			name="sensor_timeout"
-			value="1.0" />
-		<param
-			name="odom_used"
-			value="true" />
-		<param
-			name="imu_used"
-			value="false" />
-		<param
-			name="vo_used"
-			value="false" />
-		<param
-			name="gps_used"
-			value="true" />
-		<param
-			name="debug"
-			value="false" />
-		<param
-			name="self_diagnose"
-			value="false" />
-		<param
-			name="publish_tf"
-			value="false" />
--->
-
-		<remap
-			from="imu_data_x"
-			to="/lse_xsens_mti/xsens/imu/data" />
 		<remap
 			from="imu_data"
+			to="/lse_xsens_mti/xsens/imu/data" />
+		<remap
+			from="imu_data_xx"
 			to="/calibrated/imu/data" />
 		<remap
 			from="gps"
@@ -75,7 +36,6 @@
 		<remap
 			from="vo"
 			to="/vo_odometry/odom" />
-			
 	</node>
 
 	<node
@@ -85,14 +45,6 @@
 		output="screen"
 		respawn="true"
 	>
-<!-- 
-		<param
-			name="frame_id"
-			value="ekf_odom" />
-		<param
-			name="child_frame_id"
-			value="base_footprint" />
- -->
 		<remap
 			from="pose"
 			to="/robot_pose_ekf/pose" />

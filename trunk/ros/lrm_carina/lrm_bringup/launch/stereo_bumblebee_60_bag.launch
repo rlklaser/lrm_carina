@@ -1,0 +1,22 @@
+<launch>
+
+	<include file="$(find lrm_bringup)/launch/stereo_camera.launch" />
+
+	<rosparam file="$(find lrm_bringup)/params/cameras/bumblebee_60.yaml" />
+
+	<group ns="/stereo_camera">
+		<node
+			pkg="nodelet"
+			type="nodelet"
+			name="bumblebee_split_nodelet"
+			args="load lrm_sensors/split_bb2 /bumblebee_nodelet_manager"
+			output="screen"
+			respawn="true"
+		>
+			<remap
+				from="image_raw"
+				to="/camera/image_raw" />
+		</node>
+	</group>
+
+</launch>

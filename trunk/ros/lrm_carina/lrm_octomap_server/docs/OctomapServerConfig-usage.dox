@@ -2,6 +2,7 @@
 \verbatim
 <node name="lrm_octomap_server" pkg="lrm_octomap_server" type="lrm_octomap_server">
   <param name="max_depth" type="int" value="16" />
+  <param name="use_ground" type="bool" value="True" />
 </node>
 \endverbatim
 

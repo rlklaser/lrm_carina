@@ -134,7 +134,7 @@
 			pkg="nodelet"
 			type="nodelet"
 			name="local_scan_cutahead_points_nodelet"
-			args="load pcl/PassThrough /camera_nodelet_manager"
+			args="load pcl/PassThrough /camera_nodelet_manager --no-bond"
 			output="screen"
 			respawn="true"
 		>
@@ -150,7 +150,7 @@
 			pkg="nodelet"
 			type="nodelet"
 			name="local_scan_points_nodelet"
-			args="load pcl/PassThrough /camera_nodelet_manager"
+			args="load pcl/PassThrough /camera_nodelet_manager --no-bond"
 			output="screen"
 			respawn="true"
 		>
@@ -166,7 +166,7 @@
 			pkg="nodelet"
 			type="nodelet"
 			name="local_ground_scan_points_nodelet"
-			args="load pcl/PassThrough /camera_nodelet_manager"
+			args="load pcl/PassThrough /camera_nodelet_manager --no-bond"
 			output="screen"
 			respawn="true"
 		>

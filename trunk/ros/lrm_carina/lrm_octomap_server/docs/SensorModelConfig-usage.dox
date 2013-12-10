@@ -9,6 +9,10 @@
   <param name="hit_far" type="double" value="0.7" />
   <param name="miss_to_gnd" type="double" value="0.4" />
   <param name="miss_to_obs" type="double" value="0.4" />
+  <param name="mid_dist" type="double" value="20.0" />
+  <param name="far_dist" type="double" value="30.0" />
+  <param name="decay_cost" type="double" value="90.0" />
+  <param name="degrade_time" type="double" value="300.0" />
   <param name="max_range" type="double" value="30.0" />
   <param name="max_range_occ" type="double" value="0.5" />
   <param name="update_occ" type="double" value="0.5" />
