@@ -78,7 +78,21 @@
 
 		</node>
 -->
+<!--
+		<node
+			pkg="nodelet"
+			type="nodelet"
+			name="disparity_bm_ocl"
+			args="load lrm_stereo/disparity_bm_ocl $(arg manager) $(arg bond)"
+			respawn="true"
+			output="screen"
+		>
+			<remap
+				from="disparity"
+				to="disparity_bm_ocl" />
 
+		</node>
+-->		
 <!-- 
 		<node
 			pkg="nodelet"
