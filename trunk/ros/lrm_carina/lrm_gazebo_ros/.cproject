@@ -235,6 +235,7 @@
 <pathentry kind="mac" name="__EXCEPTIONS" path="" value="1"/>
 <pathentry kind="mac" name="_GNU_SOURCE" path="" value="1"/>
 <pathentry include="/home/rlklaser/Work/ros/sandbox/lrm_gazebo_ros/include" kind="inc" path="" system="true"/>
+<pathentry include="/home/rlklaser/Work/ros/sandbox/lrm_description/include" kind="inc" path="" system="true"/>
 <pathentry include="/home/rlklaser/Work/ros/sandbox/lrm_msgs/include" kind="inc" path="" system="true"/>
 <pathentry include="/home/rlklaser/Work/ros/sandbox/lrm_msgs/msg_gen/cpp/include" kind="inc" path="" system="true"/>
 <pathentry include="/home/rlklaser/Work/ros/pcl_ws/install_isolated/include" kind="inc" path="" system="true"/>
