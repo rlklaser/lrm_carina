@@ -1,1 +1,1 @@
-rosbag play --clock --pause map:=old_map tf:=old_tf /home/rlklaser/Work/ros/bags/bag-estacionamento/2013-09-28/
+rosbag play --clock --pause map:=old_map tf:=old_tf joint_states:=old_js /home/rlklaser/Work/ros/bags/bag-estacionamento/2013-09-28/
