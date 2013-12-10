@@ -10,10 +10,14 @@ include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
 #set(ROS_BUILD_TYPE RelWithDebInfo)
 set(ROS_BUILD_TYPE Release)
 
-rosbuild_init()
+add_definitions(-std=c++0x)
+add_definitions(-msse3 -msse4.1 -msse4.2)
+add_definitions(-mfpmath=sse -Ofast -flto -march=native)
 
-add_definitions(-msse3 -msse4.1 -msse4.2 -mfpmath=sse)
-#add_definitions(-std=c++1x)
+add_definitions(-DEIGEN_VECTORIZE -DEIGEN_DISABLE_UNALIGNED_ARRAY_ASSERT)
+
+
+rosbuild_init()
 
 #set the default path for built executables to the "bin" directory
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)

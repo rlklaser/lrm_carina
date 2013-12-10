@@ -9,6 +9,11 @@ include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
 #  MinSizeRel     : w/o debug symbols, w/ optimization, stripped binaries
 #set(ROS_BUILD_TYPE RelWithDebInfo)
 
+# http://software.intel.com/en-us/blogs/2012/09/26/gcc-x86-performance-hints
+add_definitions(-std=c++0x)
+add_definitions(-msse3 -msse4.1 -msse4.2)
+add_definitions(-mfpmath=sse -Ofast -flto -march=native)
+
 rosbuild_init()
 
 #set the default path for built executables to the "bin" directory

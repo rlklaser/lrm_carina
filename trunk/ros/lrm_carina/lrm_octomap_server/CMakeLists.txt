@@ -18,6 +18,12 @@ include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
 #set(ROS_BUILD_TYPE RelWithDebInfo)
 set(ROS_BUILD_TYPE Release)
 
+add_definitions(-std=c++0x)
+add_definitions(-msse3 -msse4.1 -msse4.2)
+add_definitions(-mfpmath=sse -Ofast -flto -march=native)
+
+add_definitions(-DEIGEN_VECTORIZE -DEIGEN_DISABLE_UNALIGNED_ARRAY_ASSERT)
+
 rosbuild_init()
 
 #find_package(octomap REQUIRED)
@@ -25,10 +31,7 @@ rosbuild_init()
 #link_directories(${OCTOMAP_LIBRARY_DIRS})
 #add_definitions(-DOCTOMAP_NODEBUGOUT)
 
-#add_definitions(-Wno-deprecated -DEIGEN_VECTORIZE -DEIGEN_DISABLE_UNALIGNED_ARRAY_ASSERT)
-add_definitions(-msse3 -msse4.1 -msse4.2 -mfpmath=sse)
-#add_definitions(-std=c++1x)
-#add_definitions(-mavx -mfpmath=sse)
+#add_definitions(-DEIGEN_VECTORIZE -DEIGEN_DISABLE_UNALIGNED_ARRAY_ASSERT)
 
 #find_package(PCL REQUIRED)
 #include_directories(${PCL_INCLUDE_DIRS})

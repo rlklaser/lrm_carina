@@ -52,7 +52,7 @@ void ArduinoThrottle::setAccel(const double& accel) {
 	if (this->currentAccel != accel) { //only send to hw if changed
 		this->currentAccel = accel;
 		char value = (char) (this->currentAccel * (this->max_value - this->min_value) / 100);
-		char msg[2] = { CMD_SETVEL, value };
+		char msg[2] = { (char)CMD_SETVEL, value };
 		this->arduino->send((void *) msg, 2);
 	}
 }

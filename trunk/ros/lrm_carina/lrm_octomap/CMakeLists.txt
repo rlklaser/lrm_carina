@@ -5,6 +5,10 @@ PROJECT( octomap )
 
 set(CMAKE_BUILD_TYPE "Release")
 
+add_definitions(-std=c++0x)
+add_definitions(-msse3 -msse4.1 -msse4.2)
+add_definitions(-mfpmath=sse -Ofast -flto -march=native)
+
 # version (e.g. for packaging)
 set(OCTOMAP_MAJOR_VERSION 1)
 set(OCTOMAP_MINOR_VERSION 6)
