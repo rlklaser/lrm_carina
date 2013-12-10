@@ -9,8 +9,12 @@ include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
 #  MinSizeRel     : w/o debug symbols, w/ optimization, stripped binaries
 
 #set(ROS_BUILD_TYPE RelWithDebInfo)
-set(ROS_BUILD_TYPE Debug)
-#set(ROS_BUILD_TYPE Release)
+#set(ROS_BUILD_TYPE Debug)
+set(ROS_BUILD_TYPE Release)
+
+add_definitions(-std=c++0x)
+add_definitions(-msse3 -msse4.1 -msse4.2)
+add_definitions(-mfpmath=sse -Ofast -flto -march=native)
 
 #include (FindPkgConfig)
 #if (PKG_CONFIG_FOUND)
@@ -32,8 +36,8 @@ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 #set the default path for built libraries to the "lib" directory
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 
-set (COMPILE_FLAGS -msse4.2 -mpreferred-stack-boundary=4 -march=native)
-add_definitions(-Wno-deprecated -DEIGEN_DONT_VECTORIZE -DEIGEN_DISABLE_UNALIGNED_ARRAY_ASSERT)
+#set (COMPILE_FLAGS -msse4.2 -mpreferred-stack-boundary=4 -march=native)
+#add_definitions(-Wno-deprecated -DEIGEN_DONT_VECTORIZE -DEIGEN_DISABLE_UNALIGNED_ARRAY_ASSERT)
 
 #uncomment if you have defined messages
 rosbuild_genmsg()
