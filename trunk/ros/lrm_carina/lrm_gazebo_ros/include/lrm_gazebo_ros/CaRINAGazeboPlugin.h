@@ -44,10 +44,15 @@ class CaRINAGazeboPlugin: public ModelPlugin
 private:
 
 	physics::ModelPtr _model;
-	ros::NodeHandle* _node;
+	boost::shared_ptr<ros::NodeHandle> _nh;
+	boost::shared_ptr<ros::NodeHandle> _nh_priv;
 	ros::Subscriber _sub;
 
 	void SetupSteeringConstraint();
+
+protected:
+	physics::JointPtr l_hinge;
+	physics::JointPtr r_hinge;
 
 public:
 

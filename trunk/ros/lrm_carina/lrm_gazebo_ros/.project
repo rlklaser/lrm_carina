@@ -43,7 +43,7 @@
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.build.arguments</key>
-					<value></value>
+					<value>-j4</value>
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.buildLocation</key>
@@ -55,7 +55,7 @@
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.environment</key>
-					<value>VERBOSE=1|ROS_ROOT=/opt/ros/groovy/share/ros|ROS_PACKAGE_PATH=/home/rlklaser/Work/ros/overrides:/home/rlklaser/Work/ros/pcl_ws/install_isolated/share:/home/rlklaser/Work/ros/pcl_ws/install_isolated/stacks:/opt/ros/groovy/share:/opt/ros/groovy/stacks:/home/rlklaser/Work/ros/sandbox|PYTHONPATH=/home/rlklaser/Work/ros/pcl_ws/install_isolated/lib/python2.7/dist-packages:/opt/ros/groovy/lib/python2.7/dist-packages|PATH=/home/rlklaser/Work/ros/pcl_ws/install_isolated/bin:/opt/ros/groovy/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games|LD_LIBRARY_PATH=/home/rlklaser/Work/ros/pcl_ws/install_isolated/lib:/opt/ros/groovy/lib|PKG_CONFIG_PATH=/home/rlklaser/Work/ros/pcl_ws/install_isolated/lib/pkgconfig:/opt/ros/groovy/lib/pkgconfig|CMAKE_PREFIX_PATH=/home/rlklaser/Work/ros/pcl_ws/install_isolated:/opt/ros/groovy|</value>
+					<value>VERBOSE=1|ROS_ROOT=/opt/ros/groovy/share/ros|ROS_PACKAGE_PATH=/home/rlklaser/Work/ros/overrides:/home/rlklaser/Work/ros/opencv_ws/src/vision_opencv/cv_bridge:/home/rlklaser/Work/ros/pcl_ws/install_isolated/share:/home/rlklaser/Work/ros/pcl_ws/install_isolated/stacks:/opt/ros/groovy/share:/opt/ros/groovy/stacks:/home/rlklaser/Work/ros/opencv_ws/src/vision_opencv/image_geometry:/home/rlklaser/Work/ros/opencv_ws/src/vision_opencv/opencv_tests:/home/rlklaser/Work/ros/opencv_ws/install_isolated/share:/home/rlklaser/Work/ros/opencv_ws/install_isolated/stacks:/home/rlklaser/Work/ros/sandbox|PYTHONPATH=/home/rlklaser/Work/ros/opencv_ws/devel_isolated/cv_bridge/lib/python2.7/dist-packages:/home/rlklaser/Work/ros/pcl_ws/install_isolated/lib/python2.7/dist-packages:/opt/ros/groovy/lib/python2.7/dist-packages:/home/rlklaser/Work/ros/opencv_ws/devel_isolated/image_geometry/lib/python2.7/dist-packages:/home/rlklaser/Work/ros/opencv_ws/devel_isolated/opencv_tests/lib/python2.7/dist-packages:/home/rlklaser/Work/ros/opencv_ws/install_isolated/lib/python2.7/dist-packages:/home/rlklaser/Work/ros/opencv_ws/devel_isolated/opencv2/lib/python2.7/dist-packages|PATH=/home/rlklaser/Work/ros/opencv_ws/devel_isolated/cv_bridge/bin:/home/rlklaser/Work/ros/pcl_ws/install_isolated/bin:/opt/ros/groovy/bin:/home/rlklaser/Work/ros/opencv_ws/devel_isolated/image_geometry/bin:/home/rlklaser/Work/ros/opencv_ws/devel_isolated/opencv_tests/bin:/home/rlklaser/Work/ros/opencv_ws/install_isolated/bin:/home/rlklaser/Work/ros/opencv_ws/devel_isolated/opencv2/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games|LD_LIBRARY_PATH=/home/rlklaser/Work/ros/opencv_ws/devel_isolated/cv_bridge/lib:/home/rlklaser/Work/ros/pcl_ws/install_isolated/lib:/opt/ros/groovy/lib:/home/rlklaser/Work/ros/opencv_ws/devel_isolated/image_geometry/lib:/home/rlklaser/Work/ros/opencv_ws/devel_isolated/opencv_tests/lib:/home/rlklaser/Work/ros/opencv_ws/install_isolated/lib:/home/rlklaser/Work/ros/opencv_ws/devel_isolated/opencv2/lib|PKG_CONFIG_PATH=/home/rlklaser/Work/ros/opencv_ws/devel_isolated/cv_bridge/lib/pkgconfig:/home/rlklaser/Work/ros/pcl_ws/install_isolated/lib/pkgconfig:/opt/ros/groovy/lib/pkgconfig:/home/rlklaser/Work/ros/opencv_ws/devel_isolated/image_geometry/lib/pkgconfig:/home/rlklaser/Work/ros/opencv_ws/devel_isolated/opencv_tests/lib/pkgconfig:/home/rlklaser/Work/ros/opencv_ws/install_isolated/lib/pkgconfig:/home/rlklaser/Work/ros/opencv_ws/devel_isolated/opencv2/lib/pkgconfig|CMAKE_PREFIX_PATH=/home/rlklaser/Work/ros/opencv_ws/devel_isolated/cv_bridge:/home/rlklaser/Work/ros/pcl_ws/install_isolated:/opt/ros/groovy:/home/rlklaser/Work/ros/opencv_ws/devel_isolated/image_geometry:/home/rlklaser/Work/ros/opencv_ws/devel_isolated/opencv_tests:/home/rlklaser/Work/ros/opencv_ws/install_isolated:/home/rlklaser/Work/ros/opencv_ws/devel_isolated/opencv2|</value>
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.enableFullBuild</key>
@@ -124,6 +124,46 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
+			<name>[Targets]/[lib] lrm_carina_plugin</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] lrm_carina_plugin/</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] lrm_carina_plugin/Source Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] lrm_carina_plugin/Source Files/CaRINAGazeboPlugin.cpp</name>
+			<type>1</type>
+			<location>/home/rlklaser/Work/ros/sandbox/lrm_gazebo_ros/src/CaRINAGazeboPlugin.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] lrm_carina_plugin/Header Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] lrm_carina_plugin/CMake Rules</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] lrm_carina_plugin/Resources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] lrm_carina_plugin/Object Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
 			<name>[Targets]/[lib] gtest</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
@@ -159,6 +199,11 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
+			<name>[Targets]/[lib] gtest/Object Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
 			<name>[Targets]/[lib] gtest_main</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
@@ -190,6 +235,11 @@
 		</link>
 		<link>
 			<name>[Targets]/[lib] gtest_main/Resources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] gtest_main/Object Files</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
