@@ -137,7 +137,7 @@ protected:
 
   inline void updateNode(const octomap::OcTreeKey& key, float log_odds_update) {
 #ifdef USE_CLIPPING
-	  m_octree->updateNodeClipping(key, log_odds_update);
+	  m_octree->updateNodeClipping(key, log_odds_update, log_odds_update==octomap::logodds(m_probHit));
 #else
 	  m_octree->updateNode(key, log_odds_update);
 #endif

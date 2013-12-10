@@ -41,15 +41,15 @@ class OcTreeNodeClipped: public OcTreeNode {
 
 public:
 	OcTreeNodeClipped() :
-			OcTreeNode()/*, is_clipped(false)*/{
+			OcTreeNode(), is_clipped(false) {
 	}
 
 	OcTreeNodeClipped(const OcTreeNodeClipped& rhs) :
-			OcTreeNode(rhs)/*, is_clipped(false)*/{
+			OcTreeNode(rhs), is_clipped(false) {
 	}
 
 	bool operator==(const OcTreeNodeClipped& rhs) const {
-		return (rhs.value == value /*&& rhs.is_clipped == is_clipped*/);
+		return (rhs.value == value && rhs.is_clipped == is_clipped);
 	}
 
 	// children
@@ -67,12 +67,16 @@ public:
 		return true;
 	}
 
-	//inline void setClipped(bool value) {
-	//	is_clipped = value;
-	//}
+	void setClipped(bool value) {
+		is_clipped = value;
+	}
+
+	bool isClipped() {
+		return is_clipped;
+	}
 
 protected:
-	//bool is_clipped;
+	bool is_clipped;
 };
 
 // tree definition
@@ -94,22 +98,35 @@ public:
 		return "OcTreeClipped";
 	}
 
-	virtual void updateNodeClipping(const OcTreeKey& key, float log_odds_update) {
+	virtual void updateNodeClipping(const OcTreeKey& key, float log_odds_update, bool clip) {
+
+		if (log_odds_update == 0)
+			return;
+
 		OcTreeNodeClipped* node = this->search(key);
 		if (node) {
-			if (log_odds_update == 0) {
+
+			if(node->isClipped())
 				return;
-			} else if (log_odds_update < 0) {
+
+			this->updateNode(key, log_odds_update);
+
+			if (log_odds_update < 0) {
 				if (node->getLogOdds() >= this->getClampingThresMaxLog()) {
-					return;
+					//return;
+					node->setClipped(clip);
+					ROS_INFO_STREAM("node clipped " << node->getMeanChildLogOdds() );
 				}
 			} else {
-				//if (node->getLogOdds() <= this->getClampingThresMinLog()) {
-				//	return;
-				//}
+				if (node->getLogOdds() <= this->getClampingThresMinLog()) {
+					//return;
+					//node->setClipped(clip);
+				}
 			}
 		}
-		this->updateNode(key, log_odds_update);
+		else {
+			this->updateNode(key, log_odds_update);
+		}
 	}
 
 protected:
