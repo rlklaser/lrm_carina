@@ -10,6 +10,10 @@ Reads and maintains the following parameters on the ROS server
 - \b "~hit_far" : \b [double] Hit sensor model probability (far distance) min: 0.5001, default: 0.7, max: 0.9999
 - \b "~miss_to_gnd" : \b [double] Miss sensor model probability (to ground) min: 0.0001, default: 0.4, max: 0.4999
 - \b "~miss_to_obs" : \b [double] Miss sensor model probability (to obstacle) min: 0.0001, default: 0.4, max: 0.4999
+- \b "~mid_dist" : \b [double] Mid distance min: 0.0, default: 20.0, max: 1000.0
+- \b "~far_dist" : \b [double] Far distance min: 0.0, default: 30.0, max: 1000.0
+- \b "~decay_cost" : \b [double] Decaying min: 0.0, default: 90.0, max: 100.0
+- \b "~degrade_time" : \b [double] Degrading age (sec) min: 0.0, default: 300.0, max: 360000.0
 - \b "~max_range" : \b [double] Max sensor range min: 0.0, default: 30.0, max: 1000.0
 - \b "~max_range_occ" : \b [double] After occlusion update range min: 0.0, default: 0.5, max: 1000.0
 - \b "~update_occ" : \b [double] Update sensor model after occlusion min: 0.0001, default: 0.5, max: 0.9999

@@ -1,9 +1,9 @@
 <launch>
 
-	<param
-		name="/use_sim_time"
-		value="true" />
-	
+	<rosparam
+		command="load"
+		file="$(find lrm_bringup)/params/global_bag_params.yaml" />
+
 	<node
 		name="rviz"
 		pkg="rviz"

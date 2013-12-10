@@ -165,9 +165,9 @@ OctomapServer::OctomapServer(ros::NodeHandle nh, ros::NodeHandle nh_priv) :
 //	m_pointCloudGroundSub = new message_filters::Subscriber<sensor_msgs::PointCloud2>(m_nh, "ground_cloud_in", 100);
 
 	m_pointCloudSubs = m_nh.subscribe<sensor_msgs::PointCloud2>("cloud_in", 100, &OctomapServer::insertCloudCallback, this);
-	if(m_useGround) {
-		m_pointCloudGroundSubs = m_nh.subscribe<sensor_msgs::PointCloud2>("ground_cloud_in", 50, &OctomapServer::insertCloudGroundCallback, this);
-	}
+	//if(m_useGround) {
+	m_pointCloudGroundSubs = m_nh.subscribe<sensor_msgs::PointCloud2>("ground_cloud_in", 50, &OctomapServer::insertCloudGroundCallback, this);
+	//}
 
 //	m_tfPointCloudSub = new tf::MessageFilter<sensor_msgs::PointCloud2>(*m_pointCloudSub, m_tfListener, m_worldFrameId, 50);
 //	m_tfPointCloudSub->registerCallback(boost::bind(&OctomapServer::insertCloudCallback, this, _1));
@@ -350,6 +350,9 @@ void OctomapServer::insertCloudGroundCallback(const sensor_msgs::PointCloud2::Co
 	ros::WallTime startTime = ros::WallTime::now();
 
 	//ROS_INFO_STREAM("octomap: ground in");
+
+	if(!m_useGround)
+		return;
 
 	//
 	// ground filtering in base frame
@@ -1713,6 +1716,8 @@ void OctomapServer::reconfigureCallback(lrm_octomap_server::OctomapServerConfig&
 	boost::recursive_mutex::scoped_lock monitor(m_mutex);
 	//boost::unique_lock<boost::mutex> scoped_lock(m_mutex);
 
+	m_useGround = config.use_ground;
+
 	if (m_maxTreeDepth != unsigned(config.max_depth)) {
 		m_maxTreeDepth = unsigned(config.max_depth);
 
@@ -1725,20 +1730,20 @@ void OctomapServer::reconfigureCallbackSM(lrm_octomap_server::SensorModelConfig&
 
 	boost::recursive_mutex::scoped_lock monitor(m_mutex);
 
-	//m_degradeTime = config.degrade_time;
+	m_degradeTime = config.degrade_time;
 	m_maxRange = config.max_range;
 	m_maxRangeOcc = config.max_range_occ;
 	m_probHit = config.hit;
 	m_probHitMid = config.hit_mid;
 	m_probHitFar = config.hit_far;
-	//m_probMidDist = config.mid_dist;
-	//m_probFarDist = config.far_dist;
+	m_probMidDist = config.mid_dist;
+	m_probFarDist = config.far_dist;
 	m_probMissGnd = config.miss_to_gnd;
 	m_probMissObs = config.miss_to_obs;
 	m_thresMin = config.min;
 	m_thresMax = config.max;
 	m_occupancyThres = config.occ;
-	//m_decayCost = config.decay_cost;
+	m_decayCost = config.decay_cost;
 	m_updateOcclusion = config.update_occ;
 
 	updateTreeProbabilities();
