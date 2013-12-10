@@ -12,6 +12,13 @@ include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
 #set(ROS_BUILD_TYPE Debug)
 set(ROS_BUILD_TYPE Release)
 
+add_definitions(-std=c++0x)
+add_definitions(-msse3 -msse4.1 -msse4.2)
+add_definitions(-mfpmath=sse -Ofast -flto -march=native)
+
+add_definitions(-DEIGEN_VECTORIZE -DEIGEN_DISABLE_UNALIGNED_ARRAY_ASSERT)
+
+
 rosbuild_init()
 
 #set the default path for built executables to the "bin" directory
@@ -36,11 +43,6 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 #rosbuild_link_boost(${PROJECT_NAME} thread)
 #rosbuild_add_executable(example examples/example.cpp)
 #target_link_libraries(example ${PROJECT_NAME})
-
-
-#add_definitions(-Wno-deprecated -DEIGEN_VECTORIZE -DEIGEN_DISABLE_UNALIGNED_ARRAY_ASSERT)
-add_definitions(-msse3 -msse4.1 -msse4.2 -mfpmath=sse)
-#add_definitions(-mavx -mfpmath=sse)
 
 #rosbuild_add_executable(optflow src/ic2020_optflow.cpp)
 

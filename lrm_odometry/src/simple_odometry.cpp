@@ -59,7 +59,8 @@ int main(int argc, char** argv) {
 	dynamic_reconfigure::Server<lrm_odometry::OdometryConfig>::CallbackType f = boost::bind(&reconfig, _1, _2);
 	srv.setCallback(f);
 
-	ros::ServiceServer service = nh.advertiseService(nh_priv.getNamespace() + "/set_pose", poseService);
+	//ros::ServiceServer service = nh.advertiseService(nh_priv.getNamespace() + "/set_pose", poseService);
+	auto service = nh.advertiseService(nh_priv.getNamespace() + "/set_pose", poseService);
 
 	ros::spinOnce();
 	odometry->start();

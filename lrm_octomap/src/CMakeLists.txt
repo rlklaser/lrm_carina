@@ -19,7 +19,7 @@ SET_TARGET_PROPERTIES(octomap-static PROPERTIES OUTPUT_NAME "lrm_octomap")
 
 TARGET_LINK_LIBRARIES(octomap octomath)
 
-ADD_SUBDIRECTORY( testing )
+#ADD_SUBDIRECTORY( testing )
 
 ADD_EXECUTABLE(graph2tree graph2tree.cpp)
 TARGET_LINK_LIBRARIES(graph2tree octomap)
@@ -45,14 +45,14 @@ TARGET_LINK_LIBRARIES(eval_octree_accuracy octomap)
 ADD_EXECUTABLE(compare_octrees compare_octrees.cpp)
 TARGET_LINK_LIBRARIES(compare_octrees octomap)
 
-ADD_EXECUTABLE(simple_example simple_example.cpp)
-TARGET_LINK_LIBRARIES(simple_example octomap)
+#ADD_EXECUTABLE(simple_example simple_example.cpp)
+#TARGET_LINK_LIBRARIES(simple_example octomap)
 
-ADD_EXECUTABLE(normals_example normals_example.cpp)
-TARGET_LINK_LIBRARIES(normals_example octomap)
+#ADD_EXECUTABLE(normals_example normals_example.cpp)
+#TARGET_LINK_LIBRARIES(normals_example octomap)
 
-ADD_EXECUTABLE(intersection_example intersection_example.cpp)
-TARGET_LINK_LIBRARIES(intersection_example octomap)
+#ADD_EXECUTABLE(intersection_example intersection_example.cpp)
+#TARGET_LINK_LIBRARIES(intersection_example octomap)
 
 
 # installation:
