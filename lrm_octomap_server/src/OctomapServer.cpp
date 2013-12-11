@@ -1187,19 +1187,20 @@ bool OctomapServer::clearBBXSrv(BBXSrv::Request& req, BBXSrv::Response& resp) {
 	}
 	*/
 
+	/*
 	for (OcTreeT::leaf_bbx_iterator it = m_octree->begin_leafs_bbx(min, max), end = m_octree->end_leafs_bbx(); it != end; ++it) {
 
-		ROS_INFO_STREAM(""
-				<< "Node center: " << it.getCoordinate() << std::endl
-				<< "Node size: " << it.getSize() << std::endl
-				<< "Node value: " << it->getValue() << std::endl
-				);
+		//ROS_INFO_STREAM(""
+		//		<< "Node center: " << it.getCoordinate() << std::endl
+		//		<< "Node size: " << it.getSize() << std::endl
+		//		<< "Node value: " << it->getValue() << std::endl
+		//		);
 
 		m_octree->updateNode(it.getKey(), octomap::logodds(m_thresMin));
-		//m_updated = true;
 	}
 
 	return true;
+	*/
 }
 
 bool OctomapServer::resetSrv(std_srvs::Empty::Request& req, std_srvs::Empty::Response& resp) {

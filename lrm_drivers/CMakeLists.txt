@@ -77,5 +77,8 @@ rosbuild_add_executable(vehicle_state_node
 
 rosbuild_add_executable(vel_booster_node 
 	src/vel_booster_node.cpp)
-			
+
+rosbuild_add_executable(constant_twist_publisher 
+	src/constant_twist_publisher.cpp)
+		
 						

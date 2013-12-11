@@ -1,9 +1,9 @@
 <launch>
-    
+
 	<arg
 		name="bond"
 		value="" />
-		
+
 	<node
 		pkg="nodelet"
 		type="nodelet"
@@ -15,6 +15,18 @@
 		<param
 			name="yaml_cfg_file"
 			value="$(find lrm_bringup)/params/cmd_vel_mux.yaml" />
+	</node>
+
+	<node
+		name="constant_twist_publisher"
+		pkg="lrm_drivers"
+		type="constant_twist_publisher"
+		output="screen"
+		respawn="true"
+	>
+		<remap
+			from="~cmd_vel"
+			to="/safety/cmd_vel" />
 	</node>
 
 	<node
@@ -39,5 +51,5 @@
 			to="nav_throttle_commands" />
 		 -->
 	</node>
-	
+
 </launch>
