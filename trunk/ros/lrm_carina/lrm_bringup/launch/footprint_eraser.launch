@@ -8,6 +8,9 @@
 		respawn="true"
 	>
 		<remap
+			from="odom"
+			to="/odom" />
+		<remap
 			from="clear_bbx"
 			to="map_server/clear_bbx" />
 	</node>

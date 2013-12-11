@@ -5,16 +5,19 @@
 		value="true" />
 
 	<group ns="/stereo_camera">
+		
 		<rosparam
 			command="load"
 			file="$(find lrm_bringup)/params/camera_parameters.yaml" />
+	
+		<include file="$(find lrm_bringup)/launch/vision_throttle.launch" />
+	
 	</group>
 
 	<!-- 
 	<include file="$(find lrm_bringup)/launch/camera_nodelet_manager.launch" />
 	 -->
 	<include file="$(find lrm_bringup)/launch/simulator_terrain.launch" />
-	<include file="$(find lrm_bringup)/launch/vision_throttle.launch" />
 	
 	<rosparam
 		command="load"

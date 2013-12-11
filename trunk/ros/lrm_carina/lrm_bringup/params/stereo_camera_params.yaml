@@ -3,10 +3,3 @@ main_nodelet_manager:
 
 bumblebee_nodelet_manager:
   num_worker_threads: 8
-
-throttle_stereo_node:
-  input_namespace: stereo_camera
-  output_namespace: /stereo
-  
-  #diff real/sim
-  #rate: 6

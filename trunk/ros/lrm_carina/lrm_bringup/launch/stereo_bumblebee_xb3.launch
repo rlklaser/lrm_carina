@@ -9,7 +9,7 @@
 		pkg="nodelet"
 		type="nodelet"
 		name="camera1394_nodelet"
-		args="load camera1394/driver /bumblebee_nodelet_manager"
+		args="load camera1394/driver /bumblebee_nodelet_manager --no-bond"
 		output="screen"
 		respawn="true" />
 	
@@ -24,7 +24,7 @@
 			pkg="nodelet"
 			type="nodelet"
 			name="xb3_split_nodelet"
-			args="load lrm_sensors/split_xb3 /bumblebee_nodelet_manager"
+			args="load lrm_sensors/split_xb3 /bumblebee_nodelet_manager --no-bond"
 			output="screen"
 			respawn="true"
 		>

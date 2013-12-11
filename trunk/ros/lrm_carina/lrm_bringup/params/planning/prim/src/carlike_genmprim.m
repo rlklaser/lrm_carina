@@ -1,6 +1,8 @@
 %generates motion primitives and saves them into file
 
 resolution = 0.1;          	% resolucao da primitiva
+dt = resolution;
+fout = fopen('../carina.mprim', 'w');
 
 #see #define NAVXYTHETALAT_THETADIR
 numberofangles = 16; 		% número de fracoes de angulos para um giro de 360 graus
@@ -32,7 +34,7 @@ custo4 *= cmul;
 stlim = 0.559;  % estercamento maximo 32 graus
 vmax = 3;      % velocidade maxima
 L = 1.64;      % distancia entre eixos
-dt = 0.1;
+
 
 to_plot = false;
 
@@ -86,8 +88,7 @@ basemprimendpts0_c(16,:) = [ -8   2  -1  custo3  -0.3   pi/8.2 40];
 basemprimendpts0_c(17,:) = [ -7  -3   1  custo4  -0.2  -stlim 50];
 basemprimendpts0_c(18,:) = [ -7   3  -1  custo4  -0.2   stlim 50];
 
-    
-fout = fopen('../carina.mprim', 'w');
+
 fprintf(fout, 'resolution_m: %f\n', resolution);
 fprintf(fout, 'numberofangles: %d\n', numberofangles);
 fprintf(fout, 'totalnumberofprimitives: %d\n', numberofprimsperangle*numberofangles);
