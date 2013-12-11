@@ -13,8 +13,8 @@ local_costmap:
   #global_frame: /wheel_odom
   global_frame: /odom
   #robot_base_frame: base_footprint
-  #robot_base_frame: base_odometry
-  robot_base_frame: heading_link
+  robot_base_frame: base_odometry
+  #robot_base_frame: heading_link
   update_frequency: 1.0
   publish_frequency: 1.0
   

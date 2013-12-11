@@ -1,0 +1,6 @@
+throttle_stereo:
+  input_namespace: /stereo_camera
+  output_namespace: /stereo
+  
+  #diff real/sim
+  #rate: 6

@@ -2,6 +2,9 @@ footprint_eraser:
   min_distance: 0.5
   timeout: 10
   
+  #see odometry node config
+  base_odometry: /base_odometry
+  
 map_server:
   latch: false
   wait_tf: 0.05
