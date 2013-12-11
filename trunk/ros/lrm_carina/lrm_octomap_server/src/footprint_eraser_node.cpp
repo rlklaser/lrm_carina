@@ -130,31 +130,33 @@ int main(int argc, char **argv) {
 
 	nh_priv.param<double>("min_distance", _min_distance_to_update, 0.5);
 	nh_priv.param<double>("timeout", _timeout, 10);
+	std::string base_odometry;
+	nh_priv.param<std::string>("base_odometry", base_odometry, std::string("base_footprint"));
 
 	_last_clear = ros::Time::now();
 
 	tf::TransformListener listener;
 
 	try {
-		listener.waitForTransform("base_footprint", "bbx_base_rear_left_link", ros::Time(0), ros::Duration(5.0));
+		listener.waitForTransform(base_odometry, "bbx_base_rear_left_link", ros::Time(0), ros::Duration(5.0));
 	} catch (tf::TransformException &ex) {
 		ROS_ERROR("footprint_eraser wait: %s", ex.what());
 	}
 
 	try {
-		listener.waitForTransform("base_footprint", "bbx_top_front_right_link", ros::Time(0), ros::Duration(5.0));
+		listener.waitForTransform(base_odometry, "bbx_top_front_right_link", ros::Time(0), ros::Duration(5.0));
 	} catch (tf::TransformException &ex) {
 		ROS_ERROR("footprint_eraser wait: %s", ex.what());
 	}
 
 	try {
-		listener.lookupTransform("base_footprint", "bbx_base_rear_left_link", ros::Time(0), _transform_min);
+		listener.lookupTransform(base_odometry, "bbx_base_rear_left_link", ros::Time(0), _transform_min);
 	} catch (tf::TransformException &ex) {
 		ROS_ERROR("footprint_eraser: %s", ex.what());
 	}
 
 	try {
-		listener.lookupTransform("base_footprint", "bbx_top_front_right_link", ros::Time(0), _transform_max);
+		listener.lookupTransform(base_odometry, "bbx_top_front_right_link", ros::Time(0), _transform_max);
 	} catch (tf::TransformException &ex) {
 		ROS_ERROR("footprint_eraser: %s", ex.what());
 	}
