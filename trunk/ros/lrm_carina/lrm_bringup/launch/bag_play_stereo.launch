@@ -1,5 +1,9 @@
 <launch>
 
+	<arg
+		name="bond"
+		value="" />
+		
 	<param
 		name="/use_sim_time"
 		value="true" />
@@ -50,7 +54,7 @@
 		pkg="nodelet"
 		type="nodelet"
 		name="voxel_grid"
-		args="load pcl/VoxelGrid /camera_nodelet_manager --no-bond"
+		args="load pcl/VoxelGrid /camera_nodelet_manager $(arg bond)"
 		output="screen"
 	>
 		<remap

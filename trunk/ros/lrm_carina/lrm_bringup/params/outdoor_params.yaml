@@ -2,5 +2,6 @@ compass_frame:
   rate: 50.0
   frame_id: compass_link
   fixed_frame: world
-  robot_base: base_footprint
+  #robot_base: base_footprint
+  robot_base: base_odometry
   fixed: true

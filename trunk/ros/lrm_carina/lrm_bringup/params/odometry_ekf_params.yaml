@@ -15,5 +15,6 @@ robot_pose_ekf:
 ekf_odometry:
   
   frame_id: odom
-  child_frame_id: base_footprint
+  #child_frame_id: base_footprint
+  child_frame_id: base_odometry
   

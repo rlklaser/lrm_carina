@@ -1,22 +1,8 @@
 <launch>
 
 	<arg
-		name="camera"
-		default="camera" />
-	<arg
-		name="respawn"
-		default="false" />
-	<arg
-		if="$(arg respawn)"
 		name="bond"
 		value="" />
-	<arg
-		unless="$(arg respawn)"
-		name="bond"
-		value="--no-bond" />
-	<arg
-		name="manager"
-		default="/$(arg camera)_nodelet_manager" />
 
 	<group ns="/stereo">
 

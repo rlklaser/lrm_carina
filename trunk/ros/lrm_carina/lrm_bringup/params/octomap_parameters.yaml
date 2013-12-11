@@ -11,7 +11,8 @@ map_server:
   #wait_tf: -1 #do not wait
   rate: 5
   frame_id: /map
-  base_frame_id: /base_footprint
+  #base_frame_id: /base_footprint
+  base_frame_id: /base_odometry
   #source_frame_id: /base_stereo_camera
   source_frame_id: /camera_center_link
   #height_map: true
