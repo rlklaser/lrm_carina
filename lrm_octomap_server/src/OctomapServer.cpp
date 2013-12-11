@@ -621,7 +621,7 @@ void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPo
 	// instead of direct scan insertion, compute update to filter ground:
 	KeySet free_gnd_cells, free_obs_cells, occupied_cells, weak_free_cells;
 	// insert ground points only as free:
-	for (PCLPointCloud::const_iterator it = ground.begin(); it != ground.end(); ++it) {
+	for (PCLPointCloud::const_iterator it = ground.begin(), end = ground.end(); it != end; ++it) {
 		point3d point(it->x, it->y, it->z);
 		// maxrange check
 		if ((m_maxRange > 0.0) && ((point - sensorOrigin).norm() > m_maxRange)) {
@@ -643,7 +643,7 @@ void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPo
 	}
 
 	// all other points: free on ray, occupied on endpoint:
-	for (PCLPointCloud::const_iterator it = nonground.begin(); it != nonground.end(); ++it) {
+	for (PCLPointCloud::const_iterator it = nonground.begin(), end = nonground.end(); it != end; ++it) {
 		point3d point(it->x, it->y, it->z);
 		// maxrange check
 		double dist_to_point = (point - sensorOrigin).norm();
@@ -682,6 +682,9 @@ void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPo
 				}
 				updateMinKey(key, m_updateBBXMin);
 				updateMaxKey(key, m_updateBBXMax);
+			}
+			else {
+				ROS_WARN_STREAM("octomap: key not found for coord");
 			}
 
 			//weak free (on occlusion)
@@ -861,32 +864,58 @@ void OctomapServer::_publishAll(const ros::Time& rostime) {
 	m_octree->getMetricMin(minX, minY, minZ);
 	m_octree->getMetricMax(maxX, maxY, maxZ);
 
-	//std::vector<const OcTreeNode*> occ_nodes, free_nodes;
+	std::vector<OcTreeT::NodeType*> occ_nodes, free_nodes;
 	//std::vector<const OcTreeT::iterator*> occ_nodes, free_nodes;
 
 
+
+	/*
+	 * Process free nodes first
+	 */
 	for (OcTreeT::iterator it = m_octree->begin(m_maxTreeDepth), end = m_octree->end(); it != end; ++it) {
-		bool inUpdateBBX = isInUpdateBBX(it.getKey());
 		if (!m_octree->isNodeOccupied(*it)) {
-			handleFreeNode(it);
-			if (inUpdateBBX)
-				handleFreeNodeInBBX(it);
+			if(m_projectCompleteMap) {
+				handleFreeNode(it);
+			}
+			else {
+				if (isInUpdateBBX(it.getKey())) {
+					handleFreeNodeInBBX(it);
+				}
+			}
 		}
 	}
 
-	// now, traverse all leafs in the tree:
+	/*
+	 * Process occupied nodes now
+	 */
+	for (OcTreeT::iterator it = m_octree->begin(m_maxTreeDepth), end = m_octree->end(); it != end; ++it) {
+		bool inUpdateBBX = isInUpdateBBX(it.getKey());
+		if (m_octree->isNodeOccupied(*it)) {
+			if(m_projectCompleteMap) {
+				handleOccupiedNode(it);
+			}
+			else {
+				if (isInUpdateBBX(it.getKey())) {
+					handleOccupiedNodeInBBX(it);
+				}
+			}
+		}
+	}
+
+	//publish
 	for (OcTreeT::iterator it = m_octree->begin(m_maxTreeDepth), end = m_octree->end(); it != end; ++it) {
 	//for (OcTreeT::tree_iterator it = m_octree->begin_tree(m_maxTreeDepth), end = m_octree->end_tree(); it != end; ++it) {
 	//OcTreeT::iterator it = m_octree->begin(m_maxTreeDepth), end = m_octree->end();
 	//for (; it != end; ++it) {
-		bool inUpdateBBX = isInUpdateBBX(it.getKey());
+		//bool inUpdateBBX = isInUpdateBBX(it.getKey());
 
 		// call general hook:
 		//handleNode(it);
 		//if (inUpdateBBX)
 		//	handleNodeInBBX(it);
 
-		if (m_octree->isNodeOccupied(*it)) {
+		//if (m_octree->isNodeOccupied(*it)) {
+		if (it->getOccupancy()>0.53) {
 			float z = it.getZ();
 			if (z > m_occupancyMinZ && z < m_occupancyMaxZ) {
 				//double size = it.getSize();
@@ -913,19 +942,21 @@ void OctomapServer::_publishAll(const ros::Time& rostime) {
 				//node->getColor();
 
 				// Ignore speckles in the map:
-				if (m_filterSpeckles && (it.getDepth() == m_treeDepth + 1) && isSpeckleNode(it.getKey())) {
-					ROS_DEBUG("Ignoring single speckle at (%f,%f,%f)", x, y, z);
+//				if (m_filterSpeckles && (it.getDepth() == m_treeDepth + 1) && isSpeckleNode(it.getKey())) {
+//					ROS_DEBUG("Ignoring single speckle at (%f,%f,%f)", x, y, z);
+//
+//					it->setLogOdds(octomap::logodds(0));
+//
+//					ROS_WARN_STREAM("speckle removed");
+//
+//					continue;
+//				} // else: current octree node is no speckle, send it out
 
-					it->setLogOdds(octomap::logodds(0));
+				//handleOccupiedNode(it);
+				//if (inUpdateBBX)
+				//	handleOccupiedNodeInBBX(it);
 
-					ROS_WARN_STREAM("speckle removed");
-
-					continue;
-				} // else: current octree node is no speckle, send it out
-
-				handleOccupiedNode(it);
-				if (inUpdateBBX)
-					handleOccupiedNodeInBBX(it);
+				//occ_nodes.push_back(it);
 
 				//const OcTreeT::iterator* tt = &it;
 				//occ_nodes.push_back(tt);
@@ -1016,13 +1047,13 @@ void OctomapServer::_publishAll(const ros::Time& rostime) {
 				}
 			}
 		}
-		//else { // node not occupied => mark as free in 2D map if unknown so far
-///			handleFreeNode(it);
-///			if (inUpdateBBX)
-///				handleFreeNodeInBBX(it);
-			//const OcTreeT::iterator* tt = it.iterator_base();
-			//free_nodes.push_back(tt);
-		//}
+//		else { // node not occupied => mark as free in 2D map if unknown so far
+//			handleFreeNode(it);
+//			if (inUpdateBBX)
+//				handleFreeNodeInBBX(it);
+//			//const OcTreeT::iterator* tt = it.iterator_base();
+//			//free_nodes.push_back(tt);
+//		}
 	}
 
 	/*
