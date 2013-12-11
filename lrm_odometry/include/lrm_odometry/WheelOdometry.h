@@ -61,6 +61,7 @@ struct st_param
 {
 	double rate;
 	double tf_rate;
+	double js_rate;
 
 	double robot_length;
 	double robot_width;
@@ -202,6 +203,7 @@ private:
 	ros::Publisher velocity_pub;
 	ros::Timer odom_publisher_timer;
 	ros::Timer tf_publisher_timer;
+	ros::Timer js_publisher_timer;
 
 	tf::TransformBroadcaster odom_broadcaster;
 	tf::TransformListener listener;
@@ -219,8 +221,8 @@ private:
 	bool tf_publisher_timer_started;
 
 	void imuCallback(const sensor_msgs::Imu::ConstPtr& msg);
-	//void encodersCallback(const atuacao::Encoders::ConstPtr& encoder);
 	void encodersCallback(const lrm_msgs::Encoders::ConstPtr& encoder);
+
 	void calcParams();
 	void getParams();
 	void publishTF();
@@ -233,11 +235,13 @@ protected:
 	struct st_joints joints;
 
 	virtual void calcOdometry() = 0;
-	virtual void odomCallback(const ros::TimerEvent& t);
-	virtual void tfCallback(const ros::TimerEvent& t);
-	virtual void publishPose();
-	virtual void publishOdometry();
-	virtual void publishVelocity();
+
+	void odomCallback(const ros::TimerEvent& t);
+	void tfCallback(const ros::TimerEvent& t);
+	void jsCallback(const ros::TimerEvent& t);
+	void publishPose();
+	void publishOdometry();
+	void publishVelocity();
 
 public:
 	WheelOdometry(ros::NodeHandle n);
