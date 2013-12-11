@@ -6,14 +6,14 @@ map_server:
   latch: false
   wait_tf: 0.05
   #wait_tf: -1 #do not wait
-  rate: 10
+  rate: 5
   frame_id: /map
   base_frame_id: /base_footprint
   #source_frame_id: /base_stereo_camera
   source_frame_id: /camera_center_link
   #height_map: true
   height_map: false
-  resolution: 0.05
+  resolution: 0.1
     
   max_depth: 16
     
