@@ -56,10 +56,11 @@ using namespace message_filters;
 
 namespace lrm_stereo {
 
-//typedef sync_policies::ExactTime<Image, Image> StereoCameraSyncPolicy;
-typedef sync_policies::ApproximateTime<Image, Image> StereoCameraSyncPolicy;
+typedef sync_policies::ExactTime<Image, Image> StereoCameraExSyncPolicy;
+typedef sync_policies::ApproximateTime<Image, Image> StereoCameraApSyncPolicy;
 typedef message_filters::Subscriber<Image> ImageSubscriber;
-typedef Synchronizer<StereoCameraSyncPolicy> ImageSynchronizer;
+typedef Synchronizer<StereoCameraExSyncPolicy> ImageSynchronizerEx;
+typedef Synchronizer<StereoCameraApSyncPolicy> ImageSynchronizerAp;
 
 // class for broadcasting synchronized, throttled versions of a stereo camera topic
 class StereoCameraThrottler {
@@ -72,7 +73,8 @@ private:
 	ros::Publisher right_camera_info_pub_;
 	boost::shared_ptr<ImageSubscriber> left_sub_;
 	boost::shared_ptr<ImageSubscriber> right_sub_;
-	boost::shared_ptr<ImageSynchronizer> sync_;
+	boost::shared_ptr<ImageSynchronizerAp> sync_ap_;
+	boost::shared_ptr<ImageSynchronizerEx> sync_ex_;
 	ros::Subscriber left_info_sub_;
 	ros::Subscriber right_info_sub_;
 	CameraInfo left_cam_info_;
@@ -84,6 +86,7 @@ private:
 	std::string image_topic_;
 	//boost::recursive_mutex config_mutex_;
 	dynamic_reconfigure::Server<ThrottleStereoConfig> srv_;
+	bool approximate_sync_;
 public:
 	StereoCameraThrottler(ros::NodeHandle& nh, ros::NodeHandle& nh_priv);
 	//virtual ~StereoCameraThrottler();

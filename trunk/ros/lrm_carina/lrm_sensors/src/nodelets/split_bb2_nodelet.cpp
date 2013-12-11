@@ -148,13 +148,13 @@ void SplitBB2Nodelet::publishCam(const sensor_msgs::Image& image) {
 
 	ctx_.left.info = ctx_.left.manager->getCameraInfo();
 	ctx_.left.info.header.frame_id = ctx_.frame_id;
-	ctx_.left.info.header.stamp = stamp;
+	//ctx_.left.info.header.stamp = stamp;
 	ctx_.left.info.height = imHeight;
 	ctx_.left.info.width = imWidth;
 
 	ctx_.right.info = ctx_.right.manager->getCameraInfo();
 	ctx_.right.info.header.frame_id = ctx_.frame_id;
-	ctx_.right.info.header.stamp = stamp;
+	//ctx_.right.info.header.stamp = stamp;
 	ctx_.right.info.height = imHeight;
 	ctx_.right.info.width = imWidth;
 

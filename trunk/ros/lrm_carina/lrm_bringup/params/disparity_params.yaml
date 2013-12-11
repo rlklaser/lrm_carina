@@ -16,4 +16,4 @@ disparity_bm:
   speckle_size: 400
   speckle_range: 15
   
-  approximate_sync: true
+  approximate_sync: false
