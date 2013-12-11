@@ -1176,17 +1176,25 @@ bool OctomapServer::clearBBXSrv(BBXSrv::Request& req, BBXSrv::Response& resp) {
 	m_octree->updateNode(min, octomap::logodds(m_thresMin));
 	m_octree->updateNode(max, octomap::logodds(m_thresMin));
 
-	//m_octree->setBBXMax()
-
+	/*
+	 * checked by iterator
+	 *
 	kmin_ok = m_octree->coordToKeyChecked(min, kmin);
 	kmax_ok = m_octree->coordToKeyChecked(max, kmax);
-
 	if(!kmin_ok || !kmax_ok) {
 		ROS_WARN_STREAM("Cannot clear these coordinates");
 		return false;
 	}
+	*/
 
 	for (OcTreeT::leaf_bbx_iterator it = m_octree->begin_leafs_bbx(min, max), end = m_octree->end_leafs_bbx(); it != end; ++it) {
+
+		ROS_INFO_STREAM(""
+				<< "Node center: " << it.getCoordinate() << std::endl
+				<< "Node size: " << it.getSize() << std::endl
+				<< "Node value: " << it->getValue() << std::endl
+				);
+
 		m_octree->updateNode(it.getKey(), octomap::logodds(m_thresMin));
 		//m_updated = true;
 	}
