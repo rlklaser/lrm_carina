@@ -51,7 +51,8 @@ WheelOdometry::WheelOdometry(ros::NodeHandle n) :
 	odom.twist.covariance.elems[35] = odo.p.rot_cov;
 
 	odo.initial_orientation = INF;
-	odo.current_time = ros::Time(0);
+	//odo.current_time = ros::Time(0);
+	odo.dt = -1;
 
 	int position = 0;
 
@@ -109,16 +110,10 @@ WheelOdometry::WheelOdometry(ros::NodeHandle n) :
 	joint_state.position.push_back(0);
 	joints.ndx_joint_steering_wheel = position++;
 
-//	if (odo.p.use_imu) {
-//		imu_sub = nh.subscribe<sensor_msgs::Imu>("imu_data", 1, &WheelOdometry::imuCallback, this);
-//	}
-//	encoders_sub = nh.subscribe<lrm_msgs::Encoders>("encoders", 1, &WheelOdometry::encodersCallback, this);
-
 	pose_pub = nh.advertise<geometry_msgs::Pose2D>(nh_priv.getNamespace() + "/pose2d", 1/*odo.p.rate*/);
 	posestamped_pub = nh.advertise<geometry_msgs::PoseStamped>(nh_priv.getNamespace() + "/pose", 1/*odo.p.rate*/);
 	odom_pub = nh.advertise<nav_msgs::Odometry>(nh_priv.getNamespace() + "/odom", 1/*odo.p.rate*/);
 	velocity_pub = nh.advertise<lrm_msgs::Velocity>(nh_priv.getNamespace() + "/velocity", 1);
-
 	joint_pub = nh.advertise<sensor_msgs::JointState>("joint_states", 1);
 
 	if(odo.p.rate==0)
@@ -126,14 +121,14 @@ WheelOdometry::WheelOdometry(ros::NodeHandle n) :
 	if(odo.p.tf_rate==0)
 		odo.p.tf_rate = 1;
 
-	//if(odo.p.publish_tf) {
 	odom_publisher_timer = n.createTimer(ros::Duration(1.0 / odo.p.rate), &WheelOdometry::odomCallback, this, false, false);
 	tf_publisher_timer = n.createTimer(ros::Duration(1.0 / odo.p.tf_rate), &WheelOdometry::tfCallback, this, false, false);
-	//odom_publisher_timer.start();
-	//}
+	js_publisher_timer = n.createTimer(ros::Duration(1.0 / odo.p.js_rate), &WheelOdometry::jsCallback, this, false, false);
 
 	odo.current_time = ros::Time::now();
 	base_to_odom_msg.setIdentity();
+
+	ROS_WARN_STREAM("Odometry node initialized");
 }
 
 /**
@@ -143,16 +138,22 @@ WheelOdometry::~WheelOdometry() {
 }
 
 void WheelOdometry::start() {
-	odom_publisher_timer.start();
-
-	//if (odo.p.publish_tf) {
-	//	tf_publisher_timer.start();
-	//}
-
 	if (odo.p.use_imu) {
 		imu_sub = nh.subscribe<sensor_msgs::Imu>("imu_data", 1, &WheelOdometry::imuCallback, this);
 	}
 	encoders_sub = nh.subscribe<lrm_msgs::Encoders>("encoders", 1, &WheelOdometry::encodersCallback, this);
+
+	odom_publisher_timer.start();
+
+	if (odo.p.publish_tf) {
+		tf_publisher_timer.start();
+	}
+
+	if (odo.p.publish_js) {
+		js_publisher_timer.start();
+	}
+
+	ROS_WARN_STREAM("Odometry node started");
 }
 
 void WheelOdometry::getParams() {
@@ -174,6 +175,7 @@ void WheelOdometry::getParams() {
 	nh_priv.param("animation_only", odo.p.animation_only, false);
 	nh_priv.param("rate", odo.p.rate, DEFAULT_RATE);
 	nh_priv.param("tf_rate", odo.p.tf_rate, DEFAULT_RATE);
+	nh_priv.param("js_rate", odo.p.js_rate, DEFAULT_RATE);
 
 	nh_priv.param("rot_cov", odo.p.rot_cov, DEFAULT_ROT_COV);
 	nh_priv.param("pos_cov", odo.p.pos_cov, DEFAULT_POS_COV);
@@ -188,15 +190,7 @@ void WheelOdometry::getParams() {
 
 	std::string tf_prefix;
 	nh.param<std::string>("tf_prefix", tf_prefix, "");
-
 	//ROS_INFO_STREAM(tf_prefix << std::endl);
-
-	/*
-	 joint_state.header.frame_id = tf_prefix + "/" + odo.p.base_link;
-	 odom.header.frame_id = tf_prefix + "/" + odo.p.fixed_odometry;
-	 odom.child_frame_id = tf_prefix + "/" + odo.p.base_footprint;
-	 current_posestamped.header.frame_id = tf_prefix + "/" + odo.p.base_footprint;
-	 */
 
 	//multi-robot aware
 	odo.p.base_link = tf_prefix + "/" + odo.p.base_link;
@@ -228,6 +222,9 @@ void WheelOdometry::calcParams() {
 }
 
 void WheelOdometry::reconfigure(lrm_odometry::OdometryConfig &config, uint32_t level) {
+
+	boost::unique_lock < boost::mutex > scoped_lock(mutex);
+
 	odo.p.max_inner_wheel_angle = config.max_angle_left;
 	odo.p.max_outer_wheel_angle = config.max_angle_right;
 	odo.p.robot_length = config.robot_lenght;
@@ -244,32 +241,27 @@ void WheelOdometry::reconfigure(lrm_odometry::OdometryConfig &config, uint32_t l
 
 	calcParams();
 
-	ROS_WARN("node reconfigured");
+	ROS_WARN("Odometry node reconfigured");
 }
 
 void WheelOdometry::imuCallback(const sensor_msgs::Imu::ConstPtr& msg) {
 
-	if (odo.initial_orientation == INF) {
-		odo.initial_orientation = tf::getYaw(msg->orientation);
-		odo.last_orientation = odo.initial_orientation;
-	}
-
-	if (odo.p.absolute) {
-		odo.yaw = tf::getYaw(msg->orientation) + angles::from_degrees(odo.p.absolute_heading);
-	} else {
-		odo.yaw = tf::getYaw(msg->orientation) - odo.initial_orientation;
-	}
+	boost::unique_lock < boost::mutex > scoped_lock(mutex);
 
 	odo.imu_ang_vel_x = msg->angular_velocity.x;
 	odo.imu_ang_vel_y = msg->angular_velocity.y;
 	odo.imu_ang_vel_z = msg->angular_velocity.z;
 
-	if (odo.p.use_6dof) {
+	double yaw = tf::getYaw(msg->orientation);
+
+	//if (odo.p.use_6dof) {
 		if (!odo.cached_transform) {
 			try {
-				listener.waitForTransform(msg->header.frame_id, odo.p.base_odometry, ros::Time(0), ros::Duration(5.0));
+				listener.waitForTransform(msg->header.frame_id, odo.p.base_odometry, ros::Time(0),
+						ros::Duration(1.0));
 				try {
-					listener.lookupTransform(msg->header.frame_id, odo.p.base_odometry, ros::Time(0), odo.trans_base_imu);
+					listener.lookupTransform(msg->header.frame_id, odo.p.base_odometry, ros::Time(0),
+							odo.trans_base_imu);
 					odo.cached_transform = true;
 				} catch (tf::TransformException &ex) {
 					ROS_ERROR("lrm_odometry (3): %s", ex.what());
@@ -280,17 +272,29 @@ void WheelOdometry::imuCallback(const sensor_msgs::Imu::ConstPtr& msg) {
 		}
 
 		if (odo.cached_transform) {
-			tf::Quaternion orientation(msg->orientation.x, msg->orientation.y, msg->orientation.z, msg->orientation.w);
-			//geometry_msgs::Quaternion qt;
-			//qt = msg->orientation.normalize();
-			//tf::quaternionMsgToTF(qt, orientation);
+			tf::Quaternion orientation(
+					msg->orientation.x,
+					msg->orientation.y,
+					msg->orientation.z,
+					msg->orientation.w);
 			orientation.normalize();
 			tf::Transform transf(orientation, tf::Vector3(0, 0, 0));
 			transf *= odo.trans_base_imu;
 			orientation = transf.getRotation();
-			double yaw;
+
 			tf::Matrix3x3(orientation).getRPY(odo.roll, odo.pitch, yaw);
 		}
+	//}
+
+	if (odo.initial_orientation == INF) {
+		odo.initial_orientation = yaw;
+		odo.last_orientation = odo.initial_orientation;
+	}
+
+	if (odo.p.absolute) {
+		odo.yaw = yaw + angles::from_degrees(odo.p.absolute_heading);
+	} else {
+		odo.yaw = yaw - odo.initial_orientation;
 	}
 }
 
@@ -300,17 +304,8 @@ void WheelOdometry::imuCallback(const sensor_msgs::Imu::ConstPtr& msg) {
  */
 //void WheelOdometry::encodersCallback(const atuacao::Encoders::ConstPtr& encoder)
 void WheelOdometry::encodersCallback(const lrm_msgs::Encoders::ConstPtr& encoder) {
-	/*
-	 ros::Time stamp;
+	boost::unique_lock < boost::mutex > scoped_lock(mutex);
 
-	 stamp = encoder->header.stamp;
-	 //stamp = ros::Time::now();
-
-	 if(odo.current_time == ros::Time(0)) {
-	 odo.last_time = stamp;
-	 }
-	 odo.current_time = stamp;
-	 */
 	odo.encWheelValue += encoder->wheel.relative;
 	odo.encSteerValue = encoder->steering.absolute;
 
@@ -319,31 +314,36 @@ void WheelOdometry::encodersCallback(const lrm_msgs::Encoders::ConstPtr& encoder
 
 void WheelOdometry::tfCallback(const ros::TimerEvent& t) {
 	boost::unique_lock < boost::mutex > scoped_lock(mutex);
+
 	if(calcTransform()) {
 		publishTF();
 	}
 }
 
+void WheelOdometry::jsCallback(const ros::TimerEvent& t) {
+	boost::unique_lock < boost::mutex > scoped_lock(mutex);
+
+	calcJointStates();
+	publishJointStates();
+}
+
 void WheelOdometry::odomCallback(const ros::TimerEvent& t) {
-	//boost::unique_lock < boost::mutex > scoped_lock(mutex);
 
-	//stamp = encoder->header.stamp;
+	boost::unique_lock < boost::mutex > scoped_lock(mutex);
+
 	ros::Time stamp = ros::Time::now();
-
-	if (odo.current_time == ros::Time(0)) {
+	if (odo.dt < 0) {
 		odo.last_time = stamp;
 	}
 	odo.current_time = stamp;
 
 	odo.dt = (odo.current_time - odo.last_time).toSec();
 
-	//odo.encWheelValue = encoder->relative.front();
-	//odo.encSteerValue = encoder->absolute.front();
-	//odo.encWheelValue = encoder->wheel.relative;
-	//odo.encSteerValue = encoder->steering.absolute;
-
-	boost::unique_lock < boost::mutex > scoped_lock(mutex);
+	/*
+	 * Main odometry calc (virtual method)
+	 */
 	calcOdometry();
+
 
 	//velocity
 	if (odo.dt != 0) {
@@ -394,12 +394,16 @@ void WheelOdometry::odomCallback(const ros::TimerEvent& t) {
 		"");
 	}
 
+	//reset relative accumulator
 	odo.encWheelValue = 0;
+
 	publishPose();
-	calcJointStates();
-	if (odo.p.publish_js) {
-		publishJointStates();
-	}
+	publishVelocity();
+
+	//if (odo.p.publish_js) {
+	//	calcJointStates();
+	//	publishJointStates();
+	//}
 
 	//if (calcTransform()) {
 		//if (odo.p.publish_tf) {
@@ -407,6 +411,7 @@ void WheelOdometry::odomCallback(const ros::TimerEvent& t) {
 		//}
 		//publishOdometry();
 	//}
+
 	if (!odo.p.publish_tf) {
 		if(calcTransform()) {
 			publishOdometry();
@@ -416,16 +421,10 @@ void WheelOdometry::odomCallback(const ros::TimerEvent& t) {
 		publishOdometry();
 	}
 
-	publishVelocity();
-
-	if(!tf_publisher_timer_started && odo.p.publish_tf) {
-		tf_publisher_timer_started = true;
-		tf_publisher_timer.start();
-	}
 }
 
 void WheelOdometry::calcJointStates() {
-	joint_state.header.stamp = odo.current_time; //ros::Time::now();
+	joint_state.header.stamp = /*odo.current_time;*/ ros::Time::now();
 
 	if (!odo.p.animation_only) {
 		joint_state.position[joints.ndx_joint_rear_left_wheel] += odo.dist_r_l / odo.p.wheel_ray;
@@ -470,28 +469,13 @@ void WheelOdometry::publishOdometry() {
 	//next, we'll publish the odometry message over ROS
 	odom.header.stamp = odo.current_time; //ros::Time::now();
 
-	//set the position
-	/*
-	 odom.pose.pose.position.x = base_to_odom_msg.transform.translation.x;
-	 odom.pose.pose.position.y = base_to_odom_msg.transform.translation.y;
-	 odom.pose.pose.position.z = base_to_odom_msg.transform.translation.z;
-	 odom.pose.pose.orientation.w = base_to_odom_msg.transform.rotation.w;
-	 odom.pose.pose.orientation.x = base_to_odom_msg.transform.rotation.x;
-	 odom.pose.pose.orientation.y = base_to_odom_msg.transform.rotation.y;
-	 odom.pose.pose.orientation.z = base_to_odom_msg.transform.rotation.z;
-	 */
-
-	//set the velocity
-	/*
-	 tf::Transform orientation(
-	 tf::Quaternion(
-	 base_to_odom_msg.transform.rotation.x,
-	 base_to_odom_msg.transform.rotation.y,
-	 base_to_odom_msg.transform.rotation.z,
-	 base_to_odom_msg.transform.rotation.w));
-	 */
-	tf::Quaternion rotation = base_to_odom_msg.getRotation();
-	tf::Vector3 translation = base_to_odom_msg.getOrigin();
+	/* from TF */
+	//tf::Quaternion rotation = base_to_odom_msg.getRotation();
+	//tf::Vector3 translation = base_to_odom_msg.getOrigin();
+	//tf::Transform orientation(rotation);
+	/* from Odom */
+	tf::Quaternion rotation = tf::createQuaternionFromYaw(odo.theta);
+	tf::Vector3 translation(odo.x, odo.y, 0);
 	tf::Transform orientation(rotation);
 
 	odom.pose.pose.position.x = translation.x();
@@ -532,15 +516,16 @@ void WheelOdometry::publishOdometry() {
 }
 
 bool WheelOdometry::calcTransform() {
-	//ros::Time current_time = odo.current_time;
-	//ros::Time current_time = odo.current_time - ros::Duration(0.5); //past publish by 0.5
-	ros::Time current_time = odo.current_time - ros::Duration(odo.p.tf_delay); //slight delay
 
-	if(!current_time.isValid()){
-		ROS_ERROR("invalid time");
+	if(!ros::Time::now().isValid() || ros::Time::now().toSec()<odo.p.tf_delay) {
+		//simulator start with zero time
+		//the below subtraction will crash
+		ROS_WARN_STREAM("time is zero");
 		return false;
 	}
+	ros::Time current_time = ros::Time::now() - ros::Duration(odo.p.tf_delay); //slight delay
 
+	//ROS_WARN_STREAM("will calc TF");
 	//try {
 	//	listener.waitForTransform(odo.p.base_footprint, odo.p.base_odometry, ros::Time(0), ros::Duration(5.0));
 	//} catch (tf::TransformException &ex) {
@@ -551,10 +536,9 @@ bool WheelOdometry::calcTransform() {
 	/*publish transformed*/
 	//desnecessario se o base_footprint estiver no meio do eixo traseiro
 	//fixed transform
-
 	tf::StampedTransform trans_base_enc(
 			tf::Transform::getIdentity(),
-			ros::Time::now(),
+			current_time,
 			odo.p.base_odometry,
 			odo.p.base_footprint);
 	try {
@@ -590,7 +574,7 @@ bool WheelOdometry::calcTransform() {
 
 	tf::Transform trans_odom_encoder(qt, tf::Vector3(odo.x, odo.y, 0.0));
 
-	tf::StampedTransform trans_odom_base_st(trans_odom_encoder, current_time, // - ros::Duration(0.5), /*trans_base_enc.stamp_,*/
+	tf::StampedTransform trans_odom_base_st(trans_odom_encoder, current_time,
 			odo.p.frame_id, odo.p.base_footprint);
 
 	//tf::Transform trans_compass(
@@ -600,8 +584,6 @@ bool WheelOdometry::calcTransform() {
 	//trans_odom_base_st *= trans_compass;
 
 	trans_odom_base_st *= trans_base_enc.inverse();
-	//tf::transformStampedTFToMsg(trans_odom_base_st, base_to_odom_msg);
-	//base_to_odom_msg.header.stamp = current_time;
 	base_to_odom_msg = trans_odom_base_st;
 
 	return true;
@@ -619,7 +601,7 @@ void WheelOdometry::publishVelocity() {
 	if (velocity_pub.getNumSubscribers() > 0) {
 		lrm_msgs::Velocity msg;
 		msg.header.stamp = odo.current_time;
-		//msg.header.frame_id = "base_footprint"
+		msg.header.frame_id = odo.p.base_odometry;
 		msg.value = odo.v;
 		velocity_pub.publish(msg);
 	}
