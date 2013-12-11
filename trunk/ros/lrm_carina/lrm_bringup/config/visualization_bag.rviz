@@ -269,14 +269,14 @@ Visualization Manager:
       Value: true
       Visual Enabled: true
     - Class: rviz/Camera
-      Enabled: false
+      Enabled: true
       Image Rendering: background and overlay
       Image Topic: /stereo/left/image_color
       Name: Camera
       Overlay Alpha: 0.5
       Queue Size: 2
       Transport Hint: raw
-      Value: false
+      Value: true
       Visibility:
         Axes: true
         Camera: false
@@ -292,10 +292,10 @@ Visualization Manager:
           Polygon: true
           Value: true
         Odometry:
-          "": true
+          Odometry: true
           Value: true
         PointCloud:
-          "": true
+          PointCloud2: true
           Value: true
         Pose: true
         RobotModel: false
@@ -348,8 +348,7 @@ Visualization Manager:
       Marker Topic: /octomap/occupied_cells_vis_array
       Name: MarkerArray
       Namespaces:
-        depth_15: true
-        depth_16: true
+        {}
       Queue Size: 100
       Value: true
     - Alpha: 1
@@ -696,7 +695,7 @@ Visualization Manager:
           Color: 255; 255; 255
           Color Transformer: RGB8
           Decay Time: 0
-          Enabled: false
+          Enabled: true
           Max Color: 255; 255; 255
           Max Intensity: 4096
           Min Color: 0; 0; 0
@@ -711,7 +710,7 @@ Visualization Manager:
           Topic: /cloud_in
           Use Fixed Frame: true
           Use rainbow: true
-          Value: false
+          Value: true
       Enabled: true
       Name: PointCloud
   Enabled: true
@@ -734,17 +733,17 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 23.5985
+      Distance: 18.2747
       Focal Point:
-        X: 11.0792
-        Y: -1.21952
-        Z: 4.75577
+        X: 11.667
+        Y: -2.60103
+        Z: 6.49367
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 1.4748
+      Pitch: 0.644801
       Target Frame: /base_footprint
       Value: Orbit (rviz)
-      Yaw: 2.43722
+      Yaw: 1.48222
     Saved: ~
 Window Geometry:
   Camera:
