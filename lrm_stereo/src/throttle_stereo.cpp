@@ -46,6 +46,8 @@ StereoCameraThrottler::StereoCameraThrottler(ros::NodeHandle& nh, ros::NodeHandl
 	nh_priv_.param<std::string>("output_namespace", out_topic, "stereo");
 	nh_priv_.param<double>("rate", msg_rate_, 10);
 
+	nh_priv_.param<bool>("approximate_sync", approximate_sync_, false);
+
 	//subscribe to the left and right camera info messages
 	left_info_sub_ = nh_.subscribe(image_topic_ + std::string("/left/camera_info"), 1, &StereoCameraThrottler::left_info_cb, this);
 	right_info_sub_ = nh_.subscribe(image_topic_ + std::string("/right/camera_info"), 1, &StereoCameraThrottler::right_info_cb, this);
@@ -54,8 +56,14 @@ StereoCameraThrottler::StereoCameraThrottler(ros::NodeHandle& nh, ros::NodeHandl
 	right_sub_.reset(new ImageSubscriber(nh_, image_topic_ + std::string("/right/image_raw"), 1));
 
 	//register the callback for the topic synchronizer
-	sync_.reset(new ImageSynchronizer(StereoCameraSyncPolicy(50), *left_sub_, *right_sub_));
-	sync_->registerCallback(boost::bind(&StereoCameraThrottler::stereo_cb, this, _1, _2));
+	if(approximate_sync_) {
+		sync_ap_.reset(new ImageSynchronizerAp(StereoCameraApSyncPolicy(5), *left_sub_, *right_sub_));
+		sync_ap_->registerCallback(boost::bind(&StereoCameraThrottler::stereo_cb, this, _1, _2));
+	}
+	else {
+		sync_ex_.reset(new ImageSynchronizerEx(StereoCameraExSyncPolicy(5), *left_sub_, *right_sub_));
+		sync_ex_->registerCallback(boost::bind(&StereoCameraThrottler::stereo_cb, this, _1, _2));
+	}
 
 	dynamic_reconfigure::Server<lrm_stereo::ThrottleStereoConfig>::CallbackType f = boost::bind(&StereoCameraThrottler::reconfig, this, _1, _2);
 	srv_.setCallback(f);
@@ -99,19 +107,28 @@ void StereoCameraThrottler::stereo_cb(const ImageConstPtr& left_image, const Ima
 	{
 		last_msg_time_ = ros::Time::now();
 
-		//left_image->header.stamp = last_msg_time_;
-		//right_image->header.stamp = last_msg_time_;
+		ros::Time stamp = left_image->header.stamp;
 
 		left_image_pub_.publish(left_image);
-		right_image_pub_.publish(right_image);
+
+		if(approximate_sync_) {
+			//make all image same stamp
+			Image right_image_copy = *right_image;
+			right_image_copy.header.stamp = stamp;
+			right_image_pub_.publish(right_image_copy);
+		}
+		else {
+			right_image_pub_.publish(right_image);
+		}
+
 		if (received_left_cam_info_)
 		{
-			left_cam_info_.header.stamp = left_image->header.stamp;
+			left_cam_info_.header.stamp = stamp;
 			left_camera_info_pub_.publish(left_cam_info_);
 		}
 		if (received_right_cam_info_)
 		{
-			right_cam_info_.header.stamp = right_image->header.stamp;
+			right_cam_info_.header.stamp = stamp;
 			right_camera_info_pub_.publish(right_cam_info_);
 		}
 
