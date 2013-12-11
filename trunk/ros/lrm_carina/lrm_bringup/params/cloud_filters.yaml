@@ -10,7 +10,7 @@ voxel_grid_nodelet:
   #keep_organized: true
   input_frame: /stereo_camera
   #output_frame: /base_footprint
-  output_frame: /base_heading
+  output_frame: /heading_link
   approximate_sync: false
   
   
