@@ -1,5 +1,9 @@
 <launch>
 
+	<arg
+		name="bond"
+		value="" />
+		
 	<group ns="/cloud">
 	
 <!-- 

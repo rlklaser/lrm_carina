@@ -6,5 +6,6 @@ gps_odometry:
   frame_id: odom
 #  frame_id: imu_link  
 #  child_frame_id: /base_footprint
-  child_frame_id: /imu_link
+#  child_frame_id: /imu_link
+  child_frame_id: /base_odometry
   

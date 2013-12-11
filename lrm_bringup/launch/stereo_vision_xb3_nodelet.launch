@@ -1,10 +1,8 @@
 <launch>
 
-	<!--
-	<param
-		name="/use_sim_time"
-		value="true" />
-	-->
+	<arg
+		name="bond"
+		value="" />
 	
 	<group ns="/stereo/narrow">
 
@@ -18,13 +16,13 @@
 				pkg="nodelet"
 				type="nodelet"
 				name="debayer"
-				args="load image_proc/debayer /camera_nodelet_manager --no-bond"
+				args="load image_proc/debayer /camera_nodelet_manager $(arg bond)"
 				respawn="true" />
 			<node
 				pkg="nodelet"
 				type="nodelet"
 				name="rectify_mono"
-				args="load image_proc/rectify /camera_nodelet_manager --no-bond"
+				args="load image_proc/rectify /camera_nodelet_manager $(arg bond)"
 				respawn="true"
 				output="screen" />
   			<!-- Color rectified image -->
@@ -32,7 +30,7 @@
 				pkg="nodelet"
 				type="nodelet"
 				name="rectify_color"
-				args="load image_proc/rectify /camera_nodelet_manager --no-bond"
+				args="load image_proc/rectify /camera_nodelet_manager $(arg bond)"
 				respawn="true"
 				output="screen"
 			>
@@ -51,13 +49,13 @@
 				pkg="nodelet"
 				type="nodelet"
 				name="debayer"
-				args="load image_proc/debayer /camera_nodelet_manager --no-bond"
+				args="load image_proc/debayer /camera_nodelet_manager $(arg bond)"
 				respawn="true" />
 			<node
 				pkg="nodelet"
 				type="nodelet"
 				name="rectify_mono"
-				args="load image_proc/rectify /camera_nodelet_manager --no-bond"
+				args="load image_proc/rectify /camera_nodelet_manager $(arg bond)"
 				respawn="true"
 				output="screen" />
   			<!-- Color rectified image -->
@@ -65,7 +63,7 @@
 				pkg="nodelet"
 				type="nodelet"
 				name="rectify_color"
-				args="load image_proc/rectify /camera_nodelet_manager --no-bond"
+				args="load image_proc/rectify /camera_nodelet_manager $(arg bond)"
 				respawn="true"
 				output="screen"
 			>
@@ -83,7 +81,7 @@
 			pkg="nodelet"
 			type="nodelet"
 			name="disparity_bm"
-			args="load stereo_image_proc/disparity /camera_nodelet_manager --no-bond"
+			args="load stereo_image_proc/disparity /camera_nodelet_manager $(arg bond)"
 			respawn="true"
 			output="screen"
 		>
@@ -102,7 +100,7 @@
 			pkg="nodelet"
 			type="nodelet"
 			name="disparity_sgbm"
-			args="load lrm_stereo/disparity_sgbm /camera_nodelet_manager - -no-bond"
+			args="load lrm_stereo/disparity_sgbm /camera_nodelet_manager $(arg bond)"
 			respawn="true"
 			output="screen"
 		>
@@ -121,7 +119,7 @@
 			pkg="nodelet"
 			type="nodelet"
 			name="point_cloud2"
-			args="load stereo_image_proc/point_cloud2 /camera_nodelet_manager --no-bond"
+			args="load stereo_image_proc/point_cloud2 /camera_nodelet_manager $(arg bond)"
 			respawn="true"
 			output="screen"
 		>
@@ -139,7 +137,7 @@
 			pkg="nodelet"
 			type="nodelet"
 			name="point_cloud_colorless"
-			args="load lrm_stereo/colorless_stereo /camera_nodelet_manager - -no-bond"
+			args="load lrm_stereo/colorless_stereo /camera_nodelet_manager $(arg bond)"
 			respawn="true"
 			output="screen"
 		>
@@ -167,13 +165,13 @@
 				pkg="nodelet"
 				type="nodelet"
 				name="debayer"
-				args="load image_proc/debayer /camera_nodelet_manager --no-bond"
+				args="load image_proc/debayer /camera_nodelet_manager $(arg bond)"
 				respawn="true" />
 			<node
 				pkg="nodelet"
 				type="nodelet"
 				name="rectify_mono"
-				args="load image_proc/rectify /camera_nodelet_manager --no-bond"
+				args="load image_proc/rectify /camera_nodelet_manager $(arg bond)"
 				respawn="true"
 				output="screen" />
   			<!-- Color rectified image -->
@@ -181,7 +179,7 @@
 				pkg="nodelet"
 				type="nodelet"
 				name="rectify_color"
-				args="load image_proc/rectify /camera_nodelet_manager --no-bond"
+				args="load image_proc/rectify /camera_nodelet_manager $(arg bond)"
 				respawn="true"
 				output="screen"
 			>
@@ -200,13 +198,13 @@
 				pkg="nodelet"
 				type="nodelet"
 				name="debayer"
-				args="load image_proc/debayer /camera_nodelet_manager --no-bond"
+				args="load image_proc/debayer /camera_nodelet_manager $(arg bond)"
 				respawn="true" />
 			<node
 				pkg="nodelet"
 				type="nodelet"
 				name="rectify_mono"
-				args="load image_proc/rectify /camera_nodelet_manager --no-bond"
+				args="load image_proc/rectify /camera_nodelet_manager $(arg bond)"
 				respawn="true"
 				output="screen" />
   			<!-- Color rectified image -->
@@ -214,7 +212,7 @@
 				pkg="nodelet"
 				type="nodelet"
 				name="rectify_color"
-				args="load image_proc/rectify /camera_nodelet_manager --no-bond"
+				args="load image_proc/rectify /camera_nodelet_manager $(arg bond)"
 				respawn="true"
 				output="screen"
 			>
@@ -232,7 +230,7 @@
 			pkg="nodelet"
 			type="nodelet"
 			name="disparity_bm"
-			args="load stereo_image_proc/disparity /camera_nodelet_manager --no-bond"
+			args="load stereo_image_proc/disparity /camera_nodelet_manager $(arg bond)"
 			respawn="true"
 			output="screen"
 		>
@@ -251,7 +249,7 @@
 			pkg="nodelet"
 			type="nodelet"
 			name="disparity_sgbm"
-			args="load lrm_stereo/disparity_sgbm /camera_nodelet_manager - -no-bond"
+			args="load lrm_stereo/disparity_sgbm /camera_nodelet_manager $(arg bond)"
 			respawn="true"
 			output="screen"
 		>
@@ -270,7 +268,7 @@
 			pkg="nodelet"
 			type="nodelet"
 			name="point_cloud2"
-			args="load stereo_image_proc/point_cloud2 /camera_nodelet_manager --no-bond"
+			args="load stereo_image_proc/point_cloud2 /camera_nodelet_manager $(arg bond)"
 			respawn="true"
 			output="screen"
 		>
@@ -288,7 +286,7 @@
 			pkg="nodelet"
 			type="nodelet"
 			name="point_cloud_colorless"
-			args="load lrm_stereo/colorless_stereo /camera_nodelet_manager - -no-bond"
+			args="load lrm_stereo/colorless_stereo /camera_nodelet_manager $(arg bond)"
 			respawn="true"
 			output="screen"
 		>

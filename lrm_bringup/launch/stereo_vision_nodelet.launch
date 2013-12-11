@@ -1,22 +1,8 @@
 <launch>
 
 	<arg
-		name="camera"
-		default="camera" />
-	<arg
-		name="respawn"
-		default="false" />
-	<arg
-		if="$(arg respawn)"
 		name="bond"
 		value="" />
-	<arg
-		unless="$(arg respawn)"
-		name="bond"
-		value="--no-bond" />
-	<arg
-		name="manager"
-		default="/$(arg camera)_nodelet_manager" />
 
 	<group ns="/stereo">
 
@@ -30,7 +16,7 @@
 			pkg="nodelet"
 			type="nodelet"
 			name="disparity_bm"
-			args="load lrm_stereo/disparity_bm $(arg manager) $(arg bond)"
+			args="load lrm_stereo/disparity_bm /camera_nodelet_manager $(arg bond)"
 			respawn="true"
 			output="screen"
 		>
@@ -47,7 +33,7 @@
 			pkg="nodelet"
 			type="nodelet"
 			name="point_cloud"
-			args="load lrm_stereo/point_cloud2 $(arg manager) $(arg bond)"
+			args="load lrm_stereo/point_cloud2 /camera_nodelet_manager $(arg bond)"
 			respawn="true"
 			output="screen"
 		>
@@ -58,7 +44,7 @@
 
 
 		<include file="$(find lrm_bringup)/launch/stereo_vision_nodelet_extras.launch" />
-		
+
 	</group>
 
 </launch>

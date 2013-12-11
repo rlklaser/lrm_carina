@@ -2,7 +2,7 @@ cloud:
   {
     #sensor_frame: /stereo_camera, 
     #point cloud are transformed
-    sensor_frame: /base_footprint, 
+    #sensor_frame: /base_footprint, 
     data_type: PointCloud2,  
     topic: /fake_cloud_in, 
     marking: true, 
@@ -22,7 +22,7 @@ ground_cloud:
   {
     #sensor_frame: /stereo_camera, 
     #point cloud are transformed
-    sensor_frame: /base_footprint,  
+    #sensor_frame: /base_footprint,  
     data_type: PointCloud2,  
     topic: /ground_cloud_in, 
     marking: false, 
@@ -40,7 +40,7 @@ ground_cloud:
   
 local_cloud: 
   {
-    sensor_frame: /base_footprint, 
+    #sensor_frame: /base_footprint, 
     data_type: PointCloud2,  
     topic: /local_cloud_in, 
     marking: true, 
@@ -56,7 +56,7 @@ local_cloud:
   
 global_cloud: 
   {
-    sensor_frame: /base_footprint, 
+    #sensor_frame: /base_footprint, 
     data_type: PointCloud2,  
     topic: /cloud_in, 
     marking: true, 
@@ -73,7 +73,7 @@ global_cloud:
   
 map_cloud:
   {
-    sensor_frame: /base_footprint, 
+    #sensor_frame: /base_footprint, 
     data_type: PointCloud2,  
     topic: /map_cloud_in, 
     marking: true, 
@@ -89,7 +89,7 @@ map_cloud:
   
 cluster_cloud:
   {
-    sensor_frame: /base_footprint, 
+    #sensor_frame: /base_footprint, 
     data_type: PointCloud2,  
     topic: /cloud_in, 
     marking: true, 
@@ -106,7 +106,7 @@ cluster_cloud:
   
 map_cloud_no_mark:
   {
-    sensor_frame: /base_footprint, 
+    #sensor_frame: /base_footprint, 
     data_type: PointCloud2,  
     topic: /map_cloud_in, 
     marking: false, 

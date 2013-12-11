@@ -1,5 +1,9 @@
 <launch>
 
+	<arg
+		name="bond"
+		value="" />
+		
 	<group ns="octomap">
 
 		<rosparam
@@ -10,7 +14,7 @@
 			pkg="nodelet"
 			type="nodelet"
 			name="map_server"
-			args="load lrm_octomap_server/OctomapServerNodelet /camera_nodelet_manager --no-bond"
+			args="load lrm_octomap_server/OctomapServerNodelet /camera_nodelet_manager $(arg bond)"
 			output="screen"
 			respawn="true"
 		>

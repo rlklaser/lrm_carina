@@ -1,5 +1,9 @@
 <launch>
 
+	<arg
+		name="bond"
+		value="" />
+		
 	<rosparam
 		command="load"
 		file="$(find lrm_bringup)/params/octomap_parameters.yaml"

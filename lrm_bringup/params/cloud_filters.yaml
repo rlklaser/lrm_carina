@@ -9,7 +9,8 @@ voxel_grid_nodelet:
   leaf_size: 0.05
   #keep_organized: true
   input_frame: /stereo_camera
-  output_frame: /base_footprint
+  #output_frame: /base_footprint
+  output_frame: /base_heading
   approximate_sync: false
   
   

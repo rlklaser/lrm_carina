@@ -131,7 +131,7 @@ int main(int argc, char **argv) {
 	nh_priv.param<double>("min_distance", _min_distance_to_update, 0.5);
 	nh_priv.param<double>("timeout", _timeout, 10);
 	std::string base_odometry;
-	nh_priv.param<std::string>("base_odometry", base_odometry, std::string("base_footprint"));
+	nh_priv.param<std::string>("base_odometry", base_odometry, std::string("base_odometry"));
 
 	_last_clear = ros::Time::now();
 

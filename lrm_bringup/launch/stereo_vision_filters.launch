@@ -1,10 +1,8 @@
 <launch>
 
-	<!--
-	<param
-		name="/use_sim_time"
-		value="true" />
-	-->
+	<arg
+		name="bond"
+		value="" />
 	
 	<group ns="/cloud">
 
@@ -16,7 +14,7 @@
 			pkg="nodelet"
 			type="nodelet"
 			name="voxel_grid_nodelet"
-			args="load pcl/VoxelGrid /camera_nodelet_manager --no-bond"
+			args="load pcl/VoxelGrid /camera_nodelet_manager $(arg bond)"
 			output="screen"
 			respawn="true"
 		>
@@ -54,7 +52,7 @@
 			pkg="nodelet"
 			type="nodelet"
 			name="pass_throught_range_nodelet"
-			args="load pcl/PassThrough /camera_nodelet_manager --no-bond"
+			args="load pcl/PassThrough /camera_nodelet_manager $(arg bond)"
 			output="screen"
 			respawn="true"
 		>
@@ -70,7 +68,7 @@
 			pkg="nodelet"
 			type="nodelet"
 			name="pass_throught_nodelet"
-			args="load pcl/PassThrough /camera_nodelet_manager --no-bond"
+			args="load pcl/PassThrough /camera_nodelet_manager $(arg bond)"
 			output="screen"
 			respawn="true"
 		>
@@ -86,7 +84,7 @@
 			pkg="nodelet"
 			type="nodelet"
 			name="ground_pass_throught_nodelet"
-			args="load pcl/PassThrough /camera_nodelet_manager --no-bond"
+			args="load pcl/PassThrough /camera_nodelet_manager $(arg bond)"
 			output="screen"
 			respawn="true"
 		>
@@ -102,7 +100,7 @@
 			pkg="nodelet"
 			type="nodelet"
 			name="ground_voxel_grid_nodelet"
-			args="load pcl/VoxelGrid /camera_nodelet_manager --no-bond"
+			args="load pcl/VoxelGrid /camera_nodelet_manager $(arg bond)"
 			output="screen"
 			respawn="true"
 		>
@@ -118,7 +116,7 @@
 			pkg="nodelet"
 			type="nodelet"
 			name="stat_removal_nodelet"
-			args="load pcl/StatisticalOutlierRemoval /camera_nodelet_manager --no-bond"
+			args="load pcl/StatisticalOutlierRemoval /camera_nodelet_manager $(arg bond)"
 			output="screen"
 			respawn="true"
 		>
@@ -134,7 +132,7 @@
 			pkg="nodelet"
 			type="nodelet"
 			name="local_scan_cutahead_points_nodelet"
-			args="load pcl/PassThrough /camera_nodelet_manager --no-bond"
+			args="load pcl/PassThrough /camera_nodelet_manager $(arg bond)"
 			output="screen"
 			respawn="true"
 		>
@@ -150,7 +148,7 @@
 			pkg="nodelet"
 			type="nodelet"
 			name="local_scan_points_nodelet"
-			args="load pcl/PassThrough /camera_nodelet_manager --no-bond"
+			args="load pcl/PassThrough /camera_nodelet_manager $(arg bond)"
 			output="screen"
 			respawn="true"
 		>
@@ -166,7 +164,7 @@
 			pkg="nodelet"
 			type="nodelet"
 			name="local_ground_scan_points_nodelet"
-			args="load pcl/PassThrough /camera_nodelet_manager --no-bond"
+			args="load pcl/PassThrough /camera_nodelet_manager $(arg bond)"
 			output="screen"
 			respawn="true"
 		>
