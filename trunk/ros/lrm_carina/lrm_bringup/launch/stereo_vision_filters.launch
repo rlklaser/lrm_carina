@@ -3,7 +3,7 @@
 	<arg
 		name="bond"
 		value="" />
-	
+
 	<group ns="/cloud">
 
 		<rosparam
@@ -37,11 +37,11 @@
 			<remap
 				from="points"
 				to="points_voxel" />
-				
-		   <remap
+
+			<remap
 				from="~ground_points"
 				to="gd_points_voxel" />
-		   <remap
+			<remap
 				from="~no_ground_points"
 				to="ngd_points_voxel" />
 		</node>
@@ -95,7 +95,7 @@
 				from="~output"
 				to="ground_points_through" />
 		</node>
-		
+
 		<node
 			pkg="nodelet"
 			type="nodelet"
@@ -174,6 +174,22 @@
 			<remap
 				from="~output"
 				to="points_local_ground_scan" />
+		</node>
+
+		<node
+			pkg="nodelet"
+			type="nodelet"
+			name="voxel_grid_clusters"
+			args="load pcl/VoxelGrid /camera_nodelet_manager $(arg bond)"
+			output="screen"
+			respawn="true"
+		>
+			<remap
+				from="~input"
+				to="points_zigzag_filter" />
+			<remap
+				from="~output"
+				to="points_voxel_clusters" />
 		</node>
 
 	</group>

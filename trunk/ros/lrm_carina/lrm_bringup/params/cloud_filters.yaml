@@ -77,3 +77,7 @@ stat_removal_nodelet:
   #stddev: 0.1
   negative: False
   approximate_sync: false  
+   
+voxel_grid_clusters:
+  leaf_size: 0.1
+  approximate_sync: false
