@@ -8,6 +8,10 @@ Panels:
         - /TF1/Tree1
         - /Camera1/Visibility1
         - /Camera2/Visibility1
+        - /Odometry1
+        - /PointCloud1/PointCloud21
+        - /PointCloud1/PointCloud22
+        - /PointCloud1/PointCloud23
       Splitter Ratio: 0.470588
     Tree Height: 759
   - Class: rviz/Tool Properties
@@ -66,206 +70,18 @@ Visualization Manager:
     - Alpha: 1
       Class: rviz/RobotModel
       Collision Enabled: false
-      Enabled: true
+      Enabled: false
       Links:
         All Links Enabled: true
         Expand Joint Details: false
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
-        ackermann_bar_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        ackermann_left_susp_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        ackermann_right_susp_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        base_footprint:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        base_front_sensors:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        base_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        base_odometry:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        base_steering_wheel:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        base_stereo_camera:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        bbx_base_front_left_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        bbx_base_front_right_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        bbx_base_rear_left_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        bbx_base_rear_right_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        bbx_top_front_left_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        bbx_top_front_right_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        bbx_top_rear_left_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        bbx_top_rear_right_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        body_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        camera_center_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        center_mass_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        front_axle_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        front_left_bar_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        front_left_susp_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        front_left_wheel:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        front_right_bar_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        front_right_susp_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        front_right_wheel:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        heading_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        imu_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        rear_axle_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        rear_left_bar_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        rear_left_susp_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        rear_left_wheel:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        rear_right_bar_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        rear_right_susp_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        rear_right_wheel:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        steer_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        steering_wheel_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        stereo_camera:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        stereo_camera/left_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        stereo_camera/left_optical_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        stereo_camera/right_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        stereo_camera/right_optical_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
       Name: RobotModel
       Robot Description: robot_description
       TF Prefix: ""
       Update Interval: 0
-      Value: true
+      Value: false
       Visual Enabled: true
     - Class: rviz/Camera
       Enabled: true
@@ -351,13 +167,13 @@ Visualization Manager:
       Topic: /map
       Value: true
     - Class: rviz/MarkerArray
-      Enabled: true
+      Enabled: false
       Marker Topic: /octomap/occupied_cells_vis_array
       Name: MarkerArray
       Namespaces:
-        depth_16: true
+        {}
       Queue Size: 100
-      Value: true
+      Value: false
     - Class: rviz/Image
       Enabled: false
       Image Topic: /stereo/left/image_mono
@@ -457,23 +273,23 @@ Visualization Manager:
         - Angle Tolerance: 0.1
           Class: rviz/Odometry
           Color: 255; 255; 0
-          Enabled: true
+          Enabled: false
           Keep: 1000
           Length: 1
           Name: Odometry
           Position Tolerance: 0.1
           Topic: /gps_odometry/odom
-          Value: true
+          Value: false
         - Angle Tolerance: 0.1
           Class: rviz/Odometry
           Color: 255; 25; 0
-          Enabled: true
+          Enabled: false
           Keep: 1000
           Length: 1
           Name: Odometry
           Position Tolerance: 0.1
           Topic: /ekf_odometry/odom
-          Value: true
+          Value: false
         - Angle Tolerance: 0.1
           Class: rviz/Odometry
           Color: 0; 0; 255
@@ -487,13 +303,13 @@ Visualization Manager:
         - Angle Tolerance: 0.1
           Class: rviz/Odometry
           Color: 0; 255; 0
-          Enabled: false
+          Enabled: true
           Keep: 100
           Length: 1
           Name: Odometry
           Position Tolerance: 0.1
-          Topic: /enu
-          Value: false
+          Topic: /sim_odometry/odom
+          Value: true
         - Angle Tolerance: 0.1
           Class: rviz/Odometry
           Color: 0; 85; 0
@@ -504,7 +320,7 @@ Visualization Manager:
           Position Tolerance: 0.1
           Topic: /vo_odometry/odom
           Value: true
-      Enabled: false
+      Enabled: true
       Name: Odometry
     - Class: rviz/Group
       Displays:
@@ -517,10 +333,10 @@ Visualization Manager:
           Axis: Z
           Channel Name: intensity
           Class: rviz/PointCloud2
-          Color: 255; 255; 255
-          Color Transformer: AxisColor
+          Color: 255; 0; 255
+          Color Transformer: FlatColor
           Decay Time: 0
-          Enabled: false
+          Enabled: true
           Max Color: 255; 255; 255
           Max Intensity: 4096
           Min Color: 0; 0; 0
@@ -529,13 +345,13 @@ Visualization Manager:
           Position Transformer: XYZ
           Queue Size: 10
           Selectable: true
-          Size (Pixels): 3
+          Size (Pixels): 6
           Size (m): 0.01
           Style: Points
-          Topic: /map_cloud_in
+          Topic: /octomap/octomap_point_cloud_centers
           Use Fixed Frame: true
           Use rainbow: true
-          Value: false
+          Value: true
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -716,7 +532,7 @@ Visualization Manager:
           Color: 255; 255; 255
           Color Transformer: RGB8
           Decay Time: 0
-          Enabled: true
+          Enabled: false
           Max Color: 255; 255; 255
           Max Intensity: 4096
           Min Color: 0; 0; 0
@@ -731,12 +547,12 @@ Visualization Manager:
           Topic: /cloud_in
           Use Fixed Frame: true
           Use rainbow: true
-          Value: true
+          Value: false
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
-            Max Value: 66.8414
-            Min Value: 5.05006
+            Max Value: 36.7616
+            Min Value: 11.7793
             Value: true
           Axis: X
           Channel Name: intensity
@@ -744,7 +560,7 @@ Visualization Manager:
           Color: 255; 255; 255
           Color Transformer: AxisColor
           Decay Time: 0
-          Enabled: true
+          Enabled: false
           Max Color: 255; 255; 255
           Max Intensity: 4096
           Min Color: 0; 0; 0
@@ -759,8 +575,8 @@ Visualization Manager:
           Topic: /ground_cloud_in
           Use Fixed Frame: true
           Use rainbow: true
-          Value: true
-      Enabled: false
+          Value: false
+      Enabled: true
       Name: PointCloud
     - Class: rviz/Group
       Displays:
@@ -887,17 +703,17 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 28.5569
+      Distance: 47.9979
       Focal Point:
-        X: 8.39456
-        Y: -2.03841
-        Z: -2.77056
+        X: -0.607354
+        Y: -4.95582
+        Z: -5.13265
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 1.0348
+      Pitch: 0.909797
       Target Frame: /base_footprint
       Value: Orbit (rviz)
-      Yaw: 1.55904
+      Yaw: 3.1404
     Saved: ~
 Window Geometry:
   Camera:
@@ -919,5 +735,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1215
-  X: 65
+  X: 58
   Y: 24
