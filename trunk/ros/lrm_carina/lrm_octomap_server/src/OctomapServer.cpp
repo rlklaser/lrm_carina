@@ -662,11 +662,17 @@ void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPo
 #endif
 				//std::cout << "pt x:" << it->x << " y:" << it->y << " z:" << it->z << " r:" << (unsigned int)it->r << " g:" << (unsigned int)it->g << " b:" << (unsigned int)it->b << std::endl;
 
-				if(hit_dist<m_probMidDist) {
+				// use cloud centroid
+				//double pt_dist = hit_dist;
+				// or
+				// use each point distance
+				double pt_dist = sensorOrigin.distance(point);
+
+				if(pt_dist<m_probMidDist) {
 					updateNode(key, octomap::logodds(m_probHit));
 				}
 				else {
-					if(hit_dist>m_probFarDist) {
+					if(pt_dist>m_probFarDist) {
 						updateNode(key, octomap::logodds(m_probHitFar));
 					}
 					else {
