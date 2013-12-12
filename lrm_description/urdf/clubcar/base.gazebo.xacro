@@ -75,7 +75,7 @@
 		>
 			<alwaysOn>true</alwaysOn>
 			<updateRate>20.0</updateRate>
-			<bodyName>base_footprint</bodyName>
+			<bodyName>base_odometry</bodyName>
 			<topicName>/sim_odometry/odom</topicName>
 			<gaussianNoise>0.01</gaussianNoise>
 			<frameName>world</frameName>

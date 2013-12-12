@@ -7,7 +7,7 @@ robot_pose_ekf:
   sensor_timeout: 1.0
   odom_used: true
   imu_used: true
-  vo_used: false
+  vo_used: true
   gps_used: true
   debug: false
   self_diagnose: false
