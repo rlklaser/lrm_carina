@@ -1,0 +1,69 @@
+<launch>
+
+	<param
+		name="/use_sim_time"
+		value="true" />
+
+	<arg
+		name="bond"
+		value="" />
+
+	<rosparam file="$(find lrm_bringup)/params/cameras/bumblebee_xb3.yaml" />
+
+	<include file="$(find lrm_bringup)/launch/camera_tf.launch" />
+	<include file="$(find lrm_bringup)/launch/robot_model.launch" />
+
+	<include file="$(find lrm_bringup)/launch/camera_nodelet_manager.launch" />
+
+	<group ns="/stereo">
+		<node
+			pkg="nodelet"
+			type="nodelet"
+			name="xb3_split_nodelet"
+			args="load lrm_sensors/split_xb3 /camera_nodelet_manager $(arg bond)"
+			output="screen"
+			respawn="true"
+		>
+			<remap
+				from="image_raw"
+				to="/camera/image_raw" />
+		</node>
+
+
+		<group ns="narrow">
+			<include file="$(find lrm_bringup)/launch/image_pipeline_stereo.launch" />
+			<include file="$(find lrm_bringup)/launch/disparity_cloud_pipeline.launch" />
+			<!-- 
+			<include file="$(find lrm_bringup)/launch/cloud_filters_pipeline.launch" />
+ 			-->
+		</group>
+
+		<group ns="wide">
+			<include file="$(find lrm_bringup)/launch/image_pipeline_stereo.launch" />
+			<include file="$(find lrm_bringup)/launch/disparity_cloud_pipeline.launch" />
+
+		</group>
+
+	</group>
+
+	<node
+		pkg="lrm_odometry"
+		type="extended_odometry"
+		name="wheel_odometry"
+		output="screen"
+		respawn="true"
+	>
+		<remap
+			from="encoders"
+			to="/encoders_controller/encoders" />
+
+		<param
+			name="publish_js"
+			value="true" />
+		<param
+			name="animation_only"
+			value="false" />
+
+	</node>
+
+</launch>

@@ -9,10 +9,10 @@
 	<node
 		pkg="tf"
 		type="static_transform_publisher"
-		name="wheel_odom_broadcaster_aa"
+		name="wheel_odom_broadcaster_f"
 		args="0.0 0.0 0.0  1.57 3.14 1.57 /base_sensors /camera 50"
 		output="screen" />
-			 	
+
 	<node
 		pkg="tf"
 		type="static_transform_publisher"
@@ -20,6 +20,13 @@
 		args="0.0 0.0 0.0  1.57 3.14 1.57 /base_sensors /stereo_camera 50"
 		output="screen" />
 
+	<node
+		pkg="tf"
+		type="static_transform_publisher"
+		name="wheel_odom_broadcaster_h"
+		args="0.0 0.0 0.0  1.57 3.14 1.57 /base_sensors /stereo 50"
+		output="screen" />
+		
 	<node
 		pkg="tf"
 		type="static_transform_publisher"
@@ -41,12 +48,20 @@
 		args="0.0 0.0 0.5 0 0 0 /base_odometry /imu_link 50"
 		output="screen" />
 		
-		
+	<!-- 	
 	<node
 		pkg="tf"
 		type="static_transform_publisher"
 		name="wheel_odom_broadcaster_e"
 		args="0.0 0.0 0.0 0 0 0 /map /base_footprint 50"
 		output="screen" />
-		
+    -->
+
+	<node
+		pkg="tf"
+		type="static_transform_publisher"
+		name="wheel_odom_broadcaster_g"
+		args="0.0 0.0 0.0 0 0 0 /odom /map 50"
+		output="screen" />
+
 </launch>

@@ -1,5 +1,5 @@
 main_nodelet_manager:
-  num_worker_threads: 4
+  num_worker_threads: 24
 
 bumblebee_nodelet_manager:
   num_worker_threads: 8

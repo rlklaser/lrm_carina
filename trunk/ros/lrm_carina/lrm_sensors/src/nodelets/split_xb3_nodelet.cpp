@@ -68,9 +68,6 @@ void SplitXB3Nodelet::onInit() {
 	std::string wide_frame_id;
 
 	nh_priv.param("name", name, std::string("camera"));
-	nh_priv.param("narrow/frame_id", narrow_ctx_.frame_id, std::string(""));
-	nh_priv.param("narrow/left/camera_info_url", narrow_ctx_.left.url, std::string(""));
-	nh_priv.param("narrow/right/camera_info_url", narrow_ctx_.right.url, std::string(""));
 
 	narrow_ctx_.name = name;
 	wide_ctx_.name = name;
@@ -79,6 +76,10 @@ void SplitXB3Nodelet::onInit() {
 		ros::NodeHandle nh_baseline(nh.getNamespace() + "/narrow");
 		ros::NodeHandle nh_left(nh_baseline.getNamespace() + "/left");
 		ros::NodeHandle nh_right(nh_baseline.getNamespace() + "/right");
+
+		nh_priv.param("narrow/frame_id", narrow_ctx_.frame_id, std::string(""));
+		nh_priv.param("narrow/left/camera_info_url", narrow_ctx_.left.url, std::string(""));
+		nh_priv.param("narrow/right/camera_info_url", narrow_ctx_.right.url, std::string(""));
 
 		narrow_ctx_.left.publisher = it_->advertiseCamera(nh_left.getNamespace() + "/image_raw", 1);
 		narrow_ctx_.right.publisher = it_->advertiseCamera(nh_right.getNamespace() + "/image_raw", 1);
@@ -94,6 +95,7 @@ void SplitXB3Nodelet::onInit() {
 		ros::NodeHandle nh_left(nh_baseline.getNamespace() + "/left");
 		ros::NodeHandle nh_right(nh_baseline.getNamespace() + "/right");
 
+		nh_priv.param("wide/frame_id", narrow_ctx_.frame_id, std::string(""));
 		nh_priv.param("wide/left/camera_info_url", wide_ctx_.left.url, std::string(""));
 		nh_priv.param("wide/right/camera_info_url", wide_ctx_.right.url, std::string(""));
 
@@ -198,9 +200,6 @@ void SplitXB3Nodelet::publishCam(const sensor_msgs::Image& image) {
 	narrow_ctx_.frame_id = narrow_ctx_.frame_id == "" ? image.header.frame_id : narrow_ctx_.frame_id;
 
 	narrow_ctx_.left.image.header.frame_id = narrow_ctx_.frame_id;
-	//narrow_ctx_.left.image.header.stamp = stamp;
-	//narrow_ctx_.left.image.encoding = sensor_msgs::image_encodings::BAYER_GBRG8;
-
 	narrow_ctx_.right.image.header.frame_id = narrow_ctx_.frame_id;
 
 	narrow_ctx_.left.info = narrow_ctx_.left.manager->getCameraInfo();

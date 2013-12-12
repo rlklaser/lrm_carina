@@ -40,13 +40,13 @@ stereo:
   xb3_split_nodelet:
     name: 00b09d0100bec852
     narrow:
-      frame_id: /stereo_camera
+      frame_id: /stereo
       left:
         camera_info_url: package://lrm_bringup/params/cameras/calib/00b09d0100bec852_narrow_left.yaml
       right:
         camera_info_url: package://lrm_bringup/params/cameras/calib/00b09d0100bec852_narrow_right.yaml
     wide:
-      frame_id: /stereo_camera
+      frame_id: /stereo
       left:
         camera_info_url: package://lrm_bringup/params/cameras/calib/00b09d0100bec852_wide_left.yaml
       right:
