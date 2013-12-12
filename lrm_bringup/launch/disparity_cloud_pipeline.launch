@@ -1,0 +1,25 @@
+<launch>
+
+	<arg
+		name="bond"
+		value="" />
+
+	<node
+		pkg="nodelet"
+		type="nodelet"
+		name="disparity_bm"
+		args="load stereo_image_proc/disparity /camera_nodelet_manager $(arg bond)"
+		respawn="true"
+		output="screen"
+	/>
+
+	<node
+		pkg="nodelet"
+		type="nodelet"
+		name="point_cloud2"
+		args="load stereo_image_proc/point_cloud2 /camera_nodelet_manager $(arg bond)"
+		respawn="true"
+		output="screen"
+	/>
+	
+</launch>
