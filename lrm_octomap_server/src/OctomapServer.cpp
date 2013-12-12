@@ -52,7 +52,7 @@ OctomapServer::OctomapServer(ros::NodeHandle nh, ros::NodeHandle nh_priv) :
 		m_res(0.1), m_treeDepth(0), m_maxTreeDepth(0),
 		m_probHit(0.7), m_probHitMid(0.7), m_probHitFar(0.7),
 		m_probFarDist(25.0), m_probMidDist(15.0),
-		m_probMissGnd(0.4), m_probMissObs(0.4), m_thresMin(0.12), m_thresMax(0.97),
+		m_probMissGnd(0.499), m_probMissObs(0.499), m_thresMin(0.12), m_thresMax(0.97),
 		m_pointcloudMinZ(-std::numeric_limits<double>::max()),
 		m_pointcloudMaxZ(std::numeric_limits<double>::max()),
 		m_occupancyMinZ(-std::numeric_limits<double>::max()),
@@ -649,16 +649,9 @@ void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPo
 		double dist_to_point = (point - sensorOrigin).norm();
 		if ((m_maxRange < 0.0) || (dist_to_point <= m_maxRange)) {
 
-			// free cells
-			if (m_octree->computeRayKeys(sensorOrigin, point, m_keyRay)) {
-				free_obs_cells.insert(m_keyRay.begin(), m_keyRay.end());
-			}
-
 			// occupied endpoint
 			OcTreeKey key;
 			if (m_octree->coordToKeyChecked(point, key)) {
-
-				occupied_cells.insert(key);
 
 				//m_octree->integrateNodeColor(key, it->r, it->g, it->b);
 				//m_octree->setNodeColor(key, it->r, it->g, it->b);
@@ -680,8 +673,19 @@ void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPo
 						updateNode(key, octomap::logodds(m_probHitMid));
 					}
 				}
+
+				m_octree->coordToKeyChecked(point, key);
+
 				updateMinKey(key, m_updateBBXMin);
 				updateMaxKey(key, m_updateBBXMax);
+
+				// free cells
+				if (m_octree->computeRayKeys(sensorOrigin, point, m_keyRay)) {
+					free_obs_cells.insert(m_keyRay.begin(), m_keyRay.end());
+				}
+
+				occupied_cells.insert(key);
+
 			}
 			else {
 				ROS_WARN_STREAM("octomap: key not found for coord");
@@ -701,6 +705,7 @@ void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPo
 
 			}
 		}
+		/*
 		else { // ray longer than maxrange:;
 			point3d new_end = sensorOrigin + (point - sensorOrigin).normalized() * m_maxRange;
 			if (m_octree->computeRayKeys(sensorOrigin, new_end, m_keyRay)) {
@@ -716,11 +721,13 @@ void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPo
 
 			}
 		}
+		*/
 	}
 
 	int in = 0, jn = 0;
 
 	//m_octree->computeUpdate(nonground, sensorOrigin, free_cells, occupied_cells);
+
 
 	// mark free cells only if not seen occupied in this cloud
 	for (KeySet::iterator it = free_gnd_cells.begin(), end = free_gnd_cells.end(); it != end; ++it) {
@@ -729,6 +736,7 @@ void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPo
 			in++;
 		}
 	}
+
 
 	// mark free cells to obstacle
 	for (KeySet::iterator it = free_obs_cells.begin(), end = free_obs_cells.end(); it != end; ++it) {
@@ -747,6 +755,7 @@ void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPo
 			}
 		}
 	}
+
 
 	/*
 	 // now mark all occupied cells:
@@ -915,9 +924,9 @@ void OctomapServer::_publishAll(const ros::Time& rostime) {
 		//	handleNodeInBBX(it);
 
 		//if (m_octree->isNodeOccupied(*it)) {
-		if (it->getOccupancy()>0.53) {
+		if (it->getOccupancy()>=m_probHitFar) {
 			float z = it.getZ();
-			if (z > m_occupancyMinZ && z < m_occupancyMaxZ) {
+			//if (z > m_occupancyMinZ && z < m_occupancyMaxZ) {
 				//double size = it.getSize();
 				float x = it.getX();
 				float y = it.getY();
@@ -1045,7 +1054,7 @@ void OctomapServer::_publishAll(const ros::Time& rostime) {
 					*/
 
 				}
-			}
+			//}
 		}
 //		else { // node not occupied => mark as free in 2D map if unknown so far
 //			handleFreeNode(it);
@@ -1162,6 +1171,9 @@ bool OctomapServer::octomapFullSrv(OctomapSrv::Request &req, OctomapSrv::Respons
 }
 
 bool OctomapServer::clearBBXSrv(BBXSrv::Request& req, BBXSrv::Response& resp) {
+
+	return true;
+
 	point3d min = pointMsgToOctomap(req.min);
 	point3d max = pointMsgToOctomap(req.max);
 
@@ -1187,7 +1199,6 @@ bool OctomapServer::clearBBXSrv(BBXSrv::Request& req, BBXSrv::Response& resp) {
 	}
 	*/
 
-	/*
 	for (OcTreeT::leaf_bbx_iterator it = m_octree->begin_leafs_bbx(min, max), end = m_octree->end_leafs_bbx(); it != end; ++it) {
 
 		//ROS_INFO_STREAM(""
@@ -1200,7 +1211,6 @@ bool OctomapServer::clearBBXSrv(BBXSrv::Request& req, BBXSrv::Response& resp) {
 	}
 
 	return true;
-	*/
 }
 
 bool OctomapServer::resetSrv(std_srvs::Empty::Request& req, std_srvs::Empty::Response& resp) {
