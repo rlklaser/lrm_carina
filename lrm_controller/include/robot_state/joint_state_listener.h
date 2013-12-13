@@ -40,7 +40,7 @@
 #include <kdl/tree.hpp>
 #include <ros/ros.h>
 #include <sensor_msgs/JointState.h>
-#include "robot_state_publisher/robot_state_publisher.h"
+#include "robot_state/robot_state_publisher.h"
 
 using namespace std;
 using namespace ros;
@@ -53,7 +53,7 @@ namespace robot_state_publisher{
 class JointStateListener{
 public:
   /** Constructor
-   * \param tree The kinematic model of a robot, represented by a KDL Tree 
+   * \param tree The kinematic model of a robot, represented by a KDL Tree
    */
   JointStateListener(const KDL::Tree& tree);
 

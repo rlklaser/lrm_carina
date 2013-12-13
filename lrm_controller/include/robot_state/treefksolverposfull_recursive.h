@@ -39,7 +39,7 @@ public:
   int JntToCart(const std::map<std::string, double>& q_in, std::map<std::string, tf::Stamped<Frame> >& p_out, bool flatten_tree=true);
 
 private:
-  void addFrameToMap(const std::map<std::string, double>& q_in, 
+  void addFrameToMap(const std::map<std::string, double>& q_in,
 		     std::map<std::string, tf::Stamped<KDL::Frame> >& p_out,
 		     const tf::Stamped<KDL::Frame>& previous_frame,
 		     const SegmentMap::const_iterator this_segment,

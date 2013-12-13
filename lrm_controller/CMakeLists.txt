@@ -8,7 +8,12 @@ include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
 #  RelWithDebInfo : w/ debug symbols, w/ optimization
 #  MinSizeRel     : w/o debug symbols, w/ optimization, stripped binaries
 #set(ROS_BUILD_TYPE RelWithDebInfo)
-set(ROS_BUILD_TYPE Debug)
+#set(ROS_BUILD_TYPE Debug)
+set(ROS_BUILD_TYPE Release)
+
+add_definitions(-std=c++0x)
+add_definitions(-msse3 -msse4.1 -msse4.2)
+add_definitions(-mfpmath=sse -Ofast -flto -march=native)
 
 rosbuild_init()
 
