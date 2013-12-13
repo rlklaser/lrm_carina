@@ -182,7 +182,7 @@ void EnvironmentNAVXYTHETALATTICE::SetConfiguration(int width, int height, const
     if (0 == mapdata) {
         for (int y = 0; y < EnvNAVXYTHETALATCfg.EnvHeight_c; y++) {
             for (int x = 0; x < EnvNAVXYTHETALATCfg.EnvWidth_c; x++) {
-                EnvNAVXYTHETALATCfg.Grid2D[x][y] = 0;
+                EnvNAVXYTHETALATCfg.Grid2D[x][y] = 255;
             }
         }
     }

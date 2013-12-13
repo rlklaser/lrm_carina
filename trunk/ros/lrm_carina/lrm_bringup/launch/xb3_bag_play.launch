@@ -33,9 +33,9 @@
 		<group ns="narrow">
 			<include file="$(find lrm_bringup)/launch/image_pipeline_stereo.launch" />
 			<include file="$(find lrm_bringup)/launch/disparity_cloud_pipeline.launch" />
-			<!-- 
+
 			<include file="$(find lrm_bringup)/launch/cloud_filters_pipeline.launch" />
- 			-->
+ 		
 		</group>
 
 		<group ns="wide">
