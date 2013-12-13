@@ -36,8 +36,8 @@
 
 #include <kdl/tree.hpp>
 #include <ros/ros.h>
-#include "robot_state_publisher/robot_state_publisher.h"
-#include "robot_state_publisher/joint_state_listener.h"
+#include "robot_state/robot_state_publisher.h"
+#include "robot_state/joint_state_listener.h"
 #include <kdl_parser/kdl_parser.hpp>
 
 
