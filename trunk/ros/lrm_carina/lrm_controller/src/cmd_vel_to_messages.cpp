@@ -59,7 +59,7 @@ int main(int argc, char** argv) {
 	lrm_msgs::Steering steer;
 
 	geometry_msgs::Twist cmd_vel_;
-	float pose_x, pose_y;
+	//float pose_x, pose_y;
 
 	throttle_pub = nh.advertise<lrm_msgs::Throttle>(nh_priv.getNamespace() + "/throttle_commands", 1);
 	steering_pub = nh.advertise<lrm_msgs::Steering>(nh_priv.getNamespace() + "/steering_commands", 1);
