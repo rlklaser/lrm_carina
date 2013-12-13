@@ -15,11 +15,11 @@
 #footprint: [[0.5, -1.0], [0.5, 1.0], [-1.5, 1.0], [-1.5, -1.0]]
 
 #for base_odometry
-footprint: [[2.0, -0.8], [2.45, 0.0], [2.0, 0.8], [-0.8, 0.8], [-0.8, -0.8]]
+footprint: [[2.0, -0.8], [2.4, 0.0], [2.0, 0.8], [-0.8, 0.8], [-0.8, -0.8]]
 
-footprint_padding: 0.05
+footprint_padding: 0.0
 
-inflation_radius: 2.8
+inflation_radius: 2.9
 
 transform_tolerance: 0.3                    # default 0.3
 #cost_scaling_factor: 1.0                    # default 10

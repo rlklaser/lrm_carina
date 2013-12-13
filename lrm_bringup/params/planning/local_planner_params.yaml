@@ -21,28 +21,27 @@ min_vel_theta: -0.6
 max_rotational_vel: 0.0
 min_in_place_rotational_vel: 0.0
 
-sim_time: 1.0
-sim_granularity: 0.025
-angular_sim_granularity: 0.025
+sim_time: 1.0    #higher, slow down speed
+sim_granularity: 0.05 #0.025
+angular_sim_granularity: 0.0559 #0.025
 
-path_distance_bias: 0.2
-goal_distance_bias: 0.5
-
+#unused
 stop_time_buffer: 0.2
 
-pdist_scale: 0.6        # The weight for the path distance part of the cost function
-gdist_scale: 0.9        # The weight for the goal distance part of the cost function
-occdist_scale: 0.1      # The weight for the obstacle distance part of the cost function
-heading_scale: 0.3      # fixed
+path_distance_bias: 0.3 #0.6    # The weight for the path distance part of the cost function
+goal_distance_bias: 0.5 #0.9    # The weight for the goal distance part of the cost function
+occdist_scale: 0.1         # The weight for the obstacle distance part of the cost function
+heading_scale: 0.3         # fixed
                                    
 oscillation_reset_dist: 0.5
 oscillation_reset_angle: 0.15
 
-vx_samples: 5
+vx_samples: 10
 vtheta_samples: 33
 
-xy_goal_tolerance: 1.0
-yaw_goal_tolerance: 0.87
+#used in every step, if tolerance is higher than the step, the car will not move
+xy_goal_tolerance: 0.4
+yaw_goal_tolerance: 0.559  #1.57
 
 latch_xy_goal_tolerance: false      #stop when reached or rotate in place, false = stop
 
@@ -59,6 +58,7 @@ escape_vel: -0.5
 simple_attractor: false
 meter_scoring: true                # If true, distances are expressed in meters; otherwise grid cells
 prune_plan: true
+#prune_plan: false
 
 #carlike planner
 base_wheels: 1.65
