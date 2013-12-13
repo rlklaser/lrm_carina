@@ -26,7 +26,7 @@
 			value="0.0" />
 		<param
 			name="filter_limit_max"
-			value="10.0" />
+			value="20.0" />
 	</node>
 
 	<node
@@ -45,13 +45,13 @@
 			to="points4" />
 		<param
 			name="filter_field_name"
-			value="y" />
+			value="x" />
 		<param
 			name="filter_limit_min"
-			value="0.0" />
+			value="-15.0" />
 		<param
 			name="filter_limit_max"
-			value="1.0" />
+			value="15.0" />
 	</node>
 
 	<node
