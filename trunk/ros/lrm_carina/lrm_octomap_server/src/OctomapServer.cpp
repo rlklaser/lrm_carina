@@ -227,8 +227,8 @@ void OctomapServer::updateTreeProbabilities()
 
 void OctomapServer::timerCallback(const ros::TimerEvent& t) {
 
-	boost::recursive_mutex::scoped_lock monitor(m_mutex);
-	//boost::unique_lock<boost::mutex> scoped_lock(m_mutex);
+	//boost::recursive_mutex::scoped_lock monitor(m_mutex);
+	boost::unique_lock<boost::mutex> scoped_lock(m_mutex);
 
 	bool reset = false;
 
@@ -554,8 +554,8 @@ inline OcTreeKey getIndexKey(const OcTreeKey & key, unsigned short depth) {
 
 void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPointCloud& ground, const PCLPointCloud& nonground) {
 
-	boost::recursive_mutex::scoped_lock monitor(m_mutex);
-	//boost::unique_lock<boost::mutex> scoped_lock(m_mutex);
+	//boost::recursive_mutex::scoped_lock monitor(m_mutex);
+	boost::unique_lock<boost::mutex> scoped_lock(m_mutex);
 
 	tf::Point sensorOriginTf = sensorTf.getOrigin();
 	point3d sensorOrigin = pointTfToOctomap(sensorOriginTf);
@@ -818,8 +818,8 @@ void OctomapServer::insertScan(const tf::StampedTransform& sensorTf, const PCLPo
 
 void OctomapServer::publishAll(const ros::Time& rostime) {
 
-	boost::recursive_mutex::scoped_lock monitor(m_mutex);
-	//boost::unique_lock<boost::mutex> scoped_lock(m_mutex);
+	//boost::recursive_mutex::scoped_lock monitor(m_mutex);
+	boost::unique_lock<boost::mutex> scoped_lock(m_mutex);
 
 	m_updated = true;
 	//_publishAll(rostime);
@@ -1153,8 +1153,8 @@ bool OctomapServer::octomapBinarySrv(OctomapSrv::Request &req, OctomapSrv::Respo
 	res.map.header.frame_id = m_worldFrameId;
 	res.map.header.stamp = ros::Time::now();
 
-	boost::recursive_mutex::scoped_lock monitor(m_mutex);
-	//boost::unique_lock<boost::mutex> scoped_lock(m_mutex);
+	//boost::recursive_mutex::scoped_lock monitor(m_mutex);
+	boost::unique_lock<boost::mutex> scoped_lock(m_mutex);
 
 	if (!octomap_msgs::binaryMapToMsg(*m_octree, res.map))
 		return false;
@@ -1167,8 +1167,8 @@ bool OctomapServer::octomapFullSrv(OctomapSrv::Request &req, OctomapSrv::Respons
 	res.map.header.frame_id = m_worldFrameId;
 	res.map.header.stamp = ros::Time::now();
 
-	boost::recursive_mutex::scoped_lock monitor(m_mutex);
-	//boost::unique_lock<boost::mutex> scoped_lock(m_mutex);
+	//boost::recursive_mutex::scoped_lock monitor(m_mutex);
+	boost::unique_lock<boost::mutex> scoped_lock(m_mutex);
 
 	if (!octomap_msgs::fullMapToMsg(*m_octree, res.map))
 		return false;
@@ -1178,7 +1178,7 @@ bool OctomapServer::octomapFullSrv(OctomapSrv::Request &req, OctomapSrv::Respons
 
 bool OctomapServer::clearBBXSrv(BBXSrv::Request& req, BBXSrv::Response& resp) {
 
-	return true;
+	//return true;
 
 	point3d min = pointMsgToOctomap(req.min);
 	point3d max = pointMsgToOctomap(req.max);
@@ -1188,8 +1188,8 @@ bool OctomapServer::clearBBXSrv(BBXSrv::Request& req, BBXSrv::Response& resp) {
 
 	//ROS_INFO_STREAM("clear_bbx called " << min.x() << ":" << max.x());
 
-	boost::recursive_mutex::scoped_lock monitor(m_mutex);
-	//boost::unique_lock<boost::mutex> scoped_lock(m_mutex);
+	//boost::recursive_mutex::scoped_lock monitor(m_mutex);
+	boost::unique_lock<boost::mutex> scoped_lock(m_mutex);
 
 	m_octree->updateNode(min, octomap::logodds(m_thresMin));
 	m_octree->updateNode(max, octomap::logodds(m_thresMin));
@@ -1224,8 +1224,8 @@ bool OctomapServer::resetSrv(std_srvs::Empty::Request& req, std_srvs::Empty::Res
 	occupiedNodesVis.markers.resize(m_treeDepth + 1);
 	ros::Time rostime = ros::Time::now();
 
-	boost::recursive_mutex::scoped_lock monitor(m_mutex);
-	//boost::unique_lock<boost::mutex> scoped_lock(m_mutex);
+	//boost::recursive_mutex::scoped_lock monitor(m_mutex);
+	boost::unique_lock<boost::mutex> scoped_lock(m_mutex);
 
 	m_octree->clear();
 
@@ -1270,8 +1270,8 @@ bool OctomapServer::resetSrv(std_srvs::Empty::Request& req, std_srvs::Empty::Res
 bool OctomapServer::pruneSrv(std_srvs::Empty::Request& req, std_srvs::Empty::Response& resp) {
 	ROS_INFO("pruning octomap...");
 
-	boost::recursive_mutex::scoped_lock monitor(m_mutex);
-	//boost::unique_lock<boost::mutex> scoped_lock(m_mutex);
+	//boost::recursive_mutex::scoped_lock monitor(m_mutex);
+	boost::unique_lock<boost::mutex> scoped_lock(m_mutex);
 
 	m_octree->prune();
 
@@ -1769,8 +1769,8 @@ bool OctomapServer::isSpeckleNode(const OcTreeKey&nKey) const {
 
 void OctomapServer::reconfigureCallback(lrm_octomap_server::OctomapServerConfig& config, uint32_t level) {
 
-	boost::recursive_mutex::scoped_lock monitor(m_mutex);
-	//boost::unique_lock<boost::mutex> scoped_lock(m_mutex);
+	//boost::recursive_mutex::scoped_lock monitor(m_mutex);
+	boost::unique_lock<boost::mutex> scoped_lock(m_mutex);
 
 	m_useGround = config.use_ground;
 
@@ -1784,7 +1784,8 @@ void OctomapServer::reconfigureCallback(lrm_octomap_server::OctomapServerConfig&
 
 void OctomapServer::reconfigureCallbackSM(lrm_octomap_server::SensorModelConfig& config, uint32_t level) {
 
-	boost::recursive_mutex::scoped_lock monitor(m_mutex);
+	//boost::recursive_mutex::scoped_lock monitor(m_mutex);
+	boost::unique_lock<boost::mutex> scoped_lock(m_mutex);
 
 	m_degradeTime = config.degrade_time;
 	m_maxRange = config.max_range;

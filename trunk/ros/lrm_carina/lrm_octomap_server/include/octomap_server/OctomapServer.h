@@ -338,8 +338,8 @@ protected:
   bool m_useGround;
 
 private:
-  //boost::mutex m_mutex;
-  boost::recursive_mutex m_mutex;
+  boost::mutex m_mutex;
+  //boost::recursive_mutex m_mutex;
 
   ros::Timer m_publisherTimer;
 

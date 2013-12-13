@@ -55,8 +55,8 @@ double _timeout;
 tf::StampedTransform _transform_min;
 tf::StampedTransform _transform_max;
 
-//void poseCallback(const geometry_msgs::PoseStamped::ConstPtr& msg) {
-//}
+boost::shared_ptr<tf::TransformListener> _listener;
+std::string _map_frame;
 
 void odomCallback(const nav_msgs::Odometry::ConstPtr & msg) {
 
@@ -82,12 +82,11 @@ void odomCallback(const nav_msgs::Odometry::ConstPtr & msg) {
 
 	if (dist > _min_distance_to_update || timeouted) {
 
+		/*
 		tf::Quaternion qt = tf::createQuaternionFromYaw(msg->pose.pose.orientation.z);
 		tf::Transform trans_odom(qt, tf::Vector3(msg->pose.pose.position.x, msg->pose.pose.position.y, msg->pose.pose.position.z));
 		tf::Transform trans_min;
 		tf::Transform trans_max;
-		//min = msg->pose.pose.position * transform_min;
-		//max = msg->pose.pose.position * transform_max;
 
 		trans_min = trans_odom * _transform_min;
 		trans_max = trans_odom * _transform_max;
@@ -99,6 +98,28 @@ void odomCallback(const nav_msgs::Odometry::ConstPtr & msg) {
 		min.x = trans_min.getOrigin().x();
 		min.y = trans_min.getOrigin().y();
 		min.z = trans_min.getOrigin().z();
+		*/
+		try {
+			_listener->lookupTransform(_map_frame, "bbx_base_rear_left_link", ros::Time(0), _transform_min);
+		} catch (tf::TransformException &ex) {
+			ROS_ERROR("footprint_eraser: %s", ex.what());
+			return;
+		}
+
+		try {
+			_listener->lookupTransform(_map_frame, "bbx_top_front_right_link", ros::Time(0), _transform_max);
+		} catch (tf::TransformException &ex) {
+			ROS_ERROR("footprint_eraser: %s", ex.what());
+			return;
+		}
+
+		max.x = _transform_max.getOrigin().x();
+		max.y = _transform_max.getOrigin().y();
+		max.z = _transform_max.getOrigin().z();
+
+		min.x = _transform_min.getOrigin().x();
+		min.y = _transform_min.getOrigin().y();
+		min.z = _transform_min.getOrigin().z();
 
 		srv.request.max = max;
 		srv.request.min = min;
@@ -131,35 +152,39 @@ int main(int argc, char **argv) {
 	nh_priv.param<double>("min_distance", _min_distance_to_update, 0.5);
 	nh_priv.param<double>("timeout", _timeout, 10);
 	std::string base_odometry;
-	nh_priv.param<std::string>("base_odometry", base_odometry, std::string("base_odometry"));
+	nh_priv.param<std::string>("base_odometry", base_odometry, std::string("/base_odometry"));
+	nh_priv.param<std::string>("map_frame", _map_frame, std::string("/map"));
 
 	_last_clear = ros::Time::now();
 
-	tf::TransformListener listener;
+	//tf::TransformListener listener;
+	_listener.reset(new tf::TransformListener());
 
+	/*
 	try {
-		listener.waitForTransform(base_odometry, "bbx_base_rear_left_link", ros::Time(0), ros::Duration(5.0));
+		_listener->waitForTransform(base_odometry, "bbx_base_rear_left_link", ros::Time(0), ros::Duration(5.0));
 	} catch (tf::TransformException &ex) {
 		ROS_ERROR("footprint_eraser wait: %s", ex.what());
 	}
 
 	try {
-		listener.waitForTransform(base_odometry, "bbx_top_front_right_link", ros::Time(0), ros::Duration(5.0));
+		_listener->waitForTransform(base_odometry, "bbx_top_front_right_link", ros::Time(0), ros::Duration(5.0));
 	} catch (tf::TransformException &ex) {
 		ROS_ERROR("footprint_eraser wait: %s", ex.what());
 	}
 
 	try {
-		listener.lookupTransform(base_odometry, "bbx_base_rear_left_link", ros::Time(0), _transform_min);
+		_listener->lookupTransform(base_odometry, "bbx_base_rear_left_link", ros::Time(0), _transform_min);
 	} catch (tf::TransformException &ex) {
 		ROS_ERROR("footprint_eraser: %s", ex.what());
 	}
 
 	try {
-		listener.lookupTransform(base_odometry, "bbx_top_front_right_link", ros::Time(0), _transform_max);
+		_listener->lookupTransform(base_odometry, "bbx_top_front_right_link", ros::Time(0), _transform_max);
 	} catch (tf::TransformException &ex) {
 		ROS_ERROR("footprint_eraser: %s", ex.what());
 	}
+	*/
 
 	ROS_INFO_STREAM("footprint_eraser start spinning...");
 
