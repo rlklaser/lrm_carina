@@ -118,7 +118,7 @@ int main(int argc, char** argv)
 void TeleopPR2Keyboard::keyboardLoop()
 {
   char c;
-  bool dirty=false;
+  //bool dirty=false;
 
   // get the console in raw mode
   tcgetattr(kfd, &cooked);
