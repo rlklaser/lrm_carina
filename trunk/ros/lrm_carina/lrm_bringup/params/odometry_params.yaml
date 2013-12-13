@@ -2,6 +2,7 @@ wheel_odometry:
   
   publish_tf: true
   tf_rate: 50
+  js_rate: 50
   
   #odometry
   robot_lenght: 1.64
@@ -17,7 +18,7 @@ wheel_odometry:
   
   absolute: true
   use_imu: true
-  #use_6dof: true
+  use_6dof: true
   publish_js: true
   #animation_only: true
   

@@ -1,10 +1,11 @@
 <launch>
 
-	<!--  -->
+	<!--  
 	<include file="$(find lrm_bringup)/launch/odometry_vo.launch" />
-	
 	<include file="$(find lrm_bringup)/launch/odometry_gps.launch" />
 	<include file="$(find lrm_bringup)/launch/odometry_ekf.launch" />
+	-->
+	
 	<!-- localization
 	<include file="$(find lrm_bringup)/launch/odometry_refine.launch" />
  	-->
@@ -17,37 +18,4 @@
 		respawn="true"
 		output="screen" />
 
-<!-- 
-	<node
-		name="markers"
-		type="pose_markers"
-		pkg="lrm_odometry"
-		output="screen"
-	>
-		<remap
-			from="odom"
-			to="/gps_odometry/odom" />
-
-	</node>
-
-- on localization.launch
-	<node
-		pkg="tf"
-		type="static_transform_publisher"
-		name="world_map_broadcaster"
-		args="0 0 0 0 0 0 world map 50"
-		output="screen" />
-		
-	<rosparam
-		command="load"
-		file="$(find lrm_bringup)/params/outdoor_params.yaml" />
-
-	<node
-		pkg="lrm_outdoor"
-		type="compass_tf_node"
-		name="compass_frame"
-		respawn="true"
-		output="screen" />
--->
-		
 </launch>

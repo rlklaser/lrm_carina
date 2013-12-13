@@ -1,11 +1,5 @@
 <launch>
 
-    <!--
-	<param
-		name="/use_sim_time"
-		value="true" />
-	-->
-	
 	<!-- 
 	<node
 		pkg="tf"
@@ -14,11 +8,11 @@
 		args="0 0 0 0 0 0 map gps_odom 50"
 		output="screen" />
     -->
- 
- 	<rosparam
+
+	<rosparam
 		command="load"
 		file="$(find lrm_bringup)/params/odometry_gps_params.yaml" />
-		
+
 	<node
 		name="gps_odometry"
 		pkg="lrm_odometry"
@@ -26,7 +20,6 @@
 		output="screen"
 		respawn="true"
 	>
-
 		<remap
 			from="fix"
 			to="/lse_xsens_mti/xsens/fix" />
@@ -36,29 +29,9 @@
 		<remap
 			from="imu"
 			to="/calibrated/imu/data" />
-<!--  
-		<param
-			name="pos_cov"
-			value="25" />
-		<param
-			name="rot_cov"
-			value="99999" />
-		<param
-			name="pos_cov"
-			value="0.00002" />
-		<param
-			name="rot_cov"
-			value="99999" />
-		<param
-			name="frame_id"
-			value="gps_odom" />
-		<param
-			name="child_frame_id"
-			value="base_footprint" />
--->
 	</node>
 
-<!-- 
+    <!-- 
 	<node
 		pkg="lrm_odometry"
 		type="from_fix"
@@ -78,6 +51,19 @@
 			from="fix"
 			to="/lse_xsens_mti/xsens/fix" />
 	</node>
- -->
+    -->
  	
+ 	<!-- 
+	<node
+		name="markers"
+		type="pose_markers"
+		pkg="lrm_odometry"
+		output="screen"
+	>
+		<remap
+			from="odom"
+			to="/gps_odometry/odom" />
+
+	</node>
+	
 </launch>
