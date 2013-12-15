@@ -128,6 +128,8 @@ void odomCallback(const nav_msgs::Odometry::ConstPtr & msg) {
 
 		if (!_client.call(srv)) {
 			ROS_ERROR_STREAM("footprint_eraser service failed!");
+			//_client = nh.serviceClient<octomap_msgs::BoundingBoxQuery>("clear_bbx");
+			//_client.getService()
 		}
 
 		_last_pose = msg->pose;

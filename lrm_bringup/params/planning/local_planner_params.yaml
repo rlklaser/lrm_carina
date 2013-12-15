@@ -22,8 +22,8 @@ max_rotational_vel: 0.0
 min_in_place_rotational_vel: 0.0
 
 sim_time: 1.0    #higher, slow down speed
-sim_granularity: 0.05 #0.025
-angular_sim_granularity: 0.0559 #0.025
+sim_granularity: 0.1 #0.025
+angular_sim_granularity: 0.0125
 
 #unused
 stop_time_buffer: 0.2
@@ -45,8 +45,8 @@ yaw_goal_tolerance: 0.559  #1.57
 
 latch_xy_goal_tolerance: false      #stop when reached or rotate in place, false = stop
 
-#heading_scoring: true
-heading_scoring: false
+heading_scoring: true
+#heading_scoring: false
 heading_scoring_timestep: 0.1
 heading_lookahead: 2.0
 

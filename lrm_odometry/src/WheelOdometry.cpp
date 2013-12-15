@@ -120,6 +120,8 @@ WheelOdometry::WheelOdometry(ros::NodeHandle n) :
 		odo.p.rate = 1;
 	if(odo.p.tf_rate==0)
 		odo.p.tf_rate = 1;
+	if(odo.p.js_rate==0)
+		odo.p.js_rate = 1;
 
 	odom_publisher_timer = n.createTimer(ros::Duration(1.0 / odo.p.rate), &WheelOdometry::odomCallback, this, false, false);
 	tf_publisher_timer = n.createTimer(ros::Duration(1.0 / odo.p.tf_rate), &WheelOdometry::tfCallback, this, false, false);
@@ -486,6 +488,7 @@ void WheelOdometry::publishOdometry() {
 	odom.pose.pose.orientation.y = rotation.y();
 	odom.pose.pose.orientation.z = rotation.z();
 
+	/*
 	tf::Vector3 vel(0.0, 0.0, 0.0);
 	if (odo.dt != 0) {
 		vel.setX(odo.delta_x / odo.dt);
@@ -496,6 +499,8 @@ void WheelOdometry::publishOdometry() {
 	odom.twist.twist.linear.x = vel.x();
 	odom.twist.twist.linear.y = vel.y();
 	odom.twist.twist.linear.z = vel.z();
+	*/
+	odom.twist.twist.linear.x = odo.v;
 
 	if (odo.p.use_imu) {
 		odom.twist.twist.angular.x = odo.imu_ang_vel_x;
