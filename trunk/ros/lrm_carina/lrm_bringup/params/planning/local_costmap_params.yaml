@@ -15,17 +15,17 @@ local_costmap:
   #robot_base_frame: base_footprint
   robot_base_frame: base_odometry
   #robot_base_frame: heading_link
-  update_frequency: 1.0
+  update_frequency: 5.0
   publish_frequency: 1.0
   
   static_map: false
   rolling_window: true
   #width: 5.0
   #height: 5.0
-  width: 10.0
-  height: 10.0
+  width: 14.0
+  height: 14.0
   resolution: 0.1
-  origin_x: 0.0
+  origin_x: -8.0
   origin_y: 0.0
   
   save_debug_pgm: false
