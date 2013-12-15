@@ -3,13 +3,13 @@ ack_vel_min: -3.0
 ack_acc_max: 1.0
 ack_steer_angle_max: 0.559
 ack_steer_angle_min: -0.559
-ack_steer_speed_max: 0.4
-ack_steer_speed_min: -0.4
+ack_steer_speed_max: 0.2
+ack_steer_speed_min: -0.2
 ack_steer_acc_max: 1.0
-ack_axis_distance: 1.65
+ack_axis_distance: 1.64
 
 # Goal Tolerance Parameters
-xy_goal_tolerance: 0.3
+#xy_goal_tolerance: 0.3
 yaw_goal_tolerance: 3.14
 
 # Forward Simulation Parameters
@@ -18,7 +18,7 @@ sim_granularity: 0.1
 
 pdist_scale: 1.0
 gdist_scale: 0.8
-occdist_scale: 1.0
+occdist_scale: 1.2
 hdiff_scale: 1.0
 heading_points: 8
 

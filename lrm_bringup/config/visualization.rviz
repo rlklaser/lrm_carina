@@ -4,12 +4,17 @@ Panels:
     Name: Displays
     Property Tree Widget:
       Expanded:
-        - /TF1/Frames1
-        - /TF1/Tree1
+        - /TF-Skeleton1/Frames1//compass_link1
+        - /TF-Skeleton1/Tree1//world1
+        - /TF-Skeleton1/Tree1//world1//map1
+        - /TF-Skeleton1/Tree1//world1//map1//odom1
+        - /TF-Skeleton1/Tree1//world1//map1//odom1//base_footprint1
+        - /TF-Skeleton1/Tree1//world1//map1//odom1//base_footprint1//base_link1
+        - /TF-Skeleton1/Tree1//world1//map1//odom1//base_footprint1//base_link1//base_steering_wheel1
+        - /RobotModel-Wheels1/Links1
         - /Camera1/Visibility1
         - /Camera2/Visibility1
-        - /PointCloud1/PointCloud24
-      Splitter Ratio: 0.470588
+      Splitter Ratio: 0.840637
     Tree Height: 710
   - Class: rviz/Tool Properties
     Expanded:
@@ -33,19 +38,182 @@ Visualization Manager:
   Class: ""
   Displays:
     - Class: rviz/TF
-      Enabled: false
+      Enabled: true
       Frame Timeout: 15
       Frames:
-        All Enabled: true
+        /ackermann_bar_link:
+          Value: true
+        /ackermann_left_susp_link:
+          Value: true
+        /ackermann_right_susp_link:
+          Value: true
+        /base_footprint:
+          Value: false
+        /base_front_sensors:
+          Value: true
+        /base_link:
+          Value: true
+        /base_odometry:
+          Value: false
+        /base_steering_wheel:
+          Value: true
+        /base_stereo_camera:
+          Value: false
+        /bbx_base_front_left_link:
+          Value: false
+        /bbx_base_front_right_link:
+          Value: false
+        /bbx_base_rear_left_link:
+          Value: false
+        /bbx_base_rear_right_link:
+          Value: false
+        /bbx_top_front_left_link:
+          Value: false
+        /bbx_top_front_right_link:
+          Value: false
+        /bbx_top_rear_left_link:
+          Value: false
+        /bbx_top_rear_right_link:
+          Value: false
+        /body_link:
+          Value: false
+        /camera_center_link:
+          Value: false
+        /center_mass_link:
+          Value: true
+        /compass_link:
+          Value: true
+        /front_axle_link:
+          Value: true
+        /front_left_bar_link:
+          Value: true
+        /front_left_susp_link:
+          Value: true
+        /front_left_wheel:
+          Value: true
+        /front_right_bar_link:
+          Value: true
+        /front_right_susp_link:
+          Value: true
+        /front_right_wheel:
+          Value: true
+        /heading_link:
+          Value: true
+        /imu_link:
+          Value: true
+        /map:
+          Value: false
+        /odom:
+          Value: false
+        /rear_axle_link:
+          Value: true
+        /rear_left_bar_link:
+          Value: true
+        /rear_left_susp_link:
+          Value: true
+        /rear_left_wheel:
+          Value: true
+        /rear_right_bar_link:
+          Value: true
+        /rear_right_susp_link:
+          Value: true
+        /rear_right_wheel:
+          Value: true
+        /steer_link:
+          Value: true
+        /steering_wheel_link:
+          Value: true
+        /stereo_camera:
+          Value: false
+        /stereo_camera/left_frame:
+          Value: false
+        /stereo_camera/left_optical_frame:
+          Value: false
+        /stereo_camera/right_frame:
+          Value: false
+        /stereo_camera/right_optical_frame:
+          Value: false
+        /world:
+          Value: false
+        All Enabled: false
       Marker Scale: 0.7
-      Name: TF
+      Name: TF-Skeleton
       Show Arrows: true
       Show Axes: true
       Show Names: false
       Tree:
-        {}
+        /world:
+          /map:
+            /odom:
+              /base_footprint:
+                /base_link:
+                  /base_front_sensors:
+                    /base_stereo_camera:
+                      /camera_center_link:
+                        /stereo_camera:
+                          {}
+                      /stereo_camera/left_frame:
+                        /stereo_camera/left_optical_frame:
+                          {}
+                      /stereo_camera/right_frame:
+                        /stereo_camera/right_optical_frame:
+                          {}
+                  /base_steering_wheel:
+                    /steering_wheel_link:
+                      {}
+                  /bbx_base_front_left_link:
+                    {}
+                  /bbx_base_front_right_link:
+                    {}
+                  /bbx_base_rear_left_link:
+                    {}
+                  /bbx_base_rear_right_link:
+                    {}
+                  /bbx_top_front_left_link:
+                    {}
+                  /bbx_top_front_right_link:
+                    {}
+                  /bbx_top_rear_left_link:
+                    {}
+                  /bbx_top_rear_right_link:
+                    {}
+                  /body_link:
+                    {}
+                  /center_mass_link:
+                    {}
+                  /front_axle_link:
+                    /front_left_susp_link:
+                      /front_left_bar_link:
+                        /front_left_wheel:
+                          {}
+                    /front_right_susp_link:
+                      /front_right_bar_link:
+                        /front_right_wheel:
+                          {}
+                    /heading_link:
+                      {}
+                    /steer_link:
+                      /ackermann_bar_link:
+                        /ackermann_left_susp_link:
+                          {}
+                        /ackermann_right_susp_link:
+                          {}
+                  /imu_link:
+                    {}
+                  /rear_axle_link:
+                    /base_odometry:
+                      /compass_link:
+                        {}
+                    /rear_left_susp_link:
+                      /rear_left_bar_link:
+                        /rear_left_wheel:
+                          {}
+                    /rear_right_susp_link:
+                      /rear_right_bar_link:
+                        /rear_right_wheel:
+                          {}
       Update Interval: 0
-      Value: false
+      Value: true
     - Alpha: 0.5
       Cell Size: 1
       Class: rviz/Grid
@@ -69,7 +237,7 @@ Visualization Manager:
       Collision Enabled: false
       Enabled: true
       Links:
-        All Links Enabled: true
+        All Links Enabled: false
         Expand Joint Details: false
         Expand Link Details: false
         Expand Tree: false
@@ -78,7 +246,7 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
+          Value: false
         ackermann_left_susp_link:
           Alpha: 1
           Show Axes: false
@@ -147,12 +315,12 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
+          Value: false
         camera_center_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
+          Value: false
         center_mass_link:
           Alpha: 1
           Show Axes: false
@@ -165,7 +333,7 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
+          Value: false
         front_left_susp_link:
           Alpha: 1
           Show Axes: false
@@ -179,7 +347,7 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
+          Value: false
         front_right_susp_link:
           Alpha: 1
           Show Axes: false
@@ -197,7 +365,7 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
+          Value: false
         rear_axle_link:
           Alpha: 1
           Show Axes: false
@@ -206,7 +374,7 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
+          Value: false
         rear_left_susp_link:
           Alpha: 1
           Show Axes: false
@@ -220,7 +388,7 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
+          Value: false
         rear_right_susp_link:
           Alpha: 1
           Show Axes: false
@@ -234,7 +402,7 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
+          Value: false
         steering_wheel_link:
           Alpha: 1
           Show Axes: false
@@ -248,7 +416,7 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
+          Value: false
         stereo_camera/left_optical_frame:
           Alpha: 1
           Show Axes: false
@@ -257,27 +425,28 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
+          Value: false
         stereo_camera/right_optical_frame:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-      Name: RobotModel
+      Name: RobotModel-Wheels
       Robot Description: robot_description
       TF Prefix: ""
       Update Interval: 0
       Value: true
       Visual Enabled: true
     - Class: rviz/Camera
-      Enabled: true
+      Enabled: false
       Image Rendering: background and overlay
       Image Topic: /stereo/left/image_color
       Name: Camera
       Overlay Alpha: 0.5
       Queue Size: 2
       Transport Hint: raw
-      Value: true
+      Value: false
       Visibility:
+        "": true
         Axes: true
         Camera: false
         Grid: false
@@ -340,8 +509,10 @@ Visualization Manager:
           Value: true
         Pose: true
         PoseArray: true
-        RobotModel: false
+        RobotModel: true
+        RobotModel-Wheels: false
         TF: true
+        TF-Skeleton: false
         Value: true
       Zoom Factor: 1
     - Alpha: 0.9
@@ -521,7 +692,7 @@ Visualization Manager:
           Color: 255; 0; 255
           Color Transformer: FlatColor
           Decay Time: 0
-          Enabled: true
+          Enabled: false
           Max Color: 255; 255; 255
           Max Intensity: 4096
           Min Color: 0; 0; 0
@@ -536,7 +707,7 @@ Visualization Manager:
           Topic: /octomap/octomap_point_cloud_centers
           Use Fixed Frame: true
           Use rainbow: true
-          Value: true
+          Value: false
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -593,17 +764,17 @@ Visualization Manager:
           Use Fixed Frame: true
           Use rainbow: true
           Value: false
-        - Alpha: 1
+        - Alpha: 0.3
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
-            Max Value: 10
-            Min Value: -10
+            Max Value: 0.371101
+            Min Value: 0.0531509
             Value: true
           Axis: Z
           Channel Name: intensity
           Class: rviz/PointCloud2
           Color: 255; 255; 255
-          Color Transformer: Intensity
+          Color Transformer: AxisColor
           Decay Time: 0
           Enabled: true
           Max Color: 255; 255; 255
@@ -615,8 +786,8 @@ Visualization Manager:
           Queue Size: 10
           Selectable: true
           Size (Pixels): 3
-          Size (m): 0.01
-          Style: Points
+          Size (m): 0.1
+          Style: Flat Squares
           Topic: /move_base/TrajectoryPlannerROS/cost_cloud
           Use Fixed Frame: true
           Use rainbow: true
@@ -761,7 +932,7 @@ Visualization Manager:
           Use Fixed Frame: true
           Use rainbow: true
           Value: false
-      Enabled: false
+      Enabled: true
       Name: PointCloud
     - Class: rviz/Group
       Displays:
@@ -868,6 +1039,36 @@ Visualization Manager:
       Shape: Arrow
       Topic: ""
       Value: false
+    - Class: rviz/TF
+      Enabled: false
+      Frame Timeout: 15
+      Frames:
+        All Enabled: true
+      Marker Scale: 1
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: true
+      Tree:
+        {}
+      Update Interval: 0
+      Value: false
+    - Alpha: 1
+      Class: rviz/RobotModel
+      Collision Enabled: false
+      Enabled: false
+      Links:
+        All Links Enabled: true
+        Expand Joint Details: false
+        Expand Link Details: false
+        Expand Tree: false
+        Link Tree Style: Links in Alphabetic Order
+      Name: RobotModel
+      Robot Description: robot_description
+      TF Prefix: ""
+      Update Interval: 0
+      Value: false
+      Visual Enabled: true
   Enabled: true
   Global Options:
     Background Color: 255; 255; 255
@@ -889,15 +1090,15 @@ Visualization Manager:
     Current:
       Class: rviz_animated_view_controller/Animated
       Control Mode: Orbit
-      Distance: 30.5767
+      Distance: 4.47555
       Eye:
-        X: -8.14414
-        Y: 1.01153
-        Z: 22.9761
+        X: -2.25938
+        Y: 0.875493
+        Z: 0.751682
       Focus:
-        X: 10.1651
-        Y: 1.1746
-        Z: -1.51231
+        X: 1.96354
+        Y: -0.211795
+        Z: -0.255948
       Maintain Vertical Axis: true
       Mouse Enabled: true
       Name: Current View
