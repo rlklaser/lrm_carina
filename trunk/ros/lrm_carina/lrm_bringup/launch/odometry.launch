@@ -18,4 +18,18 @@
 		respawn="true"
 		output="screen" />
 
+
+
+<node name="iri_covariance_markers"
+      pkg="iri_covariance_markers"
+      type="iri_covariance_markers"
+      output="screen">
+    <remap from="~odom" to="/odom"/>
+    <!--remap from="~markers" to="~markers"/ -->
+    <!--param name="frame_id" value="" / -->
+    <!--param name="namespace" value="" / -->
+    <param name="scale_multiplier" value="2" />
+    <param name="scale_multiplier_z" value="0.00001" />
+</node>
+
 </launch>

@@ -20,8 +20,10 @@ local_costmap:
   
   static_map: false
   rolling_window: true
-  width: 9.0
-  height: 9.0
+  #width: 5.0
+  #height: 5.0
+  width: 10.0
+  height: 10.0
   resolution: 0.1
   origin_x: 0.0
   origin_y: 0.0
@@ -32,7 +34,8 @@ local_costmap:
   #observation_sources: cloud ground_cloud
   #observation_sources: local_cloud global_cloud ground_cloud
   #observation_sources:  local_cloud global_cloud
-  #observation_sources: cloud map_cloud
+  observation_sources: cloud map_cloud
   #observation_sources: cluster_cloud map_cloud
 
-  observation_sources: map_cloud_no_mark
+  #observation_sources: map_cloud_no_mark
+  #observation_sources: map_cloud_mark_clear

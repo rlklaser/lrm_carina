@@ -34,6 +34,11 @@ recovery_behavior_enabled: true
 #]
 
 recovery_behaviors: [
+  {
+    name: conservative_backward_recover, 
+    type: lrm_twist_recovery/TwistRecovery
+  }
+  ,
 #  {
 #    name: conservative_reset, 
 #    type: lrm_clear_costmap_recovery/ClearCostmapRecovery
@@ -62,6 +67,19 @@ conservative_reset:
 aggressive_reset:
   reset_distance: 1.0
   global_clear: true
+
+conservative_backward_recover:
+  duration: 3
+  linear_speed_limit: -3.0
+  angular_speed_limit: 0.0
+  linear_acceleration_limit: -3.0
+  angular_acceleration_limit: 0.0
+  controller_frequency: 20
+  #simulation_inc:
+  
+  linear_x: -0.6
+  linear_y: 0.0
+  angular_z: 0.001
   
 backward_recover:
   duration: 4
@@ -69,7 +87,7 @@ backward_recover:
   angular_speed_limit: 0.0
   linear_acceleration_limit: -3.0
   angular_acceleration_limit: 0.0
-  controller_frequency: 10
+  controller_frequency: 20
   #simulation_inc:
   
   linear_x: -1.0
@@ -82,7 +100,7 @@ more_backward_recover:
   angular_speed_limit: 0.0
   linear_acceleration_limit: -3.0
   angular_acceleration_limit: 0.0
-  controller_frequency: 10
+  controller_frequency: 20
   #simulation_inc:
   
   linear_x: -1.0
