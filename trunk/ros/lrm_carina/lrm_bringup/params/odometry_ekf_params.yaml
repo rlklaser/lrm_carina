@@ -8,7 +8,7 @@ robot_pose_ekf:
   odom_used: true
   imu_used: true
   vo_used: true
-  gps_used: true
+  gps_used: false
   debug: false
   self_diagnose: false
   

@@ -6,6 +6,11 @@
 		name="bumblebee_nodelet_manager"
 		args="manager"
 		respawn="true"
-		output="screen" />
+		output="screen"
+	>
+		<param
+			name="num_worker_threads"
+			value="6" />
+	</node>
 
 </launch>

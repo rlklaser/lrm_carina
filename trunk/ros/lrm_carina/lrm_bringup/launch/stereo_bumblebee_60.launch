@@ -28,7 +28,7 @@
 		>
 			<remap
 				from="image_raw"
-				to="/camera/image_raw" />
+				to="camera/image_raw" />
 		</node>
 		
 	</group>

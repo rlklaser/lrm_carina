@@ -1,4 +1,3 @@
-
 camera1394_nodelet:
 
   #Point Grey Research Bumblebee2 BB2-03S2C
@@ -13,13 +12,10 @@ camera1394_nodelet:
   camera_info_url: package://lrm_bringup/params/cameras/calib/00b09d0100ac7cc8.yaml
 
 
-stereo_camera:
-  bumblebee_split_nodelet:
-
-    name: 00b09d0100ac7cc8
-    frame_id: /stereo_camera
-
-    left:
-      camera_info_url: package://lrm_bringup/params/cameras/calib/00b09d0100ac7cc8_left.yaml
-    right:
-      camera_info_url: package://lrm_bringup/params/cameras/calib/00b09d0100ac7cc8_right.yaml
+bumblebee_split_nodelet:
+  name: 00b09d0100ac7cc8
+  frame_id: /stereo_camera
+  left:
+    camera_info_url: package://lrm_bringup/params/cameras/calib/00b09d0100ac7cc8_left.yaml
+  right:
+    camera_info_url: package://lrm_bringup/params/cameras/calib/00b09d0100ac7cc8_right.yaml

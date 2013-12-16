@@ -1,5 +1,9 @@
 <launch>
 
+	<arg
+		name="bond"
+		value="" />
+		
 	<group ns="/stereo_camera">
 
 		<include file="$(find lrm_bringup)/launch/stereo_camera.launch" />
@@ -10,13 +14,13 @@
 			pkg="nodelet"
 			type="nodelet"
 			name="bumblebee_split_nodelet"
-			args="load lrm_sensors/split_bb2 bumblebee_nodelet_manager"
+			args="load lrm_sensors/split_bb2 bumblebee_nodelet_manager $(arg bond)"
 			output="screen"
 			respawn="true"
 		>
 			<remap
 				from="image_raw"
-				to="/camera/image_raw" />
+				to="camera/image_raw" />
 		</node>
 		
 	</group>

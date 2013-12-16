@@ -1,14 +1,4 @@
 <launch>
-
-
-	<!-- 
-	<node
-		pkg="tf"
-		type="static_transform_publisher"
-		name="ekf_odom_broadcaster"
-		args="0 0 0 0 0 0 map ekf_odom 50"
-		output="screen" />
-    -->
     
 	<rosparam
 		command="load"

@@ -18,7 +18,7 @@ sim_granularity: 0.1
 
 pdist_scale: 1.0
 gdist_scale: 0.8
-occdist_scale: 1.2
+occdist_scale: 10.0
 hdiff_scale: 1.0
 heading_points: 8
 
