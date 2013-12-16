@@ -238,6 +238,7 @@
 <pathentry include="/opt/ros/groovy/include" kind="inc" path="" system="true"/>
 <pathentry include="/usr/src/gtest/include" kind="inc" path="" system="true"/>
 <pathentry include="/usr/src/gtest" kind="inc" path="" system="true"/>
+<pathentry include="/home/rlklaser/Work/ros/opencv_ws/install_isolated/include" kind="inc" path="" system="true"/>
 <pathentry include="/home/rlklaser/Work/ros/pcl_ws/install_isolated/include" kind="inc" path="" system="true"/>
 <pathentry include="/usr/lib/gcc/i686-linux-gnu/4.6/include" kind="inc" path="" system="true"/>
 <pathentry include="/usr/local/include" kind="inc" path="" system="true"/>
