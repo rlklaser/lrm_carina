@@ -20,6 +20,7 @@
 <storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
 <storageModule moduleId="org.eclipse.cdt.core.pathentry">
 <pathentry excluding="**/CMakeFiles/" kind="out" path=""/>
+<pathentry kind="mac" name="BOOST_CB_DISABLE_DEBUG" path="" value=""/>
 <pathentry kind="mac" name="__STDC__" path="" value="1"/>
 <pathentry kind="mac" name="__STDC_HOSTED__" path="" value="1"/>
 <pathentry kind="mac" name="__GNUC__" path="" value="4"/>
@@ -235,10 +236,36 @@
 <pathentry kind="mac" name="__EXCEPTIONS" path="" value="1"/>
 <pathentry kind="mac" name="_GNU_SOURCE" path="" value="1"/>
 <pathentry include="/home/rlklaser/Work/ros/sandbox/lrm_carina_gazebo_plugins/include" kind="inc" path="" system="true"/>
+<pathentry include="/home/rlklaser/Work/ros/overrides/simulator_gazebo/gazebo_plugins/cfg/cpp" kind="inc" path="" system="true"/>
+<pathentry include="/home/rlklaser/Work/ros/overrides/simulator_gazebo/gazebo_plugins/include" kind="inc" path="" system="true"/>
+<pathentry include="/home/rlklaser/Work/ros/overrides/simulator_gazebo/gazebo_plugins/msg_gen/cpp/include" kind="inc" path="" system="true"/>
+<pathentry include="/home/rlklaser/Work/ros/overrides/simulator_gazebo/gazebo/include" kind="inc" path="" system="true"/>
+<pathentry include="/opt/ros/groovy/stacks/simulator_gazebo/gazebo/gazebo/include/gazebo-1.5" kind="inc" path="" system="true"/>
+<pathentry include="/opt/ros/groovy/stacks/simulator_gazebo/gazebo/gazebo/include/gazebo-1.5/gazebo" kind="inc" path="" system="true"/>
+<pathentry include="/usr/include/OGRE" kind="inc" path="" system="true"/>
+<pathentry include="/home/rlklaser/Work/ros/overrides/simulator_gazebo/gazebo/msg_gen/cpp/include" kind="inc" path="" system="true"/>
+<pathentry include="/home/rlklaser/Work/ros/overrides/simulator_gazebo/gazebo/srv_gen/cpp/include" kind="inc" path="" system="true"/>
+<pathentry include="/home/rlklaser/Work/ros/overrides/simulator_gazebo/gazebo_msgs/msg_gen/cpp/include" kind="inc" path="" system="true"/>
+<pathentry include="/home/rlklaser/Work/ros/overrides/simulator_gazebo/gazebo_msgs/srv_gen/cpp/include" kind="inc" path="" system="true"/>
+<pathentry include="/opt/ros/groovy/stacks/bullet/include" kind="inc" path="" system="true"/>
+<pathentry include="/home/rlklaser/Work/ros/sandbox/lrm_msgs/include" kind="inc" path="" system="true"/>
+<pathentry include="/home/rlklaser/Work/ros/sandbox/lrm_msgs/msg_gen/cpp/include" kind="inc" path="" system="true"/>
+<pathentry include="/home/rlklaser/Work/ros/sandbox/lrm_carina_description/include" kind="inc" path="" system="true"/>
+<pathentry include="/opt/ros/groovy/stacks/pr2_mechanism/pr2_controller_interface/include" kind="inc" path="" system="true"/>
+<pathentry include="/opt/ros/groovy/stacks/pr2_mechanism/pr2_mechanism_model/include" kind="inc" path="" system="true"/>
+<pathentry include="/opt/ros/groovy/stacks/pr2_mechanism/pr2_hardware_interface/include" kind="inc" path="" system="true"/>
+<pathentry include="/opt/ros/groovy/stacks/ros_control/hardware_interface/include" kind="inc" path="" system="true"/>
+<pathentry include="/opt/ros/groovy/stacks/ros_control/controller_interface/include" kind="inc" path="" system="true"/>
+<pathentry include="/home/rlklaser/Work/ros/pcl_ws/install_isolated/include" kind="inc" path="" system="true"/>
+<pathentry include="/home/rlklaser/Work/ros/pcl_ws/install_isolated/include/pcl-1.7" kind="inc" path="" system="true"/>
 <pathentry include="/opt/ros/groovy/include" kind="inc" path="" system="true"/>
+<pathentry include="/usr/include/eigen3" kind="inc" path="" system="true"/>
+<pathentry include="/usr/include/ni" kind="inc" path="" system="true"/>
+<pathentry include="/usr/include/vtk-5.8" kind="inc" path="" system="true"/>
+<pathentry include="/usr/include/qhull" kind="inc" path="" system="true"/>
 <pathentry include="/usr/src/gtest/include" kind="inc" path="" system="true"/>
 <pathentry include="/usr/src/gtest" kind="inc" path="" system="true"/>
-<pathentry include="/home/rlklaser/Work/ros/pcl_ws/install_isolated/include" kind="inc" path="" system="true"/>
+<pathentry include="/home/rlklaser/Work/ros/opencv_ws/install_isolated/include" kind="inc" path="" system="true"/>
 <pathentry include="/usr/lib/gcc/i686-linux-gnu/4.6/include" kind="inc" path="" system="true"/>
 <pathentry include="/usr/local/include" kind="inc" path="" system="true"/>
 <pathentry include="/usr/lib/gcc/i686-linux-gnu/4.6/include-fixed" kind="inc" path="" system="true"/>
@@ -250,6 +277,62 @@
 </storageModule>
 <storageModule moduleId="org.eclipse.cdt.make.core.buildtargets">
 <buildTargets>
+<target name="[lib] AckermannControllerPlugin" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>AckermannControllerPlugin</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[lib] AckermannControllerPlugin/fast" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>AckermannControllerPlugin/fast</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Build" path="[Targets]/[lib] AckermannControllerPlugin" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-C "/home/rlklaser/Work/ros/sandbox/lrm_carina_gazebo_plugins" -j4</buildArguments>
+<buildTarget>AckermannControllerPlugin</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Clean" path="[Targets]/[lib] AckermannControllerPlugin" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/cmake</buildCommand>
+<buildArguments>-E chdir "/home/rlklaser/Work/ros/sandbox/lrm_carina_gazebo_plugins" "/usr/bin/cmake" -P "CMakeFiles/AckermannControllerPlugin.dir/cmake_clean.cmake"</buildArguments>
+<buildTarget></buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[lib] AckermannPlugin" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>AckermannPlugin</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[lib] AckermannPlugin/fast" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>AckermannPlugin/fast</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Build" path="[Targets]/[lib] AckermannPlugin" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-C "/home/rlklaser/Work/ros/sandbox/lrm_carina_gazebo_plugins" -j4</buildArguments>
+<buildTarget>AckermannPlugin</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Clean" path="[Targets]/[lib] AckermannPlugin" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/cmake</buildCommand>
+<buildArguments>-E chdir "/home/rlklaser/Work/ros/sandbox/lrm_carina_gazebo_plugins" "/usr/bin/cmake" -P "CMakeFiles/AckermannPlugin.dir/cmake_clean.cmake"</buildArguments>
+<buildTarget></buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
 <target name=": ROSBUILD_genmsg_cpp" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j4</buildArguments>
@@ -296,6 +379,34 @@
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j4</buildArguments>
 <buildTarget>doxygen</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[lib] encoders_controller" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>encoders_controller</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[lib] encoders_controller/fast" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>encoders_controller/fast</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Build" path="[Targets]/[lib] encoders_controller" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-C "/home/rlklaser/Work/ros/sandbox/lrm_carina_gazebo_plugins" -j4</buildArguments>
+<buildTarget>encoders_controller</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Clean" path="[Targets]/[lib] encoders_controller" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/cmake</buildCommand>
+<buildArguments>-E chdir "/home/rlklaser/Work/ros/sandbox/lrm_carina_gazebo_plugins" "/usr/bin/cmake" -P "CMakeFiles/encoders_controller.dir/cmake_clean.cmake"</buildArguments>
+<buildTarget></buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
@@ -383,6 +494,34 @@
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
+<target name="[lib] suspension_controller" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>suspension_controller</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[lib] suspension_controller/fast" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>suspension_controller/fast</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Build" path="[Targets]/[lib] suspension_controller" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-C "/home/rlklaser/Work/ros/sandbox/lrm_carina_gazebo_plugins" -j4</buildArguments>
+<buildTarget>suspension_controller</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Clean" path="[Targets]/[lib] suspension_controller" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/cmake</buildCommand>
+<buildArguments>-E chdir "/home/rlklaser/Work/ros/sandbox/lrm_carina_gazebo_plugins" "/usr/bin/cmake" -P "CMakeFiles/suspension_controller.dir/cmake_clean.cmake"</buildArguments>
+<buildTarget></buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
 <target name=": test" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j4</buildArguments>
@@ -429,6 +568,90 @@
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j4</buildArguments>
 <buildTarget>clean</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] src/AckermannControllerPlugin.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>src/AckermannControllerPlugin.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] src/AckermannControllerPlugin.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>src/AckermannControllerPlugin.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] src/AckermannControllerPlugin.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>src/AckermannControllerPlugin.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] src/AckermannPlugin.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>src/AckermannPlugin.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] src/AckermannPlugin.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>src/AckermannPlugin.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] src/AckermannPlugin.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>src/AckermannPlugin.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] src/EncodersController.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>src/EncodersController.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] src/EncodersController.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>src/EncodersController.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] src/EncodersController.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>src/EncodersController.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] src/SuspensionController.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>src/SuspensionController.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] src/SuspensionController.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>src/SuspensionController.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] src/SuspensionController.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j4</buildArguments>
+<buildTarget>src/SuspensionController.cpp.s</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
