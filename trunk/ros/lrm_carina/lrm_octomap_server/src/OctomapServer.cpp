@@ -917,6 +917,22 @@ void OctomapServer::_publishAll(const ros::Time& rostime) {
 		}
 	}
 
+	while(m_clearQueue.size()>0) {
+		octomap::OcTreeKey min, max;
+
+		min = m_clearQueue.front();
+		m_clearQueue.pop();
+		max = m_clearQueue.front();
+		m_clearQueue.pop();
+
+		m_octree->updateNode(min, octomap::logodds(m_thresMin));
+		m_octree->updateNode(max, octomap::logodds(m_thresMin));
+
+		for (OcTreeT::leaf_bbx_iterator it = m_octree->begin_leafs_bbx(min, max), end = m_octree->end_leafs_bbx(); it != end; ++it) {
+			m_octree->updateNode(it.getKey(), octomap::logodds(m_thresMin));
+		}
+	}
+
 	//publish
 	for (OcTreeT::iterator it = m_octree->begin(m_maxTreeDepth), end = m_octree->end(); it != end; ++it) {
 	//for (OcTreeT::tree_iterator it = m_octree->begin_tree(m_maxTreeDepth), end = m_octree->end_tree(); it != end; ++it) {
@@ -1191,8 +1207,15 @@ bool OctomapServer::clearBBXSrv(BBXSrv::Request& req, BBXSrv::Response& resp) {
 	//boost::recursive_mutex::scoped_lock monitor(m_mutex);
 	boost::unique_lock<boost::mutex> scoped_lock(m_mutex);
 
-	m_octree->updateNode(min, octomap::logodds(m_thresMin));
-	m_octree->updateNode(max, octomap::logodds(m_thresMin));
+
+	kmin_ok = m_octree->coordToKeyChecked(min, kmin);
+	kmax_ok = m_octree->coordToKeyChecked(max, kmax);
+
+	m_clearQueue.push(kmin);
+	m_clearQueue.push(kmax);
+
+//	m_octree->updateNode(min, octomap::logodds(m_thresMin));
+//	m_octree->updateNode(max, octomap::logodds(m_thresMin));
 
 	/*
 	 * checked by iterator
@@ -1205,7 +1228,7 @@ bool OctomapServer::clearBBXSrv(BBXSrv::Request& req, BBXSrv::Response& resp) {
 	}
 	*/
 
-	for (OcTreeT::leaf_bbx_iterator it = m_octree->begin_leafs_bbx(min, max), end = m_octree->end_leafs_bbx(); it != end; ++it) {
+//	for (OcTreeT::leaf_bbx_iterator it = m_octree->begin_leafs_bbx(min, max), end = m_octree->end_leafs_bbx(); it != end; ++it) {
 
 		//ROS_INFO_STREAM(""
 		//		<< "Node center: " << it.getCoordinate() << std::endl
@@ -1213,8 +1236,9 @@ bool OctomapServer::clearBBXSrv(BBXSrv::Request& req, BBXSrv::Response& resp) {
 		//		<< "Node value: " << it->getValue() << std::endl
 		//		);
 
-		m_octree->updateNode(it.getKey(), octomap::logodds(m_thresMin));
-	}
+//		m_octree->updateNode(it.getKey(), octomap::logodds(m_thresMin));
+//		m_clearQueue.push(it.getKey());
+//	}
 
 	return true;
 }
