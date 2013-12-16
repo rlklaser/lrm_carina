@@ -90,6 +90,8 @@
 #include <boost/thread/mutex.hpp>
 #include <boost/thread/recursive_mutex.hpp>
 
+#include <queue>
+
 //#define USE_COLOR
 #define USE_CLIPPING
 //#define USE_STAMPTREE
@@ -345,6 +347,8 @@ private:
 
   int m_ticksOnSec;
   double m_rate;
+
+  std::queue<octomap::OcTreeKey> m_clearQueue;
 
   void _publishAll(const ros::Time& rostime = ros::Time::now());
   void updateTreeProbabilities();

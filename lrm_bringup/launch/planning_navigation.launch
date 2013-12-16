@@ -48,7 +48,7 @@
 			command="load"
 			ns="SBPLLatticePlanner" />
 
-<!-- 
+		<!-- 
 		<param
 			name="base_local_planner"
 			value="lrm_base_local_planner/TrajectoryPlannerROS" />
@@ -56,7 +56,7 @@
 			file="$(find lrm_bringup)/params/planning/local_planner_params.yaml"
 			command="load"
 			ns="TrajectoryPlannerROS" />
- -->
+ 		-->
  			
 		<!-- or
 		<param
@@ -84,7 +84,7 @@
 			file="$(find lrm_bringup)/params/planning/local_planner_car_params.yaml"
 			command="load"
 			ns="TrajectoryPlannerROS" />
-			
+		 	
 		<!-- 
 		<rosparam
 			file="$(find lrm_bringup)/params/planning/sbpl_global_params.yaml"
