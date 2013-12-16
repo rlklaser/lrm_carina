@@ -65,5 +65,6 @@
 			to="/gps_odometry/odom" />
 
 	</node>
+	-->
 	
 </launch>

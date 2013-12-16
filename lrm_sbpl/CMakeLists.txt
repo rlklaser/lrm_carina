@@ -12,11 +12,12 @@ include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
 #set(DEBUG 1)
 #set(TIME_DEBUG 1)
 
-set(ROS_BUILD_TYPE Release)
+set(ROS_BUILD_TYPE RelWithDebInfo)
+#set(ROS_BUILD_TYPE Release)
 set(DEBUG 0)
 set(TIME_DEBUG 0)
 
-add_definitions(-std=c++0x)
+#add_definitions(-std=c++0x)
 add_definitions(-msse3 -msse4.1 -msse4.2)
 add_definitions(-mfpmath=sse -Ofast -flto -march=native)
 

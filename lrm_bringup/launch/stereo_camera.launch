@@ -1,7 +1,5 @@
 <launch>
 
-	<rosparam file="$(find lrm_bringup)/params/stereo_camera_params.yaml" />
-
 	<include file="$(find lrm_bringup)/launch/bumblebee_nodelet_manager.launch" />
 	<include file="$(find lrm_bringup)/launch/vision_throttle.launch" />
 

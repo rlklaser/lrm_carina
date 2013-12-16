@@ -30,3 +30,4 @@ wheel_odometry:
   base_footprint: base_footprint
   base_link: base_link
   
+  tf_delay: 0.1
