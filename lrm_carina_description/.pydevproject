@@ -8,6 +8,7 @@
 <path>/home/rlklaser/Work/ros/sandbox/lrm_carina_description/src</path>
 <path>/home/rlklaser/Work/ros/sandbox/lrm_carina_description/lib</path>
 <path>/opt/ros/groovy/share/mk</path>
+<path>/home/rlklaser/Work/ros/opencv_ws/install_isolated/lib/python2.7/dist-packages</path>
 <path>/home/rlklaser/Work/ros/pcl_ws/install_isolated/lib/python2.7/dist-packages</path>
 <path>/opt/ros/groovy/lib/python2.7/dist-packages</path>
 <path>/usr/lib/python2.7</path>
