@@ -104,7 +104,7 @@ namespace robot_state_publisher{
     ROS_DEBUG("Publishing transforms for fixed joints");
     std::vector<tf::StampedTransform> tf_transforms;
     tf::StampedTransform tf_transform;
-    tf_transform.stamp_ = ros::Time::now()+ros::Duration(0.5);  // future publish by 0.5 seconds
+    tf_transform.stamp_ = ros::Time::now();//+ros::Duration(0.5);  // future publish by 0.5 seconds
 
     // loop over all fixed segments
     for (map<string, SegmentPair>::const_iterator seg=segments_fixed_.begin(); seg != segments_fixed_.end(); seg++){
