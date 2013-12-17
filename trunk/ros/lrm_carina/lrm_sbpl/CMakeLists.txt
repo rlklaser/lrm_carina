@@ -12,8 +12,8 @@ include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
 #set(DEBUG 1)
 #set(TIME_DEBUG 1)
 
-set(ROS_BUILD_TYPE RelWithDebInfo)
-#set(ROS_BUILD_TYPE Release)
+#set(ROS_BUILD_TYPE RelWithDebInfo)
+set(ROS_BUILD_TYPE Release)
 set(DEBUG 0)
 set(TIME_DEBUG 0)
 
