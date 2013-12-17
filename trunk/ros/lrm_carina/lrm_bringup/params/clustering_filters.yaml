@@ -27,6 +27,17 @@ region_growing_rgb_seg:
   to_map: true   #necessary if will sum
   use_cloud_color: true
   
+region_growing_try_seg:
+  k_search: 16
+  min_size: 10
+  max_size: 50000
+  neighbours: 16
+  
+  curvature: 1.0
+  smoothness: 30.0
+  
+  to_map: true   #necessary if will sum
+  use_cloud_color: false
   
 cluster_sum_filtered:
   frame_count: 3

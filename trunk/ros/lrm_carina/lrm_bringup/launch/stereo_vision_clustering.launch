@@ -57,6 +57,24 @@
 				from="~points_out"
 				to="points_cluster_rgb" />
 		</node>
+		
+<!-- 
+		<node
+			pkg="nodelet"
+			type="nodelet"
+			name="region_growing_try_seg"
+			args="load lrm_stereo/region_growing /camera_nodelet_manager $(arg bond)"
+			output="screen"
+			respawn="true"
+		>
+			<remap
+				from="points_in"
+				to="points_stat" />
+			<remap
+				from="~points_out"
+				to="points_cluster_try" />
+		</node>
+ -->		
 
 		<node
 			pkg="nodelet"
