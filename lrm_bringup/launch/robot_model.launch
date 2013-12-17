@@ -35,5 +35,10 @@
 			value="true" />
 	</node>
  -->
+ 
+ 	<param
+		name="compass_description"
+		command="$(find xacro)/xacro.py '$(find lrm_description)/urdf/compass_model.urdf'" />
+ 
 
 </launch>
