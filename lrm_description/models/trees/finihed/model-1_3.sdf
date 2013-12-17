@@ -18,32 +18,21 @@
 					<izz>0.001</izz>
 				</inertia>
 			</inertial>
-			<!-- 
 			<collision name="collision">
 				<laser_retro>0.5</laser_retro>
 				<geometry>
+					<!-- 
 					<mesh>
 						<uri>model://finihed/meshes/finihed.dae</uri>
 					</mesh>
-					
+					-->
 					<pose>0 -0.05 0 0 0 0</pose>
-
 					<cylinder>
-						<radius>1.0</radius>
-						<length>1.0</length>
+						<radius>0.15</radius>
+						<length>2.001</length>
 					</cylinder>
 				</geometry>
-				<surface>
-					<bounce />
-					<friction>
-						<ode />
-					</friction>
-					<contact>
-						<ode />
-					</contact>
-				</surface>
 			</collision>
-	         -->
 			<visual name="visual">
 				<geometry>
 					<mesh>
