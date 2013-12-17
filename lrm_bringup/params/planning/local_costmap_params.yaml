@@ -11,7 +11,7 @@ local_costmap:
   
   #map_type: costmap
   #global_frame: /wheel_odom
-  global_frame: /odom
+  global_frame: /map
   #robot_base_frame: base_footprint
   robot_base_frame: /base_odometry
   #robot_base_frame: heading_link
@@ -22,10 +22,10 @@ local_costmap:
   rolling_window: true
   #width: 5.0
   #height: 5.0
-  width: 14.0
-  height: 14.0
+  width: 7.0
+  height: 7.0
   resolution: 0.1
-  origin_x: -8.0
+  origin_x: 0.0
   origin_y: 0.0
   
   #save_debug_pgm: false
@@ -34,8 +34,8 @@ local_costmap:
   #observation_sources: cloud ground_cloud
   #observation_sources: local_cloud global_cloud ground_cloud
   #observation_sources:  local_cloud global_cloud
-  #observation_sources: cloud map_cloud
+  observation_sources: cloud map_cloud
   #observation_sources: cluster_cloud map_cloud
 
-  observation_sources: map_cloud_no_mark
+  #observation_sources: map_cloud_no_mark
   #observation_sources: map_cloud_mark_clear

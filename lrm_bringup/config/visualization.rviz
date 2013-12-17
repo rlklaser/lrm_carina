@@ -7,7 +7,6 @@ Panels:
         - /RobotModel-Wheels1/Links1
         - /Camera1/Visibility1
         - /Camera2/Visibility1
-        - /Odometry1
       Splitter Ratio: 0.840637
     Tree Height: 710
   - Class: rviz/Tool Properties
@@ -36,45 +35,45 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         /ackermann_bar_link:
-          Value: true
+          Value: false
         /ackermann_left_susp_link:
-          Value: true
+          Value: false
         /ackermann_right_susp_link:
-          Value: true
+          Value: false
         /base_footprint:
           Value: true
         /base_front_sensors:
-          Value: true
+          Value: false
         /base_link:
           Value: true
         /base_odometry:
-          Value: true
+          Value: false
         /base_steering_wheel:
           Value: true
         /base_stereo_camera:
-          Value: true
+          Value: false
         /bbx_base_front_left_link:
-          Value: true
+          Value: false
         /bbx_base_front_right_link:
-          Value: true
+          Value: false
         /bbx_base_rear_left_link:
-          Value: true
+          Value: false
         /bbx_base_rear_right_link:
-          Value: true
+          Value: false
         /bbx_top_front_left_link:
-          Value: true
+          Value: false
         /bbx_top_front_right_link:
-          Value: true
+          Value: false
         /bbx_top_rear_left_link:
-          Value: true
+          Value: false
         /bbx_top_rear_right_link:
-          Value: true
+          Value: false
         /body_link:
-          Value: true
+          Value: false
         /camera_center_link:
-          Value: true
+          Value: false
         /center_mass_link:
-          Value: true
+          Value: false
         /compass_link:
           Value: true
         /front_axle_link:
@@ -96,9 +95,9 @@ Visualization Manager:
         /imu_link:
           Value: true
         /map:
-          Value: true
+          Value: false
         /odom:
-          Value: true
+          Value: false
         /rear_axle_link:
           Value: true
         /rear_left_bar_link:
@@ -118,17 +117,17 @@ Visualization Manager:
         /steering_wheel_link:
           Value: true
         /stereo_camera:
-          Value: true
+          Value: false
         /stereo_camera/left_frame:
-          Value: true
+          Value: false
         /stereo_camera/left_optical_frame:
-          Value: true
+          Value: false
         /stereo_camera/right_frame:
-          Value: true
+          Value: false
         /stereo_camera/right_optical_frame:
-          Value: true
+          Value: false
         /world:
-          Value: true
+          Value: false
         All Enabled: false
       Marker Scale: 0.7
       Name: TF-Skeleton
@@ -431,14 +430,14 @@ Visualization Manager:
       Value: true
       Visual Enabled: true
     - Class: rviz/Camera
-      Enabled: false
+      Enabled: true
       Image Rendering: background and overlay
       Image Topic: /stereo/left/image_color
       Name: Camera
       Overlay Alpha: 0.5
       Queue Size: 2
       Transport Hint: raw
-      Value: false
+      Value: true
       Visibility:
         Axes: true
         Camera: false
@@ -465,20 +464,20 @@ Visualization Manager:
         Pose: true
         PoseArray: true
         RobotModel: false
-        RobotModel-Wheels: true
+        RobotModel-Wheels: false
         TF: false
-        TF-Skeleton: true
+        TF-Skeleton: false
         Value: true
       Zoom Factor: 1
     - Class: rviz/Camera
-      Enabled: true
+      Enabled: false
       Image Rendering: background and overlay
       Image Topic: /stereo/right/image_raw
       Name: Camera
       Overlay Alpha: 0.2
       Queue Size: 2
       Transport Hint: raw
-      Value: true
+      Value: false
       Visibility:
         Axes: true
         Camera: true
@@ -1085,15 +1084,15 @@ Visualization Manager:
     Current:
       Class: rviz_animated_view_controller/Animated
       Control Mode: Orbit
-      Distance: 3.89505
+      Distance: 4.89847
       Eye:
-        X: -1.64064
-        Y: 2.41944
-        Z: 0.909606
+        X: -3.4367
+        Y: 0.956763
+        Z: 2.35737
       Focus:
-        X: 0.551125
-        Y: -0.644429
-        Z: -0.0805131
+        X: 0.787151
+        Y: -0.500499
+        Z: 0.349753
       Maintain Vertical Axis: true
       Mouse Enabled: true
       Name: Current View
@@ -1117,7 +1116,7 @@ Window Geometry:
   Hide Right Dock: false
   Image:
     collapsed: false
-  QMainWindow State: 000000ff00000000fd00000003000000000000010f00000375fc0200000009fc0000003d000003750000010301000019fa000000010100000002fb0000000a005600690065007700730100000000ffffffff0000010f00fffffffb000000100044006900730070006c0061007900730100000000000001a70000010f00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007300000001b90000006d0000006a00fffffffb0000001200530065006c0065006300740069006f006e00000001f5000000820000006a00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007300000002a70000009f0000000000000000fc0000021b000001180000000000fffffffaffffffff0100000001fb0000000a0049006d0061006700650000000000ffffffff0000005100fffffffb0000000c00540065006c0065006f0070000000030a0000007f0000000000000000fb0000000a0049006d00610067006500000002e0000000c70000000000000000fb0000000a0049006d006100670065000000031c000000b40000000000000000fb0000000a0049006d006100670065010000021c00000117000000000000000000000002000003aa00000106fc0100000002fb0000000c00430061006d0065007200610000000115000003aa0000005700fffffffb0000000c00430061006d0065007200610100000115000003aa0000005700ffffff00000003000003aa0000003efc0100000001fb0000000800540069006d00650100000115000003aa0000024e00ffffff000003aa0000022500000001000000020000000100000002fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd00000003000000000000010f00000375fc0200000009fc0000003d000003750000010301000019fa000000010100000002fb0000000a005600690065007700730100000000ffffffff0000010f00fffffffb000000100044006900730070006c0061007900730100000000000001a70000010f00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007300000001b90000006d0000006a00fffffffb0000001200530065006c0065006300740069006f006e00000001f5000000820000006a00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007300000002a70000009f0000000000000000fc0000021b000001180000000000fffffffaffffffff0100000001fb0000000a0049006d0061006700650000000000ffffffff0000005100fffffffb0000000c00540065006c0065006f0070000000030a0000007f0000000000000000fb0000000a0049006d00610067006500000002e0000000c70000000000000000fb0000000a0049006d006100670065000000031c000000b40000000000000000fb0000000a0049006d006100670065010000021c00000117000000000000000000000002000003aa00000106fc0100000002fb0000000c00430061006d0065007200610100000115000003aa0000005700fffffffb0000000c00430061006d0065007200610000000115000003aa0000005700ffffff00000003000003aa0000003efc0100000001fb0000000800540069006d00650100000115000003aa0000024e00ffffff000003aa0000022500000001000000020000000100000002fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:

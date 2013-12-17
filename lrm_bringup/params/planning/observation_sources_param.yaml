@@ -89,7 +89,7 @@ map_cloud:
   
 cluster_cloud:
   {
-    #sensor_frame: /base_footprint, 
+    #sensor_frame: /map, 
     data_type: PointCloud2,  
     topic: /cloud_in, 
     marking: true, 
@@ -122,7 +122,7 @@ map_cloud_no_mark:
   
 map_cloud_mark_clear:
   {
-    #sensor_frame: /base_footprint, 
+    #sensor_frame: /map, 
     data_type: PointCloud2,  
     topic: /map_cloud_in, 
     marking: true, 

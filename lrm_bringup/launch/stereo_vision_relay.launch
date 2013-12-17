@@ -3,6 +3,7 @@
 	<group ns="relay">
 		<!-- 
 		args="/cloud/points_zigzag_filter /cloud_in"
+		args="/cloud/points_voxel_clusters /cloud_in"
 		-->
 		<node
 			name="cluster_filter"

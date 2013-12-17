@@ -21,7 +21,9 @@ footprint_padding: 0.0
 
 inflation_radius: 3.2
 
-transform_tolerance: 0.3                    # default 0.3
+#tf wait
+transform_tolerance: 0.5                    # default 0.3
+
 cost_scaling_factor: 1.0                    # default 10
 
 
