@@ -97,7 +97,7 @@
 	<link name="base_front_sensors">
 		<xacro:inertial_minimal />
 	</link>
-
+     
 	<joint
 		name="joint_front_sensors"
 		type="fixed"

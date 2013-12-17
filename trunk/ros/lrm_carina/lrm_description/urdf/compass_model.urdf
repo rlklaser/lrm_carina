@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+
+<robot name="Compass">
+	<link name="compass_link">
+		<visual>
+			<origin
+				xyz="0 -0.15 0.0"
+				rpy="0 0 2.36" />
+			<geometry>
+				<mesh
+					filename="package://lrm_description/meshes/compass_rose.dae"
+					scale="0.1 0.1 0.1" />
+			</geometry>
+		</visual>
+	</link>
+</robot>
+ 
