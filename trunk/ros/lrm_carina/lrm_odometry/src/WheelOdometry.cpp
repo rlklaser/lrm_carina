@@ -77,6 +77,14 @@ WheelOdometry::WheelOdometry(ros::NodeHandle n) :
 		joint_state.position.push_back(0);
 		joints.ndx_joint_front_right_bar = position++;
 
+		joint_state.name.push_back(std::string("joint_steer"));
+		joint_state.position.push_back(0);
+		joints.ndx_joint_steering = position++;
+
+		joint_state.name.push_back(std::string("joint_ackermann_bar"));
+		joint_state.position.push_back(0);
+		joints.ndx_joint_ackermann_bar = position++;
+
 		/*model with suspension*/
 		joint_state.name.push_back(std::string("joint_front_left_susp"));
 		joint_state.position.push_back(0);
@@ -99,9 +107,6 @@ WheelOdometry::WheelOdometry(ros::NodeHandle n) :
 		joint_state.position.push_back(0);
 		position++;
 		joint_state.name.push_back(std::string("joint_ackermann_right_susp"));
-		joint_state.position.push_back(0);
-		position++;
-		joint_state.name.push_back(std::string("joint_steer"));
 		joint_state.position.push_back(0);
 		position++;
 	}
@@ -429,10 +434,10 @@ void WheelOdometry::calcJointStates() {
 	joint_state.header.stamp = /*odo.current_time;*/ ros::Time::now();
 
 	if (!odo.p.animation_only) {
-		joint_state.position[joints.ndx_joint_rear_left_wheel] += odo.dist_r_l / odo.p.wheel_ray;
-		joint_state.position[joints.ndx_joint_rear_right_wheel] += odo.dist_r_r / odo.p.wheel_ray;
-		joint_state.position[joints.ndx_joint_front_left_wheel] += odo.dist_f_l / odo.p.wheel_ray;
-		joint_state.position[joints.ndx_joint_front_right_wheel] += odo.dist_f_r / odo.p.wheel_ray;
+		joint_state.position[joints.ndx_joint_rear_left_wheel] += odo.dist_r_l / odo.p.wheel_diameter / M_PI;
+		joint_state.position[joints.ndx_joint_rear_right_wheel] += odo.dist_r_r / odo.p.wheel_diameter / M_PI;
+		joint_state.position[joints.ndx_joint_front_left_wheel] += odo.dist_f_l / odo.p.wheel_diameter / M_PI;
+		joint_state.position[joints.ndx_joint_front_right_wheel] += odo.dist_f_r / odo.p.wheel_diameter / M_PI;
 
 		//keep into 2*PI
 		joint_state.position[joints.ndx_joint_rear_left_wheel] =
@@ -446,6 +451,9 @@ void WheelOdometry::calcJointStates() {
 
 		joint_state.position[joints.ndx_joint_front_left_bar] = odo.phi_l;
 		joint_state.position[joints.ndx_joint_front_right_bar] = odo.phi_r;
+		double steer = (odo.phi_r + odo.phi_l) / 2;
+		joint_state.position[joints.ndx_joint_steering] = steer;
+		joint_state.position[joints.ndx_joint_ackermann_bar] = M_PI - steer;
 	}
 	joint_state.position[joints.ndx_joint_steering_wheel] = -(odo.encSteerValue / STEER_ENCODER_RESOLUTION) * (2 * M_PI);
 }

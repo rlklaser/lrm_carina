@@ -188,6 +188,8 @@ struct st_joints {
 	int ndx_joint_front_left_bar;
 	int ndx_joint_front_right_bar;
 	int ndx_joint_steering_wheel;
+	int ndx_joint_steering;
+	int ndx_joint_ackermann_bar;
 };
 
 class WheelOdometry {
