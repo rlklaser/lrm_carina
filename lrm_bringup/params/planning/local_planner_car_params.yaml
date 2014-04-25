@@ -18,12 +18,15 @@ sim_granularity: 0.1
 
 pdist_scale: 1.0
 gdist_scale: 0.8
-occdist_scale: 1.0
+occdist_scale: 0.1 
+#1.0
 hdiff_scale: 1.0
-heading_points: 11
+heading_points: 5
 
-vx_samples: 11
-vtheta_samples: 37
+vx_samples: 7
+#11
+vtheta_samples: 25 
+#37
 
 simple_attractor: False
 angular_sim_granularity: 0.025
