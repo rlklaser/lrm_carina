@@ -76,13 +76,13 @@
 		value="0.60" />
 	<property
 		name="max_steer"
-		value="32" /> <!-- 32 = 0.59, 38 = 0,66 rad -->
+		value="32.9" /> <!-- 32 = 0.59, 38 = 0,66 rad -->
 	<property
 		name="max_throttle"
 		value="110" /> <!-- see arduino controller -->
 	<property
 		name="drive_torque"
-		value="700000" /> <!-- 1 hp = 746 W = 746 N·m/s -> clubcar motor ~ 9.5 Hp -->
+		value="99000000" /> <!--  700000    1 hp = 746 W = 746 N·m/s -> clubcar motor ~ 9.5 Hp -->
 	<property
 		name="steer_torque"
 		value="600" />

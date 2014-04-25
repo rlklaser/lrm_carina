@@ -18,6 +18,7 @@
 					<izz>0.001</izz>
 				</inertia>
 			</inertial>
+
 			<collision name="collision">
 				<laser_retro>0.5</laser_retro>
 				<geometry>
@@ -33,6 +34,7 @@
 					</cylinder>
 				</geometry>
 			</collision>
+
 			<visual name="visual">
 				<geometry>
 					<mesh>
