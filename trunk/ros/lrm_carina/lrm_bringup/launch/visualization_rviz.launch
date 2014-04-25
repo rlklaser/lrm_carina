@@ -1,0 +1,22 @@
+<launch>
+
+	<rosparam
+		command="load"
+		file="$(find lrm_bringup)/params/global_sim_params.yaml" />
+		
+	<node
+		name="rviz"
+		pkg="rviz"
+		type="rviz"
+		respawn="true"
+		output="screen"
+		args="-d $(find lrm_bringup)/config/visualization.rviz" />
+
+	<node
+		name="viz_gazebo_models"
+		pkg="lrm_gazebo"
+		type="viz_gazebo_models_node"
+		respawn="true"
+		output="screen" />
+
+</launch>

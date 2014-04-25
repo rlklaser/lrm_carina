@@ -309,7 +309,7 @@ Visualization Manager:
           Position Tolerance: 0.1
           Topic: /vo_odometry/odom
           Value: true
-      Enabled: false
+      Enabled: true
       Name: Odometry
     - Class: rviz/Group
       Displays:
@@ -947,15 +947,15 @@ Visualization Manager:
     Current:
       Class: rviz_animated_view_controller/Animated
       Control Mode: Orbit
-      Distance: 31.0786
+      Distance: 20.8701
       Eye:
-        X: -11.7107
-        Y: -0.638152
-        Z: 20.7927
+        X: -7.94192
+        Y: 0.199907
+        Z: 3.57853
       Focus:
-        X: 12.7237
-        Y: -1.62155
-        Z: 1.61276
+        X: 12.2407
+        Y: -0.584224
+        Z: -1.67578
       Maintain Vertical Axis: true
       Mouse Enabled: true
       Name: Current View
