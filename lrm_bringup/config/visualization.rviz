@@ -6,9 +6,6 @@ Panels:
       Expanded:
         - /Camera1/Visibility1
         - /Camera2/Visibility1
-        - /Navigation1/Path1
-        - /Navigation1/Path2
-        - /Navigation1/Path3
         - /Models1/Wheels1/Links1
       Splitter Ratio: 0.628253
     Tree Height: 731
@@ -588,7 +585,7 @@ Visualization Manager:
           Value: true
         - Alpha: 1
           Class: rviz/Polygon
-          Color: 25; 255; 0
+          Color: 0; 0; 0
           Enabled: true
           Name: Polygon
           Topic: /move_base/global_costmap/robot_footprint
@@ -950,15 +947,15 @@ Visualization Manager:
     Current:
       Class: rviz_animated_view_controller/Animated
       Control Mode: Orbit
-      Distance: 5.16635
+      Distance: 17.128
       Eye:
-        X: -1.20935
-        Y: 3.44327
-        Z: 2.7332
+        X: -7.30547
+        Y: 1.41678
+        Z: 5.05074
       Focus:
-        X: 1.61878
-        Y: -0.0254847
-        Z: 0.152403
+        X: 6.50134
+        Y: 2.86517
+        Z: -4.98129
       Maintain Vertical Axis: true
       Mouse Enabled: true
       Name: Current View
