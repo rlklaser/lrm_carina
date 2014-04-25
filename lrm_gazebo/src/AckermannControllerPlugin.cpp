@@ -129,7 +129,7 @@ void AckermannControllerPlugin::Load(physics::ModelPtr _parent, sdf::ElementPtr 
 
 	if (!_sdf->HasElement("driveTorque")) {
 		ROS_WARN("Ackermann Drive plugin missing <driveTorque>");
-		driveTorque_ = 700000.0;
+		driveTorque_ = 7000000.0;
 	} else {
 		driveTorque_ = _sdf->GetElement("driveTorque")->GetValueDouble();
 	}
@@ -236,8 +236,12 @@ void AckermannControllerPlugin::UpdateChild() {
 
 		//std::cout << l_force << " ";
 
-		joints_[BACKLEFT]->SetForce(0, l_force);
-		joints_[BACKRIGHT]->SetForce(0, r_force);
+		//joints_[BACKLEFT]->SetForce(0, l_force);
+		//joints_[BACKRIGHT]->SetForce(0, r_force);
+
+		joints_[BACKLEFT]->SetVelocity(0, 3 *  wheelSpeed_[BACKLEFT] / maxThrottle_);
+		joints_[BACKRIGHT]->SetVelocity(0, 3 *  wheelSpeed_[BACKRIGHT] / maxThrottle_);
+
 	}
 
 	double diff = (wheelSpeed_[FRONTSTEER] - stAngle);

@@ -36,10 +36,19 @@
 #include <visualization_msgs/MarkerArray.h>
 #include <vector>
 
+#include <boost/assign/list_of.hpp>
+
 struct st_model {
 	std::string name;
 	geometry_msgs::Pose pose;
 	geometry_msgs::Twist twist;
+	int type;
+};
+
+struct st_model_type {
+	std::string type;
+	int count;
+	std::string mesh;
 };
 
 ros::Publisher markersPub;
@@ -48,31 +57,45 @@ ros::Subscriber modelSub;
 
 bool published;
 
+struct st_model_type finihed = { "finihed", 7, "package://lrm_description/models/trees/finihed/meshes/finihed.dae" };
+struct st_model_type bush = { "Bush", 4, "package://lrm_description/models/trees/Bush/meshes/Bush.dae" };
+struct st_model_type bark = { "Bark", 4, "package://lrm_description/models/trees/Bark/meshes/Bark.dae" };
+struct st_model_type spatha = { "Spathaphylum", 12, "package://lrm_description/models/trees/Spathaphylum/meshes/Spathaphylum.dae" };
+
+std::vector<struct st_model_type> types; // = boost::assign::list_of(finished, bush, bark, spatha);
+
 //void modelsCallback(gazebo_msgs::ModelStates::ConstPtr msg) {
 void modelsCallback(gazebo_msgs::LinkStates::ConstPtr msg) {
 
-	if(published) return;
+	if (published)
+		return;
 	published = true;
 
 	std::vector<st_model> models;
 
-	for (unsigned i = 0; i < msg->name.size(); i++) {
-		//std::cout << msg->name[i] << std::endl;
-		if (strncmp(msg->name[i].c_str(), "finihed", 7) == 0) {
-			struct st_model model;
-			model.name = msg->name[i];
-			model.pose = msg->pose[i];
-			model.twist = msg->twist[i];
+	for (unsigned m = 0; m < types.size(); ++m) {
+		for (unsigned i = 0; i < msg->name.size(); i++) {
+			//std::cout << msg->name[i] << std::endl;
+			if (strncmp(msg->name[i].c_str(), types[m].type.c_str(), types[m].count) == 0) {
+				struct st_model model;
+				model.name = msg->name[i];
+				model.pose = msg->pose[i];
+				model.twist = msg->twist[i];
+				model.type = m;
 
-			if(model.pose.position.x == 0 && model.pose.position.y == 0 && model.pose.position.z == 0) {
-				continue;
+				if (model.pose.position.x == 0 && model.pose.position.y == 0 && model.pose.position.z == 0) {
+					continue;
+				}
+
+				models.push_back(model);
 			}
 
-			models.push_back(model);
-		}
+			if (strncmp(msg->name[i].c_str(), "carina::base_footprint", 22) == 0) {
+				std::cout << "x: " << msg->pose[i].position.x << " y: " << msg->pose[i].position.y << std::endl;
+			}
 
-		if (strncmp(msg->name[i].c_str(), "carina::base_footprint", 22) == 0) {
-			std::cout << "x: " << msg->pose[i].position.x << " y: " <<  msg->pose[i].position.y << std::endl;
+			if(m==0)
+				std::cout << msg->name[i].c_str() << std::endl;
 		}
 	}
 
@@ -83,7 +106,7 @@ void modelsCallback(gazebo_msgs::LinkStates::ConstPtr msg) {
 	for (unsigned i = 0; i < models.size(); ++i) {
 		markers.markers[i].header.frame_id = "/map";
 		markers.markers[i].header.stamp = rostime;
-		markers.markers[i].ns = "trees";//models[i].name;
+		markers.markers[i].ns = "trees"; //models[i].name;
 		markers.markers[i].id = i;
 		//markers.markers[i].type = visualization_msgs::Marker::CYLINDER;
 		markers.markers[i].type = visualization_msgs::Marker::MESH_RESOURCE;
@@ -96,6 +119,7 @@ void modelsCallback(gazebo_msgs::LinkStates::ConstPtr msg) {
 		markers.markers[i].scale.x = 1;
 		markers.markers[i].scale.y = 1;
 		markers.markers[i].scale.z = 1;
+		models[i].pose.position.z = 0;
 		markers.markers[i].pose = models[i].pose;
 
 		//markers.markers[i].color.r = 0.3;
@@ -103,7 +127,7 @@ void modelsCallback(gazebo_msgs::LinkStates::ConstPtr msg) {
 		//markers.markers[i].color.b = 0.3;
 		//markers.markers[i].color.a = 1;
 
-		markers.markers[i].mesh_resource = "package://lrm_description/models/trees/finihed/meshes/finihed.dae";
+		markers.markers[i].mesh_resource = types[models[i].type].mesh; //"package://lrm_description/models/trees/finihed/meshes/finihed.dae";
 		markers.markers[i].text = models[i].name;
 		markers.markers[i].mesh_use_embedded_materials = true;
 		//markers.markers[i].pose.orientation = models[i].twist;
@@ -121,6 +145,11 @@ void modelsCallback(gazebo_msgs::LinkStates::ConstPtr msg) {
 int main(int argc, char** argv) {
 	ros::init(argc, argv, "viz_gazebo_models_node");
 	ros::NodeHandle nh;
+
+	types.push_back(bark);
+	types.push_back(bush);
+	types.push_back(finihed);
+	types.push_back(spatha);
 
 	published = false;
 	markersPub = nh.advertise<visualization_msgs::MarkerArray>("viz_gazebo_models_array", 1, true);
