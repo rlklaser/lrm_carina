@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <sdf version="1.4">
-  <model name="Banksea">
+  <model name="Bark">
     <static>true</static>
     <link name="link">
       <collision name="collision">

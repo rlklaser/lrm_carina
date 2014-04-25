@@ -30,7 +30,7 @@
 			<visual name="visual">
 				<geometry>
 					<mesh>
-						<uri>model://trees/spathaphylum/meshes/Spathaphylum.dae</uri>
+						<uri>model://spathaphylum/meshes/Spathaphylum.dae</uri>
 					</mesh>
 				</geometry>
 			</visual>
