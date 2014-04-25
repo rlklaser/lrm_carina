@@ -17,7 +17,8 @@
 	<!-- 
 	<include file="$(find lrm_bringup)/launch/camera_nodelet_manager.launch" />
 	 -->
-	<include file="$(find lrm_bringup)/launch/simulator_terrain.launch" />
+	<!-- <include file="$(find lrm_bringup)/launch/simulator_terrain.launch" /> -->
+	<include file="$(find lrm_bringup)/launch/simulator_empty_terrain.launch" />
 	
 	<rosparam
 		command="load"
