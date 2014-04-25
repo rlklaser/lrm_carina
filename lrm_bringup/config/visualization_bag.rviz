@@ -5,12 +5,12 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /TF1/Tree1
-        - /Camera1
+        - /RobotModel1/Links1
         - /Marker1/Namespaces1
         - /Navigation1/GridCells1
         - /PointCloud1
       Splitter Ratio: 0.649402
-    Tree Height: 756
+    Tree Height: 466
   - Class: rviz/Tool Properties
     Expanded:
       - /2D Nav Goal1
@@ -23,7 +23,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: Camera
+    SyncSource: Image
   - Class: rviz/Views
     Expanded:
       - /Current View1
@@ -69,7 +69,7 @@ Visualization Manager:
       Collision Enabled: false
       Enabled: true
       Links:
-        All Links Enabled: true
+        All Links Enabled: false
         Expand Joint Details: false
         Expand Link Details: false
         Expand Tree: false
@@ -147,7 +147,7 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
+          Value: false
         camera_center_link:
           Alpha: 1
           Show Axes: false
@@ -269,14 +269,14 @@ Visualization Manager:
       Value: true
       Visual Enabled: true
     - Class: rviz/Camera
-      Enabled: true
+      Enabled: false
       Image Rendering: background and overlay
       Image Topic: /stereo/left/image_color
       Name: Camera
       Overlay Alpha: 0.2
       Queue Size: 2
       Transport Hint: raw
-      Value: true
+      Value: false
       Visibility:
         Axes: true
         Grid: true
@@ -286,15 +286,13 @@ Visualization Manager:
         Marker: true
         MarkerArray: true
         Navigation:
-          GridCells: true
-          Path: true
-          Polygon: true
+          "": true
           Value: true
         Odometry:
           Odometry: true
           Value: true
         PointCloud:
-          PointCloud2: true
+          "": true
           Value: true
         Pose: true
         RobotModel: false
@@ -304,10 +302,10 @@ Visualization Manager:
     - Alpha: 0.9
       Class: rviz/Map
       Draw Behind: false
-      Enabled: true
+      Enabled: false
       Name: Map
       Topic: /map
-      Value: true
+      Value: false
     - Class: rviz/MarkerArray
       Enabled: false
       Marker Topic: /octomap/occupied_cells_vis_array
@@ -331,8 +329,8 @@ Visualization Manager:
       Topic: /move_base/current_goal
       Value: false
     - Class: rviz/Image
-      Enabled: false
-      Image Topic: /stereo/right/image_mono
+      Enabled: true
+      Image Topic: /stereo/left/image_color
       Max Value: 1
       Median window: 5
       Min Value: 0
@@ -340,7 +338,7 @@ Visualization Manager:
       Normalize Range: true
       Queue Size: 2
       Transport Hint: raw
-      Value: false
+      Value: true
     - Alpha: 0.5
       Cell Size: 1
       Class: rviz/Grid
@@ -697,18 +695,29 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Class: rviz/Orbit
-      Distance: 28.4686
-      Focal Point:
-        X: 3.60525
-        Y: 9.79988
-        Z: -3.27426
+      Class: rviz_animated_view_controller/Animated
+      Control Mode: Orbit
+      Distance: 3.55345
+      Eye:
+        X: -5.37982
+        Y: -1.62627
+        Z: 5.11003
+      Focus:
+        X: -2.23642
+        Y: -1.10159
+        Z: 3.53817
+      Maintain Vertical Axis: true
+      Mouse Enabled: true
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 0.594798
+      Placement Topic: /rviz/camera_placement
       Target Frame: /base_footprint
-      Value: Orbit (rviz)
-      Yaw: 4.27402
+      Transition Time: 0.5
+      Up:
+        X: 0
+        Y: 0
+        Z: 1
+      Value: Animated (rviz_animated_view_controller)
     Saved: ~
 Window Geometry:
   Camera:
@@ -720,7 +729,7 @@ Window Geometry:
   Hide Right Dock: true
   Image:
     collapsed: false
-  QMainWindow State: 000000ff00000000fd00000003000000000000010f000003a6fc020000000afc00000028000003a60000010301000019fa000000010100000002fb0000000a005600690065007700730100000000ffffffff0000010f00fffffffb000000100044006900730070006c0061007900730100000000000001a70000010f00fffffffb0000000c00430061006d00650072006100000001ce000000af0000001600000016fb0000001e0054006f006f006c002000500072006f007000650072007400690065007300000001b90000006d0000006a00fffffffb0000001200530065006c0065006300740069006f006e00000001f5000000820000006a00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007300000002a70000009f0000000000000000fc00000220000001130000000000fffffffaffffffff0100000001fb0000000a0049006d0061006700650000000000ffffffff0000005100fffffffb0000000c00540065006c0065006f0070000000030a0000007f0000000000000000fb0000000a0049006d00610067006500000002e0000000c70000000000000000fb0000000a0049006d006100670065000000031c000000b40000000000000000fb0000000a0049006d006100670065010000021c00000117000000000000000000000002000003aa000000dafc0100000001fb0000000c00430061006d0065007200610100000115000003aa0000005700ffffff00000003000003aa0000003efc0100000001fb0000000800540069006d00650100000115000003aa0000024e00ffffff000003aa0000028200000001000000020000000100000002fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd000000030000000000000144000003a6fc020000000afc00000028000002840000010301000019fa000000010100000002fb0000000a005600690065007700730100000000ffffffff0000010f00fffffffb000000100044006900730070006c0061007900730100000000000001a70000010f00fffffffb0000000a0049006d00610067006501000002b20000011c0000001600fffffffb0000000c00430061006d00650072006100000001ce000000af0000001600fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007300000001b90000006d0000006a00fffffffb0000001200530065006c0065006300740069006f006e00000001f5000000820000006a00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007300000002a70000009f0000000000000000fb0000000c00540065006c0065006f0070000000030a0000007f0000000000000000fb0000000a0049006d00610067006500000002e0000000c70000000000000000fb0000000a0049006d006100670065000000031c000000b40000000000000000fb0000000a0049006d006100670065010000021c00000117000000000000000000000002000003aa000000dafc0100000001fb0000000c00430061006d0065007200610100000115000003aa000000000000000000000003000003750000003efc0100000001fb0000000800540069006d0065010000014a000003750000024e00ffffff000003750000036200000001000000020000000100000002fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:
