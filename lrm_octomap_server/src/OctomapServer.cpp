@@ -210,7 +210,7 @@ OctomapServer::OctomapServer(ros::NodeHandle nh, ros::NodeHandle nh_priv) :
 	ReconfigureServerSensorModel::CallbackType fsm = boost::bind(&OctomapServer::reconfigureCallbackSM, this, _1, _2);
 	m_reconfigureServerSM->setCallback(fsm);
 
-	m_octree->updateNode(0, 0, 0, false);
+	//m_octree->updateNode(0, 0, 0, false);
 
 	//m_octree->updateNode(1000, 0, 0, true);
 	//m_octree->updateNode(-1000, 0, 0, true);
