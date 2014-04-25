@@ -1,8 +1,8 @@
 ack_vel_max: 3.0
 ack_vel_min: -3.0
 ack_acc_max: 1.0
-ack_steer_angle_max: 0.55
-ack_steer_angle_min: -0.55
+ack_steer_angle_max: 0.5595
+ack_steer_angle_min: -0.5595
 ack_steer_speed_max: 0.2
 ack_steer_speed_min: -0.2
 ack_steer_acc_max: 1.0

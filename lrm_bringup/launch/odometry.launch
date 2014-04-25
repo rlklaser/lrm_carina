@@ -12,9 +12,11 @@
 		type="relay"
 		args="/wheel_odometry/odom /odom"
 		respawn="true"
-		output="screen" />
+		output="screen"
+	>
+	</node>
 
-
+<!-- 
 	<node
 		name="iri_covariance_markers"
 		pkg="iri_covariance_markers"
@@ -38,5 +40,6 @@
 			name="scale_multiplier_z"
 			value="0.00001" />
 	</node>
+-->
 
 </launch>
