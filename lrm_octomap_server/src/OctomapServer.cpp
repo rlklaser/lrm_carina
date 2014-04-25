@@ -129,6 +129,28 @@ OctomapServer::OctomapServer(ros::NodeHandle nh, ros::NodeHandle nh_priv) :
 	// initialize octomap object & params
 	m_octree = new OcTreeT(m_res);
 
+
+	/*
+	octomap::KeyRay keyRay;
+	point3d ptini(0,0,0);
+	point3d ptfim_a(100,0,0);
+	m_octree->coordToKeyChecked(point, endKey)
+	if (m_octree->computeRayKeys(ptini, ptfim_a, keyRay)) {
+		m_octree->integrateHit(keyRay.end());
+	}
+	*/
+
+	//OcTreeKey k = m_octree->coordToKey(100,100,0);
+	//m_octree->integrateHit(k);
+	//point3d ptini(0,0,0);
+	//point3d ptfim(100,0,0);
+	//m_octree->integrateMissOnRay(ptini, ptfim);
+	//m_octree->insertRay(ptini, ptfim);
+
+	//m_octree->integrateHit()
+	//m_octree->integrateHit()
+	//m_octree->expand();
+
 	//updateTreeProbabilities();
 
 	m_treeDepth = m_octree->getTreeDepth();
@@ -189,6 +211,24 @@ OctomapServer::OctomapServer(ros::NodeHandle nh, ros::NodeHandle nh_priv) :
 	m_reconfigureServerSM->setCallback(fsm);
 
 	m_octree->updateNode(0, 0, 0, false);
+
+	//m_octree->updateNode(1000, 0, 0, true);
+	//m_octree->updateNode(-1000, 0, 0, true);
+	//m_octree->updateNode(0, 1000, 0, true);
+	//m_octree->updateNode(0, -1000, 0, true);
+	point3d ptini(0, 0, 0);
+	point3d ptfim_a(100, 100, 0);
+	point3d ptfim_b(100, -100, 0);
+	point3d ptfim_c(-100, 100, 0);
+	point3d ptfim_d(-1000, -100, 0);
+
+	m_octree->insertRay(ptini, ptfim_a, 200);
+	m_octree->insertRay(ptini, ptfim_b, 200);
+	m_octree->insertRay(ptini, ptfim_c, 200);
+	m_octree->insertRay(ptini, ptfim_d, 200);
+
+	//m_octree->expand();
+
 	m_octree->updateInnerOccupancy();
 	m_updated = false;
 	m_publisherTimer = m_nh.createTimer(ros::Duration(1.0 / m_rate), &OctomapServer::timerCallback, this);
