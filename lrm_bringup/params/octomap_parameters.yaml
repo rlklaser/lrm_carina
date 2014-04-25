@@ -1,5 +1,5 @@
 footprint_eraser:
-  min_distance: 0.5
+  min_distance: 1.5
   timeout: 10
   
   #see odometry node config
