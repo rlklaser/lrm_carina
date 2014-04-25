@@ -87,17 +87,14 @@ Visualization Manager:
           Value: true
           Wheels: true
         Navigation:
-          GridCells: true
-          Path: true
-          Polygon: true
-          Pose: true
+          "": true
           Value: true
         Obstacles: true
         Odometry:
           Odometry: true
           Value: true
         PointCloud:
-          PointCloud2: true
+          "": true
           Value: true
         Pose: true
         PoseArray: true
@@ -947,15 +944,15 @@ Visualization Manager:
     Current:
       Class: rviz_animated_view_controller/Animated
       Control Mode: Orbit
-      Distance: 17.128
+      Distance: 14.1367
       Eye:
-        X: -7.30547
-        Y: 1.41678
-        Z: 5.05074
+        X: -3.15254
+        Y: 0.270204
+        Z: 4.25782
       Focus:
-        X: 6.50134
-        Y: 2.86517
-        Z: -4.98129
+        X: 6.33298
+        Y: 0.120789
+        Z: -6.22312
       Maintain Vertical Axis: true
       Mouse Enabled: true
       Name: Current View
@@ -989,5 +986,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1215
-  X: 1168
+  X: 1338
   Y: 33
