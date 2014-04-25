@@ -63,14 +63,14 @@ Visualization Manager:
       Reference Frame: <Fixed Frame>
       Value: true
     - Class: rviz/Camera
-      Enabled: false
+      Enabled: true
       Image Rendering: background and overlay
       Image Topic: /stereo/left/image_color
       Name: Camera
       Overlay Alpha: 0.5
       Queue Size: 2
       Transport Hint: raw
-      Value: false
+      Value: true
       Visibility:
         Axes: true
         Camera: false
@@ -87,14 +87,17 @@ Visualization Manager:
           Value: true
           Wheels: true
         Navigation:
-          "": true
+          GridCells: true
+          Path: true
+          Polygon: true
+          Pose: true
           Value: true
         Obstacles: true
         Odometry:
           Odometry: true
           Value: true
         PointCloud:
-          "": true
+          PointCloud2: true
           Value: true
         Pose: true
         PoseArray: true
@@ -247,13 +250,13 @@ Visualization Manager:
       Topic: /octomap/cluster_pose
       Value: false
     - Class: rviz/MarkerArray
-      Enabled: false
+      Enabled: true
       Marker Topic: /viz_gazebo_models_array
       Name: Obstacles
       Namespaces:
-        {}
+        trees: true
       Queue Size: 100
-      Value: false
+      Value: true
     - Class: rviz/Group
       Displays:
         - Angle Tolerance: 0.1
@@ -944,15 +947,15 @@ Visualization Manager:
     Current:
       Class: rviz_animated_view_controller/Animated
       Control Mode: Orbit
-      Distance: 14.1367
+      Distance: 31.0786
       Eye:
-        X: -3.15254
-        Y: 0.270204
-        Z: 4.25782
+        X: -11.7107
+        Y: -0.638152
+        Z: 20.7927
       Focus:
-        X: 6.33298
-        Y: 0.120789
-        Z: -6.22312
+        X: 12.7237
+        Y: -1.62155
+        Z: 1.61276
       Maintain Vertical Axis: true
       Mouse Enabled: true
       Name: Current View
