@@ -220,7 +220,7 @@ OctomapServer::OctomapServer(ros::NodeHandle nh, ros::NodeHandle nh_priv) :
 	point3d ptfim_a(100, 100, 0);
 	point3d ptfim_b(100, -100, 0);
 	point3d ptfim_c(-100, 100, 0);
-	point3d ptfim_d(-1000, -100, 0);
+	point3d ptfim_d(-100, -100, 0);
 
 	m_octree->insertRay(ptini, ptfim_a, 200);
 	m_octree->insertRay(ptini, ptfim_b, 200);
