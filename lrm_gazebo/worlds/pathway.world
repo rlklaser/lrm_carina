@@ -1,0 +1,2752 @@
+<sdf version='1.3'>
+  <world name='default'>
+    <scene>
+      <grid>0</grid>
+      <shadows>1</shadows>
+      <ambient>0.200000 0.200000 0.200000 1.000000</ambient>
+      <background>0.700000 0.700000 0.700000 1.000000</background>
+    </scene>
+    <light name='sun' type='directional'>
+      <cast_shadows>1</cast_shadows>
+      <pose>0.000000 0.000000 10.000000 0.000000 0.000000 0.000000</pose>
+      <diffuse>0.800000 0.800000 0.800000 1.000000</diffuse>
+      <specular>0.100000 0.100000 0.100000 1.000000</specular>
+      <attenuation>
+        <range>1000.000000</range>
+        <constant>0.900000</constant>
+        <linear>0.010000</linear>
+        <quadratic>0.001000</quadratic>
+      </attenuation>
+      <direction>-0.500000 0.500000 -1.000000</direction>
+    </light>
+    <model name='heightmap'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <heightmap>
+              <uri>file://media/materials/textures/heightmap_bowl.png</uri>
+              <size>129.000000 129.000000 10.000000</size>
+              <pos>0.000000 0.000000 -5.200000</pos>
+            </heightmap>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <heightmap>
+              <texture>
+                <diffuse>file://media/materials/textures/dirt_diffusespecular.png</diffuse>
+                <normal>file://media/materials/textures/dirt_normal.png</normal>
+                <size>50.000000</size>
+              </texture>
+              <texture>
+                <diffuse>file://media/materials/textures/grass_diffusespecular.png</diffuse>
+                <normal>file://media/materials/textures/grass_normal.png</normal>
+                <size>20.000000</size>
+              </texture>
+              <texture>
+                <diffuse>file://media/materials/textures/fungus_diffusespecular.png</diffuse>
+                <normal>file://media/materials/textures/fungus_normal.png</normal>
+                <size>80.000000</size>
+              </texture>
+              <blend>
+                <min_height>2.000000</min_height>
+                <fade_dist>5.000000</fade_dist>
+              </blend>
+              <blend>
+                <min_height>4.000000</min_height>
+                <fade_dist>5.000000</fade_dist>
+              </blend>
+              <uri>file://media/materials/textures/heightmap_bowl.png</uri>
+              <size>129.000000 129.000000 10.000000</size>
+              <pos>0.000000 0.000000 -5.200000</pos>
+            </heightmap>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <physics type='ode'>
+      <update_rate>1000.000000</update_rate>
+      <gravity>0.000000 0.000000 -9.800000</gravity>
+    </physics>
+    <model name='finihed'>
+      <pose>5.000000 3.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_0'>
+      <pose>6.572180 2.493180 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_1'>
+      <pose>8.000000 2.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_2'>
+      <pose>11.000000 1.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_3'>
+      <pose>13.505400 1.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_4'>
+      <pose>14.503900 2.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_5'>
+      <pose>16.575400 3.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_6'>
+      <pose>18.000000 4.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_7'>
+      <pose>20.000000 4.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_8'>
+      <pose>22.000000 3.517540 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_9'>
+      <pose>24.447500 3.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_10'>
+      <pose>26.000000 2.560790 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_11'>
+      <pose>-4.000000 -19.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_12'>
+      <pose>28.000000 1.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_13'>
+      <pose>29.000000 -1.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_14'>
+      <pose>30.000000 -3.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_15'>
+      <pose>30.000000 -5.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_16'>
+      <pose>31.000000 -7.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_17'>
+      <pose>32.448700 -8.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_18'>
+      <pose>34.000000 -9.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_19'>
+      <pose>36.000000 -8.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_20'>
+      <pose>38.000000 -7.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_21'>
+      <pose>3.000000 -6.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_22'>
+      <pose>4.000000 -6.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_23'>
+      <pose>6.000000 -7.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_24'>
+      <pose>7.000000 -6.440370 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_25'>
+      <pose>8.529960 -6.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_26'>
+      <pose>10.000000 -6.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_27'>
+      <pose>12.000000 -6.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_28'>
+      <pose>13.545700 -6.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_29'>
+      <pose>15.000000 -6.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_30'>
+      <pose>16.000000 -7.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_31'>
+      <pose>17.000000 -8.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_32'>
+      <pose>18.000000 -9.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_33'>
+      <pose>21.000000 -12.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_34'>
+      <pose>23.000000 -15.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_35'>
+      <pose>24.000000 -16.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_36'>
+      <pose>26.000000 -18.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_37'>
+      <pose>29.000000 -19.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_38'>
+      <pose>30.553700 -19.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_39'>
+      <pose>21.000000 -4.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_40'>
+      <pose>32.000000 -19.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_41'>
+      <pose>33.000000 -20.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_42'>
+      <pose>34.000000 -22.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_43'>
+      <pose>35.000000 -23.459000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_44'>
+      <pose>36.000000 -26.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_45'>
+      <pose>39.000000 -16.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_46'>
+      <pose>40.000000 -15.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_47'>
+      <pose>41.000000 -17.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_48'>
+      <pose>43.000000 -14.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <model name='finihed_49'>
+      <pose>42.515900 -18.000000 0.000000 0.000000 0.000000 0.000000</pose>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <link name='link'>
+        <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+        <inertial>
+          <mass>10.000000</mass>
+          <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+          <inertia>
+            <ixx>0.001000</ixx>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyy>0.001000</iyy>
+            <iyz>0.000000</iyz>
+            <izz>0.001000</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.150000</radius>
+              <length>5.000000</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://finihed/meshes/finihed.dae</uri>
+              <scale>1.000000 1.000000 1.000000</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <state world_name='default'>
+      <sim_time>0 0</sim_time>
+      <real_time>0 0</real_time>
+      <wall_time>1398454122 88091510</wall_time>
+    </state>
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose>33.753400 -57.547400 99.737000 0.000000 1.099640 1.256190</pose>
+        <view_controller>orbit</view_controller>
+      </camera>
+    </gui>
+  </world>
+</sdf>
