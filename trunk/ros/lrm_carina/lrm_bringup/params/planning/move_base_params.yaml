@@ -18,6 +18,9 @@ global_frame: /map
 inscribed_radius: 1.6
 circumscribed_radius: 3.2
 
+
+multithreaded: 1
+
 # Recovery
 recovery_behavior_enabled: true
 
