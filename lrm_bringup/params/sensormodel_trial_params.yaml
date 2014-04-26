@@ -11,9 +11,9 @@ sensor_model:
   mid_dist: 5.0
   far_dist: 10.0
   hit: 0.68
-  hit_mid: 0.62
-  hit_far: 0.59
-  miss_to_gnd: 0.48
+  hit_mid: 0.64
+  hit_far: 0.62
+  miss_to_gnd: 0.485
   miss_to_obs: 0.49
   occ: 0.80
   #occ: 80

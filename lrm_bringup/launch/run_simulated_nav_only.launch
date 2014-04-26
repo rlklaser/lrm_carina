@@ -1,0 +1,9 @@
+<launch>
+
+	<rosparam
+		command="load"
+		file="$(find lrm_bringup)/params/global_sim_params.yaml" />
+
+	<include file="$(find lrm_bringup)/launch/planning_navigation.launch" />
+
+</launch>
