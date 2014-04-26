@@ -1,0 +1,22 @@
+sensor_model:
+  degrade_time: 0.0 # 0 means no degradation
+  #update_occ: 0.5 
+  update_occ: 0.495
+  max_range_occ: 0.9
+  decay_cost: 0.9
+    
+  #max_range: 15
+  max_range: 40
+  
+  mid_dist: 5.0
+  far_dist: 10.0
+  hit: 0.59
+  hit_mid: 0.57
+  hit_far: 0.55
+  miss_to_gnd: 0.47
+  miss_to_obs: 0.485
+  occ: 0.80
+  #occ: 80
+    
+  max: 0.96
+  min: 0.03
