@@ -4,21 +4,8 @@
 		command="load"
 		file="$(find lrm_bringup)/params/global_sim_params.yaml" />
 
+	<include file="$(find lrm_bringup)/launch/stereo_vision.launch" />
 	<include file="$(find lrm_bringup)/launch/octomap_mapping.launch" />
-	<include file="$(find lrm_bringup)/launch/planning_navigation.launch" />
-
-<!-- 
-	<node
-		name="ground_seg_node"
-		pkg="lrm_wrappers"
-		type="plane_segment"
-		respawn="true"
-		output="screen"
-	>
-		<remap
-			from="points"
-			to="/cloud/points_voxel" />
-	</node>
- -->
  
 </launch>
+
