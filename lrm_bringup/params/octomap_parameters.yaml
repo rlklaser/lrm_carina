@@ -19,7 +19,7 @@ map_server:
   height_map: false
   resolution: 0.1
   
-  initialize_size: 50
+  initialize_size: 60
     
   max_depth: 16
     
