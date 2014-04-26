@@ -9,7 +9,7 @@ map_server:
   latch: false
   wait_tf: 0.05
   #wait_tf: -1 #do not wait
-  rate: 5
+  rate: 4
   frame_id: /map
   #base_frame_id: /base_footprint
   base_frame_id: /base_odometry
@@ -19,7 +19,7 @@ map_server:
   height_map: false
   resolution: 0.1
   
-  initialize_size: 30
+  initialize_size: 40
     
   max_depth: 16
     
