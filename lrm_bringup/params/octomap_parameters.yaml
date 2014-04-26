@@ -18,6 +18,8 @@ map_server:
   #height_map: true
   height_map: false
   resolution: 0.1
+  
+  initialize_size: 30
     
   max_depth: 16
     

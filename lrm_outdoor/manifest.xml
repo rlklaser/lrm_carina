@@ -18,6 +18,7 @@
 	<depend package="gps_common" />
 	<depend package="geodesy" />
 	<depend package="geometry_msgs" />
+	<depend package="move_base_msgs" />
 	
 </package>
 

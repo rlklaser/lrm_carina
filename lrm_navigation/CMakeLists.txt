@@ -53,3 +53,8 @@ rosbuild_add_boost_directories()
 #	)
 #target_link_libraries(footprint_eraser vnl vgl)
 
+
+rosbuild_add_executable(send_goal
+	src/send_goal.cpp
+	)
+

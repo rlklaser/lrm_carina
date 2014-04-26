@@ -288,6 +288,7 @@ protected:
   bool m_latchedTopics;
 
   double m_res;
+  double m_initSz;
   unsigned m_treeDepth;
   unsigned m_maxTreeDepth;
   double m_probHit;
