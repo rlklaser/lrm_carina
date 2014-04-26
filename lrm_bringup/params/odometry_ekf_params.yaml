@@ -3,7 +3,7 @@ robot_pose_ekf:
   publish_tf: false
 
   output_frame: odom
-  freq: 20.0
+  freq: 10.0
   sensor_timeout: 1.0
   odom_used: true
   imu_used: true
