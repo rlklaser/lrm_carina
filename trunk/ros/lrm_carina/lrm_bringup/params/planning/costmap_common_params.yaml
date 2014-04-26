@@ -28,7 +28,7 @@ cost_scaling_factor: 1.0                    # default 10
 
 
 #lethal_cost_threshold: 85                   #occ from octomap
-lethal_cost_threshold: 80
+lethal_cost_threshold: 75
 
 unknown_cost_value: 0
 track_unknown_space: false
