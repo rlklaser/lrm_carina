@@ -49,7 +49,7 @@ OctomapServer::OctomapServer(ros::NodeHandle nh, ros::NodeHandle nh_priv) :
 		m_octree(NULL), m_maxRange(-1.0), m_maxRangeOcc(0.0), m_worldFrameId("/world"),
 		m_baseFrameId("base_footprint"), m_sourceFrameId("stereo_camera"),
 		m_useHeightMap(true), m_colorFactor(0.8), m_latchedTopics(false),
-		m_res(0.1), m_treeDepth(0), m_maxTreeDepth(0),
+		m_res(0.1), m_initSz(0), m_treeDepth(0), m_maxTreeDepth(0),
 		m_probHit(0.7), m_probHitMid(0.7), m_probHitFar(0.7),
 		m_probFarDist(25.0), m_probMidDist(15.0),
 		m_probMissGnd(0.499), m_probMissObs(0.499), m_thresMin(0.12), m_thresMax(0.97),
@@ -75,6 +75,7 @@ OctomapServer::OctomapServer(ros::NodeHandle nh, ros::NodeHandle nh_priv) :
 	m_nh_priv.param("height_map", m_useHeightMap, m_useHeightMap);
 	m_nh_priv.param("color_factor", m_colorFactor, m_colorFactor);
 	m_nh_priv.param("resolution", m_res, m_res);
+	m_nh_priv.param("initialize_size", m_initSz, m_initSz);
 
 	m_nh_priv.param("pointcloud_min_z", m_pointcloudMinZ, m_pointcloudMinZ);
 	m_nh_priv.param("pointcloud_max_z", m_pointcloudMaxZ, m_pointcloudMaxZ);
@@ -210,24 +211,20 @@ OctomapServer::OctomapServer(ros::NodeHandle nh, ros::NodeHandle nh_priv) :
 	ReconfigureServerSensorModel::CallbackType fsm = boost::bind(&OctomapServer::reconfigureCallbackSM, this, _1, _2);
 	m_reconfigureServerSM->setCallback(fsm);
 
-	//m_octree->updateNode(0, 0, 0, false);
+	m_octree->updateNode(0, 0, 0, false);
 
-	//m_octree->updateNode(1000, 0, 0, true);
-	//m_octree->updateNode(-1000, 0, 0, true);
-	//m_octree->updateNode(0, 1000, 0, true);
-	//m_octree->updateNode(0, -1000, 0, true);
-	point3d ptini(0, 0, 0);
-	point3d ptfim_a(100, 100, 0);
-	point3d ptfim_b(100, -100, 0);
-	point3d ptfim_c(-100, 100, 0);
-	point3d ptfim_d(-100, -100, 0);
+	if(m_initSz>0) {
+		point3d ptini(0, 0, 0);
+		point3d ptfim_a(m_initSz, m_initSz, 0);
+		point3d ptfim_b(m_initSz, -m_initSz, 0);
+		point3d ptfim_c(-m_initSz, m_initSz, 0);
+		point3d ptfim_d(-m_initSz, -m_initSz, 0);
 
-	m_octree->insertRay(ptini, ptfim_a, 200);
-	m_octree->insertRay(ptini, ptfim_b, 200);
-	m_octree->insertRay(ptini, ptfim_c, 200);
-	m_octree->insertRay(ptini, ptfim_d, 200);
-
-	//m_octree->expand();
+		m_octree->insertRay(ptini, ptfim_a, 200);
+		m_octree->insertRay(ptini, ptfim_b, 200);
+		m_octree->insertRay(ptini, ptfim_c, 200);
+		m_octree->insertRay(ptini, ptfim_d, 200);
+	}
 
 	m_octree->updateInnerOccupancy();
 	m_updated = false;
