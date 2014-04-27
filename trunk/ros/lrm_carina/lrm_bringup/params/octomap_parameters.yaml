@@ -7,7 +7,7 @@ footprint_eraser:
   
 map_server:
   latch: false
-  wait_tf: 0.05
+  wait_tf: 0.5
   #wait_tf: -1 #do not wait
   rate: 4
   frame_id: /map
