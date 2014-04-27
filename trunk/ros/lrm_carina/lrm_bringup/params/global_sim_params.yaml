@@ -9,6 +9,6 @@ imu_calibrate_node:
 stereo_camera:
   throttle_stereo:
     rate: 5
-    #approximate_sync: true
-    approximate_sync: false
+    approximate_sync: true
+    #approximate_sync: false
   
