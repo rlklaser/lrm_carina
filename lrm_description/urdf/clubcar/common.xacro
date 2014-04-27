@@ -82,7 +82,7 @@
 		value="110" /> <!-- see arduino controller -->
 	<property
 		name="drive_torque"
-		value="99000000" /> <!--  700000    1 hp = 746 W = 746 N·m/s -> clubcar motor ~ 9.5 Hp -->
+		value="700000" /> <!--  700000    1 hp = 746 W = 746 N·m/s -> clubcar motor ~ 9.5 Hp -->
 	<property
 		name="steer_torque"
 		value="600" />
