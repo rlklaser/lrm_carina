@@ -1,0 +1,484 @@
+<sdf version='1.3'>
+  <world name='default'>
+    <scene>
+      <grid>0</grid>
+      <shadows>1</shadows>
+      <ambient>0.200000 0.200000 0.200000 1.000000</ambient>
+      <background>0.700000 0.700000 0.700000 1.000000</background>
+    </scene>
+    <light name='sun' type='directional'>
+      <cast_shadows>1</cast_shadows>
+      <pose>0.000000 0.000000 10.000000 0.000000 0.000000 0.000000</pose>
+      <diffuse>0.800000 0.800000 0.800000 1.000000</diffuse>
+      <specular>0.100000 0.100000 0.100000 1.000000</specular>
+      <attenuation>
+        <range>1000.000000</range>
+        <constant>0.900000</constant>
+        <linear>0.010000</linear>
+        <quadratic>0.001000</quadratic>
+      </attenuation>
+      <direction>-0.500000 0.500000 -1.000000</direction>
+    </light>
+    <model name='heightmap'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <heightmap>
+              <uri>file://media/materials/textures/heightmap_bowl.png</uri>
+              <size>129.000000 129.000000 10.000000</size>
+              <pos>0.000000 0.000000 -5.200000</pos>
+            </heightmap>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <heightmap>
+              <texture>
+                <diffuse>file://media/materials/textures/dirt_diffusespecular.png</diffuse>
+                <normal>file://media/materials/textures/dirt_normal.png</normal>
+                <size>50.000000</size>
+              </texture>
+              <texture>
+                <diffuse>file://media/materials/textures/grass_diffusespecular.png</diffuse>
+                <normal>file://media/materials/textures/grass_normal.png</normal>
+                <size>20.000000</size>
+              </texture>
+              <texture>
+                <diffuse>file://media/materials/textures/fungus_diffusespecular.png</diffuse>
+                <normal>file://media/materials/textures/fungus_normal.png</normal>
+                <size>80.000000</size>
+              </texture>
+              <blend>
+                <min_height>2.000000</min_height>
+                <fade_dist>5.000000</fade_dist>
+              </blend>
+              <blend>
+                <min_height>4.000000</min_height>
+                <fade_dist>5.000000</fade_dist>
+              </blend>
+              <uri>file://media/materials/textures/heightmap_bowl.png</uri>
+              <size>129.000000 129.000000 10.000000</size>
+              <pos>0.000000 0.000000 -5.200000</pos>
+            </heightmap>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <physics type='ode'>
+      <update_rate>1000.000000</update_rate>
+      <gravity>0.000000 0.000000 -9.800000</gravity>
+    </physics>
+    <model name='Construction Barrel'>
+      <static>1</static>
+      <link name='link'>
+        <inertial>
+          <pose>0.000000 0.000000 0.400000 0.000000 0.000000 0.000000</pose>
+          <mass>500.000000</mass>
+          <inertia>
+            <ixx>51.209600</ixx>
+            <iyy>51.209600</iyy>
+            <izz>25.000000</izz>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyz>0.000000</iyz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://construction_barrel/meshes/construction_barrel.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://construction_barrel/meshes/construction_barrel.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose>15.000000 -1.487060 0.000000 0.000000 0.000000 0.000000</pose>
+    </model>
+    <model name='Construction Barrel_0'>
+      <static>1</static>
+      <link name='link'>
+        <inertial>
+          <pose>0.000000 0.000000 0.400000 0.000000 0.000000 0.000000</pose>
+          <mass>500.000000</mass>
+          <inertia>
+            <ixx>51.209600</ixx>
+            <iyy>51.209600</iyy>
+            <izz>25.000000</izz>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyz>0.000000</iyz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://construction_barrel/meshes/construction_barrel.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://construction_barrel/meshes/construction_barrel.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose>0.000000 -2.484610 0.000000 0.000000 0.000000 0.000000</pose>
+    </model>
+    <model name='Construction Barrel_1'>
+      <static>1</static>
+      <link name='link'>
+        <inertial>
+          <pose>0.000000 0.000000 0.400000 0.000000 0.000000 0.000000</pose>
+          <mass>500.000000</mass>
+          <inertia>
+            <ixx>51.209600</ixx>
+            <iyy>51.209600</iyy>
+            <izz>25.000000</izz>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyz>0.000000</iyz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://construction_barrel/meshes/construction_barrel.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://construction_barrel/meshes/construction_barrel.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose>0.565180 2.000000 0.000000 0.000000 0.000000 0.000000</pose>
+    </model>
+    <model name='Construction Barrel_2'>
+      <static>1</static>
+      <link name='link'>
+        <inertial>
+          <pose>0.000000 0.000000 0.400000 0.000000 0.000000 0.000000</pose>
+          <mass>500.000000</mass>
+          <inertia>
+            <ixx>51.209600</ixx>
+            <iyy>51.209600</iyy>
+            <izz>25.000000</izz>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyz>0.000000</iyz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://construction_barrel/meshes/construction_barrel.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://construction_barrel/meshes/construction_barrel.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose>12.000000 -22.000000 0.000000 0.000000 0.000000 0.000000</pose>
+    </model>
+    <model name='Construction Barrel_3'>
+      <static>1</static>
+      <link name='link'>
+        <inertial>
+          <pose>0.000000 0.000000 0.400000 0.000000 0.000000 0.000000</pose>
+          <mass>500.000000</mass>
+          <inertia>
+            <ixx>51.209600</ixx>
+            <iyy>51.209600</iyy>
+            <izz>25.000000</izz>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyz>0.000000</iyz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://construction_barrel/meshes/construction_barrel.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://construction_barrel/meshes/construction_barrel.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose>17.000000 15.461300 0.000000 0.000000 0.000000 0.000000</pose>
+    </model>
+    <model name='Construction Barrel_4'>
+      <static>1</static>
+      <link name='link'>
+        <inertial>
+          <pose>0.000000 0.000000 0.400000 0.000000 0.000000 0.000000</pose>
+          <mass>500.000000</mass>
+          <inertia>
+            <ixx>51.209600</ixx>
+            <iyy>51.209600</iyy>
+            <izz>25.000000</izz>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyz>0.000000</iyz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://construction_barrel/meshes/construction_barrel.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://construction_barrel/meshes/construction_barrel.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose>1.000000 9.000000 0.000000 0.000000 0.000000 0.000000</pose>
+    </model>
+    <model name='Construction Barrel_5'>
+      <static>1</static>
+      <link name='link'>
+        <inertial>
+          <pose>0.000000 0.000000 0.400000 0.000000 0.000000 0.000000</pose>
+          <mass>500.000000</mass>
+          <inertia>
+            <ixx>51.209600</ixx>
+            <iyy>51.209600</iyy>
+            <izz>25.000000</izz>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyz>0.000000</iyz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://construction_barrel/meshes/construction_barrel.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://construction_barrel/meshes/construction_barrel.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose>-12.000000 14.000000 0.000000 0.000000 0.000000 0.000000</pose>
+    </model>
+    <model name='Construction Barrel_6'>
+      <static>1</static>
+      <link name='link'>
+        <inertial>
+          <pose>0.000000 0.000000 0.400000 0.000000 0.000000 0.000000</pose>
+          <mass>500.000000</mass>
+          <inertia>
+            <ixx>51.209600</ixx>
+            <iyy>51.209600</iyy>
+            <izz>25.000000</izz>
+            <ixy>0.000000</ixy>
+            <ixz>0.000000</ixz>
+            <iyz>0.000000</iyz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://construction_barrel/meshes/construction_barrel.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://construction_barrel/meshes/construction_barrel.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0.000000</linear>
+          <angular>0.000000</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose>-15.000000 -3.000000 0.000000 0.000000 0.000000 0.000000</pose>
+    </model>
+    <state world_name='default'>
+      <sim_time>0 0</sim_time>
+      <real_time>0 0</real_time>
+      <wall_time>1398572951 281009699</wall_time>
+    </state>
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose>23.753900 3.346960 145.116000 -0.000016 1.569800 2.088170</pose>
+        <view_controller>orbit</view_controller>
+      </camera>
+    </gui>
+  </world>
+</sdf>
