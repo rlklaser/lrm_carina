@@ -431,11 +431,11 @@ void OctomapServer::insertCloudGroundCallback(const sensor_msgs::PointCloud2::Co
 			m_tfListener.lookupTransform(m_worldFrameId, cloud->header.frame_id, cloud->header.stamp, sensorToWorldTf);
 		}
 		catch (tf::ExtrapolationException& ex) {
-			ROS_ERROR_STREAM(">GD:Transform error of sensor data: " << ex.what() << ", quitting callback");
+			ROS_ERROR_STREAM(">GD:E Transform error of sensor data: " << ex.what() << ", quitting callback");
 			return;
 		}
 		catch (tf::TransformException& ex) {
-			ROS_ERROR_STREAM("GD:Transform error of sensor data: " << ex.what() << ", quitting callback");
+			ROS_ERROR_STREAM("GD:T Transform error of sensor data: " << ex.what() << ", quitting callback");
 			return;
 		}
 
