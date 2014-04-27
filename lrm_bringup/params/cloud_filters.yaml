@@ -47,8 +47,8 @@ ground_voxel_grid_nodelet:
   filter_limit_negative: False
   leaf_size: 0.25
   approximate_sync: false
-  #output_frame: /map
-  output_frame: /heading_link
+  output_frame: /map
+  #output_frame: /heading_link
   
 local_scan_cutahead_points_nodelet:
   filter_field_name: x
