@@ -28,6 +28,7 @@
  */
 
 #include <ros/ros.h>
+#include <tf/tf.h>
 #include <move_base_msgs/MoveBaseAction.h>
 #include <actionlib/client/simple_action_client.h>
 
@@ -46,13 +47,19 @@ int main(int argc, char** argv){
 
   move_base_msgs::MoveBaseGoal goal;
 
-  //we'll send a goal to the robot to move 1 meter forward
-  goal.target_pose.header.frame_id = "base_link";
+  goal.target_pose.header.frame_id = "/map";
   goal.target_pose.header.stamp = ros::Time::now();
 
-  goal.target_pose.pose.position.x = 42.0;
-  goal.target_pose.pose.position.y = -5.0;
-  goal.target_pose.pose.orientation.w = 1.0;
+  goal.target_pose.pose.position.x = 48.0;
+  goal.target_pose.pose.position.y = 0.0;
+  goal.target_pose.pose.position.z = 0;
+  //tf::Quaternion q = tf::createQuaternionFromRPY(0, 0, 3*M_PI/4);
+  //tf::Quaternion q = tf::createQuaternionFromRPY(0, 0, M_PI);
+  tf::Quaternion q = tf::createQuaternionFromRPY(0, 0, 0);
+  goal.target_pose.pose.orientation.x = q.x();
+  goal.target_pose.pose.orientation.y = q.y();
+  goal.target_pose.pose.orientation.z = q.z();
+  goal.target_pose.pose.orientation.w = q.w();
 
   ROS_INFO("Sending goal");
   ac.sendGoal(goal);
