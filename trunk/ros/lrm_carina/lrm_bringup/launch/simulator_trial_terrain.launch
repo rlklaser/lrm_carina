@@ -6,6 +6,7 @@
 	<env
 		name="GAZEBO_PLUGIN_PATH"
 		value="$GAZEBO_PLUGIN_PATH:$(find lrm_gazebo)/lib" />
+
 <!-- 
 	<node
 		name="gazebo"
@@ -15,7 +16,6 @@
 		respawn="true"
 		output="screen" />
 
-
 	<node
 		name="gazebo"
 		pkg="gazebo"
@@ -23,15 +23,13 @@
 		args="$(find lrm_gazebo)/worlds/parking.world"
 		respawn="true"
 		output="screen" />
- -->
- 
- 
+--> 
  	<node
 		name="gazebo"
 		pkg="gazebo"
 		type="gazebo"
-		args="$(find lrm_gazebo)/worlds/pathway.world"
+		args="$(find lrm_gazebo)/worlds/pathway2.world"
 		respawn="true"
 		output="screen" />
-		
+	
 </launch>
