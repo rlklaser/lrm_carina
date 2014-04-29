@@ -40,6 +40,13 @@
 
 #include <lrm_description/Constants.h>
 
+
+#include <time.h>
+#include <boost/random/normal_distribution.hpp>
+#include <boost/random/mersenne_twister.hpp>
+#include <boost/random/variate_generator.hpp>
+
+
 namespace lrm_gazebo {
 
 typedef pr2_mechanism_model::RobotState RobotState;
@@ -78,6 +85,11 @@ public:
 			lrm_msgs::Encoders msg;
 
 			accWheel_ = wheel;
+
+
+			//double sgn_steer = fabs(encSteer)/encSteer;
+			//double noise_steer = sgn_steer * rand() * 70;
+			//encSteer+=noise_steer;
 
 			//ROS_WARN_STREAM("pos:" << encWheel);
 
@@ -146,6 +158,9 @@ private:
 
 		return true;
 	}
+
+	//boost::variate_generator<boost::mt19937, boost::normal_distribution<> >
+	//	    generator( boost::mt19937(time(0)), boost::normal_distribution<>());
 };
 }
 /*
