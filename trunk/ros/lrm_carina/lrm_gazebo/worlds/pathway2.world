@@ -2802,16 +2802,22 @@
         <gravity>1</gravity>
       </link>
     </model>
-    
-    
-    
+
     <state world_name='default'>
       <sim_time>0 0</sim_time>
       <real_time>0 0</real_time>
       <wall_time>1398454122 88091510</wall_time>
-      
-      
-      
+
+
+      <model name='finihed'>
+        <pose>5 3 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>5 3 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
       <model name='finihed_0'>
         <pose>6.57218 2.49318 0 0 -0 0</pose>
         <link name='link'>
@@ -2822,18 +2828,18 @@
         </link>
       </model>
       <model name='finihed_1'>
-        <pose>8 2 0 0 -0 0</pose>
+        <pose>8.8397 1.63073 0 0 -0 0</pose>
         <link name='link'>
-          <pose>8 2 0 0 -0 0</pose>
+          <pose>8.8397 1.63073 0 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='finihed_10'>
-        <pose>25.7817 3.05857 1.76153 0 -0 0</pose>
+        <pose>25.7817 1.59216 1.67052 0 -0 0</pose>
         <link name='link'>
-          <pose>25.7817 3.05857 1.76153 0 -0 0</pose>
+          <pose>25.7817 1.59216 1.67052 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
@@ -2885,9 +2891,9 @@
         </link>
       </model>
       <model name='finihed_16'>
-        <pose>31 -7 2.13561 0 -0 0</pose>
+        <pose>31.0319 -6.82327 2.13561 0 -0 0</pose>
         <link name='link'>
-          <pose>31 -7 2.13561 0 -0 0</pose>
+          <pose>31.0319 -6.82327 2.13561 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
@@ -2903,9 +2909,9 @@
         </link>
       </model>
       <model name='finihed_18'>
-        <pose>34 -9 2.08662 0 -0 0</pose>
+        <pose>34.1987 -9.785 2.08662 0 -0 0</pose>
         <link name='link'>
-          <pose>34 -9 2.08662 0 -0 0</pose>
+          <pose>34.1987 -9.785 2.08662 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
@@ -2930,27 +2936,27 @@
         </link>
       </model>
       <model name='finihed_20'>
-        <pose>37.2863 -9.93803 2.2897 0 -0 0</pose>
+        <pose>37.8994 -5.67624 2.2897 0 -0 0</pose>
         <link name='link'>
-          <pose>37.2863 -9.93803 2.2897 0 -0 0</pose>
+          <pose>37.8994 -5.67624 2.2897 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='finihed_21'>
-        <pose>3 -6 0 0 -0 0</pose>
+        <pose>1.46718 -5.05495 0 0 -0 0</pose>
         <link name='link'>
-          <pose>3 -6 0 0 -0 0</pose>
+          <pose>1.46718 -5.05495 0 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='finihed_22'>
-        <pose>4 -6 0 0 -0 0</pose>
+        <pose>3.28895 -6.16533 0 0 -0 0</pose>
         <link name='link'>
-          <pose>4 -6 0 0 -0 0</pose>
+          <pose>3.28895 -6.16533 0 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
@@ -2966,9 +2972,9 @@
         </link>
       </model>
       <model name='finihed_24'>
-        <pose>7 -6.44037 0 0 -0 0</pose>
+        <pose>7.51514 -7.04977 0 0 -0 0</pose>
         <link name='link'>
-          <pose>7 -6.44037 0 0 -0 0</pose>
+          <pose>7.51514 -7.04977 0 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
@@ -3002,27 +3008,27 @@
         </link>
       </model>
       <model name='finihed_28'>
-        <pose>13.5457 -6 0.533631 0 -0 0</pose>
+        <pose>12.8385 -5.58687 0.533631 0 -0 0</pose>
         <link name='link'>
-          <pose>13.5457 -6 0.533631 0 -0 0</pose>
+          <pose>12.8385 -5.58687 0.533631 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='finihed_29'>
-        <pose>14.8847 -7.79256 0.697663 0 -0 0</pose>
+        <pose>14.5368 -5.64902 0.697663 0 -0 0</pose>
         <link name='link'>
-          <pose>14.8847 -7.79256 0.697663 0 -0 0</pose>
+          <pose>14.5368 -5.64902 0.697663 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='finihed_3'>
-        <pose>13.5054 1 0.788557 0 -0 0</pose>
+        <pose>12.6997 0.505127 0.640958 0 -0 0</pose>
         <link name='link'>
-          <pose>13.5054 1 0.788557 0 -0 0</pose>
+          <pose>12.6997 0.505127 0.640958 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
@@ -3092,18 +3098,18 @@
         </link>
       </model>
       <model name='finihed_37'>
-        <pose>29 -19 1.82502 0 -0 0</pose>
+        <pose>28.2259 -18.978 1.82502 0 -0 0</pose>
         <link name='link'>
-          <pose>29 -19 1.82502 0 -0 0</pose>
+          <pose>28.2259 -18.978 1.82502 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='finihed_38'>
-        <pose>30.0683 -19.5893 2.02014 0 -0 0</pose>
+        <pose>30.1232 -18.4302 2.02014 0 -0 0</pose>
         <link name='link'>
-          <pose>30.0683 -19.5893 2.02014 0 -0 0</pose>
+          <pose>30.1232 -18.4302 2.02014 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
@@ -3128,9 +3134,9 @@
         </link>
       </model>
       <model name='finihed_40'>
-        <pose>32 -19 2.12811 0 -0 0</pose>
+        <pose>32.1271 -18.1337 2.12811 0 -0 0</pose>
         <link name='link'>
-          <pose>32 -19 2.12811 0 -0 0</pose>
+          <pose>32.1271 -18.1337 2.12811 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
@@ -3155,9 +3161,9 @@
         </link>
       </model>
       <model name='finihed_43'>
-        <pose>35.3288 -23.3502 2.18416 0 -0 0</pose>
+        <pose>34.8717 -24.0111 2.18416 0 -0 0</pose>
         <link name='link'>
-          <pose>35.3288 -23.3502 2.18416 0 -0 0</pose>
+          <pose>34.8717 -24.0111 2.18416 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
@@ -3191,27 +3197,27 @@
         </link>
       </model>
       <model name='finihed_47'>
-        <pose>41 -17 3.00753 0 -0 0</pose>
+        <pose>40.9518 -18.0174 3.00753 0 -0 0</pose>
         <link name='link'>
-          <pose>41 -17 3.00753 0 -0 0</pose>
+          <pose>40.9518 -18.0174 3.00753 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='finihed_48'>
-        <pose>42.7589 -15.0014 2.9594 0 -0 0</pose>
+        <pose>42.5124 -13.166 2.9594 0 -0 0</pose>
         <link name='link'>
-          <pose>42.7589 -15.0014 2.9594 0 -0 0</pose>
+          <pose>42.5124 -13.166 2.9594 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='finihed_49'>
-        <pose>42.5293 -18.1195 2.66027 0 -0 0</pose>
+        <pose>43.3428 -19.6212 2.66027 0 -0 0</pose>
         <link name='link'>
-          <pose>42.5293 -18.1195 2.66027 0 -0 0</pose>
+          <pose>43.3428 -19.6212 2.66027 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
@@ -3270,11 +3276,9 @@
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
-      </model>      
-      
-      
-      
+      </model>
     </state>
+
     <gui fullscreen='0'>
       <camera name='user_camera'>
         <pose>33.753400 -57.547400 99.737000 0.000000 1.099640 1.256190</pose>
@@ -3283,3 +3287,4 @@
     </gui>
   </world>
 </sdf>
+    
