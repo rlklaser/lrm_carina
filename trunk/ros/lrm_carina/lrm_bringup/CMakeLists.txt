@@ -8,11 +8,13 @@ include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
 #  RelWithDebInfo : w/ debug symbols, w/ optimization
 #  MinSizeRel     : w/o debug symbols, w/ optimization, stripped binaries
 #set(ROS_BUILD_TYPE RelWithDebInfo)
+set(ROS_BUILD_TYPE Debug)
+
 
 # http://software.intel.com/en-us/blogs/2012/09/26/gcc-x86-performance-hints
-add_definitions(-std=c++0x)
-add_definitions(-msse3 -msse4.1 -msse4.2)
-add_definitions(-mfpmath=sse -Ofast -flto -march=native)
+#add_definitions(-std=c++0x)
+#add_definitions(-msse3 -msse4.1 -msse4.2)
+#add_definitions(-mfpmath=sse -Ofast -flto -march=native)
 
 rosbuild_init()
 
@@ -29,7 +31,19 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 #common commands for building c++ executables and libraries
 #rosbuild_add_library(${PROJECT_NAME} src/example.cpp)
 #target_link_libraries(${PROJECT_NAME} another_library)
-#rosbuild_add_boost_directories()
+
+rosbuild_add_boost_directories()
+
 #rosbuild_link_boost(${PROJECT_NAME} thread)
 #rosbuild_add_executable(example examples/example.cpp)
 #target_link_libraries(example ${PROJECT_NAME})
+
+
+rosbuild_add_executable(send_goal
+	src/send_goal.cpp
+	)
+
+rosbuild_add_executable(trial_node
+	src/trial_node.cpp
+	)
+	

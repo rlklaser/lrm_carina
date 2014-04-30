@@ -23,7 +23,16 @@
 		args="$(find lrm_gazebo)/worlds/parking.world"
 		respawn="true"
 		output="screen" />
+	
+    <node
+		name="gazebo"
+		pkg="gazebo"
+		type="gazebo"
+		args="$(find lrm_gazebo)/worlds/unstructured.world"
+		respawn="true"
+		output="screen" />
 --> 
+
  	<node
 		name="gazebo"
 		pkg="gazebo"

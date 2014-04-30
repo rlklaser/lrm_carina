@@ -6,7 +6,7 @@ sensor_model:
   decay_cost: 0.9
     
   #max_range: 15
-  max_range: 40
+  max_range: 45
   
   mid_dist: 5.0
   far_dist: 10.0

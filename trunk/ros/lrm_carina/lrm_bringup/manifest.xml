@@ -1,17 +1,25 @@
 <package>
-  <description brief="lrm_bringup">
+	<description brief="lrm_bringup">
 
-     lrm_bringup
+		lrm_bringup
 
-  </description>
-  <author>Rafael Luiz Klaser</author>
-  <license>BSD</license>
-  <review status="unreviewed" notes=""/>
-  <url>http://ros.org/wiki/lrm_bringup</url>
-  <depend package="roscpp"/>
-  <depend package="rospy"/>
-  <depend package="std_msgs"/>
-  <depend package="lrm_msgs"/>
+	</description>
+	<author>Rafael Luiz Klaser</author>
+	<license>BSD</license>
+	<review
+		status="unreviewed"
+		notes="" />
+	<url>http://ros.org/wiki/lrm_bringup</url>
+	<depend package="roscpp" />
+	<depend package="rospy" />
+	<depend package="std_msgs" />
+	<depend package="lrm_msgs" />
+	<depend package="sensor_msgs" />
+	<depend package="move_base_msgs" />
+	<depend package="actionlib" />
+	<depend package="geometry_msgs" />
+	<depend package="nav_msgs" />
+	<depend package="sbpl_lattice_planner" />
 
 </package>
 

@@ -62,6 +62,7 @@ struct st_model_type bush = { "Bush", 4, "package://lrm_description/models/trees
 struct st_model_type bark = { "Bark", 4, "package://lrm_description/models/trees/Bark/meshes/Bark.dae" };
 struct st_model_type spatha = { "Spathaphylum", 12, "package://lrm_description/models/trees/Spathaphylum/meshes/Spathaphylum.dae" };
 struct st_model_type barrel = { "Construction Barrel", 19, "package://lrm_description/models/construction_barrel/meshes/construction_barrel.dae" };
+struct st_model_type dumpster = { "Dumpster", 8, "package://lrm_description/models/dumpster/meshes/dumpster.dae" };
 
 
 
@@ -154,6 +155,7 @@ int main(int argc, char** argv) {
 	types.push_back(finihed);
 	types.push_back(spatha);
 	types.push_back(barrel);
+	types.push_back(dumpster);
 
 	published = false;
 	markersPub = nh.advertise<visualization_msgs::MarkerArray>("viz_gazebo_models_array", 1, true);

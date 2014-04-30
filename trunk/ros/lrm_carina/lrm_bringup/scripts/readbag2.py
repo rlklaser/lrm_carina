@@ -1,4 +1,5 @@
-#!/usr/bin/env python
+#!/usr/bin/python
+
 import roslib; roslib.load_manifest('rosbag')
 import rosbag
 import sys
