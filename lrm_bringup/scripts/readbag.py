@@ -25,6 +25,8 @@ import sys
 import os
 import pickle
 import std_msgs
+import numpy as np
+import numpy.core.umath as umath
 
 roslib.load_manifest('lrm_msgs')
 import lrm_msgs
@@ -50,6 +52,9 @@ def run():
 
         bag = rosbag.Bag(inputFileName)
         topicList = readBagTopicList(bag)
+
+        sumDistance(bag)
+        sumDistanceEnc(bag)
 
         while True:
             if len(topicList) == 0:
@@ -131,22 +136,83 @@ def readBagTopicList(bag):
     print "[OK] Reading topics in this bag. Can take a while.."
     topicList = []
     #for topic, msg, t in bag.read_messages():
-    #for topic, msg, t in bag.read_messages(topics=['/encoders_controller/encoders']):
+    for topic, msg, t in bag.read_messages(topics=['/encoders_controller/encoders']):
     #for topic, msg, t in bag.read_messages(topics=['/move_base/status']):
     #for topic, msg, t in bag.read_messages(topics=['/move_base/feedback']):
     #for topic, msg, t in bag.read_messages(topics=['/move_base/goal']):
     #for topic, msg, t in bag.read_messages(topics=['/move_base/result']): 
-    for topic, msg, t in bag.read_messages(topics=['/move_base/result', '/move_base/goal']):
+    #for topic, msg, t in bag.read_messages(topics=['/move_base/result', '/move_base/goal']):
+    #for topic, msg, t in bag.read_messages(topics=['/wheel_odometry/odom']):
         #print msg #.status_list #.header.stamp
         #print msg.feedback.base_position.pose.position
         #print msg.feedback.base_position.pose.orientation
         print msg
-        
         if topicList.count(topic) == 0:
             topicList.append (topic)
 
     print '{0} topics found:'.format(len(topicList))
     return topicList
 
+
+def sumDistance(bag):
+    old_x = 0
+    old_y = 0
+    dist = 0
+    for topic, msg, t in bag.read_messages(topics=['/wheel_odometry/odom']):
+        x = msg.pose.pose.position.x
+        y = msg.pose.pose.position.y
+        
+        #linalg.norm()
+        d = umath.sqrt( (x-old_x)*(x-old_x) + (y-old_y)*(y-old_y) )
+        old_x = x
+        old_y = y
+        #print d
+        dist += d;
+
+    print "Distancia: {0}".format(dist)
+    
+
+
+def sumDistanceEnc(bag):
+    ticks = 0
+    stamp = 0
+    for topic, msg, t in bag.read_messages(topics=['/encoders_controller/encoders']):
+        #x = msg.pose.pose.position.x
+        #y = msg.pose.pose.position.y
+        
+        tick = np.absolute(msg.wheel.relative)
+        
+        ticks += tick;
+
+        stamp = msg.header.stamp
+
+    print "Distancia: {0}".format(ticks/2048*1.508)
+    print stamp
+     
+def sumVelo(bag):
+    ticks = 0
+    stamp = 0
+    for topic, msg, t in bag.read_messages(topics=['/vehicle_states']):
+        #x = msg.pose.pose.position.x
+        #y = msg.pose.pose.position.y
+        
+        #tick = np.absolute(msg.wheel.relative)
+        
+        #ticks += tick;
+
+        #stamp = msg.header.stamp
+
+    #print "Distancia: {0}".format(ticks/2048*1.508)
+    #print stamp
+    
 if __name__ == "__main__":
     run()
+
+
+#/move_base/SBPLLatticePlanner/plan  
+#/move_base/TrajectoryPlannerROS/local_plan
+#/planning/cmd_vel  
+#/move_base/status 
+#/wheel_odometry/odom 
+
+ 

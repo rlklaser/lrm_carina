@@ -3116,7 +3116,7 @@
         </link>
       </model>
       <model name='finihed_39'>
-        <pose>21.0991 -4.15527 1.25949 0 -0 0</pose>
+        <pose>19.0991 -2.15527 1.25949 0 -0 0</pose>
         <link name='link'>
           <pose>21.0991 -4.15527 1.25949 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
