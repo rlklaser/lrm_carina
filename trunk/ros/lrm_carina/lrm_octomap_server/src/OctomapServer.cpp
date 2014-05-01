@@ -214,7 +214,7 @@ OctomapServer::OctomapServer(ros::NodeHandle nh, ros::NodeHandle nh_priv) :
 	m_octree->updateNode(0, 0, 0, false);
 
 	if(m_initSz>0) {
-		point3d ptini(0, 0, m_pointcloudMinZ);
+		point3d ptini(0, 0, m_occupancyMaxZ);
 		point3d ptfim_a(m_initSz, m_initSz, m_occupancyMinZ);
 		point3d ptfim_b(m_initSz, -m_initSz, m_occupancyMinZ);
 		point3d ptfim_c(-m_initSz, m_initSz, m_occupancyMinZ);
@@ -227,7 +227,7 @@ OctomapServer::OctomapServer(ros::NodeHandle nh, ros::NodeHandle nh_priv) :
 	}
 
 	if(m_initSz>0) {
-		point3d ptini(0, 0, 2.0);
+		point3d ptini(0, 0, m_occupancyMinZ);
 		point3d ptfim_a(m_initSz, m_initSz, m_occupancyMaxZ);
 		point3d ptfim_b(m_initSz, -m_initSz, m_occupancyMaxZ);
 		point3d ptfim_c(-m_initSz, m_initSz, m_occupancyMaxZ);
