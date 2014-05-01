@@ -3,7 +3,7 @@ sensor_model:
   #update_occ: 0.5 
   update_occ: 0.495
   max_range_occ: 0.9
-  decay_cost: 0.9
+  decay_cost: 0.95
     
   #max_range: 15
   max_range: 45
@@ -13,7 +13,7 @@ sensor_model:
   hit: 0.68
   hit_mid: 0.64
   hit_far: 0.62
-  miss_to_gnd: 0.485
+  miss_to_gnd: 0.48
   miss_to_obs: 0.47
   occ: 0.80
   #occ: 80
