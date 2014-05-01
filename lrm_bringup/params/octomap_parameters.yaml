@@ -9,7 +9,7 @@ map_server:
   latch: false
   wait_tf: 0.25
   #wait_tf: -1 #do not wait
-  rate: 2
+  rate: 5
   frame_id: /map
   #base_frame_id: /base_footprint
   base_frame_id: /base_odometry
