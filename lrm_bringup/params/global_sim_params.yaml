@@ -6,6 +6,9 @@ imu_calibrate_node:
   declination: 0.0
   fixed_declination: true #if false will subscribe declination topic
   
+  #time_drift: 0.0001   # from xsens datasheet
+  time_drift: 0.0
+  
 stereo_camera:
   throttle_stereo:
     rate: 5
