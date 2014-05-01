@@ -2,6 +2,5 @@
 
 	<include file="$(find lrm_bringup)/launch/run_real_painel.launch" />
 	<include file="$(find lrm_bringup)/launch/run_real_main.launch" />
-	<include file="$(find lrm_bringup)/launch/run_real_main_nav.launch" />
 
 </launch>
