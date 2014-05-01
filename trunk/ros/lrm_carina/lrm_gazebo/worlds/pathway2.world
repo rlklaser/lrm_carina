@@ -842,7 +842,8 @@
       </link>
     </model>
     <model name='finihed_13'>
-      <pose>29 -1 0 0 -0 0</pose>
+    <!--     <pose>29 -1 0 0 -0 0</pose> -->
+      <pose>29.53 -1.96 0 0 -0 0</pose>
       <static>1</static>
       <allow_auto_disable>1</allow_auto_disable>
       <link name='link'>
@@ -2864,7 +2865,7 @@
         </link>
       </model>
       <model name='finihed_13'>
-        <pose>28.9759 -0.976546 1.95971 0 -0 0</pose>
+        <pose>29.0 -0.9 1.95971 0 -0 0</pose>
         <link name='link'>
           <pose>28.9759 -0.976546 1.95971 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
@@ -2909,7 +2910,7 @@
         </link>
       </model>
       <model name='finihed_18'>
-        <pose>34.1987 -9.785 2.08662 0 -0 0</pose>
+        <pose>34.1987 -9.0 2.08662 0 -0 0</pose>
         <link name='link'>
           <pose>34.1987 -9.785 2.08662 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
