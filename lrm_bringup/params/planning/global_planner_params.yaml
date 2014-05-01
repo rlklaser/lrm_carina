@@ -11,7 +11,8 @@ planner_type: ADPlanner
 ##the planner will use up remaining time improving solution until it is optimal or until time 
 ##runs out (which ever comes first).
   
-allocated_time: 15.0
+#allocated_time: 15.0
+allocated_time: 10.0
   
 ##The value the heuristic is scaled by for the first search. This value must be greater 
 ##or equal to 1. The larger this value is the faster the search tends to find a solution 
