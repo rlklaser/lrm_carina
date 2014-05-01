@@ -1,0 +1,16 @@
+<launch>
+
+
+	<rosparam
+		command="load"
+		file="$(find lrm_bringup)/params/global_real_params.yaml" />
+
+	<node
+		name="rviz"
+		pkg="rviz"
+		type="rviz"
+		respawn="true"
+		output="screen"
+		args="-d $(find lrm_bringup)/config/visualization_cdcc.rviz" />
+
+</launch>
