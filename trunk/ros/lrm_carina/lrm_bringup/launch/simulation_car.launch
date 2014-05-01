@@ -1,0 +1,83 @@
+<launch>
+
+	<rosparam
+		command="load"
+		file="$(find lrm_bringup)/params/global_sim_params.yaml" />
+
+	<group ns="/stereo_camera">
+
+		<rosparam
+			command="load"
+			file="$(find lrm_bringup)/params/camera_parameters.yaml" />
+
+		<include file="$(find lrm_bringup)/launch/vision_throttle.launch" />
+
+	</group>
+
+	<rosparam
+		command="load"
+		file="$(find lrm_bringup)/params/carina_4w_suspension.yaml" />
+
+	<node
+		name="carina_object"
+		pkg="gazebo"
+		type="spawn_model"
+		args="-urdf -param robot_description -x 0.67 -y 0.0 -z 0.15 -R 0 -P 0 -Y 0 -model carina -gazebo_namespace /gazebo -unpause"
+		respawn="false"
+		output="screen" />
+
+    <!--  
+	<node
+		pkg="tf"
+		type="static_transform_publisher"
+		name="ground_truth_odom_broadcaster"
+		args="0 0 0 0 0 0 map gazebo_odom 50"
+		output="screen"
+		respawn="true" />
+    -->
+
+	<node
+		name="front_left_susp_controller"
+		pkg="pr2_controller_manager"
+		type="spawner"
+		args="front_left_susp_controller"
+		respawn="true"
+		output="screen" />
+
+	<node
+		name="front_right_susp_controller"
+		pkg="pr2_controller_manager"
+		type="spawner"
+		args="front_right_susp_controller"
+		respawn="true"
+		output="screen" />
+
+	<node
+		name="rear_left_susp_controller"
+		pkg="pr2_controller_manager"
+		type="spawner"
+		args="rear_left_susp_controller"
+		respawn="true"
+		output="screen" />
+
+	<node
+		name="rear_right_susp_controller"
+		pkg="pr2_controller_manager"
+		type="spawner"
+		args="rear_right_susp_controller"
+		respawn="true"
+		output="screen" />
+
+	<rosparam
+		command="load"
+		file="$(find lrm_bringup)/params/controllers_params.yaml" />
+
+	<node
+		name="encoders_controller"
+		pkg="pr2_controller_manager"
+		type="spawner"
+		args="encoders_controller"
+		respawn="true"
+		output="screen" />
+
+</launch>
