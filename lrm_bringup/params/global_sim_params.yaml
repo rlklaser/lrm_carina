@@ -11,4 +11,7 @@ stereo_camera:
     rate: 5
     approximate_sync: true
     #approximate_sync: false
-  
+
+cruise_control:
+  top_speed: 3
+  max_accel: 110

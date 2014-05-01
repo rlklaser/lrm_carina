@@ -13,3 +13,8 @@ stereo_camera:
   throttle_stereo:
     rate: 10
     approximate_sync: false
+
+cruise_control:
+  top_speed: 6
+  max_accel: 50
+    

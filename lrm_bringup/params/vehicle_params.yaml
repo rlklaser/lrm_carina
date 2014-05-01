@@ -1,6 +1,6 @@
 cruise_control:
-  top_speed: 3
-  max_accel: 110
+#  top_speed: 3
+#  max_accel: 110
   max_brake: 40
   rate: 10.0
   switch_lag_brake: 0.008
@@ -10,7 +10,7 @@ vehicle_state_node:
   rate: 10.0
   tread_lenght: 1.508
   
-vel_booster_node:
-  max_velocity: 6.0
-  max_velocity_boost: 12.0
+#vel_booster_node:
+#  max_velocity: 6.0
+#  max_velocity_boost: 12.0
   
