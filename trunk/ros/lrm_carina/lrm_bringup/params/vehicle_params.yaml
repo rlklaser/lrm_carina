@@ -8,7 +8,7 @@ cruise_control:
   
 vehicle_state_node:
   rate: 10.0
-  tread_lenght: 1.508
+  tread_lenght: 1.508  #cheat speed here
   
 #vel_booster_node:
 #  max_velocity: 6.0
