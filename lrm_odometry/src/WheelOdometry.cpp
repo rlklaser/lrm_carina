@@ -577,7 +577,7 @@ bool WheelOdometry::calcTransform() {
 
 	if (odo.p.use_imu && odo.p.use_6dof) {
 		if (odo.p.inverse) {
-			qt = tf::createQuaternionFromRPY(odo.roll, -odo.pitch, odo.theta);
+			qt = tf::createQuaternionFromRPY(odo.roll, angles::from_degrees(180) + odo.pitch, odo.theta);
 		} else {
 			qt = tf::createQuaternionFromRPY(odo.roll, odo.pitch, odo.theta);
 		}

@@ -20,3 +20,7 @@ sensor_model:
     
   max: 0.96
   min: 0.03
+
+
+cost_map:
+  unknown_cost: 70                      #first miss
