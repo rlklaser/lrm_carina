@@ -6,12 +6,6 @@ Panels:
       Expanded:
         - /Camera1/Visibility1
         - /Camera2/Visibility1
-        - /Obstacles1
-        - /Navigation1
-        - /Navigation1/GridCells4
-        - /Navigation1/GridCells5
-        - /Navigation1/Path2
-        - /Navigation1/Path3
         - /Models1/Wheels1
         - /Models1/Wheels1/Links1
       Splitter Ratio: 0.628253
@@ -96,6 +90,7 @@ Visualization Manager:
         Navigation:
           GridCells: true
           Path: true
+          PointCloud: true
           Polygon: true
           Pose: true
           Value: true
@@ -139,6 +134,7 @@ Visualization Manager:
         Navigation:
           GridCells: true
           Path: true
+          PointCloud: true
           Polygon: true
           Pose: true
           Value: true
@@ -656,6 +652,34 @@ Visualization Manager:
           Name: Path
           Topic: /move_base/TrajectoryPlannerROS/global_plan
           Value: true
+        - Alpha: 0.9
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud
+          Color: 255; 255; 255
+          Color Transformer: RGB8
+          Decay Time: 0
+          Enabled: false
+          Max Color: 255; 255; 255
+          Max Intensity: 4096
+          Min Color: 0; 0; 0
+          Min Intensity: 0
+          Name: PointCloud
+          Position Transformer: XYZ
+          Queue Size: 10
+          Selectable: true
+          Size (Pixels): 3
+          Size (m): 0.15
+          Style: Spheres
+          Topic: /move_base/global_costmap/cost_map_points
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: false
       Enabled: true
       Name: Navigation
     - Arrow Length: 0.3
@@ -983,5 +1007,5 @@ Window Geometry:
   Views:
     collapsed: true
   Width: 1323
-  X: 1689
+  X: 1682
   Y: 24
