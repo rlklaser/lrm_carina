@@ -46,7 +46,7 @@ map_server:
   cost_map:
     #incremental_2D_projection: true
     incremental_2D_projection: false
-    unknown_cost: 60                      #first miss
+    unknown_cost: 30                      #first miss
     maximum_cost: 100   
     full_down_project_map: false
     #full_down_project_map: true

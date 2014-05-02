@@ -7,8 +7,15 @@ imu_calibrate_node:
   ## http://revistapesquisa.fapesp.br/2012/07/16/o-que-e-o-que-e-8/
   declination: 23.0
   
-  fixed_declination: false          # if false will subscribe declination topic
+  #fixed_declination: false          # if false will subscribe declination topic
+  fixed_declination: true
+  time_drift: 0.0
   
 stereo_camera:
-  throttle_stereo_node:
+  throttle_stereo:
     rate: 10
+    approximate_sync: false
+
+cruise_control:
+  top_speed: 6
+  max_accel: 50

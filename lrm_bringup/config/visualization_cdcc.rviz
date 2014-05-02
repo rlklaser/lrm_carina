@@ -6,7 +6,6 @@ Panels:
       Expanded:
         - /TF1/Tree1
         - /RobotModel1/Links1
-        - /Camera1/Status1
         - /Marker1/Namespaces1
         - /Navigation1/GridCells1
         - /PointCloud1
@@ -51,7 +50,7 @@ Visualization Manager:
       Cell Size: 1
       Class: rviz/Grid
       Color: 140; 140; 140
-      Enabled: true
+      Enabled: false
       Line Style:
         Line Width: 0.03
         Value: Lines
@@ -64,7 +63,7 @@ Visualization Manager:
       Plane: XY
       Plane Cell Count: 1000
       Reference Frame: <Fixed Frame>
-      Value: true
+      Value: false
     - Alpha: 1
       Class: rviz/RobotModel
       Collision Enabled: false
@@ -79,7 +78,7 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
+          Value: false
         ackermann_left_susp_link:
           Alpha: 1
           Show Axes: false
@@ -153,7 +152,7 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
+          Value: false
         center_mass_link:
           Alpha: 1
           Show Axes: false
@@ -166,7 +165,7 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
+          Value: false
         front_left_susp_link:
           Alpha: 1
           Show Axes: false
@@ -175,12 +174,12 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
+          Value: false
         front_right_bar_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
+          Value: false
         front_right_susp_link:
           Alpha: 1
           Show Axes: false
@@ -189,17 +188,17 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
+          Value: false
         heading_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
+          Value: false
         imu_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
+          Value: false
         rear_axle_link:
           Alpha: 1
           Show Axes: false
@@ -208,7 +207,7 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
+          Value: false
         rear_left_susp_link:
           Alpha: 1
           Show Axes: false
@@ -217,12 +216,12 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
+          Value: false
         rear_right_bar_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
+          Value: false
         rear_right_susp_link:
           Alpha: 1
           Show Axes: false
@@ -231,17 +230,17 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
+          Value: false
         steer_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
+          Value: false
         steering_wheel_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
+          Value: false
         stereo_camera:
           Alpha: 1
           Show Axes: false
@@ -250,7 +249,7 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
+          Value: false
         stereo_camera/left_optical_frame:
           Alpha: 1
           Show Axes: false
@@ -259,7 +258,7 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
+          Value: false
         stereo_camera/right_optical_frame:
           Alpha: 1
           Show Axes: false
@@ -275,7 +274,7 @@ Visualization Manager:
       Image Rendering: background and overlay
       Image Topic: /stereo/left/image_color
       Name: Camera
-      Overlay Alpha: 0.2
+      Overlay Alpha: 0.5
       Queue Size: 2
       Transport Hint: raw
       Value: true
@@ -522,7 +521,7 @@ Visualization Manager:
           Color: 0; 0; 0
           Color Transformer: FlatColor
           Decay Time: 0
-          Enabled: false
+          Enabled: true
           Max Color: 255; 255; 255
           Max Intensity: 4096
           Min Color: 0; 0; 0
@@ -537,20 +536,20 @@ Visualization Manager:
           Topic: /ground_cloud_in
           Use Fixed Frame: true
           Use rainbow: true
-          Value: false
+          Value: true
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
-            Max Value: 5.2034
-            Min Value: -0.373463
+            Max Value: 71.9446
+            Min Value: 22.743
             Value: true
-          Axis: Z
+          Axis: Y
           Channel Name: x
           Class: rviz/PointCloud2
           Color: 255; 255; 255
           Color Transformer: AxisColor
           Decay Time: 0
-          Enabled: false
+          Enabled: true
           Max Color: 255; 255; 255
           Max Intensity: 4096
           Min Color: 0; 0; 0
@@ -562,10 +561,10 @@ Visualization Manager:
           Size (Pixels): 3
           Size (m): 0.01
           Style: Points
-          Topic: /cloud_filtered
+          Topic: /stereo/points2
           Use Fixed Frame: true
           Use rainbow: true
-          Value: false
+          Value: true
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -701,15 +700,15 @@ Visualization Manager:
     Current:
       Class: rviz_animated_view_controller/Animated
       Control Mode: Orbit
-      Distance: 77.5693
+      Distance: 7.53719
       Eye:
-        X: -73.1047
-        Y: 0.279903
-        Z: 33.0694
+        X: -9.00186
+        Y: -0.475214
+        Z: 0.962869
       Focus:
-        X: -2.22302
-        Y: -0.229486
-        Z: 1.5651
+        X: -1.47383
+        Y: -0.169726
+        Z: 1.17445
       Maintain Vertical Axis: true
       Mouse Enabled: true
       Name: Current View
@@ -733,7 +732,7 @@ Window Geometry:
   Hide Right Dock: true
   Image:
     collapsed: false
-  QMainWindow State: 000000ff00000000fd000000030000000000000144000003a6fc0200000009fc00000028000003a60000010301000019fa000000010100000002fb0000000a005600690065007700730100000000ffffffff0000010f00fffffffb000000100044006900730070006c0061007900730100000000000001a70000010f00fffffffb0000000a0049006d00610067006500000002b20000011c0000001600fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007300000001b90000006d0000006a00fffffffb0000001200530065006c0065006300740069006f006e00000001f5000000820000006a00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007300000002a70000009f0000000000000000fb0000000c00540065006c0065006f0070000000030a0000007f0000000000000000fb0000000a0049006d00610067006500000002e0000000c70000000000000000fb0000000a0049006d006100670065000000031c000000b40000000000000000fb0000000a0049006d006100670065010000021c0000011700000000000000000000000200000375000000dafc0100000002fb0000000c00430061006d006500720061010000014a000003750000005700fffffffb0000000c00430061006d0065007200610100000115000003aa000000000000000000000003000003750000003efc0100000001fb0000000800540069006d0065010000014a000003750000024e00ffffff000003750000028200000001000000020000000100000002fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd000000030000000000000144000003a6fc0200000009fc00000028000003a60000010301000019fa000000010100000002fb0000000a005600690065007700730100000000ffffffff0000010f00fffffffb000000100044006900730070006c0061007900730100000000000001a70000010f00fffffffb0000000a0049006d00610067006500000002b20000011c0000001600fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007300000001b90000006d0000006a00fffffffb0000001200530065006c0065006300740069006f006e00000001f5000000820000006a00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007300000002a70000009f0000000000000000fb0000000c00540065006c0065006f0070000000030a0000007f0000000000000000fb0000000a0049006d00610067006500000002e0000000c70000000000000000fb0000000a0049006d006100670065000000031c000000b40000000000000000fb0000000a0049006d006100670065010000021c000001170000000000000000000000020000037500000137fc0100000002fb0000000c00430061006d006500720061010000014a000003750000005700fffffffb0000000c00430061006d0065007200610100000115000003aa000000000000000000000003000003750000003efc0100000001fb0000000800540069006d0065010000014a000003750000024e00ffffff000003750000022500000001000000020000000100000002fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:
