@@ -3,4 +3,4 @@ wheel_odometry:
   publish_js: true
   absolute_heading: 90.0
   inverse: false
-  use_6dof: false
+  use_6dof: true
