@@ -211,6 +211,11 @@ OctomapServer::OctomapServer(ros::NodeHandle nh, ros::NodeHandle nh_priv) :
 	ReconfigureServerSensorModel::CallbackType fsm = boost::bind(&OctomapServer::reconfigureCallbackSM, this, _1, _2);
 	m_reconfigureServerSM->setCallback(fsm);
 
+	ros::NodeHandle m_nh_priv_cm = ros::NodeHandle(m_nh_priv.getNamespace() + "/cost_map");
+	m_reconfigureServerCM.reset(new ReconfigureServerCostMap(m_config_mutex, m_nh_priv_cm));
+	ReconfigureServerCostMap::CallbackType fcm = boost::bind(&OctomapServer::reconfigureCallbackCM, this, _1, _2);
+	m_reconfigureServerCM->setCallback(fcm);
+
 	m_octree->updateNode(0, 0, 0, false);
 
 	if(m_initSz>0) {
@@ -1840,6 +1845,15 @@ bool OctomapServer::isSpeckleNode(const OcTreeKey&nKey) const {
 
 	return neighborFound;
 }
+
+void OctomapServer::reconfigureCallbackCM(lrm_octomap_server::CostMapConfig& config, uint32_t level) {
+
+	boost::unique_lock<boost::mutex> scoped_lock(m_mutex);
+
+	m_unknownCost = config.unknown_cost;
+
+}
+
 
 void OctomapServer::reconfigureCallback(lrm_octomap_server::OctomapServerConfig& config, uint32_t level) {
 
