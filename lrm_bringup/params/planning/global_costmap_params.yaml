@@ -7,7 +7,7 @@ global_costmap:
   #robot_base_frame: heading_link
   
   #planner frequency?
-  update_frequency: 5.0
+  update_frequency: 2.0
   
   #visualization
   publish_frequency: 2.0
