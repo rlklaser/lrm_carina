@@ -23,4 +23,4 @@ sensor_model:
 
 
 cost_map:
-  unknown_cost: 70                      #first miss
+  unknown_cost: 60                      #first miss
