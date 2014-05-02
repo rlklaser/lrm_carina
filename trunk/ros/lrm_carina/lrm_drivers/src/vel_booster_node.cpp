@@ -69,8 +69,8 @@ int main(int argc, char ** argv) {
 	ros::NodeHandle nh;
 	ros::NodeHandle nh_priv("~");
 
-	nh.param("max_velocity", _max_velocity, 6.0);
-	nh.param("max_velocity_boost", _max_velocity_boost, 12.0);
+	nh.param("max_velocity", _max_velocity, 1.0);
+	nh.param("max_velocity_boost", _max_velocity_boost, 1.0);
 
 	//dynamic_reconfigure::Server<lrm_drivers::VelBoosterConfig> srv;
 	//dynamic_reconfigure::Server<lrm_drivers::VelBoosterConfig>::CallbackType f = boost::bind(&reconfig, _1, _2);
