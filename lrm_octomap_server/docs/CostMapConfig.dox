@@ -1,0 +1,6 @@
+\subsubsection parameters ROS parameters
+
+Reads and maintains the following parameters on the ROS server
+
+- \b "~unknown_cost" : \b [double] Unknown space cost min: 100.0, default: 0.0, max: 50.0
+

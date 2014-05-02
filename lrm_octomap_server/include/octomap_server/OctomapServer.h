@@ -56,6 +56,7 @@
 
 #include <lrm_octomap_server/OctomapServerConfig.h>
 #include <lrm_octomap_server/SensorModelConfig.h>
+#include <lrm_octomap_server/CostMapConfig.h>
 
 #include <pcl/point_types.h>
 #include <pcl/ros/conversions.h>
@@ -164,6 +165,8 @@ protected:
   void timerCallback(const ros::TimerEvent& t);
   void reconfigureCallback(lrm_octomap_server::OctomapServerConfig& config, uint32_t level);
   void reconfigureCallbackSM(lrm_octomap_server::SensorModelConfig& config, uint32_t level);
+  void reconfigureCallbackCM(lrm_octomap_server::CostMapConfig& config, uint32_t level);
+
   void publishBinaryOctoMap(const ros::Time& rostime = ros::Time::now()) const;
   void publishFullOctoMap(const ros::Time& rostime = ros::Time::now()) const;
   void publishAll(const ros::Time& rostime = ros::Time::now());
@@ -265,6 +268,10 @@ protected:
 
   typedef dynamic_reconfigure::Server<lrm_octomap_server::SensorModelConfig> ReconfigureServerSensorModel;
   boost::shared_ptr<ReconfigureServerSensorModel> m_reconfigureServerSM;
+
+  typedef dynamic_reconfigure::Server<lrm_octomap_server::CostMapConfig> ReconfigureServerCostMap;
+  boost::shared_ptr<ReconfigureServerCostMap> m_reconfigureServerCM;
+
   //boost::recursive_mutex m_config_mutex;
 
   OcTreeT* m_octree;
