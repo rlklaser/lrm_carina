@@ -35,8 +35,8 @@ local_costmap:
   
   #observation_sources: cloud ground_cloud
   #observation_sources: local_cloud global_cloud ground_cloud
-  #observation_sources:  local_cloud global_cloud
-  observation_sources:  global_cloud
+  #observation_sources: local_cloud global_cloud
+  #observation_sources: global_cloud
   #observation_sources: cloud map_cloud
   #observation_sources: cluster_cloud map_cloud
 
