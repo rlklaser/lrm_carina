@@ -36,7 +36,6 @@
 	 -->
 	</node>
 
-
 	<node
 		name="vel_booster_node"
 		pkg="lrm_drivers"
@@ -51,5 +50,5 @@
 			from="~cmd_vel"
 			to="/navigation/cmd_vel" />
 	</node>
-
+ 
 </launch>

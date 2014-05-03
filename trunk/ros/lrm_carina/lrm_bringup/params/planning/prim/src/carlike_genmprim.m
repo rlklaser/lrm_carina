@@ -69,7 +69,7 @@ to_plot = false;
 
 basemprimendpts0_c(1,:) = [ 15  -4  -1  custo1  0.3  -pi/8.2 40];
 basemprimendpts0_c(2,:) = [ 16  -2  -1  custo1  0.4  -pi/12  40];
-basemprimendpts0_c(3,:) = [ 10   0   0  custo0  0.5   0      40];
+basemprimendpts0_c(3,:) = [ 10   0   0  custo0  1.0   0      10];
 basemprimendpts0_c(4,:) = [ 16   2   1  custo1  0.4   pi/12  40];
 basemprimendpts0_c(5,:) = [ 15   4   1  custo1  0.3   pi/8.2 40];
 basemprimendpts0_c(6,:) = [  8  -2  -1  custo2  0.3  -pi/8.2 40];
@@ -80,7 +80,7 @@ basemprimendpts0_c(9,:) = [  7   3   1  custo3  0.2   stlim 50];
 
 basemprimendpts0_c(10,:) = [ -15 -4   1  custo2  -0.3  -pi/8.2 40];
 basemprimendpts0_c(11,:) = [ -16 -2   1  custo2  -0.4  -pi/12  40];
-basemprimendpts0_c(12,:) = [ -10  0   0  custo1  -0.5   0      40];
+basemprimendpts0_c(12,:) = [ -10  0   0  custo1  -0.8   0      10];
 basemprimendpts0_c(13,:) = [ -16  2  -1  custo2  -0.4   pi/12  40];
 basemprimendpts0_c(14,:) = [ -15  4  -1  custo2  -0.3   pi/8.2 40];
 basemprimendpts0_c(15,:) = [ -8  -2   1  custo3  -0.3  -pi/8.2 40];

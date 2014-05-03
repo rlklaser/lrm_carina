@@ -10,7 +10,7 @@ vehicle_state_node:
   rate: 10.0
   tread_lenght: 1.508  #cheat speed here
   
-#vel_booster_node:
-#  max_velocity: 6.0
-#  max_velocity_boost: 12.0
+vel_booster_node:
+  max_velocity: 3.0
+  max_velocity_boost: 3.0
   
