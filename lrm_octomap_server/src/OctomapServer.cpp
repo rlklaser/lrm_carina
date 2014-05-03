@@ -227,16 +227,16 @@ OctomapServer::OctomapServer(ros::NodeHandle nh, ros::NodeHandle nh_priv) :
 
 		m_octree->insertRay(ptini, ptfim_a, m_initSz);
 		m_octree->insertRay(ptini, ptfim_b, m_initSz);
-		m_octree->insertRay(ptini, ptfim_c, m_initSz);
-		m_octree->insertRay(ptini, ptfim_d, m_initSz);
+		//m_octree->insertRay(ptini, ptfim_c, m_initSz);
+		//m_octree->insertRay(ptini, ptfim_d, m_initSz);
 	}
 
 	if(m_initSz>0) {
 		point3d ptini(0, 0, m_occupancyMinZ);
 		point3d ptfim_a(m_initSz, m_initSz, m_occupancyMaxZ);
 		point3d ptfim_b(m_initSz, -m_initSz, m_occupancyMaxZ);
-		point3d ptfim_c(-m_initSz, m_initSz, m_occupancyMaxZ);
-		point3d ptfim_d(-m_initSz, -m_initSz, m_occupancyMaxZ);
+		//point3d ptfim_c(-m_initSz, m_initSz, m_occupancyMaxZ);
+		//point3d ptfim_d(-m_initSz, -m_initSz, m_occupancyMaxZ);
 
 		m_octree->insertRay(ptini, ptfim_a, m_initSz);
 		m_octree->insertRay(ptini, ptfim_b, m_initSz);
