@@ -2,4 +2,4 @@ wheel_odometry:
   animation_only: true
   publish_js: true
   absolute_heading: 0.0
-  #use_6dof: false
+  use_6dof: false
