@@ -50,5 +50,5 @@ lethal_obstacle: 75              #20 default
   
   
 #initialized search area (in meters)  
-max_env_width: 200
-max_env_height: 200
+max_env_width: 100
+max_env_height: 100
