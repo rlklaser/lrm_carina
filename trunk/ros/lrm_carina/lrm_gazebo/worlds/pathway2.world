@@ -94,7 +94,7 @@
       </link>
     </model>
     <physics type='ode'>
-      <update_rate>1000.000000</update_rate>
+      <update_rate>250</update_rate>
       <gravity>0.000000 0.000000 -9.800000</gravity>
     </physics>
     
