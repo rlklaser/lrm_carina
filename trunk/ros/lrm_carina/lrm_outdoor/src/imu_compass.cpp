@@ -24,7 +24,10 @@ CPP file for IMU Compass Class that combines gyroscope and magnetometer data to 
 
 #include "imu_compass/imu_compass.h"
 
-IMUCompass::IMUCompass(ros::NodeHandle &n): node_(n) {
+IMUCompass::IMUCompass(ros::NodeHandle &n):
+    node_(n), last_measurement_update_time_(0), last_motion_update_time_(0),
+    heading_prediction_(0), heading_prediction_variance_(0), heading_variance_prediction_(0),
+    curr_heading_(0), curr_heading_variance_(0), filter_initialized_(false) {
   // Acquire Parameters
   mag_zero_x_ = 0.0;
   mag_zero_y_ = 0.0;
@@ -80,7 +83,7 @@ void IMUCompass::imuCallback(const sensor_msgs::ImuPtr data) {
   geometry_msgs::Vector3 gyro_vector_transformed;
 
   if(!data) {
-	  ROS_ERROR("imu_compass : imu msg null");
+	  ROS_ERROR_NAMED("imu_compass", "imu msg null");
 	  return;
   }
 
@@ -96,7 +99,7 @@ void IMUCompass::imuCallback(const sensor_msgs::ImuPtr data) {
   try {
     listener_.lookupTransform("base_link", data->header.frame_id, ros::Time(0), transform);
   } catch (tf::TransformException &ex) {
-    ROS_WARN("Missed transform between base_link and %s", data->header.frame_id.c_str());
+	  ROS_WARN_NAMED("imu_compass", "Missed transform between base_link and %s", data->header.frame_id.c_str());
     return;
   }
 
@@ -134,7 +137,7 @@ void IMUCompass::magCallback(const geometry_msgs::Vector3StampedConstPtr& data) 
   try {
     listener_.lookupTransform("base_link", data->header.frame_id, ros::Time(0), transform);
   } catch (tf::TransformException &ex) {
-    ROS_WARN("Missed transform between base_link and %s", data->header.frame_id.c_str());
+	  ROS_WARN_NAMED("imu_compass", "Missed transform between base_link and %s", data->header.frame_id.c_str());
     return;
   }
 
@@ -213,7 +216,7 @@ void IMUCompass::repackageImuPublish(tf::StampedTransform transform) {
   imu_reading = o_imu_reading.getRotation();
 
   // Acquire Quaternion that is the difference between the two readings
-  tf::Quaternion compass_yaw = tf::createQuaternionFromRPY(0.0, 0.0, compass_heading);
+  ///tf::Quaternion compass_yaw = tf::createQuaternionFromRPY(0.0, 0.0, compass_heading);
   tf::Quaternion diff_yaw = tf::createQuaternionFromRPY(0.0, 0.0, compass_heading - tf::getYaw(imu_reading));
 
   // Transform the imu reading by the difference
