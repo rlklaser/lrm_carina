@@ -24,8 +24,8 @@ local_costmap:
   rolling_window: true
   #width: 5.0
   #height: 5.0
-  width: 8
-  height: 8
+  width: 12
+  height: 12
   resolution: 0.1
   origin_x: 0.0
   origin_y: 0.0
