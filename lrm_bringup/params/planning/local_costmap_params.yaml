@@ -6,6 +6,9 @@ local_costmap:
   #heading_link
   #footprint: [[0.2, -0.8], [0.65, 0.0], [0.2, 0.8], [-2.5, 0.8], [-2.5, -0.8]]
 
+  #for base_odometry
+  footprint: [[2.0, -0.9], [2.4, 0.0], [2.0, 0.9], [-0.8, 0.9], [-0.8, -0.9]]
+
   #inflation_radius: 2.8
   #cost_scaling_factor: 1.0                    # default 10
   
