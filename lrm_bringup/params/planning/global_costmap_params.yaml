@@ -6,6 +6,8 @@ global_costmap:
   #map_type: costmap
   map_topic: /map
   global_frame: /map
+  
+  #HACK: the sbpl prims are based on heading and local planner on base odometry
   robot_base_frame: /base_footprint
   #robot_base_frame: /base_odometry
   #robot_base_frame: /heading_link
