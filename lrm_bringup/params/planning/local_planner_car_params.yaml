@@ -23,7 +23,7 @@ hdiff_scale: 1.0
 #heading_points: 5
 heading_points: 10
 
-vx_samples: 7
+vx_samples: 10 
 #11
 vtheta_samples: 25 
 #37
@@ -31,5 +31,5 @@ vtheta_samples: 25
 simple_attractor: False
 angular_sim_granularity: 0.025
 
-xy_goal_tolerance: 1.5
+xy_goal_tolerance: 0.5
 heading_goal_tolerance: 0.1
