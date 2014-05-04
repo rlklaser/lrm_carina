@@ -1,4 +1,8 @@
 global_costmap: 
+
+  #base_footprint
+  footprint: [[1.25, -0.8], [1.6, 0.0], [1.25, 0.8], [-1.6, 0.8], [-1.6, -0.8]]
+
   #map_type: costmap
   map_topic: /map
   global_frame: /map
