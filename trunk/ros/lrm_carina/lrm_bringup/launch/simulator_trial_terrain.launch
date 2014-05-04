@@ -37,7 +37,7 @@
 		name="gazebo"
 		pkg="gazebo"
 		type="gazebo"
-		args="$(find lrm_gazebo)/worlds/pathway2.world"
+		args="--quiet --minimal_comms --pause $(find lrm_gazebo)/worlds/pathway2.world"
 		respawn="true"
 		output="screen" />
 	

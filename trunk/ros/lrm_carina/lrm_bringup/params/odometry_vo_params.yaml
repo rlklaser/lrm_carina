@@ -1,6 +1,7 @@
 vo_odometry:
 
   publish_tf: false
+  
   odom_frame_id: /odom
   base_link_frame_id: /base_odometry
   sensor_frame_id: /stereo_camera
@@ -16,6 +17,7 @@ vo_odometry:
   half_resolution: 1
   refinement: 1
   approximate_sync: true
+  queue_size: 10
 
   #Bucketing params
   max_features: 2
