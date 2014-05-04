@@ -11,8 +11,8 @@ oscillation_timeout: 0.0
 oscillation_distance: 0.0
 
 #robot_base_frame: base_footprint
-#robot_base_frame: /base_odometry
-robot_base_frame: /heading_link
+robot_base_frame: /base_odometry
+#robot_base_frame: /heading_link
 
 global_frame: /map
 
