@@ -20,7 +20,7 @@
 		>
 			<rosparam
 				command="load"
-				file="$(find lrm_bringup)/params/sensormodel_trial_params.yaml" />
+				file="$(find lrm_bringup)/params/sensormodel_sim_params.yaml" />
 			<remap
 				from="map"
 				to="/map" />
