@@ -16,7 +16,7 @@ subscribers:
        
   - name:        "Navigation stack"
     topic:       "/navigation/cmd_vel"
-    timeout:     0.5
+    timeout:     1.0
     priority:    2
     short_desc:  "Navigation stack controller"
     

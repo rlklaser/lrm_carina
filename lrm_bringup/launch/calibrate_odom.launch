@@ -1,0 +1,27 @@
+<launch>
+
+	<rosparam
+		command="load"
+		file="$(find lrm_bringup)/params/global_real_params.yaml" />
+
+	<include file="$(find lrm_bringup)/launch/robot_model_real.launch" />
+	<include file="$(find lrm_bringup)/launch/gps_imu_driver.launch" />
+	<include file="$(find lrm_bringup)/launch/odometry_real.launch" />
+	<include file="$(find lrm_bringup)/launch/localization.launch" />
+
+	<node
+		name="fake_encoders"
+		type="fake_encoders_node"
+		pkg="lrm_drivers"
+		output="screen"
+		respawn="true"
+	>
+		<param
+			name="wheel_relative"
+			value="5" />
+		<remap
+			from="encoders"
+			to="/encoders_controller/encoders" />
+	</node>
+
+</launch>

@@ -18,5 +18,5 @@ stereo_camera:
 
 cruise_control:
   top_speed: 3
-  max_accel: 40
+  max_accel: 70
     
