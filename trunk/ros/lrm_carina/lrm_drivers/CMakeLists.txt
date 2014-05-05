@@ -81,4 +81,6 @@ rosbuild_add_executable(vel_booster_node
 rosbuild_add_executable(constant_twist_publisher 
 	src/constant_twist_publisher.cpp)
 		
+rosbuild_add_executable(fake_encoders_node 
+	src/fake_encoders_node.cpp)
 						

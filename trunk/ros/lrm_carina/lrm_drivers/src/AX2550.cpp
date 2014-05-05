@@ -154,7 +154,7 @@ void AX2550::execute(Commands cmd, int value) {
 
 //@override
 void AX2550::steering(double angle) {
-	int value = (int) angle * steeringAngleRatio; //4.1
+	int value = (int) (angle * steeringAngleRatio); //4.1
 
 	if (steeringMotorIndex == 0) {
 		if (useClockwiseDirection)				

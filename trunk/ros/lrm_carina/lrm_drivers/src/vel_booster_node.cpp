@@ -32,14 +32,14 @@
 #include <boost/thread/mutex.hpp>
 #include <dynamic_reconfigure/server.h>
 
-//#include "lrm_drivers/VelBoosterConfig.h"
+#include "lrm_drivers/VelBoosterConfig.h"
 
 ros::Publisher _vel_pub;
 double _max_velocity;
 double _max_velocity_boost;
 boost::mutex _mutex;
 
-/*
+
 void reconfig(lrm_drivers::VelBoosterConfig &config, uint32_t level)
 {
 	//odometry->reconfigure(config, level);
@@ -49,7 +49,6 @@ void reconfig(lrm_drivers::VelBoosterConfig &config, uint32_t level)
 	_max_velocity_boost = config.max_velocity_boost;
 
 }
-*/
 
 void callbackTwist(const geometry_msgs::Twist::ConstPtr msg) {
 
@@ -72,9 +71,9 @@ int main(int argc, char ** argv) {
 	nh.param("max_velocity", _max_velocity, 1.0);
 	nh.param("max_velocity_boost", _max_velocity_boost, 1.0);
 
-	//dynamic_reconfigure::Server<lrm_drivers::VelBoosterConfig> srv;
-	//dynamic_reconfigure::Server<lrm_drivers::VelBoosterConfig>::CallbackType f = boost::bind(&reconfig, _1, _2);
-	//srv.setCallback(f);
+	dynamic_reconfigure::Server<lrm_drivers::VelBoosterConfig> srv;
+	dynamic_reconfigure::Server<lrm_drivers::VelBoosterConfig>::CallbackType f = boost::bind(&reconfig, _1, _2);
+	srv.setCallback(f);
 
 	ros::Subscriber vel_sub = nh.subscribe<geometry_msgs::Twist>("cmd_vel", 1, callbackTwist);
 	_vel_pub = nh.advertise<geometry_msgs::Twist>(nh_priv.getNamespace() + "/cmd_vel", 1);

@@ -154,7 +154,7 @@ void HDC2450::steering(double angle) {
 	//int value = (int) angle * -700;
 	//execute(SET_POSITION, 1, value);
 
-	int value = (int) angle * steeringAngleRatio; //-33.3;
+	int value = (int) (angle * steeringAngleRatio); //-33.3;
 	execute(SET_MOTOR_COMMAND, 1, value);
 }
 
