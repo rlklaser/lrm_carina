@@ -4,6 +4,7 @@ Panels:
     Name: Displays
     Property Tree Widget:
       Expanded:
+        - /Camera1
         - /Camera1/Visibility1
         - /Camera2/Visibility1
         - /Models1/Wheels1
@@ -68,7 +69,7 @@ Visualization Manager:
       Image Rendering: background and overlay
       Image Topic: /stereo/left/image_color
       Name: Camera
-      Overlay Alpha: 0.5
+      Overlay Alpha: 0.7
       Queue Size: 2
       Transport Hint: raw
       Value: true
@@ -108,14 +109,14 @@ Visualization Manager:
         Value: true
       Zoom Factor: 1
     - Class: rviz/Camera
-      Enabled: true
+      Enabled: false
       Image Rendering: background and overlay
       Image Topic: /stereo/right/image_raw
       Name: Camera
       Overlay Alpha: 0.2
       Queue Size: 2
       Transport Hint: raw
-      Value: true
+      Value: false
       Visibility:
         Axes: true
         Camera: true
@@ -1007,5 +1008,5 @@ Window Geometry:
   Views:
     collapsed: true
   Width: 1323
-  X: 1682
-  Y: 24
+  X: 1522
+  Y: 40
