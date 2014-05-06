@@ -1,0 +1,10 @@
+<launch>
+
+	<rosparam
+		command="load"
+		file="$(find lrm_bringup)/params/global_bag_params.yaml" />
+
+	<include file="$(find lrm_bringup)/launch/run_real_bag.launch" />
+	<include file="$(find lrm_bringup)/launch/run_real_bag_nav.launch" />
+
+</launch>
