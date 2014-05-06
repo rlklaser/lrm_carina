@@ -19,7 +19,7 @@
 	>
 		<param
 			name="publish_frequency"
-			value="50" />
+			value="20" />
 	</node>
 
  <!-- 
