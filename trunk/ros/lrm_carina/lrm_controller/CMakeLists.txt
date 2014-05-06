@@ -55,4 +55,8 @@ rosbuild_add_executable(robot_state_publisher
     src/robot_state/robot_state_publisher.cpp 
     src/robot_state/treefksolverposfull_recursive.cpp
     src/robot_state/joint_state_listener.cpp )
+	
+
+rosbuild_add_executable(static_transform_publisher 
+	src/static_transform_publisher.cpp)
 		
