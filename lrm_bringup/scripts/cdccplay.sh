@@ -1,0 +1,3 @@
+#rosbag play --clock --pause /move_base/TrajectoryPlannerROS/cost_cloud:=t1 /move_base/current_goal:=t2 /move_base/feedback:=t3 /move_base/global_costmap/inflated_obstacles:=t4 /move_base/global_costmap/obstacles:=t5 /move_base/global_costmap/robot_footprint:=t6 /move_base/goal:=t7 /move_base/status:=t8 /navigation/cmd_vel:=t9 /octomap/octomap_point_cloud_centers:=t10 run_2_ok.bag
+
+rosbag play --clock --pause /move_base/TrajectoryPlannerROS/cost_cloud:=t1 /move_base/current_goal:=t2 /move_base/feedback:=t3 /move_base/global_costmap/inflated_obstacles:=t4 /move_base/global_costmap/obstacles:=t5 /move_base/global_costmap/robot_footprint:=t6 /move_base/goal:=t7 /move_base/status:=t8 /navigation/cmd_vel:=t9 /octomap/octomap_point_cloud_centers:=t10 run_1_ok.bag
