@@ -34,54 +34,56 @@
         <view_controller>orbit</view_controller>
       </camera>
     </gui>
-    <model name='sanca_ground_plane'>
-      <static>1</static>
-      <link name='link'>
-        <collision name='collision'>
-          <geometry>
-            <plane>
-              <normal>0.000000 0.000000 1.000000</normal>
-              <size>100.000000 100.000000</size>
-            </plane>
-          </geometry>
-          <surface>
-            <friction>
-              <ode>
-                <mu>100.000000</mu>
-                <mu2>50.000000</mu2>
-              </ode>
-            </friction>
-            <bounce/>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
-        </collision>
-        <visual name='visual'>
-          <cast_shadows>0</cast_shadows>
-          <geometry>
-            <plane>
-              <normal>0.000000 0.000000 1.000000</normal>
-              <size>100.000000 100.000000</size>
-            </plane>
-          </geometry>
-          <material>
-            <script>
-              <uri>file://media/materials/scripts/gazebo.material</uri>
-              <name>Gazebo/Grey</name>
-            </script>
-          </material>
-        </visual>
-        <velocity_decay>
-          <linear>0.000000</linear>
-          <angular>0.000000</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
-      </link>
-      <pose>-7.000000 38.000000 0.000000 0.000000 0.000000 0.000000</pose>
-    </model>
+      
+		<model name="heightmap">
+			<static>true</static>
+			<link name="link">
+				<collision name="collision">
+					<geometry>
+						<heightmap>
+							<uri>file://media/materials/textures/heightmap_bowl.png</uri>
+							<size>129 129 10</size>
+							<pos>0 0 -5.2</pos>
+						</heightmap>
+					</geometry>
+				</collision>
+
+				<visual name="visual">
+					<geometry>
+						<heightmap>
+							<texture>
+								<diffuse>file://media/materials/textures/dirt_diffusespecular.png</diffuse>
+								<normal>file://media/materials/textures/dirt_normal.png</normal>
+								<size>50</size>
+							</texture>
+							<texture>
+								<diffuse>file://media/materials/textures/grass_diffusespecular.png</diffuse>
+								<normal>file://media/materials/textures/grass_normal.png</normal>
+								<size>20</size>
+							</texture>
+							<texture>
+								<diffuse>file://media/materials/textures/fungus_diffusespecular.png</diffuse>
+								<normal>file://media/materials/textures/fungus_normal.png</normal>
+								<size>80</size>
+							</texture>
+							<blend>
+								<min_height>2</min_height>
+								<fade_dist>5</fade_dist>
+							</blend>
+							<blend>
+								<min_height>4</min_height>
+								<fade_dist>5</fade_dist>
+							</blend>
+							<uri>file://media/materials/textures/heightmap_bowl.png</uri>
+							<size>129 129 10</size>
+							<pos>0 0 -5.2</pos>
+						</heightmap>
+					</geometry>
+				</visual>
+
+			</link>
+		</model>
+    
     <model name='carina'>
       <link name='base_footprint'>
         <pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
