@@ -1,0 +1,771 @@
+<sdf version='1.4'>
+  <world name='default'>
+    <scene>
+      <grid>0</grid>
+      <shadows>1</shadows>
+      <ambient>0.2 0.2 0.2 1</ambient>
+      <background>0.9 0.9 0.9 1</background>
+    </scene>
+    <light name='sun' type='directional'>
+      <cast_shadows>1</cast_shadows>
+      <pose>0 0 10 0 -0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.1 0.1 0.1 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.5 -1</direction>
+    </light>
+    <physics type='ode'>
+      <gravity>0 0 -9.8</gravity>
+      <real_time_update_rate>1000</real_time_update_rate>
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+    </physics>
+    
+    <state world_name='default'>
+      <sim_time>53 69000000</sim_time>
+      <real_time>53 245119523</real_time>
+      <wall_time>1399656324 127732936</wall_time>
+      <model name='Spathaphylum'>
+        <pose>-8.55367 45.1876 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-8.55367 45.1876 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Spathaphylum_0'>
+        <pose>-0.047455 15.9288 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-0.047455 15.9288 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Spathaphylum_1'>
+        <pose>0.510365 20.7664 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>0.510365 20.7664 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Spathaphylum_10'>
+        <pose>-15.5249 26.4378 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-15.5249 26.4378 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Spathaphylum_11'>
+        <pose>-15.3646 30.7999 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-15.3646 30.7999 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Spathaphylum_12'>
+        <pose>-22 36.4496 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-22 36.4496 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Spathaphylum_13'>
+        <pose>-22.5396 33.4491 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-22.5396 33.4491 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Spathaphylum_14'>
+        <pose>-23 29.5743 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-23 29.5743 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Spathaphylum_15'>
+        <pose>-23.4163 25 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-23.4163 25 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Spathaphylum_16'>
+        <pose>-0.322057 10.6187 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-0.322057 10.6187 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Spathaphylum_17'>
+        <pose>-23.7436 14.0457 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-23.7436 14.0457 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Spathaphylum_18'>
+        <pose>-23.2824 23.314 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-23.2824 23.314 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Spathaphylum_19'>
+        <pose>-17.0661 14.9652 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-17.0661 14.9652 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Spathaphylum_2'>
+        <pose>-5.12254 24.3217 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-5.12254 24.3217 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Spathaphylum_20'>
+        <pose>-16.8097 18.7853 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-16.8097 18.7853 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Spathaphylum_21'>
+        <pose>1.77787 32.6769 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>1.77787 32.6769 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Spathaphylum_22'>
+        <pose>2.14013 42.0703 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>2.14013 42.0703 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Spathaphylum_23'>
+        <pose>-4.14669 28.0372 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-4.14669 28.0372 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Spathaphylum_24'>
+        <pose>-23.4282 20.1769 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-23.4282 20.1769 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Spathaphylum_25'>
+        <pose>-0.218063 12.5126 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-0.218063 12.5126 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Spathaphylum_26'>
+        <pose>-11.0802 14.6029 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-11.0802 14.6029 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Spathaphylum_3'>
+        <pose>1.20548 25.3963 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>1.20548 25.3963 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Spathaphylum_4'>
+        <pose>-4.00813 33.0443 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-4.00813 33.0443 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Spathaphylum_5'>
+        <pose>-4 36.5231 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-4 36.5231 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Spathaphylum_6'>
+        <pose>-3.72036 43.1696 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-3.72036 43.1696 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Spathaphylum_7'>
+        <pose>-9.87743 34.4757 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-9.87743 34.4757 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Spathaphylum_8'>
+        <pose>-9.94373 25.6554 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-9.94373 25.6554 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Spathaphylum_9'>
+        <pose>-23.1128 27.8495 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-23.1128 27.8495 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed'>
+        <pose>-6.12455 9.47653 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-6.12455 9.47653 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_0'>
+        <pose>1.39328 34.4493 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>1.39328 34.4493 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_1'>
+        <pose>-11.0814 9.7746 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-11.0814 9.7746 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_10'>
+        <pose>-5.92894 15.9066 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-5.92894 15.9066 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_11'>
+        <pose>1.3687 39.7909 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>1.3687 39.7909 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_12'>
+        <pose>-5.65532 18.8521 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-5.65532 18.8521 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_13'>
+        <pose>-21.3193 43.2211 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-21.3193 43.2211 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_14'>
+        <pose>-4.0438 40.6976 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-4.0438 40.6976 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_15'>
+        <pose>-5.28512 22.1437 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-5.28512 22.1437 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_16'>
+        <pose>-4.50169 25.971 1.45905 0 -0 0</pose>
+        <link name='link'>
+          <pose>-4.50169 25.971 1.45905 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_17'>
+        <pose>-4.1177 30.0588 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-4.1177 30.0588 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_18'>
+        <pose>-10.9874 12.7361 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-10.9874 12.7361 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_19'>
+        <pose>-11.0807 16.235 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-11.0807 16.235 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_2'>
+        <pose>-0.432512 9.47315 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-0.432512 9.47315 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_20'>
+        <pose>-10.9552 19.0403 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-10.9552 19.0403 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_21'>
+        <pose>-10.6978 21.3664 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-10.6978 21.3664 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_22'>
+        <pose>-10 23.4527 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-10 23.4527 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_23'>
+        <pose>-10.135 27.4998 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-10.135 27.4998 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_24'>
+        <pose>-10.0359 29.8942 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-10.0359 29.8942 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_25'>
+        <pose>-9.65179 32.4735 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-9.65179 32.4735 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_26'>
+        <pose>-17.0946 13.252 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-17.0946 13.252 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_27'>
+        <pose>-23.5134 10.3654 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-23.5134 10.3654 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_28'>
+        <pose>-17.0824 16.9786 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-17.0824 16.9786 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_29'>
+        <pose>-16.0241 24.0307 0.248311 0 -0 0</pose>
+        <link name='link'>
+          <pose>-16.0241 24.0307 0.248311 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_3'>
+        <pose>-6.22832 12.5752 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-6.22832 12.5752 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_30'>
+        <pose>-15.4607 32.2752 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-15.4607 32.2752 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_31'>
+        <pose>-23.3939 12.5791 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-23.3939 12.5791 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_32'>
+        <pose>-23.2846 18.603 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-23.2846 18.603 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_33'>
+        <pose>-22.9952 26.6701 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-22.9952 26.6701 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_34'>
+        <pose>-22.1772 34.5041 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-22.1772 34.5041 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_35'>
+        <pose>-22.5291 30.7651 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-22.5291 30.7651 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_36'>
+        <pose>-23.316 21.7604 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-23.316 21.7604 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_37'>
+        <pose>-23.2781 15.7066 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-23.2781 15.7066 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_38'>
+        <pose>-17.6726 10.0049 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-17.6726 10.0049 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_39'>
+        <pose>-14.4386 42.8231 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-14.4386 42.8231 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_4'>
+        <pose>-0.056696 14.1235 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-0.056696 14.1235 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_40'>
+        <pose>-16.2186 21.2284 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-16.2186 21.2284 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_41'>
+        <pose>-15.6164 28.0941 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-15.6164 28.0941 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_42'>
+        <pose>-15.2767 35.3913 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-15.2767 35.3913 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_43'>
+        <pose>-9.40913 35.9721 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-9.40913 35.9721 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_44'>
+        <pose>-3.75232 34.4713 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-3.75232 34.4713 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_45'>
+        <pose>-22 38 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-22 38 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_46'>
+        <pose>-15 38 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-15 38 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_47'>
+        <pose>-4 38 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-4 38 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_48'>
+        <pose>-9.06793 40.2823 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-9.06793 40.2823 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_49'>
+        <pose>-21.5845 40 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-21.5845 40 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_5'>
+        <pose>0.417729 18.7163 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>0.417729 18.7163 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_50'>
+        <pose>-15 40 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>-15 40 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_6'>
+        <pose>0.921831 23.0755 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>0.921831 23.0755 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_7'>
+        <pose>1.20388 27.1803 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>1.20388 27.1803 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_8'>
+        <pose>1.40949 30.8119 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>1.40949 30.8119 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='finihed_9'>
+        <pose>1.57332 37.2877 0 0 -0 0</pose>
+        <link name='link'>
+          <pose>1.57332 37.2877 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+    </state>
+    
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose>4.99513 -4.10318 4.25424 0 0.275643 2.35619</pose>
+        <view_controller>orbit</view_controller>
+      </camera>
+    </gui>
+    
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <latitude_deg>0</latitude_deg>
+      <longitude_deg>0</longitude_deg>
+      <elevation>0</elevation>
+      <heading_deg>0</heading_deg>
+    </spherical_coordinates>
+    
+  </world>
+</sdf>
