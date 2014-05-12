@@ -1,0 +1,39 @@
+<launch>
+
+	<arg
+		name="bond"
+		value="" />
+
+	<group ns="octomap">
+
+		<rosparam
+			command="load"
+			file="$(find lrm_bringup)/params/octomap_parameters.yaml" />
+
+		<node
+			pkg="nodelet"
+			type="nodelet"
+			name="map_server"
+			args="load lrm_octomap_server/OctomapServerNodelet /camera_nodelet_manager $(arg bond)"
+			output="screen"
+			respawn="true"
+		>
+			<rosparam
+				command="load"
+				file="$(find lrm_bringup)/params/sensormodel_orchard_params.yaml" />
+			<remap
+				from="map"
+				to="/map" />
+			<remap
+				from="cloud_in"
+				to="/cloud_in" />
+			<remap
+				from="ground_cloud_in"
+				to="/ground_cloud_in" />
+		</node>
+
+		<include file="$(find lrm_bringup)/launch/footprint_eraser.launch" />
+
+	</group>
+
+</launch>
