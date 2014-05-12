@@ -5,9 +5,9 @@ disparity_bm:
   prefilter_size: 31
   prefilter_cap: 63
   correlation_window_size: 15
-  min_disparity: 2
+  min_disparity: 2 #48m
   #min_disparity: 8
-  disparity_range: 64
+  disparity_range: 64 #1.5m, 96 = 1m
   
   ##pos
   uniqueness_ratio: 10

@@ -1,6 +1,5 @@
 <launch>
 
-<!-- 
 	<node
 		name="footprint_eraser"
 		type="footprint_eraser_node"
@@ -15,6 +14,5 @@
 			from="clear_bbx"
 			to="map_server/clear_bbx" />
 	</node>
- -->
  
 </launch>
