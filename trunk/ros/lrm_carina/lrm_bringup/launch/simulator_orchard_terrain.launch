@@ -12,7 +12,7 @@
 		name="gazebo"
 		pkg="gazebo"
 		type="gazebo"
-		args="$(find lrm_gazebo)/worlds/orchard.world"
+		args="$(find lrm_gazebo)/worlds/orchard14.world"
 		respawn="true"
 		output="screen" />
 	
