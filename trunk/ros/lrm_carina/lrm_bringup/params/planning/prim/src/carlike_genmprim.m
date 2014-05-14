@@ -1,4 +1,6 @@
 %generates motion primitives and saves them into file
+%SEE: http://sbpl.net/node/52
+
 
 resolution = 0.1;          	% resolucao da primitiva
 dt = resolution;
