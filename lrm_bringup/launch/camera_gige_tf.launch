@@ -1,0 +1,67 @@
+<launch>
+
+	<!-- 
+	<param
+		name="/use_sim_time"
+		value="true" />
+	 -->
+
+	<node
+		pkg="tf"
+		type="static_transform_publisher"
+		name="wheel_odom_broadcaster_f"
+		args="0.0 0.0 0.0  1.57 3.14 1.57 /base_sensors /camera 50"
+		output="screen" />
+
+	<node
+		pkg="tf"
+		type="static_transform_publisher"
+		name="wheel_odom_broadcaster_a"
+		args="0.0 0.0 0.0  1.57 3.14 1.57 /base_sensors /optical_frame 50"
+		output="screen" />
+
+	<node
+		pkg="tf"
+		type="static_transform_publisher"
+		name="wheel_odom_broadcaster_h"
+		args="0.0 0.0 0.0  1.57 3.14 1.57 /base_sensors /stereo 50"
+		output="screen" />
+		
+	<node
+		pkg="tf"
+		type="static_transform_publisher"
+		name="wheel_odom_broadcaster_b"
+		args="0.0 0 1.0 0 0 0 /base_footprint /base_sensors 50"
+		output="screen" />
+
+	<node
+		pkg="tf"
+		type="static_transform_publisher"
+		name="wheel_odom_broadcaster_c"
+		args="-1.0 0 0 0 0 0 /base_footprint /base_odometry 50"
+		output="screen" />
+
+	<node
+		pkg="tf"
+		type="static_transform_publisher"
+		name="wheel_odom_broadcaster_d"
+		args="0.0 0.0 0.5 0 0 0 /base_odometry /imu_link 50"
+		output="screen" />
+		
+	<!-- 	
+	<node
+		pkg="tf"
+		type="static_transform_publisher"
+		name="wheel_odom_broadcaster_e"
+		args="0.0 0.0 0.0 0 0 0 /map /base_footprint 50"
+		output="screen" />
+    -->
+
+	<node
+		pkg="tf"
+		type="static_transform_publisher"
+		name="wheel_odom_broadcaster_g"
+		args="0.0 0.0 0.0 0 0 0 /odom /map 50"
+		output="screen" />
+
+</launch>
