@@ -1,0 +1,25 @@
+<launch>
+
+	<rosparam
+		command="load"
+		file="$(find lrm_bringup)/params/global_sim_params.yaml" />
+
+	<include file="$(find lrm_bringup)/launch/camera_nodelet_manager.launch" />
+
+	<include file="$(find lrm_bringup)/launch/stereo_vision_nodelet.launch" />
+
+
+	<include file="$(find lrm_bringup)/launch/camera_gige_tf.launch" />
+
+	<rosparam
+		command="load"
+		file="$(find lrm_bringup)/params/vision_throttle_gige_params.yaml" />
+
+	<node
+		name="throttle_stereo"
+		pkg="lrm_stereo"
+		type="throttle_stereo_node"
+		output="screen"
+		respawn="true" />
+
+</launch>
