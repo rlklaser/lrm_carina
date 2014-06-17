@@ -25,6 +25,7 @@
 				from="~points_out"
 				to="points_cluster_rgb" />
 		</node>
+-->
 
 		<node
 			name="region_growing_seg"
@@ -40,7 +41,7 @@
 				from="~points_out"
 				to="points_cluster" />
 		</node>
--->
+
 
 		<node
 			pkg="nodelet"
