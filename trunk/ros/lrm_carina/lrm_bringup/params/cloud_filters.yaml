@@ -81,4 +81,6 @@ stat_removal_nodelet:
    
 voxel_grid_clusters:
   leaf_size: 0.1
+  filter_limit_min:  0.0
+  filter_limit_max:  2.0
   approximate_sync: false
